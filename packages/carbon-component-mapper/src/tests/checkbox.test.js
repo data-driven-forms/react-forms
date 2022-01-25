@@ -1,12 +1,11 @@
 import React from 'react';
-import { act } from 'react-dom/test-utils';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 
 import FormTemplate from '../form-template';
 import componentMapper from '../component-mapper';
-import { Checkbox } from 'carbon-components-react';
 
 describe('<Checkbox />', () => {
   it('renders multiple checkbox', () => {
@@ -30,13 +29,12 @@ describe('<Checkbox />', () => {
       ],
     };
 
-    const wrapper = mount(
+    render(
       <FormRenderer onSubmit={jest.fn()} FormTemplate={(props) => <FormTemplate {...props} />} schema={schema} componentMapper={componentMapper} />
     );
 
-    expect(wrapper.find(Checkbox)).toHaveLength(2);
-    expect(wrapper.find(Checkbox).first().props().labelText).toEqual('option 1');
-    expect(wrapper.find(Checkbox).last().props().labelText).toEqual('option 2');
+    expect(screen.getByText('option 1')).toBeInTheDocument();
+    expect(screen.getByText('option 2')).toBeInTheDocument();
   });
 
   it('selects item in multiple checkbox', async () => {
@@ -59,22 +57,10 @@ describe('<Checkbox />', () => {
         },
       ],
     };
-    const eventCheck = {
-      target: {
-        checked: true,
-        type: 'checkbox',
-      },
-    };
-    const eventUncheck = {
-      target: {
-        checked: false,
-        type: 'checkbox',
-      },
-    };
 
     const submitSpy = jest.fn();
 
-    const wrapper = mount(
+    render(
       <FormRenderer
         onSubmit={(values) => submitSpy(values)}
         FormTemplate={(props) => <FormTemplate {...props} />}
@@ -83,43 +69,18 @@ describe('<Checkbox />', () => {
       />
     );
 
-    await act(async () => {
-      wrapper.find('input').first().simulate('change', eventCheck);
-    });
-    wrapper.update();
+    userEvent.click(screen.getByText('option 1'));
+    userEvent.click(screen.getByText('Submit'));
+    expect(submitSpy).toHaveBeenLastCalledWith({ check: ['option-1'] });
 
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
+    userEvent.click(screen.getByText('option 2'));
+    userEvent.click(screen.getByText('Submit'));
 
-    expect(submitSpy).toHaveBeenCalledWith({ check: ['option-1'] });
-    submitSpy.mockClear();
+    expect(submitSpy).toHaveBeenLastCalledWith({ check: ['option-1', 'option-2'] });
 
-    await act(async () => {
-      wrapper.find('input').last().simulate('change', eventCheck);
-    });
-    wrapper.update();
+    userEvent.click(screen.getByText('option 1'));
+    userEvent.click(screen.getByText('Submit'));
 
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
-
-    expect(submitSpy).toHaveBeenCalledWith({ check: ['option-1', 'option-2'] });
-    submitSpy.mockClear();
-
-    await act(async () => {
-      wrapper.find('input').first().simulate('change', eventUncheck);
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
-
-    expect(submitSpy).toHaveBeenCalledWith({ check: ['option-2'] });
-    submitSpy.mockClear();
+    expect(submitSpy).toHaveBeenLastCalledWith({ check: ['option-2'] });
   });
 });

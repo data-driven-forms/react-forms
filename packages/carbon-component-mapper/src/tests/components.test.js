@@ -1,12 +1,11 @@
 import React from 'react';
-import { mount } from 'enzyme';
-import { act } from 'react-dom/test-utils';
+import { render, screen, act } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { FormRenderer, componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
 
 import FormTemplate from '../form-template';
 import componentMapper from '../component-mapper';
-import WithDescription from '../with-description';
 
 describe('component tests', () => {
   const RendererWrapper = ({ schema = { fields: [] }, ...props }) => (
@@ -73,16 +72,16 @@ describe('component tests', () => {
         });
 
         it('renders correctly', () => {
-          const wrapper = mount(<RendererWrapper schema={schema} />);
+          render(<RendererWrapper schema={schema} />);
 
           if (component === componentTypes.RADIO) {
-            expect(wrapper.find('.bx--radio-button-wrapper')).toHaveLength(options.length);
-          } else if (component === 'text-field-number') {
-            expect(wrapper.find('NumberInput')).toHaveLength(1);
-          } else {
-            expect(wrapper.find(componentMapper[component])).toHaveLength(1);
-            expect(wrapper.find('label').text().includes(field.label)).toEqual(true);
+            options.forEach((opt) => {
+              expect(screen.getByText(opt.label)).toBeInTheDocument();
+            });
           }
+
+          expect(screen.getAllByText(field.label)).toBeTruthy();
+          expect(() => screen.getByText(errorText)).toThrow();
         });
 
         it('renders with error', () => {
@@ -90,17 +89,11 @@ describe('component tests', () => {
             ...field,
             validate: [{ type: validatorTypes.REQUIRED }],
           };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [errorField] }} />);
-          wrapper.find('form').simulate('submit');
+          render(<RendererWrapper schema={{ fields: [errorField] }} />);
 
-          if (wrapper.find('#field-name-error-msg').length) {
-            expect(wrapper.find('#field-name-error-msg').text()).toEqual(errorText);
-            expect(wrapper.find('[invalid=true]').length).toBeGreaterThanOrEqual(1);
-          }
+          userEvent.click(screen.getByText('Submit'));
 
-          if (wrapper.find('.ddorg__carbon-error-helper-text').length) {
-            expect(wrapper.find('.ddorg__carbon-error-helper-text').text()).toEqual(errorText);
-          }
+          expect(screen.getByText(errorText)).toBeInTheDocument();
         });
 
         if (component !== 'text-field-number') {
@@ -111,21 +104,18 @@ describe('component tests', () => {
               useWarnings: true,
               validateOnMount: true,
             };
-            let wrapper;
 
             await act(async () => {
-              wrapper = mount(<RendererWrapper schema={{ fields: [errorField] }} />);
+              render(
+                <RendererWrapper
+                  schema={{
+                    fields: [errorField],
+                  }}
+                />
+              );
             });
-            wrapper.update();
-            wrapper.update();
 
-            const helperText = wrapper.find('.bx--form__helper-text');
-
-            if (helperText.length) {
-              expect(helperText.text()).toEqual(errorText);
-            } else {
-              expect(wrapper.find('.bx--form-requirement').last().text()).toEqual(errorText);
-            }
+            expect(screen.getAllByText(errorText)).toBeTruthy();
           });
 
           it('renders with helperText', () => {
@@ -133,9 +123,9 @@ describe('component tests', () => {
               ...field,
               helperText,
             };
-            const wrapper = mount(<RendererWrapper schema={{ fields: [helpertextField] }} />);
+            render(<RendererWrapper schema={{ fields: [helpertextField] }} />);
 
-            expect(wrapper.find('.bx--form__helper-text').last().text()).toEqual(helperText);
+            expect(screen.getByText(helperText)).toBeInTheDocument();
           });
 
           it('renders with description and helperText', () => {
@@ -144,11 +134,10 @@ describe('component tests', () => {
               description,
               helperText,
             };
-            const wrapper = mount(<RendererWrapper schema={{ fields: [descriptionField] }} />);
+            render(<RendererWrapper schema={{ fields: [descriptionField] }} />);
 
-            expect(wrapper.find(WithDescription)).toHaveLength(1);
-
-            expect(wrapper.find('.bx--form__helper-text').last().text()).toEqual(helperText);
+            expect(screen.getByText(helperText)).toBeInTheDocument();
+            expect(() => screen.getByText(description)).toThrow();
           });
 
           it('renders with error and helperText', () => {
@@ -157,19 +146,12 @@ describe('component tests', () => {
               helperText,
               validate: [{ type: validatorTypes.REQUIRED }],
             };
-            const wrapper = mount(<RendererWrapper schema={{ fields: [errorFields] }} />);
-            wrapper.find('form').simulate('submit');
+            render(<RendererWrapper schema={{ fields: [errorFields] }} />);
 
-            if (wrapper.find('#field-name-error-msg').length) {
-              expect(wrapper.find('#field-name-error-msg').text()).toEqual(errorText);
-              expect(wrapper.find('[invalid=true]').length).toBeGreaterThanOrEqual(1);
-            }
+            userEvent.click(screen.getByText('Submit'));
 
-            if (wrapper.find('.ddorg__carbon-error-helper-text').length) {
-              expect(wrapper.find('.ddorg__carbon-error-helper-text').text()).toEqual(errorText);
-            }
-
-            expect(wrapper.find('.bx--form__helper-text')).toHaveLength(0);
+            expect(screen.getByText(errorText)).toBeInTheDocument();
+            expect(() => screen.getByText(helperText)).toThrow();
           });
         }
 
@@ -178,19 +160,21 @@ describe('component tests', () => {
             ...field,
             description,
           };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [descriptionField] }} />);
+          render(<RendererWrapper schema={{ fields: [descriptionField] }} />);
 
-          expect(wrapper.find(WithDescription)).toHaveLength(1);
+          expect(screen.getAllByRole('button')[0]).toHaveClass('bx--tooltip__trigger');
         });
 
         it('renders isDisabled', () => {
           const disabledField = {
             ...field,
             isDisabled: true,
+            'aria-label': field.name,
+            ...(field.type === 'number' && { ariaLabel: field.name }),
           };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [disabledField] }} />);
+          const { container } = render(<RendererWrapper schema={{ fields: [disabledField] }} />);
 
-          expect(wrapper.find('[disabled=true]').length).toBeGreaterThanOrEqual(1);
+          [...container.getElementsByTagName('input')].forEach((el) => expect(el).toBeDisabled());
         });
 
         it('renders isRequired', () => {
@@ -198,22 +182,17 @@ describe('component tests', () => {
             ...field,
             isRequired: true,
           };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [requiredField] }} />);
-          expect(wrapper.find('.ddorg__carbon-component-mapper_is-required').text()).toEqual('*');
+          render(<RendererWrapper schema={{ fields: [requiredField] }} />);
+
+          expect(screen.getByText('*')).toBeInTheDocument();
         });
 
         it('renders with submitError', () => {
-          const wrapper = mount(<RendererWrapper schema={schema} onSubmit={() => ({ [field.name]: errorText })} />);
-          wrapper.find('form').simulate('submit');
+          render(<RendererWrapper schema={schema} onSubmit={() => ({ [field.name]: errorText })} />);
 
-          if (wrapper.find('#field-name-error-msg').length) {
-            expect(wrapper.find('#field-name-error-msg').text()).toEqual(errorText);
-            expect(wrapper.find('[invalid=true]').length).toBeGreaterThanOrEqual(1);
-          }
+          userEvent.click(screen.getByText('Submit'));
 
-          if (wrapper.find('.ddorg__carbon-error-helper-text').length) {
-            expect(wrapper.find('.ddorg__carbon-error-helper-text').text()).toEqual(errorText);
-          }
+          expect(screen.getByText(errorText)).toBeInTheDocument();
         });
       });
     });
