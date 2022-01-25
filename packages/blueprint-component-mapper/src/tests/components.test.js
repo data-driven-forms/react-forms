@@ -1,12 +1,11 @@
 import React from 'react';
-import { mount } from 'enzyme';
-import { act } from 'react-dom/test-utils';
+import { render, screen, act } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 import FormTemplate from '../form-template/form-template';
 import componentMapper from '../component-mapper/component-mapper';
 import { validatorTypes } from '@data-driven-forms/react-form-renderer';
-import FormGroupWrapper from '../form-group/form-group';
 
 describe('formFields generated tests', () => {
   const RendererWrapper = ({ schema = { fields: [] }, ...props }) => (
@@ -67,19 +66,16 @@ describe('formFields generated tests', () => {
         });
 
         it('renders correctly', () => {
-          const wrapper = mount(<RendererWrapper schema={schema} />);
+          render(<RendererWrapper schema={schema} />);
 
           if (component === componentTypes.RADIO) {
-            expect(wrapper.find('.bp3-radio')).toHaveLength(options.length);
-          } else if (component === componentTypes.SWITCH) {
-            expect(wrapper.find('.bp3-switch').first().text().includes(field.label)).toEqual(true);
-          } else {
-            expect(wrapper.find(componentMapper[component])).toHaveLength(1);
-            expect(wrapper.find('label').text().includes(field.label)).toEqual(true);
+            options.forEach((opt) => {
+              expect(screen.getByText(opt.label)).toBeInTheDocument();
+            });
           }
 
-          expect(wrapper.find(FormGroupWrapper)).toHaveLength(1);
-          expect(wrapper.find('.bp3-form-helper-text')).toHaveLength(0);
+          expect(screen.getAllByText(field.label)).toBeTruthy();
+          expect(() => screen.getByText(errorText)).toThrow();
         });
 
         it('renders with error', () => {
@@ -87,10 +83,11 @@ describe('formFields generated tests', () => {
             ...field,
             validate: [{ type: validatorTypes.REQUIRED }],
           };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [errorField] }} />);
-          wrapper.find('form').simulate('submit');
-          expect(wrapper.find('.bp3-form-helper-text').last().text()).toEqual(errorText);
-          expect(wrapper.find('.bp3-intent-danger').length).toBeGreaterThanOrEqual(1);
+          render(<RendererWrapper schema={{ fields: [errorField] }} />);
+
+          userEvent.click(screen.getByText('Submit'));
+
+          expect(screen.getByText(errorText)).toBeInTheDocument();
         });
 
         it('renders with warning', async () => {
@@ -100,15 +97,18 @@ describe('formFields generated tests', () => {
             useWarnings: true,
             validateOnMount: true,
           };
-          let wrapper;
 
           await act(async () => {
-            wrapper = mount(<RendererWrapper schema={{ fields: [errorField] }} />);
+            render(
+              <RendererWrapper
+                schema={{
+                  fields: [errorField, { name: 'error-reset-touched', component: componentTypes.TEXT_FIELD, validate: [{ type: 'required' }] }],
+                }}
+              />
+            );
           });
-          wrapper.update();
 
-          expect(wrapper.find('.bp3-form-helper-text').last().text()).toEqual(errorText);
-          expect(wrapper.find('.bp3-intent-warning').length).toBeGreaterThanOrEqual(1);
+          expect(screen.getAllByText(errorText)).toBeTruthy();
         });
 
         it('renders with helperText', () => {
@@ -116,9 +116,9 @@ describe('formFields generated tests', () => {
             ...field,
             helperText,
           };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [helpertextField] }} />);
+          render(<RendererWrapper schema={{ fields: [helpertextField] }} />);
 
-          expect(wrapper.find('.bp3-form-helper-text').last().text()).toEqual(helperText);
+          expect(screen.getByText(helperText)).toBeInTheDocument();
         });
 
         it('renders with description', () => {
@@ -126,9 +126,9 @@ describe('formFields generated tests', () => {
             ...field,
             description,
           };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [descriptionField] }} />);
+          render(<RendererWrapper schema={{ fields: [descriptionField] }} />);
 
-          expect(wrapper.find('.bp3-form-helper-text').last().text()).toEqual(description);
+          expect(screen.getByText(description)).toBeInTheDocument();
         });
 
         it('renders with description and helperText', () => {
@@ -137,9 +137,10 @@ describe('formFields generated tests', () => {
             description,
             helperText,
           };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [descriptionField] }} />);
+          render(<RendererWrapper schema={{ fields: [descriptionField] }} />);
 
-          expect(wrapper.find('.bp3-form-helper-text').last().text()).toEqual(helperText);
+          expect(screen.getByText(helperText)).toBeInTheDocument();
+          expect(() => screen.getByText(description)).toThrow();
         });
 
         it('renders with error and helperText', () => {
@@ -148,10 +149,12 @@ describe('formFields generated tests', () => {
             helperText,
             validate: [{ type: validatorTypes.REQUIRED }],
           };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [errorFields] }} />);
-          wrapper.find('form').simulate('submit');
+          render(<RendererWrapper schema={{ fields: [errorFields] }} />);
 
-          expect(wrapper.find('.bp3-form-helper-text').last().text()).toEqual(errorText);
+          userEvent.click(screen.getByText('Submit'));
+
+          expect(screen.getByText(errorText)).toBeInTheDocument();
+          expect(() => screen.getByText(helperText)).toThrow();
         });
 
         it('renders isRequired', () => {
@@ -159,26 +162,27 @@ describe('formFields generated tests', () => {
             ...field,
             isRequired: true,
           };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [requiredField] }} />);
+          render(<RendererWrapper schema={{ fields: [requiredField] }} />);
 
-          expect(wrapper.find('.bp3-text-muted').last().text()).toEqual('(required)');
+          expect(screen.getByText('(required)')).toBeInTheDocument();
         });
 
         it('renders isDisabled', () => {
           const disabledField = {
             ...field,
             isDisabled: true,
+            'aria-label': field.name,
           };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [disabledField] }} />);
+          const { container } = render(<RendererWrapper schema={{ fields: [disabledField] }} />);
 
-          if (component === componentTypes.TEXTAREA) {
-            expect(wrapper.find('textarea').first().props().disabled).toEqual(true);
+          if (component === componentTypes.RADIO) {
+            options.forEach((opt) => {
+              expect(screen.getByText(opt.label)).toHaveClass('bp3-disabled');
+            });
+          } else if ([componentTypes.SLIDER, componentTypes.DATE_PICKER, componentTypes.TIME_PICKER, componentTypes.SELECT].includes(component)) {
+            expect(container.getElementsByClassName('bp3-disabled')).toHaveLength(1);
           } else {
-            if (!wrapper.find('.bp3-disabled')) {
-              expect(wrapper.find('input').first().props().disabled).toEqual(true);
-            } else {
-              expect(wrapper.find('.bp3-disabled').length).toBeGreaterThanOrEqual(1);
-            }
+            expect(screen.getAllByLabelText(field.name)[0]).toBeDisabled();
           }
         });
 
@@ -186,25 +190,27 @@ describe('formFields generated tests', () => {
           const disabledField = {
             ...field,
             isReadOnly: true,
+            'aria-label': field.name,
           };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [disabledField] }} />);
+          const { container } = render(<RendererWrapper schema={{ fields: [disabledField] }} />);
 
-          if (component === componentTypes.TEXTAREA) {
-            expect(wrapper.find('textarea').first().props().disabled).toEqual(true);
+          if (component === componentTypes.RADIO) {
+            options.forEach((opt) => {
+              expect(screen.getByText(opt.label)).toHaveClass('bp3-disabled');
+            });
+          } else if ([componentTypes.SLIDER, componentTypes.DATE_PICKER, componentTypes.TIME_PICKER, componentTypes.SELECT].includes(component)) {
+            expect(container.getElementsByClassName('bp3-disabled')).toHaveLength(1);
           } else {
-            if (!wrapper.find('.bp3-disabled')) {
-              expect(wrapper.find('input').first().props().disabled).toEqual(true);
-            } else {
-              expect(wrapper.find('.bp3-disabled').length).toBeGreaterThanOrEqual(1);
-            }
+            expect(screen.getAllByLabelText(field.name)[0]).toBeDisabled();
           }
         });
 
         it('renders with submit error', () => {
-          const wrapper = mount(<RendererWrapper schema={schema} onSubmit={() => ({ [field.name]: errorText })} />);
-          wrapper.find('form').simulate('submit');
-          expect(wrapper.find('.bp3-form-helper-text').last().text()).toEqual(errorText);
-          expect(wrapper.find('.bp3-intent-danger').length).toBeGreaterThanOrEqual(1);
+          render(<RendererWrapper schema={schema} onSubmit={() => ({ [field.name]: errorText })} />);
+
+          userEvent.click(screen.getByText('Submit'));
+
+          expect(screen.getByText(errorText)).toBeInTheDocument();
         });
       });
     });
