@@ -1,16 +1,15 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, screen, fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 
 import FormTemplate from '../form-template';
-import { act } from 'react-dom/test-utils';
 import TimePicker from '../time-picker';
 
 describe('TimePicker<String>', () => {
   let initialProps;
   let onSubmit;
-  let wrapper;
   let schema;
 
   beforeEach(() => {
@@ -38,39 +37,21 @@ describe('TimePicker<String>', () => {
       ],
     };
 
-    wrapper = mount(<FormRenderer schema={schema} {...initialProps} />);
+    render(<FormRenderer schema={schema} {...initialProps} />);
 
-    await act(async () => {
-      wrapper.find('input').simulate('change', { target: { value: '00:35' } });
-    });
-    wrapper.update();
+    userEvent.type(screen.getByPlaceholderText('hh:mm'), '00:35');
+    userEvent.selectOptions(screen.getByLabelText('open list of options', { selector: 'select' }), screen.getByText('PM'));
+    userEvent.click(screen.getByText('Submit'));
 
-    await act(async () => {
-      wrapper.find('select#time-picker-12h').simulate('change', { target: { value: 'PM' } });
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
-
-    expect(wrapper.find('input').props().value).toEqual('00:35');
+    expect(screen.getByPlaceholderText('hh:mm')).toHaveValue('00:35');
     expect(onSubmit).toHaveBeenLastCalledWith({ 'time-picker': '00:35 PM' });
 
     onSubmit.mockReset();
 
-    await act(async () => {
-      wrapper.find('select#time-picker-12h').simulate('change', { target: { value: 'AM' } });
-    });
-    wrapper.update();
+    userEvent.selectOptions(screen.getByLabelText('open list of options', { selector: 'select' }), screen.getByText('AM'));
+    userEvent.click(screen.getByText('Submit'));
 
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
-
-    expect(wrapper.find('input').props().value).toEqual('00:35');
+    expect(screen.getByPlaceholderText('hh:mm')).toHaveValue('00:35');
     expect(onSubmit).toHaveBeenLastCalledWith({ 'time-picker': '00:35 AM' });
   });
 
@@ -84,24 +65,12 @@ describe('TimePicker<String>', () => {
       ],
     };
 
-    wrapper = mount(<FormRenderer schema={schema} {...initialProps} />);
+    render(<FormRenderer schema={schema} {...initialProps} />);
 
-    await act(async () => {
-      wrapper.find('input').simulate('change', { target: { value: 'aa:BB' } });
-    });
-    wrapper.update();
+    userEvent.type(screen.getByPlaceholderText('hh:mm'), 'aa:BB');
+    userEvent.click(screen.getByText('Submit'));
 
-    await act(async () => {
-      wrapper.find('input').simulate('blur');
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
-
-    expect(wrapper.find('input').props().value).toEqual('aa:BB');
+    expect(screen.getByPlaceholderText('hh:mm')).toHaveValue('aa:BB');
     expect(onSubmit).toHaveBeenLastCalledWith({ 'time-picker': 'aa:BB' });
   });
 
@@ -115,43 +84,23 @@ describe('TimePicker<String>', () => {
       ],
     };
 
-    wrapper = mount(<FormRenderer schema={schema} {...initialProps} />);
+    render(<FormRenderer schema={schema} {...initialProps} />);
 
-    await act(async () => {
-      wrapper.find('input').simulate('change', { target: { value: '13:87' } });
-    });
-    wrapper.update();
+    fireEvent.focusIn(screen.getByPlaceholderText('hh:mm'));
+    fireEvent.change(screen.getByPlaceholderText('hh:mm'), { target: { value: '13:87' } });
+    fireEvent.focusOut(screen.getByPlaceholderText('hh:mm'));
+    userEvent.click(screen.getByText('Submit'));
 
-    await act(async () => {
-      wrapper.find('input').simulate('blur');
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
-
-    expect(wrapper.find('input').props().value).toEqual('13:87');
+    expect(screen.getByPlaceholderText('hh:mm')).toHaveValue('13:87');
     expect(onSubmit).toHaveBeenLastCalledWith({ 'time-picker': '13:87' });
     onSubmit.mockReset();
 
-    await act(async () => {
-      wrapper.find('input').simulate('change', { target: { value: '25:16' } });
-    });
-    wrapper.update();
+    fireEvent.focusIn(screen.getByPlaceholderText('hh:mm'));
+    fireEvent.change(screen.getByPlaceholderText('hh:mm'), { target: { value: '25:16' } });
+    fireEvent.focusOut(screen.getByPlaceholderText('hh:mm'));
+    userEvent.click(screen.getByText('Submit'));
 
-    await act(async () => {
-      wrapper.find('input').simulate('blur');
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
-
-    expect(wrapper.find('input').props().value).toEqual('25:16');
+    expect(screen.getByPlaceholderText('hh:mm')).toHaveValue('25:16');
     expect(onSubmit).toHaveBeenLastCalledWith({ 'time-picker': '25:16' });
   });
 
@@ -170,39 +119,22 @@ describe('TimePicker<String>', () => {
       ],
     };
 
-    wrapper = mount(<FormRenderer schema={schema} {...initialProps} />);
+    render(<FormRenderer schema={schema} {...initialProps} />);
 
-    await act(async () => {
-      wrapper.find('input').simulate('change', { target: { value: '00:35' } });
-    });
-    wrapper.update();
+    fireEvent.focusIn(screen.getByPlaceholderText('hh:mm'));
+    fireEvent.change(screen.getByPlaceholderText('hh:mm'), { target: { value: '00:35' } });
+    fireEvent.focusOut(screen.getByPlaceholderText('hh:mm'));
+    userEvent.selectOptions(screen.getAllByLabelText('open list of options', { selector: 'select' })[1], screen.getByText('EST'));
+    userEvent.click(screen.getByText('Submit'));
 
-    await act(async () => {
-      wrapper.find('select#time-picker-timezones').simulate('change', { target: { value: 'EST' } });
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
-
-    expect(wrapper.find('input').props().value).toEqual('00:35');
-    expect(onSubmit).toHaveBeenLastCalledWith({ 'time-picker': '00:35 AM EST' });
+    expect(screen.getByPlaceholderText('hh:mm')).toHaveValue('00:35');
+    expect(onSubmit).toHaveBeenLastCalledWith({ 'time-picker': '00:35 AM EAST' });
 
     onSubmit.mockReset();
 
-    await act(async () => {
-      wrapper.find('select#time-picker-timezones').simulate('change', { target: { value: 'UTC' } });
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
-
-    expect(wrapper.find('input').props().value).toEqual('00:35');
+    userEvent.selectOptions(screen.getAllByLabelText('open list of options', { selector: 'select' })[1], screen.getByText('UTC'));
+    userEvent.click(screen.getByText('Submit'));
+    expect(screen.getByPlaceholderText('hh:mm')).toHaveValue('00:35');
     expect(onSubmit).toHaveBeenLastCalledWith({ 'time-picker': '00:35 AM UTC' });
   });
 
@@ -222,19 +154,15 @@ describe('TimePicker<String>', () => {
       ],
     };
 
-    wrapper = mount(<FormRenderer schema={schema} {...initialProps} />);
+    render(<FormRenderer schema={schema} {...initialProps} />);
 
-    expect(wrapper.find('input').props().value).toEqual('12:57');
+    expect(screen.getByPlaceholderText('hh:mm')).toHaveValue('12:57');
 
-    await act(async () => {
-      wrapper.find('input').simulate('change', { target: { value: '00:35' } });
-    });
-    wrapper.update();
+    fireEvent.focusIn(screen.getByPlaceholderText('hh:mm'));
+    fireEvent.change(screen.getByPlaceholderText('hh:mm'), { target: { value: '00:35' } });
+    fireEvent.focusOut(screen.getByPlaceholderText('hh:mm'));
 
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
+    userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenLastCalledWith({ 'time-picker': '00:35 PM EAST' });
   });

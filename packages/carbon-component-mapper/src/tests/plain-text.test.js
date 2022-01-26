@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 
 import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 
@@ -24,11 +24,11 @@ describe('<PlainText />', () => {
       ],
     };
 
-    const wrapper = mount(
+    render(
       <FormRenderer onSubmit={jest.fn()} FormTemplate={(props) => <FormTemplate {...props} />} schema={schema} componentMapper={componentMapper} />
     );
 
-    expect(wrapper.find('p').text()).toEqual('I am happy text');
-    expect(wrapper.find('h1').text()).toEqual('header');
+    expect(screen.getByText('I am happy text', { selector: 'p' })).toBeInTheDocument();
+    expect(screen.getByText('header', { selector: 'h1' })).toBeInTheDocument();
   });
 });
