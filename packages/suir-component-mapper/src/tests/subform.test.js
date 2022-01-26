@@ -1,9 +1,8 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 
 import Subform from '../sub-form';
 import RenderWithProvider from '../../../../__mocks__/with-provider';
-import { Header } from 'semantic-ui-react';
 
 describe('subform', () => {
   const props = {
@@ -25,7 +24,7 @@ describe('subform', () => {
   const DESCRIPTION = 'THIS IS DESCRIPTION';
 
   it('should render correctly', () => {
-    const wrapper = mount(
+    render(
       <RenderWithProvider
         value={{
           formOptions: {
@@ -37,11 +36,11 @@ describe('subform', () => {
       </RenderWithProvider>
     );
 
-    expect(wrapper.find('h1')).toHaveLength(1);
+    expect(screen.getByText('Content')).toBeInTheDocument();
   });
 
   it('should render correctly with title', () => {
-    const wrapper = mount(
+    render(
       <RenderWithProvider
         value={{
           formOptions: {
@@ -53,13 +52,11 @@ describe('subform', () => {
       </RenderWithProvider>
     );
 
-    expect(wrapper.find(Header)).toHaveLength(1);
-    expect(wrapper.find(Header).text().includes(TITLE)).toEqual(true);
-    expect(wrapper.find('h1')).toHaveLength(1);
+    expect(screen.getByText(TITLE)).toBeInTheDocument();
   });
 
   it('should render correctly with description', () => {
-    const wrapper = mount(
+    render(
       <RenderWithProvider
         value={{
           formOptions: {
@@ -71,13 +68,11 @@ describe('subform', () => {
       </RenderWithProvider>
     );
 
-    expect(wrapper.find('p')).toHaveLength(1);
-    expect(wrapper.find('p').text().includes(DESCRIPTION)).toEqual(true);
-    expect(wrapper.find('h1')).toHaveLength(1);
+    expect(screen.getByText(DESCRIPTION)).toBeInTheDocument();
   });
 
   it('should render correctly with title and description', () => {
-    const wrapper = mount(
+    render(
       <RenderWithProvider
         value={{
           formOptions: {
@@ -89,10 +84,7 @@ describe('subform', () => {
       </RenderWithProvider>
     );
 
-    expect(wrapper.find(Header)).toHaveLength(1);
-    expect(wrapper.find('p')).toHaveLength(1);
-    expect(wrapper.find(Header).text().includes(TITLE)).toEqual(true);
-    expect(wrapper.find('p').text().includes(DESCRIPTION)).toEqual(true);
-    expect(wrapper.find('h1')).toHaveLength(1);
+    expect(screen.getByText(TITLE)).toBeInTheDocument();
+    expect(screen.getByText(DESCRIPTION)).toBeInTheDocument();
   });
 });

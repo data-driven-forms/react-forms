@@ -163,6 +163,8 @@ const DualList = ({
   rightValues,
   handleValuesClick,
   validateOnMount,
+  leftSortTitle,
+  rightSortTitle,
   OptionsListProps,
   OptionProps,
   LabelProps: { className: labelClassName, error: labelError, ...LabelProps },
@@ -212,6 +214,7 @@ const DualList = ({
                 value={state.filterOptions}
                 placeholder={filterOptionsTitle}
                 id={`${input.name}-options-toolbar`}
+                sortTitle={leftSortTitle}
                 {...ToolbarProps}
               />
             </GridColumn>
@@ -296,6 +299,7 @@ const DualList = ({
                 value={state.filterValue}
                 placeholder={filterValueTitle}
                 id={`${input.name}-value-toolbar`}
+                sortTitle={rightSortTitle}
                 {...ToolbarProps}
               />
             </GridColumn>
@@ -355,6 +359,8 @@ DualList.propTypes = {
   rightValues: PropTypes.array,
   handleValuesClick: PropTypes.func,
   validateOnMount: PropTypes.bool,
+  leftSortTitle: PropTypes.node,
+  rightSortTitle: PropTypes.node,
   /** Sub components customization API */
   OptionsListProps: PropTypes.object,
   OptionProps: PropTypes.object,
@@ -384,6 +390,8 @@ DualList.defaultProps = {
   filterValueTitle: 'Filter selected value',
   filterOptionsText: 'Remove your filter to see all options',
   filterValueText: 'Remove your filter to see all selected',
+  leftSortTitle: 'Sort options',
+  rightSortTitle: 'Sort value',
   options: [],
   allToLeft: true,
   allToRight: true,

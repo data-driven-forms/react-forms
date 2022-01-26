@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 
 import PlainText from '../plain-text';
 
@@ -8,17 +8,19 @@ describe('PlainText component', () => {
     const label = 'One \n Two \n Three';
     const name = 'name';
 
-    const wrapper = mount(<PlainText name={name} label={label} />);
+    render(<PlainText name={name} label={label} />);
 
-    expect(wrapper.find('p')).toHaveLength(3);
+    expect(screen.getByText('One', { selector: 'p' })).toBeInTheDocument();
+    expect(screen.getByText('Two', { selector: 'p' })).toBeInTheDocument();
+    expect(screen.getByText('Three', { selector: 'p' })).toBeInTheDocument();
   });
 
   it('renders correctly with one paragraphs', () => {
     const label = 'One';
     const name = 'name';
 
-    const wrapper = mount(<PlainText name={name} label={label} />);
+    render(<PlainText name={name} label={label} />);
 
-    expect(wrapper.find('p')).toHaveLength(1);
+    expect(screen.getByText('One', { selector: 'p' })).toBeInTheDocument();
   });
 });

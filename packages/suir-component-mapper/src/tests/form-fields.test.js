@@ -1,15 +1,13 @@
 import React from 'react';
-import { mount } from 'enzyme';
-import { act } from 'react-dom/test-utils';
-import MultipleChoiceListCommon from '@data-driven-forms/common/multiple-choice-list';
+import { render, screen, act } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
 import { FormRenderer, componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
 import Checkbox from '../checkbox';
 
 import RenderWithProvider from '../../../../__mocks__/with-provider';
 import FormTemplate from '../form-template';
 import componentMapper from '../component-mapper';
-import { Radio, Dropdown } from 'semantic-ui-react';
-import HelperText from '../helper-text/helper-text';
 
 const RendererWrapper = ({ schema = { fields: [] }, ...props }) => (
   <FormRenderer
@@ -69,18 +67,16 @@ describe('formFields', () => {
         });
 
         it('renders correctly', () => {
-          const wrapper = mount(<RendererWrapper schema={schema} />);
+          render(<RendererWrapper schema={schema} />);
 
           if (component === componentTypes.RADIO) {
-            expect(wrapper.find(Radio)).toHaveLength(options.length);
-          } else {
-            expect(wrapper.find(componentMapper[component])).toHaveLength(1);
+            options.forEach((opt) => {
+              expect(screen.getByText(opt.label)).toBeInTheDocument();
+            });
           }
 
-          expect(wrapper.find('label').first().text()).toEqual(field.label);
-          expect(wrapper.find('.ui.pointing.prompt.label')).toHaveLength(0);
-          expect(wrapper.find(HelperText)).toHaveLength(0);
-          expect(wrapper.find('.required.field')).toHaveLength(0);
+          expect(screen.getAllByText(field.label)).toBeTruthy();
+          expect(() => screen.getByText(errorText)).toThrow();
         });
 
         it('renders with error', () => {
@@ -88,9 +84,11 @@ describe('formFields', () => {
             ...field,
             validate: [{ type: validatorTypes.REQUIRED }],
           };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [errorField] }} />);
-          wrapper.find('form').simulate('submit');
-          expect(wrapper.find('.ui.pointing.prompt.label').last().text()).toEqual(errorText);
+          render(<RendererWrapper schema={{ fields: [errorField] }} />);
+
+          userEvent.click(screen.getByText('Submit'));
+
+          expect(screen.getByText(errorText)).toBeInTheDocument();
         });
 
         it('renders with warning', async () => {
@@ -100,14 +98,17 @@ describe('formFields', () => {
             useWarnings: true,
             validateOnMount: true,
           };
-          let wrapper;
-
           await act(async () => {
-            wrapper = mount(<RendererWrapper schema={{ fields: [errorField] }} />);
+            render(
+              <RendererWrapper
+                schema={{
+                  fields: [errorField],
+                }}
+              />
+            );
           });
-          wrapper.update();
 
-          expect(wrapper.find(HelperText).last().text()).toEqual(errorText);
+          expect(screen.getAllByText(errorText)).toBeTruthy();
         });
 
         it('renders with helperText', () => {
@@ -115,9 +116,9 @@ describe('formFields', () => {
             ...field,
             helperText,
           };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [helpertextField] }} />);
+          render(<RendererWrapper schema={{ fields: [helpertextField] }} />);
 
-          expect(wrapper.find(HelperText).last().text()).toEqual(helperText);
+          expect(screen.getByText(helperText)).toBeInTheDocument();
         });
 
         it('renders with error and helperText', () => {
@@ -126,11 +127,12 @@ describe('formFields', () => {
             helperText,
             validate: [{ type: validatorTypes.REQUIRED }],
           };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [errorFields] }} />);
-          wrapper.find('form').simulate('submit');
+          render(<RendererWrapper schema={{ fields: [errorFields] }} />);
 
-          expect(wrapper.find('.ui.pointing.prompt.label').last().text()).toEqual(errorText);
-          expect(wrapper.find(HelperText).last().text()).toEqual(helperText);
+          userEvent.click(screen.getByText('Submit'));
+
+          expect(screen.getByText(errorText)).toBeInTheDocument();
+          expect(screen.getByText(helperText)).toBeInTheDocument();
         });
 
         it('renders isRequired', () => {
@@ -138,12 +140,9 @@ describe('formFields', () => {
             ...field,
             isRequired: true,
           };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [requiredField] }} />);
-          if (component === componentTypes.TEXTAREA) {
-            expect(wrapper.find('.required.field')).toHaveLength(2);
-          } else {
-            expect(wrapper.find('.required.field')).toHaveLength(1);
-          }
+          render(<RendererWrapper schema={{ fields: [requiredField] }} />);
+
+          expect(screen.getByText(field.label).closest('.required')).toBeInTheDocument();
         });
 
         it('renders isDisabled', () => {
@@ -151,15 +150,9 @@ describe('formFields', () => {
             ...field,
             isDisabled: true,
           };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [disabledField] }} />);
+          const { container } = render(<RendererWrapper schema={{ fields: [disabledField] }} />);
 
-          if (component === componentTypes.TEXTAREA) {
-            expect(wrapper.find('textarea').first().props().disabled).toEqual(true);
-          } else if (component === componentTypes.SELECT) {
-            expect(wrapper.find(Dropdown).first().prop('disabled')).toEqual(true);
-          } else {
-            expect(wrapper.find('input').first().props().disabled).toEqual(true);
-          }
+          [...container.getElementsByTagName('input')].forEach((el) => expect(el).toBeDisabled());
         });
 
         it('renders isReadOnly', () => {
@@ -167,22 +160,23 @@ describe('formFields', () => {
             ...field,
             isReadOnly: true,
           };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [disabledField] }} />);
+          const { container } = render(<RendererWrapper schema={{ fields: [disabledField] }} />);
 
-          if (component === componentTypes.TEXTAREA) {
-            expect(wrapper.find('textarea').first().props().readOnly).toEqual(true);
-          } else if (component === componentTypes.SELECT) {
-            /**SUIR select does not have read only prop */
-            expect(true);
-          } else {
-            expect(wrapper.find('input').first().props().readOnly).toEqual(true);
-          }
+          [...container.getElementsByTagName('input')].forEach((el) => {
+            try {
+              expect(el).toBeDisabled();
+            } catch {
+              expect(el).toHaveAttribute('readonly', '');
+            }
+          });
         });
 
         it('renders with submitError', () => {
-          const wrapper = mount(<RendererWrapper schema={schema} onSubmit={() => ({ [field.name]: errorText })} />);
-          wrapper.find('form').simulate('submit');
-          expect(wrapper.find('.ui.pointing.prompt.label').last().text()).toEqual(errorText);
+          render(<RendererWrapper schema={schema} onSubmit={() => ({ [field.name]: errorText })} />);
+
+          userEvent.click(screen.getByText('Submit'));
+
+          expect(screen.getByText(errorText)).toBeInTheDocument();
         });
       });
     });
@@ -203,16 +197,15 @@ describe('formFields', () => {
     });
 
     it('renders correctly', () => {
-      const wrapper = mount(
+      render(
         <RenderWithProvider>
           <Checkbox {...initialProps} />
         </RenderWithProvider>
       );
 
-      expect(wrapper.find(MultipleChoiceListCommon)).toHaveLength(1);
-      expect(wrapper.find('.ui.pointing.prompt.label')).toHaveLength(0);
-      expect(wrapper.find(HelperText)).toHaveLength(0);
-      expect(wrapper.find('.required.field')).toHaveLength(0);
+      expect(screen.getByText('Cat')).toBeInTheDocument();
+      expect(screen.getByText('Dog')).toBeInTheDocument();
+      expect(screen.getByText('Hamster')).toBeInTheDocument();
     });
 
     it('renders with error', () => {
@@ -225,10 +218,11 @@ describe('formFields', () => {
           },
         ],
       };
-      const wrapper = mount(<RendererWrapper schema={schema} />);
-      wrapper.find('form').simulate('submit');
+      render(<RendererWrapper schema={schema} />);
 
-      expect(wrapper.find('.ui.pointing.prompt.label').last().text()).toEqual(errorText);
+      userEvent.click(screen.getByText('Submit'));
+
+      expect(screen.getByText(errorText)).toBeInTheDocument();
     });
 
     it('renders with helperText', () => {
@@ -241,9 +235,9 @@ describe('formFields', () => {
           },
         ],
       };
-      const wrapper = mount(<RendererWrapper schema={schema} />);
+      render(<RendererWrapper schema={schema} />);
 
-      expect(wrapper.find(HelperText).last().text()).toEqual(helperText);
+      expect(screen.getByText(helperText)).toBeInTheDocument();
     });
 
     it('renders with error and helperText', () => {
@@ -257,12 +251,12 @@ describe('formFields', () => {
           },
         ],
       };
-      const wrapper = mount(<RendererWrapper schema={schema} />);
-      wrapper.find('form').simulate('submit');
+      render(<RendererWrapper schema={schema} />);
 
-      expect(wrapper.find('.ui.pointing.prompt.label').last().text()).toEqual(errorText);
+      userEvent.click(screen.getByText('Submit'));
 
-      expect(wrapper.find(HelperText).last().text()).toEqual(helperText);
+      expect(screen.getByText(errorText)).toBeInTheDocument();
+      expect(screen.getByText(helperText)).toBeInTheDocument();
     });
   });
 });
