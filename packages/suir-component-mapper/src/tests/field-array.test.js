@@ -1,7 +1,7 @@
 import React from 'react';
-import { act } from 'react-dom/test-utils';
 import { FormRenderer, componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { componentMapper, FormTemplate } from '../index';
 import { reducer } from '../field-array';
@@ -40,6 +40,7 @@ describe('<FieldArray/>', () => {
               {
                 component: componentTypes.TEXT_FIELD,
                 name: 'name',
+                'aria-label': 'name',
               },
             ],
           },
@@ -47,27 +48,18 @@ describe('<FieldArray/>', () => {
       },
     };
 
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...initialProps} />);
-    });
+    render(<FormRenderer {...initialProps} />);
 
-    expect(wrapper.find(Header)).toHaveLength(2);
-    expect(wrapper.find('p')).toHaveLength(1);
-    expect(wrapper.find(Header).first().text()).toEqual('I am label');
-    expect(wrapper.find(Header).at(1).text()).toEqual('I am description');
-    expect(wrapper.find('p').last().text()).toEqual('I have no items');
+    expect(screen.getByText('I am label')).toBeInTheDocument();
+    expect(screen.getByText('I am description')).toBeInTheDocument();
+    expect(screen.getByText('I have no items')).toBeInTheDocument();
+    expect(() => screen.getByLabelText('name')).toThrow();
 
-    expect(wrapper.find('button.ui.blue.button').first().text()).toEqual('CUSTOM ADD');
+    userEvent.click(screen.getByText('CUSTOM ADD'));
 
-    /**
-     * Add new item to field array
-     */
-    await act(async () => {
-      wrapper.find('button.ui.blue.button').first().simulate('click');
-    });
-    wrapper.update();
-    expect(wrapper.find(Button).at(3).text()).toEqual('CUSTOM REMOVE');
-    expect(wrapper.find('p')).toHaveLength(0);
+    expect(screen.getByLabelText('name')).toBeInTheDocument();
+    expect(() => screen.getByText('I have no items')).toThrow();
+    expect(screen.getByText('CUSTOM REMOVE')).toBeInTheDocument();
   });
 
   it('allow to add/remove named fields', async () => {
@@ -94,30 +86,14 @@ describe('<FieldArray/>', () => {
       },
     };
 
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...initialProps} />);
-    });
+    render(<FormRenderer {...initialProps} />);
 
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
-
+    userEvent.click(screen.getByText('Submit'));
     expect(onSubmit).toHaveBeenCalledWith({});
     onSubmit.mockClear();
 
-    /**
-     * Add new item to the array
-     */
-    await act(async () => {
-      wrapper.find('button.ui.blue.button').first().simulate('click');
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
+    userEvent.click(screen.getByText('ADD'));
+    userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: [{ name: 'enter a name', lastName: 'enter a last name' }],
@@ -125,18 +101,8 @@ describe('<FieldArray/>', () => {
 
     onSubmit.mockClear();
 
-    /**
-     * Click remove button
-     */
-    await act(async () => {
-      wrapper.find('button.ui.red.basic.button').simulate('click');
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
+    userEvent.click(screen.getByText('REMOVE'));
+    userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: [],
@@ -162,30 +128,14 @@ describe('<FieldArray/>', () => {
       },
     };
 
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...initialProps} />);
-    });
+    render(<FormRenderer {...initialProps} />);
 
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
-
+    userEvent.click(screen.getByText('Submit'));
     expect(onSubmit).toHaveBeenCalledWith({});
     onSubmit.mockClear();
 
-    /**
-     * Add new item to the array
-     */
-    await act(async () => {
-      wrapper.find('button.ui.blue.button').first().simulate('click');
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
+    userEvent.click(screen.getByText('ADD'));
+    userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: ['defaultItem'],
@@ -193,18 +143,8 @@ describe('<FieldArray/>', () => {
 
     onSubmit.mockClear();
 
-    /**
-     * Click remove button
-     */
-    await act(async () => {
-      wrapper.find('button.ui.red.basic.button').simulate('click');
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
+    userEvent.click(screen.getByText('REMOVE'));
+    userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: [],
@@ -232,94 +172,42 @@ describe('<FieldArray/>', () => {
       },
     };
 
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...initialProps} />);
-    });
+    render(<FormRenderer {...initialProps} />);
 
-    /**
-     * Add new item to the array
-     */
-    await act(async () => {
-      wrapper.find('button.ui.blue.button').first().simulate('click');
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
+    userEvent.click(screen.getByText('ADD'));
+    userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: ['defaultItem'],
     });
     onSubmit.mockClear();
 
-    /**
-     * Add new item to the array
-     */
-    await act(async () => {
-      wrapper.find('button.ui.blue.button').first().simulate('click');
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
+    userEvent.click(screen.getByText('ADD'));
+    userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: ['defaultItem', 'defaultItem'],
     });
     onSubmit.mockClear();
 
-    /**
-     * Add new item to the array
-     */
-    await act(async () => {
-      wrapper.find('button.ui.blue.button').first().simulate('click');
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
+    userEvent.click(screen.getByText('ADD'));
+    userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: ['defaultItem', 'defaultItem'],
     });
     onSubmit.mockClear();
 
-    /**
-     * Click remove button
-     */
-    await act(async () => {
-      wrapper.find('button.ui.red.basic.button').first().simulate('click');
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
+    userEvent.click(screen.getAllByText('REMOVE')[0]);
+    userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: ['defaultItem'],
     });
     onSubmit.mockClear();
 
-    /**
-     * Click remove button
-     */
-    await act(async () => {
-      wrapper.find('button.ui.red.basic.button').first().simulate('click');
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
+    userEvent.click(screen.getAllByText('REMOVE')[0]);
+    userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: ['defaultItem'],
@@ -345,30 +233,17 @@ describe('<FieldArray/>', () => {
       },
     };
 
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...initialProps} />);
-    });
+    render(<FormRenderer {...initialProps} />);
 
-    expect(wrapper.find('.ddorg__suir__mapper__field-array-error')).toHaveLength(0);
+    expect(() => screen.getByText('Must have at least 3 items.')).toThrow();
 
-    /**
-     * Add new item to the array
-     */
-    await act(async () => {
-      wrapper.find('button.ui.blue.button').first().simulate('click');
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
+    userEvent.click(screen.getByText('ADD'));
+    userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).not.toHaveBeenCalled();
     onSubmit.mockClear();
 
-    expect(wrapper.find('.ddorg__suir__mapper__field-array-error')).toHaveLength(1);
-    expect(wrapper.find('.ddorg__suir__mapper__field-array-error').text()).toEqual('Must have at least 3 items.');
+    expect(screen.getByText('Must have at least 3 items.')).toBeInTheDocument();
   });
 
   it('allow to revert removal', async () => {
@@ -390,22 +265,10 @@ describe('<FieldArray/>', () => {
       },
     };
 
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...initialProps} />);
-    });
+    render(<FormRenderer {...initialProps} />);
 
-    /**
-     * Add new item to the array
-     */
-    await act(async () => {
-      wrapper.find('button.ui.blue.button').first().simulate('click');
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
+    userEvent.click(screen.getByText('ADD'));
+    userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: [{ name: 'enter a name', lastName: 'enter a last name' }],
@@ -413,18 +276,8 @@ describe('<FieldArray/>', () => {
 
     onSubmit.mockClear();
 
-    /**
-     * Click remove button
-     */
-    await act(async () => {
-      wrapper.find('button.ui.red.basic.button').first().simulate('click');
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
+    userEvent.click(screen.getByText('REMOVE'));
+    userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: [],
@@ -432,18 +285,8 @@ describe('<FieldArray/>', () => {
 
     onSubmit.mockClear();
 
-    /**
-     * Undo last action
-     */
-    await act(async () => {
-      wrapper.find('button.ddorg__suir__mapper__field-array-undo').at(0).simulate('click');
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
+    userEvent.click(screen.getByLabelText('undo'));
+    userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: [{ name: 'enter a name', lastName: 'enter a last name' }],
@@ -451,54 +294,22 @@ describe('<FieldArray/>', () => {
 
     onSubmit.mockClear();
 
-    /**
-     * Redo last action
-     */
-    await act(async () => {
-      wrapper.find('button.ddorg__suir__mapper__field-array-redo').at(0).simulate('click');
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
+    userEvent.click(screen.getByLabelText('redo'));
+    userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: [],
     });
 
-    /**
-     * Undo last action
-     */
-    await act(async () => {
-      wrapper.find('button.ddorg__suir__mapper__field-array-undo').at(0).simulate('click');
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
+    userEvent.click(screen.getByLabelText('undo'));
+    userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: [{ name: 'enter a name', lastName: 'enter a last name' }],
     });
 
-    /**
-     * Add new item to the array
-     */
-    await act(async () => {
-      wrapper.find('button.ui.blue.button').first().simulate('click');
-    });
-    wrapper.update();
-
-    expect(
-      wrapper
-        .find('button.ddorg__suir__mapper__field-array-redo')
-        .at(0) // redo button
-        .prop('disabled') // 'add' action resets history
-    ).toEqual(true);
+    userEvent.click(screen.getByText('ADD'));
+    expect(screen.getByLabelText('undo')).toBeDisabled(); // ADD resets history
   });
 
   it('reducer - default state', () => {
