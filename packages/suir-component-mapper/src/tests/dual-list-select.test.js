@@ -1,5 +1,4 @@
 import React from 'react';
-import { act } from 'react-dom/test-utils';
 import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -172,7 +171,7 @@ describe('DualListSelect', () => {
   it('sort options', async () => {
     const { container } = render(<FormRenderer {...initialProps} />);
 
-    expect([...container.getElementsByClassName('ui segment')].map((el) => [...el.children].map((e) => e.textContent)).flatMap(x => x)).toEqual([
+    expect([...container.getElementsByClassName('ui segment')].map((el) => [...el.children].map((e) => e.textContent)).flatMap((x) => x)).toEqual([
       'cats',
       'cats_1',
       'cats_2',
@@ -183,7 +182,7 @@ describe('DualListSelect', () => {
 
     userEvent.click(screen.getByTitle('Sort options'));
 
-    expect([...container.getElementsByClassName('ui segment')].map((el) => [...el.children].map((e) => e.textContent)).flatMap(x => x)).toEqual([
+    expect([...container.getElementsByClassName('ui segment')].map((el) => [...el.children].map((e) => e.textContent)).flatMap((x) => x)).toEqual([
       'zebras',
       'pigeons',
       'cats_2',
@@ -194,7 +193,7 @@ describe('DualListSelect', () => {
 
     userEvent.click(screen.getByTitle('Sort options'));
 
-    expect([...container.getElementsByClassName('ui segment')].map((el) => [...el.children].map((e) => e.textContent)).flatMap(x => x)).toEqual([
+    expect([...container.getElementsByClassName('ui segment')].map((el) => [...el.children].map((e) => e.textContent)).flatMap((x) => x)).toEqual([
       'cats',
       'cats_1',
       'cats_2',
@@ -209,7 +208,7 @@ describe('DualListSelect', () => {
       <FormRenderer {...initialProps} initialValues={{ 'dual-list': schema.fields[0].options.map(({ value }) => value) }} />
     );
 
-    expect([...container.getElementsByClassName('ui segment')].map((el) => [...el.children].map((e) => e.textContent)).flatMap(x => x)).toEqual([
+    expect([...container.getElementsByClassName('ui segment')].map((el) => [...el.children].map((e) => e.textContent)).flatMap((x) => x)).toEqual([
       'No available options',
       'cats',
       'cats_1',
@@ -220,7 +219,7 @@ describe('DualListSelect', () => {
 
     userEvent.click(screen.getByTitle('Sort value'));
 
-    expect([...container.getElementsByClassName('ui segment')].map((el) => [...el.children].map((e) => e.textContent)).flatMap(x => x)).toEqual([
+    expect([...container.getElementsByClassName('ui segment')].map((el) => [...el.children].map((e) => e.textContent)).flatMap((x) => x)).toEqual([
       'No available options',
       'zebras',
       'pigeons',
@@ -231,7 +230,7 @@ describe('DualListSelect', () => {
 
     userEvent.click(screen.getByTitle('Sort value'));
 
-    expect([...container.getElementsByClassName('ui segment')].map((el) => [...el.children].map((e) => e.textContent)).flatMap(x => x)).toEqual([
+    expect([...container.getElementsByClassName('ui segment')].map((el) => [...el.children].map((e) => e.textContent)).flatMap((x) => x)).toEqual([
       'No available options',
       'cats',
       'cats_1',

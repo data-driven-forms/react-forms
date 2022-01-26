@@ -5,12 +5,10 @@ import userEvent from '@testing-library/user-event';
 
 import { componentMapper, FormTemplate } from '../index';
 import { reducer } from '../field-array';
-import { Header, Button } from 'semantic-ui-react';
 
 describe('<FieldArray/>', () => {
   let initialProps;
   let onSubmit;
-  let wrapper;
 
   beforeEach(() => {
     onSubmit = jest.fn();
