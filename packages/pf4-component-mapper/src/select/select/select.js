@@ -39,7 +39,7 @@ const itemToString = (value, isMulti, showMore, handleShowMore, handleChange) =>
                     <span className="pf-c-chip__text" id={`pf-random-id-${index}-${label}`}>
                       {label}
                     </span>
-                    <button onClick={() => handleChange(item)} className="pf-c-button pf-m-plain" type="button">
+                    <button onClick={() => handleChange(item)} className="pf-c-button pf-m-plain" type="button" aria-label="remove option">
                       <CloseIcon />
                     </button>
                   </div>
