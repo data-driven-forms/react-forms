@@ -1,8 +1,8 @@
 import React from 'react';
-import { act } from 'react-dom/test-utils';
-import toJson from 'enzyme-to-json';
-import { FormGroup, Radio as PF4Radio } from '@patternfly/react-core';
-import { mount } from 'enzyme';
+
+import { render, screen, act } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
 import Checkbox from '../checkbox';
 import Switch from '../switch';
 
@@ -11,7 +11,6 @@ import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-rend
 import FormTemplate from '../form-template';
 import componentMapper from '../component-mapper';
 import { validatorTypes } from '@data-driven-forms/react-form-renderer';
-import MultipleChoiceListCommon from '@data-driven-forms/common/multiple-choice-list';
 
 describe('FormFields', () => {
   const props = {
@@ -20,15 +19,14 @@ describe('FormFields', () => {
   };
 
   it('should render with onText/OffText Switch correctly', () => {
-    const wrapper = mount(
+    render(
       <RenderWithProvider>
         <Switch {...props} onText="I am on" offText="Turned off" />
       </RenderWithProvider>
     );
 
-    expect(wrapper.find('.pf-m-on').text().includes('I am on')).toEqual(true);
-    expect(wrapper.find('.pf-m-on').text().includes('Turned off')).toEqual(false);
-    expect(toJson(wrapper)).toMatchSnapshot();
+    expect(screen.getByText('I am on')).toHaveClass('pf-m-on');
+    expect(screen.getByText('Turned off')).not.toHaveClass('pf-m-on');
   });
 
   describe('formFields generated tests', () => {
@@ -90,21 +88,16 @@ describe('FormFields', () => {
           });
 
           it('renders correctly', () => {
-            const wrapper = mount(<RendererWrapper schema={schema} />);
+            render(<RendererWrapper schema={schema} />);
 
             if (component === componentTypes.RADIO) {
-              expect(wrapper.find(PF4Radio)).toHaveLength(options.length);
-            } else if (component === componentTypes.SWITCH) {
-              expect(wrapper.find('.pf-c-switch__label').first().text()).toEqual(field.label);
-            } else {
-              expect(wrapper.find(componentMapper[component])).toHaveLength(1);
-              expect(wrapper.find('label').text()).toEqual(field.label);
+              options.forEach((opt) => {
+                expect(screen.getByText(opt.label)).toBeInTheDocument();
+              });
             }
 
-            expect(wrapper.find(FormGroup)).toHaveLength(1);
-            expect(wrapper.find('.pf-m-error')).toHaveLength(0);
-            expect(wrapper.find('.pf-c-form__helper-text')).toHaveLength(0);
-            expect(wrapper.find('.pf-c-form__label-required')).toHaveLength(0);
+            expect(screen.getAllByText(field.label)).toBeTruthy();
+            expect(() => screen.getByText(errorText)).toThrow();
           });
 
           it('renders with error', () => {
@@ -112,9 +105,11 @@ describe('FormFields', () => {
               ...field,
               validate: [{ type: validatorTypes.REQUIRED }],
             };
-            const wrapper = mount(<RendererWrapper schema={{ fields: [errorField] }} />);
-            wrapper.find('form').simulate('submit');
-            expect(wrapper.find('.pf-m-error').last().text()).toEqual(errorText);
+            render(<RendererWrapper schema={{ fields: [errorField] }} />);
+
+            userEvent.click(screen.getByText('Submit'));
+
+            expect(screen.getByText(errorText)).toBeInTheDocument();
           });
 
           it('renders with error and validateOnMount', async () => {
@@ -123,12 +118,17 @@ describe('FormFields', () => {
               validate: [{ type: validatorTypes.REQUIRED }],
               validateOnMount: true,
             };
-            let wrapper;
             await act(async () => {
-              wrapper = mount(<RendererWrapper schema={{ fields: [errorField] }} />);
+              render(
+                <RendererWrapper
+                  schema={{
+                    fields: [errorField],
+                  }}
+                />
+              );
             });
-            wrapper.update();
-            expect(wrapper.find('.pf-m-error').last().text()).toEqual(errorText);
+
+            expect(screen.getByText(errorText)).toBeInTheDocument();
           });
 
           it('renders with helperText', () => {
@@ -136,9 +136,9 @@ describe('FormFields', () => {
               ...field,
               helperText,
             };
-            const wrapper = mount(<RendererWrapper schema={{ fields: [helpertextField] }} />);
+            render(<RendererWrapper schema={{ fields: [helpertextField] }} />);
 
-            expect(wrapper.find('.pf-c-form__helper-text').last().text()).toEqual(helperText);
+            expect(screen.getByText(helperText)).toBeInTheDocument();
           });
 
           it('renders with description', () => {
@@ -146,9 +146,9 @@ describe('FormFields', () => {
               ...field,
               description,
             };
-            const wrapper = mount(<RendererWrapper schema={{ fields: [descriptionField] }} />);
+            render(<RendererWrapper schema={{ fields: [descriptionField] }} />);
 
-            expect(wrapper.find('small').last().text()).toEqual(description);
+            expect(screen.getByText(description)).toBeInTheDocument();
           });
 
           it('renders with description and helperText', () => {
@@ -157,55 +157,38 @@ describe('FormFields', () => {
               description,
               helperText,
             };
-            const wrapper = mount(<RendererWrapper schema={{ fields: [descriptionField] }} />);
+            render(<RendererWrapper schema={{ fields: [descriptionField] }} />);
 
-            expect(wrapper.find('.pf-c-form__helper-text').last().text()).toEqual(helperText);
-            expect(wrapper.find('small').last().text()).toEqual(description);
+            expect(screen.getByText(helperText)).toBeInTheDocument();
+            expect(screen.getByText(description)).toBeInTheDocument();
           });
 
-          if (![componentTypes.SELECT, componentTypes.SLIDER, componentTypes.RADIO].includes(component)) {
-            it('renders with warning and helperText', async () => {
-              const errorFields = {
-                ...field,
-                helperText,
-                id: 'warning-field',
-                validate: [() => ({ type: 'warning', error: errorText })],
-                useWarnings: true,
-              };
+          it('renders with warning and helperText', async () => {
+            const errorFields = {
+              ...field,
+              helperText,
+              id: 'warning-field',
+              validate: [() => ({ type: 'warning', error: errorText })],
+              useWarnings: true,
+              validateOnMount: true,
+              'aria-label': field.name,
+            };
 
-              let wrapper;
-
-              await act(async () => {
-                wrapper = mount(<RendererWrapper schema={{ fields: [errorFields] }} />);
-              });
-              wrapper.update();
-
-              await act(async () => {
-                wrapper.find('#warning-field').last().simulate('focus');
-              });
-              wrapper.update();
-
-              await act(async () => {
-                wrapper.find('#warning-field').last().simulate('blur');
-              });
-              wrapper.update();
-
-              expect(wrapper.find('.pf-m-warning').last().text()).toEqual(errorText);
+            await act(async () => {
+              render(<RendererWrapper schema={{ fields: [errorFields] }} />);
             });
-          }
+
+            expect(screen.getByText(errorText)).toBeInTheDocument();
+          });
 
           it('renders isRequired', () => {
             const requiredField = {
               ...field,
               isRequired: true,
             };
-            const wrapper = mount(<RendererWrapper schema={{ fields: [requiredField] }} />);
+            render(<RendererWrapper schema={{ fields: [requiredField] }} />);
 
-            if (component === componentTypes.SWITCH) {
-              expect(wrapper.find('.pf-c-form__label-required')).toHaveLength(2);
-            } else {
-              expect(wrapper.find('.pf-c-form__label-required')).toHaveLength(1);
-            }
+            expect(screen.getAllByText('*')).toBeTruthy();
           });
 
           it('renders isDisabled', () => {
@@ -217,55 +200,33 @@ describe('FormFields', () => {
               ...field,
               isDisabled: true,
             };
-            const wrapper = mount(<RendererWrapper schema={{ fields: [disabledField] }} />);
+            const { container } = render(<RendererWrapper schema={{ fields: [disabledField] }} />);
 
-            if (component === componentTypes.TEXTAREA) {
-              expect(wrapper.find('textarea').first().props().disabled).toEqual(true);
-            } else if (component === componentTypes.SELECT) {
-              expect(wrapper.find('div.pf-c-select__toggle').prop('disabled')).toEqual(true);
-            } else {
-              expect(wrapper.find('input').first().props().disabled).toEqual(true);
-            }
+            [...container.getElementsByTagName('input')].forEach((el) => expect(el).toBeDisabled());
           });
 
           it('renders isReadOnly', () => {
-            if (component === componentTypes.SELECT || component === componentTypes.SLIDER) {
-              return;
-            }
-
             const disabledField = {
               ...field,
               isReadOnly: true,
             };
-            const wrapper = mount(<RendererWrapper schema={{ fields: [disabledField] }} />);
+            const { container } = render(<RendererWrapper schema={{ fields: [disabledField] }} />);
 
-            if (component === componentTypes.TEXTAREA) {
-              expect(wrapper.find('textarea').first().props().disabled).toEqual(true);
-            } else if (
-              [
-                componentTypes.DATE_PICKER,
-                componentTypes.TIME_PICKER,
-                componentTypes.CHECKBOX,
-                componentTypes.RADIO,
-                componentTypes.SWITCH,
-                componentTypes.SLIDER,
-              ].includes(component)
-            ) {
-              expect(wrapper.find('input').first().props().disabled).toEqual(true);
-            } else {
-              expect(wrapper.find('input').first().props().readOnly).toEqual(true);
-            }
+            [...container.getElementsByTagName('input')].forEach((el) => {
+              try {
+                expect(el).toBeDisabled();
+              } catch {
+                expect(el).toHaveAttribute('readonly', '');
+              }
+            });
           });
 
           it('renders with submit error', async () => {
-            const wrapper = mount(<RendererWrapper schema={schema} onSubmit={() => ({ [field.name]: errorText })} />);
+            render(<RendererWrapper schema={schema} onSubmit={() => ({ [field.name]: errorText })} />);
 
-            await act(async () => {
-              wrapper.find('form').simulate('submit');
-            });
-            wrapper.update();
+            userEvent.click(screen.getByText('Submit'));
 
-            expect(wrapper.find('.pf-m-error').last().text()).toEqual(errorText);
+            expect(screen.getByText(errorText)).toBeInTheDocument();
           });
         });
       });
@@ -286,16 +247,15 @@ describe('FormFields', () => {
       });
 
       it('renders correctly', () => {
-        const wrapper = mount(
+        render(
           <RenderWithProvider>
             <Checkbox {...initialProps} />
           </RenderWithProvider>
         );
 
-        expect(wrapper.find(MultipleChoiceListCommon)).toHaveLength(1);
-        expect(wrapper.find('.pf-m-error')).toHaveLength(0);
-        expect(wrapper.find('.pf-c-form__helper-text')).toHaveLength(0);
-        expect(wrapper.find('.pf-c-form__label-required')).toHaveLength(0);
+        expect(screen.getByText('Cat')).toBeInTheDocument();
+        expect(screen.getByText('Dog')).toBeInTheDocument();
+        expect(screen.getByText('Hamster')).toBeInTheDocument();
       });
 
       it('renders with error', () => {
@@ -308,10 +268,11 @@ describe('FormFields', () => {
             },
           ],
         };
-        const wrapper = mount(<RendererWrapper schema={schema} />);
-        wrapper.find('form').simulate('submit');
+        render(<RendererWrapper schema={schema} />);
 
-        expect(wrapper.find('.pf-m-error').last().text()).toEqual(errorText);
+        userEvent.click(screen.getByText('Submit'));
+
+        expect(screen.getByText(errorText)).toBeInTheDocument();
       });
 
       it('renders with helperText', () => {
@@ -324,9 +285,9 @@ describe('FormFields', () => {
             },
           ],
         };
-        const wrapper = mount(<RendererWrapper schema={schema} />);
+        render(<RendererWrapper schema={schema} />);
 
-        expect(wrapper.find('.pf-c-form__helper-text').last().text()).toEqual(helperText);
+        expect(screen.getByText(helperText)).toBeInTheDocument();
       });
 
       it('renders with description', () => {
@@ -339,9 +300,9 @@ describe('FormFields', () => {
             },
           ],
         };
-        const wrapper = mount(<RendererWrapper schema={schema} />);
+        render(<RendererWrapper schema={schema} />);
 
-        expect(wrapper.find('small').last().text()).toEqual(description);
+        expect(screen.getByText(description)).toBeInTheDocument();
       });
 
       it('renders with description and helperText', () => {
@@ -355,10 +316,10 @@ describe('FormFields', () => {
             },
           ],
         };
-        const wrapper = mount(<RendererWrapper schema={schema} />);
+        render(<RendererWrapper schema={schema} />);
 
-        expect(wrapper.find('.pf-c-form__helper-text').last().text()).toEqual(helperText);
-        expect(wrapper.find('small').last().text()).toEqual(description);
+        expect(screen.getByText(helperText)).toBeInTheDocument();
+        expect(screen.getByText(description)).toBeInTheDocument();
       });
 
       it('renders with error and helperText', () => {
@@ -372,10 +333,14 @@ describe('FormFields', () => {
             },
           ],
         };
-        const wrapper = mount(<RendererWrapper schema={schema} />);
-        wrapper.find('form').simulate('submit');
+        render(<RendererWrapper schema={schema} />);
 
-        expect(wrapper.find('.pf-m-error').last().text()).toEqual(errorText);
+        expect(screen.getByText(helperText)).toBeInTheDocument();
+
+        userEvent.click(screen.getByText('Submit'));
+
+        expect(() => screen.getByText(helperText)).toThrow();
+        expect(screen.getByText(errorText)).toBeInTheDocument();
       });
     });
   });

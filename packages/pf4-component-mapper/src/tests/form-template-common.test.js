@@ -1,10 +1,9 @@
 import React from 'react';
-import { act } from 'react-dom/test-utils';
-import { FormRenderer, Form, FormSpy, FormError } from '@data-driven-forms/react-form-renderer';
-import { mount } from 'enzyme';
-import { Alert } from '@patternfly/react-core';
+import { FormRenderer, Form, FormError } from '@data-driven-forms/react-form-renderer';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
-import FormTemplate, { Title, Description, Button } from '../form-template';
+import FormTemplate from '../form-template';
 import RenderWithProvider from '../../../../__mocks__/with-provider';
 import componentMapper from '../component-mapper';
 
@@ -39,27 +38,26 @@ describe('FormTemplate PF4 Common', () => {
       schema: { title: 'I am title' },
     };
 
-    const wrapper = mount(
+    render(
       <ContextWrapper>
         <FormTemplate {...initialProps} />
       </ContextWrapper>
     );
 
-    expect(wrapper.find(Title)).toHaveLength(1);
-    expect(wrapper.find(Description)).toHaveLength(0);
-    expect(wrapper.find(Button)).toHaveLength(2);
-    expect(wrapper.find(FormSpy)).toHaveLength(2);
+    expect(screen.getByText('I am title')).toBeInTheDocument();
+    expect(screen.getByText('Submit')).toBeInTheDocument();
+    expect(screen.getByText('Cancel')).toBeInTheDocument();
   });
 
   it('should hide buttons', () => {
-    const wrapper = mount(
+    render(
       <ContextWrapper>
         <FormTemplate {...initialProps} showFormControls={false} />
       </ContextWrapper>
     );
 
-    expect(wrapper.find(Button)).toHaveLength(0);
-    expect(wrapper.find(FormSpy)).toHaveLength(1);
+    expect(() => screen.getByText('Submit')).toThrow();
+    expect(() => screen.getByText('Cancel')).toThrow();
   });
 
   it('should render description', () => {
@@ -68,69 +66,65 @@ describe('FormTemplate PF4 Common', () => {
       schema: { description: 'I am description' },
     };
 
-    const wrapper = mount(
+    render(
       <ContextWrapper>
         <FormTemplate {...initialProps} />
       </ContextWrapper>
     );
 
-    expect(wrapper.find(Title)).toHaveLength(0);
-    expect(wrapper.find(Description)).toHaveLength(1);
+    expect(screen.getByText('I am description')).toBeInTheDocument();
   });
 
   it('should render custom formControls', () => {
     const FormButtons = () => <div>Form Controls</div>;
 
-    const wrapper = mount(
+    render(
       <ContextWrapper>
         <FormTemplate {...initialProps} FormButtons={FormButtons} />
       </ContextWrapper>
     );
 
-    expect(wrapper.find(FormButtons)).toHaveLength(1);
+    expect(screen.getByText('Form Controls')).toBeInTheDocument();
+    expect(() => screen.getByText('Submit')).toThrow();
+    expect(() => screen.getByText('Cancel')).toThrow();
   });
 
   it('should render all controls and with default labels', () => {
-    const wrapper = mount(
+    const { container } = render(
       <ContextWrapper>
         <FormTemplate {...initialProps} />
       </ContextWrapper>
     );
-    expect(wrapper.find('button').map((b) => b.text())).toEqual(['Submit', 'Cancel']);
-    wrapper.find('button').first().simulate('click');
-    wrapper.find('button').at(1).simulate('click');
-    wrapper.find('button').last().simulate('click');
-
-    expect(formOptions.onSubmit).not.toHaveBeenCalled();
-    expect(formOptions.onReset).not.toHaveBeenCalled();
-    expect(formOptions.onCancel).toHaveBeenCalled();
+    expect([...container.getElementsByTagName('button')].map((b) => b.textContent)).toEqual(['Submit', 'Cancel']);
   });
 
   it('should render only submit button', () => {
-    const wrapper = mount(
+    const { container } = render(
       <ContextWrapper>
         <FormTemplate {...initialProps} canReset={false} onCancel={undefined} />
       </ContextWrapper>
     );
-    expect(wrapper.find('button').map((b) => b.text())).toEqual(['Submit']);
+    expect([...container.getElementsByTagName('button')].map((b) => b.textContent)).toEqual(['Submit']);
   });
 
   it('should render buttons in correct order', () => {
-    const wrapper = mount(
+    const { container } = render(
       <ContextWrapper>
         <FormTemplate {...initialProps} canSubmit canReset buttonOrder={['cancel', 'submit', 'reset']} />
       </ContextWrapper>
     );
-    expect(wrapper.find('button').map((b) => b.text())).toEqual(['Cancel', 'Submit', 'Reset']);
+
+    expect([...container.getElementsByTagName('button')].map((b) => b.textContent)).toEqual(['Cancel', 'Submit', 'Reset']);
   });
 
   it('should add missing buttons if not defined in button order', () => {
-    const wrapper = mount(
+    const { container } = render(
       <ContextWrapper>
         <FormTemplate {...initialProps} canSubmit canReset buttonOrder={[]} />
       </ContextWrapper>
     );
-    expect(wrapper.find('button').map((b) => b.text())).toEqual(['Submit', 'Reset', 'Cancel']);
+
+    expect([...container.getElementsByTagName('button')].map((b) => b.textContent)).toEqual(['Submit', 'Reset', 'Cancel']);
   });
 
   it('should call cancel with form values', () => {
@@ -138,7 +132,7 @@ describe('FormTemplate PF4 Common', () => {
 
     const onCancel = jest.fn();
 
-    const wrapper = mount(
+    render(
       <FormRenderer
         onCancel={(values) => onCancel(values)}
         schema={{ fields: [] }}
@@ -149,23 +143,20 @@ describe('FormTemplate PF4 Common', () => {
       />
     );
 
-    expect(wrapper.find(Button)).toHaveLength(2);
-
-    const CANCEL_INDEX = 1;
-
-    wrapper.find('button').at(CANCEL_INDEX).simulate('click');
+    userEvent.click(screen.getByText('Cancel'));
 
     expect(onCancel).toHaveBeenCalledWith(expectedValues);
   });
 
   it('show form alert message', async () => {
-    const wrapper = mount(
+    render(
       <FormRenderer
         schema={{
           fields: [
             {
               component: 'text-field',
               name: 'field',
+              'aria-label': 'text',
             },
           ],
         }}
@@ -180,27 +171,22 @@ describe('FormTemplate PF4 Common', () => {
       />
     );
 
-    expect(wrapper.find(Alert)).toHaveLength(0);
+    expect(() => screen.getByText('some error title')).toThrow();
 
-    await act(async () => {
-      wrapper.find('input').first().instance().value = 'cats';
-      wrapper.find('input').first().simulate('change');
-    });
-    wrapper.update();
+    userEvent.type(screen.getByLabelText('text'), 'something');
 
-    expect(wrapper.find(Alert)).toHaveLength(1);
-    expect(wrapper.find(Alert).props().title).toEqual('some error title');
-    expect(wrapper.find(Alert).text()).toEqual('Danger alert:some error title');
+    expect(screen.getByText('some error title')).toBeInTheDocument();
   });
 
   it('show form alert message as object', async () => {
-    const wrapper = mount(
+    render(
       <FormRenderer
         schema={{
           fields: [
             {
               component: 'text-field',
               name: 'field',
+              'aria-label': 'text',
             },
           ],
         }}
@@ -215,16 +201,12 @@ describe('FormTemplate PF4 Common', () => {
       />
     );
 
-    expect(wrapper.find(Alert)).toHaveLength(0);
+    expect(() => screen.getByText('some error title')).toThrow();
+    expect(() => screen.getByText('some description')).toThrow();
 
-    await act(async () => {
-      wrapper.find('input').first().instance().value = 'cats';
-      wrapper.find('input').first().simulate('change');
-    });
-    wrapper.update();
+    userEvent.type(screen.getByLabelText('text'), 'something');
 
-    expect(wrapper.find(Alert)).toHaveLength(1);
-    expect(wrapper.find(Alert).props().title).toEqual('some error title');
-    expect(wrapper.find(Alert).text()).toEqual('Danger alert:some error titlesome description');
+    expect(screen.getByText('some error title')).toBeInTheDocument();
+    expect(screen.getByText('some description')).toBeInTheDocument();
   });
 });

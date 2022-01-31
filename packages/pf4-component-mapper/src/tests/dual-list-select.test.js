@@ -1,10 +1,7 @@
 import React from 'react';
-import { act } from 'react-dom/test-utils';
 import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
-import { mount } from 'enzyme';
-
-import { DualListSelector, FormGroup } from '@patternfly/react-core';
-import { AngleDoubleLeftIcon, AngleLeftIcon, AngleRightIcon } from '@patternfly/react-icons';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { componentMapper, FormTemplate } from '../index';
 import DualListSortButton from '../dual-list-sort-button';
@@ -141,83 +138,56 @@ describe('DualListSelect', () => {
       });
 
       it('renders correctly', () => {
-        const wrapper = mount(<FormRenderer {...initialProps} />);
+        render(<FormRenderer {...initialProps} />);
 
-        expect(wrapper.find(FormGroup)).toHaveLength(1);
-        expect(wrapper.find(DualListSelector)).toHaveLength(1);
-        expect(wrapper.find('.pf-c-dual-list-selector__item')).toHaveLength(5);
+        expect(screen.getByText('cats')).toBeInTheDocument();
+        expect(screen.getByText('cats_1')).toBeInTheDocument();
+        expect(screen.getByText('cats_2')).toBeInTheDocument();
+        expect(screen.getByText('zebras')).toBeInTheDocument();
+        expect(screen.getByText('pigeons')).toBeInTheDocument();
       });
 
       it('switch left option', async () => {
-        const wrapper = mount(<FormRenderer {...initialProps} />);
+        render(<FormRenderer {...initialProps} />);
 
-        wrapper.find('form').simulate('submit');
+        userEvent.click(screen.getByText('Submit'));
+
         expect(onSubmit).toHaveBeenCalledWith({});
-        onSubmit.mockClear();
 
-        await act(async () => {
-          wrapper.find('.pf-c-dual-list-selector__item').first().simulate('click');
-        });
-        wrapper.update();
+        userEvent.click(screen.getByText('cats'));
+        userEvent.click(screen.getByLabelText('Add selected'));
+        userEvent.click(screen.getByText('Submit'));
 
-        await act(async () => {
-          wrapper.find(AngleRightIcon).parent().props().onClick();
-        });
-        wrapper.update();
-
-        await act(async () => {
-          wrapper.find('form').simulate('submit');
-        });
-
-        expect(onSubmit).toHaveBeenCalledWith({ 'dual-list': ['cats'] });
+        expect(onSubmit).toHaveBeenLastCalledWith({ 'dual-list': ['cats'] });
       });
 
       it('switch right option', async () => {
-        const wrapper = mount(<FormRenderer {...initialProps} initialValues={{ 'dual-list': ['cats'] }} />);
-        await act(async () => {
-          wrapper.find('form').simulate('submit');
-        });
-        expect(onSubmit).toHaveBeenCalledWith({ 'dual-list': ['cats'] });
-        onSubmit.mockClear();
-        await act(async () => {
-          wrapper.find('.pf-c-dual-list-selector__item').last().simulate('click');
-        });
-        wrapper.update();
+        render(<FormRenderer {...initialProps} initialValues={{ 'dual-list': ['cats'] }} />);
 
-        await act(async () => {
-          wrapper.find(AngleLeftIcon).parent().props().onClick();
-        });
-        wrapper.update();
-        await act(async () => {
-          wrapper.find('form').simulate('submit');
-        });
+        userEvent.click(screen.getByText('Submit'));
+        expect(onSubmit).toHaveBeenLastCalledWith({ 'dual-list': ['cats'] });
 
-        expect(onSubmit).toHaveBeenCalledWith({});
+        userEvent.click(screen.getByText('cats'));
+        userEvent.click(screen.getByLabelText('Remove selected'));
+        userEvent.click(screen.getByText('Submit'));
+
+        expect(onSubmit).toHaveBeenLastCalledWith({});
       });
 
       it('switch all to right', async () => {
-        const wrapper = mount(<FormRenderer {...initialProps} />);
-        await act(async () => {
-          wrapper.find('.pf-c-dual-list-selector__controls-item').find('button').at(1).simulate('click');
-        });
-        wrapper.update();
+        render(<FormRenderer {...initialProps} />);
 
-        await act(async () => {
-          wrapper.find('form').simulate('submit');
-        });
+        userEvent.click(screen.getByLabelText('Add all'));
+        userEvent.click(screen.getByText('Submit'));
 
         expect(onSubmit).toHaveBeenCalledWith({ 'dual-list': ['cats', 'cats_1', 'cats_2', 'zebras', 'pigeons'] });
       });
 
       it('switch all to left', async () => {
-        const wrapper = mount(<FormRenderer {...initialProps} initialValues={{ 'dual-list': schema.fields[0].options.map(({ value }) => value) }} />);
-        await act(async () => {
-          wrapper.find(AngleDoubleLeftIcon).parent().props().onClick();
-        });
-        wrapper.update();
-        await act(async () => {
-          wrapper.find('form').simulate('submit');
-        });
+        render(<FormRenderer {...initialProps} initialValues={{ 'dual-list': ['cats', 'cats_1', 'cats_2', 'zebras', 'pigeons'] }} />);
+
+        userEvent.click(screen.getByLabelText('Remove all'));
+        userEvent.click(screen.getByText('Submit'));
 
         expect(onSubmit).toHaveBeenCalledWith({});
       });
@@ -232,24 +202,15 @@ describe('DualListSelect', () => {
           ],
         };
 
-        const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
+        render(<FormRenderer {...initialProps} schema={schema} />);
 
-        expect(wrapper.find('.pf-c-dual-list-selector__menu').first().find('.pf-c-dual-list-selector__item')).toHaveLength(
-          schema.fields[0].options.length
-        );
+        userEvent.type(screen.getByLabelText('Available search input'), 'cats');
 
-        await act(async () => {
-          wrapper.find('input').first().instance().value = 'cats';
-          wrapper.find('input').first().simulate('change');
-        });
-        wrapper.update();
-
-        expect(wrapper.find('.pf-c-dual-list-selector__menu').first().find('.pf-c-dual-list-selector__item')).toHaveLength(3);
-        wrapper
-          .find('.pf-c-dual-list-selector__menu')
-          .first()
-          .find('.pf-c-dual-list-selector__item')
-          .forEach((option) => expect(option.text()).toEqual(expect.stringContaining('cats')));
+        expect(screen.getByText('cats')).toBeInTheDocument();
+        expect(screen.getByText('cats_1')).toBeInTheDocument();
+        expect(screen.getByText('cats_2')).toBeInTheDocument();
+        expect(() => screen.getByText('zebras')).toThrow();
+        expect(() => screen.getByText('pigeons')).toThrow();
       });
 
       it('filters value', async () => {
@@ -262,7 +223,7 @@ describe('DualListSelect', () => {
           ],
         };
 
-        const wrapper = mount(
+        render(
           <FormRenderer
             {...initialProps}
             schema={schema}
@@ -274,21 +235,13 @@ describe('DualListSelect', () => {
           />
         );
 
-        expect(wrapper.find('.pf-c-dual-list-selector__menu').last().find('.pf-c-dual-list-selector__item')).toHaveLength(
-          schema.fields[0].options.length
-        );
-        await act(async () => {
-          wrapper.find('.pf-c-dual-list-selector__tools-filter').find('input').last().instance().value = 'cats';
-          wrapper.find('.pf-c-dual-list-selector__tools-filter').find('input').last().simulate('change');
-        });
-        wrapper.update();
+        userEvent.type(screen.getByLabelText('Chosen search input'), 'cats');
 
-        expect(wrapper.find('.pf-c-dual-list-selector__menu').last().find('.pf-c-dual-list-selector__item')).toHaveLength(3);
-        wrapper
-          .find('.pf-c-dual-list-selector__menu')
-          .last()
-          .find('.pf-c-dual-list-selector__item')
-          .forEach((option) => expect(option.text()).toEqual(expect.stringContaining('cats')));
+        expect(screen.getByText('cats')).toBeInTheDocument();
+        expect(screen.getByText('cats_1')).toBeInTheDocument();
+        expect(screen.getByText('cats_2')).toBeInTheDocument();
+        expect(() => screen.getByText('zebras')).toThrow();
+        expect(() => screen.getByText('pigeons')).toThrow();
       });
 
       it('sort options', async () => {
@@ -297,30 +250,40 @@ describe('DualListSelect', () => {
             {
               ...schema.fields[0],
               isSortable: true,
-              availableOptionsActions: [<DualListSortButton position="left" key="sort" />],
-              chosenOptionsActions: [<DualListSortButton position="right" key="sort" />],
+              availableOptionsActions: [<DualListSortButton position="left" key="sort" aria-label="sort-options" />],
+              chosenOptionsActions: [<DualListSortButton position="right" key="sort" aria-label="sort-values" />],
             },
           ],
         };
 
-        const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
+        const { container } = render(<FormRenderer {...initialProps} schema={schema} />);
+        expect([...container.getElementsByClassName('pf-c-dual-list-selector__item-text')].map((e) => e.textContent)).toEqual([
+          'cats',
+          'cats_1',
+          'cats_2',
+          'pigeons',
+          'zebras',
+        ]);
 
-        expect(wrapper.find('.pf-c-dual-list-selector__menu').first().find('.pf-c-dual-list-selector__item').first().text()).toEqual('cats');
-        expect(wrapper.find('.pf-c-dual-list-selector__menu').first().find('.pf-c-dual-list-selector__item').last().text()).toEqual('zebras');
-        await act(async () => {
-          wrapper.find('.pf-c-dual-list-selector__tools-actions').first().find('button').simulate('click');
-        });
-        wrapper.update();
+        userEvent.click(screen.getByLabelText('sort-options'));
 
-        expect(wrapper.find('.pf-c-dual-list-selector__menu').first().find('.pf-c-dual-list-selector__item').first().text()).toEqual('zebras');
-        expect(wrapper.find('.pf-c-dual-list-selector__menu').first().find('.pf-c-dual-list-selector__item').last().text()).toEqual('cats');
-        await act(async () => {
-          wrapper.find('.pf-c-dual-list-selector__tools-actions').first().find('button').simulate('click');
-        });
-        wrapper.update();
+        expect([...container.getElementsByClassName('pf-c-dual-list-selector__item-text')].map((e) => e.textContent)).toEqual([
+          'zebras',
+          'pigeons',
+          'cats_2',
+          'cats_1',
+          'cats',
+        ]);
 
-        expect(wrapper.find('.pf-c-dual-list-selector__menu').first().find('.pf-c-dual-list-selector__item').first().text()).toEqual('cats');
-        expect(wrapper.find('.pf-c-dual-list-selector__menu').first().find('.pf-c-dual-list-selector__item').last().text()).toEqual('zebras');
+        userEvent.click(screen.getByLabelText('sort-options'));
+
+        expect([...container.getElementsByClassName('pf-c-dual-list-selector__item-text')].map((e) => e.textContent)).toEqual([
+          'cats',
+          'cats_1',
+          'cats_2',
+          'pigeons',
+          'zebras',
+        ]);
       });
 
       it('sort value', async () => {
@@ -329,13 +292,13 @@ describe('DualListSelect', () => {
             {
               ...schema.fields[0],
               isSortable: true,
-              availableOptionsActions: [<DualListSortButton position="left" key="sort" />],
-              chosenOptionsActions: [<DualListSortButton position="right" key="sort" />],
+              availableOptionsActions: [<DualListSortButton position="left" key="sort" aria-label="sort-options" />],
+              chosenOptionsActions: [<DualListSortButton position="right" key="sort" aria-label="sort-values" />],
             },
           ],
         };
 
-        const wrapper = mount(
+        const { container } = render(
           <FormRenderer
             {...initialProps}
             schema={schema}
@@ -347,22 +310,33 @@ describe('DualListSelect', () => {
           />
         );
 
-        expect(wrapper.find('.pf-c-dual-list-selector__menu').last().find('.pf-c-dual-list-selector__item').first().text()).toEqual('cats');
-        expect(wrapper.find('.pf-c-dual-list-selector__menu').last().find('.pf-c-dual-list-selector__item').last().text()).toEqual('zebras');
-        await act(async () => {
-          wrapper.find('.pf-c-dual-list-selector__tools-actions').last().find('button').simulate('click');
-        });
-        wrapper.update();
+        expect([...container.getElementsByClassName('pf-c-dual-list-selector__item-text')].map((e) => e.textContent)).toEqual([
+          'cats',
+          'cats_1',
+          'cats_2',
+          'pigeons',
+          'zebras',
+        ]);
 
-        expect(wrapper.find('.pf-c-dual-list-selector__menu').last().find('.pf-c-dual-list-selector__item').first().text()).toEqual('zebras');
-        expect(wrapper.find('.pf-c-dual-list-selector__menu').last().find('.pf-c-dual-list-selector__item').last().text()).toEqual('cats');
-        await act(async () => {
-          wrapper.find('.pf-c-dual-list-selector__tools-actions').last().find('button').simulate('click');
-        });
-        wrapper.update();
+        userEvent.click(screen.getByLabelText('sort-values'));
 
-        expect(wrapper.find('.pf-c-dual-list-selector__menu').last().find('.pf-c-dual-list-selector__item').first().text()).toEqual('cats');
-        expect(wrapper.find('.pf-c-dual-list-selector__menu').last().find('.pf-c-dual-list-selector__item').last().text()).toEqual('zebras');
+        expect([...container.getElementsByClassName('pf-c-dual-list-selector__item-text')].map((e) => e.textContent)).toEqual([
+          'zebras',
+          'pigeons',
+          'cats_2',
+          'cats_1',
+          'cats',
+        ]);
+
+        userEvent.click(screen.getByLabelText('sort-values'));
+
+        expect([...container.getElementsByClassName('pf-c-dual-list-selector__item-text')].map((e) => e.textContent)).toEqual([
+          'cats',
+          'cats_1',
+          'cats_2',
+          'pigeons',
+          'zebras',
+        ]);
       });
     });
   });
