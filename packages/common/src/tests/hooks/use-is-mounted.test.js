@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react';
-import { act } from 'react-dom/test-utils';
-import { mount } from 'enzyme';
+import { render, cleanup } from '@testing-library/react';
+
 import useIsMounted from '../../hooks';
 
 describe('useIsMounted', () => {
   it('mounts and unmounts', async () => {
     expect.assertions(2);
 
-    let wrapper;
     const isMountedSpy = ({ current }) => current;
 
     const Dummy = () => {
@@ -24,14 +23,8 @@ describe('useIsMounted', () => {
       return <span>Dummy</span>;
     };
 
-    await act(async () => {
-      wrapper = mount(<Dummy />);
-    });
-    wrapper.update();
+    render(<Dummy />);
 
-    await act(async () => {
-      wrapper.unmount();
-    });
-    wrapper.update();
+    cleanup();
   });
 });

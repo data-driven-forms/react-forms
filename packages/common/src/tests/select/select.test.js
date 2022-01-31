@@ -1,15 +1,15 @@
 /* eslint-disable no-console */
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { act } from 'react-dom/test-utils';
-import { mount } from 'enzyme';
+import { render, screen, act, fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
 import { useFieldApi, FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 
 import Select from '../../select';
 import reducer from '../../select/reducer';
 
 describe('Select test', () => {
-  let wrapper;
   let state;
   let inputValue;
   let field;
@@ -19,10 +19,27 @@ describe('Select test', () => {
 
     state = rest;
 
+    const selected = rest.value || [];
+
+    const handleSingle = (option) => onChange(selected.value === option.value ? undefined : option);
+
+    const handleMulti = (option) =>
+      onChange(
+        selected.map(({ value }) => value).includes(option.value) ? selected.filter(({ value }) => value !== option.value) : [...selected, option]
+      );
+
     return (
       <div>
-        <button id="onChange" onClick={onChange} />
-        <button id="onInputChange" onClick={onInputChange} />
+        <input type="text" aria-label="onInputChange" onChange={(e) => onInputChange(e.target.value)} />
+        {rest.options.map(({ value, label, ...rest }, index) => (
+          <button
+            key={`${value}-${index}`}
+            onClick={() => (props.isMulti ? handleMulti({ value, label, ...rest }) : handleSingle({ value, label, ...rest }))}
+          >
+            {label}
+          </button>
+        ))}
+        <button onClick={() => onChange()}>Clear all</button>
         <div id="noOptionsMessage">{noOptionsMessage()}</div>
       </div>
     );
@@ -42,12 +59,6 @@ describe('Select test', () => {
     componentMapper: { [componentTypes.SELECT]: WrapperSelect },
   };
 
-  class ClassDummy extends React.Component {
-    render() {
-      return <FormRenderer {...this.props} />;
-    }
-  }
-
   beforeEach(() => {
     state = undefined;
     inputValue = undefined;
@@ -66,23 +77,20 @@ describe('Select test', () => {
 
   describe('single select', () => {
     it('renders correctly', async () => {
-      await act(async () => {
-        wrapper = mount(
-          <FormRenderer
-            {...rendererProps}
-            schema={{
-              fields: [
-                {
-                  ...field,
-                  component: componentTypes.SELECT,
-                  name: 'select',
-                },
-              ],
-            }}
-          />
-        );
-      });
-      wrapper.update();
+      render(
+        <FormRenderer
+          {...rendererProps}
+          schema={{
+            fields: [
+              {
+                ...field,
+                component: componentTypes.SELECT,
+                name: 'select',
+              },
+            ],
+          }}
+        />
+      );
 
       expect(state).toEqual({
         className: 'current-select',
@@ -103,70 +111,59 @@ describe('Select test', () => {
         placeholder: 'Choose...',
         value: [],
       });
-      expect(wrapper.find('#noOptionsMessage').text()).toEqual('No options');
+      expect(screen.getByText('No options')).toBeInTheDocument();
     });
 
     it('selects value', async () => {
-      await act(async () => {
-        wrapper = mount(
-          <FormRenderer
-            {...rendererProps}
-            schema={{
-              fields: [
-                {
-                  ...field,
-                  component: componentTypes.SELECT,
-                  name: 'select',
-                },
-              ],
-            }}
-          />
-        );
-      });
-      wrapper.update();
+      render(
+        <FormRenderer
+          {...rendererProps}
+          schema={{
+            fields: [
+              {
+                ...field,
+                component: componentTypes.SELECT,
+                name: 'select',
+              },
+            ],
+          }}
+        />
+      );
 
-      await act(async () => {
-        wrapper.find('#onChange').props().onClick({ value: 'd' });
-      });
-      wrapper.update();
+      userEvent.click(screen.getByText('Dogs'));
 
       expect(state.value).toEqual([{ label: 'Dogs', value: 'd' }]);
       expect(inputValue).toEqual('d');
 
-      await act(async () => {
-        wrapper.find('#onChange').props().onClick({ value: 'c' });
-      });
-      wrapper.update();
+      userEvent.click(screen.getByText('Cats'));
 
       expect(state.value).toEqual([{ label: 'Cats', value: 'c' }]);
       expect(inputValue).toEqual('c');
     });
 
     it('change options and value is not in', async () => {
-      await act(async () => {
-        wrapper = mount(
-          <ClassDummy
-            {...rendererProps}
-            schema={{
-              fields: [
-                {
-                  ...field,
-                  initialValue: 'c',
-                  component: componentTypes.SELECT,
-                  name: 'select',
-                },
-              ],
-            }}
-          />
-        );
-      });
-      wrapper.update();
+      const { rerender } = render(
+        <FormRenderer
+          {...rendererProps}
+          schema={{
+            fields: [
+              {
+                ...field,
+                initialValue: 'c',
+                component: componentTypes.SELECT,
+                name: 'select',
+              },
+            ],
+          }}
+        />
+      );
 
       expect(inputValue).toEqual('c');
 
-      await act(async () => {
-        wrapper.setProps({
-          schema: {
+      rerender(
+        <FormRenderer
+          {...rendererProps}
+          schema={{
             fields: [
               {
                 ...field,
@@ -176,40 +173,36 @@ describe('Select test', () => {
                 name: 'select',
               },
             ],
-          },
-        });
-      });
-      wrapper.update();
+          }}
+        />
+      );
 
       expect(inputValue).toEqual('');
     });
 
     it('change options and value is not in but keep it', async () => {
-      await act(async () => {
-        wrapper = mount(
-          <ClassDummy
-            {...rendererProps}
-            schema={{
-              fields: [
-                {
-                  ...field,
-                  noValueUpdates: true,
-                  initialValue: 'c',
-                  component: componentTypes.SELECT,
-                  name: 'select',
-                },
-              ],
-            }}
-          />
-        );
-      });
-      wrapper.update();
+      const { rerender } = render(
+        <FormRenderer
+          {...rendererProps}
+          schema={{
+            fields: [
+              {
+                ...field,
+                noValueUpdates: true,
+                initialValue: 'c',
+                component: componentTypes.SELECT,
+                name: 'select',
+              },
+            ],
+          }}
+        />
+      );
 
       expect(inputValue).toEqual('c');
-
-      await act(async () => {
-        wrapper.setProps({
-          schema: {
+      rerender(
+        <FormRenderer
+          {...rendererProps}
+          schema={{
             fields: [
               {
                 ...field,
@@ -220,11 +213,9 @@ describe('Select test', () => {
                 name: 'select',
               },
             ],
-          },
-        });
-      });
-      wrapper.update();
-
+          }}
+        />
+      );
       expect(inputValue).toEqual('c');
     });
   });
@@ -233,23 +224,20 @@ describe('Select test', () => {
     it('renders correctly', async () => {
       field = { ...field, isMulti: true };
 
-      await act(async () => {
-        wrapper = mount(
-          <FormRenderer
-            {...rendererProps}
-            schema={{
-              fields: [
-                {
-                  ...field,
-                  component: componentTypes.SELECT,
-                  name: 'select',
-                },
-              ],
-            }}
-          />
-        );
-      });
-      wrapper.update();
+      render(
+        <FormRenderer
+          {...rendererProps}
+          schema={{
+            fields: [
+              {
+                ...field,
+                component: componentTypes.SELECT,
+                name: 'select',
+              },
+            ],
+          }}
+        />
+      );
 
       expect(state).toEqual({
         className: 'current-select',
@@ -275,31 +263,23 @@ describe('Select test', () => {
     it('selects value', async () => {
       field = { ...field, isMulti: true };
 
-      await act(async () => {
-        wrapper = mount(
-          <FormRenderer
-            {...rendererProps}
-            schema={{
-              fields: [
-                {
-                  ...field,
-                  component: componentTypes.SELECT,
-                  name: 'select',
-                },
-              ],
-            }}
-          />
-        );
-      });
-      wrapper.update();
+      render(
+        <FormRenderer
+          {...rendererProps}
+          schema={{
+            fields: [
+              {
+                ...field,
+                component: componentTypes.SELECT,
+                name: 'select',
+              },
+            ],
+          }}
+        />
+      );
 
-      await act(async () => {
-        wrapper
-          .find('#onChange')
-          .props()
-          .onClick([{ value: 'd' }, { value: 'c' }]);
-      });
-      wrapper.update();
+      userEvent.click(screen.getByText('Dogs'));
+      userEvent.click(screen.getByText('Cats'));
 
       expect(state.value).toEqual([
         { label: 'Dogs', value: 'd' },
@@ -311,31 +291,22 @@ describe('Select test', () => {
     it('selects null value - clears selection', async () => {
       field = { ...field, isMulti: true };
 
-      await act(async () => {
-        wrapper = mount(
-          <FormRenderer
-            {...rendererProps}
-            schema={{
-              fields: [
-                {
-                  ...field,
-                  component: componentTypes.SELECT,
-                  name: 'select',
-                },
-              ],
-            }}
-          />
-        );
-      });
-      wrapper.update();
-
-      await act(async () => {
-        wrapper
-          .find('#onChange')
-          .props()
-          .onClick([{ value: 'd' }, { value: 'c' }]);
-      });
-      wrapper.update();
+      render(
+        <FormRenderer
+          {...rendererProps}
+          schema={{
+            fields: [
+              {
+                ...field,
+                component: componentTypes.SELECT,
+                name: 'select',
+              },
+            ],
+          }}
+        />
+      );
+      userEvent.click(screen.getByText('Dogs'));
+      userEvent.click(screen.getByText('Cats'));
 
       expect(state.value).toEqual([
         { label: 'Dogs', value: 'd' },
@@ -343,10 +314,7 @@ describe('Select test', () => {
       ]);
       expect(inputValue).toEqual(['d', 'c']);
 
-      await act(async () => {
-        wrapper.find('#onChange').props().onClick(null);
-      });
-      wrapper.update();
+      userEvent.click(screen.getByText('Clear all'));
 
       expect(state.value).toEqual([]);
       expect(inputValue).toEqual([]);
@@ -355,31 +323,22 @@ describe('Select test', () => {
     it('selects all values', async () => {
       field = { ...field, isMulti: true, options: [{ label: 'Select all', selectAll: true }, ...field.options] };
 
-      await act(async () => {
-        wrapper = mount(
-          <FormRenderer
-            {...rendererProps}
-            schema={{
-              fields: [
-                {
-                  ...field,
-                  component: componentTypes.SELECT,
-                  name: 'select',
-                },
-              ],
-            }}
-          />
-        );
-      });
-      wrapper.update();
+      render(
+        <FormRenderer
+          {...rendererProps}
+          schema={{
+            fields: [
+              {
+                ...field,
+                component: componentTypes.SELECT,
+                name: 'select',
+              },
+            ],
+          }}
+        />
+      );
 
-      await act(async () => {
-        wrapper
-          .find('#onChange')
-          .props()
-          .onClick([{ label: 'Select all', selectAll: true }]);
-      });
-      wrapper.update();
+      userEvent.click(screen.getByText('Select all'));
 
       expect(state.value).toEqual([
         { label: 'Select all', selectAll: true },
@@ -389,18 +348,7 @@ describe('Select test', () => {
       ]);
       expect(inputValue).toEqual(['d', 'c', 'h']);
 
-      // remove hamsters
-      await act(async () => {
-        wrapper
-          .find('#onChange')
-          .props()
-          .onClick([
-            { label: 'Select all', selectAll: true },
-            { label: 'Dogs', value: 'd' },
-            { label: 'Cats', value: 'c' },
-          ]);
-      });
-      wrapper.update();
+      userEvent.click(screen.getByText('Hamsters'));
 
       expect(state.value).toEqual([
         { label: 'Dogs', value: 'd' },
@@ -412,46 +360,27 @@ describe('Select test', () => {
     it('selects none', async () => {
       field = { ...field, isMulti: true, options: [{ label: 'Select none', selectNone: true }, ...field.options], initialValue: ['d', 'c', 'h'] };
 
-      await act(async () => {
-        wrapper = mount(
-          <FormRenderer
-            {...rendererProps}
-            schema={{
-              fields: [
-                {
-                  ...field,
-                  component: componentTypes.SELECT,
-                  name: 'select',
-                },
-              ],
-            }}
-          />
-        );
-      });
-      wrapper.update();
+      render(
+        <FormRenderer
+          {...rendererProps}
+          schema={{
+            fields: [
+              {
+                ...field,
+                component: componentTypes.SELECT,
+                name: 'select',
+              },
+            ],
+          }}
+        />
+      );
 
-      await act(async () => {
-        wrapper
-          .find('#onChange')
-          .props()
-          .onClick([{ label: 'Select none', selectNone: true }]);
-      });
-      wrapper.update();
+      userEvent.click(screen.getByText('Select none'));
 
       expect(state.value).toEqual([{ label: 'Select none', selectNone: true }]);
       expect(inputValue).toEqual('');
 
-      // adds one
-      await act(async () => {
-        wrapper
-          .find('#onChange')
-          .props()
-          .onClick([
-            { label: 'Select none', selectNone: true },
-            { label: 'Dogs', value: 'd' },
-          ]);
-      });
-      wrapper.update();
+      userEvent.click(screen.getByText('Dogs'));
 
       expect(state.value).toEqual([{ label: 'Dogs', value: 'd' }]);
       expect(inputValue).toEqual(['d']);
@@ -468,31 +397,21 @@ describe('Select test', () => {
         ],
       };
 
-      await act(async () => {
-        wrapper = mount(
-          <FormRenderer
-            {...rendererProps}
-            schema={{
-              fields: [
-                {
-                  ...field,
-                  component: componentTypes.SELECT,
-                  name: 'select',
-                },
-              ],
-            }}
-          />
-        );
-      });
-      wrapper.update();
-
-      await act(async () => {
-        wrapper
-          .find('#onChange')
-          .props()
-          .onClick([{ label: 'Select all', selectAll: true, value: 'select-all' }]);
-      });
-      wrapper.update();
+      render(
+        <FormRenderer
+          {...rendererProps}
+          schema={{
+            fields: [
+              {
+                ...field,
+                component: componentTypes.SELECT,
+                name: 'select',
+              },
+            ],
+          }}
+        />
+      );
+      userEvent.click(screen.getByText('Select all'));
 
       expect(state.value).toEqual([
         { label: 'Select all', selectAll: true, value: 'select-all' },
@@ -502,19 +421,7 @@ describe('Select test', () => {
       ]);
       expect(inputValue).toEqual(['d', 'c', 'h']);
 
-      await act(async () => {
-        wrapper
-          .find('#onChange')
-          .props()
-          .onClick([
-            { label: 'Select all', selectAll: true },
-            { label: 'Dogs', value: 'd' },
-            { label: 'Cats', value: 'c' },
-            { label: 'Hamsters', value: 'h' },
-            { label: 'Select none', selectNone: true, value: 'select-none' },
-          ]);
-      });
-      wrapper.update();
+      userEvent.click(screen.getByText('Select none'));
 
       expect(state.value).toEqual([{ label: 'Select none', selectNone: true, value: 'select-none' }]);
       expect(inputValue).toEqual([]);
@@ -539,22 +446,20 @@ describe('Select test', () => {
 
       field = { ...field, loadOptions, options: [] };
 
-      await act(async () => {
-        wrapper = mount(
-          <FormRenderer
-            {...rendererProps}
-            schema={{
-              fields: [
-                {
-                  ...field,
-                  component: componentTypes.SELECT,
-                  name: 'select',
-                },
-              ],
-            }}
-          />
-        );
-      });
+      render(
+        <FormRenderer
+          {...rendererProps}
+          schema={{
+            fields: [
+              {
+                ...field,
+                component: componentTypes.SELECT,
+                name: 'select',
+              },
+            ],
+          }}
+        />
+      );
 
       expect(state).toEqual({
         className: 'current-select',
@@ -571,7 +476,6 @@ describe('Select test', () => {
       await act(async () => {
         jest.runAllTimers();
       });
-      wrapper.update();
 
       expect(state).toEqual({
         className: 'current-select',
@@ -606,7 +510,7 @@ describe('Select test', () => {
       field = { ...field, loadOptions, options: [] };
 
       await act(async () => {
-        wrapper = mount(
+        render(
           <FormRenderer
             {...rendererProps}
             schema={{
@@ -637,7 +541,7 @@ describe('Select test', () => {
       field = { ...field, loadOptions, options: [], isMulti: true };
 
       await act(async () => {
-        wrapper = mount(
+        render(
           <FormRenderer
             {...rendererProps}
             schema={{
@@ -668,7 +572,7 @@ describe('Select test', () => {
       field = { ...field, loadOptions, options: [], isMulti: true };
 
       await act(async () => {
-        wrapper = mount(
+        render(
           <FormRenderer
             {...rendererProps}
             schema={{
@@ -699,7 +603,7 @@ describe('Select test', () => {
       field = { ...field, loadOptions, options: [], noValueUpdates: true };
 
       await act(async () => {
-        wrapper = mount(
+        render(
           <FormRenderer
             {...rendererProps}
             schema={{
@@ -730,7 +634,7 @@ describe('Select test', () => {
       field = { ...field, loadOptions, options: [], isSearchable: true };
 
       await act(async () => {
-        wrapper = mount(
+        render(
           <FormRenderer
             {...rendererProps}
             schema={{
@@ -745,14 +649,12 @@ describe('Select test', () => {
           />
         );
       });
-      wrapper.update();
 
       loadOptions.mockClear();
 
       await act(async () => {
-        wrapper.find('#onInputChange').props().onClick('search term');
+        fireEvent.change(screen.getByLabelText('onInputChange'), { target: { value: 'search term' } });
       });
-      wrapper.update();
 
       expect(loadOptions).toHaveBeenCalledWith('search term');
     });
@@ -774,7 +676,7 @@ describe('Select test', () => {
       field = { ...field, loadOptions, options: [], isSearchable: true };
 
       await act(async () => {
-        wrapper = mount(
+        render(
           <FormRenderer
             {...rendererProps}
             schema={{
@@ -789,14 +691,12 @@ describe('Select test', () => {
           />
         );
       });
-      wrapper.update();
 
       loadOptions.mockClear();
 
       await act(async () => {
-        wrapper.find('#onInputChange').props().onClick('search term');
+        fireEvent.change(screen.getByLabelText('onInputChange'), { target: { value: 'search term' } });
       });
-      wrapper.update();
 
       expect(loadOptions).toHaveBeenCalledWith('search term');
       expect(console.error).toHaveBeenCalledWith('error');
@@ -814,9 +714,11 @@ describe('Select test', () => {
 
       field = { ...field, loadOptions, options: [], isMulti: true };
 
+      let select;
+
       await act(async () => {
-        wrapper = mount(
-          <ClassDummy
+        select = render(
+          <FormRenderer
             {...rendererProps}
             schema={{
               fields: [
@@ -831,7 +733,6 @@ describe('Select test', () => {
           />
         );
       });
-      wrapper.update();
 
       expect(state.options).toEqual([
         { label: 'first', value: '111' },
@@ -839,22 +740,24 @@ describe('Select test', () => {
       ]);
 
       await act(async () => {
-        wrapper.setProps({
-          schema: {
-            fields: [
-              {
-                ...field,
-                loadOptions: () => Promise.resolve([{ label: 'new option', value: 'new' }]),
-                options: [],
-                isMulti: true,
-                component: componentTypes.SELECT,
-                name: 'select',
-              },
-            ],
-          },
-        });
+        select.rerender(
+          <FormRenderer
+            {...rendererProps}
+            schema={{
+              fields: [
+                {
+                  ...field,
+                  loadOptions: () => Promise.resolve([{ label: 'new option', value: 'new' }]),
+                  options: [],
+                  isMulti: true,
+                  component: componentTypes.SELECT,
+                  name: 'select',
+                },
+              ],
+            }}
+          />
+        );
       });
-      wrapper.update();
 
       expect(state.options).toEqual([{ label: 'new option', value: 'new' }]);
     });
@@ -868,9 +771,11 @@ describe('Select test', () => {
 
       field = { ...field, loadOptions, options: [], isMulti: true };
 
+      let select;
+
       await act(async () => {
-        wrapper = mount(
-          <ClassDummy
+        select = render(
+          <FormRenderer
             {...rendererProps}
             schema={{
               fields: [
@@ -885,7 +790,6 @@ describe('Select test', () => {
           />
         );
       });
-      wrapper.update();
 
       expect(state.options).toEqual([
         { label: 'first', value: '111' },
@@ -895,23 +799,25 @@ describe('Select test', () => {
       options = [{ label: 'new option', value: 'new' }];
 
       await act(async () => {
-        wrapper.setProps({
-          schema: {
-            fields: [
-              {
-                ...field,
-                loadOptions,
-                options: [],
-                isMulti: true,
-                loadOptionsChangeCounter: 1,
-                component: componentTypes.SELECT,
-                name: 'select',
-              },
-            ],
-          },
-        });
+        select.rerender(
+          <FormRenderer
+            {...rendererProps}
+            schema={{
+              fields: [
+                {
+                  ...field,
+                  loadOptions,
+                  options: [],
+                  isMulti: true,
+                  loadOptionsChangeCounter: 1,
+                  component: componentTypes.SELECT,
+                  name: 'select',
+                },
+              ],
+            }}
+          />
+        );
       });
-      wrapper.update();
 
       expect(state.options).toEqual([{ label: 'new option', value: 'new' }]);
     });
