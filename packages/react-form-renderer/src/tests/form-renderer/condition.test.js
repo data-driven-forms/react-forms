@@ -1,6 +1,6 @@
 import React from 'react';
-import { mount } from 'enzyme';
-import { act } from 'react-dom/test-utils';
+import { act, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import FormTemplate from '../../../../../__mocks__/mock-form-template';
 import componentTypes from '../../component-types';
@@ -11,14 +11,13 @@ import { reducer } from '../../condition';
 
 const TextField = (props) => {
   const { input } = useFieldApi(props);
-  return <input id={input.name} {...input} />;
+  return <input aria-label={input.name} {...input} />;
 };
 
 describe('condition test', () => {
   let initialProps;
   let onSubmit;
   let schema;
-  let wrapper;
 
   beforeEach(() => {
     jest.useFakeTimers();
@@ -54,29 +53,17 @@ describe('condition test', () => {
       ],
     };
 
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
-    });
-    wrapper.update();
+    render(<FormRenderer {...initialProps} schema={schema} />);
 
-    expect(wrapper.find('input')).toHaveLength(1);
+    expect(() => screen.getByLabelText('field-2')).toThrow();
 
-    await act(async () => {
-      wrapper.find('input').simulate('change', { target: { value: 'show' } });
-    });
-    wrapper.update();
+    userEvent.type(screen.getByLabelText('field-1'), 'show');
 
-    expect(wrapper.find('input')).toHaveLength(2);
+    expect(screen.getByLabelText('field-2')).toBeInTheDocument();
 
-    await act(async () => {
-      wrapper
-        .find('input')
-        .first()
-        .simulate('change', { target: { value: 'dontshow' } });
-    });
-    wrapper.update();
+    userEvent.type(screen.getByLabelText('field-1'), 'dont');
 
-    expect(wrapper.find('input')).toHaveLength(1);
+    expect(() => screen.getByLabelText('field-2')).toThrow();
   });
 
   it('should render when condition is fulfill - when is a function', () => {
@@ -100,24 +87,19 @@ describe('condition test', () => {
       ],
     };
 
-    wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
+    render(<FormRenderer {...initialProps} schema={schema} />);
 
     expect(whenSpy.mock.calls[0][0]).toEqual({ component: 'text-field', name: 'field-2' });
 
-    expect(wrapper.find('input')).toHaveLength(1);
+    expect(() => screen.getByLabelText('field-2')).toThrow();
 
-    wrapper.find('input').simulate('change', { target: { value: 'show' } });
-    wrapper.update();
+    userEvent.type(screen.getByLabelText('field-1'), 'show');
 
-    expect(wrapper.find('input')).toHaveLength(2);
+    expect(screen.getByLabelText('field-2')).toBeInTheDocument();
 
-    wrapper
-      .find('input')
-      .first()
-      .simulate('change', { target: { value: 'dontshow' } });
-    wrapper.update();
+    userEvent.type(screen.getByLabelText('field-1'), 'dont');
 
-    expect(wrapper.find('input')).toHaveLength(1);
+    expect(() => screen.getByLabelText('field-2')).toThrow();
   });
 
   it('sets value when condition is fulfill', async () => {
@@ -142,27 +124,19 @@ describe('condition test', () => {
         },
       ],
     };
+    render(<FormRenderer {...initialProps} schema={schema} />);
+
+    expect(() => screen.getByLabelText('field-2')).toThrow();
+
+    userEvent.type(screen.getByLabelText('field-1'), 'show');
 
     await act(async () => {
-      wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
-    });
-    wrapper.update();
-
-    expect(wrapper.find('input')).toHaveLength(1);
-
-    await act(async () => {
-      wrapper.find('input').simulate('change', { target: { value: 'show' } });
       jest.advanceTimersByTime(1);
     });
-    wrapper.update();
 
-    expect(wrapper.find('input')).toHaveLength(2);
+    expect(screen.getByLabelText('field-2')).toBeInTheDocument();
 
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-      jest.advanceTimersByTime(1);
-    });
-    wrapper.update();
+    userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       'field-1': 'show',
@@ -193,18 +167,15 @@ describe('condition test', () => {
       ],
     };
 
+    render(<FormRenderer {...initialProps} schema={schema} initialValues={{ 'field-1': 'show' }} />);
+
     await act(async () => {
-      wrapper = mount(<FormRenderer {...initialProps} schema={schema} initialValues={{ 'field-1': 'show' }} />);
       jest.advanceTimersByTime(1);
     });
-    wrapper.update();
 
-    expect(wrapper.find('input')).toHaveLength(2);
+    expect(screen.getByLabelText('field-2')).toBeInTheDocument();
 
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
+    userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       'field-1': 'show',
@@ -235,47 +206,36 @@ describe('condition test', () => {
       ],
     };
 
+    render(<FormRenderer {...initialProps} schema={schema} initialValues={{ 'field-1': 'show' }} />);
+
     await act(async () => {
-      wrapper = mount(<FormRenderer {...initialProps} schema={schema} initialValues={{ 'field-1': 'show' }} />);
       jest.advanceTimersByTime(1);
     });
-    wrapper.update();
 
-    expect(wrapper.find('input')).toHaveLength(2);
+    expect(screen.getByLabelText('field-2')).toBeInTheDocument();
+
+    userEvent.type(screen.getByLabelText('field-1'), 'dont');
 
     await act(async () => {
-      wrapper
-        .find('input')
-        .first()
-        .simulate('change', { target: { value: 'dontshow' } });
       jest.advanceTimersByTime(1);
     });
-    wrapper.update();
 
-    expect(wrapper.find('input')).toHaveLength(1);
+    expect(() => screen.getByLabelText('field-2')).toThrow();
 
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
-
+    userEvent.click(screen.getByText('Submit'));
     expect(onSubmit).toHaveBeenCalledWith({
-      'field-1': 'dontshow',
+      'field-1': 'showdont',
       'field-2': 'someValue',
     });
     onSubmit.mockClear();
 
-    await act(async () => {
-      //Reset
-      wrapper.find('button').at(1).simulate('click');
-      jest.runAllTimers();
-    });
-    wrapper.update();
+    userEvent.click(screen.getByText('Reset'));
 
     await act(async () => {
-      wrapper.find('form').simulate('submit');
+      jest.runAllTimers();
     });
-    wrapper.update();
+
+    userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       'field-1': 'show',
@@ -329,23 +289,17 @@ describe('condition test', () => {
       ],
     };
 
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
-    });
+    render(<FormRenderer {...initialProps} schema={schema} />);
 
-    expect(wrapper.find('input')).toHaveLength(1);
+    expect(() => screen.getByLabelText('field-2')).toThrow();
+
+    userEvent.type(screen.getByLabelText('field-1'), 'show');
 
     await act(async () => {
-      wrapper.find('input').simulate('change', { target: { value: 'show' } });
       jest.advanceTimersByTime(1);
     });
-    wrapper.update();
 
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
-
+    userEvent.click(screen.getByText('Submit'));
     expect(onSubmit).toHaveBeenCalledWith({
       'field-1': 'show',
       'field-2': 'someValue',

@@ -1,5 +1,7 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
 import FormRenderer from '../../form-renderer';
 import FormTemplate from '../../../../../__mocks__/mock-form-template';
 import componentTypes from '../../component-types';
@@ -41,21 +43,22 @@ describe('data types', () => {
 
   it('should add integer data type validator and save interger to form state', () => {
     const onSubmit = jest.fn();
-    const wrapper = mount(<FormRenderer {...initialProps} onSubmit={onSubmit} />);
-    expect(wrapper.find(DataTypeInput)).toHaveLength(1);
-    const input = wrapper.find('input');
+    render(<FormRenderer {...initialProps} onSubmit={onSubmit} />);
+
+    expect(screen.getByLabelText('Data type test')).toBeInTheDocument();
     /**
      * should not allow submit
      * validator should prevent submit if anything else than number is passed to the input
      */
-    input.simulate('change', { target: { value: 'sadsad' } });
-    wrapper.find('button').first().simulate('click');
+    userEvent.type(screen.getByLabelText('Data type test'), 'abc');
+
+    userEvent.click(screen.getByText('Submit'));
+
     expect(onSubmit).not.toHaveBeenCalled();
 
-    input.simulate('change', { target: { value: '123' } });
-    wrapper.update();
+    userEvent.type(screen.getByLabelText('Data type test'), '{selectall}{backspace}123');
 
-    wrapper.find('form').first().simulate('submit');
+    userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith(
       expect.objectContaining({

@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { mount } from 'enzyme';
-import { act } from 'react-dom/test-utils';
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import useFieldApi from '../../use-field-api';
 import componentTypes from '../../component-types';
@@ -9,7 +9,14 @@ import RendererContext from '../../renderer-context';
 import validatorTypes from '../../validator-types';
 
 describe('useFieldApi', () => {
-  const Catcher = ({ children }) => children;
+  let catcherProps;
+
+  const Catcher = ({ children, ...rest }) => {
+    catcherProps = rest;
+
+    return children;
+  };
+
   const registerInputFileSpy = jest.fn();
 
   const TestField = (props) => {
@@ -17,36 +24,33 @@ describe('useFieldApi', () => {
 
     return (
       <Catcher {...rest}>
-        <input {...rest.input} />
+        <input {...rest.input} aria-label={rest.input.name} />
       </Catcher>
     );
   };
 
-  class WrapperComponent extends Component {
-    render() {
-      const { onSubmit, ...props } = this.props;
-      return (
-        <Form onSubmit={onSubmit}>
-          {({ handleSubmit, form: { reset } }) => (
-            <form onSubmit={handleSubmit}>
-              <RendererContext.Provider
-                value={{
-                  formOptions: {
-                    registerInputFile: registerInputFileSpy,
-                    internalRegisterField: jest.fn(),
-                    internalUnRegisterField: jest.fn(),
-                  },
-                  validatorMapper: { required: () => (value) => !value ? 'required' : undefined },
-                }}
-              >
-                <TestField reset={reset} {...props} />
-              </RendererContext.Provider>
-            </form>
-          )}
-        </Form>
-      );
-    }
-  }
+  const WrapperComponent = ({ onSubmit, ...props }) => (
+    <Form onSubmit={onSubmit}>
+      {({ handleSubmit, form: { reset } }) => (
+        <form onSubmit={handleSubmit}>
+          <RendererContext.Provider
+            value={{
+              formOptions: {
+                registerInputFile: registerInputFileSpy,
+                unRegisterInputFile: jest.fn(),
+                internalRegisterField: jest.fn(),
+                internalUnRegisterField: jest.fn(),
+              },
+              validatorMapper: { required: () => (value) => !value ? 'required' : undefined },
+            }}
+          >
+            <TestField reset={reset} {...props} />
+            <button type="submit">Submit</button>
+          </RendererContext.Provider>
+        </form>
+      )}
+    </Form>
+  );
 
   let initialProps;
   let onSubmit;
@@ -59,65 +63,53 @@ describe('useFieldApi', () => {
       onSubmit: (values) => onSubmit(values),
     };
     registerInputFileSpy.mockClear();
+    catcherProps = undefined;
   });
 
   it('reloads type when component changes', () => {
-    const wrapper = mount(<WrapperComponent {...initialProps} />);
+    const { rerender } = render(<WrapperComponent {...initialProps} />);
 
-    expect(wrapper.find(Catcher).props().input.type).toEqual(undefined);
+    expect(catcherProps.input.type).toEqual(undefined);
 
-    wrapper.setProps({ component: componentTypes.RADIO });
-    wrapper.update();
+    rerender(<WrapperComponent {...initialProps} component={componentTypes.RADIO} />);
 
-    expect(wrapper.find(Catcher).props().input.type).toEqual('radio');
+    expect(catcherProps.input.type).toEqual('radio');
   });
 
   it('reloads validator when dataType changes', () => {
-    const wrapper = mount(<WrapperComponent {...initialProps} />);
+    const { rerender } = render(<WrapperComponent {...initialProps} />);
 
-    wrapper.find('form').simulate('submit');
-    wrapper.update();
+    userEvent.click(screen.getByText('Submit'));
     expect(onSubmit).toHaveBeenCalledWith({});
     onSubmit.mockClear();
 
-    // validate is not checked in useField, so you have to change key too
-    wrapper.setProps({ dataType: 'number', key: 'somekey' });
-    wrapper.update();
+    rerender(<WrapperComponent {...initialProps} dataType="number" key="somekey" />);
+    userEvent.type(screen.getByLabelText('some-name'), 'ABC');
+    userEvent.click(screen.getByText('Submit'));
 
-    wrapper.find('input').simulate('change', { target: { value: 'ABC' } });
-    wrapper.update();
-
-    wrapper.find('form').simulate('submit');
-    wrapper.update();
     expect(onSubmit).not.toHaveBeenCalled();
     onSubmit.mockClear();
 
-    expect(wrapper.find(Catcher).props().meta.error).toEqual('Values must be number');
+    expect(catcherProps.meta.error).toEqual('Values must be number');
   });
 
   it('reloads validator when validate changes', async () => {
-    const wrapper = mount(<WrapperComponent {...initialProps} />);
+    const { rerender } = render(<WrapperComponent {...initialProps} />);
 
-    wrapper.find('form').simulate('submit');
-    wrapper.update();
+    userEvent.click(screen.getByText('Submit'));
+
     expect(onSubmit).toHaveBeenCalledWith({});
     onSubmit.mockClear();
 
     // validate is not checked in useField, so you have to change key too
-    wrapper.setProps({ validate: [{ type: 'required' }], key: 'somekey' });
-    wrapper.update();
+    rerender(<WrapperComponent {...initialProps} validate={[{ type: 'required' }]} key="somekey" />);
 
-    await act(async () => {
-      wrapper.find(Catcher).props().reset();
-    });
-    wrapper.update();
+    userEvent.click(screen.getByText('Submit'));
 
-    wrapper.find('form').simulate('submit');
-    wrapper.update();
     expect(onSubmit).not.toHaveBeenCalled();
     onSubmit.mockClear();
 
-    expect(wrapper.find(Catcher).props().meta.error).toEqual('required');
+    expect(catcherProps.meta.error).toEqual('required');
   });
 
   it('reloads array validator when dataType changes', () => {
@@ -126,14 +118,13 @@ describe('useFieldApi', () => {
       component: componentTypes.FIELD_ARRAY,
     };
 
-    const wrapper = mount(<WrapperComponent {...initialProps} />);
+    const { rerender } = render(<WrapperComponent {...initialProps} />);
 
-    expect(wrapper.find(Catcher).props().arrayValidator).toEqual(undefined);
+    expect(catcherProps.arrayValidator).toEqual(undefined);
 
-    wrapper.setProps({ dataType: 'number' });
-    wrapper.update();
+    rerender(<WrapperComponent {...initialProps} dataType="number" />);
 
-    expect(wrapper.find(Catcher).props().arrayValidator).toEqual(expect.any(Function));
+    expect(catcherProps.arrayValidator).toEqual(expect.any(Function));
   });
 
   it('reloads array validator when validate changes', () => {
@@ -142,29 +133,27 @@ describe('useFieldApi', () => {
       component: componentTypes.FIELD_ARRAY,
     };
 
-    const wrapper = mount(<WrapperComponent {...initialProps} />);
+    const { rerender } = render(<WrapperComponent {...initialProps} />);
 
-    expect(wrapper.find(Catcher).props().arrayValidator).toEqual(undefined);
+    expect(catcherProps.arrayValidator).toEqual(undefined);
 
-    wrapper.setProps({ validate: [{ type: 'required' }] });
-    wrapper.update();
+    rerender(<WrapperComponent {...initialProps} validate={[{ type: 'required' }]} />);
 
-    expect(wrapper.find(Catcher).props().arrayValidator).toEqual(expect.any(Function));
+    expect(catcherProps.arrayValidator).toEqual(expect.any(Function));
   });
 
   it('reloads initial value', () => {
-    const wrapper = mount(<WrapperComponent {...initialProps} />);
+    const { rerender } = render(<WrapperComponent {...initialProps} />);
 
-    expect(wrapper.find(Catcher).props().meta.initial).toEqual(undefined);
+    expect(catcherProps.meta.initial).toEqual(undefined);
 
-    wrapper.setProps({ initialValue: 'pepa' });
-    wrapper.update();
+    rerender(<WrapperComponent {...initialProps} initialValue="pepa" />);
 
-    expect(wrapper.find(Catcher).props().meta.initial).toEqual('pepa');
+    expect(catcherProps.meta.initial).toEqual('pepa');
   });
 
   it('should assing correct value to type file input', () => {
-    const wrapper = mount(
+    render(
       <WrapperComponent
         {...initialProps}
         name="file-input"
@@ -176,7 +165,7 @@ describe('useFieldApi', () => {
       />
     );
 
-    expect(wrapper.find('input').prop('value')).toEqual('');
+    expect(screen.getByLabelText('file-input')).toHaveValue('');
     expect(registerInputFileSpy).toHaveBeenCalledWith('file-input');
   });
 
@@ -186,7 +175,7 @@ describe('useFieldApi', () => {
         name: 'foo',
         validate: validate ? [{ type: validatorTypes.REQUIRED }] : [{ type: validatorTypes.URL }],
       });
-      return <input {...input} id="foo" />;
+      return <input {...input} aria-label="foo" />;
     };
 
     const FormWrapper = ({ validate = true }) => (
@@ -209,27 +198,28 @@ describe('useFieldApi', () => {
       </Form>
     );
 
-    const wrapper = mount(<FormWrapper />);
-    expect(wrapper.find('input')).toHaveLength(1);
-    wrapper.find('#foo').simulate('change', { target: { value: 'bar' } });
-    wrapper.update();
-    wrapper.setProps({ validate: false });
-    wrapper.update();
-    expect(wrapper.find('input')).toHaveLength(1);
+    const { rerender } = render(<FormWrapper />);
+
+    expect(screen.getByLabelText('foo')).toBeInTheDocument();
+
+    userEvent.type(screen.getByLabelText('foo'), 'bar');
+
+    rerender(<FormWrapper validate={false} />);
+
+    expect(screen.getByLabelText('foo')).toBeInTheDocument();
   });
 
   it('omits FieldProps', () => {
     const parse = jest.fn().mockImplementation((value) => value);
     initialProps = { ...initialProps, FieldProps: { parse } };
 
-    const wrapper = mount(<WrapperComponent {...initialProps} />);
+    render(<WrapperComponent {...initialProps} />);
 
-    expect(wrapper.find(Catcher).props().FieldProps).toEqual(undefined);
+    expect(catcherProps.FieldProps).toEqual(undefined);
     expect(parse.mock.calls).toHaveLength(0);
 
-    wrapper.find('input').simulate('change', { target: { value: 'ABC' } });
-    wrapper.update();
+    userEvent.type(screen.getByLabelText('some-name'), 'bar');
 
-    expect(parse.mock.calls).toHaveLength(1);
+    expect(parse.mock.calls).toHaveLength(3);
   });
 });

@@ -1,9 +1,8 @@
 import React, { Fragment } from 'react';
-import { act } from 'react-dom/test-utils';
-import { mount } from 'enzyme';
-import toJson from 'enzyme-to-json';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
 import FormRenderer from '../../form-renderer';
-import SchemaErrorComponent from '../../form-renderer/schema-error-component';
 import componentTypes from '../../component-types';
 import FormTemplate from '../../../../../__mocks__/mock-form-template';
 import useFieldApi from '../../use-field-api';
@@ -15,7 +14,7 @@ const ContextSpy = ({ registerSpy, spyFF, ...props }) => {
   const { getRegisteredFields, ffGetRegisteredFields, ...formApi } = useFormApi();
   return (
     <Fragment>
-      <button onClick={() => registerSpy(spyFF ? ffGetRegisteredFields() : getRegisteredFields())} id={props.name}></button>
+      <button onClick={() => registerSpy(spyFF ? ffGetRegisteredFields() : getRegisteredFields())} aria-label={props.name}></button>
       <PropsSpy {...formApi} />
     </Fragment>
   );
@@ -30,7 +29,7 @@ const TextField = (props) => {
   const { input } = useFieldApi(props);
   return (
     <div className="nested-item">
-      <input {...input} id={input.name} />
+      <input {...input} aria-label={input.name} />
     </div>
   );
 };
@@ -77,8 +76,10 @@ describe('<FormRenderer />', () => {
   });
 
   it('should render form from schema', () => {
-    const wrapper = mount(<FormRenderer {...initialProps} />);
-    expect(toJson(wrapper)).toMatchSnapshot();
+    render(<FormRenderer {...initialProps} />);
+
+    expect(screen.getByLabelText('component1')).toBeInTheDocument();
+    expect(screen.getByText('Select field')).toBeInTheDocument();
   });
 
   it('should render errorComponent form from schema', () => {
@@ -99,9 +100,9 @@ describe('<FormRenderer />', () => {
       ],
     };
 
-    const wrapper = mount(<FormRenderer {...initialProps} schema={schemaWithError} />);
+    render(<FormRenderer {...initialProps} schema={schemaWithError} />);
 
-    expect(wrapper.find(SchemaErrorComponent));
+    expect(screen.getByText('Form could not be rendered, because of invalid form schema.')).toBeInTheDocument();
     expect(spy).toHaveBeenCalled();
     expect(logSpy).toHaveBeenCalledWith('error: ', expect.any(String));
 
@@ -110,17 +111,18 @@ describe('<FormRenderer />', () => {
 
   it('should call form reset callback', () => {
     const onReset = jest.fn();
-    const wrapper = mount(<FormRenderer {...initialProps} canReset onReset={onReset} />);
-    wrapper.find('input#component1').simulate('change', { target: { value: 'foo' } });
-    wrapper.update();
-    wrapper.find('button').at(1).simulate('click');
+    render(<FormRenderer {...initialProps} canReset onReset={onReset} />);
+
+    userEvent.type(screen.getByLabelText('component1'), 'something');
+    userEvent.click(screen.getByText('Reset'));
+
     expect(onReset).toHaveBeenCalled();
   });
 
   it('should render hidden field', () => {
     const onSubmit = jest.fn();
 
-    const wrapper = mount(
+    render(
       <FormRenderer
         {...initialProps}
         schema={{
@@ -141,7 +143,8 @@ describe('<FormRenderer />', () => {
         onSubmit={onSubmit}
       />
     );
-    expect(toJson(wrapper)).toMatchSnapshot();
+
+    expect(screen.getByLabelText('hidden')).not.toBeVisible();
   });
 
   describe('Initial value data types', () => {
@@ -157,8 +160,10 @@ describe('<FormRenderer />', () => {
           },
         ],
       };
-      const wrapper = mount(<FormRenderer {...initialProps} schema={schema} onSubmit={(values) => onSubmit(values)} />);
-      wrapper.find('form').simulate('submit');
+      render(<FormRenderer {...initialProps} schema={schema} onSubmit={(values) => onSubmit(values)} />);
+
+      userEvent.click(screen.getByText('Submit'));
+
       expect(onSubmit).toHaveBeenCalledWith({ 'initial-convert': 5 });
     });
 
@@ -174,8 +179,10 @@ describe('<FormRenderer />', () => {
           },
         ],
       };
-      const wrapper = mount(<FormRenderer {...initialProps} schema={schema} onSubmit={(values) => onSubmit(values)} />);
-      wrapper.find('form').simulate('submit');
+      render(<FormRenderer {...initialProps} schema={schema} onSubmit={(values) => onSubmit(values)} />);
+
+      userEvent.click(screen.getByText('Submit'));
+
       expect(onSubmit).toHaveBeenCalledWith({ 'initial-convert': [5, 3, 11, 999] });
     });
 
@@ -191,16 +198,17 @@ describe('<FormRenderer />', () => {
           },
         ],
       };
-      const wrapper = mount(<FormRenderer {...initialProps} schema={schema} onSubmit={(values) => onSubmit(values)} />);
+      render(<FormRenderer {...initialProps} schema={schema} onSubmit={(values) => onSubmit(values)} />);
 
-      wrapper.find('form').simulate('submit');
+      userEvent.click(screen.getByText('Submit'));
+
       expect(onSubmit).toHaveBeenCalledWith({ 'initial-convert': [{ value: 5 }, { value: 3 }, { value: 11 }, { value: 999 }] });
     });
   });
 
   it('should register new field to renderer context', () => {
     const registerSpy = jest.fn();
-    const wrapper = mount(
+    render(
       <FormRenderer
         FormTemplate={(props) => <FormTemplate {...props} />}
         componentMapper={{
@@ -211,16 +219,14 @@ describe('<FormRenderer />', () => {
       />
     );
 
-    const button = wrapper.find('button#should-show');
-    act(() => {
-      button.simulate('click');
-    });
+    userEvent.click(screen.getByLabelText('should-show'));
+
     expect(registerSpy).toHaveBeenCalledWith(['should-show']);
   });
 
-  it('should un-register field after unmount', () => {
+  it('should un-register field after unrender', () => {
     const registerSpy = jest.fn();
-    const wrapper = mount(
+    render(
       <FormRenderer
         FormTemplate={(props) => <FormTemplate {...props} />}
         componentMapper={{
@@ -239,26 +245,20 @@ describe('<FormRenderer />', () => {
       />
     );
 
-    const button = wrapper.find('button#trigger');
-    act(() => {
-      button.simulate('click');
-    });
+    userEvent.click(screen.getByLabelText('trigger'));
+
     expect(registerSpy).toHaveBeenCalledWith(['trigger', 'x', 'field-1']);
-    act(() => {
-      wrapper
-        .find('input')
-        .first()
-        .simulate('change', { target: { value: '' } });
-    });
-    act(() => {
-      button.simulate('click');
-    });
+
+    userEvent.type(screen.getByLabelText('x'), '{selectall}{backspace}');
+
+    userEvent.click(screen.getByLabelText('trigger'));
+
     expect(registerSpy).toHaveBeenCalledWith(['trigger', 'x']);
   });
 
-  it('should not un-register field after unmount with multiple fields coppies', () => {
+  it('should not un-register field after unrender with multiple fields coppies', () => {
     const registerSpy = jest.fn();
-    const wrapper = mount(
+    render(
       <FormRenderer
         FormTemplate={(props) => <FormTemplate {...props} />}
         componentMapper={{
@@ -279,26 +279,20 @@ describe('<FormRenderer />', () => {
       />
     );
 
-    const button = wrapper.find('button#trigger');
-    act(() => {
-      button.simulate('click');
-    });
+    userEvent.click(screen.getByLabelText('trigger'));
+
     expect(registerSpy).toHaveBeenCalledWith(['trigger', 'x', 'field-1']);
-    act(() => {
-      wrapper
-        .find('input')
-        .first()
-        .simulate('change', { target: { value: '' } });
-    });
-    act(() => {
-      button.simulate('click');
-    });
+
+    userEvent.type(screen.getByLabelText('x'), '{selectall}{backspace}');
+
+    userEvent.click(screen.getByLabelText('trigger'));
+
     expect(registerSpy).toHaveBeenCalledWith(['trigger', 'x', 'field-1']);
   });
 
   it('should skip field registration', () => {
     const registerSpy = jest.fn();
-    const wrapper = mount(
+    render(
       <FormRenderer
         FormTemplate={(props) => <FormTemplate {...props} />}
         componentMapper={{
@@ -312,10 +306,8 @@ describe('<FormRenderer />', () => {
       />
     );
 
-    const button = wrapper.find('button#trigger');
-    act(() => {
-      button.simulate('click');
-    });
+    userEvent.click(screen.getByLabelText('trigger'));
+
     expect(registerSpy).toHaveBeenCalledWith([]);
   });
 });
