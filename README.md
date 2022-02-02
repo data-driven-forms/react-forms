@@ -327,7 +327,7 @@ Run `yarn build` in root folder to build all packages. You can run this command 
 Run `yarn lint` in root folder to check if the code is correctly formatted. You can use `yarn lint --fix` to automatically correct issues.
 ### Write tests
 
-All new code should be properly tested. Run `yarn test` in root folder to test all files. Check codecoverage report to see uncovered lines of code. We are using [Jest](https://jestjs.io/) and [Enzyme](https://enzymejs.github.io/enzyme/).
+All new code should be properly tested. Run `yarn test` in root folder to test all files. Check codecoverage report to see uncovered lines of code. We are using [Jest](https://jestjs.io/) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/).
 
 ### Documentation update
 
