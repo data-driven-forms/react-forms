@@ -1,9 +1,6 @@
 // eslint-disable-next-line no-unused-vars
-import { configure } from 'enzyme';
-import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import '@testing-library/jest-dom/extend-expect';
 
-configure({ adapter: new Adapter() });
 Element.prototype.scrollTo = () => {};
 
 Object.defineProperty(window, 'matchMedia', {
@@ -16,6 +13,6 @@ Object.defineProperty(window, 'matchMedia', {
     removeListener: jest.fn(), // deprecated
     addEventListener: jest.fn(),
     removeEventListener: jest.fn(),
-    dispatchEvent: jest.fn()
-  }))
+    dispatchEvent: jest.fn(),
+  })),
 });

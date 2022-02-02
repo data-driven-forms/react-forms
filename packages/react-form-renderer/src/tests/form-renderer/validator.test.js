@@ -1,6 +1,6 @@
 import React from 'react';
-import { mount } from 'enzyme';
-import { act } from 'react-dom/test-utils';
+import { render, screen, act } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import FormRenderer from '../../form-renderer';
 import componentTypes from '../../component-types';
@@ -12,7 +12,7 @@ describe('FormRenderer validator', () => {
     const { input, meta, ...rest } = useFieldApi(props);
     return (
       <div>
-        <input {...input} {...rest} />
+        <input {...input} {...rest} aria-label={props.name} />
         {meta.error && <div id="error">{meta.error}</div>}
       </div>
     );
@@ -27,7 +27,7 @@ describe('FormRenderer validator', () => {
     const META = expect.any(Object);
 
     const validator = (value, allValues, meta) => {
-      if (value) {
+      if (value === VALUE) {
         //skip initial validation
         expect(value).toEqual(VALUE);
         expect(allValues).toEqual({
@@ -38,7 +38,7 @@ describe('FormRenderer validator', () => {
       }
     };
 
-    const wrapper = mount(
+    render(
       <FormRenderer
         FormTemplate={(props) => <FormTemplate {...props} />}
         componentMapper={{
@@ -52,9 +52,7 @@ describe('FormRenderer validator', () => {
       />
     );
 
-    await act(async () => {
-      wrapper.find('input').simulate('change', { target: { value: VALUE } });
-    });
+    userEvent.type(screen.getByLabelText(NAME), VALUE);
   });
 
   describe('warning validators', () => {
@@ -63,36 +61,31 @@ describe('FormRenderer validator', () => {
       return (
         <div>
           <input {...input} {...rest} />
-          {meta.warning && <div id="warning">{meta.warning}</div>}
+          {meta.warning && <div aria-label="warning">{meta.warning}</div>}
         </div>
       );
     };
 
-    let wrapper;
-
     it('should not convert object validator to warning when warnings are not used', async () => {
-      await act(async () => {
-        wrapper = mount(
-          <FormRenderer
-            FormTemplate={FormTemplate}
-            componentMapper={{
-              [componentTypes.TEXT_FIELD]: TextFieldWarning,
-            }}
-            schema={{
-              fields: [{ component: 'text-field', name: NAME, validate: [{ type: 'required', warning: true }] }],
-            }}
-            onSubmit={jest.fn()}
-          />
-        );
-      });
-      wrapper.update();
+      render(
+        <FormRenderer
+          FormTemplate={FormTemplate}
+          componentMapper={{
+            [componentTypes.TEXT_FIELD]: TextFieldWarning,
+          }}
+          schema={{
+            fields: [{ component: 'text-field', name: NAME, validate: [{ type: 'required', warning: true }] }],
+          }}
+          onSubmit={jest.fn()}
+        />
+      );
 
-      expect(wrapper.find('#warning')).toHaveLength(0);
+      expect(() => screen.getByLabelText('warning')).toThrow();
     });
 
     it('should convert object validator to warning', async () => {
       await act(async () => {
-        wrapper = mount(
+        render(
           <FormRenderer
             FormTemplate={FormTemplate}
             componentMapper={{
@@ -105,9 +98,8 @@ describe('FormRenderer validator', () => {
           />
         );
       });
-      wrapper.update();
 
-      expect(wrapper.find('#warning').text()).toEqual('Required');
+      expect(screen.getByText('Required')).toBeInTheDocument();
     });
 
     it('should convert function validator to warning', async () => {
@@ -116,7 +108,7 @@ describe('FormRenderer validator', () => {
       const customValidator = () => ({ type: 'warning', error: ERROR });
 
       await act(async () => {
-        wrapper = mount(
+        render(
           <FormRenderer
             FormTemplate={FormTemplate}
             componentMapper={{
@@ -129,9 +121,8 @@ describe('FormRenderer validator', () => {
           />
         );
       });
-      wrapper.update();
 
-      expect(wrapper.find('#warning').text()).toEqual(ERROR);
+      expect(screen.getByText(ERROR)).toBeInTheDocument();
     });
 
     it('should convert async function validator to warning', async () => {
@@ -140,7 +131,7 @@ describe('FormRenderer validator', () => {
       const customValidator = () => new Promise((res, rej) => setTimeout(() => rej({ type: 'warning', error: ERROR })));
 
       await act(async () => {
-        wrapper = mount(
+        render(
           <FormRenderer
             FormTemplate={FormTemplate}
             componentMapper={{
@@ -153,9 +144,8 @@ describe('FormRenderer validator', () => {
           />
         );
       });
-      wrapper.update();
 
-      expect(wrapper.find('#warning').text()).toEqual(ERROR);
+      expect(screen.getByText(ERROR)).toBeInTheDocument();
     });
   });
 });
