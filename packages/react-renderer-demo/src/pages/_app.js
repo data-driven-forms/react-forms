@@ -8,6 +8,7 @@ import theme from '../theme';
 import Layout from '@docs/components/layout';
 import { MDXProvider } from '@mdx-js/react';
 import MdxComponents from '@docs/components/mdx/mdx-components';
+import CookieModal from '../components/cookie-modal';
 
 export default class MyApp extends App {
   componentDidMount() {
@@ -35,6 +36,7 @@ export default class MyApp extends App {
                 <Component {...pageProps} />
               </Layout>
             </MDXProvider>
+            <CookieModal />
           </ThemeProvider>
         </StyledEngineProvider>
       </React.Fragment>
