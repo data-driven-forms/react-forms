@@ -6,6 +6,9 @@ import DatePicker from '@data-driven-forms/mui-component-mapper/date-picker';
 import PlainText from '@data-driven-forms/mui-component-mapper/plain-text';
 import FormTemplate from '@data-driven-forms/mui-component-mapper/form-template';
 
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+
 const calculateAge = (birthday) => {
   let ageDifMs = Date.now() - birthday;
   let ageDate = new Date(ageDifMs);
@@ -36,6 +39,10 @@ const componentMapper = {
   [componentTypes.PLAIN_TEXT]: PlainText,
 };
 
-const IsCondition = () => <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />;
+const IsCondition = () => (
+  <LocalizationProvider dateAdapter={AdapterDateFns}>
+    <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />
+  </LocalizationProvider>
+);
 
 export default IsCondition;
