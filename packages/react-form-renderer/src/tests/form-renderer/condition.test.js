@@ -308,6 +308,94 @@ describe('condition test', () => {
     });
   });
 
+  it('should render when condition is fulfill - not', async () => {
+    schema = {
+      fields: [
+        {
+          component: componentTypes.TEXT_FIELD,
+          name: 'field-1',
+        },
+        {
+          component: componentTypes.TEXT_FIELD,
+          name: 'field-2',
+          condition: [
+            {
+              not: {
+                when: 'field-1',
+                is: 'show',
+              },
+            },
+          ],
+        },
+      ],
+    };
+
+    render(<FormRenderer {...initialProps} schema={schema} />);
+
+    expect(screen.getByLabelText('field-2')).toBeInTheDocument();
+
+    userEvent.type(screen.getByLabelText('field-1'), 'show');
+
+    expect(() => screen.getByLabelText('field-2')).toThrow();
+
+    userEvent.type(screen.getByLabelText('field-1'), 'dont');
+
+    expect(screen.getByLabelText('field-2')).toBeInTheDocument();
+  });
+
+  it('should render when condition is fulfill - not - array', async () => {
+    schema = {
+      fields: [
+        {
+          component: componentTypes.TEXT_FIELD,
+          name: 'field-1',
+        },
+        {
+          component: componentTypes.TEXT_FIELD,
+          name: 'field-3',
+        },
+        {
+          component: componentTypes.TEXT_FIELD,
+          name: 'field-2',
+          condition: [
+            {
+              not: [
+                {
+                  when: 'field-1',
+                  is: 'show',
+                },
+                {
+                  when: 'field-3',
+                  is: 'show',
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    };
+
+    render(<FormRenderer {...initialProps} schema={schema} />);
+
+    expect(screen.getByLabelText('field-2')).toBeInTheDocument();
+
+    userEvent.type(screen.getByLabelText('field-1'), 'show'); // (show == show && '' == show) = FALSE => TRUE
+
+    expect(screen.getByLabelText('field-2')).toBeInTheDocument();
+
+    userEvent.type(screen.getByLabelText('field-1'), 'dont'); // (show == dontshow && '' == show) = FALSE => TRUE
+
+    expect(screen.getByLabelText('field-2')).toBeInTheDocument();
+
+    userEvent.type(screen.getByLabelText('field-3'), 'show'); // (show == dontshow && show == show) = FALSE => TRUE
+
+    expect(screen.getByLabelText('field-2')).toBeInTheDocument();
+
+    userEvent.type(screen.getByLabelText('field-1'), '{selectall}{backspace}show'); // (show == show && show == show) = TRUE => FALSE
+
+    expect(() => screen.getByLabelText('field-2')).toThrow();
+  });
+
   describe('reducer', () => {
     it('returns default', () => {
       const initialState = {
