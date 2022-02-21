@@ -56,6 +56,7 @@
     "globalSetup": "<rootDir>/config/globalSetup.js"
   },
   "devDependencies": {
+    "@babel/cli": "^7.17.3",
     "@babel/core": "^7.16.7",
     "@babel/eslint-parser": "^7.16.5",
     "@babel/plugin-proposal-class-properties": "^7.16.7",
