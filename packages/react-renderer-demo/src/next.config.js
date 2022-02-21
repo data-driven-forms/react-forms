@@ -1,4 +1,3 @@
-const TerserPlugin = require('terser-webpack-plugin');
 const withMDX = require('@next/mdx')({
   extension: /\.mdx?$/,
 });
@@ -52,6 +51,7 @@ module.exports = withBundleAnalyzer(
       crossOrigin: 'anonymous',
       pageExtensions: ['js', 'jsx', 'md', 'mdx'],
       distDir: '../dist',
+      swcMinify: true,
       webpack: (config, options) => {
         config.resolve.alias = {
           ...config.resolve.alias,
@@ -67,15 +67,6 @@ module.exports = withBundleAnalyzer(
           '@docs/component-mapper-bar': path.resolve(__dirname, './components/component-mapper-bar'),
         };
 
-        config.optimization.minimizer = [
-          new TerserPlugin({
-            parallel: false,
-            terserOptions: {
-              keep_classnames: true, // eslint-disable-line camelcase
-              keep_fnames: true, // eslint-disable-line camelcase
-            },
-          }),
-        ];
         return config;
       },
     })
