@@ -11,5 +11,10 @@
   },
   "functions": {
     "source": "."
+  },
+  "emulators": {
+    "hosting": {
+      "port": 5004
+    }
   }
 }

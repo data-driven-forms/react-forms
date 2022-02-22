@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
-import { Alert, Button, Box, Backdrop } from '@mui/material';
+import Alert from '@mui/material/Alert';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import Backdrop from '@mui/material/Backdrop';
+
 import { styled } from '@mui/material/styles';
 
 const Root = styled(Backdrop)(() => ({
