@@ -214,6 +214,7 @@ const InternalSelect = ({
               className={`pf-c-select__toggle${isDisabled ? ' pf-m-disabled' : ''}${
                 isSearchable ? ' pf-m-typeahead' : ''
               } ddorg__pf4-component-mapper__select-toggle`}
+              tabIndex={0}
               {...toggleButtonProps}
             >
               <div className="pf-c-select_toggle-wrapper ddorg__pf4-component-mapper__select-toggle-wrapper">
