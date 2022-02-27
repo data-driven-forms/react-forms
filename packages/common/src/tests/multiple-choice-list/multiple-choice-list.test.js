@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { FormRenderer, componentTypes, useFormApi } from '@data-driven-forms/react-form-renderer';
+import { FormRenderer, componentTypes, useFormApi, validatorTypes } from '@data-driven-forms/react-form-renderer';
 import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -157,7 +157,7 @@ describe('multiple choice list', () => {
       },
       name: 'check',
       rest: {},
-      showError: 'Required',
+      showError: true,
     });
   });
 
@@ -195,7 +195,52 @@ describe('multiple choice list', () => {
       },
       name: 'check',
       rest: {},
-      showError: 'submitError',
+      showError: true,
+    });
+  });
+
+  it('should set showError to true if validateOnMount prop is set to true on mount', () => {
+    render(
+      <FormRenderer
+        {...rendererProps}
+        schema={{
+          ...rendererProps.schema,
+          fields: [{ ...rendererProps.schema.fields[0], validateOnMount: true, validate: [{ type: validatorTypes.REQUIRED }] }],
+        }}
+        onSubmit={() => undefined}
+      />
+    );
+
+    expect(wrapperProps).toEqual({
+      description: undefined,
+      error: 'Required',
+      helperText: 'some helper text',
+      isRequired: true,
+      label: 'Select animals',
+      meta: {
+        active: false,
+        data: {},
+        dirty: false,
+        dirtySinceLastSubmit: false,
+        error: 'Required',
+        initial: undefined,
+        invalid: true,
+        length: undefined,
+        modified: false,
+        modifiedSinceLastSubmit: false,
+        pristine: true,
+        submitError: undefined,
+        submitFailed: false,
+        submitSucceeded: false,
+        submitting: false,
+        touched: false,
+        valid: false,
+        validating: false,
+        visited: false,
+      },
+      name: 'check',
+      rest: {},
+      showError: true,
     });
   });
 });
