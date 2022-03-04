@@ -7,38 +7,40 @@ A documentation page for [Data Driven Forms](https://github.com/data-driven-form
 Always make sure to update the doces after any package change!
 
 ## Commands
+You can perform the following tasks by running the offered commands:
 
-### Installation
+- Installation
 
-```bash
-yarn
-```
+    ```bash
+    # in root directory of react-forms
+    yarn
+    ```
 
-### Start local server
-```bash
-cd packages/react-renderer-demo
-yarn dev # runs on localhost:3000
-```
+- Start local server
+    ```bash
+    cd packages/react-renderer-demo
+    yarn dev # runs on localhost:3000
+    ```
 
-### Build production version
-```bash
-cd packages/react-renderer-demo
-yarn build
-```
+- Build production version
+    ```bash
+    cd packages/react-renderer-demo
+    yarn build
+    ```
 
-### Generate component examples from mappers
-```bash
-cd packages/react-renderer-demo
-yarn generate:examples
-```
-### Run bundle analyzer
-```bash
-cd packages/react-renderer-demo
-yarn analyze
-```
+- Generate component examples from mappers
+    ```bash
+    cd packages/react-renderer-demo
+    yarn generate:examples
+    ```
+- Run bundle analyzer
+    ```bash
+    cd packages/react-renderer-demo
+    yarn analyze
+    ```
 
-### Emulate firebase server locally
-```bash
-cd packages/react-renderer-demo
-yarn build && yarn serve
-```
+- Emulate firebase server locally
+    ```bash
+    cd packages/react-renderer-demo
+    yarn build && yarn serve
+    ```
