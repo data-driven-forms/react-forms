@@ -3,12 +3,15 @@ import DocPage from '@docs/doc-page';
 
 <DocPage>
 
-# Data Types
+# dataType
 
 *string*
 
- You can specify a type of a component by providing `dataType`, which will automatically validates the component value.
-Because almost everything in HTML inputs is outputed as a string, adding the `dataType` props will also cast the value to given type.
+You can specify the type of a component by providing `dataType`, which will automatically validates the component value.
+
+Because almost everything in HTML inputs is outputed as a string, adding the `dataType` props will also cast the value to the given type.
+
+<br/>
 
 ## Example
 
@@ -20,6 +23,8 @@ Because almost everything in HTML inputs is outputed as a string, adding the `da
     dataType: 'number'
 }
 ```
+
+<br/>
 
 ## Available dataTypes
 

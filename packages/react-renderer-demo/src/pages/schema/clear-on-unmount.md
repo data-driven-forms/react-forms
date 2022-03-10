@@ -3,13 +3,17 @@ import CodeExample from '@docs/code-example';
 
 <DocPage>
 
-# Clear on unmount
+# clearOnUnmount
 
 *boolean*
 
-When using dynamic forms where more fields share the same name, the value is preserved when a user switches the field. You can disable this behavior by setting 
-`clearOnUnmount` option in the renderer component or in the schema of the field. The option in the schema has always higher priority. (When 
-`clearOnUnmount` is set in the renderer and the field has it this attribute set to `false`, the field value will not be cleared.)
+When using dynamic forms where more fields share the same name, the value is preserved when a user switches the field. 
+
+You can disable this behavior by setting `clearOnUnmount` option in the renderer component, or in the schema of the field. 
+
+The option in the schema has always higher priority. (When `clearOnUnmount` is set to `ture` in the renderer, and this attribute is set to `false` in the schema of the the field, the field value will not be cleared.)
+
+<br/>
 
 ## Examples
 
@@ -17,6 +21,7 @@ When using dynamic forms where more fields share the same name, the value is pre
 
 <CodeExample source="components/clear-on-unmount" mode="preview" />
 
+<br/>
 
 ### Form level configuration
 
@@ -29,6 +34,8 @@ When using dynamic forms where more fields share the same name, the value is pre
   clearOnUnmount
 />
 ```
+
+<br/>
 
 ### Field level configuration
 
