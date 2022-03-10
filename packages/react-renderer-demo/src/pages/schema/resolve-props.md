@@ -4,15 +4,18 @@ import CodeExample from '@docs/code-example';
 
 <DocPage>
 
-# Resolve props
+# resolveProps
 
 *function (props, {meta, input}, formOptions) => props*
 
-**Only applicable for fields connected to the form state.**
 
-A function allowing to compute field properties from the current state of the field.
+**resolveProps is only applicable for fields that connected to the form state.**
 
-## Schema
+The function of resolveProps can compute field properties from the current state of the field. 
+
+<br/>
+
+## Example
 
 ```jsx
 const schema = {
@@ -23,33 +26,50 @@ const schema = {
 }
 ```
 
+<br/>
+
 ## Arguments
 
-### Props
+### props
 
-All field props passed in the schema.
+`props` are all field properties passed in the schema.
 
-### Meta and input
+<br/>
 
+### meta and input
+
+<br/>
 <InputMeta />
 
-### FormOptions
+<br/>
 
-Object containing access to the form state. Read more [here](/hooks/use-form-api).
+### formOptions
+
+`formOptions` is an object containing access to the form state. 
+
+[Read more.](/hooks/use-form-api)
+
+<br/>
 
 ## Rules
 
-I. `resolveProps` cannot return `actions`. You can access `actions`'s code in the `resolveProps` prop if you need it.
+Here are some rules about using `resolveProps`:
+
+I. `resolveProps` cannot return `actions`. You can access `actions`'s code in the `resolveProps` props if you need it.
 
 II. Do not use `async` functions to get the props.
 
-III. Do not trigger any side effects, as it could introduce bugs.
+III. Do not trigger any side effects, as it may introduce bugs.
 
-IV. `resolveProps` are merged together with following priority: `actions.resolveProps` (highest) > `field.resolveProps` > `mapper.resolveProps` (lowest)
+IV. `resolveProps` are merged together with the following priority:
+
+`actions.resolveProps` (highest) > `field.resolveProps` > `mapper.resolveProps` (lowest)
+
+<br/>
 
 ## Global resolveProps
 
-You can modify behavior for all components of the same type in your `componentMapper` via [global component props](/mappers/global-component-props).
+You can modify the behavior for all components of the same type in your `componentMapper` via [global component props](/mappers/global-component-props).
 
 ```jsx
 const componentMapper = {
@@ -60,13 +80,21 @@ const componentMapper = {
 }
 ```
 
-## Change props according to state of other components
+<br/>
 
-You can get states of all other fields in the form via functions from `formOptions`. Don't forget to set the right [subscription](/components/renderer#subscription) to trigger `resolveProps` functions from changing other fields.
+## Change props according to the state of other components
+
+You can get states of all the other fields in the form via functions from `formOptions`. 
+
+Don't forget to set the right [subscription](/components/renderer#subscription) to trigger `resolveProps` functions from the other changing fields.
+
+<br/>
 
 ## Example
 
-Following example shows how can be a behavior of components changed using `resolveProps`. In this example, the component will have different color and helper text after it is validated.
+The following example shows how `resolveProps` changes a behavior of components . 
+
+In this example, after the component is validated, it will have different colors and helper texts.
 
 <CodeExample mode="preview" source="components/resolve-props" />
 
