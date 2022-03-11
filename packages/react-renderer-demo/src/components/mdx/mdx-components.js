@@ -11,6 +11,7 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import Divider from '@mui/material/Divider';
 import Paper from '@mui/material/Paper';
 import { headerToId } from '../../helpers/list-of-contents';
 import ShareButton from './share-button';
@@ -135,6 +136,15 @@ const MdLink = ({ href, children }) =>
     </StyledLink>
   );
 
+const StyledDivider = styled(Divider)(() => ({
+  '&.divider': {
+    marginTop: 20,
+    marginBottom: 15,
+  },
+}));
+
+const MdDivider = (props) => <StyledDivider {...props} variant="middle" className={'divider'} />;
+
 const MdxComponents = {
   p: ({ children }) => (
     <Typography variant="body1" gutterBottom>
@@ -169,6 +179,7 @@ const MdxComponents = {
   inlineCode: ({ children }) => (
     <Root style={{ background: 'white', borderRadius: 3, fontFamily: 'courier, monospace', padding: '3px' }}>{children}</Root>
   ),
+  hr: MdDivider,
 };
 
 export default MdxComponents;

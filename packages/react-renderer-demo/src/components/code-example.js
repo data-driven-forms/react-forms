@@ -6,8 +6,9 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
 import CodeIcon from '@mui/icons-material/Code';
+import CodeOffIcon from '@mui/icons-material/CodeOff';
 import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
+import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import PropTypes from 'prop-types';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Paper from '@mui/material/Paper';
@@ -159,7 +160,32 @@ const getPayload = (code, sourceFiles = {}) =>
       },
     },
   });
-
+const AccordionSummary = styled((props) => {
+  const [codeExpand, setCodeExpand] = useState(false);
+  return (
+    <MuiAccordionSummary
+      sx={{
+        pointerEvents: 'none',
+      }}
+      expandIcon={
+        <Tooltip title="Expand code example">
+          <IconButton size="small" display="flex" sx={{ pointerEvents: 'auto' }} onClick={() => setCodeExpand(!codeExpand)}>
+            {codeExpand ? <CodeOffIcon /> : <CodeIcon />}
+          </IconButton>
+        </Tooltip>
+      }
+      {...props}
+    />
+  );
+})(({ theme }) => ({
+  flexDirection: 'row',
+  '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
+    transform: 'none',
+  },
+  '& .MuiAccordionSummary-content': {
+    flexDirection: 'row-reverse',
+  },
+}));
 const CodeExample = ({ source, mode }) => {
   const [name, setName] = useState('');
   const [codeSource, setCodeSource] = useState('');
@@ -182,28 +208,32 @@ const CodeExample = ({ source, mode }) => {
   if (mode === 'preview') {
     return (
       <ExampleRoot container spacing={0} className={clsx('DocRawComponent', 'container')}>
+        {Component && (
+          <Heading component="h3" level="5">
+            {name}
+          </Heading>
+        )}
+        {Component && (
+          <Grid className={'formContainer'} item xs={12}>
+            <Paper className={'componentPanel'}>
+              <Component />
+            </Paper>
+          </Grid>
+        )}
         <Grid item xs={12}>
           <Accordion className={'accordion'}>
-            <AccordionSummary
-              className={'accordionSummary'}
-              expandIcon={
-                <Tooltip title="Expand code example">
-                  <IconButton size="large">
-                    <CodeIcon />
-                  </IconButton>
-                </Tooltip>
-              }
-            >
-              {Component && (
-                <Heading component="h3" level="5">
-                  {name}
-                </Heading>
-              )}
+            <AccordionSummary className={'accordionSummary'}>
               <Box display="flex">
                 <form action="https://codesandbox.io/api/v1/sandboxes/define" method="POST" target="_blank">
                   <input type="hidden" name="parameters" value={getPayload(codeSource, sourceFiles)} />
                   <Tooltip title="Edit in codesandbox">
-                    <IconButton disableFocusRipple type="submit" onClick={(event) => event.stopPropagation()} size="large">
+                    <IconButton
+                      disableFocusRipple
+                      type="submit"
+                      sx={{ pointerEvents: 'auto' }}
+                      onClick={(event) => event.stopPropagation()}
+                      size="small"
+                    >
                       <CodesandboxIcon />
                     </IconButton>
                   </Tooltip>
@@ -215,7 +245,7 @@ const CodeExample = ({ source, mode }) => {
                   onClick={(event) => event.stopPropagation()}
                 >
                   <Tooltip title="View source on github">
-                    <IconButton size="large">
+                    <IconButton sx={{ pointerEvents: 'auto' }} size="small">
                       <GhIcon style={{ color: grey[700] }} />
                     </IconButton>
                   </Tooltip>
@@ -227,13 +257,6 @@ const CodeExample = ({ source, mode }) => {
             </AccordionDetails>
           </Accordion>
         </Grid>
-        {Component && (
-          <Grid className={'formContainer'} item xs={12}>
-            <Paper className={'componentPanel'}>
-              <Component />
-            </Paper>
-          </Grid>
-        )}
       </ExampleRoot>
     );
   }

@@ -178,13 +178,15 @@ const Root = styled(Grid)(({ theme }) => ({
     color: '#F28D63',
   },
   '& .editorWrapper': {
-    background: '#1d1f21',
+    background: '#1D1F21',
     padding: 16,
+    borderRadius: 4,
   },
   '& .formState': {
-    marginTop: 16,
+    marginTop: 7,
     padding: 16,
     marginBottom: 16,
+    borderRadius: 4,
   },
   '& .textBottom': {
     marginBottom: 16,
