@@ -107,18 +107,16 @@ const FormRenderer = ({
             },
           }}
         >
-          {typeof children === 'function' ? (
-            children({schema, formFields: renderForm(schema.fields)})
-           ) : (
+          {typeof children === 'function' ? children({schema, formFields: renderForm(schema.fields)}) : (
             <React.Fragment>
-              <FormTemplate 
+              <FormTemplate
                 formFields={renderForm(schema.fields)}
                 schema={schema}
                 {...FormTemplateProps}
               />
               {children}
             </React.Fragment>
-           )}
+          )}
         </RendererContext.Provider>
       )}
     />
