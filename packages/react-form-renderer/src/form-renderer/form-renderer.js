@@ -11,8 +11,10 @@ import SchemaErrorComponent from './schema-error-component';
 import defaultValidatorMapper from '../validator-mapper';
 
 const FormRenderer = ({
+  children,
   componentMapper,
   FormTemplate,
+  FormTemplateProps,
   onSubmit,
   onCancel,
   onReset,
@@ -105,7 +107,18 @@ const FormRenderer = ({
             },
           }}
         >
-          <FormTemplate formFields={renderForm(schema.fields)} schema={schema} />
+          {typeof children === 'function' ? (
+            children({schema, formFields: renderForm(schema.fields)})
+           ) : (
+            <React.Fragment>
+              <FormTemplate 
+                formFields={renderForm(schema.fields)}
+                schema={schema}
+                {...FormTemplateProps}
+              />
+              {children}
+            </React.Fragment>
+           )}
         </RendererContext.Provider>
       )}
     />
@@ -113,6 +126,7 @@ const FormRenderer = ({
 };
 
 FormRenderer.propTypes = {
+  children: PropTypes.element,
   onSubmit: PropTypes.func.isRequired,
   onCancel: PropTypes.func,
   onReset: PropTypes.func,
@@ -123,7 +137,8 @@ FormRenderer.propTypes = {
   componentMapper: PropTypes.shape({
     [PropTypes.string]: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func, PropTypes.elementType]),
   }).isRequired,
-  FormTemplate: PropTypes.elementType.isRequired,
+  FormTemplate: PropTypes.oneOfType([PropTypes.func, PropTypes.elementType]),
+  FormTemplateProps: PropTypes.elementType.isRequired,
   validatorMapper: PropTypes.shape({
     [PropTypes.string]: PropTypes.func,
   }),
