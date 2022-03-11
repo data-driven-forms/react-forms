@@ -126,7 +126,7 @@ const FormRenderer = ({
 };
 
 FormRenderer.propTypes = {
-  children: PropTypes.element,
+  children: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
   onSubmit: PropTypes.func.isRequired,
   onCancel: PropTypes.func,
   onReset: PropTypes.func,
@@ -137,8 +137,8 @@ FormRenderer.propTypes = {
   componentMapper: PropTypes.shape({
     [PropTypes.string]: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func, PropTypes.elementType]),
   }).isRequired,
-  FormTemplate: PropTypes.oneOfType([PropTypes.func, PropTypes.elementType]),
-  FormTemplateProps: PropTypes.elementType.isRequired,
+  FormTemplate: PropTypes.elementType,
+  FormTemplateProps: PropTypes.object,
   validatorMapper: PropTypes.shape({
     [PropTypes.string]: PropTypes.func,
   }),
