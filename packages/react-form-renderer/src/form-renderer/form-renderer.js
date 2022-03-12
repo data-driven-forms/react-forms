@@ -1,79 +1,132 @@
-import React, { useState, useRef } from 'react';
-import Form from '../form';
 import arrayMutators from 'final-form-arrays';
-import PropTypes from 'prop-types';
 import createFocusDecorator from 'final-form-focus';
+import PropTypes from 'prop-types';
+import React, {useCallback, useMemo, useRef, useState} from 'react';
 
+import defaultSchemaValidator from '../default-schema-validator';
+import defaultValidatorMapper from '../validator-mapper';
+import Form from '../form';
 import RendererContext from '../renderer-context';
 import renderForm from './render-form';
-import defaultSchemaValidator from '../default-schema-validator';
 import SchemaErrorComponent from './schema-error-component';
-import defaultValidatorMapper from '../validator-mapper';
+
+
+const isFunc = (fn) => (typeof fn === 'function');
 
 const FormRenderer = ({
+  actionMapper,
   children,
+  clearedValue,
+  clearOnUnmount,
   componentMapper,
+  decorators,
   FormTemplate,
   FormTemplateProps,
-  onSubmit,
+  mutators,
   onCancel,
+  onError,
   onReset,
-  clearOnUnmount,
-  subscription,
-  clearedValue,
+  onSubmit,
   schema,
-  validatorMapper,
-  actionMapper,
   schemaValidatorMapper,
+  subscription,
+  validatorMapper,
   ...props
 }) => {
   const [fileInputs, setFileInputs] = useState([]);
   const registeredFields = useRef({});
   const focusDecorator = useRef(createFocusDecorator());
-  let schemaError;
+  const validatorMapperMerged = useMemo(() => ({
+    ...defaultValidatorMapper,
+    ...validatorMapper
+  }), [validatorMapper]);
+  const mutatorsMerged = useMemo(() => ({
+    ...arrayMutators,
+    ...mutators
+  }), [mutators]);
+  const decoratorsMerged = useMemo(() => ([
+    focusDecorator.current,
+    ...(Array.isArray(decorators) ? decorators : [])
+  ]), [decorators]);
 
-  const setRegisteredFields = (fn) => (registeredFields.current = fn({ ...registeredFields.current }));
-  const internalRegisterField = (name) => {
-    setRegisteredFields((prev) => (prev[name] ? { ...prev, [name]: prev[name] + 1 } : { ...prev, [name]: 1 }));
-  };
+  const handleSubmitCallback = useCallback((values, formApi, ...args) => {
+    return !isFunc(onSubmit) ? void 0 : onSubmit(values, {...formApi, fileInputs}, ...args);
+  }, [onSubmit, fileInputs]);
 
-  const internalUnRegisterField = (name) => {
-    setRegisteredFields(({ [name]: currentField, ...prev }) => (currentField && currentField > 1 ? { [name]: currentField - 1, ...prev } : prev));
-  };
+  const handleCancelCallback = useCallback((getState) => (...args) => {
+    return !isFunc(onCancel) ? void 0 : onCancel(getState().values, ...args);
+  }, [onCancel]);
 
-  const internalGetRegisteredFields = () =>
-    Object.entries(registeredFields.current).reduce((acc, [name, value]) => (value > 0 ? [...acc, name] : acc), []);
+  const handleResetCallback = useCallback((reset) => (...args) => {
+    reset();
+    return !isFunc(onReset) ? void 0 : onReset(...args);
+  }, [onReset]);
 
-  const validatorMapperMerged = { ...defaultValidatorMapper, ...validatorMapper };
+  const handleErrorCallback = useCallback((...args) => {
+    // eslint-disable-next-line no-console
+    console.error(...args);
+    return !isFunc(onError) ? void 0 : onError(...args);
+  }, [onError]);
+
+  const registerInputFile = useCallback((name) => {
+    setFileInputs((prevFiles) => [...prevFiles, name]);
+  }, []);
+
+  const unRegisterInputFile = useCallback((name) => {
+    setFileInputs((prevFiles) => [
+      ...prevFiles.splice(prevFiles.indexOf(name))
+    ]);
+  }, []);
+
+  const setRegisteredFields = useCallback((fn) => {
+    return registeredFields.current = fn({...registeredFields.current});
+  }, []);
+
+  const internalRegisterField = useCallback((name) => {
+    setRegisteredFields((prev) => (
+      prev[name] ? {...prev, [name]: prev[name] + 1} : {...prev, [name]: 1})
+    );
+  }, [setRegisteredFields]);
+
+  const internalUnRegisterField = useCallback((name) => {
+    setRegisteredFields(({[name]: currentField, ...prev}) => (
+      currentField && currentField > 1 ? {[name]: currentField - 1, ...prev} : prev
+    ));
+  }, [setRegisteredFields]);
+
+  const internalGetRegisteredFields = useCallback(() => {
+    const fields = registeredFields.current;
+    Object.entries(fields).reduce((acc, [name, value]) => (
+      value > 0 ? [...acc, name] : acc
+    ), []);
+  }, []);
 
   try {
     const validatorTypes = Object.keys(validatorMapperMerged);
     const actionTypes = actionMapper ? Object.keys(actionMapper) : [];
-    defaultSchemaValidator(schema, componentMapper, validatorTypes, actionTypes, schemaValidatorMapper);
-  } catch (error) {
-    schemaError = error;
-    // eslint-disable-next-line no-console
-    console.error(error);
-    // eslint-disable-next-line no-console
-    console.log('error: ', error.message);
+
+    defaultSchemaValidator(
+      schema,
+      componentMapper,
+      validatorTypes,
+      actionTypes,
+      schemaValidatorMapper
+    );
+  }
+  catch (error) {
+    handleErrorCallback('schema-error', error);
+    return <SchemaErrorComponent name={error.name} message={error.message} />;
   }
 
-  if (schemaError) {
-    return <SchemaErrorComponent name={schemaError.name} message={schemaError.message} />;
-  }
-
-  const registerInputFile = (name) => setFileInputs((prevFiles) => [...prevFiles, name]);
-
-  const unRegisterInputFile = (name) => setFileInputs((prevFiles) => [...prevFiles.splice(prevFiles.indexOf(name))]);
+  const formFields = useMemo(() => renderForm(schema.fields), [schema]);
 
   return (
     <Form
-      {...props}
-      onSubmit={(values, formApi, ...args) => onSubmit(values, { ...formApi, fileInputs }, ...args)}
-      mutators={{ ...arrayMutators }}
-      decorators={[focusDecorator.current]}
-      subscription={{ pristine: true, submitting: true, valid: true, ...subscription }}
-      render={({ handleSubmit, pristine, valid, form: { reset, mutators, getState, submit, ...form } }) => (
+      onSubmit={handleSubmitCallback}
+      mutators={mutatorsMerged}
+      decorators={decoratorsMerged}
+      subscription={{pristine: true, submitting: true, valid: true, ...subscription}}
+      render={({handleSubmit, pristine, valid, form: {reset, mutators, getState, submit, ...form}}) => (
         <RendererContext.Provider
           value={{
             componentMapper,
@@ -84,11 +137,9 @@ const FormRenderer = ({
               unRegisterInputFile,
               pristine,
               onSubmit,
-              onCancel: onCancel ? (...args) => onCancel(getState().values, ...args) : undefined,
-              onReset: (...args) => {
-                onReset && onReset(...args);
-                reset();
-              },
+              onCancel: handleCancelCallback(getState),
+              onReset: handleResetCallback(reset),
+              onError: handleErrorCallback,
               getState,
               valid,
               clearedValue,
@@ -107,33 +158,41 @@ const FormRenderer = ({
             },
           }}
         >
-          {typeof children === 'function' ? children({schema, formFields: renderForm(schema.fields)}) : (
-            <React.Fragment>
-              <FormTemplate
-                formFields={renderForm(schema.fields)}
-                schema={schema}
-                {...FormTemplateProps}
-              />
-              {children}
-            </React.Fragment>
+
+          {FormTemplate && (
+            <FormTemplate
+              formFields={formFields}
+              schema={schema}
+              {...FormTemplateProps}
+            />
           )}
+
+          {isFunc(children) ? children({formFields, schema}) : children}
+
         </RendererContext.Provider>
       )}
+      {...props}
     />
   );
 };
 
 FormRenderer.propTypes = {
   children: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
-  onSubmit: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func,
   onCancel: PropTypes.func,
   onReset: PropTypes.func,
+  onError: PropTypes.func,
   schema: PropTypes.object.isRequired,
   clearOnUnmount: PropTypes.bool,
-  subscription: PropTypes.shape({ [PropTypes.string]: PropTypes.bool }),
+  subscription: PropTypes.shape({[PropTypes.string]: PropTypes.bool}),
   clearedValue: PropTypes.any,
   componentMapper: PropTypes.shape({
-    [PropTypes.string]: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func, PropTypes.elementType]),
+    [PropTypes.string]: PropTypes.oneOfType([
+      PropTypes.node,
+      PropTypes.element,
+      PropTypes.func,
+      PropTypes.elementType
+    ]),
   }).isRequired,
   FormTemplate: PropTypes.elementType,
   FormTemplateProps: PropTypes.object,
