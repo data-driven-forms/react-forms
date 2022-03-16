@@ -12,11 +12,13 @@ const StyledPre = styled('pre')({
     maxWidth: '100vw',
     textAlign: 'left',
     margin: '1em 0',
-    padding: '0.5em',
+    padding: '1em',
     overflow: 'auto',
+    borderRadius: 4,
+    fontFamily: 'ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace',
     '& .token-line': {
-      lineHeight: '1.3em',
-      height: '1.3em',
+      lineHeight: '1.5em',
+      height: '1.5em',
     },
   },
 });
