@@ -50,7 +50,7 @@ const FormRenderer = ({
   ]), [decorators]);
 
   const handleSubmitCallback = useCallback((values, formApi, ...args) => {
-    return !isFunc(onSubmit) ? void 0 : onSubmit(values, {...formApi, fileInputs}, ...args);
+    return !isFunc(onSubmit) ? undefined : onSubmit(values, {...formApi, fileInputs}, ...args);
   }, [onSubmit, fileInputs]);
 
   const handleCancelCallback = useCallback((getState) => (...args) => {
@@ -86,13 +86,13 @@ const FormRenderer = ({
     setRegisteredFields((prev) => (
       prev[name] ? {...prev, [name]: prev[name] + 1} : {...prev, [name]: 1})
     );
-  }, [setRegisteredFields]);
+  }, []);
 
   const internalUnRegisterField = useCallback((name) => {
     setRegisteredFields(({[name]: currentField, ...prev}) => (
       currentField && currentField > 1 ? {[name]: currentField - 1, ...prev} : prev
     ));
-  }, [setRegisteredFields]);
+  }, []);
 
   const internalGetRegisteredFields = useCallback(() => {
     const fields = registeredFields.current;
