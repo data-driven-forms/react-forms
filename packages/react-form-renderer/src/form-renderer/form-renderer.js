@@ -96,7 +96,7 @@ const FormRenderer = ({
 
   const internalGetRegisteredFields = useCallback(() => {
     const fields = registeredFields.current;
-    Object.entries(fields).reduce((acc, [name, value]) => (
+    return Object.entries(fields).reduce((acc, [name, value]) => (
       value > 0 ? [...acc, name] : acc
     ), []);
   }, []);
