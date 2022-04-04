@@ -104,7 +104,6 @@ describe('<FormRenderer />', () => {
 
     expect(screen.getByText('Form could not be rendered, because of invalid form schema.')).toBeInTheDocument();
     expect(spy).toHaveBeenCalled();
-    expect(logSpy).toHaveBeenCalledWith('error: ', expect.any(String));
 
     console = _console; // eslint-disable-line
   });
