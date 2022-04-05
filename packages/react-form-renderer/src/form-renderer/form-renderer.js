@@ -53,8 +53,8 @@ const FormRenderer = ({
     return !isFunc(onSubmit) ? undefined : onSubmit(values, {...formApi, fileInputs}, ...args);
   }, [onSubmit, fileInputs]);
 
-  const handleCancelCallback = useCallback((getState) => (...args) => {
-    return !isFunc(onCancel) ? void 0 : onCancel(getState().values, ...args);
+  const handleCancelCallback = useCallback((getState) => {
+    return !isFunc(onCancel) ? undefined : ((...args) => onCancel(getState().values, ...args));
   }, [onCancel]);
 
   const handleResetCallback = useCallback((reset) => (...args) => {
