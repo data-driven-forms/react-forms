@@ -183,6 +183,78 @@ describe('condition test', () => {
     });
   });
 
+  it('should not override initial value with setter value', async () => {
+    const schema = {
+      fields: [
+        {
+          component: 'text-field',
+          name: 'field-1',
+          label: 'first name',
+        },
+        {
+          component: 'text-field',
+          name: 'field-2',
+          label: 'last name',
+        },
+        {
+          component: 'text-field',
+          name: 'field-3',
+          label: 'occupation',
+          condition: {
+            sequence: [
+              {
+                and: [
+                  { when: 'field-1', is: 'james' },
+                  { when: 'field-2', is: 'bond' },
+                ],
+                then: { set: { 'field-3': 'SPY' } },
+                else: { visible: true },
+              },
+              {
+                and: [
+                  { when: 'field-1', is: 'steve' },
+                  { when: 'field-2', is: 'jobs' },
+                ],
+                then: { set: { 'field-3': 'CEO' } },
+                else: { visible: true },
+              },
+            ],
+          },
+        },
+      ],
+    };
+
+    render(
+      <FormRenderer
+        {...initialProps}
+        schema={schema}
+        initialValues={{
+          'field-1': 'steve',
+          'field-2': 'jobs',
+          'field-3': 'RETIRED',
+        }}
+      />
+    );
+
+    await act(async () => {
+      jest.advanceTimersByTime(1);
+    });
+
+    expect(screen.getByLabelText('field-3')).toBeInTheDocument();
+
+    await act(async () => {
+      jest.advanceTimersByTime(10);
+    });
+
+    userEvent.click(screen.getByText('Submit'));
+
+    expect(onSubmit).toHaveBeenCalledWith({
+      'field-1': 'steve',
+      'field-2': 'jobs',
+      'field-3': 'RETIRED',
+    });
+  });
+
   it('sets value when condition is fulfill on reset', async () => {
     schema = {
       fields: [
