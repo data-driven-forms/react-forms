@@ -47,11 +47,20 @@ const Condition = React.memo(
         setters.forEach((setter, index) => {
           if (setter && (state.initial || !isEqual(setter, state.sets[index]))) {
             setTimeout(() => {
-              formOptions.batch(() => {
-                Object.entries(setter).forEach(([name, value]) => {
-                  formOptions.change(name, value);
+              /**
+               * We have to get the meta in the timetout to wait for state initialization
+               */
+              const meta = formOptions.getFieldState(field.name);
+              /**
+               * Apply setter only on modfied fields or on fields with no initial value.
+               */
+              if (typeof meta.initial === 'undefined' || meta.modified) {
+                formOptions.batch(() => {
+                  Object.entries(setter).forEach(([name, value]) => {
+                    formOptions.change(name, value);
+                  });
                 });
-              });
+              }
             });
           }
         });
