@@ -54,7 +54,7 @@ const FormRenderer = ({
   }, [onSubmit, fileInputs]);
 
   const handleCancelCallback = useCallback((getState) => {
-    return !isFunc(onCancel) ? undefined : ((...args) => onCancel(getState().values, ...args));
+    return ((...args) => onCancel(getState().values, ...args));
   }, [onCancel]);
 
   const handleResetCallback = useCallback((reset) => (...args) => {
@@ -137,7 +137,7 @@ const FormRenderer = ({
               unRegisterInputFile,
               pristine,
               onSubmit,
-              onCancel: handleCancelCallback(getState),
+              onCancel: isFunc(onCancel) ? handleCancelCallback(getState) : undefined,
               onReset: handleResetCallback(reset),
               onError: handleErrorCallback,
               getState,
