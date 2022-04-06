@@ -1,7 +1,7 @@
 import arrayMutators from 'final-form-arrays';
 import createFocusDecorator from 'final-form-focus';
 import PropTypes from 'prop-types';
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useMemo, useRef, useState, cloneElement } from 'react';
 
 import defaultSchemaValidator from '../default-schema-validator';
 import defaultValidatorMapper from '../validator-mapper';
@@ -149,7 +149,8 @@ const FormRenderer = ({
         >
           {FormTemplate && <FormTemplate formFields={formFields} schema={schema} {...FormTemplateProps} />}
 
-          {isFunc(children) ? children({ formFields, schema }) : children}
+          {isFunc(children) && children({ formFields, schema })}
+          {typeof children === 'object' && cloneElement(children, { formFields, schema })}
         </RendererContext.Provider>
       )}
       {...props}
