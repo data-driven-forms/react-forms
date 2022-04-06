@@ -35,9 +35,21 @@ You can use [globally defined attributes](/mappers/global-component-props).
 
 *Component*
 
+**Note** You have to pass at least one of `FormTemplate` or a `children` render function to render the fields.
+
 Components which defines a template of the form. This component receives two props from the renderer: `formFields` and `schema`. `formFields` is the content of the form. You should wrap this content into your `<form>` component and add form buttons.
 
 [Read more](/components/form-template).
+
+---
+
+### children
+
+**Note** You have to pass at least one of `FormTemplate` or a `children` render function to render the fields.
+
+*function*
+
+Children render function. It serves the same purpose as `FormTemplate` prop. [Read more](/components/children).
 
 ---
 
