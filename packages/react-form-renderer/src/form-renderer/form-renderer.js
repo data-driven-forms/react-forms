@@ -37,36 +37,31 @@ const FormRenderer = ({
   const registeredFields = useRef({});
   const focusDecorator = useRef(createFocusDecorator());
   const validatorMapperMerged = useMemo(() => {
-    return {...defaultValidatorMapper, ...validatorMapper}
+    return { ...defaultValidatorMapper, ...validatorMapper };
   }, [validatorMapper]);
-  const mutatorsMerged = useMemo(
-    () =>({...arrayMutators, ...mutators}), 
-    [mutators]
-  );
-  const decoratorsMerged = useMemo(
-    () => ([focusDecorator.current, ...(Array.isArray(decorators) ? decorators : [])]), 
-    [decorators]
-  );
+  const mutatorsMerged = useMemo(() => ({ ...arrayMutators, ...mutators }), [mutators]);
+  const decoratorsMerged = useMemo(() => [focusDecorator.current, ...(Array.isArray(decorators) ? decorators : [])], [decorators]);
 
   const handleSubmitCallback = useCallback(
     (values, formApi, ...args) => {
       return !isFunc(onSubmit) ? undefined : onSubmit(values, { ...formApi, fileInputs }, ...args);
-    }, 
+    },
     [onSubmit, fileInputs]
   );
 
   const handleCancelCallback = useCallback(
     (getState) => {
       return (...args) => onCancel(getState().values, ...args);
-    }, 
+    },
     [onCancel]
   );
 
   const handleResetCallback = useCallback(
-    (reset) => (...args) => {
-      reset();
-      return !isFunc(onReset) ? void 0 : onReset(...args);
-    }, 
+    (reset) =>
+      (...args) => {
+        reset();
+        return !isFunc(onReset) ? void 0 : onReset(...args);
+      },
     [onReset]
   );
 
@@ -75,7 +70,7 @@ const FormRenderer = ({
       // eslint-disable-next-line no-console
       console.error(...args);
       return !isFunc(onError) ? void 0 : onError(...args);
-    }, 
+    },
     [onError]
   );
 
@@ -88,27 +83,20 @@ const FormRenderer = ({
   }, []);
 
   const setRegisteredFields = useCallback((fn) => {
-    return registeredFields.current = fn({ ...registeredFields.current });
+    return (registeredFields.current = fn({ ...registeredFields.current }));
   }, []);
 
   const internalRegisterField = useCallback((name) => {
-    setRegisteredFields((prev) => (
-      prev[name] ? { ...prev, [name]: prev[name] + 1 } : { ...prev, [name]: 1 })
-    );
+    setRegisteredFields((prev) => (prev[name] ? { ...prev, [name]: prev[name] + 1 } : { ...prev, [name]: 1 }));
   }, []);
 
   const internalUnRegisterField = useCallback((name) => {
-    setRegisteredFields(({ [name]: currentField, ...prev }) => (
-      currentField && currentField > 1 ? { [name]: currentField - 1, ...prev } : prev
-    ));
+    setRegisteredFields(({ [name]: currentField, ...prev }) => (currentField && currentField > 1 ? { [name]: currentField - 1, ...prev } : prev));
   }, []);
 
   const internalGetRegisteredFields = useCallback(() => {
     const fields = registeredFields.current;
-    return Object.entries(fields).reduce(
-      (acc, [name, value]) => value > 0 ? [...acc, name] : acc, 
-      []
-    );
+    return Object.entries(fields).reduce((acc, [name, value]) => (value > 0 ? [...acc, name] : acc), []);
   }, []);
 
   try {
@@ -116,8 +104,7 @@ const FormRenderer = ({
     const actionTypes = actionMapper ? Object.keys(actionMapper) : [];
 
     defaultSchemaValidator(schema, componentMapper, validatorTypes, actionTypes, schemaValidatorMapper);
-  }
-  catch (error) {
+  } catch (error) {
     handleErrorCallback('schema-error', error);
     return <SchemaErrorComponent name={error.name} message={error.message} />;
   }
@@ -160,11 +147,9 @@ const FormRenderer = ({
             },
           }}
         >
-
           {FormTemplate && <FormTemplate formFields={formFields} schema={schema} {...FormTemplateProps} />}
 
           {isFunc(children) ? children({ formFields, schema }) : children}
-
         </RendererContext.Provider>
       )}
       {...props}
