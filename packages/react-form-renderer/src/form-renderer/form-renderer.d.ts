@@ -1,4 +1,4 @@
-import { ComponentType, FunctionComponent } from 'react';
+import { ComponentType, FunctionComponent, ReactNode } from 'react';
 import { FormProps } from 'react-final-form';
 import Schema from '../common-types/schema';
 import ComponentMapper from '../common-types/component-mapper';
@@ -12,6 +12,7 @@ export interface FormRendererProps extends FormProps {
   initialValues?: object;
   onCancel?: (values: AnyObject, ...args: any[]) => void;
   onReset?: () => void;
+  onError?: (...args: any[]) => void;
   schema: Schema;
   clearOnUnmount?: boolean;
   clearedValue?: any;
@@ -20,6 +21,8 @@ export interface FormRendererProps extends FormProps {
   validatorMapper?: ValidatorMapper;
   actionMapper?: ActionMapper;
   schemaValidatorMapper?: SchemaValidatorMapper;
+  FormTemplateProps?: AnyObject;
+  children?: ReactNode | ((props: FormTemplateRenderProps) => ReactNode)
 }
 
 declare const FormRenderer: React.ComponentType<FormRendererProps>;

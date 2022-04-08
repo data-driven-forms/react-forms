@@ -104,7 +104,6 @@ describe('<FormRenderer />', () => {
 
     expect(screen.getByText('Form could not be rendered, because of invalid form schema.')).toBeInTheDocument();
     expect(spy).toHaveBeenCalled();
-    expect(logSpy).toHaveBeenCalledWith('error: ', expect.any(String));
 
     console = _console; // eslint-disable-line
   });
@@ -309,5 +308,81 @@ describe('<FormRenderer />', () => {
     userEvent.click(screen.getByLabelText('trigger'));
 
     expect(registerSpy).toHaveBeenCalledWith([]);
+  });
+
+  describe('children prop', () => {
+    const ChildrenTemplate = ({ formFields, schema, hideButtons }) => {
+      const { handleSubmit } = useFormApi();
+      return (
+        <form onSubmit={handleSubmit}>
+          {schema.title}
+          {formFields}
+          {!hideButtons && <button type="submit">Child node submit</button>}
+        </form>
+      );
+    };
+
+    it('should clone template props to children node', () => {
+      render(
+        <FormRenderer componentMapper={componentMapper} schema={schema} onSubmit={jest.fn()}>
+          <ChildrenTemplate />
+        </FormRenderer>
+      );
+
+      expect(screen.getByLabelText('component1')).toBeInTheDocument();
+      expect(screen.getByText('Select field')).toBeInTheDocument();
+      expect(screen.getByText('Child node submit')).toBeInTheDocument();
+    });
+
+    it('should use children node props', () => {
+      render(
+        <FormRenderer componentMapper={componentMapper} schema={schema} onSubmit={jest.fn()}>
+          <ChildrenTemplate hideButtons />
+        </FormRenderer>
+      );
+
+      expect(screen.getByLabelText('component1')).toBeInTheDocument();
+      expect(screen.getByText('Select field')).toBeInTheDocument();
+      const submitButton = screen.queryByText('Child node submit');
+      expect(submitButton).toBeNull();
+    });
+
+    it('should submit data from children node', () => {
+      const submitSpy = jest.fn();
+      render(
+        <FormRenderer initialValues={{ foo: 'bar' }} componentMapper={componentMapper} schema={schema} onSubmit={submitSpy}>
+          <ChildrenTemplate />
+        </FormRenderer>
+      );
+
+      userEvent.click(screen.getByText('Child node submit'));
+
+      expect(submitSpy).toHaveBeenCalledWith({ foo: 'bar' }, expect.any(Object), expect.any(Function));
+    });
+
+    it('should use children render function', () => {
+      render(
+        <FormRenderer componentMapper={componentMapper} schema={schema} onSubmit={jest.fn()}>
+          {(props) => <ChildrenTemplate {...props} />}
+        </FormRenderer>
+      );
+
+      expect(screen.getByLabelText('component1')).toBeInTheDocument();
+      expect(screen.getByText('Select field')).toBeInTheDocument();
+      expect(screen.getByText('Child node submit')).toBeInTheDocument();
+    });
+
+    it('should submit data from children render function', () => {
+      const submitSpy = jest.fn();
+      render(
+        <FormRenderer initialValues={{ foo: 'bar' }} componentMapper={componentMapper} schema={schema} onSubmit={submitSpy}>
+          {(props) => <ChildrenTemplate {...props} />}
+        </FormRenderer>
+      );
+
+      userEvent.click(screen.getByText('Child node submit'));
+
+      expect(submitSpy).toHaveBeenCalledWith({ foo: 'bar' }, expect.any(Object), expect.any(Function));
+    });
   });
 });
