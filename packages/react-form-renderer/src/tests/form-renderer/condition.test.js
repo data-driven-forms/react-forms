@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, render, screen } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import FormTemplate from '../../../../../__mocks__/mock-form-template';
@@ -466,6 +466,59 @@ describe('condition test', () => {
     userEvent.type(screen.getByLabelText('field-1'), '{selectall}{backspace}show'); // (show == show && show == show) = TRUE => FALSE
 
     expect(() => screen.getByLabelText('field-2')).toThrow();
+  });
+
+  it('should handle nested complex coniditions', async () => {
+    const schema = {
+      fields: [
+        {
+          component: 'text-field',
+          name: 'info.name.last',
+          label: 'last name',
+        },
+        {
+          component: 'text-field',
+          name: 'info.name.father',
+          label: 'Father name',
+        },
+        {
+          component: 'text-field',
+          name: 'info.name.equipment',
+          label: 'Equipment name',
+        },
+        {
+          component: 'text-field',
+          name: 'info.occupation',
+          label: 'occupation',
+          condition: {
+            sequence: [
+              {
+                and: [
+                  {
+                    or: [
+                      { when: 'info.name.father', is: 'Charles' },
+                      { when: 'info.name.equipment', is: 'Gun' },
+                    ],
+                  },
+                  { when: 'info.name.last', is: 'Bond' },
+                ],
+                then: {
+                  set: { 'info.occupation': 'SPY' },
+                },
+                else: { visible: true },
+              },
+            ],
+          },
+        },
+      ],
+    };
+
+    render(<FormRenderer {...initialProps} schema={schema} />);
+
+    userEvent.type(screen.getByLabelText('info.name.last'), 'Bond');
+    userEvent.type(screen.getByLabelText('info.name.equipment'), 'Gun');
+
+    await waitFor(() => expect(screen.getByLabelText('info.occupation')).toHaveValue('SPY'));
   });
 
   describe('reducer', () => {

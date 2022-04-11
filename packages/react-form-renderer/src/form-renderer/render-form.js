@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import setWith from 'lodash/setWith';
+import cloneDeep from 'lodash/cloneDeep';
 import { Field } from 'react-final-form';
 import RendererContext from '../renderer-context';
 import Condition from '../condition';
@@ -47,7 +48,7 @@ const ConditionTriggerDetector = ({ values = {}, triggers = [], children, condit
       {({ input: { value } }) => (
         <ConditionTriggerDetector
           triggers={[...internalTriggers]}
-          values={setWith({ ...values }, name, value, Object)}
+          values={setWith(cloneDeep(values), name, value, Object)}
           condition={condition}
           field={field}
         >
