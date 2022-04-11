@@ -8,16 +8,17 @@ import SchemaValidatorMapper from '../common-types/schema-validator-mapper';
 import { FormTemplateRenderProps } from '../common-types/form-template-render-props';
 import { AnyObject } from '../common-types/any-object';
 
-export interface FormRendererProps extends FormProps {
+export interface FormRendererProps extends Omit<FormProps, 'onSubmit'> {
   initialValues?: object;
   onCancel?: (values: AnyObject, ...args: any[]) => void;
   onReset?: () => void;
   onError?: (...args: any[]) => void;
+  onSubmit?: FormProps['onSubmit']
   schema: Schema;
   clearOnUnmount?: boolean;
   clearedValue?: any;
   componentMapper: ComponentMapper;
-  FormTemplate: ComponentType<FormTemplateRenderProps> | FunctionComponent<FormTemplateRenderProps>;
+  FormTemplate?: ComponentType<FormTemplateRenderProps> | FunctionComponent<FormTemplateRenderProps>;
   validatorMapper?: ValidatorMapper;
   actionMapper?: ActionMapper;
   schemaValidatorMapper?: SchemaValidatorMapper;
