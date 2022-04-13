@@ -20,4 +20,6 @@ condition: {
 
 Set is a object consists of field names as keys and values as values. You can change any form field value from any conditional action.
 
+When the field containing a condition has some defined initial value, the setter is not triggered until the setter is retriggered with a different value.
+
 </DocPage>
