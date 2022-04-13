@@ -468,7 +468,7 @@ describe('condition test', () => {
     expect(() => screen.getByLabelText('field-2')).toThrow();
   });
 
-  it('should handle nested complex coniditions', async () => {
+  it('should handle nested complex conditions', async () => {
     const schema = {
       fields: [
         {
@@ -519,6 +519,45 @@ describe('condition test', () => {
     userEvent.type(screen.getByLabelText('info.name.equipment'), 'Gun');
 
     await waitFor(() => expect(screen.getByLabelText('info.occupation')).toHaveValue('SPY'));
+  });
+
+  it('should change field with initial value only when form is modified', async () => {
+    const schema = {
+      fields: [
+        {
+          component: 'text-field',
+          name: 'field1',
+          initialValue: 'B',
+        },
+        {
+          component: 'text-field',
+          name: 'field2',
+          initialValue: 'schema initial value',
+          clearOnUnmount: true,
+          condition: {
+            when: 'field1',
+            is: 'B',
+            then: { set: { field2: 'set with then' } },
+            else: { set: { field2: 'set with else' } },
+          },
+        },
+      ],
+    };
+
+    render(<FormRenderer {...initialProps} schema={schema} />);
+
+    expect(screen.getByLabelText('field2')).toHaveValue('schema initial value');
+
+    userEvent.type(screen.getByLabelText('field2'), '+++');
+
+    expect(screen.getByLabelText('field2')).toHaveValue('schema initial value+++');
+
+    userEvent.clear(screen.getByLabelText('field1'));
+    userEvent.type(screen.getByLabelText('field1'), 'A');
+    userEvent.clear(screen.getByLabelText('field1'));
+    userEvent.type(screen.getByLabelText('field1'), 'B');
+
+    await waitFor(() => expect(screen.getByLabelText('field2')).toHaveValue('set with then'));
   });
 
   describe('reducer', () => {

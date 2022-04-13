@@ -51,10 +51,14 @@ const Condition = React.memo(
                * We have to get the meta in the timetout to wait for state initialization
                */
               const meta = formOptions.getFieldState(field.name);
+              const isFormModified = Object.values(formOptions.getState().modified).some(Boolean);
               /**
-               * Apply setter only on modfied fields or on fields with no initial value.
+               * Apply setter only
+               *    - field has no initial value
+               *    - form is modified
+               *    - when meta is false = field was unmounted before timeout, we finish the condition
                */
-              if (typeof meta.initial === 'undefined' || meta.modified) {
+              if (!meta || isFormModified || typeof meta.initial === 'undefined') {
                 formOptions.batch(() => {
                   Object.entries(setter).forEach(([name, value]) => {
                     formOptions.change(name, value);
