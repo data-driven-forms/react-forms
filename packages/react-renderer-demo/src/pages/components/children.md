@@ -55,7 +55,7 @@ const MyForm = (props) => {
 
 ## Children render function
 
-Check the [Form template documentation](/components/form-template) for detailed example.
+Check the [Form template documentation](/components/form-template) for detailed examples.
 
 ```jsx
 <FormRenderer
