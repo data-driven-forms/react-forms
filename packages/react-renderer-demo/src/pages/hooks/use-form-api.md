@@ -26,6 +26,12 @@ This hook returns object containing following information:
 
 If you want to render fields from a component (`tabs`, `subform`, etc.) you can use `renderForm(fields)` function.
 
+## schema
+
+*object*
+
+The [schema prop](/components/renderer#schema) of FormRenderer.
+
 ## getState
 
 *() => FormState*

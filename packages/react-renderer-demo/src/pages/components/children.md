@@ -8,6 +8,23 @@ import DocPage from '@docs/doc-page';
 
 ## Props
 
+Children are supplied with `formFields` and `schema` props. If a child has one of `schema` or `formFields` prop explicitly set, the explicit props will be used.
+
+```jsx
+
+/**
+ * The ChildComponent will receive schema and formFields props from the FormRenderer.
+ */
+<FormRenderer {...props}><ChildComponent/></FormRenderer>
+
+
+/**
+ * The ChildComponent will not receive schema prop from the FormRenderer! The schema prop will be equal to "Foo".
+ * It will still receive the formFields prop from the renderer.
+ */
+<FormRenderer {...props}><ChildComponent schema="Foo"/></FormRenderer>
+```
+
 ### formFields
 
 *node*
