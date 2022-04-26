@@ -54,8 +54,8 @@ describe('<Select />', () => {
       />
     );
 
-    userEvent.click(screen.getByLabelText('open menu'));
-    userEvent.click(screen.getByText('Translated'));
+    await userEvent.click(screen.getByLabelText('open menu'));
+    await userEvent.click(screen.getByText('Translated'));
 
     expect(screen.getByText('Translated', { selector: 'h1' }).closest('.pf-c-select__toggle-text')).toBeInTheDocument();
   });
@@ -86,7 +86,7 @@ describe('<Select />', () => {
 
     expect(() => screen.getByText('some description')).toThrow();
 
-    userEvent.click(screen.getByLabelText('open menu'));
+    await userEvent.click(screen.getByLabelText('open menu'));
 
     expect(screen.getByText('some description')).toBeInTheDocument();
   });
@@ -132,7 +132,7 @@ describe('<Select />', () => {
       />
     );
 
-    userEvent.click(screen.getByLabelText('open menu'));
+    await userEvent.click(screen.getByLabelText('open menu'));
 
     expect(screen.getByText('Category 1')).toHaveClass('pf-c-select__menu-group-title');
     expect(screen.getByText('Category 2')).toHaveClass('pf-c-select__menu-group-title');
@@ -146,13 +146,13 @@ describe('<Select />', () => {
       'independent 2',
     ]);
 
-    userEvent.click(screen.getByText('value 1'));
+    await userEvent.click(screen.getByText('value 1'));
 
-    userEvent.click(screen.getByLabelText('open menu'));
+    await userEvent.click(screen.getByLabelText('open menu'));
 
     expect(screen.getByText('value 1', { selector: 'button.pf-c-select__menu-item' })).toHaveClass('pf-m-selected');
 
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({ 'select-with-categories': '111' });
   });
@@ -197,9 +197,9 @@ describe('<Select />', () => {
       />
     );
 
-    userEvent.click(screen.getByLabelText('open menu'));
+    await userEvent.click(screen.getByLabelText('open menu'));
 
-    userEvent.type(screen.getByPlaceholderText('Choose...'), 'value');
+    await userEvent.type(screen.getByPlaceholderText('Choose...'), 'value');
     expect(screen.getByText('Category 1')).toHaveClass('pf-c-select__menu-group-title');
     expect(screen.getByText('Category 2')).toHaveClass('pf-c-select__menu-group-title');
     expect(container.getElementsByClassName('pf-c-divider')).toHaveLength(0);
@@ -211,7 +211,8 @@ describe('<Select />', () => {
       'value 4',
     ]);
 
-    userEvent.type(screen.getByPlaceholderText('Choose...'), '{selectall}{backspace}independent');
+    await userEvent.clear(screen.getByPlaceholderText('Choose...'));
+    await userEvent.type(screen.getByPlaceholderText('Choose...'), 'independent');
     expect(container.getElementsByClassName('pf-c-divider')).toHaveLength(0);
     expect(container.getElementsByClassName('pf-c-select__menu-group-title')).toHaveLength(0);
 
@@ -221,8 +222,8 @@ describe('<Select />', () => {
   it('should return single simple value', async () => {
     render(<Select {...initialProps} />);
 
-    userEvent.click(screen.getByLabelText('open menu'));
-    userEvent.click(screen.getByText('First option'));
+    await userEvent.click(screen.getByLabelText('open menu'));
+    await userEvent.click(screen.getByText('First option'));
 
     expect(onChange).toHaveBeenCalledWith(1);
   });
@@ -230,8 +231,8 @@ describe('<Select />', () => {
   it('should return single object value', async () => {
     render(<Select {...initialProps} simpleValue={false} />);
 
-    userEvent.click(screen.getByLabelText('open menu'));
-    userEvent.click(screen.getByText('First option'));
+    await userEvent.click(screen.getByLabelText('open menu'));
+    await userEvent.click(screen.getByText('First option'));
 
     expect(onChange).toHaveBeenCalledWith({ ...initialProps.options[0] });
   });
@@ -242,9 +243,9 @@ describe('<Select />', () => {
     const value = [1];
     render(<Select {...initialProps} value={value} isMulti onChange={onChange} closeMenuOnSelect={false} />);
 
-    userEvent.click(screen.getByLabelText('open menu'));
-    userEvent.click(screen.getByText('First option', { selector: '.pf-c-select__menu-item' }));
-    userEvent.click(screen.getByText('Second option'));
+    await userEvent.click(screen.getByLabelText('open menu'));
+    await userEvent.click(screen.getByText('First option', { selector: '.pf-c-select__menu-item' }));
+    await userEvent.click(screen.getByText('Second option'));
 
     expect(onChange).toHaveBeenCalledTimes(2);
     expect(onChange).lastCalledWith([1, 2]);
@@ -256,9 +257,9 @@ describe('<Select />', () => {
     const value = [{ ...initialProps.options[0] }];
     render(<Select {...initialProps} value={value} simpleValue={false} isMulti onChange={onChange} closeMenuOnSelect={false} />);
 
-    userEvent.click(screen.getByLabelText('open menu'));
-    userEvent.click(screen.getByText('First option', { selector: '.pf-c-select__menu-item' }));
-    userEvent.click(screen.getByText('Second option'));
+    await userEvent.click(screen.getByLabelText('open menu'));
+    await userEvent.click(screen.getByText('First option', { selector: '.pf-c-select__menu-item' }));
+    await userEvent.click(screen.getByText('Second option'));
 
     expect(onChange).toHaveBeenCalledTimes(2);
     expect(onChange).lastCalledWith([...initialProps.options]);
@@ -282,7 +283,7 @@ describe('<Select />', () => {
     expect(container.querySelectorAll('.pf-c-chip-group')).toHaveLength(1);
     expect(container.querySelectorAll('div.pf-c-chip')).toHaveLength(3);
 
-    userEvent.click(screen.getByText('1 more'));
+    await userEvent.click(screen.getByText('1 more'));
 
     expect(container.querySelectorAll('div.pf-c-chip')).toHaveLength(4);
   });
@@ -291,7 +292,7 @@ describe('<Select />', () => {
     const value = [1, 2];
     render(<Select {...initialProps} value={value} isMulti closeMenuOnSelect={false} />);
 
-    userEvent.click(screen.getAllByLabelText('remove option')[0]);
+    await userEvent.click(screen.getAllByLabelText('remove option')[0]);
 
     expect(onChange).toHaveBeenCalledWith([2]);
   });
@@ -301,7 +302,7 @@ describe('<Select />', () => {
 
     render(<Select {...initialProps} options={undefined} loadOptions={asyncLoading} />);
 
-    userEvent.click(screen.getByLabelText('open menu'));
+    await userEvent.click(screen.getByLabelText('open menu'));
     await waitFor(() => expect(screen.getByText('label')).toBeInTheDocument());
   });
 
@@ -321,7 +322,7 @@ describe('<Select />', () => {
       />
     );
 
-    userEvent.click(screen.getByLabelText('open menu'));
+    await userEvent.click(screen.getByLabelText('open menu'));
     await waitFor(() => expect(screen.getByText('label')).toBeInTheDocument());
 
     expect(onChange).toHaveBeenCalledWith(undefined);
@@ -343,7 +344,7 @@ describe('<Select />', () => {
       />
     );
 
-    userEvent.click(screen.getByLabelText('open menu'));
+    await userEvent.click(screen.getByLabelText('open menu'));
     await waitFor(() => expect(screen.getByText('label', { selector: '.pf-c-select__menu-item' })).toBeInTheDocument());
 
     expect(onChange).toHaveBeenCalledWith(['123']);
@@ -365,7 +366,7 @@ describe('<Select />', () => {
       />
     );
 
-    userEvent.click(screen.getByLabelText('open menu'));
+    await userEvent.click(screen.getByLabelText('open menu'));
     await waitFor(() => expect(screen.getByText('label', { selector: '.pf-c-select__menu-item' })).toBeInTheDocument());
 
     expect(onChange).toHaveBeenCalledWith([{ label: 'label', value: '123' }]);
@@ -378,7 +379,7 @@ describe('<Select />', () => {
 
     expect(asyncLoading.mock.calls).toHaveLength(1);
 
-    userEvent.click(screen.getByLabelText('open menu'));
+    await userEvent.click(screen.getByLabelText('open menu'));
     await waitFor(() => expect(screen.getByText('label')).toBeInTheDocument());
 
     await act(async () => {
@@ -404,7 +405,7 @@ describe('<Select />', () => {
     it('should change the options when options prop is changed', async () => {
       const { container, rerender } = render(<Select {...initialProps} />);
 
-      userEvent.click(screen.getByLabelText('open menu'));
+      await userEvent.click(screen.getByLabelText('open menu'));
 
       expect([...container.getElementsByClassName('pf-c-select__menu-item')].map((opt) => opt.textContent)).toEqual(
         initialProps.options.map((opt) => opt.label)
@@ -420,7 +421,7 @@ describe('<Select />', () => {
     it('should change the options when loadOptions prop is changed', async () => {
       const { container, rerender } = render(<Select {...initialProps} loadOptions={asyncLoading} />);
 
-      userEvent.click(screen.getByLabelText('open menu'));
+      await userEvent.click(screen.getByLabelText('open menu'));
 
       expect([...container.getElementsByClassName('pf-c-select__menu-item')].map((opt) => opt.textContent)).toEqual(
         initialProps.options.map((opt) => opt.label)

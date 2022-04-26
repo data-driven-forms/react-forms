@@ -29,7 +29,7 @@ describe('<Select />', () => {
     expect(screen.getByText('Select')).toBeInTheDocument();
 
     await act(async () => {
-      userEvent.click(screen.getByText('Please choose'));
+      await userEvent.click(screen.getByText('Please choose'));
     });
 
     expect(screen.getByText('option 1')).toBeInTheDocument();

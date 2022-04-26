@@ -130,12 +130,12 @@ describe('Select test', () => {
         />
       );
 
-      userEvent.click(screen.getByText('Dogs'));
+      await userEvent.click(screen.getByText('Dogs'));
 
       expect(state.value).toEqual([{ label: 'Dogs', value: 'd' }]);
       expect(inputValue).toEqual('d');
 
-      userEvent.click(screen.getByText('Cats'));
+      await userEvent.click(screen.getByText('Cats'));
 
       expect(state.value).toEqual([{ label: 'Cats', value: 'c' }]);
       expect(inputValue).toEqual('c');
@@ -278,8 +278,8 @@ describe('Select test', () => {
         />
       );
 
-      userEvent.click(screen.getByText('Dogs'));
-      userEvent.click(screen.getByText('Cats'));
+      await userEvent.click(screen.getByText('Dogs'));
+      await userEvent.click(screen.getByText('Cats'));
 
       expect(state.value).toEqual([
         { label: 'Dogs', value: 'd' },
@@ -305,8 +305,8 @@ describe('Select test', () => {
           }}
         />
       );
-      userEvent.click(screen.getByText('Dogs'));
-      userEvent.click(screen.getByText('Cats'));
+      await userEvent.click(screen.getByText('Dogs'));
+      await userEvent.click(screen.getByText('Cats'));
 
       expect(state.value).toEqual([
         { label: 'Dogs', value: 'd' },
@@ -314,7 +314,7 @@ describe('Select test', () => {
       ]);
       expect(inputValue).toEqual(['d', 'c']);
 
-      userEvent.click(screen.getByText('Clear all'));
+      await userEvent.click(screen.getByText('Clear all'));
 
       expect(state.value).toEqual([]);
       expect(inputValue).toEqual([]);
@@ -338,7 +338,7 @@ describe('Select test', () => {
         />
       );
 
-      userEvent.click(screen.getByText('Select all'));
+      await userEvent.click(screen.getByText('Select all'));
 
       expect(state.value).toEqual([
         { label: 'Select all', selectAll: true },
@@ -348,7 +348,7 @@ describe('Select test', () => {
       ]);
       expect(inputValue).toEqual(['d', 'c', 'h']);
 
-      userEvent.click(screen.getByText('Hamsters'));
+      await userEvent.click(screen.getByText('Hamsters'));
 
       expect(state.value).toEqual([
         { label: 'Dogs', value: 'd' },
@@ -375,12 +375,12 @@ describe('Select test', () => {
         />
       );
 
-      userEvent.click(screen.getByText('Select none'));
+      await userEvent.click(screen.getByText('Select none'));
 
       expect(state.value).toEqual([{ label: 'Select none', selectNone: true }]);
       expect(inputValue).toEqual('');
 
-      userEvent.click(screen.getByText('Dogs'));
+      await userEvent.click(screen.getByText('Dogs'));
 
       expect(state.value).toEqual([{ label: 'Dogs', value: 'd' }]);
       expect(inputValue).toEqual(['d']);
@@ -411,7 +411,7 @@ describe('Select test', () => {
           }}
         />
       );
-      userEvent.click(screen.getByText('Select all'));
+      await userEvent.click(screen.getByText('Select all'));
 
       expect(state.value).toEqual([
         { label: 'Select all', selectAll: true, value: 'select-all' },
@@ -421,7 +421,7 @@ describe('Select test', () => {
       ]);
       expect(inputValue).toEqual(['d', 'c', 'h']);
 
-      userEvent.click(screen.getByText('Select none'));
+      await userEvent.click(screen.getByText('Select none'));
 
       expect(state.value).toEqual([{ label: 'Select none', selectNone: true, value: 'select-none' }]);
       expect(inputValue).toEqual([]);

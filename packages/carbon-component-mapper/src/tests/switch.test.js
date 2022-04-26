@@ -33,16 +33,16 @@ describe('<Switch />', () => {
 
     expect(screen.getByTestId('Switch')).toBeChecked();
 
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(spy).toHaveBeenCalledWith({ switch: true });
     spy.mockClear();
 
-    userEvent.click(screen.getByText('Switch'));
+    await userEvent.click(screen.getByText('Switch'));
 
     expect(screen.getByTestId('Switch')).not.toBeChecked();
 
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(spy).toHaveBeenCalledWith({ switch: false });
   });

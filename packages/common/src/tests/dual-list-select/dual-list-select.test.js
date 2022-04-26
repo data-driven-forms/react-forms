@@ -115,7 +115,7 @@ describe('dual list select', () => {
       value: ['cats_2'],
     });
 
-    userEvent.click(screen.getByText('cats_2'));
+    await userEvent.click(screen.getByText('cats_2'));
 
     expect(state).toEqual({
       filterOptions: '',
@@ -136,7 +136,7 @@ describe('dual list select', () => {
       value: ['cats_2'],
     });
 
-    userEvent.click(screen.getByLabelText('handleMoveLeft'));
+    await userEvent.click(screen.getByLabelText('handleMoveLeft'));
 
     expect(state).toEqual({
       filterOptions: '',
@@ -182,7 +182,7 @@ describe('dual list select', () => {
       value: '',
     });
 
-    userEvent.click(screen.getByText('cats_2'));
+    await userEvent.click(screen.getByText('cats_2'));
 
     expect(state).toEqual({
       filterOptions: '',
@@ -204,7 +204,7 @@ describe('dual list select', () => {
       value: '',
     });
 
-    userEvent.click(screen.getByLabelText('handleMoveRight'));
+    await userEvent.click(screen.getByLabelText('handleMoveRight'));
 
     expect(state).toEqual({
       filterOptions: '',
@@ -229,9 +229,15 @@ describe('dual list select', () => {
   it('move two right with ctrl', async () => {
     render(<FormRenderer {...rendererProps} />);
 
-    userEvent.click(screen.getByText('cats_2'));
-    userEvent.click(screen.getByText('cats_1'), { ctrlKey: true });
-    userEvent.click(screen.getByLabelText('handleMoveRight'));
+    await userEvent.click(screen.getByText('cats_2'));
+
+    const user = userEvent.setup();
+
+    await user.keyboard('{Control>}');
+    await user.click(screen.getByText('cats_1'));
+    await user.keyboard('{/Control}');
+
+    await userEvent.click(screen.getByLabelText('handleMoveRight'));
 
     expect(state).toEqual({
       filterOptions: '',
@@ -257,10 +263,16 @@ describe('dual list select', () => {
 
   it('unselect with ctrl', async () => {
     render(<FormRenderer {...rendererProps} />);
-    userEvent.click(screen.getByText('cats_2'));
-    userEvent.click(screen.getByText('cats_1'), { ctrlKey: true });
-    userEvent.click(screen.getByText('cats_2'), { ctrlKey: true });
-    userEvent.click(screen.getByLabelText('handleMoveRight'));
+    await userEvent.click(screen.getByText('cats_2'));
+
+    const user = userEvent.setup();
+
+    await user.keyboard('{Control>}');
+    await user.click(screen.getByText('cats_1'));
+    await user.click(screen.getByText('cats_2'));
+    await user.keyboard('{/Control}');
+
+    await userEvent.click(screen.getByLabelText('handleMoveRight'));
 
     expect(state).toEqual({
       filterOptions: '',
@@ -285,9 +297,15 @@ describe('dual list select', () => {
   it('move three right with shift', async () => {
     render(<FormRenderer {...rendererProps} />);
 
-    userEvent.click(screen.getByText('cats'));
-    userEvent.click(screen.getByText('cats_2'), { shiftKey: true });
-    userEvent.click(screen.getByLabelText('handleMoveRight'));
+    await userEvent.click(screen.getByText('cats'));
+
+    const user = userEvent.setup();
+
+    await user.keyboard('{Shift>}');
+    await user.click(screen.getByText('cats_2'));
+    await user.keyboard('{/Shift}');
+
+    await userEvent.click(screen.getByLabelText('handleMoveRight'));
 
     expect(state).toEqual({
       filterOptions: '',
@@ -314,7 +332,7 @@ describe('dual list select', () => {
   it('move all left', async () => {
     render(<FormRenderer {...rendererProps} initialValues={{ list: ['cats', 'cats_1', 'cats_2', 'pigeons', 'zebras'] }} />);
 
-    userEvent.click(screen.getByLabelText('handleClearRightValues'));
+    await userEvent.click(screen.getByLabelText('handleClearRightValues'));
 
     expect(state).toEqual({
       filterOptions: '',
@@ -340,7 +358,7 @@ describe('dual list select', () => {
   it('move all right', async () => {
     render(<FormRenderer {...rendererProps} />);
 
-    userEvent.click(screen.getByLabelText('handleClearLeftValues'));
+    await userEvent.click(screen.getByLabelText('handleClearLeftValues'));
 
     expect(state).toEqual({
       filterOptions: '',
@@ -366,7 +384,7 @@ describe('dual list select', () => {
   it('filter options', async () => {
     render(<FormRenderer {...rendererProps} />);
 
-    userEvent.type(screen.getByLabelText('filterOptions'), 'cats_');
+    await userEvent.type(screen.getByLabelText('filterOptions'), 'cats_');
 
     expect(state).toEqual({
       filterOptions: 'cats_',
@@ -389,7 +407,7 @@ describe('dual list select', () => {
   it('filter values', async () => {
     render(<FormRenderer {...rendererProps} initialValues={{ list: ['cats', 'cats_1', 'cats_2', 'pigeons', 'zebras'] }} />);
 
-    userEvent.type(screen.getByLabelText('filterValues'), 'cats_');
+    await userEvent.type(screen.getByLabelText('filterValues'), 'cats_');
 
     expect(state).toEqual({
       filterOptions: '',
@@ -412,7 +430,7 @@ describe('dual list select', () => {
   it('sort options', async () => {
     render(<FormRenderer {...rendererProps} />);
 
-    userEvent.click(screen.getByLabelText('sortOptions'));
+    await userEvent.click(screen.getByLabelText('sortOptions'));
 
     expect(state).toEqual({
       filterOptions: '',
@@ -434,7 +452,7 @@ describe('dual list select', () => {
       value: '',
     });
 
-    userEvent.click(screen.getByLabelText('sortOptions'));
+    await userEvent.click(screen.getByLabelText('sortOptions'));
 
     expect(state).toEqual({
       filterOptions: '',
@@ -460,7 +478,7 @@ describe('dual list select', () => {
   it('sort values', async () => {
     render(<FormRenderer {...rendererProps} initialValues={{ list: ['cats', 'cats_1', 'cats_2', 'pigeons', 'zebras'] }} />);
 
-    userEvent.click(screen.getByLabelText('sortValues'));
+    await userEvent.click(screen.getByLabelText('sortValues'));
 
     expect(state).toEqual({
       filterOptions: '',
@@ -482,7 +500,7 @@ describe('dual list select', () => {
       value: ['cats', 'cats_1', 'cats_2', 'pigeons', 'zebras'],
     });
 
-    userEvent.click(screen.getByLabelText('sortValues'));
+    await userEvent.click(screen.getByLabelText('sortValues'));
 
     expect(state).toEqual({
       filterOptions: '',

@@ -20,8 +20,6 @@ describe('condition test', () => {
   let schema;
 
   beforeEach(() => {
-    jest.useFakeTimers();
-
     onSubmit = jest.fn();
 
     initialProps = {
@@ -57,16 +55,16 @@ describe('condition test', () => {
 
     expect(() => screen.getByLabelText('field-2')).toThrow();
 
-    userEvent.type(screen.getByLabelText('field-1'), 'show');
+    await userEvent.type(screen.getByLabelText('field-1'), 'show');
 
     expect(screen.getByLabelText('field-2')).toBeInTheDocument();
 
-    userEvent.type(screen.getByLabelText('field-1'), 'dont');
+    await userEvent.type(screen.getByLabelText('field-1'), 'dont');
 
     expect(() => screen.getByLabelText('field-2')).toThrow();
   });
 
-  it('should render when condition is fulfill - when is a function', () => {
+  it('should render when condition is fulfill - when is a function', async () => {
     const whenSpy = jest.fn().mockImplementation(() => 'field-1');
     schema = {
       fields: [
@@ -93,11 +91,11 @@ describe('condition test', () => {
 
     expect(() => screen.getByLabelText('field-2')).toThrow();
 
-    userEvent.type(screen.getByLabelText('field-1'), 'show');
+    await userEvent.type(screen.getByLabelText('field-1'), 'show');
 
     expect(screen.getByLabelText('field-2')).toBeInTheDocument();
 
-    userEvent.type(screen.getByLabelText('field-1'), 'dont');
+    await userEvent.type(screen.getByLabelText('field-1'), 'dont');
 
     expect(() => screen.getByLabelText('field-2')).toThrow();
   });
@@ -128,15 +126,11 @@ describe('condition test', () => {
 
     expect(() => screen.getByLabelText('field-2')).toThrow();
 
-    userEvent.type(screen.getByLabelText('field-1'), 'show');
-
-    await act(async () => {
-      jest.advanceTimersByTime(1);
-    });
+    await userEvent.type(screen.getByLabelText('field-1'), 'show');
 
     expect(screen.getByLabelText('field-2')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       'field-1': 'show',
@@ -169,13 +163,9 @@ describe('condition test', () => {
 
     render(<FormRenderer {...initialProps} schema={schema} initialValues={{ 'field-1': 'show' }} />);
 
-    await act(async () => {
-      jest.advanceTimersByTime(1);
-    });
-
     expect(screen.getByLabelText('field-2')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       'field-1': 'show',
@@ -236,17 +226,9 @@ describe('condition test', () => {
       />
     );
 
-    await act(async () => {
-      jest.advanceTimersByTime(1);
-    });
-
     expect(screen.getByLabelText('field-3')).toBeInTheDocument();
 
-    await act(async () => {
-      jest.advanceTimersByTime(10);
-    });
-
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       'field-1': 'steve',
@@ -280,34 +262,26 @@ describe('condition test', () => {
 
     render(<FormRenderer {...initialProps} schema={schema} initialValues={{ 'field-1': 'show' }} />);
 
-    await act(async () => {
-      jest.advanceTimersByTime(1);
-    });
-
     expect(screen.getByLabelText('field-2')).toBeInTheDocument();
 
-    userEvent.type(screen.getByLabelText('field-1'), 'dont');
-
-    await act(async () => {
-      jest.advanceTimersByTime(1);
-    });
+    await userEvent.type(screen.getByLabelText('field-1'), 'dont');
 
     expect(() => screen.getByLabelText('field-2')).toThrow();
 
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Submit'));
     expect(onSubmit).toHaveBeenCalledWith({
       'field-1': 'showdont',
       'field-2': 'someValue',
     });
     onSubmit.mockClear();
 
-    userEvent.click(screen.getByText('Reset'));
+    await userEvent.click(screen.getByText('Reset'));
 
     await act(async () => {
       jest.runAllTimers();
     });
 
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       'field-1': 'show',
@@ -365,13 +339,9 @@ describe('condition test', () => {
 
     expect(() => screen.getByLabelText('field-2')).toThrow();
 
-    userEvent.type(screen.getByLabelText('field-1'), 'show');
+    await userEvent.type(screen.getByLabelText('field-1'), 'show');
 
-    await act(async () => {
-      jest.advanceTimersByTime(1);
-    });
-
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Submit'));
     expect(onSubmit).toHaveBeenCalledWith({
       'field-1': 'show',
       'field-2': 'someValue',
@@ -406,11 +376,11 @@ describe('condition test', () => {
 
     expect(screen.getByLabelText('field-2')).toBeInTheDocument();
 
-    userEvent.type(screen.getByLabelText('field-1'), 'show');
+    await userEvent.type(screen.getByLabelText('field-1'), 'show');
 
     expect(() => screen.getByLabelText('field-2')).toThrow();
 
-    userEvent.type(screen.getByLabelText('field-1'), 'dont');
+    await userEvent.type(screen.getByLabelText('field-1'), 'dont');
 
     expect(screen.getByLabelText('field-2')).toBeInTheDocument();
   });
@@ -451,19 +421,20 @@ describe('condition test', () => {
 
     expect(screen.getByLabelText('field-2')).toBeInTheDocument();
 
-    userEvent.type(screen.getByLabelText('field-1'), 'show'); // (show == show && '' == show) = FALSE => TRUE
+    await userEvent.type(screen.getByLabelText('field-1'), 'show'); // (show == show && '' == show) = FALSE => TRUE
 
     expect(screen.getByLabelText('field-2')).toBeInTheDocument();
 
-    userEvent.type(screen.getByLabelText('field-1'), 'dont'); // (show == dontshow && '' == show) = FALSE => TRUE
+    await userEvent.type(screen.getByLabelText('field-1'), 'dont'); // (show == dontshow && '' == show) = FALSE => TRUE
 
     expect(screen.getByLabelText('field-2')).toBeInTheDocument();
 
-    userEvent.type(screen.getByLabelText('field-3'), 'show'); // (show == dontshow && show == show) = FALSE => TRUE
+    await userEvent.type(screen.getByLabelText('field-3'), 'show'); // (show == dontshow && show == show) = FALSE => TRUE
 
     expect(screen.getByLabelText('field-2')).toBeInTheDocument();
 
-    userEvent.type(screen.getByLabelText('field-1'), '{selectall}{backspace}show'); // (show == show && show == show) = TRUE => FALSE
+    await userEvent.clear(screen.getByLabelText('field-1'));
+    await userEvent.type(screen.getByLabelText('field-1'), 'show'); // (show == show && show == show) = TRUE => FALSE
 
     expect(() => screen.getByLabelText('field-2')).toThrow();
   });
@@ -515,8 +486,8 @@ describe('condition test', () => {
 
     render(<FormRenderer {...initialProps} schema={schema} />);
 
-    userEvent.type(screen.getByLabelText('info.name.last'), 'Bond');
-    userEvent.type(screen.getByLabelText('info.name.equipment'), 'Gun');
+    await userEvent.type(screen.getByLabelText('info.name.last'), 'Bond');
+    await userEvent.type(screen.getByLabelText('info.name.equipment'), 'Gun');
 
     await waitFor(() => expect(screen.getByLabelText('info.occupation')).toHaveValue('SPY'));
   });
@@ -548,14 +519,14 @@ describe('condition test', () => {
 
     expect(screen.getByLabelText('field2')).toHaveValue('schema initial value');
 
-    userEvent.type(screen.getByLabelText('field2'), '+++');
+    await userEvent.type(screen.getByLabelText('field2'), '+++');
 
     expect(screen.getByLabelText('field2')).toHaveValue('schema initial value+++');
 
-    userEvent.clear(screen.getByLabelText('field1'));
-    userEvent.type(screen.getByLabelText('field1'), 'A');
-    userEvent.clear(screen.getByLabelText('field1'));
-    userEvent.type(screen.getByLabelText('field1'), 'B');
+    await userEvent.clear(screen.getByLabelText('field1'));
+    await userEvent.type(screen.getByLabelText('field1'), 'A');
+    await userEvent.clear(screen.getByLabelText('field1'));
+    await userEvent.type(screen.getByLabelText('field1'), 'B');
 
     await waitFor(() => expect(screen.getByLabelText('field2')).toHaveValue('set with then'));
   });

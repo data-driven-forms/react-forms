@@ -76,16 +76,16 @@ describe('useFieldApi', () => {
     expect(catcherProps.input.type).toEqual('radio');
   });
 
-  it('reloads validator when dataType changes', () => {
+  it('reloads validator when dataType changes', async () => {
     const { rerender } = render(<WrapperComponent {...initialProps} />);
 
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Submit'));
     expect(onSubmit).toHaveBeenCalledWith({});
     onSubmit.mockClear();
 
     rerender(<WrapperComponent {...initialProps} dataType="number" key="somekey" />);
-    userEvent.type(screen.getByLabelText('some-name'), 'ABC');
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.type(screen.getByLabelText('some-name'), 'ABC');
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).not.toHaveBeenCalled();
     onSubmit.mockClear();
@@ -96,7 +96,7 @@ describe('useFieldApi', () => {
   it('reloads validator when validate changes', async () => {
     const { rerender } = render(<WrapperComponent {...initialProps} />);
 
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({});
     onSubmit.mockClear();
@@ -104,7 +104,7 @@ describe('useFieldApi', () => {
     // validate is not checked in useField, so you have to change key too
     rerender(<WrapperComponent {...initialProps} validate={[{ type: 'required' }]} key="somekey" />);
 
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).not.toHaveBeenCalled();
     onSubmit.mockClear();
@@ -169,7 +169,7 @@ describe('useFieldApi', () => {
     expect(registerInputFileSpy).toHaveBeenCalledWith('file-input');
   });
 
-  it('should not crash when passing validate directly', () => {
+  it('should not crash when passing validate directly', async () => {
     const TestDummy = ({ validate }) => {
       const { input } = useFieldApi({
         name: 'foo',
@@ -202,14 +202,14 @@ describe('useFieldApi', () => {
 
     expect(screen.getByLabelText('foo')).toBeInTheDocument();
 
-    userEvent.type(screen.getByLabelText('foo'), 'bar');
+    await userEvent.type(screen.getByLabelText('foo'), 'bar');
 
     rerender(<FormWrapper validate={false} />);
 
     expect(screen.getByLabelText('foo')).toBeInTheDocument();
   });
 
-  it('omits FieldProps', () => {
+  it('omits FieldProps', async () => {
     const parse = jest.fn().mockImplementation((value) => value);
     initialProps = { ...initialProps, FieldProps: { parse } };
 
@@ -218,7 +218,7 @@ describe('useFieldApi', () => {
     expect(catcherProps.FieldProps).toEqual(undefined);
     expect(parse.mock.calls).toHaveLength(0);
 
-    userEvent.type(screen.getByLabelText('some-name'), 'bar');
+    await userEvent.type(screen.getByLabelText('some-name'), 'bar');
 
     expect(parse.mock.calls).toHaveLength(3);
   });

@@ -39,7 +39,7 @@ describe('Tabs component', () => {
     expect(screen.getByText('cosiTitle2')).toBeInTheDocument();
   });
 
-  it('should switch tabs correctly', () => {
+  it('should switch tabs correctly', async () => {
     render(
       <RenderWithProvider
         value={{
@@ -54,7 +54,7 @@ describe('Tabs component', () => {
 
     expect(screen.getByText('cosiTitle').closest('.pf-c-tabs__item')).toHaveClass('pf-m-current');
 
-    userEvent.click(screen.getByText('cosiTitle2'));
+    await userEvent.click(screen.getByText('cosiTitle2'));
 
     expect(screen.getByText('cosiTitle2').closest('.pf-c-tabs__item')).toHaveClass('pf-m-current');
   });

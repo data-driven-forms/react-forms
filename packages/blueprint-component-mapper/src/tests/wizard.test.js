@@ -56,26 +56,26 @@ describe('wizard', () => {
     };
   });
 
-  it('simple next and back', () => {
+  it('simple next and back', async () => {
     render(<FormRenderer {...initialProps} />);
 
     expect(screen.getByLabelText('aws')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Next'));
+    await userEvent.click(screen.getByText('Next'));
 
     expect(screen.getByLabelText('aws')).toBeInTheDocument();
 
-    userEvent.type(screen.getByLabelText('aws'), 'something');
-    userEvent.click(screen.getByText('Next'));
+    await userEvent.type(screen.getByLabelText('aws'), 'something');
+    await userEvent.click(screen.getByText('Next'));
 
     expect(screen.getByLabelText('summary')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Back'));
+    await userEvent.click(screen.getByText('Back'));
 
     expect(screen.getByLabelText('aws')).toBeInTheDocument();
   });
 
-  it('conditional next', () => {
+  it('conditional next', async () => {
     schema = {
       fields: [
         {
@@ -127,19 +127,20 @@ describe('wizard', () => {
 
     render(<FormRenderer {...initialProps} schema={schema} />);
 
-    userEvent.type(screen.getByLabelText('aws'), 'aws');
-    userEvent.click(screen.getByText('Next'));
+    await userEvent.type(screen.getByLabelText('aws'), 'aws');
+    await userEvent.click(screen.getByText('Next'));
 
     expect(screen.getByLabelText('summary')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Back'));
-    userEvent.type(screen.getByLabelText('aws'), '{selectall}{backspace}google');
-    userEvent.click(screen.getByText('Next'));
+    await userEvent.click(screen.getByText('Back'));
+    await userEvent.clear(screen.getByLabelText('aws'));
+    await userEvent.type(screen.getByLabelText('aws'), 'google');
+    await userEvent.click(screen.getByText('Next'));
 
     expect(screen.getByLabelText('googlesummary')).toBeInTheDocument();
   });
 
-  it('conditional submit', () => {
+  it('conditional submit', async () => {
     schema = {
       fields: [
         {
@@ -191,11 +192,11 @@ describe('wizard', () => {
 
     render(<FormRenderer {...initialProps} schema={schema} />);
 
-    userEvent.type(screen.getByLabelText('aws'), 'aws');
-    userEvent.click(screen.getByText('Next'));
-    userEvent.type(screen.getByLabelText('summary'), 'summary');
+    await userEvent.type(screen.getByLabelText('aws'), 'aws');
+    await userEvent.click(screen.getByText('Next'));
+    await userEvent.type(screen.getByLabelText('summary'), 'summary');
 
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       aws: 'aws',
@@ -203,13 +204,14 @@ describe('wizard', () => {
     });
     onSubmit.mockClear();
 
-    userEvent.click(screen.getByText('Back'));
-    userEvent.type(screen.getByLabelText('aws'), '{selectall}{backspace}google');
-    userEvent.click(screen.getByText('Next'));
+    await userEvent.click(screen.getByText('Back'));
+    await userEvent.clear(screen.getByLabelText('aws'));
+    await userEvent.type(screen.getByLabelText('aws'), 'google');
+    await userEvent.click(screen.getByText('Next'));
 
-    userEvent.type(screen.getByLabelText('googlesummary'), 'google summary');
+    await userEvent.type(screen.getByLabelText('googlesummary'), 'google summary');
 
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Submit'));
     expect(onSubmit).toHaveBeenCalledWith({
       aws: 'google',
       googlesummary: 'google summary',
@@ -217,19 +219,19 @@ describe('wizard', () => {
     onSubmit.mockClear();
   });
 
-  it('sends values to cancel', () => {
+  it('sends values to cancel', async () => {
     render(<FormRenderer {...initialProps} />);
 
-    userEvent.type(screen.getByLabelText('aws'), 'something');
+    await userEvent.type(screen.getByLabelText('aws'), 'something');
 
-    userEvent.click(screen.getByText('Cancel'));
+    await userEvent.click(screen.getByText('Cancel'));
 
     expect(onCancel).toHaveBeenCalledWith({
       aws: 'something',
     });
   });
 
-  it('conditional submit step', () => {
+  it('conditional submit step', async () => {
     const submit = jest.fn();
     schema = {
       fields: [
@@ -262,15 +264,16 @@ describe('wizard', () => {
 
     render(<FormRenderer {...initialProps} onSubmit={submit} schema={schema} />);
 
-    userEvent.type(screen.getByLabelText('name'), 'summary');
+    await userEvent.type(screen.getByLabelText('name'), 'summary');
 
     expect(screen.getByText('Next')).toBeInTheDocument();
 
-    userEvent.type(screen.getByLabelText('name'), '{selectall}{backspace}submit');
+    await userEvent.clear(screen.getByLabelText('name'));
+    await userEvent.type(screen.getByLabelText('name'), 'submit');
 
     expect(screen.getByText('Submit')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(submit).toHaveBeenCalledWith({ name: 'submit' }, expect.any(Object), expect.any(Object));
   });

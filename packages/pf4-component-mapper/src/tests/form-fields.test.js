@@ -100,14 +100,14 @@ describe('FormFields', () => {
             expect(() => screen.getByText(errorText)).toThrow();
           });
 
-          it('renders with error', () => {
+          it('renders with error', async () => {
             const errorField = {
               ...field,
               validate: [{ type: validatorTypes.REQUIRED }],
             };
             render(<RendererWrapper schema={{ fields: [errorField] }} />);
 
-            userEvent.click(screen.getByText('Submit'));
+            await userEvent.click(screen.getByText('Submit'));
 
             expect(screen.getByText(errorText)).toBeInTheDocument();
           });
@@ -224,7 +224,7 @@ describe('FormFields', () => {
           it('renders with submit error', async () => {
             render(<RendererWrapper schema={schema} onSubmit={() => ({ [field.name]: errorText })} />);
 
-            userEvent.click(screen.getByText('Submit'));
+            await userEvent.click(screen.getByText('Submit'));
 
             expect(screen.getByText(errorText)).toBeInTheDocument();
           });
@@ -258,7 +258,7 @@ describe('FormFields', () => {
         expect(screen.getByText('Hamster')).toBeInTheDocument();
       });
 
-      it('renders with error', () => {
+      it('renders with error', async () => {
         const schema = {
           fields: [
             {
@@ -270,7 +270,7 @@ describe('FormFields', () => {
         };
         render(<RendererWrapper schema={schema} />);
 
-        userEvent.click(screen.getByText('Submit'));
+        await userEvent.click(screen.getByText('Submit'));
 
         expect(screen.getByText(errorText)).toBeInTheDocument();
       });
@@ -322,7 +322,7 @@ describe('FormFields', () => {
         expect(screen.getByText(description)).toBeInTheDocument();
       });
 
-      it('renders with error and helperText', () => {
+      it('renders with error and helperText', async () => {
         const schema = {
           fields: [
             {
@@ -337,7 +337,7 @@ describe('FormFields', () => {
 
         expect(screen.getByText(helperText)).toBeInTheDocument();
 
-        userEvent.click(screen.getByText('Submit'));
+        await userEvent.click(screen.getByText('Submit'));
 
         expect(() => screen.getByText(helperText)).toThrow();
         expect(screen.getByText(errorText)).toBeInTheDocument();

@@ -66,7 +66,7 @@ describe('<FieldArray/>', () => {
     expect(screen.getByText(noItemsMessage)).toBeInTheDocument();
     expect(() => screen.getByLabelText('name')).toThrow();
 
-    userEvent.click(screen.getByText('CUSTOM ADD'));
+    await userEvent.click(screen.getByText('CUSTOM ADD'));
 
     expect(() => screen.getByText(noItemsMessage)).toThrow();
     expect(screen.getByText('CUSTOM REMOVE')).toBeInTheDocument();
@@ -102,18 +102,18 @@ describe('<FieldArray/>', () => {
     render(<FormRenderer {...initialProps} />);
 
     await act(async () => {
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.click(screen.getByText('Submit'));
     });
 
     expect(onSubmit).toHaveBeenCalledWith({});
     onSubmit.mockClear();
 
     await act(async () => {
-      userEvent.click(screen.getByText('ADD'));
+      await userEvent.click(screen.getByText('ADD'));
     });
 
     await act(async () => {
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.click(screen.getByText('Submit'));
     });
 
     expect(onSubmit).toHaveBeenCalledWith({
@@ -122,11 +122,11 @@ describe('<FieldArray/>', () => {
     onSubmit.mockClear();
 
     await act(async () => {
-      userEvent.click(screen.getByText('REMOVE'));
+      await userEvent.click(screen.getByText('REMOVE'));
     });
 
     await act(async () => {
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.click(screen.getByText('Submit'));
     });
 
     expect(onSubmit).toHaveBeenCalledWith({
@@ -156,18 +156,18 @@ describe('<FieldArray/>', () => {
     render(<FormRenderer {...initialProps} />);
 
     await act(async () => {
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.click(screen.getByText('Submit'));
     });
 
     expect(onSubmit).toHaveBeenCalledWith({});
     onSubmit.mockClear();
 
     await act(async () => {
-      userEvent.click(screen.getByText('ADD'));
+      await userEvent.click(screen.getByText('ADD'));
     });
 
     await act(async () => {
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.click(screen.getByText('Submit'));
     });
 
     expect(onSubmit).toHaveBeenCalledWith({
@@ -177,11 +177,11 @@ describe('<FieldArray/>', () => {
     onSubmit.mockClear();
 
     await act(async () => {
-      userEvent.click(screen.getByText('REMOVE'));
+      await userEvent.click(screen.getByText('REMOVE'));
     });
 
     await act(async () => {
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.click(screen.getByText('Submit'));
     });
 
     expect(onSubmit).toHaveBeenCalledWith({
@@ -213,11 +213,11 @@ describe('<FieldArray/>', () => {
     render(<FormRenderer {...initialProps} />);
 
     await act(async () => {
-      userEvent.click(screen.getByText('ADD'));
+      await userEvent.click(screen.getByText('ADD'));
     });
 
     await act(async () => {
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.click(screen.getByText('Submit'));
     });
 
     expect(onSubmit).toHaveBeenCalledWith({
@@ -226,11 +226,11 @@ describe('<FieldArray/>', () => {
     onSubmit.mockClear();
 
     await act(async () => {
-      userEvent.click(screen.getByText('ADD'));
+      await userEvent.click(screen.getByText('ADD'));
     });
 
     await act(async () => {
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.click(screen.getByText('Submit'));
     });
 
     expect(onSubmit).toHaveBeenCalledWith({
@@ -239,11 +239,11 @@ describe('<FieldArray/>', () => {
     onSubmit.mockClear();
 
     await act(async () => {
-      userEvent.click(screen.getByText('ADD'));
+      await userEvent.click(screen.getByText('ADD'));
     });
 
     await act(async () => {
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.click(screen.getByText('Submit'));
     });
 
     expect(onSubmit).toHaveBeenCalledWith({
@@ -252,11 +252,11 @@ describe('<FieldArray/>', () => {
     onSubmit.mockClear();
 
     await act(async () => {
-      userEvent.click(screen.getAllByText('REMOVE')[0]);
+      await userEvent.click(screen.getAllByText('REMOVE')[0]);
     });
 
     await act(async () => {
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.click(screen.getByText('Submit'));
     });
 
     expect(onSubmit).toHaveBeenCalledWith({
@@ -265,11 +265,11 @@ describe('<FieldArray/>', () => {
     onSubmit.mockClear();
 
     await act(async () => {
-      userEvent.click(screen.getAllByText('REMOVE')[0]);
+      await userEvent.click(screen.getAllByText('REMOVE')[0]);
     });
 
     await act(async () => {
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.click(screen.getByText('Submit'));
     });
 
     expect(onSubmit).toHaveBeenCalledWith({
@@ -301,11 +301,11 @@ describe('<FieldArray/>', () => {
     expect(() => screen.getByText('Must have at least 3 items.')).toThrow();
 
     await act(async () => {
-      userEvent.click(screen.getByText('ADD'));
+      await userEvent.click(screen.getByText('ADD'));
     });
 
     await act(async () => {
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.click(screen.getByText('Submit'));
     });
 
     expect(onSubmit).not.toHaveBeenCalled();
@@ -338,11 +338,11 @@ describe('<FieldArray/>', () => {
     render(<FormRenderer {...initialProps} />);
 
     await act(async () => {
-      userEvent.click(screen.getByText('ADD'));
+      await userEvent.click(screen.getByText('ADD'));
     });
 
     await act(async () => {
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.click(screen.getByText('Submit'));
     });
 
     expect(onSubmit).toHaveBeenCalledWith({
@@ -352,11 +352,11 @@ describe('<FieldArray/>', () => {
     onSubmit.mockClear();
 
     await act(async () => {
-      userEvent.click(screen.getByText('REMOVE'));
+      await userEvent.click(screen.getByText('REMOVE'));
     });
 
     await act(async () => {
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.click(screen.getByText('Submit'));
     });
 
     expect(onSubmit).toHaveBeenCalledWith({
@@ -366,11 +366,11 @@ describe('<FieldArray/>', () => {
     onSubmit.mockClear();
 
     await act(async () => {
-      userEvent.click(screen.getByLabelText('undo-button'));
+      await userEvent.click(screen.getByLabelText('undo-button'));
     });
 
     await act(async () => {
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.click(screen.getByText('Submit'));
     });
 
     expect(onSubmit).toHaveBeenCalledWith({
@@ -380,11 +380,11 @@ describe('<FieldArray/>', () => {
     onSubmit.mockClear();
 
     await act(async () => {
-      userEvent.click(screen.getByLabelText('redo-button'));
+      await userEvent.click(screen.getByLabelText('redo-button'));
     });
 
     await act(async () => {
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.click(screen.getByText('Submit'));
     });
 
     expect(onSubmit).toHaveBeenCalledWith({
@@ -392,11 +392,11 @@ describe('<FieldArray/>', () => {
     });
 
     await act(async () => {
-      userEvent.click(screen.getByLabelText('undo-button'));
+      await userEvent.click(screen.getByLabelText('undo-button'));
     });
 
     await act(async () => {
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.click(screen.getByText('Submit'));
     });
 
     expect(onSubmit).toHaveBeenCalledWith({
@@ -404,7 +404,7 @@ describe('<FieldArray/>', () => {
     });
 
     await act(async () => {
-      userEvent.click(screen.getByText('ADD'));
+      await userEvent.click(screen.getByText('ADD'));
     });
 
     expect(screen.getByLabelText('redo-button')).toBeDisabled();

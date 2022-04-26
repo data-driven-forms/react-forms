@@ -108,12 +108,12 @@ describe('<FormRenderer />', () => {
     console = _console; // eslint-disable-line
   });
 
-  it('should call form reset callback', () => {
+  it('should call form reset callback', async () => {
     const onReset = jest.fn();
     render(<FormRenderer {...initialProps} canReset onReset={onReset} />);
 
-    userEvent.type(screen.getByLabelText('component1'), 'something');
-    userEvent.click(screen.getByText('Reset'));
+    await userEvent.type(screen.getByLabelText('component1'), 'something');
+    await userEvent.click(screen.getByText('Reset'));
 
     expect(onReset).toHaveBeenCalled();
   });
@@ -147,7 +147,7 @@ describe('<FormRenderer />', () => {
   });
 
   describe('Initial value data types', () => {
-    it('should convert string to integer', () => {
+    it('should convert string to integer', async () => {
       const onSubmit = jest.fn();
       const schema = {
         fields: [
@@ -161,12 +161,12 @@ describe('<FormRenderer />', () => {
       };
       render(<FormRenderer {...initialProps} schema={schema} onSubmit={(values) => onSubmit(values)} />);
 
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.click(screen.getByText('Submit'));
 
       expect(onSubmit).toHaveBeenCalledWith({ 'initial-convert': 5 });
     });
 
-    it('should convert individual values in array of literals as initial value', () => {
+    it('should convert individual values in array of literals as initial value', async () => {
       const onSubmit = jest.fn();
       const schema = {
         fields: [
@@ -180,12 +180,12 @@ describe('<FormRenderer />', () => {
       };
       render(<FormRenderer {...initialProps} schema={schema} onSubmit={(values) => onSubmit(values)} />);
 
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.click(screen.getByText('Submit'));
 
       expect(onSubmit).toHaveBeenCalledWith({ 'initial-convert': [5, 3, 11, 999] });
     });
 
-    it('should convert individual values in array of objects as initial value', () => {
+    it('should convert individual values in array of objects as initial value', async () => {
       const onSubmit = jest.fn();
       const schema = {
         fields: [
@@ -199,13 +199,13 @@ describe('<FormRenderer />', () => {
       };
       render(<FormRenderer {...initialProps} schema={schema} onSubmit={(values) => onSubmit(values)} />);
 
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.click(screen.getByText('Submit'));
 
       expect(onSubmit).toHaveBeenCalledWith({ 'initial-convert': [{ value: 5 }, { value: 3 }, { value: 11 }, { value: 999 }] });
     });
   });
 
-  it('should register new field to renderer context', () => {
+  it('should register new field to renderer context', async () => {
     const registerSpy = jest.fn();
     render(
       <FormRenderer
@@ -218,12 +218,12 @@ describe('<FormRenderer />', () => {
       />
     );
 
-    userEvent.click(screen.getByLabelText('should-show'));
+    await userEvent.click(screen.getByLabelText('should-show'));
 
     expect(registerSpy).toHaveBeenCalledWith(['should-show']);
   });
 
-  it('should un-register field after unrender', () => {
+  it('should un-register field after unrender', async () => {
     const registerSpy = jest.fn();
     render(
       <FormRenderer
@@ -244,18 +244,18 @@ describe('<FormRenderer />', () => {
       />
     );
 
-    userEvent.click(screen.getByLabelText('trigger'));
+    await userEvent.click(screen.getByLabelText('trigger'));
 
     expect(registerSpy).toHaveBeenCalledWith(['trigger', 'x', 'field-1']);
 
-    userEvent.type(screen.getByLabelText('x'), '{selectall}{backspace}');
+    await userEvent.clear(screen.getByLabelText('x'));
 
-    userEvent.click(screen.getByLabelText('trigger'));
+    await userEvent.click(screen.getByLabelText('trigger'));
 
     expect(registerSpy).toHaveBeenCalledWith(['trigger', 'x']);
   });
 
-  it('should not un-register field after unrender with multiple fields coppies', () => {
+  it('should not un-register field after unrender with multiple fields coppies', async () => {
     const registerSpy = jest.fn();
     render(
       <FormRenderer
@@ -278,18 +278,18 @@ describe('<FormRenderer />', () => {
       />
     );
 
-    userEvent.click(screen.getByLabelText('trigger'));
+    await userEvent.click(screen.getByLabelText('trigger'));
 
     expect(registerSpy).toHaveBeenCalledWith(['trigger', 'x', 'field-1']);
 
-    userEvent.type(screen.getByLabelText('x'), '{selectall}{backspace}');
+    await userEvent.clear(screen.getByLabelText('x'));
 
-    userEvent.click(screen.getByLabelText('trigger'));
+    await userEvent.click(screen.getByLabelText('trigger'));
 
     expect(registerSpy).toHaveBeenCalledWith(['trigger', 'x', 'field-1']);
   });
 
-  it('should skip field registration', () => {
+  it('should skip field registration', async () => {
     const registerSpy = jest.fn();
     render(
       <FormRenderer
@@ -305,7 +305,7 @@ describe('<FormRenderer />', () => {
       />
     );
 
-    userEvent.click(screen.getByLabelText('trigger'));
+    await userEvent.click(screen.getByLabelText('trigger'));
 
     expect(registerSpy).toHaveBeenCalledWith([]);
   });
@@ -347,7 +347,7 @@ describe('<FormRenderer />', () => {
       expect(submitButton).toBeNull();
     });
 
-    it('should submit data from children node', () => {
+    it('should submit data from children node', async () => {
       const submitSpy = jest.fn();
       render(
         <FormRenderer initialValues={{ foo: 'bar' }} componentMapper={componentMapper} schema={schema} onSubmit={submitSpy}>
@@ -355,7 +355,7 @@ describe('<FormRenderer />', () => {
         </FormRenderer>
       );
 
-      userEvent.click(screen.getByText('Child node submit'));
+      await userEvent.click(screen.getByText('Child node submit'));
 
       expect(submitSpy).toHaveBeenCalledWith({ foo: 'bar' }, expect.any(Object), expect.any(Function));
     });
@@ -372,7 +372,7 @@ describe('<FormRenderer />', () => {
       expect(screen.getByText('Child node submit')).toBeInTheDocument();
     });
 
-    it('should submit data from children render function', () => {
+    it('should submit data from children render function', async () => {
       const submitSpy = jest.fn();
       render(
         <FormRenderer initialValues={{ foo: 'bar' }} componentMapper={componentMapper} schema={schema} onSubmit={submitSpy}>
@@ -380,7 +380,7 @@ describe('<FormRenderer />', () => {
         </FormRenderer>
       );
 
-      userEvent.click(screen.getByText('Child node submit'));
+      await userEvent.click(screen.getByText('Child node submit'));
 
       expect(submitSpy).toHaveBeenCalledWith({ foo: 'bar' }, expect.any(Object), expect.any(Function));
     });

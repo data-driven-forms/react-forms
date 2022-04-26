@@ -150,13 +150,13 @@ describe('DualListSelect', () => {
       it('switch left option', async () => {
         render(<FormRenderer {...initialProps} />);
 
-        userEvent.click(screen.getByText('Submit'));
+        await userEvent.click(screen.getByText('Submit'));
 
         expect(onSubmit).toHaveBeenCalledWith({});
 
-        userEvent.click(screen.getByText('cats'));
-        userEvent.click(screen.getByLabelText('Add selected'));
-        userEvent.click(screen.getByText('Submit'));
+        await userEvent.click(screen.getByText('cats'));
+        await userEvent.click(screen.getByLabelText('Add selected'));
+        await userEvent.click(screen.getByText('Submit'));
 
         expect(onSubmit).toHaveBeenLastCalledWith({ 'dual-list': ['cats'] });
       });
@@ -164,12 +164,12 @@ describe('DualListSelect', () => {
       it('switch right option', async () => {
         render(<FormRenderer {...initialProps} initialValues={{ 'dual-list': ['cats'] }} />);
 
-        userEvent.click(screen.getByText('Submit'));
+        await userEvent.click(screen.getByText('Submit'));
         expect(onSubmit).toHaveBeenLastCalledWith({ 'dual-list': ['cats'] });
 
-        userEvent.click(screen.getByText('cats'));
-        userEvent.click(screen.getByLabelText('Remove selected'));
-        userEvent.click(screen.getByText('Submit'));
+        await userEvent.click(screen.getByText('cats'));
+        await userEvent.click(screen.getByLabelText('Remove selected'));
+        await userEvent.click(screen.getByText('Submit'));
 
         expect(onSubmit).toHaveBeenLastCalledWith({});
       });
@@ -177,8 +177,8 @@ describe('DualListSelect', () => {
       it('switch all to right', async () => {
         render(<FormRenderer {...initialProps} />);
 
-        userEvent.click(screen.getByLabelText('Add all'));
-        userEvent.click(screen.getByText('Submit'));
+        await userEvent.click(screen.getByLabelText('Add all'));
+        await userEvent.click(screen.getByText('Submit'));
 
         expect(onSubmit).toHaveBeenCalledWith({ 'dual-list': ['cats', 'cats_1', 'cats_2', 'zebras', 'pigeons'] });
       });
@@ -186,8 +186,8 @@ describe('DualListSelect', () => {
       it('switch all to left', async () => {
         render(<FormRenderer {...initialProps} initialValues={{ 'dual-list': ['cats', 'cats_1', 'cats_2', 'zebras', 'pigeons'] }} />);
 
-        userEvent.click(screen.getByLabelText('Remove all'));
-        userEvent.click(screen.getByText('Submit'));
+        await userEvent.click(screen.getByLabelText('Remove all'));
+        await userEvent.click(screen.getByText('Submit'));
 
         expect(onSubmit).toHaveBeenCalledWith({});
       });
@@ -204,7 +204,7 @@ describe('DualListSelect', () => {
 
         render(<FormRenderer {...initialProps} schema={schema} />);
 
-        userEvent.type(screen.getByLabelText('Available search input'), 'cats');
+        await userEvent.type(screen.getByLabelText('Available search input'), 'cats');
 
         expect(screen.getByText('cats')).toBeInTheDocument();
         expect(screen.getByText('cats_1')).toBeInTheDocument();
@@ -235,7 +235,7 @@ describe('DualListSelect', () => {
           />
         );
 
-        userEvent.type(screen.getByLabelText('Chosen search input'), 'cats');
+        await userEvent.type(screen.getByLabelText('Chosen search input'), 'cats');
 
         expect(screen.getByText('cats')).toBeInTheDocument();
         expect(screen.getByText('cats_1')).toBeInTheDocument();
@@ -265,7 +265,7 @@ describe('DualListSelect', () => {
           'zebras',
         ]);
 
-        userEvent.click(screen.getByLabelText('sort-options'));
+        await userEvent.click(screen.getByLabelText('sort-options'));
 
         expect([...container.getElementsByClassName('pf-c-dual-list-selector__item-text')].map((e) => e.textContent)).toEqual([
           'zebras',
@@ -275,7 +275,7 @@ describe('DualListSelect', () => {
           'cats',
         ]);
 
-        userEvent.click(screen.getByLabelText('sort-options'));
+        await userEvent.click(screen.getByLabelText('sort-options'));
 
         expect([...container.getElementsByClassName('pf-c-dual-list-selector__item-text')].map((e) => e.textContent)).toEqual([
           'cats',
@@ -318,7 +318,7 @@ describe('DualListSelect', () => {
           'zebras',
         ]);
 
-        userEvent.click(screen.getByLabelText('sort-values'));
+        await userEvent.click(screen.getByLabelText('sort-values'));
 
         expect([...container.getElementsByClassName('pf-c-dual-list-selector__item-text')].map((e) => e.textContent)).toEqual([
           'zebras',
@@ -328,7 +328,7 @@ describe('DualListSelect', () => {
           'cats',
         ]);
 
-        userEvent.click(screen.getByLabelText('sort-values'));
+        await userEvent.click(screen.getByLabelText('sort-values'));
 
         expect([...container.getElementsByClassName('pf-c-dual-list-selector__item-text')].map((e) => e.textContent)).toEqual([
           'cats',

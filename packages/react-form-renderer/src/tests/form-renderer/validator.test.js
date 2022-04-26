@@ -52,7 +52,7 @@ describe('FormRenderer validator', () => {
       />
     );
 
-    userEvent.type(screen.getByLabelText(NAME), VALUE);
+    await userEvent.type(screen.getByLabelText(NAME), VALUE);
   });
 
   describe('warning validators', () => {

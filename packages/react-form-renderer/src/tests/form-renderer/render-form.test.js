@@ -92,7 +92,7 @@ describe('renderForm function', () => {
     expect(screen.getByText('TextField', { selector: 'h1' })).toBeInTheDocument();
   });
 
-  it('should correctly assign dataType validator if no additional validators given', () => {
+  it('should correctly assign dataType validator if no additional validators given', async () => {
     const onSubmit = jest.fn();
     const formFields = [
       {
@@ -112,12 +112,12 @@ describe('renderForm function', () => {
       />
     );
 
-    userEvent.type(screen.getByLabelText('foo'), 'abc');
+    await userEvent.type(screen.getByLabelText('foo'), 'abc');
 
     expect(screen.getByText('Values must be number')).toBeInTheDocument();
   });
 
-  it('should correctly assign required validator with custom message', () => {
+  it('should correctly assign required validator with custom message', async () => {
     const onSubmit = jest.fn();
     const formFields = [
       {
@@ -143,14 +143,14 @@ describe('renderForm function', () => {
       />
     );
 
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).not.toHaveBeenCalled();
 
     expect(screen.getByText('Bar')).toBeInTheDocument();
   });
 
-  it('should correctly assign function validator with custom message and fail', () => {
+  it('should correctly assign function validator with custom message and fail', async () => {
     const cannotBeOdd = (value) => (value % 2 === 0 ? undefined : 'Odd');
     const onSubmit = jest.fn();
     const formFields = [
@@ -172,12 +172,12 @@ describe('renderForm function', () => {
       />
     );
 
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Submit'));
     expect(onSubmit).not.toHaveBeenCalled();
     expect(screen.getByText('Odd')).toBeInTheDocument();
   });
 
-  it('should correctly assign function validator with custom message and pass', () => {
+  it('should correctly assign function validator with custom message and pass', async () => {
     const cannotBeEven = (value) => (value % 2 === 0 ? 'Even' : undefined);
     const onSubmit = jest.fn();
     const formFields = [
@@ -199,11 +199,11 @@ describe('renderForm function', () => {
       />
     );
 
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Submit'));
     expect(onSubmit).toHaveBeenCalled();
   });
 
-  it('should use custom validatoMapper and default validatorMapper', () => {
+  it('should use custom validatoMapper and default validatorMapper', async () => {
     const customType = 'custom';
     const customValidatorMapper = {
       [customType]: () => (value) => value > 5 ? undefined : 'Error',
@@ -250,16 +250,17 @@ describe('renderForm function', () => {
 
     expect(screen.getByText('Required'));
 
-    userEvent.type(screen.getByLabelText('foo'), '3');
+    await userEvent.type(screen.getByLabelText('foo'), '3');
 
     expect(screen.getByText('Error'));
 
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).not.toHaveBeenCalled();
 
-    userEvent.type(screen.getByLabelText('foo'), '{selectall}{backspace}6');
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.clear(screen.getByLabelText('foo'));
+    await userEvent.type(screen.getByLabelText('foo'), '6');
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({ foo: '6' });
   });
@@ -304,7 +305,7 @@ describe('renderForm function', () => {
   });
 
   describe('#condition', () => {
-    it('should render condition field only if the condition is met', () => {
+    it('should render condition field only if the condition is met', async () => {
       const formFields = [
         {
           component: 'custom-component',
@@ -330,12 +331,12 @@ describe('renderForm function', () => {
       );
       expect(() => screen.getByLabelText('foo')).toThrow();
 
-      userEvent.type(screen.getByLabelText('bar'), 'fuzz');
+      await userEvent.type(screen.getByLabelText('bar'), 'fuzz');
 
       expect(screen.getByLabelText('foo')).toBeInTheDocument();
     });
 
-    it('should render condition field only if the condition is not met', () => {
+    it('should render condition field only if the condition is not met', async () => {
       const formFields = [
         {
           component: 'custom-component',
@@ -364,16 +365,16 @@ describe('renderForm function', () => {
 
       expect(screen.getByLabelText('foo')).toBeInTheDocument();
 
-      userEvent.type(screen.getByLabelText('bar'), 'fuzz');
+      await userEvent.type(screen.getByLabelText('bar'), 'fuzz');
 
       expect(() => screen.getByLabelText('foo')).toThrow();
 
-      userEvent.type(screen.getByLabelText('bar'), 'else');
+      await userEvent.type(screen.getByLabelText('bar'), 'else');
 
       expect(screen.getByLabelText('foo')).toBeInTheDocument();
     });
 
-    it('should render condition field only if the isNotEmpty condition is met', () => {
+    it('should render condition field only if the isNotEmpty condition is met', async () => {
       const formFields = [
         {
           component: 'custom-component',
@@ -400,12 +401,12 @@ describe('renderForm function', () => {
       );
       expect(() => screen.getByLabelText('foo')).toThrow();
 
-      userEvent.type(screen.getByLabelText('bar'), 'something');
+      await userEvent.type(screen.getByLabelText('bar'), 'something');
 
       expect(screen.getByLabelText('foo')).toBeInTheDocument();
     });
 
-    it('should render condition field only if the isEmpty condition is met', () => {
+    it('should render condition field only if the isEmpty condition is met', async () => {
       const formFields = [
         {
           component: 'custom-component',
@@ -433,16 +434,16 @@ describe('renderForm function', () => {
 
       expect(screen.getByLabelText('foo')).toBeInTheDocument();
 
-      userEvent.type(screen.getByLabelText('bar'), 'fuzz');
+      await userEvent.type(screen.getByLabelText('bar'), 'fuzz');
 
       expect(() => screen.getByLabelText('foo')).toThrow();
 
-      userEvent.type(screen.getByLabelText('bar'), '{selectall}{backspace}');
+      await userEvent.clear(screen.getByLabelText('bar'));
 
       expect(screen.getByLabelText('foo')).toBeInTheDocument();
     });
 
-    it('should render condition field only if the pattern condition is met', () => {
+    it('should render condition field only if the pattern condition is met', async () => {
       const formFields = [
         {
           component: 'custom-component',
@@ -468,12 +469,12 @@ describe('renderForm function', () => {
       );
       expect(() => screen.getByLabelText('foo')).toThrow();
 
-      userEvent.type(screen.getByLabelText('bar'), 'fuzz');
+      await userEvent.type(screen.getByLabelText('bar'), 'fuzz');
 
       expect(screen.getByLabelText('foo')).toBeInTheDocument();
     });
 
-    it('should render condition field only if the pattern condition is met (string)', () => {
+    it('should render condition field only if the pattern condition is met (string)', async () => {
       const formFields = [
         {
           component: 'custom-component',
@@ -500,12 +501,12 @@ describe('renderForm function', () => {
 
       expect(() => screen.getByLabelText('foo')).toThrow();
 
-      userEvent.type(screen.getByLabelText('bar'), 'fuzz');
+      await userEvent.type(screen.getByLabelText('bar'), 'fuzz');
 
       expect(screen.getByLabelText('foo')).toBeInTheDocument();
     });
 
-    it('should render condition field only if the pattern condition is met (string with flags)', () => {
+    it('should render condition field only if the pattern condition is met (string with flags)', async () => {
       const formFields = [
         {
           component: 'custom-component',
@@ -533,12 +534,12 @@ describe('renderForm function', () => {
 
       expect(() => screen.getByLabelText('foo')).toThrow();
 
-      userEvent.type(screen.getByLabelText('bar'), 'FuZz');
+      await userEvent.type(screen.getByLabelText('bar'), 'FuZz');
 
       expect(screen.getByLabelText('foo')).toBeInTheDocument();
     });
 
-    it('should render condition field only if the pattern condition is not met', () => {
+    it('should render condition field only if the pattern condition is not met', async () => {
       const formFields = [
         {
           component: 'custom-component',
@@ -566,16 +567,17 @@ describe('renderForm function', () => {
 
       expect(screen.getByLabelText('foo')).toBeInTheDocument();
 
-      userEvent.type(screen.getByLabelText('bar'), 'foo fuuzz foo');
+      await userEvent.type(screen.getByLabelText('bar'), 'foo fuuzz foo');
 
       expect(screen.getByLabelText('foo')).toBeInTheDocument();
 
-      userEvent.type(screen.getByLabelText('bar'), '{selectall}{backspace}fuzz');
+      await userEvent.clear(screen.getByLabelText('bar'));
+      await userEvent.type(screen.getByLabelText('bar'), 'fuzz');
 
       expect(() => screen.getByLabelText('foo')).toThrow();
     });
 
-    it('should render condition field only if one of depency fields has correct value', () => {
+    it('should render condition field only if one of depency fields has correct value', async () => {
       const formFields = [
         {
           component: 'custom-component',
@@ -604,18 +606,19 @@ describe('renderForm function', () => {
         </ContextWrapper>
       );
 
-      userEvent.type(screen.getByLabelText('a'), 'x');
+      await userEvent.type(screen.getByLabelText('a'), 'x');
 
       expect(screen.getByLabelText('foo')).toBeInTheDocument();
-      userEvent.type(screen.getByLabelText('a'), '{selectall}{backspace}');
+
+      await userEvent.clear(screen.getByLabelText('a'));
 
       expect(() => screen.getByLabelText('foo')).toThrow();
-      userEvent.type(screen.getByLabelText('b'), 'x');
+      await userEvent.type(screen.getByLabelText('b'), 'x');
 
       expect(screen.getByLabelText('foo')).toBeInTheDocument();
     });
 
-    it('should render condition field only if contition is array and passes all validations', () => {
+    it('should render condition field only if contition is array and passes all validations', async () => {
       const formFields = [
         {
           component: 'custom-component',
@@ -650,21 +653,26 @@ describe('renderForm function', () => {
         </ContextWrapper>
       );
 
-      userEvent.type(screen.getByLabelText('a'), '{selectall}{backspace}x');
+      await userEvent.clear(screen.getByLabelText('a'));
+      await userEvent.type(screen.getByLabelText('a'), 'x');
 
       expect(() => screen.getByLabelText('foo')).toThrow();
-      userEvent.type(screen.getByLabelText('a'), '{selectall}{backspace}');
+
+      await userEvent.clear(screen.getByLabelText('a'));
 
       expect(() => screen.getByLabelText('foo')).toThrow();
-      userEvent.type(screen.getByLabelText('c'), '{selectall}{backspace}something fuzz is great');
+
+      await userEvent.clear(screen.getByLabelText('c'));
+      await userEvent.type(screen.getByLabelText('c'), 'something fuzz is great');
 
       expect(() => screen.getByLabelText('foo')).toThrow();
-      userEvent.type(screen.getByLabelText('a'), '{selectall}{backspace}x');
+      await userEvent.clear(screen.getByLabelText('a'));
+      await userEvent.type(screen.getByLabelText('a'), 'x');
 
       expect(screen.getByLabelText('foo')).toBeInTheDocument();
     });
 
-    it('should render condition field only if the condition with nested name is met', () => {
+    it('should render condition field only if the condition with nested name is met', async () => {
       const formFields = [
         {
           component: 'custom-component',
@@ -692,12 +700,13 @@ describe('renderForm function', () => {
 
       expect(() => screen.getByLabelText('foo.bar')).toThrow();
 
-      userEvent.type(screen.getByLabelText('foo'), '{selectall}{backspace}fuzz');
+      await userEvent.clear(screen.getByLabelText('foo'));
+      await userEvent.type(screen.getByLabelText('foo'), 'fuzz');
 
       expect(screen.getByLabelText('foo.bar')).toBeInTheDocument();
     });
 
-    it('should render condition field only if one of depency fields has correct value - nested name', () => {
+    it('should render condition field only if one of depency fields has correct value - nested name', async () => {
       const formFields = [
         {
           component: 'custom-component',
@@ -728,21 +737,23 @@ describe('renderForm function', () => {
       );
 
       expect(() => screen.getByLabelText('foo')).toThrow();
-      userEvent.type(screen.getByLabelText('nested.a'), '{selectall}{backspace}x');
+      await userEvent.clear(screen.getByLabelText('nested.a'));
+      await userEvent.type(screen.getByLabelText('nested.a'), 'x');
 
       expect(screen.getByLabelText('foo')).toBeInTheDocument();
 
-      userEvent.type(screen.getByLabelText('nested.a'), '{selectall}{backspace}');
+      await userEvent.clear(screen.getByLabelText('nested.a'));
 
       expect(() => screen.getByLabelText('foo')).toThrow();
 
-      userEvent.type(screen.getByLabelText('b'), '{selectall}{backspace}x');
+      await userEvent.clear(screen.getByLabelText('b'));
+      await userEvent.type(screen.getByLabelText('b'), 'x');
 
       expect(screen.getByLabelText('foo')).toBeInTheDocument();
     });
   });
 
-  describe('#clearOnUrender', () => {
+  describe('#clearOnUnmount', () => {
     const formFields = (clearOnUnmount = undefined, component = 'custom-component') => ({
       fields: [
         {
@@ -789,7 +800,7 @@ describe('renderForm function', () => {
       );
     };
 
-    it('should clear values after unrender when set on fields', () => {
+    it('should clear values after unrender when set on fields', async () => {
       const onSubmit = jest.fn();
       render(
         <FormRenderer
@@ -802,21 +813,25 @@ describe('renderForm function', () => {
         />
       );
 
-      userEvent.type(screen.getByLabelText('foo'), '{selectall}{backspace}bar');
-      userEvent.type(screen.getByLabelText('unmnounted'), '{selectall}{backspace}foovalue');
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.clear(screen.getByLabelText('foo'));
+      await userEvent.type(screen.getByLabelText('foo'), 'bar');
+
+      await userEvent.clear(screen.getByLabelText('unmnounted'));
+      await userEvent.type(screen.getByLabelText('unmnounted'), 'foovalue');
+      await userEvent.click(screen.getByText('Submit'));
 
       expect(onSubmit).toHaveBeenCalledWith({ unmnounted: 'foovalue', foo: 'bar' });
       onSubmit.mockReset();
 
-      userEvent.type(screen.getByLabelText('foo'), '{selectall}{backspace}barrr');
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.clear(screen.getByLabelText('foo'));
+      await userEvent.type(screen.getByLabelText('foo'), 'barrr');
+      await userEvent.click(screen.getByText('Submit'));
 
       expect(onSubmit).toHaveBeenCalledWith({ unmnounted: undefined, foo: 'barrr' });
       onSubmit.mockReset();
     });
 
-    it('should clear values after unrender when set on form', () => {
+    it('should clear values after unrender when set on form', async () => {
       const onSubmit = jest.fn();
       render(
         <FormRenderer
@@ -830,22 +845,26 @@ describe('renderForm function', () => {
         />
       );
 
-      userEvent.type(screen.getByLabelText('foo'), '{selectall}{backspace}bar');
-      userEvent.type(screen.getByLabelText('unmnounted'), '{selectall}{backspace}foovalue');
+      await userEvent.clear(screen.getByLabelText('foo'));
+      await userEvent.type(screen.getByLabelText('foo'), 'bar');
 
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.clear(screen.getByLabelText('unmnounted'));
+      await userEvent.type(screen.getByLabelText('unmnounted'), 'foovalue');
+
+      await userEvent.click(screen.getByText('Submit'));
 
       expect(onSubmit).toHaveBeenCalledWith({ unmnounted: 'foovalue', foo: 'bar' });
       onSubmit.mockReset();
 
-      userEvent.type(screen.getByLabelText('foo'), '{selectall}{backspace}barrr');
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.clear(screen.getByLabelText('foo'));
+      await userEvent.type(screen.getByLabelText('foo'), 'barrr');
+      await userEvent.click(screen.getByText('Submit'));
 
       expect(onSubmit).toHaveBeenCalledWith({ unmnounted: undefined, foo: 'barrr' });
       onSubmit.mockReset();
     });
 
-    it('should not clear values after unrender when not set', () => {
+    it('should not clear values after unrender when not set', async () => {
       const onSubmit = jest.fn();
       render(
         <FormRenderer
@@ -858,21 +877,24 @@ describe('renderForm function', () => {
         />
       );
 
-      userEvent.type(screen.getByLabelText('foo'), '{selectall}{backspace}bar');
-      userEvent.type(screen.getByLabelText('unmnounted'), '{selectall}{backspace}foovalue');
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.clear(screen.getByLabelText('foo'));
+      await userEvent.type(screen.getByLabelText('foo'), 'bar');
+      await userEvent.clear(screen.getByLabelText('unmnounted'));
+      await userEvent.type(screen.getByLabelText('unmnounted'), 'foovalue');
+      await userEvent.click(screen.getByText('Submit'));
 
       expect(onSubmit).toHaveBeenCalledWith({ unmnounted: 'foovalue', foo: 'bar' });
       onSubmit.mockReset();
 
-      userEvent.type(screen.getByLabelText('foo'), '{selectall}{backspace}barrr');
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.clear(screen.getByLabelText('foo'));
+      await userEvent.type(screen.getByLabelText('foo'), 'barrr');
+      await userEvent.click(screen.getByText('Submit'));
 
       expect(onSubmit).toHaveBeenCalledWith({ unmnounted: 'foovalue', foo: 'barrr' });
       onSubmit.mockReset();
     });
 
-    it('should not clear values after unrender when set in form and not in fields', () => {
+    it('should not clear values after unrender when set in form and not in fields', async () => {
       const onSubmit = jest.fn();
       render(
         <FormRenderer
@@ -886,21 +908,24 @@ describe('renderForm function', () => {
         />
       );
 
-      userEvent.type(screen.getByLabelText('foo'), '{selectall}{backspace}bar');
-      userEvent.type(screen.getByLabelText('unmnounted'), '{selectall}{backspace}foovalue');
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.clear(screen.getByLabelText('foo'));
+      await userEvent.type(screen.getByLabelText('foo'), 'bar');
+      await userEvent.clear(screen.getByLabelText('unmnounted'));
+      await userEvent.type(screen.getByLabelText('unmnounted'), 'foovalue');
+      await userEvent.click(screen.getByText('Submit'));
 
       expect(onSubmit).toHaveBeenCalledWith({ unmnounted: 'foovalue', foo: 'bar' });
       onSubmit.mockReset();
 
-      userEvent.type(screen.getByLabelText('foo'), '{selectall}{backspace}barrr');
+      await userEvent.clear(screen.getByLabelText('foo'));
+      await userEvent.type(screen.getByLabelText('foo'), 'barrr');
 
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.click(screen.getByText('Submit'));
       expect(onSubmit).toHaveBeenCalledWith({ unmnounted: 'foovalue', foo: 'barrr' });
       onSubmit.mockReset();
     });
 
-    it('should not clear values after unrender (default component)', () => {
+    it('should not clear values after unrender (default component)', async () => {
       const onSubmit = jest.fn();
       render(
         <FormRenderer
@@ -913,20 +938,24 @@ describe('renderForm function', () => {
         />
       );
 
-      userEvent.type(screen.getByLabelText('foo'), '{selectall}{backspace}bar');
-      userEvent.type(screen.getByLabelText('unmnounted'), '{selectall}{backspace}foovalue');
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.clear(screen.getByLabelText('foo'));
+      await userEvent.type(screen.getByLabelText('foo'), 'bar');
+
+      await userEvent.clear(screen.getByLabelText('unmnounted'));
+      await userEvent.type(screen.getByLabelText('unmnounted'), 'foovalue');
+      await userEvent.click(screen.getByText('Submit'));
 
       expect(onSubmit).toHaveBeenCalledWith({ unmnounted: 'foovalue', foo: 'bar' });
       onSubmit.mockReset();
 
-      userEvent.type(screen.getByLabelText('foo'), '{selectall}{backspace}barrr');
+      await userEvent.clear(screen.getByLabelText('foo'));
+      await userEvent.type(screen.getByLabelText('foo'), 'barrr');
 
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.click(screen.getByText('Submit'));
       expect(onSubmit).toHaveBeenCalledWith({ unmnounted: 'foovalue', foo: 'barrr' });
     });
 
-    it('should clear values after unrender (default component)', () => {
+    it('should clear values after unrender (default component)', async () => {
       const onSubmit = jest.fn();
       render(
         <FormRenderer
@@ -940,20 +969,23 @@ describe('renderForm function', () => {
         />
       );
 
-      userEvent.type(screen.getByLabelText('foo'), '{selectall}{backspace}bar');
-      userEvent.type(screen.getByLabelText('unmnounted'), '{selectall}{backspace}foovalue');
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.clear(screen.getByLabelText('foo'));
+      await userEvent.type(screen.getByLabelText('foo'), 'bar');
+      await userEvent.clear(screen.getByLabelText('unmnounted'));
+      await userEvent.type(screen.getByLabelText('unmnounted'), 'foovalue');
+      await userEvent.click(screen.getByText('Submit'));
 
       expect(onSubmit).toHaveBeenCalledWith({ unmnounted: 'foovalue', foo: 'bar' });
       onSubmit.mockReset();
 
-      userEvent.type(screen.getByLabelText('foo'), '{selectall}{backspace}barrr');
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.clear(screen.getByLabelText('foo'));
+      await userEvent.type(screen.getByLabelText('foo'), 'barrr');
+      await userEvent.click(screen.getByText('Submit'));
 
       expect(onSubmit).toHaveBeenCalledWith({ unmnounted: undefined, foo: 'barrr' });
     });
 
-    it('should clear values after unrender and set to field cleared value', () => {
+    it('should clear values after unrender and set to field cleared value', async () => {
       const schema = {
         fields: [
           {
@@ -988,21 +1020,24 @@ describe('renderForm function', () => {
         />
       );
 
-      userEvent.type(screen.getByLabelText('foo'), '{selectall}{backspace}show');
-      userEvent.type(screen.getByLabelText('unmnounted'), '{selectall}{backspace}foovalue');
+      await userEvent.clear(screen.getByLabelText('foo'));
+      await userEvent.type(screen.getByLabelText('foo'), 'show');
+      await userEvent.clear(screen.getByLabelText('unmnounted'));
+      await userEvent.type(screen.getByLabelText('unmnounted'), 'foovalue');
 
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.click(screen.getByText('Submit'));
 
       expect(onSubmit).toHaveBeenCalledWith({ foo: 'show', unmnounted: 'foovalue' });
       onSubmit.mockClear();
 
-      userEvent.type(screen.getByLabelText('foo'), '{selectall}{backspace}barrr');
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.clear(screen.getByLabelText('foo'));
+      await userEvent.type(screen.getByLabelText('foo'), 'barrr');
+      await userEvent.click(screen.getByText('Submit'));
 
       expect(onSubmit).toHaveBeenCalledWith({ foo: 'barrr', unmnounted: 'bla' });
     });
 
-    it('should clear values after unrender and set to form cleared value', () => {
+    it('should clear values after unrender and set to form cleared value', async () => {
       const schema = {
         fields: [
           {
@@ -1036,15 +1071,18 @@ describe('renderForm function', () => {
         />
       );
 
-      userEvent.type(screen.getByLabelText('foo'), '{selectall}{backspace}show');
-      userEvent.type(screen.getByLabelText('unmnounted'), '{selectall}{backspace}foovalue');
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.clear(screen.getByLabelText('foo'));
+      await userEvent.type(screen.getByLabelText('foo'), 'show');
+      await userEvent.clear(screen.getByLabelText('unmnounted'));
+      await userEvent.type(screen.getByLabelText('unmnounted'), 'foovalue');
+      await userEvent.click(screen.getByText('Submit'));
 
       expect(onSubmit).toHaveBeenCalledWith({ foo: 'show', unmnounted: 'foovalue' });
       onSubmit.mockClear();
 
-      userEvent.type(screen.getByLabelText('foo'), '{selectall}{backspace}barrr');
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.clear(screen.getByLabelText('foo'));
+      await userEvent.type(screen.getByLabelText('foo'), 'barrr');
+      await userEvent.click(screen.getByText('Submit'));
 
       expect(onSubmit).toHaveBeenCalledWith({ foo: 'barrr', unmnounted: 'BlaBlaBla' });
     });
@@ -1079,7 +1117,7 @@ describe('renderForm function', () => {
       ],
     });
 
-    it('should reset value after render when set on fields', () => {
+    it('should reset value after render when set on fields', async () => {
       const SET_INITIALIZE_ON_MOUNT = true;
       const onSubmit = jest.fn();
 
@@ -1097,30 +1135,35 @@ describe('renderForm function', () => {
         />
       );
 
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.click(screen.getByText('Submit'));
       expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [INITIALIZED_FIELD]: INITIAL_VALUE }));
       onSubmit.mockReset();
 
-      userEvent.type(screen.getByLabelText(SHOWER_FIELD), `{selectall}{backspace}${SHOW_VALUE}`);
-      userEvent.type(screen.getByLabelText(INITIALIZED_FIELD), `{selectall}{backspace}${NEW_VALUE}`);
+      await userEvent.clear(screen.getByLabelText(SHOWER_FIELD));
+      await userEvent.type(screen.getByLabelText(SHOWER_FIELD), SHOW_VALUE);
 
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.clear(screen.getByLabelText(INITIALIZED_FIELD));
+      await userEvent.type(screen.getByLabelText(INITIALIZED_FIELD), NEW_VALUE);
+
+      await userEvent.click(screen.getByText('Submit'));
       expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [INITIALIZED_FIELD]: NEW_VALUE, [SHOWER_FIELD]: SHOW_VALUE }));
       onSubmit.mockReset();
 
-      userEvent.type(screen.getByLabelText(SHOWER_FIELD), `{selectall}{backspace}${NOT_SHOW_VALUE}`);
+      await userEvent.clear(screen.getByLabelText(SHOWER_FIELD));
+      await userEvent.type(screen.getByLabelText(SHOWER_FIELD), NOT_SHOW_VALUE);
 
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.click(screen.getByText('Submit'));
       expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [INITIALIZED_FIELD]: NEW_VALUE, [SHOWER_FIELD]: NOT_SHOW_VALUE }));
       onSubmit.mockReset();
 
-      userEvent.type(screen.getByLabelText(SHOWER_FIELD), `{selectall}{backspace}${SHOW_VALUE}`);
+      await userEvent.clear(screen.getByLabelText(SHOWER_FIELD));
+      await userEvent.type(screen.getByLabelText(SHOWER_FIELD), SHOW_VALUE);
 
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.click(screen.getByText('Submit'));
       expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [INITIALIZED_FIELD]: INITIAL_VALUE, [SHOWER_FIELD]: SHOW_VALUE }));
     });
 
-    it('should not reset value after render when set on fields', () => {
+    it('should not reset value after render when set on fields', async () => {
       const UNSET_INITIALIZE_ON_MOUNT = false;
       const onSubmit = jest.fn();
 
@@ -1138,29 +1181,33 @@ describe('renderForm function', () => {
         />
       );
 
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.click(screen.getByText('Submit'));
       expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [INITIALIZED_FIELD]: INITIAL_VALUE }));
       onSubmit.mockReset();
 
-      userEvent.type(screen.getByLabelText(SHOWER_FIELD), `{selectall}{backspace}${SHOW_VALUE}`);
-      userEvent.type(screen.getByLabelText(INITIALIZED_FIELD), `{selectall}{backspace}${NEW_VALUE}`);
+      await userEvent.clear(screen.getByLabelText(SHOWER_FIELD));
+      await userEvent.type(screen.getByLabelText(SHOWER_FIELD), SHOW_VALUE);
+      await userEvent.clear(screen.getByLabelText(INITIALIZED_FIELD));
+      await userEvent.type(screen.getByLabelText(INITIALIZED_FIELD), NEW_VALUE);
 
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.click(screen.getByText('Submit'));
       expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [SHOWER_FIELD]: SHOW_VALUE, [INITIALIZED_FIELD]: NEW_VALUE }));
       onSubmit.mockReset();
 
-      userEvent.type(screen.getByLabelText(SHOWER_FIELD), `{selectall}{backspace}${NOT_SHOW_VALUE}`);
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.clear(screen.getByLabelText(SHOWER_FIELD));
+      await userEvent.type(screen.getByLabelText(SHOWER_FIELD), NOT_SHOW_VALUE);
+      await userEvent.click(screen.getByText('Submit'));
       expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [SHOWER_FIELD]: NOT_SHOW_VALUE, [INITIALIZED_FIELD]: NEW_VALUE }));
       onSubmit.mockReset();
 
-      userEvent.type(screen.getByLabelText(SHOWER_FIELD), `{selectall}{backspace}${SHOW_VALUE}`);
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.clear(screen.getByLabelText(SHOWER_FIELD));
+      await userEvent.type(screen.getByLabelText(SHOWER_FIELD), SHOW_VALUE);
+      await userEvent.click(screen.getByText('Submit'));
       expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [SHOWER_FIELD]: SHOW_VALUE, [INITIALIZED_FIELD]: NEW_VALUE }));
       onSubmit.mockReset();
     });
 
-    it('should reset value after render when set on fields and use initialValue from schema instead of renderer initialValues', () => {
+    it('should reset value after render when set on fields and use initialValue from schema instead of renderer initialValues', async () => {
       const SET_INITIALIZE_ON_MOUNT = true;
       const onSubmit = jest.fn();
 
@@ -1178,24 +1225,28 @@ describe('renderForm function', () => {
         />
       );
 
-      userEvent.type(screen.getByLabelText(SHOWER_FIELD), `{selectall}{backspace}${SHOW_VALUE}`);
-      userEvent.type(screen.getByLabelText(INITIALIZED_FIELD), `{selectall}{backspace}${NEW_VALUE}`);
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.clear(screen.getByLabelText(SHOWER_FIELD));
+      await userEvent.type(screen.getByLabelText(SHOWER_FIELD), SHOW_VALUE);
+      await userEvent.clear(screen.getByLabelText(INITIALIZED_FIELD));
+      await userEvent.type(screen.getByLabelText(INITIALIZED_FIELD), NEW_VALUE);
+      await userEvent.click(screen.getByText('Submit'));
       expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [SHOWER_FIELD]: SHOW_VALUE, [INITIALIZED_FIELD]: NEW_VALUE }));
       onSubmit.mockReset();
 
-      userEvent.type(screen.getByLabelText(SHOWER_FIELD), `{selectall}{backspace}${NOT_SHOW_VALUE}`);
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.clear(screen.getByLabelText(SHOWER_FIELD));
+      await userEvent.type(screen.getByLabelText(SHOWER_FIELD), NOT_SHOW_VALUE);
+      await userEvent.click(screen.getByText('Submit'));
       expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [SHOWER_FIELD]: NOT_SHOW_VALUE, [INITIALIZED_FIELD]: NEW_VALUE }));
       onSubmit.mockReset();
 
-      userEvent.type(screen.getByLabelText(SHOWER_FIELD), `{selectall}{backspace}${SHOW_VALUE}`);
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.clear(screen.getByLabelText(SHOWER_FIELD));
+      await userEvent.type(screen.getByLabelText(SHOWER_FIELD), SHOW_VALUE);
+      await userEvent.click(screen.getByText('Submit'));
       expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [SHOWER_FIELD]: SHOW_VALUE, [INITIALIZED_FIELD]: SCHEMA_INITIAL_VALUE }));
       onSubmit.mockReset();
     });
 
-    it('should reset value after render when set on fields and use initialValue from schema', () => {
+    it('should reset value after render when set on fields and use initialValue from schema', async () => {
       const SET_INITIALIZE_ON_RENDER = true;
       const onSubmit = jest.fn();
 
@@ -1210,24 +1261,28 @@ describe('renderForm function', () => {
         />
       );
 
-      userEvent.type(screen.getByLabelText(SHOWER_FIELD), `{selectall}{backspace}${SHOW_VALUE}`);
-      userEvent.type(screen.getByLabelText(INITIALIZED_FIELD), `{selectall}{backspace}${NEW_VALUE}`);
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.clear(screen.getByLabelText(SHOWER_FIELD));
+      await userEvent.type(screen.getByLabelText(SHOWER_FIELD), SHOW_VALUE);
+      await userEvent.clear(screen.getByLabelText(INITIALIZED_FIELD));
+      await userEvent.type(screen.getByLabelText(INITIALIZED_FIELD), NEW_VALUE);
+      await userEvent.click(screen.getByText('Submit'));
       expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [SHOWER_FIELD]: SHOW_VALUE, [INITIALIZED_FIELD]: NEW_VALUE }));
       onSubmit.mockReset();
 
-      userEvent.type(screen.getByLabelText(SHOWER_FIELD), `{selectall}{backspace}${NOT_SHOW_VALUE}`);
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.clear(screen.getByLabelText(SHOWER_FIELD));
+      await userEvent.type(screen.getByLabelText(SHOWER_FIELD), NOT_SHOW_VALUE);
+      await userEvent.click(screen.getByText('Submit'));
       expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [INITIALIZED_FIELD]: NEW_VALUE, [SHOWER_FIELD]: NOT_SHOW_VALUE }));
       onSubmit.mockReset();
 
-      userEvent.type(screen.getByLabelText(SHOWER_FIELD), `{selectall}{backspace}${SHOW_VALUE}`);
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.clear(screen.getByLabelText(SHOWER_FIELD));
+      await userEvent.type(screen.getByLabelText(SHOWER_FIELD), SHOW_VALUE);
+      await userEvent.click(screen.getByText('Submit'));
       expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [INITIALIZED_FIELD]: SCHEMA_INITIAL_VALUE, [SHOWER_FIELD]: SHOW_VALUE }));
       onSubmit.mockReset();
     });
 
-    it('should set false value in initializeOnMount', () => {
+    it('should set false value in initializeOnMount', async () => {
       const schema = {
         fields: [
           {
@@ -1271,19 +1326,21 @@ describe('renderForm function', () => {
         />
       );
 
-      userEvent.type(screen.getByLabelText('input'), '{selectall}{backspace}show_true');
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.clear(screen.getByLabelText('input'));
+      await userEvent.type(screen.getByLabelText('input'), 'show_true');
+      await userEvent.click(screen.getByText('Submit'));
 
       expect(onSubmit).toHaveBeenCalledWith({ input: 'show_true', unrendered: true }, expect.any(Object), expect.any(Function));
       onSubmit.mockClear();
 
-      userEvent.type(screen.getByLabelText('input'), '{selectall}{backspace}show_false');
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.clear(screen.getByLabelText('input'));
+      await userEvent.type(screen.getByLabelText('input'), 'show_false');
+      await userEvent.click(screen.getByText('Submit'));
 
       expect(onSubmit).toHaveBeenCalledWith({ input: 'show_false', unrendered: false }, expect.any(Object), expect.any(Function));
     });
 
-    it('should set unefined value in initializeOnMount', () => {
+    it('should set unefined value in initializeOnMount', async () => {
       const schema = {
         fields: [
           {
@@ -1327,14 +1384,16 @@ describe('renderForm function', () => {
         />
       );
 
-      userEvent.type(screen.getByLabelText('input'), '{selectall}{backspace}show_true');
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.clear(screen.getByLabelText('input'));
+      await userEvent.type(screen.getByLabelText('input'), 'show_true');
+      await userEvent.click(screen.getByText('Submit'));
 
       expect(onSubmit).toHaveBeenCalledWith({ input: 'show_true', unrendered: true }, expect.any(Object), expect.any(Function));
       onSubmit.mockClear();
 
-      userEvent.type(screen.getByLabelText('input'), '{selectall}{backspace}show_undef');
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.clear(screen.getByLabelText('input'));
+      await userEvent.type(screen.getByLabelText('input'), 'show_undef');
+      await userEvent.click(screen.getByText('Submit'));
 
       expect(onSubmit).toHaveBeenCalledWith({ input: 'show_undef', unrendered: undefined }, expect.any(Object), expect.any(Function));
     });
@@ -1621,7 +1680,7 @@ describe('renderForm function', () => {
   });
 
   describe('#initialValues', () => {
-    it('initialValues has a higher priority than initialValue', () => {
+    it('initialValues has a higher priority than initialValue', async () => {
       const onSubmit = jest.fn();
       render(
         <FormRenderer
@@ -1645,12 +1704,12 @@ describe('renderForm function', () => {
 
       expect(screen.getByLabelText('testField')).toHaveValue('higher-priority');
 
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.click(screen.getByText('Submit'));
 
       expect(onSubmit).toHaveBeenCalledWith({ testField: 'higher-priority' });
     });
 
-    it('empty initialValues ', () => {
+    it('empty initialValues ', async () => {
       const onSubmit = jest.fn();
       render(
         <FormRenderer
@@ -1674,12 +1733,12 @@ describe('renderForm function', () => {
 
       expect(screen.getByLabelText('testField')).toHaveValue('lower-priority');
 
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.click(screen.getByText('Submit'));
 
       expect(onSubmit).toHaveBeenCalledWith({ testField: 'lower-priority' });
     });
 
-    it('null initialValues ', () => {
+    it('null initialValues ', async () => {
       const onSubmit = jest.fn();
       render(
         <FormRenderer
@@ -1703,7 +1762,7 @@ describe('renderForm function', () => {
 
       expect(screen.getByLabelText('testField')).toHaveValue('');
 
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.click(screen.getByText('Submit'));
 
       expect(onSubmit).toHaveBeenCalledWith({ testField: null });
     });
@@ -1734,7 +1793,7 @@ describe('renderForm function', () => {
 
       expect(screen.getByLabelText('testField')).toHaveValue('lower-priority');
 
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.click(screen.getByText('Submit'));
 
       expect(onSubmit).toHaveBeenCalledWith({ testField: 'lower-priority' });
     });

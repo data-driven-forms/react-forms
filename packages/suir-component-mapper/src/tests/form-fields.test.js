@@ -79,14 +79,14 @@ describe('formFields', () => {
           expect(() => screen.getByText(errorText)).toThrow();
         });
 
-        it('renders with error', () => {
+        it('renders with error', async () => {
           const errorField = {
             ...field,
             validate: [{ type: validatorTypes.REQUIRED }],
           };
           render(<RendererWrapper schema={{ fields: [errorField] }} />);
 
-          userEvent.click(screen.getByText('Submit'));
+          await userEvent.click(screen.getByText('Submit'));
 
           expect(screen.getByText(errorText)).toBeInTheDocument();
         });
@@ -121,7 +121,7 @@ describe('formFields', () => {
           expect(screen.getByText(helperText)).toBeInTheDocument();
         });
 
-        it('renders with error and helperText', () => {
+        it('renders with error and helperText', async () => {
           const errorFields = {
             ...field,
             helperText,
@@ -129,7 +129,7 @@ describe('formFields', () => {
           };
           render(<RendererWrapper schema={{ fields: [errorFields] }} />);
 
-          userEvent.click(screen.getByText('Submit'));
+          await userEvent.click(screen.getByText('Submit'));
 
           expect(screen.getByText(errorText)).toBeInTheDocument();
           expect(screen.getByText(helperText)).toBeInTheDocument();
@@ -171,10 +171,10 @@ describe('formFields', () => {
           });
         });
 
-        it('renders with submitError', () => {
+        it('renders with submitError', async () => {
           render(<RendererWrapper schema={schema} onSubmit={() => ({ [field.name]: errorText })} />);
 
-          userEvent.click(screen.getByText('Submit'));
+          await userEvent.click(screen.getByText('Submit'));
 
           expect(screen.getByText(errorText)).toBeInTheDocument();
         });
@@ -208,7 +208,7 @@ describe('formFields', () => {
       expect(screen.getByText('Hamster')).toBeInTheDocument();
     });
 
-    it('renders with error', () => {
+    it('renders with error', async () => {
       const schema = {
         fields: [
           {
@@ -220,7 +220,7 @@ describe('formFields', () => {
       };
       render(<RendererWrapper schema={schema} />);
 
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.click(screen.getByText('Submit'));
 
       expect(screen.getByText(errorText)).toBeInTheDocument();
     });
@@ -240,7 +240,7 @@ describe('formFields', () => {
       expect(screen.getByText(helperText)).toBeInTheDocument();
     });
 
-    it('renders with error and helperText', () => {
+    it('renders with error and helperText', async () => {
       const schema = {
         fields: [
           {
@@ -253,7 +253,7 @@ describe('formFields', () => {
       };
       render(<RendererWrapper schema={schema} />);
 
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.click(screen.getByText('Submit'));
 
       expect(screen.getByText(errorText)).toBeInTheDocument();
       expect(screen.getByText(helperText)).toBeInTheDocument();

@@ -60,7 +60,7 @@ describe('<WizardSTepButtons', () => {
     expect(screen.getByText('Cancel').closest('.foo-class')).toBeInTheDocument();
   });
 
-  it('should call next with correct arguments when next step is string', () => {
+  it('should call next with correct arguments when next step is string', async () => {
     const handleNext = jest.fn();
 
     render(
@@ -69,12 +69,12 @@ describe('<WizardSTepButtons', () => {
       </RenderWithProvider>
     );
 
-    userEvent.click(screen.getByText('Next'));
+    await userEvent.click(screen.getByText('Next'));
 
     expect(handleNext).toHaveBeenCalledWith('next-step');
   });
 
-  it('should call next with correct arguments when next step is condition', () => {
+  it('should call next with correct arguments when next step is condition', async () => {
     const handleNext = jest.fn();
 
     render(
@@ -97,12 +97,12 @@ describe('<WizardSTepButtons', () => {
       </RenderWithProvider>
     );
 
-    userEvent.click(screen.getByText('Next'));
+    await userEvent.click(screen.getByText('Next'));
 
     expect(handleNext).toHaveBeenCalledWith('bar');
   });
 
-  it('should call submit functions if no next step is defined', () => {
+  it('should call submit functions if no next step is defined', async () => {
     const handleSubmit = jest.fn();
     render(
       <RenderWithProvider>
@@ -110,12 +110,12 @@ describe('<WizardSTepButtons', () => {
       </RenderWithProvider>
     );
 
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(handleSubmit).toHaveBeenCalled();
   });
 
-  it('should call cancel function', () => {
+  it('should call cancel function', async () => {
     const VALUES = { aws: 'yes', password: '123456643' };
     const onCancel = jest.fn();
     render(
@@ -124,12 +124,12 @@ describe('<WizardSTepButtons', () => {
       </RenderWithProvider>
     );
 
-    userEvent.click(screen.getByText('Cancel'));
+    await userEvent.click(screen.getByText('Cancel'));
 
     expect(onCancel).toHaveBeenCalled();
   });
 
-  it('should call prev function', () => {
+  it('should call prev function', async () => {
     const handlePrev = jest.fn();
     render(
       <RenderWithProvider>
@@ -137,7 +137,7 @@ describe('<WizardSTepButtons', () => {
       </RenderWithProvider>
     );
 
-    userEvent.click(screen.getByText('Back'));
+    await userEvent.click(screen.getByText('Back'));
 
     expect(handlePrev).toHaveBeenCalled();
   });
@@ -287,7 +287,7 @@ describe('<WizardSTepButtons', () => {
     });
   });
 
-  it('conditional submit step', () => {
+  it('conditional submit step', async () => {
     const submit = jest.fn();
     const schema = {
       fields: [
@@ -327,17 +327,18 @@ describe('<WizardSTepButtons', () => {
       />
     );
 
-    userEvent.type(screen.getByLabelText('Name'), 'bla');
+    await userEvent.type(screen.getByLabelText('Name'), 'bla');
 
     expect(screen.getByText('Next')).toBeInTheDocument();
     expect(() => screen.getByText('Submit')).toThrow();
 
-    userEvent.type(screen.getByLabelText('Name'), '{selectall}{backspace}submit');
+    await userEvent.clear(screen.getByLabelText('Name'));
+    await userEvent.type(screen.getByLabelText('Name'), 'submit');
 
     expect(() => screen.getByText('Next')).toThrow();
     expect(screen.getByText('Submit')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(submit).toHaveBeenCalledWith({ name: 'submit' }, expect.any(Object), expect.any(Object));
   });

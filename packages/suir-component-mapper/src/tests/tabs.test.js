@@ -39,7 +39,7 @@ describe('tabs', () => {
     expect(screen.getByText('cosiTitle2')).toBeInTheDocument();
   });
 
-  it('should switch tabs correctly', () => {
+  it('should switch tabs correctly', async () => {
     render(
       <RenderWithProvider value={{ formOptions }}>
         <FormTabs {...props} />
@@ -48,12 +48,12 @@ describe('tabs', () => {
 
     expect(screen.getByText('cosiTitle')).toHaveClass('active item');
 
-    userEvent.click(screen.getByText('cosiTitle2'));
+    await userEvent.click(screen.getByText('cosiTitle2'));
 
     expect(screen.getByText('cosiTitle2')).toHaveClass('active item');
   });
 
-  it('validate all tabs', () => {
+  it('validate all tabs', async () => {
     const onSubmit = jest.fn();
     render(
       <FormRenderer
@@ -98,13 +98,13 @@ describe('tabs', () => {
       />
     );
 
-    userEvent.type(screen.getByLabelText('name'), 'NAME');
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.type(screen.getByLabelText('name'), 'NAME');
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).not.toHaveBeenCalled();
 
-    userEvent.type(screen.getByLabelText('password'), 'PASSWORD');
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.type(screen.getByLabelText('password'), 'PASSWORD');
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({ name: 'NAME', password: 'PASSWORD' });
   });

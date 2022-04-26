@@ -39,17 +39,17 @@ describe('TimePicker<String>', () => {
 
     render(<FormRenderer schema={schema} {...initialProps} />);
 
-    userEvent.type(screen.getByPlaceholderText('hh:mm'), '00:35');
-    userEvent.selectOptions(screen.getByLabelText('open list of options', { selector: 'select' }), screen.getByText('PM'));
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.type(screen.getByPlaceholderText('hh:mm'), '00:35');
+    await userEvent.selectOptions(screen.getByLabelText('open list of options', { selector: 'select' }), screen.getByText('PM'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(screen.getByPlaceholderText('hh:mm')).toHaveValue('00:35');
     expect(onSubmit).toHaveBeenLastCalledWith({ 'time-picker': '00:35 PM' });
 
     onSubmit.mockReset();
 
-    userEvent.selectOptions(screen.getByLabelText('open list of options', { selector: 'select' }), screen.getByText('AM'));
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.selectOptions(screen.getByLabelText('open list of options', { selector: 'select' }), screen.getByText('AM'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(screen.getByPlaceholderText('hh:mm')).toHaveValue('00:35');
     expect(onSubmit).toHaveBeenLastCalledWith({ 'time-picker': '00:35 AM' });
@@ -67,8 +67,8 @@ describe('TimePicker<String>', () => {
 
     render(<FormRenderer schema={schema} {...initialProps} />);
 
-    userEvent.type(screen.getByPlaceholderText('hh:mm'), 'aa:BB');
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.type(screen.getByPlaceholderText('hh:mm'), 'aa:BB');
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(screen.getByPlaceholderText('hh:mm')).toHaveValue('aa:BB');
     expect(onSubmit).toHaveBeenLastCalledWith({ 'time-picker': 'aa:BB' });
@@ -89,7 +89,7 @@ describe('TimePicker<String>', () => {
     fireEvent.focusIn(screen.getByPlaceholderText('hh:mm'));
     fireEvent.change(screen.getByPlaceholderText('hh:mm'), { target: { value: '13:87' } });
     fireEvent.focusOut(screen.getByPlaceholderText('hh:mm'));
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(screen.getByPlaceholderText('hh:mm')).toHaveValue('13:87');
     expect(onSubmit).toHaveBeenLastCalledWith({ 'time-picker': '13:87' });
@@ -98,7 +98,7 @@ describe('TimePicker<String>', () => {
     fireEvent.focusIn(screen.getByPlaceholderText('hh:mm'));
     fireEvent.change(screen.getByPlaceholderText('hh:mm'), { target: { value: '25:16' } });
     fireEvent.focusOut(screen.getByPlaceholderText('hh:mm'));
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(screen.getByPlaceholderText('hh:mm')).toHaveValue('25:16');
     expect(onSubmit).toHaveBeenLastCalledWith({ 'time-picker': '25:16' });
@@ -124,16 +124,16 @@ describe('TimePicker<String>', () => {
     fireEvent.focusIn(screen.getByPlaceholderText('hh:mm'));
     fireEvent.change(screen.getByPlaceholderText('hh:mm'), { target: { value: '00:35' } });
     fireEvent.focusOut(screen.getByPlaceholderText('hh:mm'));
-    userEvent.selectOptions(screen.getAllByLabelText('open list of options', { selector: 'select' })[1], screen.getByText('EST'));
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.selectOptions(screen.getAllByLabelText('open list of options', { selector: 'select' })[1], screen.getByText('EST'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(screen.getByPlaceholderText('hh:mm')).toHaveValue('00:35');
     expect(onSubmit).toHaveBeenLastCalledWith({ 'time-picker': '00:35 AM EAST' });
 
     onSubmit.mockReset();
 
-    userEvent.selectOptions(screen.getAllByLabelText('open list of options', { selector: 'select' })[1], screen.getByText('UTC'));
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.selectOptions(screen.getAllByLabelText('open list of options', { selector: 'select' })[1], screen.getByText('UTC'));
+    await userEvent.click(screen.getByText('Submit'));
     expect(screen.getByPlaceholderText('hh:mm')).toHaveValue('00:35');
     expect(onSubmit).toHaveBeenLastCalledWith({ 'time-picker': '00:35 AM UTC' });
   });
@@ -162,7 +162,7 @@ describe('TimePicker<String>', () => {
     fireEvent.change(screen.getByPlaceholderText('hh:mm'), { target: { value: '00:35' } });
     fireEvent.focusOut(screen.getByPlaceholderText('hh:mm'));
 
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenLastCalledWith({ 'time-picker': '00:35 PM EAST' });
   });
