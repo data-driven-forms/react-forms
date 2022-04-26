@@ -12,6 +12,33 @@ import SchemaErrorComponent from './schema-error-component';
 
 const isFunc = (fn) => typeof fn === 'function';
 
+const renderChildren = (children, props) => {
+  if (isFunc(children)) {
+    return children(props);
+  }
+
+  let childElement = children;
+  if (Array.isArray(children)) {
+    /**
+     * Only permit one child element
+     */
+    if (children.length !== 1) {
+      throw new Error('FormRenderer expects only one child element!');
+    }
+
+    childElement = children[0];
+  }
+
+  if (typeof childElement === 'object') {
+    /**
+     * Clone react element, pass form fields and schema as props, but override them with child props if present
+     */
+    return cloneElement(children, { ...props, ...childElement.props });
+  }
+
+  throw new Error(`Invalid children prop! Expected one of [null, Function, object], got ${typeof children}`);
+};
+
 const FormRenderer = ({
   actionMapper,
   children,
@@ -144,13 +171,13 @@ const FormRenderer = ({
               ffGetRegisteredFields: form.getRegisteredFields,
               getRegisteredFields: internalGetRegisteredFields,
               initialValues: props.initialValues,
+              schema,
             },
           }}
         >
           {FormTemplate && <FormTemplate formFields={formFields} schema={schema} {...FormTemplateProps} />}
 
-          {isFunc(children) && children({ formFields, schema })}
-          {typeof children === 'object' && cloneElement(children, { formFields, schema })}
+          {children && renderChildren(children, { formFields, schema })}
         </RendererContext.Provider>
       )}
       {...props}
