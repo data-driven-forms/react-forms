@@ -56,7 +56,7 @@ describe('<FieldArray/>', () => {
     expect(screen.getByText(noItemsMessage)).toBeInTheDocument();
     expect(() => screen.getByLabelText('name')).toThrow();
 
-    userEvent.click(screen.getByText('CUSTOM ADD'));
+    await userEvent.click(screen.getByText('CUSTOM ADD'));
 
     expect(screen.getByLabelText('name')).toBeInTheDocument();
     expect(() => screen.getByText(noItemsMessage)).toThrow();
@@ -89,12 +89,12 @@ describe('<FieldArray/>', () => {
 
     render(<FormRenderer {...initialProps} />);
 
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Submit'));
     expect(onSubmit).toHaveBeenCalledWith({});
     onSubmit.mockClear();
 
-    userEvent.click(screen.getByText('Add item'));
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Add item'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: [{ name: 'enter a name', lastName: 'enter a last name' }],
@@ -102,8 +102,8 @@ describe('<FieldArray/>', () => {
 
     onSubmit.mockClear();
 
-    userEvent.click(screen.getByLabelText('Remove'));
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByLabelText('Remove'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: [],
@@ -135,15 +135,15 @@ describe('<FieldArray/>', () => {
     };
 
     render(<FormRenderer {...initialProps} />);
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({});
     onSubmit.mockClear();
 
-    userEvent.click(screen.getByText('Add item'));
-    userEvent.click(screen.getByText('Add item'));
-    userEvent.click(screen.getByText('Add item'));
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Add item'));
+    await userEvent.click(screen.getByText('Add item'));
+    await userEvent.click(screen.getByText('Add item'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: [
@@ -155,8 +155,8 @@ describe('<FieldArray/>', () => {
 
     onSubmit.mockClear();
 
-    userEvent.click(screen.getByText('Delete all'));
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Delete all'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: [],
@@ -184,12 +184,12 @@ describe('<FieldArray/>', () => {
 
     render(<FormRenderer {...initialProps} />);
 
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Submit'));
     expect(onSubmit).toHaveBeenCalledWith({});
     onSubmit.mockClear();
 
-    userEvent.click(screen.getByText('Add item'));
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Add item'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: ['defaultItem'],
@@ -197,8 +197,8 @@ describe('<FieldArray/>', () => {
 
     onSubmit.mockClear();
 
-    userEvent.click(screen.getByLabelText('Remove'));
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByLabelText('Remove'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: [],
@@ -228,40 +228,40 @@ describe('<FieldArray/>', () => {
 
     render(<FormRenderer {...initialProps} />);
 
-    userEvent.click(screen.getByText('Add item'));
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Add item'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: ['defaultItem'],
     });
     onSubmit.mockClear();
 
-    userEvent.click(screen.getByText('Add item'));
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Add item'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: ['defaultItem', 'defaultItem'],
     });
     onSubmit.mockClear();
 
-    userEvent.click(screen.getByText('Add item'));
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Add item'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: ['defaultItem', 'defaultItem'],
     });
     onSubmit.mockClear();
 
-    userEvent.click(screen.getAllByLabelText('Remove')[0]);
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getAllByLabelText('Remove')[0]);
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: ['defaultItem'],
     });
     onSubmit.mockClear();
 
-    userEvent.click(screen.getAllByLabelText('Remove')[0]);
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getAllByLabelText('Remove')[0]);
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: ['defaultItem'],
@@ -291,8 +291,8 @@ describe('<FieldArray/>', () => {
 
     expect(() => screen.getByText('Must have at least 3 items.')).toThrow();
 
-    userEvent.click(screen.getByText('Add item'));
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Add item'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).not.toHaveBeenCalled();
     onSubmit.mockClear();
@@ -386,7 +386,7 @@ describe('<FieldArray/>', () => {
 
     expect(screen.getByLabelText('foo')).toBeInTheDocument();
 
-    userEvent.click(screen.getAllByLabelText('Remove')[0]);
+    await userEvent.click(screen.getAllByLabelText('Remove')[0]);
 
     expect(() => screen.getByLabelText('foo')).toThrow();
   });
@@ -416,7 +416,7 @@ describe('<FieldArray/>', () => {
 
     render(<FormRenderer {...initialProps} />);
 
-    userEvent.click(screen.getByText('Add item'));
+    await userEvent.click(screen.getByText('Add item'));
 
     expect(screen.getByLabelText('foo')).toHaveAttribute('name', 'foo[0].nested-component');
   });
@@ -445,7 +445,7 @@ describe('<FieldArray/>', () => {
 
     render(<FormRenderer {...initialProps} />);
 
-    userEvent.click(screen.getByText('Add item'));
+    await userEvent.click(screen.getByText('Add item'));
     expect(screen.getByLabelText('foo')).toHaveAttribute('name', 'foo[0]');
   });
 });

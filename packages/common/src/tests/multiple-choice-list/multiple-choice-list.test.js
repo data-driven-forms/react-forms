@@ -164,7 +164,7 @@ describe('multiple choice list', () => {
   it('show submit error', async () => {
     render(<FormRenderer {...rendererProps} onSubmit={() => ({ check: 'submitError' })} />);
 
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(wrapperProps).toEqual({
       description: undefined,

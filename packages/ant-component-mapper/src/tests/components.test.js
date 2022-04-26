@@ -85,7 +85,7 @@ describe('formFields generated tests', () => {
           render(<RendererWrapper schema={{ fields: [errorField] }} />);
 
           await act(async () => {
-            userEvent.click(screen.getByText('Submit'));
+            await userEvent.click(screen.getByText('Submit'));
           });
 
           expect(screen.getByText(errorText)).toBeInTheDocument();
@@ -163,7 +163,7 @@ describe('formFields generated tests', () => {
           render(<RendererWrapper schema={{ fields: [errorFields] }} />);
 
           await act(async () => {
-            userEvent.click(screen.getByText('Submit'));
+            await userEvent.click(screen.getByText('Submit'));
           });
 
           expect(screen.getByText(errorText)).toBeInTheDocument();
@@ -234,7 +234,7 @@ describe('formFields generated tests', () => {
           render(<RendererWrapper schema={schema} onSubmit={() => ({ [field.name]: errorText })} />);
 
           await act(async () => {
-            userEvent.click(screen.getByText('Submit'));
+            await userEvent.click(screen.getByText('Submit'));
           });
 
           expect(screen.getByText(errorText)).toBeInTheDocument();

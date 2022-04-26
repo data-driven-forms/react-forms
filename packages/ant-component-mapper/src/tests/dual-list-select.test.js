@@ -70,17 +70,17 @@ describe('DualListSelect', () => {
     });
 
     await act(async () => {
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.click(screen.getByText('Submit'));
     });
 
     expect(onSubmit).toHaveBeenCalledWith({});
     onSubmit.mockClear();
 
-    userEvent.click(screen.getByText('cats'));
-    userEvent.click(screen.getByLabelText('right'));
+    await userEvent.click(screen.getByText('cats'));
+    await userEvent.click(screen.getByLabelText('right'));
 
     await act(async () => {
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.click(screen.getByText('Submit'));
     });
 
     expect(onSubmit).toHaveBeenCalledWith({ 'dual-Menu': ['cats'] });
@@ -92,17 +92,17 @@ describe('DualListSelect', () => {
     });
 
     await act(async () => {
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.click(screen.getByText('Submit'));
     });
 
     expect(onSubmit).toHaveBeenCalledWith({ 'dual-Menu': ['cats'] });
     onSubmit.mockClear();
 
-    userEvent.click(screen.getByText('cats'));
-    userEvent.click(screen.getByLabelText('left'));
+    await userEvent.click(screen.getByText('cats'));
+    await userEvent.click(screen.getByLabelText('left'));
 
     await act(async () => {
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.click(screen.getByText('Submit'));
     });
 
     expect(onSubmit).toHaveBeenCalledWith({});

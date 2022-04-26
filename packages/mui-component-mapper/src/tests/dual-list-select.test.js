@@ -72,13 +72,13 @@ describe('DualListSelect', () => {
   it('switch left option', async () => {
     render(<FormRenderer {...initialProps} />);
 
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({});
 
-    userEvent.click(screen.getByText('cats'));
-    userEvent.click(screen.getByLabelText('Move selected to right'));
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('cats'));
+    await userEvent.click(screen.getByLabelText('Move selected to right'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenLastCalledWith({ 'dual-list': ['cats'] });
   });
@@ -86,10 +86,16 @@ describe('DualListSelect', () => {
   it('switch left option with holding ctrl', async () => {
     render(<FormRenderer {...initialProps} />);
 
-    userEvent.click(screen.getByText('cats'));
-    userEvent.click(screen.getByText('zebras'), { ctrlKey: true });
-    userEvent.click(screen.getByLabelText('Move selected to right'));
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('cats'));
+
+    const user = userEvent.setup();
+
+    await user.keyboard('{Control>}');
+    await user.click(screen.getByText('zebras'));
+    await user.keyboard('{/Control}');
+
+    await userEvent.click(screen.getByLabelText('Move selected to right'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenLastCalledWith({ 'dual-list': ['cats', 'zebras'] });
   });
@@ -97,10 +103,16 @@ describe('DualListSelect', () => {
   it('switch left option with holding shift', async () => {
     render(<FormRenderer {...initialProps} />);
 
-    userEvent.click(screen.getByText('cats'));
-    userEvent.click(screen.getByText('zebras'), { shiftKey: true });
-    userEvent.click(screen.getByLabelText('Move selected to right'));
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('cats'));
+
+    const user = userEvent.setup();
+
+    await user.keyboard('{Shift>}');
+    await user.click(screen.getByText('zebras'));
+    await user.keyboard('{/Shift}');
+
+    await userEvent.click(screen.getByLabelText('Move selected to right'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenLastCalledWith({ 'dual-list': ['cats', 'cats_1', 'cats_2', 'pigeons', 'zebras'] });
   });
@@ -108,11 +120,20 @@ describe('DualListSelect', () => {
   it('switch left option with holding and removing by ctrl', async () => {
     render(<FormRenderer {...initialProps} />);
 
-    userEvent.click(screen.getByText('cats'));
-    userEvent.click(screen.getByText('zebras'), { shiftKey: true });
-    userEvent.click(screen.getByText('cats'), { ctrlKey: true });
-    userEvent.click(screen.getByLabelText('Move selected to right'));
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('cats'));
+
+    const user = userEvent.setup();
+
+    await user.keyboard('{Shift>}');
+    await user.click(screen.getByText('zebras'));
+    await user.keyboard('{/Shift}');
+
+    await user.keyboard('{Control>}');
+    await user.click(screen.getByText('cats'));
+    await user.keyboard('{/Control}');
+
+    await userEvent.click(screen.getByLabelText('Move selected to right'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenLastCalledWith({ 'dual-list': ['cats_1', 'cats_2', 'pigeons', 'zebras'] });
   });
@@ -120,12 +141,12 @@ describe('DualListSelect', () => {
   it('switch right option', async () => {
     render(<FormRenderer {...initialProps} initialValues={{ 'dual-list': ['cats'] }} />);
 
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Submit'));
     expect(onSubmit).toHaveBeenLastCalledWith({ 'dual-list': ['cats'] });
 
-    userEvent.click(screen.getByText('cats'));
-    userEvent.click(screen.getByLabelText('Move selected to left'));
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('cats'));
+    await userEvent.click(screen.getByLabelText('Move selected to left'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenLastCalledWith({});
   });
@@ -133,8 +154,8 @@ describe('DualListSelect', () => {
   it('switch all to right', async () => {
     render(<FormRenderer {...initialProps} />);
 
-    userEvent.click(screen.getByLabelText('Move all to right'));
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByLabelText('Move all to right'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({ 'dual-list': ['cats', 'cats_1', 'cats_2', 'pigeons', 'zebras'] });
   });
@@ -142,8 +163,8 @@ describe('DualListSelect', () => {
   it('switch all to left', async () => {
     render(<FormRenderer {...initialProps} initialValues={{ 'dual-list': schema.fields[0].options.map(({ value }) => value) }} />);
 
-    userEvent.click(screen.getByLabelText('Move all to left'));
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByLabelText('Move all to left'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({});
   });
@@ -151,7 +172,7 @@ describe('DualListSelect', () => {
   it('filters options', async () => {
     render(<FormRenderer {...initialProps} />);
 
-    userEvent.type(screen.getByLabelText('Filter options'), 'cats');
+    await userEvent.type(screen.getByLabelText('Filter options'), 'cats');
 
     expect(screen.getByText('cats')).toBeInTheDocument();
     expect(screen.getByText('cats_1')).toBeInTheDocument();
@@ -163,7 +184,7 @@ describe('DualListSelect', () => {
   it('filters value', async () => {
     render(<FormRenderer {...initialProps} initialValues={{ 'dual-list': schema.fields[0].options.map(({ value }) => value) }} />);
 
-    userEvent.type(screen.getByLabelText('Filter selected value'), 'cats');
+    await userEvent.type(screen.getByLabelText('Filter selected value'), 'cats');
 
     expect(screen.getByText('cats')).toBeInTheDocument();
     expect(screen.getByText('cats_1')).toBeInTheDocument();
@@ -191,7 +212,7 @@ describe('DualListSelect', () => {
       'Submit',
     ]);
 
-    userEvent.click(screen.getByLabelText('sort options'));
+    await userEvent.click(screen.getByLabelText('sort options'));
 
     expect(screen.getAllByRole('button').map((b) => b.textContent)).toEqual([
       '',
@@ -209,7 +230,7 @@ describe('DualListSelect', () => {
       'Submit',
     ]);
 
-    userEvent.click(screen.getByLabelText('sort options'));
+    await userEvent.click(screen.getByLabelText('sort options'));
 
     expect(screen.getAllByRole('button').map((b) => b.textContent)).toEqual([
       '',
@@ -247,7 +268,7 @@ describe('DualListSelect', () => {
       'Submit',
     ]);
 
-    userEvent.click(screen.getByLabelText('sort value'));
+    await userEvent.click(screen.getByLabelText('sort value'));
 
     expect(screen.getAllByRole('button').map((b) => b.textContent)).toEqual([
       '',
@@ -265,7 +286,7 @@ describe('DualListSelect', () => {
       'Submit',
     ]);
 
-    userEvent.click(screen.getByLabelText('sort value'));
+    await userEvent.click(screen.getByLabelText('sort value'));
 
     expect(screen.getAllByRole('button').map((b) => b.textContent)).toEqual([
       '',
@@ -288,9 +309,9 @@ describe('DualListSelect', () => {
     it('switch all visible to right', async () => {
       render(<FormRenderer {...initialProps} />);
 
-      userEvent.type(screen.getByLabelText('Filter options'), 'cats');
-      userEvent.click(screen.getByLabelText('Move all to right'));
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.type(screen.getByLabelText('Filter options'), 'cats');
+      await userEvent.click(screen.getByLabelText('Move all to right'));
+      await userEvent.click(screen.getByText('Submit'));
 
       expect(onSubmit).toHaveBeenCalledWith({ 'dual-list': ['cats', 'cats_1', 'cats_2'] });
     });
@@ -300,9 +321,9 @@ describe('DualListSelect', () => {
     it('switch all visible to left', async () => {
       render(<FormRenderer {...initialProps} initialValues={{ 'dual-list': schema.fields[0].options.map(({ value }) => value) }} />);
 
-      userEvent.type(screen.getByLabelText('Filter selected value'), 'cats');
-      userEvent.click(screen.getByLabelText('Move all to left'));
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.type(screen.getByLabelText('Filter selected value'), 'cats');
+      await userEvent.click(screen.getByLabelText('Move all to left'));
+      await userEvent.click(screen.getByText('Submit'));
 
       expect(onSubmit).toHaveBeenCalledWith({ 'dual-list': ['zebras', 'pigeons'] });
     });

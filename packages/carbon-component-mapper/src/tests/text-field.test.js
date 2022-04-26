@@ -62,8 +62,8 @@ describe('<TextInput and NumberInput />', () => {
         componentMapper={componentMapper}
       />
     );
-    userEvent.click(screen.getByLabelText('Increment number'));
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByLabelText('Increment number'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(submitSpy).toHaveBeenCalledWith({ input: '2' });
   });
@@ -90,8 +90,8 @@ describe('<TextInput and NumberInput />', () => {
         componentMapper={componentMapper}
       />
     );
-    userEvent.click(screen.getByLabelText('Decrement number'));
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByLabelText('Decrement number'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(submitSpy).toHaveBeenCalledWith({ input: '4' });
   });

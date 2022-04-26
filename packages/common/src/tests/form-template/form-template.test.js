@@ -109,7 +109,7 @@ describe('FormTemplate', () => {
 
     render(<FormRenderer {...rendererProps} onSubmit={spy} />);
 
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(spy).toHaveBeenCalled();
   });
@@ -117,11 +117,11 @@ describe('FormTemplate', () => {
   it('Calls reset', async () => {
     render(<FormRenderer {...rendererProps} FormTemplate={(props) => <FormTemplateTest {...props} canReset />} />);
 
-    userEvent.type(screen.getByLabelText('field1'), 'y');
+    await userEvent.type(screen.getByLabelText('field1'), 'y');
 
     expect(screen.getByLabelText('field1')).toHaveValue('y');
 
-    userEvent.click(screen.getByText('Reset'));
+    await userEvent.click(screen.getByText('Reset'));
 
     expect(screen.getByLabelText('field1')).toHaveValue('');
   });
@@ -131,7 +131,7 @@ describe('FormTemplate', () => {
 
     render(<FormRenderer {...rendererProps} onCancel={spy} />);
 
-    userEvent.click(screen.getByText('Cancel'));
+    await userEvent.click(screen.getByText('Cancel'));
 
     expect(spy).toHaveBeenCalled();
   });
@@ -217,7 +217,7 @@ describe('FormTemplate', () => {
 
     expect(() => screen.getByText('form error')).toThrow();
 
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(screen.getByText('form error')).toBeInTheDocument();
   });

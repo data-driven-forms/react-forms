@@ -54,12 +54,12 @@ describe('<Radio />', () => {
     ]);
 
     await act(async () => {
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.click(screen.getByText('Submit'));
     });
 
     expect(onSubmit).toHaveBeenLastCalledWith({ radio: '2' });
 
-    userEvent.click(screen.getByText('Hamsters'));
+    await userEvent.click(screen.getByText('Hamsters'));
 
     expect([...screen.getAllByRole('radio')].map((r) => [r.name, r.value, r.checked])).toEqual([
       ['radio', '1', false],
@@ -68,7 +68,7 @@ describe('<Radio />', () => {
     ]);
 
     await act(async () => {
-      userEvent.click(screen.getByText('Submit'));
+      await userEvent.click(screen.getByText('Submit'));
     });
 
     expect(onSubmit).toHaveBeenLastCalledWith({ radio: '3' });

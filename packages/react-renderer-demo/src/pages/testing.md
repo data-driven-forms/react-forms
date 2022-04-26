@@ -81,15 +81,15 @@ describe('<FormRendererTest />', () => {
     /**
      * we can try submit the form when the validation is not met
      */
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Submit'));
     expect(submitSpy).not.toHaveBeenCalled(); // true
 
     /**
      * fill the user name to pass the validation
      */
-    userEvent.type(screen.getByLabelText('Username field'), 'John');
+    await userEvent.type(screen.getByLabelText('Username field'), 'John');
 
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Submit'));
 
     /**
      * first argument are the values and the second one is formApi
@@ -101,7 +101,7 @@ describe('<FormRendererTest />', () => {
      */
     expect(() => screen.getByLabelText('Email field')).toThrow();
 
-    userEvent.click(screen.getByLabelText('Enable emails'));
+    await userEvent.click(screen.getByLabelText('Enable emails'));
 
     /**
      * there should be new form field
@@ -111,23 +111,24 @@ describe('<FormRendererTest />', () => {
     /**
      * submit should not occur
      */
-    userEvent.click(screen.getByText('Submit'), undefined, { skipPointerEventsCheck: true });
+    await userEvent.click(screen.getByText('Submit'), undefined, { skipPointerEventsCheck: true });
     expect(submitSpy).not.toHaveBeenCalled(); // true
 
     /**
      * field should be in error state
      * we only allow value of John
      */
-    userEvent.type(screen.getByLabelText('Email field'), 'Marty');
-    userEvent.click(screen.getByText('Submit'), undefined, { skipPointerEventsCheck: true });
+    await userEvent.type(screen.getByLabelText('Email field'), 'Marty');
+    await userEvent.click(screen.getByText('Submit'), undefined, { skipPointerEventsCheck: true });
     await waitFor(() => expect(screen.getByLabelText('Email field')).toBeInvalid());
     /**
      * set value to John and submit the form
      */
-    userEvent.type(screen.getByLabelText('Email field'), '{selectall}{backspace}John');
+    await userEvent.clear(screen.getByLabelText('Email field'));
+    await userEvent.type(screen.getByLabelText('Email field'), 'John');
     await waitFor(() => expect(screen.getByLabelText('Email field')).toHaveAttribute('aria-invalid', 'false'));
 
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Submit'));
     await waitFor(() =>
       expect(submitSpy).toHaveBeenCalledWith(
         {
@@ -226,7 +227,7 @@ describe('<CustomComponent /> with renderer', () => {
   it('should call sideEffect when the input change', () => {
     const sideEffect = jest.fn();
     render(<RendererWrapper schema={createSchema({ sideEffect })} />);
-    userEvent.type(screen.getByLabelText('Custom label'), 'foo');
+    await userEvent.type(screen.getByLabelText('Custom label'), 'foo');
     expect(sideEffect).toHaveBeenCalledTimes(3);
   });
 });
@@ -315,7 +316,7 @@ describe('<CustomComponent /> outside renderer', () => {
         <CustomComponent name="custom-component" label="custom-component" sideEffect={sideEffect} />
       </FormWrapper>
     );
-    userEvent.type(screen.getByLabelText('custom-component'), 'foo');
+    await userEvent.type(screen.getByLabelText('custom-component'), 'foo');
     expect(sideEffect).toHaveBeenCalledTimes(3);
   });
 });

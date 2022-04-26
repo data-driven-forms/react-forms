@@ -97,7 +97,7 @@ describe('wizard test', () => {
       prevSteps: [],
     });
 
-    userEvent.click(screen.getByLabelText('handleNext'));
+    await userEvent.click(screen.getByLabelText('handleNext'));
 
     expect(state).toEqual({
       activeStepIndex: 1,
@@ -109,7 +109,7 @@ describe('wizard test', () => {
       prevSteps: ['step1'],
     });
 
-    userEvent.click(screen.getByLabelText('handlePrev'));
+    await userEvent.click(screen.getByLabelText('handlePrev'));
 
     expect(state).toEqual({
       activeStepIndex: 0,
@@ -137,7 +137,7 @@ describe('wizard test', () => {
   it('onKeyDown - goes to the next step', async () => {
     render(<FormRenderer {...rendererProps} />);
 
-    userEvent.type(screen.getByLabelText('some input'), '{enter}');
+    await userEvent.type(screen.getByLabelText('some input'), '{enter}');
 
     expect(state).toEqual({
       activeStepIndex: 1,
@@ -153,8 +153,8 @@ describe('wizard test', () => {
   it('jumpToStep - when valid', async () => {
     render(<FormRenderer {...rendererProps} />);
 
-    userEvent.click(screen.getByLabelText('handleNext'));
-    userEvent.click(screen.getByLabelText('jumpToStepValid'));
+    await userEvent.click(screen.getByLabelText('handleNext'));
+    await userEvent.click(screen.getByLabelText('jumpToStepValid'));
 
     expect(state).toEqual({
       activeStepIndex: 0,
@@ -170,8 +170,8 @@ describe('wizard test', () => {
   it('jumpToStep - when invalid', async () => {
     render(<FormRenderer {...rendererProps} />);
 
-    userEvent.click(screen.getByLabelText('handleNext'));
-    userEvent.click(screen.getByLabelText('jumpToStepInvalid'));
+    await userEvent.click(screen.getByLabelText('handleNext'));
+    await userEvent.click(screen.getByLabelText('jumpToStepInvalid'));
 
     expect(state).toEqual({
       activeStepIndex: 0,
@@ -205,7 +205,7 @@ describe('wizard test', () => {
 
     expect(state.prevSteps).toEqual(['step1', 'step2', 'step3']);
 
-    userEvent.click(screen.getByLabelText('setPrevSteps'));
+    await userEvent.click(screen.getByLabelText('setPrevSteps'));
 
     expect(state).toEqual({
       activeStepIndex: 0,
@@ -267,16 +267,17 @@ describe('wizard test', () => {
       />
     );
 
-    userEvent.click(screen.getByLabelText('handleNext'));
-    userEvent.click(screen.getByLabelText('handleSubmit'));
+    await userEvent.click(screen.getByLabelText('handleNext'));
+    await userEvent.click(screen.getByLabelText('handleSubmit'));
 
     expect(submitSpy).toHaveBeenCalledWith({ value1: 'x', value2: 'x-value2' });
     submitSpy.mockClear();
 
-    userEvent.click(screen.getByLabelText('handlePrev'));
-    userEvent.type(screen.getByLabelText('value1'), '{selectall}{backspace}y');
-    userEvent.click(screen.getByLabelText('handleNext'));
-    userEvent.click(screen.getByLabelText('handleSubmit'));
+    await userEvent.click(screen.getByLabelText('handlePrev'));
+    await userEvent.clear(screen.getByLabelText('value1'));
+    await userEvent.type(screen.getByLabelText('value1'), 'y');
+    await userEvent.click(screen.getByLabelText('handleNext'));
+    await userEvent.click(screen.getByLabelText('handleSubmit'));
 
     expect(submitSpy).toHaveBeenCalledWith({ value1: 'y', value3: 'x-value3' });
   });

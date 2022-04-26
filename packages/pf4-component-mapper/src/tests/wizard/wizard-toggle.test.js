@@ -31,7 +31,7 @@ describe('WizardToggle', () => {
     };
   });
 
-  it('opens dropdown', () => {
+  it('opens dropdown', async () => {
     render(<WizardToggle {...initialProps} />);
 
     const toggle = screen.getByLabelText('Wizard Toggle');
@@ -39,12 +39,12 @@ describe('WizardToggle', () => {
     expect(toggle).not.toHaveClass('pf-m-expanded');
     expect(dispatch).not.toHaveBeenCalled();
 
-    userEvent.click(toggle);
+    await userEvent.click(toggle);
 
     expect(dispatch).toHaveBeenCalledWith({ type: 'openNav' });
   });
 
-  it('closes dropdown', () => {
+  it('closes dropdown', async () => {
     initialProps = {
       ...initialProps,
       isOpen: true,
@@ -57,7 +57,7 @@ describe('WizardToggle', () => {
     expect(toggle).toHaveClass('pf-m-expanded');
     expect(dispatch).not.toHaveBeenCalled();
 
-    userEvent.click(toggle);
+    await userEvent.click(toggle);
 
     expect(dispatch).toHaveBeenCalledWith({ type: 'closeNav' });
   });

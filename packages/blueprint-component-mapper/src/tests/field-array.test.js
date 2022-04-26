@@ -63,7 +63,7 @@ describe('<FieldArray/>', () => {
     expect(screen.getByText(noItemsMessage)).toBeInTheDocument();
     expect(() => screen.getByLabelText('name')).toThrow();
 
-    userEvent.click(screen.getByText('CUSTOM ADD'));
+    await userEvent.click(screen.getByText('CUSTOM ADD'));
 
     expect(screen.getByLabelText('name')).toBeInTheDocument();
     expect(() => screen.getByText(noItemsMessage)).toThrow();
@@ -96,12 +96,12 @@ describe('<FieldArray/>', () => {
 
     render(<FormRenderer {...initialProps} />);
 
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Submit'));
     expect(onSubmit).toHaveBeenCalledWith({});
     onSubmit.mockClear();
 
-    userEvent.click(screen.getByText('Add'));
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Add'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: [{ name: 'enter a name', lastName: 'enter a last name' }],
@@ -109,8 +109,8 @@ describe('<FieldArray/>', () => {
 
     onSubmit.mockClear();
 
-    userEvent.click(screen.getByText('Remove'));
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Remove'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: [],
@@ -138,12 +138,12 @@ describe('<FieldArray/>', () => {
 
     render(<FormRenderer {...initialProps} />);
 
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Submit'));
     expect(onSubmit).toHaveBeenCalledWith({});
     onSubmit.mockClear();
 
-    userEvent.click(screen.getByText('Add'));
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Add'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: ['defaultItem'],
@@ -151,8 +151,8 @@ describe('<FieldArray/>', () => {
 
     onSubmit.mockClear();
 
-    userEvent.click(screen.getByText('Remove'));
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Remove'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: [],
@@ -182,40 +182,40 @@ describe('<FieldArray/>', () => {
 
     render(<FormRenderer {...initialProps} />);
 
-    userEvent.click(screen.getByText('Add'));
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Add'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: ['defaultItem'],
     });
     onSubmit.mockClear();
 
-    userEvent.click(screen.getByText('Add'));
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Add'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: ['defaultItem', 'defaultItem'],
     });
     onSubmit.mockClear();
 
-    userEvent.click(screen.getByText('Add'));
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Add'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: ['defaultItem', 'defaultItem'],
     });
     onSubmit.mockClear();
 
-    userEvent.click(screen.getAllByText('Remove')[0]);
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getAllByText('Remove')[0]);
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: ['defaultItem'],
     });
     onSubmit.mockClear();
 
-    userEvent.click(screen.getAllByText('Remove')[0]);
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getAllByText('Remove')[0]);
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: ['defaultItem'],
@@ -245,8 +245,8 @@ describe('<FieldArray/>', () => {
 
     expect(() => screen.getByText('Must have at least 3 items.')).toThrow();
 
-    userEvent.click(screen.getByText('Add'));
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Add'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).not.toHaveBeenCalled();
     onSubmit.mockClear();

@@ -41,7 +41,7 @@ describe('data types', () => {
     };
   });
 
-  it('should add integer data type validator and save interger to form state', () => {
+  it('should add integer data type validator and save interger to form state', async () => {
     const onSubmit = jest.fn();
     render(<FormRenderer {...initialProps} onSubmit={onSubmit} />);
 
@@ -50,15 +50,17 @@ describe('data types', () => {
      * should not allow submit
      * validator should prevent submit if anything else than number is passed to the input
      */
-    userEvent.type(screen.getByLabelText('Data type test'), 'abc');
+    await userEvent.type(screen.getByLabelText('Data type test'), 'abc');
 
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).not.toHaveBeenCalled();
 
-    userEvent.type(screen.getByLabelText('Data type test'), '{selectall}{backspace}123');
+    await userEvent.clear(screen.getByLabelText('Data type test'));
 
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.type(screen.getByLabelText('Data type test'), '123');
+
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith(
       expect.objectContaining({

@@ -69,17 +69,17 @@ describe('<Checkbox />', () => {
       />
     );
 
-    userEvent.click(screen.getByText('option 1'));
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('option 1'));
+    await userEvent.click(screen.getByText('Submit'));
     expect(submitSpy).toHaveBeenLastCalledWith({ check: ['option-1'] });
 
-    userEvent.click(screen.getByText('option 2'));
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('option 2'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(submitSpy).toHaveBeenLastCalledWith({ check: ['option-1', 'option-2'] });
 
-    userEvent.click(screen.getByText('option 1'));
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('option 1'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(submitSpy).toHaveBeenLastCalledWith({ check: ['option-2'] });
   });

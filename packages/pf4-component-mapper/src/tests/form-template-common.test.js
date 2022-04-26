@@ -127,7 +127,7 @@ describe('FormTemplate PF4 Common', () => {
     expect([...container.getElementsByTagName('button')].map((b) => b.textContent)).toEqual(['Submit', 'Reset', 'Cancel']);
   });
 
-  it('should call cancel with form values', () => {
+  it('should call cancel with form values', async () => {
     const expectedValues = { name: 'some name', b: { type: 'good' } };
 
     const onCancel = jest.fn();
@@ -143,7 +143,7 @@ describe('FormTemplate PF4 Common', () => {
       />
     );
 
-    userEvent.click(screen.getByText('Cancel'));
+    await userEvent.click(screen.getByText('Cancel'));
 
     expect(onCancel).toHaveBeenCalledWith(expectedValues);
   });
@@ -173,7 +173,7 @@ describe('FormTemplate PF4 Common', () => {
 
     expect(() => screen.getByText('some error title')).toThrow();
 
-    userEvent.type(screen.getByLabelText('text'), 'something');
+    await userEvent.type(screen.getByLabelText('text'), 'something');
 
     expect(screen.getByText('some error title')).toBeInTheDocument();
   });
@@ -204,7 +204,7 @@ describe('FormTemplate PF4 Common', () => {
     expect(() => screen.getByText('some error title')).toThrow();
     expect(() => screen.getByText('some description')).toThrow();
 
-    userEvent.type(screen.getByLabelText('text'), 'something');
+    await userEvent.type(screen.getByLabelText('text'), 'something');
 
     expect(screen.getByText('some error title')).toBeInTheDocument();
     expect(screen.getByText('some description')).toBeInTheDocument();

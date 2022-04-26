@@ -50,7 +50,7 @@ describe('<FormTemplate />', () => {
       />
     );
 
-    userEvent.type(screen.getByLabelText('field'), 'something');
+    await userEvent.type(screen.getByLabelText('field'), 'something');
 
     expect(screen.getByText('some error title')).toBeInTheDocument();
   });
@@ -78,7 +78,7 @@ describe('<FormTemplate />', () => {
       />
     );
 
-    userEvent.type(screen.getByLabelText('field'), 'something');
+    await userEvent.type(screen.getByLabelText('field'), 'something');
 
     expect(screen.getByText('some error title')).toBeInTheDocument();
     expect(screen.getByText('some description')).toBeInTheDocument();
