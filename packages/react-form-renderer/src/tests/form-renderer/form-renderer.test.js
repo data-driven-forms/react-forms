@@ -384,5 +384,42 @@ describe('<FormRenderer />', () => {
 
       expect(submitSpy).toHaveBeenCalledWith({ foo: 'bar' }, expect.any(Object), expect.any(Function));
     });
+
+    it('should render null as a child', () => {
+      expect(() => {
+        render(
+          <FormRenderer initialValues={{ foo: 'bar' }} componentMapper={componentMapper} schema={schema}>
+            {null}
+          </FormRenderer>
+        );
+      }).not.toThrow();
+    });
+
+    it('should throw an error if more than one child was passed', () => {
+      expect(() => {
+        render(
+          <FormRenderer initialValues={{ foo: 'bar' }} componentMapper={componentMapper} schema={schema}>
+            <div />
+            <div />
+          </FormRenderer>
+        );
+      }).toThrow('FormRenderer expects only one child element!');
+    });
+
+    it('should not override schema or formFields prop if explicitely given to child', () => {
+      const ChildSpy = ({ schema, formFields }) => (
+        <div>
+          <div>{schema}</div>
+          <div>{formFields}</div>
+        </div>
+      );
+      render(
+        <FormRenderer initialValues={{ foo: 'bar' }} componentMapper={componentMapper} schema={schema}>
+          <ChildSpy schema="schema-prop" formFields="form-fields-prop" />
+        </FormRenderer>
+      );
+      expect(screen.getByText('schema-prop')).toBeInTheDocument();
+      expect(screen.getByText('form-fields-prop')).toBeInTheDocument();
+    });
   });
 });

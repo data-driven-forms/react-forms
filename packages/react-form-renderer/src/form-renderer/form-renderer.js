@@ -23,7 +23,7 @@ const renderChildren = (children, props) => {
      * Only permit one child element
      */
     if (children.length !== 1) {
-      throw new Error('FormRenderer expect only one child element!');
+      throw new Error('FormRenderer expects only one child element!');
     }
 
     childElement = children[0];
