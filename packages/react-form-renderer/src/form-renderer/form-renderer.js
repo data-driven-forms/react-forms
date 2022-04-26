@@ -171,6 +171,7 @@ const FormRenderer = ({
               ffGetRegisteredFields: form.getRegisteredFields,
               getRegisteredFields: internalGetRegisteredFields,
               initialValues: props.initialValues,
+              schema,
             },
           }}
         >
