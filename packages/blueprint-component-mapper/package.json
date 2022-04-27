@@ -37,8 +37,8 @@
     "@blueprintjs/core": "^3.26.1",
     "@blueprintjs/datetime": "^3.17.0",
     "@blueprintjs/select": "^3.12.3",
-    "react": "^16.13.1 || ^17.0.2",
-    "react-dom": "^16.13.1 || ^17.0.2"
+    "react": "^16.13.1 || ^17.0.2 || ^18.0.0",
+    "react-dom": "^16.13.1 || ^17.0.2 || ^18.0.0"
   },
   "dependencies": {
     "@data-driven-forms/common": "*",

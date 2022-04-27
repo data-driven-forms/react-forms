@@ -37,8 +37,8 @@
     "@data-driven-forms/react-form-renderer": "*",
     "@patternfly/react-core": "^4.157.3",
     "@patternfly/react-icons": "^4.11.7",
-    "react": "^16.13.1 || ^17.0.2",
-    "react-dom": "^16.13.1 || ^17.0.2"
+    "react": "^16.13.1 || ^17.0.2 || ^18.0.0",
+    "react-dom": "^16.13.1 || ^17.0.2 || ^18.0.0"
   },
   "dependencies": {
     "@data-driven-forms/common": "*",
