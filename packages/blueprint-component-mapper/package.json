@@ -1,6 +1,6 @@
 {
   "name": "@data-driven-forms/blueprint-component-mapper",
-  "version": "3.12.1",
+  "version": "3.17.4",
   "description": "BlueprintJS React component mapper for Data Driven Forms.",
   "main": "index.js",
   "module": "esm/index.js",
@@ -36,7 +36,9 @@
   "peerDependencies": {
     "@blueprintjs/core": "^3.26.1",
     "@blueprintjs/datetime": "^3.17.0",
-    "@blueprintjs/select": "^3.12.3"
+    "@blueprintjs/select": "^3.12.3",
+    "react": "^16.13.1 || ^17.0.2 || ^18.0.0",
+    "react-dom": "^16.13.1 || ^17.0.2 || ^18.0.0"
   },
   "dependencies": {
     "@data-driven-forms/common": "*",

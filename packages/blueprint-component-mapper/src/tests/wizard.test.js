@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormRenderer, componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
-import { mount } from 'enzyme';
-import { Button } from '@blueprintjs/core';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { componentMapper, FormTemplate } from '../index';
 import { CONDITIONAL_SUBMIT_FLAG } from '@data-driven-forms/common/wizard';
@@ -27,6 +27,7 @@ describe('wizard', () => {
                   component: componentTypes.TEXT_FIELD,
                   name: 'aws',
                   validate: [{ type: validatorTypes.REQUIRED }],
+                  'aria-label': 'aws',
                 },
               ],
             },
@@ -36,6 +37,7 @@ describe('wizard', () => {
                 {
                   component: componentTypes.TEXTAREA,
                   name: 'summary',
+                  'aria-label': 'summary',
                 },
               ],
             },
@@ -54,32 +56,26 @@ describe('wizard', () => {
     };
   });
 
-  it('simple next and back', () => {
-    const wrapper = mount(<FormRenderer {...initialProps} />);
+  it('simple next and back', async () => {
+    render(<FormRenderer {...initialProps} />);
 
-    expect(wrapper.find('input').first().props().name).toEqual('aws');
+    expect(screen.getByLabelText('aws')).toBeInTheDocument();
 
-    wrapper.find(Button).last().simulate('click'); // disabled next
-    wrapper.update();
+    await userEvent.click(screen.getByText('Next'));
 
-    expect(wrapper.find('input').first().props().name).toEqual('aws');
+    expect(screen.getByLabelText('aws')).toBeInTheDocument();
 
-    wrapper.find('input').instance().value = 'something';
-    wrapper.find('input').simulate('change');
-    wrapper.update();
+    await userEvent.type(screen.getByLabelText('aws'), 'something');
+    await userEvent.click(screen.getByText('Next'));
 
-    wrapper.find(Button).last().simulate('click'); // next
-    wrapper.update();
+    expect(screen.getByLabelText('summary')).toBeInTheDocument();
 
-    expect(wrapper.find('textarea').first().props().name).toEqual('summary');
+    await userEvent.click(screen.getByText('Back'));
 
-    wrapper.find(Button).at(1).simulate('click'); // back
-    wrapper.update();
-
-    expect(wrapper.find('input').first().props().name).toEqual('aws');
+    expect(screen.getByLabelText('aws')).toBeInTheDocument();
   });
 
-  it('conditional next', () => {
+  it('conditional next', async () => {
     schema = {
       fields: [
         {
@@ -100,6 +96,7 @@ describe('wizard', () => {
                   component: componentTypes.TEXT_FIELD,
                   name: 'aws',
                   validate: [{ type: validatorTypes.REQUIRED }],
+                  'aria-label': 'aws',
                 },
               ],
             },
@@ -109,6 +106,7 @@ describe('wizard', () => {
                 {
                   component: componentTypes.TEXT_FIELD,
                   name: 'summary',
+                  'aria-label': 'summary',
                 },
               ],
             },
@@ -118,6 +116,7 @@ describe('wizard', () => {
                 {
                   component: componentTypes.TEXT_FIELD,
                   name: 'googlesummary',
+                  'aria-label': 'googlesummary',
                 },
               ],
             },
@@ -126,41 +125,22 @@ describe('wizard', () => {
       ],
     };
 
-    const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
+    render(<FormRenderer {...initialProps} schema={schema} />);
 
-    expect(wrapper.find('input').first().props().name).toEqual('aws');
+    await userEvent.type(screen.getByLabelText('aws'), 'aws');
+    await userEvent.click(screen.getByText('Next'));
 
-    wrapper.find('input').instance().value = 'aws';
-    wrapper.find('input').simulate('change');
-    wrapper.update();
+    expect(screen.getByLabelText('summary')).toBeInTheDocument();
 
-    wrapper.find(Button).last().simulate('click'); // next
-    wrapper.update();
+    await userEvent.click(screen.getByText('Back'));
+    await userEvent.clear(screen.getByLabelText('aws'));
+    await userEvent.type(screen.getByLabelText('aws'), 'google');
+    await userEvent.click(screen.getByText('Next'));
 
-    expect(wrapper.find('input').instance().name).toEqual('summary');
-
-    wrapper
-      .find(Button)
-      .at(1) // back
-      .simulate('click');
-    wrapper.update();
-
-    expect(wrapper.find('input').first().props().name).toEqual('aws');
-
-    wrapper.find('input').instance().value = 'google';
-    wrapper.find('input').simulate('change');
-    wrapper.update();
-
-    wrapper
-      .find(Button)
-      .last() // next
-      .simulate('click');
-    wrapper.update();
-
-    expect(wrapper.find('input').instance().name).toEqual('googlesummary');
+    expect(screen.getByLabelText('googlesummary')).toBeInTheDocument();
   });
 
-  it('conditional submit', () => {
+  it('conditional submit', async () => {
     schema = {
       fields: [
         {
@@ -181,6 +161,7 @@ describe('wizard', () => {
                   component: componentTypes.TEXT_FIELD,
                   name: 'aws',
                   validate: [{ type: validatorTypes.REQUIRED }],
+                  'aria-label': 'aws',
                 },
               ],
             },
@@ -190,6 +171,7 @@ describe('wizard', () => {
                 {
                   component: componentTypes.TEXTAREA,
                   name: 'summary',
+                  'aria-label': 'summary',
                 },
               ],
             },
@@ -199,6 +181,7 @@ describe('wizard', () => {
                 {
                   component: componentTypes.TEXTAREA,
                   name: 'googlesummary',
+                  'aria-label': 'googlesummary',
                 },
               ],
             },
@@ -207,21 +190,13 @@ describe('wizard', () => {
       ],
     };
 
-    const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
+    render(<FormRenderer {...initialProps} schema={schema} />);
 
-    wrapper.find('input').instance().value = 'aws';
-    wrapper.find('input').simulate('change');
-    wrapper.update();
+    await userEvent.type(screen.getByLabelText('aws'), 'aws');
+    await userEvent.click(screen.getByText('Next'));
+    await userEvent.type(screen.getByLabelText('summary'), 'summary');
 
-    wrapper.find(Button).last().simulate('click');
-    wrapper.update();
-
-    wrapper.find('textarea').first().instance().value = 'summary';
-    wrapper.find('textarea').first().simulate('change');
-    wrapper.update();
-
-    wrapper.find(Button).last().simulate('click');
-    wrapper.update();
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       aws: 'aws',
@@ -229,23 +204,14 @@ describe('wizard', () => {
     });
     onSubmit.mockClear();
 
-    wrapper.find(Button).at(1).simulate('click');
-    wrapper.update();
+    await userEvent.click(screen.getByText('Back'));
+    await userEvent.clear(screen.getByLabelText('aws'));
+    await userEvent.type(screen.getByLabelText('aws'), 'google');
+    await userEvent.click(screen.getByText('Next'));
 
-    wrapper.find('input').instance().value = 'google';
-    wrapper.find('input').simulate('change');
-    wrapper.update();
+    await userEvent.type(screen.getByLabelText('googlesummary'), 'google summary');
 
-    wrapper.find(Button).last().simulate('click');
-    wrapper.update();
-
-    wrapper.find('textarea').first().instance().value = 'google summary';
-    wrapper.find('textarea').first().simulate('change');
-    wrapper.update();
-
-    wrapper.find(Button).last().simulate('click');
-    wrapper.update();
-
+    await userEvent.click(screen.getByText('Submit'));
     expect(onSubmit).toHaveBeenCalledWith({
       aws: 'google',
       googlesummary: 'google summary',
@@ -253,22 +219,19 @@ describe('wizard', () => {
     onSubmit.mockClear();
   });
 
-  it('sends values to cancel', () => {
-    const wrapper = mount(<FormRenderer {...initialProps} />);
+  it('sends values to cancel', async () => {
+    render(<FormRenderer {...initialProps} />);
 
-    wrapper.find('input').instance().value = 'something';
-    wrapper.find('input').simulate('change');
-    wrapper.update();
+    await userEvent.type(screen.getByLabelText('aws'), 'something');
 
-    wrapper.find(Button).first().simulate('click'); // disabled next
-    wrapper.update();
+    await userEvent.click(screen.getByText('Cancel'));
 
     expect(onCancel).toHaveBeenCalledWith({
       aws: 'something',
     });
   });
 
-  it('conditional submit step', () => {
+  it('conditional submit step', async () => {
     const submit = jest.fn();
     schema = {
       fields: [
@@ -290,6 +253,7 @@ describe('wizard', () => {
                   component: componentTypes.TEXT_FIELD,
                   name: 'name',
                   validate: [{ type: validatorTypes.REQUIRED }],
+                  'aria-label': 'name',
                 },
               ],
             },
@@ -298,20 +262,19 @@ describe('wizard', () => {
       ],
     };
 
-    const wrapper = mount(<FormRenderer {...initialProps} onSubmit={submit} schema={schema} />);
+    render(<FormRenderer {...initialProps} onSubmit={submit} schema={schema} />);
 
-    wrapper.find('input').instance().value = 'bla';
-    wrapper.find('input').simulate('change');
-    wrapper.update();
+    await userEvent.type(screen.getByLabelText('name'), 'summary');
 
-    expect(wrapper.find('button.bp3-button.bp3-intent-success').text()).toEqual('Next');
+    expect(screen.getByText('Next')).toBeInTheDocument();
 
-    wrapper.find('input').instance().value = 'submit';
-    wrapper.find('input').simulate('change');
-    wrapper.update();
+    await userEvent.clear(screen.getByLabelText('name'));
+    await userEvent.type(screen.getByLabelText('name'), 'submit');
 
-    expect(wrapper.find('button.bp3-button.bp3-intent-success').text()).toEqual('Submit');
-    wrapper.find('button.bp3-button.bp3-intent-success').simulate('click');
+    expect(screen.getByText('Submit')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Submit'));
+
     expect(submit).toHaveBeenCalledWith({ name: 'submit' }, expect.any(Object), expect.any(Object));
   });
 });

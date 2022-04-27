@@ -35,9 +35,21 @@ You can use [globally defined attributes](/mappers/global-component-props).
 
 *Component*
 
-Components which defines a template of the form. This component receives two props from the renderer: `formFields` and `schema`. `formFields` is the content of the form. You should wrap this content into your `<form>` component and add form buttons.
+**Note** You have to pass at least one of `FormTemplate` or a `children` render function to render the fields.
+
+A component that defines a template of the form. This component receives two props from the renderer: `formFields` and `schema`. `formFields` is the content of the form. You should wrap this content into your `<form>` component and add form buttons.
 
 [Read more](/components/form-template).
+
+---
+
+### children
+
+**Note** You have to pass at least one of `FormTemplate` or a `children` render function to render the fields.
+
+*function*
+
+Children render function. It serves the same purpose as `FormTemplate` prop. [Read more](/components/children).
 
 ---
 
@@ -47,7 +59,7 @@ Components which defines a template of the form. This component receives two pro
 
 A submit callback which receives two arguments: `values` and `formApi`.
 
-[Read more]([/mappers/custom-mapper](https://final-form.org/docs/react-final-form/types/FormProps#onsubmit)).
+[Read more](https://final-form.org/docs/react-final-form/types/FormProps#onsubmit).
 
 ---
 
@@ -125,7 +137,7 @@ A cancel callback, which receives `values` as the first argument.
 
 *(formState) => void*
 
-A function which will be called with every form update, i.e. `({ values }) => setValues(values)`. 
+A function which will be called with every form update, i.e. `({ values }) => setValues(values)`.
 
 [Read more](https://final-form.org/docs/react-final-form/types/FormProps#debug)
 
@@ -173,7 +185,7 @@ You can pass your own [subscription](https://final-form.org/docs/react-final-for
 
 A function which receives all form values and returns an object with errors.
 
-[Read more]([/components/form-template](https://final-form.org/docs/react-final-form/types/FormProps#validate)).
+[Read more](https://final-form.org/docs/react-final-form/types/FormProps#validate).
 
 ---
 

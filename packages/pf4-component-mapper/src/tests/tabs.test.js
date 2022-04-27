@@ -1,8 +1,9 @@
 import React from 'react';
 import Tabs from '../tabs';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
 import RenderWithProvider from '../../../../__mocks__/with-provider';
-import { Tabs as PF4Tabs } from '@patternfly/react-core';
 
 describe('Tabs component', () => {
   const props = {
@@ -21,7 +22,7 @@ describe('Tabs component', () => {
   };
 
   it('should render tabs correctly', () => {
-    const wrapper = mount(
+    render(
       <RenderWithProvider
         value={{
           formOptions: {
@@ -32,12 +33,14 @@ describe('Tabs component', () => {
         <Tabs {...props}></Tabs>
       </RenderWithProvider>
     );
-    expect(wrapper.find(PF4Tabs)).toHaveLength(1);
-    expect(wrapper.find('.content')).toHaveLength(2);
+
+    expect(screen.getAllByText('Here would be form')).toHaveLength(2);
+    expect(screen.getByText('cosiTitle')).toBeInTheDocument();
+    expect(screen.getByText('cosiTitle2')).toBeInTheDocument();
   });
 
-  it('should switch tabs correctly', () => {
-    const wrapper = mount(
+  it('should switch tabs correctly', async () => {
+    render(
       <RenderWithProvider
         value={{
           formOptions: {
@@ -49,11 +52,10 @@ describe('Tabs component', () => {
       </RenderWithProvider>
     );
 
-    expect(wrapper.find(PF4Tabs).props().activeKey).toEqual(0);
+    expect(screen.getByText('cosiTitle').closest('.pf-c-tabs__item')).toHaveClass('pf-m-current');
 
-    const secondTabButton = wrapper.find('.pf-c-tabs__link').last();
-    secondTabButton.simulate('click');
+    await userEvent.click(screen.getByText('cosiTitle2'));
 
-    expect(wrapper.find(PF4Tabs).props().activeKey).toEqual(1);
+    expect(screen.getByText('cosiTitle2').closest('.pf-c-tabs__item')).toHaveClass('pf-m-current');
   });
 });

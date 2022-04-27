@@ -1,11 +1,40 @@
 import React from 'react';
+import { styled } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
 import selectNext from '@data-driven-forms/common/wizard/select-next';
 import { FormSpy } from '@data-driven-forms/react-form-renderer';
-import { Button, Grid } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Button, Grid } from '@mui/material';
+
+const PREFIX = 'WizardStepButtons';
+
+const classes = {
+  wizardBody: `${PREFIX}-wizardBody`,
+  buttons: `${PREFIX}-buttons`,
+  button: `${PREFIX}-button`,
+  buttonsContainer: `${PREFIX}-buttonsContainer`,
+};
+
+const StyledGrid = styled(Grid)(() => ({
+  [`& .${classes.wizardBody}`]: {
+    padding: 24,
+    margin: 0,
+  },
+
+  [`& .${classes.buttons}`]: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+  },
+
+  [`& .${classes.button}`]: {
+    marginRight: 16,
+  },
+
+  [`&.${classes.buttonsContainer}`]: {
+    marginTop: 36,
+  },
+}));
 
 const NextButton = ({ nextStep, valid, handleNext, nextLabel, getState, handleSubmit, submitLabel, conditionalSubmitFlag }) => {
   const nextResult = nextStep ? selectNext(nextStep, getState) : nextStep;
@@ -33,26 +62,7 @@ NextButton.propTypes = {
   conditionalSubmitFlag: PropTypes.string.isRequired,
 };
 
-const useStyles = makeStyles(() => ({
-  wizardBody: {
-    padding: 24,
-    margin: 0,
-  },
-  buttons: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-  },
-  button: {
-    marginRight: 16,
-  },
-  buttonsContainer: {
-    marginTop: 36,
-  },
-}));
-
 const WizardStepButtons = ({ buttons: Buttons, ...props }) => {
-  const classes = useStyles();
-
   if (Buttons) {
     return <Buttons classes={classes} {...props} />;
   }
@@ -69,10 +79,10 @@ const WizardStepButtons = ({ buttons: Buttons, ...props }) => {
   } = props;
 
   return (
-    <Grid
+    <StyledGrid
       container
       direction="row"
-      justify="space-evenly"
+      justifyContent="space-evenly"
       {...ButtonContainerProps}
       className={clsx(classes.buttonsContainer, ButtonContainerProps.className)}
     >
@@ -98,7 +108,7 @@ const WizardStepButtons = ({ buttons: Buttons, ...props }) => {
           </React.Fragment>
         )}
       </FormSpy>
-    </Grid>
+    </StyledGrid>
   );
 };
 

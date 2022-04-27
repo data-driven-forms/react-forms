@@ -1,4 +1,4 @@
-interface validatorTypes {
+interface IvalidatorTypes {
   REQUIRED: 'required';
   MIN_LENGTH: 'min-length';
   MAX_LENGTH: 'max-length';
@@ -10,6 +10,6 @@ interface validatorTypes {
   URL: 'url';
 }
 
-declare const validatorTypes: validatorTypes;
+declare const validatorTypes: IvalidatorTypes;
 
 export default validatorTypes;

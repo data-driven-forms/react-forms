@@ -1,8 +1,8 @@
 import React from 'react';
+import { styled } from '@mui/material/styles';
 import PropTypes from 'prop-types';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
 
 import validatorTypes from '@data-driven-forms/react-form-renderer/validator-types';
 import componentTypes from '@data-driven-forms/react-form-renderer/component-types';
@@ -12,8 +12,14 @@ import Checkbox from '@data-driven-forms/mui-component-mapper/checkbox';
 import FormSpy from '@data-driven-forms/react-form-renderer/form-spy';
 import useFormApi from '@data-driven-forms/react-form-renderer/use-form-api';
 
-const useStyles = makeStyles((theme) => ({
-  formButtons: {
+const PREFIX = 'FormExample';
+
+const classes = {
+  formButtons: `${PREFIX}-formButtons`,
+};
+
+const Buttons = styled('div')(({ theme }) => ({
+  [`&.${classes.formButtons}`]: {
     display: 'flex',
     width: '100%',
     flexFlow: 'row-reverse',
@@ -23,19 +29,17 @@ const useStyles = makeStyles((theme) => ({
 
 const FormTemplate = ({ formFields }) => {
   const formOptions = useFormApi();
-  const classes = useStyles();
-
   return (
     <form onSubmit={formOptions.handleSubmit}>
       <Grid container spacing={2}>
         {formFields}
         <FormSpy subscription={{ valid: true }}>
           {({ valid }) => (
-            <div className={classes.formButtons}>
+            <Buttons className={classes.formButtons}>
               <Button disabled={!valid} type="submit" color="primary" variant="contained">
                 Show
               </Button>
-            </div>
+            </Buttons>
           )}
         </FormSpy>
       </Grid>

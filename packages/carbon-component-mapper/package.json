@@ -1,6 +1,6 @@
 {
   "name": "@data-driven-forms/carbon-component-mapper",
-  "version": "3.12.1",
+  "version": "3.17.4",
   "description": "Carbon React component mapper for Data Driven Forms.",
   "main": "index.js",
   "module": "esm/index.js",
@@ -29,13 +29,16 @@
     "javascript"
   ],
   "devDependencies": {
-    "@carbon/icons-react": "^10.19.0",
-    "@types/carbon-components-react": "^7.10.9",
-    "carbon-components": "^10.22.0",
-    "carbon-components-react": "^7.22.0",
+    "@carbon/icons-react": "^10.41.0",
+    "@types/carbon-components-react": "^7.44.1",
+    "carbon-components": "^10.46.0",
+    "carbon-components-react": "^7.46.0",
     "carbon-icons": "^7.0.7"
   },
-  "peerDependencies": {},
+  "peerDependencies": {
+    "react": "^16.13.1 || ^17.0.2 || ^18.0.0",
+    "react-dom": "^16.13.1 || ^17.0.2 || ^18.0.0"
+  },
   "dependencies": {
     "@data-driven-forms/common": "*",
     "clsx": "^1.1.1",

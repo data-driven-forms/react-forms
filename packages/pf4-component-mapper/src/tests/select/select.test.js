@@ -1,19 +1,19 @@
 import React from 'react';
-import { mount } from 'enzyme';
-import isEqual from 'lodash/isEqual';
+import { render, screen, waitFor, act, fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
 import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 
 import Select from '../../select/select/select';
-import { act } from 'react-dom/test-utils';
-import ValueContainer from '../../select/select/value-container';
 import FormTemplate from '../../form-template';
 import componentMapper from '../../component-mapper';
-import Option from '../../select/select/option';
 
 describe('<Select />', () => {
   let initialProps;
-  const onChange = jest.fn();
+  let onChange;
+
   beforeEach(() => {
+    onChange = jest.fn();
     initialProps = {
       onChange,
       name: 'test-select',
@@ -31,12 +31,8 @@ describe('<Select />', () => {
     };
   });
 
-  afterEach(() => {
-    onChange.mockReset();
-  });
-
   it('should render translated option in value container', async () => {
-    const wrapper = mount(
+    render(
       <FormRenderer
         onSubmit={jest.fn}
         FormTemplate={FormTemplate}
@@ -58,21 +54,14 @@ describe('<Select />', () => {
       />
     );
 
-    expect(wrapper.find(ValueContainer).find('h1')).toHaveLength(0);
+    await userEvent.click(screen.getByLabelText('open menu'));
+    await userEvent.click(screen.getByText('Translated'));
 
-    wrapper.find('.pf-c-select__toggle').simulate('click');
-    const option = wrapper.find('button.pf-c-select__menu-item').first();
-
-    await act(async () => {
-      option.simulate('click');
-    });
-    wrapper.update();
-
-    expect(wrapper.find(ValueContainer).find('h1').text()).toEqual('Translated');
+    expect(screen.getByText('Translated', { selector: 'h1' }).closest('.pf-c-select__toggle-text')).toBeInTheDocument();
   });
 
   it('should render description', async () => {
-    const wrapper = mount(
+    render(
       <FormRenderer
         onSubmit={jest.fn}
         FormTemplate={FormTemplate}
@@ -95,33 +84,155 @@ describe('<Select />', () => {
       />
     );
 
-    expect(wrapper.find(ValueContainer).find('h1')).toHaveLength(0);
+    expect(() => screen.getByText('some description')).toThrow();
 
-    wrapper.find('.pf-c-select__toggle').simulate('click');
+    await userEvent.click(screen.getByLabelText('open menu'));
 
-    expect(wrapper.find(Option).find('.pf-c-select__menu-item-description').text()).toEqual('some description');
+    expect(screen.getByText('some description')).toBeInTheDocument();
+  });
+
+  it('should render groups and dividers', async () => {
+    const onSubmit = jest.fn();
+
+    const { container } = render(
+      <FormRenderer
+        onSubmit={(values) => onSubmit(values)}
+        FormTemplate={FormTemplate}
+        componentMapper={componentMapper}
+        schema={{
+          fields: [
+            {
+              component: 'select',
+              name: 'select-with-categories',
+              label: 'With categories',
+              options: [
+                {
+                  label: 'Category 1',
+                  options: [
+                    { label: 'value 1', value: '111' },
+                    { label: 'value 2', value: '222' },
+                  ],
+                },
+                { divider: true },
+                { label: 'independent 1', value: '1112333' },
+                { divider: true },
+                {
+                  label: 'Category 2',
+                  options: [
+                    { label: 'value 3', value: '333' },
+                    { label: 'value 4', value: '444' },
+                  ],
+                },
+                { divider: true },
+                { label: 'independent 2', value: '11111' },
+              ],
+            },
+          ],
+        }}
+      />
+    );
+
+    await userEvent.click(screen.getByLabelText('open menu'));
+
+    expect(screen.getByText('Category 1')).toHaveClass('pf-c-select__menu-group-title');
+    expect(screen.getByText('Category 2')).toHaveClass('pf-c-select__menu-group-title');
+    expect(container.getElementsByClassName('pf-c-divider')).toHaveLength(3);
+    expect([...container.getElementsByClassName('pf-c-select__menu-item')].map((opt) => opt.textContent)).toEqual([
+      'value 1',
+      'value 2',
+      'independent 1',
+      'value 3',
+      'value 4',
+      'independent 2',
+    ]);
+
+    await userEvent.click(screen.getByText('value 1'));
+
+    await userEvent.click(screen.getByLabelText('open menu'));
+
+    expect(screen.getByText('value 1', { selector: 'button.pf-c-select__menu-item' })).toHaveClass('pf-m-selected');
+
+    await userEvent.click(screen.getByText('Submit'));
+
+    expect(onSubmit).toHaveBeenCalledWith({ 'select-with-categories': '111' });
+  });
+
+  it('filters with nested options', async () => {
+    const { container } = render(
+      <FormRenderer
+        onSubmit={jest.fn()}
+        FormTemplate={FormTemplate}
+        componentMapper={componentMapper}
+        schema={{
+          fields: [
+            {
+              component: 'select',
+              name: 'select-with-categories',
+              label: 'With categories',
+              isSearchable: true,
+              options: [
+                {
+                  label: 'Category 1',
+                  options: [
+                    { label: 'value 1', value: '111' },
+                    { label: 'value 2', value: '222' },
+                  ],
+                },
+                { divider: true },
+                { label: 'independent 1', value: '1112333' },
+                { divider: true },
+                {
+                  label: 'Category 2',
+                  options: [
+                    { label: 'value 3', value: '333' },
+                    { label: 'value 4', value: '444' },
+                  ],
+                },
+                { divider: true },
+                { label: 'independent 2', value: '11111' },
+              ],
+            },
+          ],
+        }}
+      />
+    );
+
+    await userEvent.click(screen.getByLabelText('open menu'));
+
+    await userEvent.type(screen.getByPlaceholderText('Choose...'), 'value');
+    expect(screen.getByText('Category 1')).toHaveClass('pf-c-select__menu-group-title');
+    expect(screen.getByText('Category 2')).toHaveClass('pf-c-select__menu-group-title');
+    expect(container.getElementsByClassName('pf-c-divider')).toHaveLength(0);
+
+    expect([...container.getElementsByClassName('pf-c-select__menu-item')].map((opt) => opt.textContent)).toEqual([
+      'value 1',
+      'value 2',
+      'value 3',
+      'value 4',
+    ]);
+
+    await userEvent.clear(screen.getByPlaceholderText('Choose...'));
+    await userEvent.type(screen.getByPlaceholderText('Choose...'), 'independent');
+    expect(container.getElementsByClassName('pf-c-divider')).toHaveLength(0);
+    expect(container.getElementsByClassName('pf-c-select__menu-group-title')).toHaveLength(0);
+
+    expect([...container.getElementsByClassName('pf-c-select__menu-item')].map((opt) => opt.textContent)).toEqual(['independent 1', 'independent 2']);
   });
 
   it('should return single simple value', async () => {
-    const wrapper = mount(<Select {...initialProps} />);
-    wrapper.find('.pf-c-select__toggle').simulate('click');
-    const option = wrapper.find('button.pf-c-select__menu-item').first();
+    render(<Select {...initialProps} />);
 
-    await act(async () => {
-      option.simulate('click');
-    });
+    await userEvent.click(screen.getByLabelText('open menu'));
+    await userEvent.click(screen.getByText('First option'));
 
     expect(onChange).toHaveBeenCalledWith(1);
   });
 
   it('should return single object value', async () => {
-    const wrapper = mount(<Select {...initialProps} simpleValue={false} />);
-    wrapper.find('.pf-c-select__toggle').simulate('click');
-    const option = wrapper.find('button.pf-c-select__menu-item').first();
+    render(<Select {...initialProps} simpleValue={false} />);
 
-    await act(async () => {
-      option.simulate('click');
-    });
+    await userEvent.click(screen.getByLabelText('open menu'));
+    await userEvent.click(screen.getByText('First option'));
 
     expect(onChange).toHaveBeenCalledWith({ ...initialProps.options[0] });
   });
@@ -130,25 +241,12 @@ describe('<Select />', () => {
     const onChange = jest.fn();
     // simulate first return value in state
     const value = [1];
-    const wrapper = mount(<Select {...initialProps} value={value} isMulti onChange={onChange} closeMenuOnSelect={false} />);
-    wrapper.find('.pf-c-select__toggle').simulate('click');
-    /**
-     * select first option
-     */
-    const option1 = wrapper.find('button.pf-c-select__menu-item').first();
+    render(<Select {...initialProps} value={value} isMulti onChange={onChange} closeMenuOnSelect={false} />);
 
-    await act(async () => {
-      option1.simulate('click');
-    });
-    /**
-     * select second option
-     */
-    const option2 = wrapper.find('button.pf-c-select__menu-item').last();
-    await act(async () => {
-      option2.simulate('click');
-    });
+    await userEvent.click(screen.getByLabelText('open menu'));
+    await userEvent.click(screen.getByText('First option', { selector: '.pf-c-select__menu-item' }));
+    await userEvent.click(screen.getByText('Second option'));
 
-    wrapper.update();
     expect(onChange).toHaveBeenCalledTimes(2);
     expect(onChange).lastCalledWith([1, 2]);
   });
@@ -157,24 +255,12 @@ describe('<Select />', () => {
     const onChange = jest.fn();
     // simulate first return value in state
     const value = [{ ...initialProps.options[0] }];
-    const wrapper = mount(<Select {...initialProps} value={value} simpleValue={false} isMulti onChange={onChange} closeMenuOnSelect={false} />);
-    wrapper.find('.pf-c-select__toggle').simulate('click');
-    /**
-     * select first option
-     */
-    const option1 = wrapper.find('button.pf-c-select__menu-item').first();
+    render(<Select {...initialProps} value={value} simpleValue={false} isMulti onChange={onChange} closeMenuOnSelect={false} />);
 
-    await act(async () => {
-      option1.simulate('click');
-    });
-    /**
-     * select second option
-     */
-    const option2 = wrapper.find('button.pf-c-select__menu-item').last();
-    await act(async () => {
-      option2.simulate('click');
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByLabelText('open menu'));
+    await userEvent.click(screen.getByText('First option', { selector: '.pf-c-select__menu-item' }));
+    await userEvent.click(screen.getByText('Second option'));
+
     expect(onChange).toHaveBeenCalledTimes(2);
     expect(onChange).lastCalledWith([...initialProps.options]);
   });
@@ -192,178 +278,118 @@ describe('<Select />', () => {
         value: 4,
       },
     ];
-    const wrapper = mount(<Select {...initialProps} options={options} value={value} isMulti closeMenuOnSelect={false} />);
+    const { container } = render(<Select {...initialProps} options={options} value={value} isMulti closeMenuOnSelect={false} />);
 
-    expect(wrapper.find('.pf-c-chip-group')).toHaveLength(1);
-    expect(wrapper.find('div.pf-c-chip')).toHaveLength(3);
-    const expandButton = wrapper.find('button.pf-c-chip.pf-m-overflow').last();
-    await act(async () => {
-      expandButton.simulate('click');
-    });
-    wrapper.update();
-    expect(wrapper.find('div.pf-c-chip')).toHaveLength(4);
+    expect(container.querySelectorAll('.pf-c-chip-group')).toHaveLength(1);
+    expect(container.querySelectorAll('div.pf-c-chip')).toHaveLength(3);
+
+    await userEvent.click(screen.getByText('1 more'));
+
+    expect(container.querySelectorAll('div.pf-c-chip')).toHaveLength(4);
   });
 
   it('should call on change when removing chip', async () => {
     const value = [1, 2];
-    const wrapper = mount(<Select {...initialProps} value={value} isMulti closeMenuOnSelect={false} />);
+    render(<Select {...initialProps} value={value} isMulti closeMenuOnSelect={false} />);
 
-    await act(async () => {
-      wrapper.find('button.pf-c-button.pf-m-plain').first().simulate('click');
-    });
+    await userEvent.click(screen.getAllByLabelText('remove option')[0]);
 
     expect(onChange).toHaveBeenCalledWith([2]);
-  });
-
-  it('should map props correctly', () => {
-    const props = {
-      isMulti: true,
-      options: [
-        { label: 'a', value: 1 },
-        { label: 'b', value: 2 },
-      ],
-      name: 'foo',
-      onChange: Function,
-      value: [1, 2],
-    };
-    const wrapper = mount(<Select {...props} />);
-    const mappedProps = wrapper.find(Select).props();
-    expect(mappedProps).toEqual({
-      isClearable: false,
-      isMulti: true,
-      onChange: Function,
-      isSearchable: false,
-      name: 'foo',
-      options: [
-        { label: 'a', value: 1 },
-        { label: 'b', value: 2 },
-      ],
-      placeholder: 'Choose...',
-      showLessLabel: 'Show less',
-      showMoreLabel: 'more',
-      simpleValue: true,
-      updatingMessage: 'Loading data...',
-      menuIsPortal: false,
-      value: [1, 2],
-      loadingMessage: 'Loading...',
-      noOptionsMessage: 'No options',
-      noResultsMessage: 'No results found',
-    });
   });
 
   it('should load single select Async options correctly', async () => {
     const asyncLoading = jest.fn().mockReturnValue(Promise.resolve([{ label: 'label', value: '3' }]));
 
-    let wrapper;
+    render(<Select {...initialProps} options={undefined} loadOptions={asyncLoading} />);
 
-    await act(async () => {
-      wrapper = mount(<Select {...initialProps} options={undefined} loadOptions={asyncLoading} />);
-    });
-    wrapper.update();
-    wrapper.find('.pf-c-select__toggle').simulate('click');
-
-    expect(wrapper.find('button.pf-c-select__menu-item')).toHaveLength(1);
-    expect(wrapper.find('button.pf-c-select__menu-item').text()).toEqual('label');
+    await userEvent.click(screen.getByLabelText('open menu'));
+    await waitFor(() => expect(screen.getByText('label')).toBeInTheDocument());
   });
 
   it('should load multi select Async options correctly and set initial value to undefined', async () => {
     const asyncLoading = jest.fn().mockReturnValue(Promise.resolve([{ label: 'label', value: '123' }]));
     const onChange = jest.fn();
-    let wrapper;
 
-    await act(async () => {
-      wrapper = mount(
-        <Select
-          {...initialProps}
-          value={['does not exists in options']}
-          isMulti
-          options={undefined}
-          loadOptions={asyncLoading}
-          onChange={onChange}
-          simpleValue
-        />
-      );
-    });
+    render(
+      <Select
+        {...initialProps}
+        value={['does not exists in options']}
+        isMulti
+        options={undefined}
+        loadOptions={asyncLoading}
+        onChange={onChange}
+        simpleValue
+      />
+    );
 
-    wrapper.update();
-    wrapper.find('.pf-c-select__toggle').simulate('click');
-    expect(wrapper.find('button.pf-c-select__menu-item')).toHaveLength(1);
-    expect(wrapper.find('button.pf-c-select__menu-item').text()).toEqual('label');
+    await userEvent.click(screen.getByLabelText('open menu'));
+    await waitFor(() => expect(screen.getByText('label')).toBeInTheDocument());
+
     expect(onChange).toHaveBeenCalledWith(undefined);
   });
 
   it('should load multi select Async options correctly and set initial value to ["123"]', async () => {
     const asyncLoading = jest.fn().mockReturnValue(Promise.resolve([{ label: 'label', value: '123' }]));
     const onChange = jest.fn();
-    let wrapper;
 
-    await act(async () => {
-      wrapper = mount(
-        <Select
-          {...initialProps}
-          value={['123', 'Not in options']}
-          isMulti
-          options={undefined}
-          loadOptions={asyncLoading}
-          onChange={onChange}
-          simpleValue
-        />
-      );
-    });
+    render(
+      <Select
+        {...initialProps}
+        value={['123', 'Not in options']}
+        isMulti
+        options={undefined}
+        loadOptions={asyncLoading}
+        onChange={onChange}
+        simpleValue
+      />
+    );
 
-    wrapper.update();
-    wrapper.find('.pf-c-select__toggle').simulate('click');
-    expect(wrapper.find('button.pf-c-select__menu-item')).toHaveLength(1);
-    expect(wrapper.find('button.pf-c-select__menu-item').text()).toEqual('label');
+    await userEvent.click(screen.getByLabelText('open menu'));
+    await waitFor(() => expect(screen.getByText('label', { selector: '.pf-c-select__menu-item' })).toBeInTheDocument());
+
     expect(onChange).toHaveBeenCalledWith(['123']);
   });
 
   it('should load multi select Async options correctly and set initial value to ["123"] if initial value is an object', async () => {
     const asyncLoading = jest.fn().mockReturnValue(Promise.resolve([{ label: 'label', value: '123' }]));
     const onChange = jest.fn();
-    let wrapper;
-    await act(async () => {
-      wrapper = mount(
-        <Select
-          {...initialProps}
-          value={[{ value: '123', label: 'label' }, 'Not in options']}
-          isMulti
-          options={undefined}
-          loadOptions={asyncLoading}
-          onChange={onChange}
-          simpleValue
-        />
-      );
-    });
 
-    wrapper.update();
-    wrapper.find('.pf-c-select__toggle').simulate('click');
-    expect(wrapper.find('button.pf-c-select__menu-item')).toHaveLength(1);
-    expect(wrapper.find('button.pf-c-select__menu-item').text()).toEqual('label');
+    render(
+      <Select
+        {...initialProps}
+        value={[{ value: '123', label: 'label' }, 'Not in options']}
+        isMulti
+        options={undefined}
+        loadOptions={asyncLoading}
+        onChange={onChange}
+        simpleValue
+      />
+    );
+
+    await userEvent.click(screen.getByLabelText('open menu'));
+    await waitFor(() => expect(screen.getByText('label', { selector: '.pf-c-select__menu-item' })).toBeInTheDocument());
+
     expect(onChange).toHaveBeenCalledWith([{ label: 'label', value: '123' }]);
   });
 
   it('should load Async options after filtering', async () => {
     const asyncLoading = jest.fn().mockReturnValue(Promise.resolve([{ label: 'label', value: 1 }]));
-    let wrapper;
-    await act(async () => {
-      wrapper = mount(<Select {...initialProps} isSearchable={true} options={undefined} loadOptions={asyncLoading} />);
-    });
 
-    wrapper.update();
+    render(<Select {...initialProps} isSearchable={true} options={undefined} loadOptions={asyncLoading} />);
+
     expect(asyncLoading.mock.calls).toHaveLength(1);
-    wrapper.find('.pf-c-select__toggle').simulate('click');
 
-    const search = wrapper.find('input');
+    await userEvent.click(screen.getByLabelText('open menu'));
+    await waitFor(() => expect(screen.getByText('label')).toBeInTheDocument());
 
     await act(async () => {
-      search.instance().value = 'foo';
-      search.simulate('change');
+      fireEvent.change(screen.getByPlaceholderText('Choose...'), { target: { value: 'foo' } });
     });
 
-    wrapper.update();
     expect(asyncLoading.mock.calls).toHaveLength(2);
     expect(asyncLoading.mock.calls[1]).toEqual(['foo']);
+
+    await waitFor(() => () => expect(screen.getByText('label')).toThrow());
   });
 
   describe('reloading props', () => {
@@ -371,109 +397,85 @@ describe('<Select />', () => {
     let asyncLoading;
     let asyncLoadingNew;
 
-    class Wrapper extends React.Component {
-      render() {
-        return <Select {...this.props} />;
-      }
-    }
-
     beforeEach(() => {
       asyncLoading = () => Promise.resolve(initialProps.options);
       asyncLoadingNew = () => Promise.resolve(NEW_OPTIONS);
     });
 
     it('should change the options when options prop is changed', async () => {
-      let wrapper;
-      await act(async () => {
-        wrapper = mount(<Wrapper {...initialProps} />);
-      });
+      const { container, rerender } = render(<Select {...initialProps} />);
 
-      let innerSelectProps = wrapper.find('InternalSelect').props().options;
+      await userEvent.click(screen.getByLabelText('open menu'));
 
-      expect(isEqual(innerSelectProps, initialProps.options)).toEqual(true);
+      expect([...container.getElementsByClassName('pf-c-select__menu-item')].map((opt) => opt.textContent)).toEqual(
+        initialProps.options.map((opt) => opt.label)
+      );
 
-      await act(async () => {
-        wrapper.setProps({ options: NEW_OPTIONS });
-      });
-      wrapper.update();
-      innerSelectProps = wrapper.find('InternalSelect').props().options;
+      rerender(<Select {...initialProps} options={NEW_OPTIONS} />);
 
-      expect(innerSelectProps).toEqual(NEW_OPTIONS);
+      expect([...container.getElementsByClassName('pf-c-select__menu-item')].map((opt) => opt.textContent)).toEqual(
+        NEW_OPTIONS.map((opt) => opt.label)
+      );
     });
 
     it('should change the options when loadOptions prop is changed', async () => {
-      let wrapper;
-      await act(async () => {
-        wrapper = mount(<Wrapper {...initialProps} loadOptions={asyncLoading} />);
-      });
+      const { container, rerender } = render(<Select {...initialProps} loadOptions={asyncLoading} />);
 
-      wrapper.update();
-      let innerSelectProps = wrapper.find('InternalSelect').props().options;
+      await userEvent.click(screen.getByLabelText('open menu'));
 
-      expect(isEqual(innerSelectProps, initialProps.options)).toEqual(true);
+      expect([...container.getElementsByClassName('pf-c-select__menu-item')].map((opt) => opt.textContent)).toEqual(
+        initialProps.options.map((opt) => opt.label)
+      );
 
       await act(async () => {
-        wrapper.setProps({ loadOptions: asyncLoadingNew });
+        rerender(<Select {...initialProps} loadOptions={asyncLoadingNew} />);
       });
 
-      wrapper.update();
-      innerSelectProps = wrapper.find('InternalSelect').props().options;
-
-      expect(isEqual(innerSelectProps, NEW_OPTIONS)).toEqual(true);
+      expect([...container.getElementsByClassName('pf-c-select__menu-item')].map((opt) => opt.textContent)).toEqual(
+        NEW_OPTIONS.map((opt) => opt.label)
+      );
     });
 
     it('should change the value when new options do not include it', async () => {
-      let wrapper;
-      await act(async () => {
-        wrapper = mount(<Wrapper {...initialProps} value={1} />);
-      });
-      await act(async () => {
-        wrapper.setProps({ options: NEW_OPTIONS });
-      });
-      wrapper.update();
+      const { rerender } = render(<Select {...initialProps} value={1} />);
+
+      rerender(<Select {...initialProps} value={1} options={NEW_OPTIONS} />);
 
       expect(onChange).toHaveBeenCalledWith(undefined);
     });
 
     it('not should change the value when new options include it', async () => {
-      let wrapper;
-      await act(async () => {
-        wrapper = mount(<Wrapper {...initialProps} value={2} />);
-      });
-      await act(async () => {
-        wrapper.setProps({ options: NEW_OPTIONS });
-      });
-      wrapper.update();
+      const { rerender } = render(<Select {...initialProps} value={2} />);
+
+      rerender(<Select {...initialProps} value={2} options={NEW_OPTIONS} />);
 
       expect(onChange).not.toHaveBeenCalled();
     });
 
     it('should reset the value when loadOptions prop is changed and new options do not include the value', async () => {
-      let wrapper;
-      await act(async () => {
-        wrapper = mount(<Wrapper {...initialProps} loadOptions={asyncLoading} value={1} />);
-      });
-      wrapper.update();
+      let screen;
 
       await act(async () => {
-        wrapper.setProps({ loadOptions: asyncLoadingNew });
+        screen = render(<Select {...initialProps} loadOptions={asyncLoading} value={1} />);
       });
-      wrapper.update();
+
+      await act(async () => {
+        screen.rerender(<Select {...initialProps} value={1} loadOptions={asyncLoadingNew} />);
+      });
 
       expect(onChange).toHaveBeenCalledWith(undefined);
     });
 
     it('should not reset the value when loadOptions prop is changed and new options includes the value', async () => {
-      let wrapper;
+      let screen;
 
       await act(async () => {
-        wrapper = mount(<Wrapper {...initialProps} loadOptions={asyncLoading} value={2} />);
+        screen = render(<Select {...initialProps} loadOptions={asyncLoading} value={2} />);
       });
-      wrapper.update();
+
       await act(async () => {
-        wrapper.setProps({ loadOptions: asyncLoadingNew });
+        screen.rerender(<Select {...initialProps} value={2} loadOptions={asyncLoadingNew} />);
       });
-      wrapper.update();
 
       expect(onChange).not.toHaveBeenCalled();
     });

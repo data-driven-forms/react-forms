@@ -13,6 +13,10 @@ const schemaRenderer = [
     linkText: 'Form template',
   },
   {
+    component: 'children',
+    linkText: 'Children',
+  },
+  {
     subHeader: true,
     title: 'Form components',
     noRoute: true,

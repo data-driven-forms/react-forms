@@ -5,26 +5,23 @@ import { wrapperProps } from '@data-driven-forms/common/multiple-choice-list';
 import FormGroup from '../form-group';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
-const RadioOption = ({ name, option, ...rest }) => {
-  const { input } = useFieldApi({ name, type: 'radio', value: option.value });
-  return (
-    <AntRadio key={`${name}-${option.value}`} {...input} id={`${name}-${option.value}`} {...rest}>
-      {option.label}
-    </AntRadio>
-  );
-};
+const RadioOption = ({ name, option: { label, value, ...rest } }) => (
+  <AntRadio key={`${name}-${value}`} id={`${name}-${value}`} value={value} {...rest}>
+    {label}
+  </AntRadio>
+);
 
 RadioOption.propTypes = {
   name: PropTypes.string.isRequired,
   option: PropTypes.shape({ label: PropTypes.string.isRequired, value: PropTypes.any.isRequired }).isRequired,
 };
 
-const Radio = ({ name, ...props }) => {
-  const { options, isDisabled, label, isRequired, helperText, description, isReadOnly, meta, validateOnMount, FormItemProps, ...rest } = useFieldApi({
-    ...props,
-    name,
-    type: 'radio',
-  });
+const Radio = ({ name, component, ...props }) => {
+  const { options, isDisabled, label, isRequired, helperText, description, isReadOnly, meta, validateOnMount, FormItemProps, input, ...rest } =
+    useFieldApi({
+      ...props,
+      name,
+    });
 
   return (
     <FormGroup
@@ -36,7 +33,7 @@ const Radio = ({ name, ...props }) => {
       FormItemProps={FormItemProps}
       isRequired={isRequired}
     >
-      <AntRadio.Group name={name} disabled={isDisabled || isReadOnly} {...rest}>
+      <AntRadio.Group name={name} disabled={isDisabled || isReadOnly} {...input} {...rest}>
         {options.map((option) => (
           <RadioOption key={option.value} name={name} option={option} />
         ))}
@@ -58,6 +55,7 @@ Radio.propTypes = {
   isReadOnly: PropTypes.bool,
   description: PropTypes.node,
   FormItemProps: PropTypes.object,
+  component: PropTypes.string,
 };
 
 Radio.defaultProps = {

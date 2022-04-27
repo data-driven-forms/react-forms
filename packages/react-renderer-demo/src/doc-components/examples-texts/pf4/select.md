@@ -6,6 +6,58 @@ In order to show menu properly in dialogs like modals, you can use `menuIsPortal
 |---------|----|-----------|
 |menuIsPortal|`bool`|Append menu to body instead of to select wrapper.See more [here](https://react-select.com/advanced#portaling)|
 
+## Groups and dividers
+
+PF4 selects supports grouping options and inserting dividers.
+
+### Group
+
+```jsx
+{
+  label: 'Category name',
+  options: [ ...options ]
+}
+```
+
+### Divider
+
+```jsx
+{
+  divider: true
+}
+```
+
+### Example
+
+```jsx
+{
+    component: 'select',
+    name: 'select-with-categories',
+    label: 'With categories',
+    options: [
+        {
+            label: 'Category 1',
+            options: [
+                { label: 'value 1', value: '111' },
+                { label: 'value 2', value: '222' }
+            ]
+        },
+        {divider: true },
+        {label: 'independent 1', value: '1112333'},
+        {divider: true },
+        {
+            label: 'Category 2',
+            options: [
+                { label: 'value 3', value: '333' },
+                { label: 'value 4', value: '444' }
+            ]
+        },
+        {divider: true },
+        {label: 'independent 2', value: '11111' }
+    ]
+}
+```
+
 ## PF4 Async Select
 
 PF4 Select allows to load the options asynchronously.

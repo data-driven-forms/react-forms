@@ -52,19 +52,19 @@ To implement a custom component, please take a look [here](/components/field-arr
 
 |name|type|default|target component|
 |----|----|-------|----------------|
-|GridContainerProps|`{}`|[Grid](https://material-ui.com/api/grid/)|
-|HeaderGridProps|`{}`|[Grid](https://material-ui.com/api/grid/)|
-|HeaderProps|`{}`|[Typography](https://material-ui.com/api/typography/)|
-|UndoButtonProps|`{}`|[Button](https://material-ui.com/api/button/)|
-|RedoButtonProps|`{}`|[Button](https://material-ui.com/api/button/)|
-|AddButtonProps|`{}`|[Button](https://material-ui.com/api/button/)|
-|DescriptionGridProps|`{}`|[Grid](https://material-ui.com/api/grid/)|
-|DescriptionProps|`{}`|[Typography](https://material-ui.com/api/typography/)|
-|BodyGridProps|`{}`|[Grid](https://material-ui.com/api/grid/)|
-|NoItemsProps|`{}`|[Typography](https://material-ui.com/api/typography/)|
-|FormHelperTextGridProps|`{}`|[Grid](https://material-ui.com/api/grid/)|
-|FormHelperTextProps|`{}`|[FormHelperText](https://material-ui.com/api/form-helper-text/)|
-|FieldContainerProps|`{}`|[Grid](https://material-ui.com/api/grid/)|
-|FieldGroupGridProps|`{}`|[Grid](https://material-ui.com/api/grid/)|
-|RemoveButtonGridProps|`{}`|[Grid](https://material-ui.com/api/grid/)|
-|RemoveButtonProps|`{}`|[Button](https://material-ui.com/api/button/)|
+|GridContainerProps|`{}`|[Grid](https://mui.com/api/grid/)|
+|HeaderGridProps|`{}`|[Grid](https://mui.com/api/grid/)|
+|HeaderProps|`{}`|[Typography](https://mui.com/api/typography/)|
+|UndoButtonProps|`{}`|[Button](https://mui.com/api/button/)|
+|RedoButtonProps|`{}`|[Button](https://mui.com/api/button/)|
+|AddButtonProps|`{}`|[Button](https://mui.com/api/button/)|
+|DescriptionGridProps|`{}`|[Grid](https://mui.com/api/grid/)|
+|DescriptionProps|`{}`|[Typography](https://mui.com/api/typography/)|
+|BodyGridProps|`{}`|[Grid](https://mui.com/api/grid/)|
+|NoItemsProps|`{}`|[Typography](https://mui.com/api/typography/)|
+|FormHelperTextGridProps|`{}`|[Grid](https://mui.com/api/grid/)|
+|FormHelperTextProps|`{}`|[FormHelperText](https://mui.com/api/form-helper-text/)|
+|FieldContainerProps|`{}`|[Grid](https://mui.com/api/grid/)|
+|FieldGroupGridProps|`{}`|[Grid](https://mui.com/api/grid/)|
+|RemoveButtonGridProps|`{}`|[Grid](https://mui.com/api/grid/)|
+|RemoveButtonProps|`{}`|[Button](https://mui.com/api/button/)|

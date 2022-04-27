@@ -1,10 +1,9 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 
 import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 import FormTemplate from '../form-template';
 import componentMapper from '../component-mapper';
-import { Title, Text } from '@patternfly/react-core';
 
 describe('SubForm component', () => {
   let initialProps;
@@ -29,19 +28,20 @@ describe('SubForm component', () => {
             {
               component: componentTypes.TEXT_FIELD,
               name: 'some input',
+              label: 'some input',
             },
           ],
         },
       ],
     };
-    const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
+    render(<FormRenderer {...initialProps} schema={schema} />);
 
-    expect(wrapper.find(Title).text()).toEqual('some title');
-    expect(wrapper.find(Text).text()).toEqual('some description');
-    expect(wrapper.find('input')).toHaveLength(1);
+    expect(screen.getByText('some title')).toBeInTheDocument();
+    expect(screen.getByText('some description')).toBeInTheDocument();
+    expect(screen.getByText('some input')).toBeInTheDocument();
   });
 
-  it('should render SubForm with description correctly', () => {
+  it('should render SubForm without description correctly', () => {
     const schema = {
       fields: [
         {
@@ -52,16 +52,16 @@ describe('SubForm component', () => {
             {
               component: componentTypes.TEXT_FIELD,
               name: 'some input',
+              label: 'some input',
             },
           ],
         },
       ],
     };
-    const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
+    render(<FormRenderer {...initialProps} schema={schema} />);
 
-    expect(wrapper.find(Title).text()).toEqual('some title');
-    expect(wrapper.find(Text)).toHaveLength(0);
-    expect(wrapper.find('input')).toHaveLength(1);
+    expect(screen.getByText('some title')).toBeInTheDocument();
+    expect(screen.getByText('some input')).toBeInTheDocument();
   });
 
   it('should render SubForm without title correctly', () => {
@@ -75,15 +75,15 @@ describe('SubForm component', () => {
             {
               component: componentTypes.TEXT_FIELD,
               name: 'some input',
+              label: 'some input',
             },
           ],
         },
       ],
     };
-    const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
+    render(<FormRenderer {...initialProps} schema={schema} />);
 
-    expect(wrapper.find(Title)).toHaveLength(0);
-    expect(wrapper.find(Text).text()).toEqual('some description');
-    expect(wrapper.find('input')).toHaveLength(1);
+    expect(screen.getByText('some description')).toBeInTheDocument();
+    expect(screen.getByText('some input')).toBeInTheDocument();
   });
 });

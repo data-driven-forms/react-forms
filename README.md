@@ -16,7 +16,7 @@ Data Driven Forms is a React library used for rendering and managing forms with 
 
 :tada: Features :tada:
 - **Easily readable schema**, you don't need to know any HTML or JS to be able to write your own form schemas!
-- You can use your **own components** or use one of our **provided mappers**: [PatternFly 4](https://patternfly-react.surge.sh/patternfly-4/), [Material-UI](https://material-ui.com/), [Ant Design](https://ant.design/)! and more, see below!)
+- You can use your **own components** or use one of our **provided mappers**: [PatternFly 4](https://patternfly-react.surge.sh/patternfly-4/), [Material-UI](https://mui.com/), [Ant Design](https://ant.design/)! and more, see below!)
 - **Form state manager** out-of-the-box (including error states!)
 - Fully **customizable** (you can use your own buttons, actions, etc.)!
 - **Conditional** fields!
@@ -327,7 +327,7 @@ Run `yarn build` in root folder to build all packages. You can run this command 
 Run `yarn lint` in root folder to check if the code is correctly formatted. You can use `yarn lint --fix` to automatically correct issues.
 ### Write tests
 
-All new code should be properly tested. Run `yarn test` in root folder to test all files. Check codecoverage report to see uncovered lines of code. We are using [Jest](https://jestjs.io/) and [Enzyme](https://enzymejs.github.io/enzyme/).
+All new code should be properly tested. Run `yarn test` in root folder to test all files. Check codecoverage report to see uncovered lines of code. We are using [Jest](https://jestjs.io/) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/).
 
 ### Documentation update
 
@@ -365,7 +365,7 @@ We are trying to avoid breaking changes. Please, open an issue and discuss the i
 
 - [Data Driven Forms documentation](https://data-driven-forms.org/)
 - [PatternFly 4 Design documentation](https://www.patternfly.org/v4/)
-- [Material-UI documentation](https://material-ui.com/)
+- [Material-UI documentation](https://mui.com/)
 - [Ant Design documentation](https://ant.design/)
 - [Semantic UI React](https://react.semantic-ui.com/)
 - [BlueprintJS](https://blueprintjs.com/)

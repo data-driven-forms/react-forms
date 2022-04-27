@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
-import { act } from 'react-dom/test-utils';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
 import { FormRenderer, WizardContext, componentTypes, useFieldApi } from '@data-driven-forms/react-form-renderer';
-import { mount } from 'enzyme';
 
 import Wizard from '../../wizard';
 
 describe('wizard test', () => {
   let state;
-  let wrapper;
 
   const fields = [
     {
@@ -54,16 +54,16 @@ describe('wizard test', () => {
     spyState(state);
 
     return (
-      <React.Fragment>
-        <button id="handleNext" onClick={() => handleNext(selectNext(state.currentStep.nextStep, formOptions.getState))} />
-        <button id="handlePrev" onClick={handlePrev} />
-        <button id="setPrevSteps" onClick={setPrevSteps} />
-        <button id="jumpToStepValid" onClick={() => jumpToStep(0, true)} />
-        <button id="jumpToStepInvalid" onClick={() => jumpToStep(0, false)} />
-        <button id="handleSubmit" onClick={formOptions.handleSubmit} />
-        <div id="onKeyDown" onKeyDown={onKeyDown} />
+      <div onKeyDown={onKeyDown}>
+        <button aria-label="handleNext" onClick={() => handleNext(selectNext(state.currentStep.nextStep, formOptions.getState))} />
+        <button aria-label="handlePrev" onClick={handlePrev} />
+        <button aria-label="setPrevSteps" onClick={setPrevSteps} />
+        <button aria-label="jumpToStepValid" onClick={() => jumpToStep(0, true)} />
+        <button aria-label="jumpToStepInvalid" onClick={() => jumpToStep(0, false)} />
+        <button aria-label="handleSubmit" onClick={formOptions.handleSubmit} />
+        <input aria-label="some input" />
         {formOptions.renderForm(state.currentStep?.fields || [])}
-      </React.Fragment>
+      </div>
     );
   };
 
@@ -85,10 +85,7 @@ describe('wizard test', () => {
   };
 
   it('handle next and handle prev', async () => {
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...rendererProps} />);
-    });
-    wrapper.update();
+    render(<FormRenderer {...rendererProps} />);
 
     expect(state).toEqual({
       activeStepIndex: 0,
@@ -100,10 +97,7 @@ describe('wizard test', () => {
       prevSteps: [],
     });
 
-    await act(async () => {
-      wrapper.find('#handleNext').simulate('click');
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByLabelText('handleNext'));
 
     expect(state).toEqual({
       activeStepIndex: 1,
@@ -115,10 +109,7 @@ describe('wizard test', () => {
       prevSteps: ['step1'],
     });
 
-    await act(async () => {
-      wrapper.find('#handlePrev').simulate('click');
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByLabelText('handlePrev'));
 
     expect(state).toEqual({
       activeStepIndex: 0,
@@ -132,10 +123,7 @@ describe('wizard test', () => {
   });
 
   it('creates full schema', async () => {
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...rendererProps} initialValues={{ field1: 'x', field2: 'step5' }} />);
-    });
-    wrapper.update();
+    render(<FormRenderer {...rendererProps} initialValues={{ field1: 'x', field2: 'step5' }} />);
 
     expect(state.navSchema).toEqual([
       { index: 0, name: 'step1', primary: true, substepOf: undefined, substepOfTitle: undefined, title: 'step1' },
@@ -147,15 +135,9 @@ describe('wizard test', () => {
   });
 
   it('onKeyDown - goes to the next step', async () => {
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...rendererProps} />);
-    });
-    wrapper.update();
+    render(<FormRenderer {...rendererProps} />);
 
-    await act(async () => {
-      wrapper.find('#onKeyDown').simulate('keydown', { preventDefault: jest.fn(), key: 'Enter' });
-    });
-    wrapper.update();
+    await userEvent.type(screen.getByLabelText('some input'), '{enter}');
 
     expect(state).toEqual({
       activeStepIndex: 1,
@@ -169,20 +151,10 @@ describe('wizard test', () => {
   });
 
   it('jumpToStep - when valid', async () => {
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...rendererProps} />);
-    });
-    wrapper.update();
+    render(<FormRenderer {...rendererProps} />);
 
-    await act(async () => {
-      wrapper.find('#handleNext').simulate('click');
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('#jumpToStepValid').simulate('click');
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByLabelText('handleNext'));
+    await userEvent.click(screen.getByLabelText('jumpToStepValid'));
 
     expect(state).toEqual({
       activeStepIndex: 0,
@@ -196,20 +168,10 @@ describe('wizard test', () => {
   });
 
   it('jumpToStep - when invalid', async () => {
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...rendererProps} />);
-    });
-    wrapper.update();
+    render(<FormRenderer {...rendererProps} />);
 
-    await act(async () => {
-      wrapper.find('#handleNext').simulate('click');
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('#jumpToStepInvalid').simulate('click');
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByLabelText('handleNext'));
+    await userEvent.click(screen.getByLabelText('jumpToStepInvalid'));
 
     expect(state).toEqual({
       activeStepIndex: 0,
@@ -223,33 +185,27 @@ describe('wizard test', () => {
   });
 
   it('setPrevSteps - resets state according to the current path', async () => {
-    await act(async () => {
-      wrapper = mount(
-        <FormRenderer
-          {...rendererProps}
-          schema={{
-            fields: [
-              {
-                component: componentTypes.WIZARD,
-                name: 'wizard',
-                fields,
-                initialState: {
-                  prevSteps: ['step1', 'step2', 'step3'],
-                },
+    render(
+      <FormRenderer
+        {...rendererProps}
+        schema={{
+          fields: [
+            {
+              component: componentTypes.WIZARD,
+              name: 'wizard',
+              fields,
+              initialState: {
+                prevSteps: ['step1', 'step2', 'step3'],
               },
-            ],
-          }}
-        />
-      );
-    });
-    wrapper.update();
+            },
+          ],
+        }}
+      />
+    );
 
     expect(state.prevSteps).toEqual(['step1', 'step2', 'step3']);
 
-    await act(async () => {
-      wrapper.find('#setPrevSteps').simulate('click');
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByLabelText('setPrevSteps'));
 
     expect(state).toEqual({
       activeStepIndex: 0,
@@ -265,85 +221,63 @@ describe('wizard test', () => {
   it('submits sends only visited values', async () => {
     const DummyTextField = (props) => {
       const { input } = useFieldApi(props);
-      return <input {...input} />;
+      // eslint-disable-next-line react/prop-types
+      return <input {...input} aria-label={props.name} />;
     };
 
     const submitSpy = jest.fn();
 
-    await act(async () => {
-      wrapper = mount(
-        <FormRenderer
-          {...rendererProps}
-          componentMapper={{
-            ...rendererProps.componentMapper,
-            [componentTypes.TEXT_FIELD]: DummyTextField,
-          }}
-          onSubmit={(values) => submitSpy(values)}
-          schema={{
-            fields: [
-              {
-                component: componentTypes.WIZARD,
-                name: 'wizard',
-                fields: [
-                  {
-                    name: 'step1',
-                    nextStep: {
-                      when: 'value1',
-                      stepMapper: {
-                        x: 'step2',
-                        y: 'step3',
-                      },
+    render(
+      <FormRenderer
+        {...rendererProps}
+        componentMapper={{
+          ...rendererProps.componentMapper,
+          [componentTypes.TEXT_FIELD]: DummyTextField,
+        }}
+        onSubmit={(values) => submitSpy(values)}
+        schema={{
+          fields: [
+            {
+              component: componentTypes.WIZARD,
+              name: 'wizard',
+              fields: [
+                {
+                  name: 'step1',
+                  nextStep: {
+                    when: 'value1',
+                    stepMapper: {
+                      x: 'step2',
+                      y: 'step3',
                     },
-                    fields: [{ component: componentTypes.TEXT_FIELD, name: 'value1', initialValue: 'x' }],
                   },
-                  {
-                    name: 'step2',
-                    fields: [{ component: componentTypes.TEXT_FIELD, name: 'value2', initialValue: 'x-value2' }],
-                  },
-                  {
-                    name: 'step3',
-                    fields: [{ component: componentTypes.TEXT_FIELD, name: 'value3', initialValue: 'x-value3' }],
-                  },
-                ],
-              },
-            ],
-          }}
-        />
-      );
-    });
-    wrapper.update();
+                  fields: [{ component: componentTypes.TEXT_FIELD, name: 'value1', initialValue: 'x' }],
+                },
+                {
+                  name: 'step2',
+                  fields: [{ component: componentTypes.TEXT_FIELD, name: 'value2', initialValue: 'x-value2' }],
+                },
+                {
+                  name: 'step3',
+                  fields: [{ component: componentTypes.TEXT_FIELD, name: 'value3', initialValue: 'x-value3' }],
+                },
+              ],
+            },
+          ],
+        }}
+      />
+    );
 
-    await act(async () => {
-      wrapper.find('#handleNext').simulate('click');
-    });
-    wrapper.update();
-    await act(async () => {
-      wrapper.find('#handleSubmit').simulate('click');
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByLabelText('handleNext'));
+    await userEvent.click(screen.getByLabelText('handleSubmit'));
 
     expect(submitSpy).toHaveBeenCalledWith({ value1: 'x', value2: 'x-value2' });
     submitSpy.mockClear();
 
-    await act(async () => {
-      wrapper.find('#handlePrev').simulate('click');
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('input').instance().value = 'y';
-      wrapper.find('input').simulate('change');
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('#handleNext').simulate('click');
-    });
-    wrapper.update();
-    await act(async () => {
-      wrapper.find('#handleSubmit').simulate('click');
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByLabelText('handlePrev'));
+    await userEvent.clear(screen.getByLabelText('value1'));
+    await userEvent.type(screen.getByLabelText('value1'), 'y');
+    await userEvent.click(screen.getByLabelText('handleNext'));
+    await userEvent.click(screen.getByLabelText('handleSubmit'));
 
     expect(submitSpy).toHaveBeenCalledWith({ value1: 'y', value3: 'x-value3' });
   });

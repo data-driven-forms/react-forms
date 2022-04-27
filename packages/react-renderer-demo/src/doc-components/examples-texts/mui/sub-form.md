@@ -5,8 +5,8 @@ import Common from './common.md';
 ### Composite props
 |name|type|default|target component|
 |----|----|-------|----------------|
-|TitleProps|object|`{}`|[Grid](https://material-ui.com/api/typography/)|
-|TitleGridProps|object|`{}`|[Grid](https://material-ui.com/api/grid/)|
-|DescriptionProps|object|`{}`|[Grid](https://material-ui.com/api/typography/)|
-|DescriptionGridProps|object|`{}`|[Grid](https://material-ui.com/api/grid/)|
-|ItemsGridProps|object|`{}`|[Grid](https://material-ui.com/api/grid/)|
+|TitleProps|object|`{}`|[Grid](https://mui.com/api/typography/)|
+|TitleGridProps|object|`{}`|[Grid](https://mui.com/api/grid/)|
+|DescriptionProps|object|`{}`|[Grid](https://mui.com/api/typography/)|
+|DescriptionGridProps|object|`{}`|[Grid](https://mui.com/api/grid/)|
+|ItemsGridProps|object|`{}`|[Grid](https://mui.com/api/grid/)|

@@ -1,16 +1,16 @@
 import React, { useEffect, useState, useRef } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import makeStyles from '@material-ui/core/styles/makeStyles';
-import Drawer from '@material-ui/core/Drawer';
-import Toolbar from '@material-ui/core/Toolbar';
-import Divider from '@material-ui/core/Divider';
-import Badge from '@material-ui/core/Badge';
-import Hidden from '@material-ui/core/Hidden';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import SvgIcon from '@material-ui/core/SvgIcon';
+import Drawer from '@mui/material/Drawer';
+import Toolbar from '@mui/material/Toolbar';
+import Divider from '@mui/material/Divider';
+import Badge from '@mui/material/Badge';
+import Hidden from '@mui/material/Hidden';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import SvgIcon from '@mui/material/SvgIcon';
+import { styled } from '@mui/material/styles';
 import { useRouter } from 'next/router';
 
 import { flatSchema } from './navigation/schemas/schema';
@@ -29,8 +29,8 @@ const DocSearch = dynamic(import('./docsearch'), {
 
 export const drawerWidth = 240;
 
-const useStyles = makeStyles((theme) => ({
-  mainGradient: {
+const Root = styled('div')(({ theme }) => ({
+  '& .mainGradient': {
     backgroundImage: 'linear-gradient(135deg, #41108E 0%, rgba(165, 37, 193, 1) 44.76%, #FC9957 100%)',
     backgroundSize: '100% 100vh',
     backgroundRepeat: 'no-repeat',
@@ -39,51 +39,51 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
-  mainGradientShift: {
+  '& .mainGradientShift': {
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
   },
-  root: {
+  '&.root': {
     display: 'flex',
     minHeight: 'calc(100vh - 16px)',
   },
-  appBar: {
+  '& .appBar': {
     position: 'fixed',
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
   },
-  contentWrapper: {
+  '& .contentWrapper': {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
     minHeight: '100%',
     paddingTop: 86,
   },
-  menuButton: {
+  '& .menuButton': {
     marginRight: theme.spacing(2),
   },
-  hide: {
+  '& .hide': {
     display: 'none',
   },
-  drawer: {
+  '& .drawer': {
     width: drawerWidth,
     flexShrink: 0,
   },
-  drawerPaper: {
+  '& .drawerPaper': {
     width: drawerWidth,
   },
-  drawerHeader: {
+  '& .drawerHeader': {
     display: 'flex',
     alignItems: 'center',
     padding: '0 8px',
     ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
   },
-  content: {
+  '& .content': {
     flexGrow: 1,
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
@@ -93,7 +93,7 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: -drawerWidth,
     },
   },
-  contentShift: {
+  '& .contentShift': {
     [theme.breakpoints.up('md')]: {
       transition: theme.transitions.create('margin', {
         easing: theme.transitions.easing.easeOut,
@@ -102,10 +102,10 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: 0,
     },
   },
-  menuIcons: {
+  '& .menuIcons': {
     fill: theme.palette.common.white,
   },
-  rightAppBar: {
+  '& .rightAppBar': {
     right: 0,
     width: '100%',
     backgroundImage: 'linear-gradient(135deg, #41108E 0%, rgba(165, 37, 193, 1) 44.76%, #FC9957 100%)',
@@ -114,10 +114,10 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 900,
     paddingLeft: 48,
   },
-  toolbarOverride: {
+  '& .toolbarOverride': {
     zIndex: 1000,
   },
-  appBarShift: {
+  '& .appBarShift': {
     [theme.breakpoints.up('md')]: {
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
@@ -131,7 +131,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Layout = ({ children }) => {
   const router = useRouter();
-  const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [links, setLinks] = useState({});
   const searchRef = useRef(null);
@@ -167,11 +166,11 @@ const Layout = ({ children }) => {
 
   return (
     <MenuContext.Provider value={links}>
-      <div className={classes.root}>
+      <Root className="root">
         <Toolbar
-          className={clsx(classes.appBar, {
-            [classes.toolbarOverride]: !open,
-            [classes.appBarShift]: open,
+          className={clsx('appBar', {
+            toolbarOverride: !open,
+            appBarShift: open,
           })}
         >
           <IconButton
@@ -179,19 +178,20 @@ const Layout = ({ children }) => {
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}
+            className={clsx('menuButton', open && 'hide')}
+            size="large"
           >
-            <MenuIcon className={classes.menuIcons} />
+            <MenuIcon className="menuIcons" />
           </IconButton>
         </Toolbar>
-        <Hidden smDown implementation="css">
+        <Hidden mdDown implementation="css">
           <Drawer
-            className={classes.drawer}
+            className="drawer"
             variant="persistent"
             anchor="left"
             open={open && window && window.innerWidth > 960}
             classes={{
-              paper: classes.drawerPaper,
+              paper: 'drawerPaper',
             }}
           >
             <Navigation searchRef={searchRef} closeNav={handleDrawerClose} />
@@ -200,12 +200,12 @@ const Layout = ({ children }) => {
         </Hidden>
         <Hidden mdUp implementation="css">
           <Drawer
-            className={classes.drawer}
+            className="drawer"
             variant="temporary"
             anchor="left"
             open={open && window && window.innerWidth < 960}
             classes={{
-              paper: classes.drawerPaper,
+              paper: 'drawerPaper',
             }}
             ModalProps={{
               keepMounted: true,
@@ -216,14 +216,14 @@ const Layout = ({ children }) => {
           </Drawer>
         </Hidden>
         <div
-          className={clsx(classes.drawerHeader, classes.appBar, classes.rightAppBar, {
-            [classes.appBarShift]: open,
+          className={clsx('drawerHeader', 'appBar', 'rightAppBar', {
+            appBarShift: open,
           })}
         >
           <DocSearch />
-          <IconButton aria-label="show new notifications" onClick={handleToggle} color="inherit" ref={anchorRef} className={clsx(classes.menuButton)}>
+          <IconButton aria-label="show new notifications" onClick={handleToggle} color="inherit" ref={anchorRef} className="menuButton" size="large">
             <Badge badgeContent={newMessages} color="secondary">
-              <NotificationsIcon className={classes.menuIcons} />
+              <NotificationsIcon className="menuIcons" />
             </Badge>
           </IconButton>
           <NotificationPanel
@@ -233,21 +233,21 @@ const Layout = ({ children }) => {
             onClose={() => setOpenNotifiation(false)}
           />
           <a href="https://github.com/data-driven-forms/react-forms" rel="noopener noreferrer" target="_blank">
-            <IconButton color="inherit" aria-label="gh repository" edge="start" className={clsx(classes.menuButton)}>
+            <IconButton color="inherit" aria-label="gh repository" edge="start" className="menuButton" size="large">
               <SvgIcon>
-                <GhIcon className={classes.menuIcons} />
+                <GhIcon className="menuIcons" />
               </SvgIcon>
             </IconButton>
           </a>
         </div>
         <main
-          className={clsx(classes.content, {
-            [classes.contentShift]: open,
-            [classes.mainGradient]: router.pathname === '/',
-            [classes.mainGradientShift]: router.pathname === '/' && open,
+          className={clsx('content', {
+            contentShift: open,
+            mainGradient: router.pathname === '/',
+            mainGradientShift: router.pathname === '/' && open,
           })}
         >
-          <div className={classes.contentWrapper}>
+          <div className="contentWrapper">
             <div
               className="DocSearch-content"
               style={{
@@ -263,7 +263,7 @@ const Layout = ({ children }) => {
             </div>
           </div>
         </main>
-      </div>
+      </Root>
     </MenuContext.Provider>
   );
 };

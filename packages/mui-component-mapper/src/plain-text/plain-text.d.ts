@@ -1,4 +1,4 @@
-import { TypographyProps } from "@material-ui/core";
+import { TypographyProps } from "@mui/material";
 import { ElementType, ReactNode } from "react";
 
 export interface PlainTextProps extends Omit<TypographyProps, 'component'> {

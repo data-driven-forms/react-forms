@@ -1,6 +1,6 @@
 {
   "name": "@data-driven-forms/ant-component-mapper",
-  "version": "3.12.1",
+  "version": "3.17.4",
   "description": "Ant Design React component mapper for Data Driven Forms.",
   "main": "index.js",
   "module": "esm/index.js",
@@ -29,10 +29,10 @@
     "antd": "^4.2.0"
   },
   "peerDependencies": {
-    "@data-driven-forms/react-form-renderer": ">=3.2.1",
+    "@data-driven-forms/react-form-renderer": "*",
     "antd": "^4.2.0",
-    "react": "^16.13.1 || ^17.0.2",
-    "react-dom": "^16.13.1 || ^17.0.2"
+    "react": "^16.13.1 || ^17.0.2 || ^18.0.0",
+    "react-dom": "^16.13.1 || ^17.0.2 || ^18.0.0"
   },
   "dependencies": {
     "@data-driven-forms/common": "*",

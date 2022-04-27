@@ -1,8 +1,13 @@
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createTheme } from '@mui/material/styles';
 
-const theme = createMuiTheme({
-  typography: {
-    useNextVariants: true,
+const theme = createTheme({
+  components: {
+    MuiLink: {
+      defaultProps: {
+        underline: 'hover',
+        color: '#3f51b5',
+      },
+    },
   },
 });
 

@@ -1,14 +1,10 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 
 import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
-import { Tabs as CarbonTabs, Tab } from 'carbon-components-react';
 
 import FormTemplate from '../form-template';
 import componentMapper from '../component-mapper';
-import Tabs from '../tabs';
-import WrapperTextField from '../text-field';
-import WrapperSwitch from '../switch';
 
 describe('<Tabs />', () => {
   it('renders correctly', () => {
@@ -21,26 +17,26 @@ describe('<Tabs />', () => {
             {
               title: 'title 1',
               name: 'tab1',
-              fields: [{ label: 'some-label', component: componentTypes.SWITCH, name: 'switch' }],
+              fields: [{ label: 'some-label-1', component: componentTypes.SWITCH, name: 'switch' }],
             },
             {
               title: 'title 2',
               name: 'tab2',
-              fields: [{ label: 'some-label', component: componentTypes.TEXT_FIELD, name: 'text_field' }],
+              fields: [{ label: 'some-label-2', component: componentTypes.TEXT_FIELD, name: 'text_field' }],
             },
           ],
         },
       ],
     };
 
-    const wrapper = mount(
+    render(
       <FormRenderer onSubmit={jest.fn()} FormTemplate={(props) => <FormTemplate {...props} />} schema={schema} componentMapper={componentMapper} />
     );
 
-    expect(wrapper.find(Tabs)).toHaveLength(1);
-    expect(wrapper.find(CarbonTabs)).toHaveLength(1);
-    expect(wrapper.find(Tab)).toHaveLength(2);
-    expect(wrapper.find(WrapperTextField)).toHaveLength(1);
-    expect(wrapper.find(WrapperSwitch)).toHaveLength(1);
+    expect(screen.getByText('title 1')).toBeInTheDocument();
+    expect(screen.getByText('title 2')).toBeInTheDocument();
+
+    expect(screen.getByText('some-label-1')).toBeInTheDocument();
+    expect(screen.getByText('some-label-2')).toBeInTheDocument();
   });
 });

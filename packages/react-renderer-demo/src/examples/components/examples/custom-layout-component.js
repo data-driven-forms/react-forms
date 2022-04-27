@@ -5,7 +5,7 @@ import FormTemplate from '@data-driven-forms/mui-component-mapper/form-template'
 import TextField from '@data-driven-forms/mui-component-mapper/text-field';
 import useFormApi from '@data-driven-forms/react-form-renderer/use-form-api';
 
-import Grid from '@material-ui/core/Grid';
+import Grid from '@mui/material/Grid';
 
 const TwoColumns = ({ fields }) => {
   const { renderForm } = useFormApi();

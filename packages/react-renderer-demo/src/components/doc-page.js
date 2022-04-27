@@ -1,26 +1,35 @@
 import React from 'react';
+import { styled } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 
-import Grid from '@material-ui/core/Grid';
-import Hidden from '@material-ui/core/Hidden';
-
-import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@mui/material/Grid';
+import Hidden from '@mui/material/Hidden';
 
 import ListOfContents from '../helpers/list-of-contents';
 import ListOfContentsMobile from '../helpers/list-of-contents-select';
 
-const useStyles = makeStyles((theme) => ({
-  hidden: {
+const PREFIX = 'DocPage';
+
+const classes = {
+  hidden: `${PREFIX}-hidden`,
+  wrapper: `${PREFIX}-wrapper`,
+  content: `${PREFIX}-content`,
+};
+
+const StyledGrid = styled(Grid)(({ theme }) => ({
+  [`& .${classes.hidden}`]: {
     height: '100%',
   },
-  wrapper: {
+
+  [`&.${classes.wrapper}`]: {
     justifyContent: 'center',
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       flexDirection: 'column-reverse',
     },
   },
-  content: {
+
+  [`& .${classes.content}`]: {
     [theme.breakpoints.up('md')]: {
       maxWidth: 768,
     },
@@ -29,15 +38,13 @@ const useStyles = makeStyles((theme) => ({
 
 const DocPage = ({ children }) => {
   const router = useRouter();
-  const classes = useStyles();
-
   const text = require(`!raw-loader!@docs/pages/${router.pathname.replace('/', '')}.md`).default;
 
   const regex = /^#+ .*/gm;
   const found = text.match(regex) || [];
 
   return (
-    <Grid container item className={classes.wrapper}>
+    <StyledGrid container item className={classes.wrapper}>
       <Grid item xs={12} md={10} className={classes.content}>
         {children}
       </Grid>
@@ -45,11 +52,11 @@ const DocPage = ({ children }) => {
         <Hidden mdUp>
           <ListOfContentsMobile found={found} />
         </Hidden>
-        <Hidden smDown className={classes.hidden}>
+        <Hidden mdDown className={classes.hidden}>
           <ListOfContents found={found} />
         </Hidden>
       </Grid>
-    </Grid>
+    </StyledGrid>
   );
 };
 

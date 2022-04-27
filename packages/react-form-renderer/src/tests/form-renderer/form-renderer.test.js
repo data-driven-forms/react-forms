@@ -1,9 +1,8 @@
 import React, { Fragment } from 'react';
-import { act } from 'react-dom/test-utils';
-import { mount } from 'enzyme';
-import toJson from 'enzyme-to-json';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
 import FormRenderer from '../../form-renderer';
-import SchemaErrorComponent from '../../form-renderer/schema-error-component';
 import componentTypes from '../../component-types';
 import FormTemplate from '../../../../../__mocks__/mock-form-template';
 import useFieldApi from '../../use-field-api';
@@ -15,7 +14,7 @@ const ContextSpy = ({ registerSpy, spyFF, ...props }) => {
   const { getRegisteredFields, ffGetRegisteredFields, ...formApi } = useFormApi();
   return (
     <Fragment>
-      <button onClick={() => registerSpy(spyFF ? ffGetRegisteredFields() : getRegisteredFields())} id={props.name}></button>
+      <button onClick={() => registerSpy(spyFF ? ffGetRegisteredFields() : getRegisteredFields())} aria-label={props.name}></button>
       <PropsSpy {...formApi} />
     </Fragment>
   );
@@ -30,7 +29,7 @@ const TextField = (props) => {
   const { input } = useFieldApi(props);
   return (
     <div className="nested-item">
-      <input {...input} id={input.name} />
+      <input {...input} aria-label={input.name} />
     </div>
   );
 };
@@ -77,8 +76,10 @@ describe('<FormRenderer />', () => {
   });
 
   it('should render form from schema', () => {
-    const wrapper = mount(<FormRenderer {...initialProps} />);
-    expect(toJson(wrapper)).toMatchSnapshot();
+    render(<FormRenderer {...initialProps} />);
+
+    expect(screen.getByLabelText('component1')).toBeInTheDocument();
+    expect(screen.getByText('Select field')).toBeInTheDocument();
   });
 
   it('should render errorComponent form from schema', () => {
@@ -99,28 +100,28 @@ describe('<FormRenderer />', () => {
       ],
     };
 
-    const wrapper = mount(<FormRenderer {...initialProps} schema={schemaWithError} />);
+    render(<FormRenderer {...initialProps} schema={schemaWithError} />);
 
-    expect(wrapper.find(SchemaErrorComponent));
+    expect(screen.getByText('Form could not be rendered, because of invalid form schema.')).toBeInTheDocument();
     expect(spy).toHaveBeenCalled();
-    expect(logSpy).toHaveBeenCalledWith('error: ', expect.any(String));
 
     console = _console; // eslint-disable-line
   });
 
-  it('should call form reset callback', () => {
+  it('should call form reset callback', async () => {
     const onReset = jest.fn();
-    const wrapper = mount(<FormRenderer {...initialProps} canReset onReset={onReset} />);
-    wrapper.find('input#component1').simulate('change', { target: { value: 'foo' } });
-    wrapper.update();
-    wrapper.find('button').at(1).simulate('click');
+    render(<FormRenderer {...initialProps} canReset onReset={onReset} />);
+
+    await userEvent.type(screen.getByLabelText('component1'), 'something');
+    await userEvent.click(screen.getByText('Reset'));
+
     expect(onReset).toHaveBeenCalled();
   });
 
   it('should render hidden field', () => {
     const onSubmit = jest.fn();
 
-    const wrapper = mount(
+    render(
       <FormRenderer
         {...initialProps}
         schema={{
@@ -141,11 +142,12 @@ describe('<FormRenderer />', () => {
         onSubmit={onSubmit}
       />
     );
-    expect(toJson(wrapper)).toMatchSnapshot();
+
+    expect(screen.getByLabelText('hidden')).not.toBeVisible();
   });
 
   describe('Initial value data types', () => {
-    it('should convert string to integer', () => {
+    it('should convert string to integer', async () => {
       const onSubmit = jest.fn();
       const schema = {
         fields: [
@@ -157,12 +159,14 @@ describe('<FormRenderer />', () => {
           },
         ],
       };
-      const wrapper = mount(<FormRenderer {...initialProps} schema={schema} onSubmit={(values) => onSubmit(values)} />);
-      wrapper.find('form').simulate('submit');
+      render(<FormRenderer {...initialProps} schema={schema} onSubmit={(values) => onSubmit(values)} />);
+
+      await userEvent.click(screen.getByText('Submit'));
+
       expect(onSubmit).toHaveBeenCalledWith({ 'initial-convert': 5 });
     });
 
-    it('should convert individual values in array of literals as initial value', () => {
+    it('should convert individual values in array of literals as initial value', async () => {
       const onSubmit = jest.fn();
       const schema = {
         fields: [
@@ -174,12 +178,14 @@ describe('<FormRenderer />', () => {
           },
         ],
       };
-      const wrapper = mount(<FormRenderer {...initialProps} schema={schema} onSubmit={(values) => onSubmit(values)} />);
-      wrapper.find('form').simulate('submit');
+      render(<FormRenderer {...initialProps} schema={schema} onSubmit={(values) => onSubmit(values)} />);
+
+      await userEvent.click(screen.getByText('Submit'));
+
       expect(onSubmit).toHaveBeenCalledWith({ 'initial-convert': [5, 3, 11, 999] });
     });
 
-    it('should convert individual values in array of objects as initial value', () => {
+    it('should convert individual values in array of objects as initial value', async () => {
       const onSubmit = jest.fn();
       const schema = {
         fields: [
@@ -191,16 +197,17 @@ describe('<FormRenderer />', () => {
           },
         ],
       };
-      const wrapper = mount(<FormRenderer {...initialProps} schema={schema} onSubmit={(values) => onSubmit(values)} />);
+      render(<FormRenderer {...initialProps} schema={schema} onSubmit={(values) => onSubmit(values)} />);
 
-      wrapper.find('form').simulate('submit');
+      await userEvent.click(screen.getByText('Submit'));
+
       expect(onSubmit).toHaveBeenCalledWith({ 'initial-convert': [{ value: 5 }, { value: 3 }, { value: 11 }, { value: 999 }] });
     });
   });
 
-  it('should register new field to renderer context', () => {
+  it('should register new field to renderer context', async () => {
     const registerSpy = jest.fn();
-    const wrapper = mount(
+    render(
       <FormRenderer
         FormTemplate={(props) => <FormTemplate {...props} />}
         componentMapper={{
@@ -211,16 +218,14 @@ describe('<FormRenderer />', () => {
       />
     );
 
-    const button = wrapper.find('button#should-show');
-    act(() => {
-      button.simulate('click');
-    });
+    await userEvent.click(screen.getByLabelText('should-show'));
+
     expect(registerSpy).toHaveBeenCalledWith(['should-show']);
   });
 
-  it('should un-register field after unmount', () => {
+  it('should un-register field after unrender', async () => {
     const registerSpy = jest.fn();
-    const wrapper = mount(
+    render(
       <FormRenderer
         FormTemplate={(props) => <FormTemplate {...props} />}
         componentMapper={{
@@ -239,26 +244,20 @@ describe('<FormRenderer />', () => {
       />
     );
 
-    const button = wrapper.find('button#trigger');
-    act(() => {
-      button.simulate('click');
-    });
+    await userEvent.click(screen.getByLabelText('trigger'));
+
     expect(registerSpy).toHaveBeenCalledWith(['trigger', 'x', 'field-1']);
-    act(() => {
-      wrapper
-        .find('input')
-        .first()
-        .simulate('change', { target: { value: '' } });
-    });
-    act(() => {
-      button.simulate('click');
-    });
+
+    await userEvent.clear(screen.getByLabelText('x'));
+
+    await userEvent.click(screen.getByLabelText('trigger'));
+
     expect(registerSpy).toHaveBeenCalledWith(['trigger', 'x']);
   });
 
-  it('should not un-register field after unmount with multiple fields coppies', () => {
+  it('should not un-register field after unrender with multiple fields coppies', async () => {
     const registerSpy = jest.fn();
-    const wrapper = mount(
+    render(
       <FormRenderer
         FormTemplate={(props) => <FormTemplate {...props} />}
         componentMapper={{
@@ -279,26 +278,20 @@ describe('<FormRenderer />', () => {
       />
     );
 
-    const button = wrapper.find('button#trigger');
-    act(() => {
-      button.simulate('click');
-    });
+    await userEvent.click(screen.getByLabelText('trigger'));
+
     expect(registerSpy).toHaveBeenCalledWith(['trigger', 'x', 'field-1']);
-    act(() => {
-      wrapper
-        .find('input')
-        .first()
-        .simulate('change', { target: { value: '' } });
-    });
-    act(() => {
-      button.simulate('click');
-    });
+
+    await userEvent.clear(screen.getByLabelText('x'));
+
+    await userEvent.click(screen.getByLabelText('trigger'));
+
     expect(registerSpy).toHaveBeenCalledWith(['trigger', 'x', 'field-1']);
   });
 
-  it('should skip field registration', () => {
+  it('should skip field registration', async () => {
     const registerSpy = jest.fn();
-    const wrapper = mount(
+    render(
       <FormRenderer
         FormTemplate={(props) => <FormTemplate {...props} />}
         componentMapper={{
@@ -312,10 +305,121 @@ describe('<FormRenderer />', () => {
       />
     );
 
-    const button = wrapper.find('button#trigger');
-    act(() => {
-      button.simulate('click');
-    });
+    await userEvent.click(screen.getByLabelText('trigger'));
+
     expect(registerSpy).toHaveBeenCalledWith([]);
+  });
+
+  describe('children prop', () => {
+    const ChildrenTemplate = ({ formFields, schema, hideButtons }) => {
+      const { handleSubmit } = useFormApi();
+      return (
+        <form onSubmit={handleSubmit}>
+          {schema.title}
+          {formFields}
+          {!hideButtons && <button type="submit">Child node submit</button>}
+        </form>
+      );
+    };
+
+    it('should clone template props to children node', () => {
+      render(
+        <FormRenderer componentMapper={componentMapper} schema={schema} onSubmit={jest.fn()}>
+          <ChildrenTemplate />
+        </FormRenderer>
+      );
+
+      expect(screen.getByLabelText('component1')).toBeInTheDocument();
+      expect(screen.getByText('Select field')).toBeInTheDocument();
+      expect(screen.getByText('Child node submit')).toBeInTheDocument();
+    });
+
+    it('should use children node props', () => {
+      render(
+        <FormRenderer componentMapper={componentMapper} schema={schema} onSubmit={jest.fn()}>
+          <ChildrenTemplate hideButtons />
+        </FormRenderer>
+      );
+
+      expect(screen.getByLabelText('component1')).toBeInTheDocument();
+      expect(screen.getByText('Select field')).toBeInTheDocument();
+      const submitButton = screen.queryByText('Child node submit');
+      expect(submitButton).toBeNull();
+    });
+
+    it('should submit data from children node', async () => {
+      const submitSpy = jest.fn();
+      render(
+        <FormRenderer initialValues={{ foo: 'bar' }} componentMapper={componentMapper} schema={schema} onSubmit={submitSpy}>
+          <ChildrenTemplate />
+        </FormRenderer>
+      );
+
+      await userEvent.click(screen.getByText('Child node submit'));
+
+      expect(submitSpy).toHaveBeenCalledWith({ foo: 'bar' }, expect.any(Object), expect.any(Function));
+    });
+
+    it('should use children render function', () => {
+      render(
+        <FormRenderer componentMapper={componentMapper} schema={schema} onSubmit={jest.fn()}>
+          {(props) => <ChildrenTemplate {...props} />}
+        </FormRenderer>
+      );
+
+      expect(screen.getByLabelText('component1')).toBeInTheDocument();
+      expect(screen.getByText('Select field')).toBeInTheDocument();
+      expect(screen.getByText('Child node submit')).toBeInTheDocument();
+    });
+
+    it('should submit data from children render function', async () => {
+      const submitSpy = jest.fn();
+      render(
+        <FormRenderer initialValues={{ foo: 'bar' }} componentMapper={componentMapper} schema={schema} onSubmit={submitSpy}>
+          {(props) => <ChildrenTemplate {...props} />}
+        </FormRenderer>
+      );
+
+      await userEvent.click(screen.getByText('Child node submit'));
+
+      expect(submitSpy).toHaveBeenCalledWith({ foo: 'bar' }, expect.any(Object), expect.any(Function));
+    });
+
+    it('should render null as a child', () => {
+      expect(() => {
+        render(
+          <FormRenderer initialValues={{ foo: 'bar' }} componentMapper={componentMapper} schema={schema}>
+            {null}
+          </FormRenderer>
+        );
+      }).not.toThrow();
+    });
+
+    it('should throw an error if more than one child was passed', () => {
+      expect(() => {
+        render(
+          <FormRenderer initialValues={{ foo: 'bar' }} componentMapper={componentMapper} schema={schema}>
+            <div />
+            <div />
+          </FormRenderer>
+        );
+      }).toThrow('FormRenderer expects only one child element!');
+    });
+
+    it('should not override schema or formFields prop if explicitely given to child', () => {
+      const ChildSpy = ({ schema, formFields }) => (
+        <div>
+          <div>{schema}</div>
+          <div>{formFields}</div>
+        </div>
+      );
+      render(
+        <FormRenderer initialValues={{ foo: 'bar' }} componentMapper={componentMapper} schema={schema}>
+          <ChildSpy schema="schema-prop" formFields="form-fields-prop" />
+        </FormRenderer>
+      );
+      expect(screen.getByText('schema-prop')).toBeInTheDocument();
+      expect(screen.getByText('form-fields-prop')).toBeInTheDocument();
+    });
   });
 });

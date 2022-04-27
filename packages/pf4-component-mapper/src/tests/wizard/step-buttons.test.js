@@ -1,6 +1,6 @@
 import React from 'react';
-import { mount } from 'enzyme';
-import { mountToJson } from 'enzyme-to-json';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import handleEnter from '@data-driven-forms/common/wizard/enter-handler';
 
 import RenderWithProvider from '../../../../../__mocks__/with-provider';
@@ -17,6 +17,7 @@ describe('<WizardSTepButtons', () => {
   let initialProps;
   beforeEach(() => {
     initialProps = {
+      conditionalSubmitFlag: 'submit',
       buttonLabels: {
         cancel: 'Cancel',
         next: 'Next',
@@ -38,40 +39,45 @@ describe('<WizardSTepButtons', () => {
   });
 
   it('should render correctly', () => {
-    const wrapper = mount(
+    render(
       <RenderWithProvider>
         <WizardStepButtons {...initialProps} />
       </RenderWithProvider>
     );
-    expect(mountToJson(wrapper)).toMatchSnapshot();
+
+    expect(screen.getByText('Cancel')).toBeInTheDocument();
+    expect(screen.getByText('Submit')).toBeInTheDocument();
+    expect(screen.getByText('Back')).toBeInTheDocument();
   });
 
   it('should add custom className to toolbar', () => {
-    const wrapper = mount(
+    render(
       <RenderWithProvider>
         <WizardStepButtons {...initialProps} buttonsClassName="foo-class" />
       </RenderWithProvider>
     );
-    expect(mountToJson(wrapper)).toMatchSnapshot();
+
+    expect(screen.getByText('Cancel').closest('.foo-class')).toBeInTheDocument();
   });
 
-  it('should call next with correct arguments when next step is string', () => {
+  it('should call next with correct arguments when next step is string', async () => {
     const handleNext = jest.fn();
 
-    const wrapper = mount(
+    render(
       <RenderWithProvider>
         <WizardStepButtons {...initialProps} handleNext={handleNext} nextStep="next-step" />
       </RenderWithProvider>
     );
 
-    wrapper.find('button').at(0).simulate('click');
+    await userEvent.click(screen.getByText('Next'));
+
     expect(handleNext).toHaveBeenCalledWith('next-step');
   });
 
-  it('should call next with correct arguments when next step is condition', () => {
+  it('should call next with correct arguments when next step is condition', async () => {
     const handleNext = jest.fn();
 
-    const wrapper = mount(
+    render(
       <RenderWithProvider>
         <WizardStepButtons
           {...initialProps}
@@ -91,41 +97,48 @@ describe('<WizardSTepButtons', () => {
       </RenderWithProvider>
     );
 
-    wrapper.find('button').at(0).simulate('click');
+    await userEvent.click(screen.getByText('Next'));
+
     expect(handleNext).toHaveBeenCalledWith('bar');
   });
 
-  it('should call submit functions if no next step is defined', () => {
+  it('should call submit functions if no next step is defined', async () => {
     const handleSubmit = jest.fn();
-    const wrapper = mount(
+    render(
       <RenderWithProvider>
         <WizardStepButtons {...initialProps} formOptions={{ ...initialProps.formOptions, handleSubmit }} nextStep={undefined} />
       </RenderWithProvider>
     );
-    wrapper.find('button').at(0).simulate('click');
+
+    await userEvent.click(screen.getByText('Submit'));
+
     expect(handleSubmit).toHaveBeenCalled();
   });
 
-  it('should call cancel function', () => {
+  it('should call cancel function', async () => {
     const VALUES = { aws: 'yes', password: '123456643' };
     const onCancel = jest.fn();
-    const wrapper = mount(
+    render(
       <RenderWithProvider>
         <WizardStepButtons {...initialProps} formOptions={{ ...initialProps.formOptions, onCancel, getState: () => ({ values: VALUES }) }} />
       </RenderWithProvider>
     );
-    wrapper.find('button').last().simulate('click');
+
+    await userEvent.click(screen.getByText('Cancel'));
+
     expect(onCancel).toHaveBeenCalled();
   });
 
-  it('should call prev function', () => {
+  it('should call prev function', async () => {
     const handlePrev = jest.fn();
-    const wrapper = mount(
+    render(
       <RenderWithProvider>
         <WizardStepButtons {...initialProps} handlePrev={handlePrev} disableBack={false} />
       </RenderWithProvider>
     );
-    wrapper.find('button').at(1).simulate('click');
+
+    await userEvent.click(screen.getByText('Back'));
+
     expect(handlePrev).toHaveBeenCalled();
   });
 
@@ -274,7 +287,7 @@ describe('<WizardSTepButtons', () => {
     });
   });
 
-  it('conditional submit step', () => {
+  it('conditional submit step', async () => {
     const submit = jest.fn();
     const schema = {
       fields: [
@@ -296,6 +309,7 @@ describe('<WizardSTepButtons', () => {
                   component: componentTypes.TEXT_FIELD,
                   name: 'name',
                   validate: [{ type: validatorTypes.REQUIRED }],
+                  label: 'Name',
                 },
               ],
             },
@@ -304,7 +318,7 @@ describe('<WizardSTepButtons', () => {
       ],
     };
 
-    const wrapper = mount(
+    render(
       <FormRenderer
         componentMapper={componentMapper}
         FormTemplate={(props) => <FormTemplate {...props} showFormControls={false} />}
@@ -313,18 +327,19 @@ describe('<WizardSTepButtons', () => {
       />
     );
 
-    wrapper.find('input').instance().value = 'bla';
-    wrapper.find('input').simulate('change');
-    wrapper.update();
+    await userEvent.type(screen.getByLabelText('Name'), 'bla');
 
-    expect(wrapper.find('button.pf-c-button.pf-m-primary').text()).toEqual('Next');
+    expect(screen.getByText('Next')).toBeInTheDocument();
+    expect(() => screen.getByText('Submit')).toThrow();
 
-    wrapper.find('input').instance().value = 'submit';
-    wrapper.find('input').simulate('change');
-    wrapper.update();
+    await userEvent.clear(screen.getByLabelText('Name'));
+    await userEvent.type(screen.getByLabelText('Name'), 'submit');
 
-    expect(wrapper.find('button.pf-c-button.pf-m-primary').text()).toEqual('Submit');
-    wrapper.find('button.pf-c-button.pf-m-primary').simulate('click');
+    expect(() => screen.getByText('Next')).toThrow();
+    expect(screen.getByText('Submit')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Submit'));
+
     expect(submit).toHaveBeenCalledWith({ name: 'submit' }, expect.any(Object), expect.any(Object));
   });
 });

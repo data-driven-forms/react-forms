@@ -10,7 +10,7 @@ Other mappers can have similar solutions.
 
 ---
 
-Each MUI component mapper component is wrapped in [Grid](https://material-ui.com/components/grid/#grid) component by default and this component is configurable via `FormFieldGridProps` object you can pass via schema - this object is of the same shape as props for the Grid component.
+Each MUI component mapper component is wrapped in [Grid](https://mui.com/components/grid/#grid) component by default and this component is configurable via `FormFieldGridProps` object you can pass via schema - this object is of the same shape as props for the Grid component.
 
 ```jsx
 {

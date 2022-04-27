@@ -1,16 +1,13 @@
 import React from 'react';
-import { act } from 'react-dom/test-utils';
 import { FormRenderer, FormError } from '@data-driven-forms/react-form-renderer';
-import { mount } from 'enzyme';
-import { Typography } from '@material-ui/core';
-import Alert from '@material-ui/lab/Alert';
-import AlertTitle from '@material-ui/lab/AlertTitle';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { componentMapper, FormTemplate } from '../';
 
 describe('<FormTemplate />', () => {
   it('<Description /> renders correctly', () => {
-    const wrapper = mount(
+    render(
       <FormRenderer
         onSubmit={jest.fn()}
         componentMapper={componentMapper}
@@ -19,25 +16,26 @@ describe('<FormTemplate />', () => {
       />
     );
 
-    expect(wrapper.find(Typography).text()).toEqual('Some description');
+    expect(screen.getByText('Some description')).toBeInTheDocument();
   });
 
   it('<Title /> renders correctly', () => {
-    const wrapper = mount(
+    render(
       <FormRenderer onSubmit={jest.fn()} componentMapper={componentMapper} FormTemplate={FormTemplate} schema={{ title: 'Some title', fields: [] }} />
     );
 
-    expect(wrapper.find(Typography).text()).toEqual('Some title');
+    expect(screen.getByText('Some title')).toBeInTheDocument();
   });
 
   it('show form alert message', async () => {
-    const wrapper = mount(
+    render(
       <FormRenderer
         schema={{
           fields: [
             {
               component: 'text-field',
               name: 'field',
+              inputProps: { 'aria-label': 'field' },
             },
           ],
         }}
@@ -52,26 +50,20 @@ describe('<FormTemplate />', () => {
       />
     );
 
-    expect(wrapper.find(Alert)).toHaveLength(0);
+    await userEvent.type(screen.getByLabelText('field'), 'something');
 
-    await act(async () => {
-      wrapper.find('input').first().instance().value = 'cats';
-      wrapper.find('input').first().simulate('change');
-    });
-    wrapper.update();
-
-    expect(wrapper.find(Alert)).toHaveLength(1);
-    expect(wrapper.find(Alert).text()).toEqual('some error title');
+    expect(screen.getByText('some error title')).toBeInTheDocument();
   });
 
   it('show form alert message as object', async () => {
-    const wrapper = mount(
+    render(
       <FormRenderer
         schema={{
           fields: [
             {
               component: 'text-field',
               name: 'field',
+              inputProps: { 'aria-label': 'field' },
             },
           ],
         }}
@@ -86,16 +78,9 @@ describe('<FormTemplate />', () => {
       />
     );
 
-    expect(wrapper.find(Alert)).toHaveLength(0);
+    await userEvent.type(screen.getByLabelText('field'), 'something');
 
-    await act(async () => {
-      wrapper.find('input').first().instance().value = 'cats';
-      wrapper.find('input').first().simulate('change');
-    });
-    wrapper.update();
-
-    expect(wrapper.find(Alert)).toHaveLength(1);
-    expect(wrapper.find(AlertTitle).text()).toEqual('some error title');
-    expect(wrapper.find(Alert).text()).toEqual('some error titlesome description');
+    expect(screen.getByText('some error title')).toBeInTheDocument();
+    expect(screen.getByText('some description')).toBeInTheDocument();
   });
 });

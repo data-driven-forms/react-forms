@@ -1,5 +1,7 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
 import WizardToggle from '../../wizard/wizard-components/wizard-toggle';
 
 describe('WizardToggle', () => {
@@ -29,37 +31,41 @@ describe('WizardToggle', () => {
     };
   });
 
-  it('opens dropdown', () => {
-    const wrapper = mount(<WizardToggle {...initialProps} />);
+  it('opens dropdown', async () => {
+    render(<WizardToggle {...initialProps} />);
 
-    expect(wrapper.find('.pf-m-expanded')).toHaveLength(0);
+    const toggle = screen.getByLabelText('Wizard Toggle');
+
+    expect(toggle).not.toHaveClass('pf-m-expanded');
     expect(dispatch).not.toHaveBeenCalled();
 
-    wrapper.find('.pf-c-wizard__toggle').simulate('click');
+    await userEvent.click(toggle);
 
     expect(dispatch).toHaveBeenCalledWith({ type: 'openNav' });
   });
 
-  it('closes dropdown', () => {
+  it('closes dropdown', async () => {
     initialProps = {
       ...initialProps,
       isOpen: true,
     };
 
-    const wrapper = mount(<WizardToggle {...initialProps} />);
+    render(<WizardToggle {...initialProps} />);
 
-    expect(wrapper.find('.pf-m-expanded')).toHaveLength(1);
+    const toggle = screen.getByLabelText('Wizard Toggle');
+
+    expect(toggle).toHaveClass('pf-m-expanded');
     expect(dispatch).not.toHaveBeenCalled();
 
-    wrapper.find('.pf-c-wizard__toggle').simulate('click');
+    await userEvent.click(toggle);
 
     expect(dispatch).toHaveBeenCalledWith({ type: 'closeNav' });
   });
 
   it('renders correctly', () => {
-    const wrapper = mount(<WizardToggle {...initialProps} />);
+    render(<WizardToggle {...initialProps} />);
 
-    expect(wrapper.find('.pf-c-wizard__toggle-list-item').text()).toEqual('1 Title');
+    expect(screen.getByText('Title')).toBeInTheDocument();
   });
 
   it('renders on substep', () => {
@@ -97,9 +103,9 @@ describe('WizardToggle', () => {
       ],
     };
 
-    const wrapper = mount(<WizardToggle {...initialProps} />);
+    render(<WizardToggle {...initialProps} />);
 
-    expect(wrapper.find('.pf-c-wizard__toggle-list-item').first().text()).toEqual('2 substep title');
-    expect(wrapper.find('.pf-c-wizard__toggle-list-item').last().text()).toEqual('Title special');
+    expect(screen.getByText('substep title')).toBeInTheDocument();
+    expect(screen.getByText('Title special')).toBeInTheDocument();
   });
 });

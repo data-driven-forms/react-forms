@@ -1,5 +1,5 @@
 import { UseFieldApiComponentConfig } from "@data-driven-forms/react-form-renderer";
-import { TextFieldProps as MuiTextFieldProps, GridProps } from '@material-ui/core';
+import { TextFieldProps as MuiTextFieldProps, GridProps } from '@mui/material';
 import { ReactNode } from "react";
 
 interface InternalTextFieldProps {

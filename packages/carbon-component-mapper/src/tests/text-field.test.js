@@ -1,25 +1,19 @@
 import React from 'react';
-import { mount } from 'enzyme';
-import { act } from 'react-dom/test-utils';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 
 import FormTemplate from '../form-template';
 import componentMapper from '../component-mapper';
-import { TextInput, NumberInput } from 'carbon-components-react';
 
 describe('<TextInput and NumberInput />', () => {
-  let onChange;
-  let wrapper;
   let submitSpy;
+
   beforeEach(() => {
     submitSpy = jest.fn();
-    onChange = jest.fn();
   });
-  afterEach(() => {
-    onChange.mockReset();
-    submitSpy.mockReset();
-  });
+
   it('renders NumberInput', () => {
     const schema = {
       fields: [
@@ -34,7 +28,7 @@ describe('<TextInput and NumberInput />', () => {
       ],
     };
 
-    const wrapper = mount(
+    render(
       <FormRenderer
         onSubmit={(values) => submitSpy(values)}
         FormTemplate={(props) => <FormTemplate {...props} />}
@@ -43,7 +37,7 @@ describe('<TextInput and NumberInput />', () => {
       />
     );
 
-    expect(wrapper.find(NumberInput)).toHaveLength(1);
+    expect(screen.getByLabelText('Please enter a value')).toHaveAttribute('type', 'number');
   });
 
   it('NumberInput - click on increment button', async () => {
@@ -59,27 +53,18 @@ describe('<TextInput and NumberInput />', () => {
         },
       ],
     };
-    await act(async () => {
-      wrapper = mount(
-        <FormRenderer
-          onSubmit={(values) => submitSpy(values)}
-          FormTemplate={(props) => <FormTemplate {...props} />}
-          schema={schema}
-          componentMapper={componentMapper}
-        />
-      );
-    });
 
-    expect(wrapper.find(NumberInput)).toHaveLength(1);
-    expect(wrapper.find('input')).toHaveLength(1);
+    render(
+      <FormRenderer
+        onSubmit={(values) => submitSpy(values)}
+        FormTemplate={(props) => <FormTemplate {...props} />}
+        schema={schema}
+        componentMapper={componentMapper}
+      />
+    );
+    await userEvent.click(screen.getByLabelText('Increment number'));
+    await userEvent.click(screen.getByText('Submit'));
 
-    await act(async () => {
-      wrapper.find('button.up-icon').first().simulate('click');
-    });
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
     expect(submitSpy).toHaveBeenCalledWith({ input: '2' });
   });
 
@@ -96,27 +81,18 @@ describe('<TextInput and NumberInput />', () => {
         },
       ],
     };
-    await act(async () => {
-      wrapper = mount(
-        <FormRenderer
-          onSubmit={(values) => submitSpy(values)}
-          FormTemplate={(props) => <FormTemplate {...props} />}
-          schema={schema}
-          componentMapper={componentMapper}
-        />
-      );
-    });
 
-    expect(wrapper.find(NumberInput)).toHaveLength(1);
-    expect(wrapper.find('input')).toHaveLength(1);
+    render(
+      <FormRenderer
+        onSubmit={(values) => submitSpy(values)}
+        FormTemplate={(props) => <FormTemplate {...props} />}
+        schema={schema}
+        componentMapper={componentMapper}
+      />
+    );
+    await userEvent.click(screen.getByLabelText('Decrement number'));
+    await userEvent.click(screen.getByText('Submit'));
 
-    await act(async () => {
-      wrapper.find('button.down-icon').first().simulate('click');
-    });
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
     expect(submitSpy).toHaveBeenCalledWith({ input: '4' });
   });
 
@@ -132,7 +108,7 @@ describe('<TextInput and NumberInput />', () => {
       ],
     };
 
-    const wrapper = mount(
+    render(
       <FormRenderer
         onSubmit={(values) => submitSpy(values)}
         FormTemplate={(props) => <FormTemplate {...props} />}
@@ -141,6 +117,6 @@ describe('<TextInput and NumberInput />', () => {
       />
     );
 
-    expect(wrapper.find(TextInput)).toHaveLength(1);
+    expect(screen.getByLabelText('Please enter a value')).toHaveAttribute('type', 'text');
   });
 });

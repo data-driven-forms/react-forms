@@ -1,6 +1,6 @@
 {
   "name": "@data-driven-forms/pf4-component-mapper",
-  "version": "3.12.1",
+  "version": "3.17.4",
   "description": "Patternfly 4 React component mapper for Data Driven Forms.",
   "main": "index.js",
   "module": "esm/index.js",
@@ -30,13 +30,15 @@
     "javascript"
   ],
   "devDependencies": {
-    "@patternfly/react-core": "^4.101.3",
-    "@patternfly/react-icons": "^4.9.5"
+    "@patternfly/react-core": "^4.157.3",
+    "@patternfly/react-icons": "^4.11.7"
   },
   "peerDependencies": {
-    "@data-driven-forms/react-form-renderer": ">=3.2.1",
-    "@patternfly/react-core": "^4.101.3",
-    "@patternfly/react-icons": "^4.9.5"
+    "@data-driven-forms/react-form-renderer": "*",
+    "@patternfly/react-core": "^4.157.3",
+    "@patternfly/react-icons": "^4.11.7",
+    "react": "^16.13.1 || ^17.0.2 || ^18.0.0",
+    "react-dom": "^16.13.1 || ^17.0.2 || ^18.0.0"
   },
   "dependencies": {
     "@data-driven-forms/common": "*",

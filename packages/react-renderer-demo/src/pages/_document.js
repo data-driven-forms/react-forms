@@ -1,7 +1,6 @@
 import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
-import { ServerStyleSheets } from '@material-ui/styles';
-import theme from '../theme';
+import { ServerStyleSheets } from '@mui/styles';
 
 class MyDocument extends Document {
   render() {
@@ -15,12 +14,10 @@ class MyDocument extends Document {
           <link rel="apple-touch-icon" href="/192x192.png"></link>
           <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no" />
           {/* PWA primary color */}
-          <meta name="theme-color" content={theme.palette.primary.main} />
+          <meta name="theme-color" content="#430f8f" />
           <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
           <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Montserrat:700&display=swap" />
           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
-          <link rel="stylesheet" type="text/css" href="https://wpcc.io/lib/1.0.2/cookieconsent.min.css" />
-          <script src="https://wpcc.io/lib/1.0.2/cookieconsent.min.js"></script>
           <style
             dangerouslySetInnerHTML={{
               __html: `
@@ -51,27 +48,6 @@ class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
-          <script async src="https://www.googletagmanager.com/gtag/js?id=UA-164334905-1"></script>
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
-              (function() {
-                if(!window.location.origin.includes("localhost")) {
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
-                  gtag('js', new Date());
-  
-                  gtag('config', 'UA-164334905-1');
-                }
-              })()
-                `,
-            }}
-          ></script>
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `window.addEventListener("load", function(){window.wpcc.init({"border":"thin","corners":"small","colors":{"popup":{"background":"#f6f6f6","text":"#000000","border":"#555555"},"button":{"background":"#555555","text":"#ffffff"}}})});`,
-            }}
-          />
         </body>
       </html>
     );

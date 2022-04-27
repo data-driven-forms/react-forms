@@ -1,18 +1,16 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { act } from 'react-dom/test-utils';
 import { FormRenderer, componentTypes, useFieldApi, FormError as ERROR } from '@data-driven-forms/react-form-renderer';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 
 import FormTemplate from '../../form-template/form-template';
+import userEvent from '@testing-library/user-event';
 
 describe('FormTemplate', () => {
-  let wrapper;
-
   const DummyField = (props) => {
     const { input } = useFieldApi(props);
 
-    return <input {...input} />;
+    return <input {...input} aria-label={props.name} />;
   };
 
   const fields = [
@@ -58,235 +56,169 @@ describe('FormTemplate', () => {
   };
 
   it('Renders correctly', async () => {
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...rendererProps} />);
-    });
-    wrapper.update();
+    render(<FormRenderer {...rendererProps} />);
 
-    expect(wrapper.find(Form)).toHaveLength(1);
-    expect(wrapper.find(FormError)).toHaveLength(1);
-    expect(wrapper.find(Button)).toHaveLength(1);
-
-    expect(wrapper.find('button').map((b) => b.text())).toEqual(['Submit']);
-
-    expect(wrapper.find(ButtonGroup)).toHaveLength(1);
-    expect(wrapper.find(Title)).toHaveLength(0);
-    expect(wrapper.find(Description)).toHaveLength(0);
-
-    expect(wrapper.find(DummyField)).toHaveLength(2);
+    expect(screen.getByText('Submit')).toBeInTheDocument();
+    expect(screen.getByLabelText('field1')).toBeInTheDocument();
+    expect(screen.getByLabelText('field2')).toBeInTheDocument();
   });
 
   it('Renders correctly - fully enabled', async () => {
-    await act(async () => {
-      wrapper = mount(
-        <FormRenderer
-          {...rendererProps}
-          onCancel={jest.fn()}
-          schema={{
-            title: 'some-title',
-            description: 'some-description',
-            fields,
-          }}
-          FormTemplate={(props) => <FormTemplateTest {...props} canReset />}
-        />
-      );
-    });
-    wrapper.update();
+    render(
+      <FormRenderer
+        {...rendererProps}
+        onCancel={jest.fn()}
+        schema={{
+          title: 'some-title',
+          description: 'some-description',
+          fields,
+        }}
+        FormTemplate={(props) => <FormTemplateTest {...props} canReset />}
+      />
+    );
 
-    expect(wrapper.find(Form)).toHaveLength(1);
-    expect(wrapper.find(FormError)).toHaveLength(1);
-    expect(wrapper.find(Button)).toHaveLength(3);
+    expect(screen.getByText('Submit')).toBeInTheDocument();
+    expect(screen.getByText('Reset')).toBeInTheDocument();
+    expect(screen.getByText('Cancel')).toBeInTheDocument();
 
-    expect(wrapper.find('button').map((b) => b.text())).toEqual(['Submit', 'Reset', 'Cancel']);
+    expect(screen.getByText('some-title')).toBeInTheDocument();
+    expect(screen.getByText('some-description')).toBeInTheDocument();
 
-    expect(wrapper.find(ButtonGroup)).toHaveLength(1);
-    expect(wrapper.find(Title).text()).toEqual('some-title');
-    expect(wrapper.find(Description).text()).toEqual('some-description');
+    expect(screen.getByLabelText('field1')).toBeInTheDocument();
+    expect(screen.getByLabelText('field2')).toBeInTheDocument();
   });
 
   it('Renders correctly - with label', async () => {
-    await act(async () => {
-      wrapper = mount(
-        <FormRenderer
-          {...rendererProps}
-          onCancel={jest.fn()}
-          schema={{
-            label: 'some-title',
-            fields,
-          }}
-          FormTemplate={(props) => <FormTemplateTest {...props} canReset />}
-        />
-      );
-    });
-    wrapper.update();
+    render(
+      <FormRenderer
+        {...rendererProps}
+        onCancel={jest.fn()}
+        schema={{
+          label: 'some-title',
+          fields,
+        }}
+        FormTemplate={(props) => <FormTemplateTest {...props} canReset />}
+      />
+    );
 
-    expect(wrapper.find(Title).text()).toEqual('some-title');
+    expect(screen.getByText('some-title')).toBeInTheDocument();
   });
 
   it('Calls submit', async () => {
     const spy = jest.fn();
 
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...rendererProps} onSubmit={spy} />);
-    });
-    wrapper.update();
+    render(<FormRenderer {...rendererProps} onSubmit={spy} />);
 
-    await act(async () => {
-      wrapper.find('#submit').simulate('submit');
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(spy).toHaveBeenCalled();
   });
 
   it('Calls reset', async () => {
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...rendererProps} FormTemplate={(props) => <FormTemplateTest {...props} canReset />} />);
-    });
-    wrapper.update();
+    render(<FormRenderer {...rendererProps} FormTemplate={(props) => <FormTemplateTest {...props} canReset />} />);
 
-    await act(async () => {
-      wrapper.find('input').first().instance().value = 'y';
-      wrapper.find('input').first().simulate('change');
-    });
-    wrapper.update();
+    await userEvent.type(screen.getByLabelText('field1'), 'y');
 
-    await act(async () => {
-      wrapper.find('#reset').simulate('click');
-    });
-    wrapper.update();
+    expect(screen.getByLabelText('field1')).toHaveValue('y');
 
-    expect(wrapper.find('input').first().value).toEqual();
+    await userEvent.click(screen.getByText('Reset'));
+
+    expect(screen.getByLabelText('field1')).toHaveValue('');
   });
 
   it('Calls cancel', async () => {
     const spy = jest.fn();
 
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...rendererProps} onCancel={spy} />);
-    });
-    wrapper.update();
+    render(<FormRenderer {...rendererProps} onCancel={spy} />);
 
-    await act(async () => {
-      wrapper.find('#cancel').simulate('click');
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByText('Cancel'));
 
     expect(spy).toHaveBeenCalled();
   });
 
   it('Changes button order', async () => {
-    await act(async () => {
-      wrapper = mount(
-        <FormRenderer
-          {...rendererProps}
-          onCancel={jest.fn()}
-          FormTemplate={(props) => <FormTemplateTest {...props} canReset buttonOrder={['cancel', 'submit', 'reset']} />}
-        />
-      );
-    });
-    wrapper.update();
+    const { container } = render(
+      <FormRenderer
+        {...rendererProps}
+        onCancel={jest.fn()}
+        FormTemplate={(props) => <FormTemplateTest {...props} canReset buttonOrder={['cancel', 'submit', 'reset']} />}
+      />
+    );
 
-    expect(wrapper.find('button').map((b) => b.text())).toEqual(['Cancel', 'Submit', 'Reset']);
+    expect([...container.getElementsByTagName('button')].map((e) => e.textContent)).toEqual(['Cancel', 'Submit', 'Reset']);
   });
 
   it('Changes button order - default', async () => {
-    await act(async () => {
-      wrapper = mount(
-        <FormRenderer {...rendererProps} onCancel={jest.fn()} FormTemplate={(props) => <FormTemplateTest {...props} canReset buttonOrder={[]} />} />
-      );
-    });
-    wrapper.update();
+    const { container } = render(
+      <FormRenderer {...rendererProps} onCancel={jest.fn()} FormTemplate={(props) => <FormTemplateTest {...props} canReset buttonOrder={[]} />} />
+    );
 
-    expect(wrapper.find('button').map((b) => b.text())).toEqual(['Submit', 'Reset', 'Cancel']);
+    expect([...container.getElementsByTagName('button')].map((e) => e.textContent)).toEqual(['Submit', 'Reset', 'Cancel']);
   });
 
   it('Changes labels', async () => {
-    await act(async () => {
-      wrapper = mount(
-        <FormRenderer
-          {...rendererProps}
-          onCancel={jest.fn()}
-          FormTemplate={(props) => <FormTemplateTest {...props} canReset submitLabel="save" cancelLabel="discard" resetLabel="retry" />}
-        />
-      );
-    });
-    wrapper.update();
+    const { container } = render(
+      <FormRenderer
+        {...rendererProps}
+        onCancel={jest.fn()}
+        FormTemplate={(props) => <FormTemplateTest {...props} canReset submitLabel="save" cancelLabel="discard" resetLabel="retry" />}
+      />
+    );
 
-    expect(wrapper.find('button').map((b) => b.text())).toEqual(['save', 'retry', 'discard']);
+    expect([...container.getElementsByTagName('button')].map((e) => e.textContent)).toEqual(['save', 'retry', 'discard']);
   });
 
   it('Changes button className', async () => {
-    await act(async () => {
-      wrapper = mount(
-        <FormRenderer
-          {...rendererProps}
-          onCancel={jest.fn()}
-          FormTemplate={(props) => <FormTemplateTest {...props} buttonClassName="custom-button-classname" />}
-        />
-      );
-    });
-    wrapper.update();
+    render(
+      <FormRenderer
+        {...rendererProps}
+        onCancel={jest.fn()}
+        FormTemplate={(props) => <FormTemplateTest {...props} buttonClassName="custom-button-classname" />}
+      />
+    );
 
-    expect(wrapper.find(ButtonGroup).find('span').props().className).toEqual('custom-button-classname');
+    expect(screen.getByText('Submit').closest('.custom-button-classname')).toBeDefined();
   });
 
   it('Hide form controls', async () => {
-    await act(async () => {
-      wrapper = mount(
-        <FormRenderer
-          {...rendererProps}
-          onCancel={jest.fn()}
-          FormTemplate={(props) => <FormTemplateTest {...props} canReset showFormControls={false} />}
-        />
-      );
-    });
-    wrapper.update();
+    render(
+      <FormRenderer
+        {...rendererProps}
+        onCancel={jest.fn()}
+        FormTemplate={(props) => <FormTemplateTest {...props} canReset showFormControls={false} />}
+      />
+    );
 
-    expect(wrapper.find(Button)).toHaveLength(0);
-    expect(wrapper.find(ButtonGroup)).toHaveLength(0);
-    expect(wrapper.find(DummyField)).toHaveLength(2);
+    expect(() => screen.getByText('Submit')).toThrow();
+    expect(() => screen.getByText('Reset')).toThrow();
+    expect(() => screen.getByText('Cancel')).toThrow();
   });
 
   it('Custom buttons', async () => {
-    await act(async () => {
-      wrapper = mount(
-        <FormRenderer
-          {...rendererProps}
-          onCancel={jest.fn()}
-          FormTemplate={(props) => <FormTemplateTest {...props} FormButtons={() => <div id="custom-buttons" />} />}
-        />
-      );
-    });
-    wrapper.update();
-
-    expect(wrapper.find(Button)).toHaveLength(0);
-    expect(wrapper.find(ButtonGroup)).toHaveLength(0);
-    expect(wrapper.find(DummyField)).toHaveLength(2);
-    expect(wrapper.find('#custom-buttons')).toHaveLength(1);
+    render(
+      <FormRenderer
+        {...rendererProps}
+        onCancel={jest.fn()}
+        FormTemplate={(props) => <FormTemplateTest {...props} FormButtons={() => <div id="custom-buttons">custom buttons</div>} />}
+      />
+    );
+    expect(screen.getByText('custom buttons')).toBeInTheDocument();
   });
 
   it('shows form error', async () => {
-    await act(async () => {
-      wrapper = mount(
-        <FormRenderer
-          {...rendererProps}
-          onSubmit={() => ({
-            [ERROR]: 'form error',
-          })}
-        />
-      );
-    });
-    wrapper.update();
+    render(
+      <FormRenderer
+        {...rendererProps}
+        onSubmit={() => ({
+          [ERROR]: 'form error',
+        })}
+      />
+    );
 
-    expect(wrapper.find(FormError).text()).toEqual('');
+    expect(() => screen.getByText('form error')).toThrow();
 
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
+    await userEvent.click(screen.getByText('Submit'));
 
-    wrapper.update();
-
-    expect(wrapper.find(FormError).text()).toEqual('form error');
+    expect(screen.getByText('form error')).toBeInTheDocument();
   });
 });

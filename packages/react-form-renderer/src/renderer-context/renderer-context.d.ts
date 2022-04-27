@@ -1,10 +1,11 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { FormApi } from 'final-form';
 import ComponentMapper from '../common-types/component-mapper';
 import { ValidatorMapper } from '../validator-mapper';
 import { ActionMapper } from '../form-renderer';
 import Field from '../common-types/field';
 import { AnyObject } from '../common-types/any-object';
+import Schema from '../common-types/schema';
 
 export interface FormOptions extends FormApi {
   registerInputFile?: (name: string) => void;
@@ -18,6 +19,8 @@ export interface FormOptions extends FormApi {
   internalUnregisterField: (name: string) => void;
   getRegisteredFields: () => string[];
   ffGetRegisteredFields: () => string[];
+  initialValues: AnyObject;
+  schema: Schema,
 }
 
 export interface RendererContextValue {
@@ -27,8 +30,6 @@ export interface RendererContextValue {
   formOptions: FormOptions;
 }
 
-interface RendererContext {
-  value: RendererContextValue;
-}
+declare const RendererContext: React.Context<RendererContextValue>;
 
 export default RendererContext;

@@ -1,5 +1,5 @@
 import { UseFieldApiComponentConfig, AnyObject } from "@data-driven-forms/react-form-renderer";
-import { RadioProps as MuiRadioProps, GridProps, FormControlProps, FormControlLabelProps, FormLabelProps, FormHelperTextProps } from '@material-ui/core';
+import { RadioProps as MuiRadioProps, GridProps, FormControlProps, FormControlLabelProps, FormLabelProps, FormHelperTextProps } from '@mui/material';
 import { ReactNode } from "react";
 
 export interface RadioOption extends AnyObject {

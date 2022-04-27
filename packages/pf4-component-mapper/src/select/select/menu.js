@@ -117,8 +117,26 @@ const Menu = ({
   menuPortalTarget,
   menuIsPortal,
   selectToggleRef,
+  originalOptions,
 }) => {
-  const filteredOptions = isSearchable ? filterOptions(options, filterValue) : options;
+  const filteredOptions = isSearchable ? filterOptions(originalOptions, filterValue) : originalOptions;
+
+  let index = 0;
+
+  const createOption = (item) => {
+    index++;
+
+    const itemProps = getItemProps({
+      item,
+      index,
+      isActive: highlightedIndex === index,
+      isSelected: isMulti ? !!selectedItem.find(({ value }) => item.value === value) : selectedItem === item.value,
+      onMouseUp: (e) => e.stopPropagation(), // we need this to prevent issues with portal menu not selecting a option
+    });
+
+    return <Option key={item.key || item.value || (typeof item.label === 'string' && item.label) || item} item={item} {...itemProps} />;
+  };
+
   const menuItems = (
     <ul className={`pf-c-select__menu${menuIsPortal ? ' ddorg__pf4-component-mapper__select-menu-portal' : ''}`}>
       {filteredOptions.length === 0 && (
@@ -130,15 +148,21 @@ const Menu = ({
           isFetching={isFetching}
         />
       )}
-      {filteredOptions.map((item, index) => {
-        const itemProps = getItemProps({
-          item,
-          index,
-          isActive: highlightedIndex === index,
-          isSelected: isMulti ? !!selectedItem.find(({ value }) => item.value === value) : selectedItem === item.value,
-          onMouseUp: (e) => e.stopPropagation(), // we need this to prevent issues with portal menu not selecting a option
-        });
-        return <Option key={item.key || item.value || (typeof item.label === 'string' && item.label) || item} item={item} {...itemProps} />;
+      {filteredOptions.map((item, arrayIndex) => {
+        if (item.options) {
+          return (
+            <div className="pf-c-select__menu-group" key={`group-${arrayIndex}`}>
+              <div className="pf-c-select__menu-group-title">{item.label}</div>
+              {item.options.map((nestedItem) => createOption(nestedItem))}
+            </div>
+          );
+        }
+
+        if (item.divider) {
+          return <hr className="pf-c-divider" key={`divider-${index}`} />;
+        }
+
+        return createOption(item);
       })}
     </ul>
   );

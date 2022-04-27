@@ -1,20 +1,18 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { act } from 'react-dom/test-utils';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
 import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
-import { mount } from 'enzyme';
 
 import DualListSelectCommon from '../../dual-list-select';
 
 describe('dual list select', () => {
   let state;
-  let wrapper;
 
   const spyState = (newState) => {
     state = newState;
   };
-
-  const event = { preventDefault: jest.fn() };
 
   const Dummy = ({
     leftValues,
@@ -36,16 +34,24 @@ describe('dual list select', () => {
 
     return (
       <React.Fragment>
-        <button id="handleOptionsClick" onClick={handleOptionsClick} />
-        <button id="handleValuesClick" onClick={handleValuesClick} />
-        <button id="handleMoveRight" onClick={handleMoveRight} />
-        <button id="handleMoveLeft" onClick={handleMoveLeft} />
-        <button id="sortOptions" onClick={sortOptions} />
-        <button id="sortValues" onClick={sortValues} />
-        <button id="filterOptions" onClick={filterOptions} />
-        <button id="filterValues" onClick={filterValues} />
-        <button id="handleClearLeftValues" onClick={handleClearLeftValues} />
-        <button id="handleClearRightValues" onClick={handleClearRightValues} />
+        {leftValues.map(({ label, value }) => (
+          <button key={value} onClick={(event) => handleOptionsClick(event, value)}>
+            {label}
+          </button>
+        ))}
+        {rightValues.map(({ label, value }) => (
+          <button key={value} onClick={(event) => handleValuesClick(event, value)}>
+            {label}
+          </button>
+        ))}
+        <button aria-label="handleMoveRight" onClick={handleMoveRight} />
+        <button aria-label="handleMoveLeft" onClick={handleMoveLeft} />
+        <button aria-label="sortOptions" onClick={sortOptions} />
+        <button aria-label="sortValues" onClick={sortValues} />
+        <input type="text" aria-label="filterOptions" onChange={(e) => filterOptions(e.target.value)} value={state.filterOptions} />
+        <input type="text" aria-label="filterValues" onChange={(e) => filterValues(e.target.value)} value={state.filterValues} />
+        <button aria-label="handleClearLeftValues" onClick={handleClearLeftValues} />
+        <button aria-label="handleClearRightValues" onClick={handleClearRightValues} />
       </React.Fragment>
     );
   };
@@ -89,11 +95,7 @@ describe('dual list select', () => {
   };
 
   it('move one left', async () => {
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...rendererProps} initialValues={{ list: ['cats_2'] }} />);
-    });
-    wrapper.update();
-
+    render(<FormRenderer {...rendererProps} initialValues={{ list: ['cats_2'] }} />);
     expect(state).toEqual({
       filterOptions: '',
       filterValue: '',
@@ -113,10 +115,7 @@ describe('dual list select', () => {
       value: ['cats_2'],
     });
 
-    await act(async () => {
-      wrapper.find('#handleValuesClick').props().onClick(event, 'cats_2');
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByText('cats_2'));
 
     expect(state).toEqual({
       filterOptions: '',
@@ -137,10 +136,7 @@ describe('dual list select', () => {
       value: ['cats_2'],
     });
 
-    await act(async () => {
-      wrapper.find('#handleMoveLeft').simulate('click');
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByLabelText('handleMoveLeft'));
 
     expect(state).toEqual({
       filterOptions: '',
@@ -164,10 +160,7 @@ describe('dual list select', () => {
   });
 
   it('move one right', async () => {
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...rendererProps} />);
-    });
-    wrapper.update();
+    render(<FormRenderer {...rendererProps} />);
 
     expect(state).toEqual({
       filterOptions: '',
@@ -189,10 +182,7 @@ describe('dual list select', () => {
       value: '',
     });
 
-    await act(async () => {
-      wrapper.find('#handleOptionsClick').props().onClick(event, 'cats_2');
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByText('cats_2'));
 
     expect(state).toEqual({
       filterOptions: '',
@@ -214,10 +204,7 @@ describe('dual list select', () => {
       value: '',
     });
 
-    await act(async () => {
-      wrapper.find('#handleMoveRight').simulate('click');
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByLabelText('handleMoveRight'));
 
     expect(state).toEqual({
       filterOptions: '',
@@ -240,28 +227,17 @@ describe('dual list select', () => {
   });
 
   it('move two right with ctrl', async () => {
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...rendererProps} />);
-    });
-    wrapper.update();
+    render(<FormRenderer {...rendererProps} />);
 
-    await act(async () => {
-      wrapper.find('#handleOptionsClick').props().onClick(event, 'cats_2');
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByText('cats_2'));
 
-    await act(async () => {
-      wrapper
-        .find('#handleOptionsClick')
-        .props()
-        .onClick({ ...event, ctrlKey: true }, 'cats_1');
-    });
-    wrapper.update();
+    const user = userEvent.setup();
 
-    await act(async () => {
-      wrapper.find('#handleMoveRight').simulate('click');
-    });
-    wrapper.update();
+    await user.keyboard('{Control>}');
+    await user.click(screen.getByText('cats_1'));
+    await user.keyboard('{/Control}');
+
+    await userEvent.click(screen.getByLabelText('handleMoveRight'));
 
     expect(state).toEqual({
       filterOptions: '',
@@ -286,36 +262,17 @@ describe('dual list select', () => {
   });
 
   it('unselect with ctrl', async () => {
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...rendererProps} />);
-    });
-    wrapper.update();
+    render(<FormRenderer {...rendererProps} />);
+    await userEvent.click(screen.getByText('cats_2'));
 
-    await act(async () => {
-      wrapper.find('#handleOptionsClick').props().onClick(event, 'cats_2');
-    });
-    wrapper.update();
+    const user = userEvent.setup();
 
-    await act(async () => {
-      wrapper
-        .find('#handleOptionsClick')
-        .props()
-        .onClick({ ...event, ctrlKey: true }, 'cats_1');
-    });
-    wrapper.update();
+    await user.keyboard('{Control>}');
+    await user.click(screen.getByText('cats_1'));
+    await user.click(screen.getByText('cats_2'));
+    await user.keyboard('{/Control}');
 
-    await act(async () => {
-      wrapper
-        .find('#handleOptionsClick')
-        .props()
-        .onClick({ ...event, ctrlKey: true }, 'cats_2');
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('#handleMoveRight').simulate('click');
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByLabelText('handleMoveRight'));
 
     expect(state).toEqual({
       filterOptions: '',
@@ -338,28 +295,17 @@ describe('dual list select', () => {
   });
 
   it('move three right with shift', async () => {
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...rendererProps} />);
-    });
-    wrapper.update();
+    render(<FormRenderer {...rendererProps} />);
 
-    await act(async () => {
-      wrapper.find('#handleOptionsClick').props().onClick(event, 'cats');
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByText('cats'));
 
-    await act(async () => {
-      wrapper
-        .find('#handleOptionsClick')
-        .props()
-        .onClick({ ...event, shiftKey: true }, 'cats_2');
-    });
-    wrapper.update();
+    const user = userEvent.setup();
 
-    await act(async () => {
-      wrapper.find('#handleMoveRight').simulate('click');
-    });
-    wrapper.update();
+    await user.keyboard('{Shift>}');
+    await user.click(screen.getByText('cats_2'));
+    await user.keyboard('{/Shift}');
+
+    await userEvent.click(screen.getByLabelText('handleMoveRight'));
 
     expect(state).toEqual({
       filterOptions: '',
@@ -384,15 +330,9 @@ describe('dual list select', () => {
   });
 
   it('move all left', async () => {
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...rendererProps} initialValues={{ list: ['cats', 'cats_1', 'cats_2', 'pigeons', 'zebras'] }} />);
-    });
-    wrapper.update();
+    render(<FormRenderer {...rendererProps} initialValues={{ list: ['cats', 'cats_1', 'cats_2', 'pigeons', 'zebras'] }} />);
 
-    await act(async () => {
-      wrapper.find('#handleClearRightValues').simulate('click');
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByLabelText('handleClearRightValues'));
 
     expect(state).toEqual({
       filterOptions: '',
@@ -416,15 +356,9 @@ describe('dual list select', () => {
   });
 
   it('move all right', async () => {
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...rendererProps} />);
-    });
-    wrapper.update();
+    render(<FormRenderer {...rendererProps} />);
 
-    await act(async () => {
-      wrapper.find('#handleClearLeftValues').simulate('click');
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByLabelText('handleClearLeftValues'));
 
     expect(state).toEqual({
       filterOptions: '',
@@ -448,15 +382,9 @@ describe('dual list select', () => {
   });
 
   it('filter options', async () => {
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...rendererProps} />);
-    });
-    wrapper.update();
+    render(<FormRenderer {...rendererProps} />);
 
-    await act(async () => {
-      wrapper.find('#filterOptions').props().onClick('cats_');
-    });
-    wrapper.update();
+    await userEvent.type(screen.getByLabelText('filterOptions'), 'cats_');
 
     expect(state).toEqual({
       filterOptions: 'cats_',
@@ -477,15 +405,9 @@ describe('dual list select', () => {
   });
 
   it('filter values', async () => {
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...rendererProps} initialValues={{ list: ['cats', 'cats_1', 'cats_2', 'pigeons', 'zebras'] }} />);
-    });
-    wrapper.update();
+    render(<FormRenderer {...rendererProps} initialValues={{ list: ['cats', 'cats_1', 'cats_2', 'pigeons', 'zebras'] }} />);
 
-    await act(async () => {
-      wrapper.find('#filterValues').props().onClick('cats_');
-    });
-    wrapper.update();
+    await userEvent.type(screen.getByLabelText('filterValues'), 'cats_');
 
     expect(state).toEqual({
       filterOptions: '',
@@ -506,15 +428,9 @@ describe('dual list select', () => {
   });
 
   it('sort options', async () => {
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...rendererProps} />);
-    });
-    wrapper.update();
+    render(<FormRenderer {...rendererProps} />);
 
-    await act(async () => {
-      wrapper.find('#sortOptions').simulate('click');
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByLabelText('sortOptions'));
 
     expect(state).toEqual({
       filterOptions: '',
@@ -536,10 +452,7 @@ describe('dual list select', () => {
       value: '',
     });
 
-    await act(async () => {
-      wrapper.find('#sortOptions').simulate('click');
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByLabelText('sortOptions'));
 
     expect(state).toEqual({
       filterOptions: '',
@@ -563,15 +476,9 @@ describe('dual list select', () => {
   });
 
   it('sort values', async () => {
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...rendererProps} initialValues={{ list: ['cats', 'cats_1', 'cats_2', 'pigeons', 'zebras'] }} />);
-    });
-    wrapper.update();
+    render(<FormRenderer {...rendererProps} initialValues={{ list: ['cats', 'cats_1', 'cats_2', 'pigeons', 'zebras'] }} />);
 
-    await act(async () => {
-      wrapper.find('#sortValues').simulate('click');
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByLabelText('sortValues'));
 
     expect(state).toEqual({
       filterOptions: '',
@@ -593,10 +500,7 @@ describe('dual list select', () => {
       value: ['cats', 'cats_1', 'cats_2', 'pigeons', 'zebras'],
     });
 
-    await act(async () => {
-      wrapper.find('#sortValues').simulate('click');
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByLabelText('sortValues'));
 
     expect(state).toEqual({
       filterOptions: '',

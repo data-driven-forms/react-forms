@@ -5,15 +5,24 @@ import CodeExample from '@docs/code-example';
 
 # Data Driven Forms Introduction
 
-Data Driven Forms converts JSON form definitions (schemas) into fully functional React forms with the provided set of features.
+Data Driven Forms is a React library that renders a form and manages its state. Main features of this approach are:
 
-## Form state management
+- ○ **all components and form functionality is implemented in one place**, so all forms accross the whole application work and look the same,
+- ○ **form schemas can be stored as a JSON value** and loaded dynamically from API,
+- ○ **all forms are easily customizable and extendable** (for example, changing field from one component to another is just a matter of rewriting one string),
+- ○ forms can be written by non-developer persons,
+- ○ forms can be shared between different applications,
+- ○ **Data Driven Forms implements [React Final Form](https://github.com/final-form/react-final-form)** as the form manager, so all advanced form features such as validation are available,
+- ○ Data Driven Forms implements **custom form features such as conditions, actions, custom validators**, etc.
+- ○ Data Driven Forms provides utitilites for writing complex components such as **Wizard, Dual List Selector or asynchronous select**.
+- ○ The library provides multiple already implemented component mappers: **MUI, Ant, Patternfly,** ...
 
-Data Driven Forms uses [React Final Form](https://github.com/final-form/react-final-form) for the form state management. It is recommended to check their documentations first to fully understand how the [Data Driven Forms](https://github.com/data-driven-forms/react-forms) libraries work. However, it's not required to use DDF library.
+To start implementing a form in Data Driven Forms, you need to provide four props:
 
-## Schema
-
-[A schema](/schema/introduction) is a JSON object controlling the whole form. Using schema you define form fields and its attributes.
+- ○ `onSubmit` a function that is called on submit,
+- ○ `schema` a JSON object describing the form, [read more](/schema/introduction).
+- ○ `componentMapper` a set of components used in the form, [custom one](/mappers/custom-mapper) or [one of the provided ones](/provided-mappers/component-api),
+- ○ `FormTemplate` [a React component](/components/form-template) that structures and renders form fields and form buttons.
 
 ## How to start
 
@@ -23,7 +32,19 @@ Then you can import `FormRenderer` from the `@data-driven-forms/react-form-rende
 
 Following example shows basic usage of Data Driven Forms library with our [Material UI mapper](/provided-mappers/mui-component-mapper).
 
+<img src="https://user-images.githubusercontent.com/32869456/153852549-01ea7f97-b80b-4afe-a0f2-73bf0f4db972.png" width="100%" />
+
 <CodeExample source="components/get-started/get-started" mode="preview" />
+
+<br />
+
+---
+
+## Form state management
+
+Data Driven Forms uses [React Final Form](https://github.com/final-form/react-final-form) for the form state management. You can check their documentations first to fully understand how the [Data Driven Forms](https://github.com/data-driven-forms/react-forms) libraries work. However, it's not required to use DDF library.
+
+---
 
 ## Articles
 
@@ -37,9 +58,11 @@ Following articles can give you more insights about Data Driven Forms and why/ho
 
 [This article](https://medium.com/javascript-in-plain-english/data-driven-form-building-in-react-30768b49e625) presents basics of the data driven form building. It is a great point to start if you are new with this library.
 
+---
+
 ## Comparison with other form libraries
 
-### Form state management
+### Form state managers
 
 You can find many of already existing and well-established libraries such as Formik, React Hook Form, or React Final Form. These libraries are focused on providing form state management solutions. Data Driven Forms is using one of them - React Final Form - to enhance the developer experience and to provide consistent way for building complex forms. Form state management is completely abstracted in Data Driven Forms, so developers can focus on the only thing that really matters - building the most accessible web forms.
 

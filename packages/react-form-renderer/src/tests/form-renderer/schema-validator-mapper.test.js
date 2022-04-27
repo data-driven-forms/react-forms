@@ -1,10 +1,10 @@
 /* eslint-disable no-console */
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
+
 import FormRenderer from '../../form-renderer';
 import componentTypes from '../../component-types';
 import DefaultSchemaError from '../../schema-errors';
-import SchemaErrorComponent from '../../form-renderer/schema-error-component';
 
 describe('schemaValidatorMapper', () => {
   let initialProps;
@@ -58,9 +58,9 @@ describe('schemaValidatorMapper', () => {
       },
     };
 
-    const wrapper = mount(<FormRenderer {...initialProps} schemaValidatorMapper={schemaValidatorMapper} />);
+    render(<FormRenderer {...initialProps} schemaValidatorMapper={schemaValidatorMapper} />);
 
-    expect(wrapper.find(SchemaErrorComponent).text()).toEqual(expect.stringContaining('Please include "customProp" in field-input'));
+    expect(screen.getByText('Please include "customProp" in field-input')).toBeInTheDocument();
   });
 
   it('validator schema error', () => {
@@ -74,11 +74,9 @@ describe('schemaValidatorMapper', () => {
       },
     };
 
-    const wrapper = mount(<FormRenderer {...initialProps} schemaValidatorMapper={schemaValidatorMapper} />);
+    render(<FormRenderer {...initialProps} schemaValidatorMapper={schemaValidatorMapper} />);
 
-    expect(wrapper.find(SchemaErrorComponent).text()).toEqual(
-      expect.stringContaining('Please include "customProp" in custom validator in field-input')
-    );
+    expect(screen.getByText('Please include "customProp" in custom validator in field-input')).toBeInTheDocument();
   });
 
   it('action schema error', () => {
@@ -92,11 +90,9 @@ describe('schemaValidatorMapper', () => {
       },
     };
 
-    const wrapper = mount(<FormRenderer {...initialProps} schemaValidatorMapper={schemaValidatorMapper} />);
+    render(<FormRenderer {...initialProps} schemaValidatorMapper={schemaValidatorMapper} />);
 
-    expect(wrapper.find(SchemaErrorComponent).text()).toEqual(
-      expect.stringContaining('TranslateString actions has to have two arguments in: field-input')
-    );
+    expect(screen.getByText('TranslateString actions has to have two arguments in: field-input')).toBeInTheDocument();
   });
 
   describe('nested components', () => {
@@ -126,9 +122,9 @@ describe('schemaValidatorMapper', () => {
         },
       };
 
-      const wrapper = mount(<FormRenderer {...initialProps} schemaValidatorMapper={schemaValidatorMapper} />);
+      render(<FormRenderer {...initialProps} schemaValidatorMapper={schemaValidatorMapper} />);
 
-      expect(wrapper.find(SchemaErrorComponent).text()).toEqual(expect.stringContaining('Please include "customProp" in field-input'));
+      expect(screen.getByText('Please include "customProp" in field-input')).toBeInTheDocument();
     });
 
     it('validator schema error', () => {
@@ -142,11 +138,9 @@ describe('schemaValidatorMapper', () => {
         },
       };
 
-      const wrapper = mount(<FormRenderer {...initialProps} schemaValidatorMapper={schemaValidatorMapper} />);
+      render(<FormRenderer {...initialProps} schemaValidatorMapper={schemaValidatorMapper} />);
 
-      expect(wrapper.find(SchemaErrorComponent).text()).toEqual(
-        expect.stringContaining('Please include "customProp" in custom validator in field-input')
-      );
+      expect(screen.getByText('Please include "customProp" in custom validator in field-input')).toBeInTheDocument();
     });
 
     it('action schema error', () => {
@@ -160,11 +154,9 @@ describe('schemaValidatorMapper', () => {
         },
       };
 
-      const wrapper = mount(<FormRenderer {...initialProps} schemaValidatorMapper={schemaValidatorMapper} />);
+      render(<FormRenderer {...initialProps} schemaValidatorMapper={schemaValidatorMapper} />);
 
-      expect(wrapper.find(SchemaErrorComponent).text()).toEqual(
-        expect.stringContaining('TranslateString actions has to have two arguments in: field-input')
-      );
+      expect(screen.getByText('TranslateString actions has to have two arguments in: field-input')).toBeInTheDocument();
     });
   });
 });

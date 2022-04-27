@@ -11,10 +11,11 @@ const SingleCheckbox = (props) => {
 };
 
 const MultipleChoiceList = (props) => {
-  const { Wrapper, Checkbox, label, isRequired, helperText, meta, input, options, isDisabled, isReadOnly, description, ...rest } = useFieldApi(props);
+  const { Wrapper, Checkbox, label, validateOnMount, isRequired, helperText, meta, input, options, isDisabled, isReadOnly, description, ...rest } =
+    useFieldApi(props);
 
   const { error, touched, submitError } = meta;
-  const showError = touched && (error || submitError);
+  const showError = Boolean((touched || validateOnMount) && (error || submitError));
 
   return (
     <Wrapper
