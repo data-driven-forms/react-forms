@@ -23,7 +23,7 @@ export interface FormStateManagerProps {
   debug?: Debug;
 }
 
-const FormStateManager: React.ComponentType<FormStateManagerProps> = ({
+const FormStateManager: React.FunctionComponent<FormStateManagerProps> = ({
   children,
   onSubmit,
   clearOnUnmount,
