@@ -146,7 +146,7 @@ describe('DualListSelect', () => {
     await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenLastCalledWith({
-      'dual-StructuredListWrapper': [],
+      'dual-list': [],
     });
   });
 
@@ -166,7 +166,7 @@ describe('DualListSelect', () => {
     await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
-      'dual-StructuredListWrapper': [],
+      'dual-list': [],
     });
   });
 

@@ -17,8 +17,6 @@ describe('useFieldApi', () => {
     return children;
   };
 
-  const registerInputFileSpy = jest.fn();
-
   const TestField = (props) => {
     const rest = useFieldApi(props);
 
@@ -31,13 +29,11 @@ describe('useFieldApi', () => {
 
   const WrapperComponent = ({ onSubmit, ...props }) => (
     <Form onSubmit={onSubmit}>
-      {({ handleSubmit, form: { reset } }) => (
+      {({ handleSubmit, formOptions: { reset } }) => (
         <form onSubmit={handleSubmit}>
           <RendererContext.Provider
             value={{
               formOptions: {
-                registerInputFile: registerInputFileSpy,
-                unRegisterInputFile: jest.fn(),
                 internalRegisterField: jest.fn(),
                 internalUnRegisterField: jest.fn(),
               },

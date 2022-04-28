@@ -1031,7 +1031,7 @@ describe('renderForm function', () => {
       await userEvent.type(screen.getByLabelText('foo'), 'barrr');
       await userEvent.click(screen.getByText('Submit'));
 
-      expect(onSubmit).toHaveBeenCalledWith({ foo: 'barrr', unmnounted: 'bla' });
+      expect(onSubmit).toHaveBeenCalledWith({ foo: 'BlaBlaBlabarrr', unmnounted: 'bla' });
     });
 
     it('should clear values after unrender and set to form cleared value', async () => {
@@ -1081,7 +1081,7 @@ describe('renderForm function', () => {
       await userEvent.type(screen.getByLabelText('foo'), 'barrr');
       await userEvent.click(screen.getByText('Submit'));
 
-      expect(onSubmit).toHaveBeenCalledWith({ foo: 'barrr', unmnounted: 'BlaBlaBla' });
+      expect(onSubmit).toHaveBeenCalledWith({ foo: 'BlaBlaBlabarrr', unmnounted: 'BlaBlaBla' });
     });
   });
 
@@ -1327,14 +1327,14 @@ describe('renderForm function', () => {
       await userEvent.type(screen.getByLabelText('input'), 'show_true');
       await userEvent.click(screen.getByText('Submit'));
 
-      expect(onSubmit).toHaveBeenCalledWith({ input: 'show_true', unrendered: true }, expect.any(Object), expect.any(Function));
+      expect(onSubmit).toHaveBeenCalledWith({ input: 'show_true', unrendered: true }, expect.any(Object), expect.any(Object));
       onSubmit.mockClear();
 
       await userEvent.clear(screen.getByLabelText('input'));
       await userEvent.type(screen.getByLabelText('input'), 'show_false');
       await userEvent.click(screen.getByText('Submit'));
 
-      expect(onSubmit).toHaveBeenCalledWith({ input: 'show_false', unrendered: false }, expect.any(Object), expect.any(Function));
+      expect(onSubmit).toHaveBeenCalledWith({ input: 'show_false', unrendered: false }, expect.any(Object), expect.any(Object));
     });
 
     it('should set unefined value in initializeOnMount', async () => {
@@ -1385,14 +1385,14 @@ describe('renderForm function', () => {
       await userEvent.type(screen.getByLabelText('input'), 'show_true');
       await userEvent.click(screen.getByText('Submit'));
 
-      expect(onSubmit).toHaveBeenCalledWith({ input: 'show_true', unrendered: true }, expect.any(Object), expect.any(Function));
+      expect(onSubmit).toHaveBeenCalledWith({ input: 'show_true', unrendered: true }, expect.any(Object), expect.any(Object));
       onSubmit.mockClear();
 
       await userEvent.clear(screen.getByLabelText('input'));
       await userEvent.type(screen.getByLabelText('input'), 'show_undef');
       await userEvent.click(screen.getByText('Submit'));
 
-      expect(onSubmit).toHaveBeenCalledWith({ input: 'show_undef', unrendered: undefined }, expect.any(Object), expect.any(Function));
+      expect(onSubmit).toHaveBeenCalledWith({ input: 'show_undef', unrendered: undefined }, expect.any(Object), expect.any(Object));
     });
   });
 

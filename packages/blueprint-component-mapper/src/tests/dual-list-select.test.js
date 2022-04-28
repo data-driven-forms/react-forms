@@ -145,7 +145,7 @@ describe('DualListSelect', () => {
     await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenLastCalledWith({
-      'dual-Menu': [],
+      'dual-list': [],
     });
   });
 
@@ -165,7 +165,7 @@ describe('DualListSelect', () => {
     await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
-      'dual-Menu': [],
+      'dual-list': [],
     });
   });
 
