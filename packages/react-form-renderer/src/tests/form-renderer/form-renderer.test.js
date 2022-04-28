@@ -357,7 +357,7 @@ describe('<FormRenderer />', () => {
 
       await userEvent.click(screen.getByText('Child node submit'));
 
-      expect(submitSpy).toHaveBeenCalledWith({ foo: 'bar' }, expect.any(Object), expect.any(Function));
+      expect(submitSpy).toHaveBeenCalledWith({ foo: 'bar' }, expect.any(Object), expect.any(Object));
     });
 
     it('should use children render function', () => {
@@ -382,7 +382,7 @@ describe('<FormRenderer />', () => {
 
       await userEvent.click(screen.getByText('Child node submit'));
 
-      expect(submitSpy).toHaveBeenCalledWith({ foo: 'bar' }, expect.any(Object), expect.any(Function));
+      expect(submitSpy).toHaveBeenCalledWith({ foo: 'bar' }, expect.any(Object), expect.any(Object));
     });
 
     it('should render null as a child', () => {

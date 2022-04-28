@@ -4,7 +4,7 @@ import RendererContext from '../renderer-context';
 import assignSpecialType from './assign-special-type';
 import componentTypes from '../component-types';
 import { prepareArrayValidator, getValidate } from './validator-helpers';
-import composeValidators from './compose-validators';
+import composeValidators from '../compose-validators';
 import get from 'lodash/get';
 
 const calculateArrayValidator = (props, validate, component, validatorMapper) => {
@@ -60,10 +60,6 @@ const createFieldProps = (name, formOptions) => {
 const useFieldApi = ({ name, resolveProps, skipRegistration = false, ...props }) => {
   const { validatorMapper, formOptions } = useContext(RendererContext);
 
-  // if there is field initial value, we have to check form initialValues
-  // initialValues should have higher priority
-  const formInitialValue = Object.prototype.hasOwnProperty.call(props, 'initialValue') ? get(formOptions.initialValues, name) : undefined;
-
   const resolvedProps = resolveProps ? resolveProps(props, createFieldProps(name, formOptions), formOptions) || {} : {};
 
   const combinedProps = { ...props, ...resolvedProps };
@@ -86,7 +82,7 @@ const useFieldApi = ({ name, resolveProps, skipRegistration = false, ...props })
     ...(stateValidate ? { validate: stateValidate } : {}),
   };
 
-  const field = useField(name, { ...enhancedProps, ...(typeof formInitialValue !== 'undefined' && { initialValue: formInitialValue }) });
+  const field = useField(enhancedProps);
 
   /** Reinitilize type */
   useEffect(() => {
