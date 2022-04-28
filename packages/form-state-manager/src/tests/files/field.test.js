@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 
 import FormStateManager from '../../form-state-manager';
 import Field from '../../field';
@@ -10,55 +10,30 @@ describe('<Field />', () => {
   const initialProps = { name: 'some-field', initialValue: 'some-value' };
 
   it('renders with children', () => {
-    wrapper = mount(<FormStateManager>{() => <Field {...initialProps}>{(props) => <input {...props.input} />}</Field>}</FormStateManager>);
+    render(<FormStateManager>{() => <Field {...initialProps}>{(props) => <input {...props.input} />}</Field>}</FormStateManager>);
 
-    expect(wrapper.find('input').props()).toEqual({
-      name: initialProps.name,
-      onBlur: expect.any(Function),
-      onChange: expect.any(Function),
-      onFocus: expect.any(Function),
-      value: initialProps.initialValue,
-    });
+    expect(screen.getByRole('textbox')).toHaveValue('some-value');
   });
 
   it('renders with string component', () => {
     const ref = React.createRef();
 
-    wrapper = mount(<FormStateManager>{() => <Field {...initialProps} component="input" ref={ref} />}</FormStateManager>);
+    render(<FormStateManager>{() => <Field {...initialProps} component="input" ref={ref} />}</FormStateManager>);
 
-    expect(wrapper.find('input').props()).toEqual({
-      name: initialProps.name,
-      onBlur: expect.any(Function),
-      onChange: expect.any(Function),
-      onFocus: expect.any(Function),
-      value: initialProps.initialValue,
-    });
+    expect(screen.getByRole('textbox')).toHaveValue('some-value');
   });
 
   it('renders with component as ComponentType', () => {
-    const ref = React.createRef();
     const Component = ({ input }) => <input {...input} />;
 
-    wrapper = mount(<FormStateManager>{() => <Field {...initialProps} component={Component} />}</FormStateManager>);
+    render(<FormStateManager>{() => <Field {...initialProps} component={Component} />}</FormStateManager>);
 
-    expect(wrapper.find('input').props()).toEqual({
-      name: initialProps.name,
-      onBlur: expect.any(Function),
-      onChange: expect.any(Function),
-      onFocus: expect.any(Function),
-      value: initialProps.initialValue,
-    });
+    expect(screen.getByRole('textbox')).toHaveValue('some-value');
   });
 
   it('renders with render function', () => {
-    wrapper = mount(<FormStateManager>{() => <Field {...initialProps} render={(props) => <input {...props.input} />} />}</FormStateManager>);
+    render(<FormStateManager>{() => <Field {...initialProps} render={(props) => <input {...props.input} />} />}</FormStateManager>);
 
-    expect(wrapper.find('input').props()).toEqual({
-      name: initialProps.name,
-      onBlur: expect.any(Function),
-      onChange: expect.any(Function),
-      onFocus: expect.any(Function),
-      value: initialProps.initialValue,
-    });
+    expect(screen.getByRole('textbox')).toHaveValue('some-value');
   });
 });

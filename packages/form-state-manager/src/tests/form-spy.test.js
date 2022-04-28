@@ -1,6 +1,6 @@
 import React from 'react';
-import { act } from 'react-dom/test-utils';
-import { mount } from 'enzyme';
+import { act, render as rtlRender } from '@testing-library/react';
+
 import FormManagerContext from '../form-manager-context';
 import createManagerApi from '../manager-api';
 import FormSpy from '../form-spy';
@@ -11,7 +11,7 @@ describe('<FormSpy />', () => {
 
     const render = jest.fn().mockImplementation(() => null);
 
-    const wrapper = mount(
+    const wrapper = rtlRender(
       <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
         <FormSpy subscription={{ valid: true }}>{render}</FormSpy>
       </FormManagerContext.Provider>
@@ -32,14 +32,12 @@ describe('<FormSpy />', () => {
     await act(async () => {
       managerApi().rerender(['valid']);
     });
-    wrapper.update();
 
     expect(render.mock.calls.length).toEqual(2);
 
     await act(async () => {
       managerApi().rerender(['values']);
     });
-    wrapper.update();
 
     expect(render.mock.calls.length).toEqual(2);
   });
