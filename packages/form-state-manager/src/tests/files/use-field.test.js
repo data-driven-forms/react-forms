@@ -1,14 +1,27 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect } from 'react';
-import { act } from 'react-dom/test-utils';
-import { mount } from 'enzyme';
+import { cleanup, render, screen, act, waitFor, fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
 import FormManagerContext from '../../form-manager-context';
 import useField, { checkEmpty } from '../../use-field';
 import createManagerApi, { initialMeta } from '../../manager-api';
 
-const NonInputSpyComponent = ({ changeValue, onChange }) => <button id="fake-change" type="button" onClick={() => onChange(changeValue)}></button>;
+let NonInputSpyComponentValue;
 
-const SpyComponent = ({ initialValue, meta, validate, initializeOnMount, ...props }) => <input name="spy-input" id="spy-input" {...props} />;
+const NonInputSpyComponent = ({ changeValue, onChange, value }) => {
+  NonInputSpyComponentValue = value;
+
+  return <button id="fake-change" type="button" onClick={() => onChange(changeValue)}></button>;
+};
+
+let spyProps;
+
+const SpyComponent = ({ initialValue, meta, validate, initializeOnMount, ...props }) => {
+  spyProps = { meta, ...props };
+
+  return <input name="spy-input" id="spy-input" {...props} />;
+};
 
 const SubscribedComponent = ({ fakeComponent, ...props }) => {
   const {
@@ -37,19 +50,20 @@ describe('useField', () => {
   beforeEach(() => {
     managerApi = createManagerApi(jest.fn());
   });
-  it('should assing value and onChange handlers to SpyComponent', () => {
-    const spy = mount(<DummyComponent subscriberProps={{ name: 'spy' }} managerApi={managerApi} />).find(SpyComponent);
-    expect(spy.prop('value')).toEqual('');
-    expect(spy.prop('name')).toEqual('spy');
-    expect(spy.prop('onChange')).toEqual(expect.any(Function));
+  it('should assing value and onChange handlers to SpyComponent', async () => {
+    render(<DummyComponent subscriberProps={{ name: 'spy' }} managerApi={managerApi} />);
+
+    expect(screen.getByRole('textbox')).toHaveValue('');
+    expect(screen.getByRole('textbox')).toHaveAttribute('name', 'spy');
   });
 
   it('should assing meta SpyComponent', () => {
-    const spy = mount(<DummyComponent subscriberProps={{ name: 'spy' }} managerApi={managerApi} />).find(SpyComponent);
-    expect(spy.prop('meta')).toEqual(initialMeta());
+    render(<DummyComponent subscriberProps={{ name: 'spy' }} managerApi={managerApi} />);
+
+    expect(spyProps.meta).toEqual(initialMeta());
   });
 
-  it('should call register field on mount and unregister on unmount', async () => {
+  it('should call register field on render and unregister on unrender', async () => {
     const managerApi = createManagerApi(jest.fn());
     const api = managerApi();
     const registerSpy = jest.spyOn(api, 'registerField');
@@ -65,55 +79,46 @@ describe('useField', () => {
       name: 'spy',
       internalId: expect.any(Number),
     };
-    const wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy', initialValue: 'foo' }} managerApi={managerApi} />);
+    render(<DummyComponent subscriberProps={{ name: 'spy', initialValue: 'foo' }} managerApi={managerApi} />);
+
     expect(registerSpy).toHaveBeenCalledWith(registerArguments);
-    await act(async () => {
-      wrapper.unmount();
-    });
+
+    await cleanup();
+
     expect(unregisterSpy).toHaveBeenCalledWith(unregisterArguments);
   });
 
   it('should set correct value on input type text', async () => {
-    const wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy' }} managerApi={managerApi} />);
-    const input = wrapper.find('input');
-    await act(async () => {
-      input.simulate('change', { target: { value: 'foo' } });
-    });
-    wrapper.update();
-    expect(wrapper.find(SpyComponent).prop('value')).toEqual('foo');
+    render(<DummyComponent subscriberProps={{ name: 'spy' }} managerApi={managerApi} />);
+
+    await userEvent.type(screen.getByRole('textbox'), 'foo');
+
+    expect(screen.getByRole('textbox')).toHaveValue('foo');
   });
 
   it('should set correct value on input type checkbox', async () => {
-    const wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy', type: 'checkbox' }} managerApi={managerApi} />);
-    const input = wrapper.find('input');
-    await act(async () => {
-      input.simulate('change', { target: { checked: true, type: 'checkbox' } });
-    });
-    wrapper.update();
-    expect(wrapper.find(SpyComponent).prop('checked')).toEqual(true);
+    render(<DummyComponent subscriberProps={{ name: 'spy', type: 'checkbox' }} managerApi={managerApi} />);
+
+    await userEvent.click(screen.getByRole('checkbox'));
+
+    expect(screen.getByRole('checkbox')).toBeChecked();
   });
 
   it('should set correct array value', async () => {
-    const wrapper = mount(<DummyComponent subscriberProps={{ fakeComponent: true, name: 'spy', changeValue: [] }} managerApi={managerApi} />);
-    const input = wrapper.find('button#fake-change');
-    await act(async () => {
-      input.simulate('click');
-    });
-    wrapper.update();
-    expect(wrapper.find(NonInputSpyComponent).prop('value')).toEqual([]);
+    render(<DummyComponent subscriberProps={{ fakeComponent: true, name: 'spy', changeValue: [] }} managerApi={managerApi} />);
+
+    await userEvent.click(screen.getByRole('button'));
+
+    expect(NonInputSpyComponentValue).toEqual([]);
   });
 
   it('should set correct on non event object value', async () => {
     const nonEventObject = { value: 1, label: 'bar' };
-    const wrapper = mount(
-      <DummyComponent subscriberProps={{ fakeComponent: true, name: 'spy', changeValue: nonEventObject }} managerApi={managerApi} />
-    );
-    const input = wrapper.find('button#fake-change');
-    await act(async () => {
-      input.simulate('click');
-    });
-    wrapper.update();
-    expect(wrapper.find(NonInputSpyComponent).prop('value')).toEqual(nonEventObject);
+    render(<DummyComponent subscriberProps={{ fakeComponent: true, name: 'spy', changeValue: nonEventObject }} managerApi={managerApi} />);
+
+    await userEvent.click(screen.getByRole('button'));
+
+    expect(NonInputSpyComponentValue).toEqual(nonEventObject);
   });
 
   it('should call focus callback on focus event', async () => {
@@ -121,17 +126,15 @@ describe('useField', () => {
     const api = managerApi();
     const focusSpy = jest.spyOn(api, 'focus');
     const blurSpy = jest.spyOn(api, 'blur');
-    const spy = mount(<DummyComponent subscriberProps={{ name: 'spy' }} managerApi={managerApi} />).find('input');
+    render(<DummyComponent subscriberProps={{ name: 'spy' }} managerApi={managerApi} />);
 
     await act(async () => {
-      spy.prop('onFocus')();
+      screen.getByRole('textbox').focus();
     });
-    spy.update();
     expect(focusSpy).toHaveBeenCalledWith('spy');
     await act(async () => {
-      spy.prop('onBlur')();
+      screen.getByRole('textbox').blur();
     });
-    spy.update();
     expect(blurSpy).toHaveBeenCalledWith('spy');
     expect(focusSpy).toHaveBeenCalledTimes(1);
     expect(blurSpy).toHaveBeenCalledTimes(1);
@@ -141,32 +144,32 @@ describe('useField', () => {
     const managerApi = createManagerApi({});
     managerApi().change('foo[0]', 'bar');
 
-    const wrapper = mount(<DummyComponent subscriberProps={{ name: 'foo[0]' }} managerApi={managerApi} />);
+    render(<DummyComponent subscriberProps={{ name: 'foo[0]' }} managerApi={managerApi} />);
 
-    expect(wrapper.find('input[name="foo[0]"]').prop('value')).toEqual('bar');
+    expect(screen.getByRole('textbox')).toHaveValue('bar');
   });
 
   describe('initialValues', () => {
     it('should set value from initialValues', () => {
       const managerApi = createManagerApi({ initialValues: { spy: 'value1' } });
 
-      mount(<DummyComponent subscriberProps={{ name: 'spy' }} managerApi={managerApi} />);
+      render(<DummyComponent subscriberProps={{ name: 'spy' }} managerApi={managerApi} />);
 
       expect(managerApi().values.spy).toEqual('value1');
     });
 
-    it('should set value from initialValue over initialValues', () => {
+    it('should set value from initialValues over initialValue', () => {
       const managerApi = createManagerApi({ initialValues: { spy: 'value1' } });
 
-      mount(<DummyComponent subscriberProps={{ name: 'spy', initialValue: 'value2' }} managerApi={managerApi} />);
+      render(<DummyComponent subscriberProps={{ name: 'spy', initialValue: 'value2' }} managerApi={managerApi} />);
 
-      expect(managerApi().values.spy).toEqual('value2');
+      expect(managerApi().values.spy).toEqual('value1');
     });
 
     it('should set nested value from initialValues', () => {
       const managerApi = createManagerApi({ initialValues: { spy: { nested: 'value123' } } });
 
-      mount(<DummyComponent subscriberProps={{ name: 'spy.nested' }} managerApi={managerApi} />);
+      render(<DummyComponent subscriberProps={{ name: 'spy.nested' }} managerApi={managerApi} />);
 
       expect(managerApi().values.spy.nested).toEqual('value123');
     });
@@ -174,18 +177,17 @@ describe('useField', () => {
     it('should set value from initialValues only on first registration', async () => {
       const managerApi = createManagerApi({ initialValues: { spy: { nested: 'value123' } } });
 
-      let wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy.nested' }} managerApi={managerApi} />);
+      render(<DummyComponent subscriberProps={{ name: 'spy.nested' }} managerApi={managerApi} />);
 
       expect(managerApi().values.spy.nested).toEqual('value123');
 
       await act(async () => {
         managerApi().change('spy.nested', 'different value');
       });
-      wrapper.update();
 
-      wrapper.unmount();
+      await cleanup();
 
-      wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy.nested' }} managerApi={managerApi} />);
+      render(<DummyComponent subscriberProps={{ name: 'spy.nested' }} managerApi={managerApi} />);
 
       expect(managerApi().values.spy.nested).toEqual('different value');
     });
@@ -193,17 +195,16 @@ describe('useField', () => {
     it('should set value from initialValues when form.initializeOnTrue = true', async () => {
       const managerApi = createManagerApi({ initialValues: { spy: { nested: 'value123' } }, initializeOnMount: true });
 
-      let wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy.nested' }} managerApi={managerApi} />);
+      render(<DummyComponent subscriberProps={{ name: 'spy.nested' }} managerApi={managerApi} />);
       expect(managerApi().values.spy.nested).toEqual('value123');
 
       await act(async () => {
         managerApi().change('spy.nested', 'different value');
       });
-      wrapper.update();
 
-      wrapper.unmount();
+      await cleanup();
 
-      wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy.nested' }} managerApi={managerApi} />);
+      render(<DummyComponent subscriberProps={{ name: 'spy.nested' }} managerApi={managerApi} />);
 
       expect(managerApi().values.spy.nested).toEqual('value123');
     });
@@ -211,17 +212,16 @@ describe('useField', () => {
     it('should set value from initialValues when field.initializeOnTrue = true', async () => {
       const managerApi = createManagerApi({ initialValues: { spy: { nested: 'value123' } }, initializeOnMount: true });
 
-      let wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy.nested', initializeOnMount: true }} managerApi={managerApi} />);
+      render(<DummyComponent subscriberProps={{ name: 'spy.nested', initializeOnMount: true }} managerApi={managerApi} />);
       expect(managerApi().values.spy.nested).toEqual('value123');
 
       await act(async () => {
         managerApi().change('spy.nested', 'different value');
       });
-      wrapper.update();
 
-      wrapper.unmount();
+      await cleanup();
 
-      wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy.nested' }} managerApi={managerApi} />);
+      render(<DummyComponent subscriberProps={{ name: 'spy.nested' }} managerApi={managerApi} />);
 
       expect(managerApi().values.spy.nested).toEqual('value123');
     });
@@ -229,17 +229,16 @@ describe('useField', () => {
     it('field.initializeOnMount has higher priority than form.initializeOnMount', async () => {
       const managerApi = createManagerApi({ initialValues: { spy: { nested: 'value123' } }, initializeOnMount: true });
 
-      let wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy.nested' }} managerApi={managerApi} />);
+      render(<DummyComponent subscriberProps={{ name: 'spy.nested' }} managerApi={managerApi} />);
       expect(managerApi().values.spy.nested).toEqual('value123');
 
       await act(async () => {
         managerApi().change('spy.nested', 'different value');
       });
-      wrapper.update();
 
-      wrapper.unmount();
+      await cleanup();
 
-      wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy.nested', initializeOnMount: false }} managerApi={managerApi} />);
+      render(<DummyComponent subscriberProps={{ name: 'spy.nested', initializeOnMount: false }} managerApi={managerApi} />);
 
       expect(managerApi().values.spy.nested).toEqual('different value');
     });
@@ -266,7 +265,7 @@ describe('useField', () => {
     it('should rerender from the manager api', async () => {
       const managerApi = createManagerApi({});
 
-      const wrapper = mount(
+      render(
         <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <RenderWatch name="field" />
         </FormManagerContext.Provider>
@@ -277,7 +276,6 @@ describe('useField', () => {
       await act(async () => {
         managerApi().rerender(['valid']);
       });
-      wrapper.update();
 
       expect(renderCount).toEqual(2);
     });
@@ -285,7 +283,7 @@ describe('useField', () => {
     it('should rerender only on subscription', async () => {
       const managerApi = createManagerApi({});
 
-      const wrapper = mount(
+      render(
         <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <RenderWatch name="field" subscription={{ valid: true }} />
         </FormManagerContext.Provider>
@@ -296,14 +294,12 @@ describe('useField', () => {
       await act(async () => {
         managerApi().rerender(['values']);
       });
-      wrapper.update();
 
       expect(renderCount).toEqual(1);
 
       await act(async () => {
         managerApi().rerender(['valid']);
       });
-      wrapper.update();
 
       expect(renderCount).toEqual(2);
     });
@@ -311,7 +307,7 @@ describe('useField', () => {
     it('should rerender only on global subscription', async () => {
       const managerApi = createManagerApi({ subscription: { valid: true } });
 
-      const wrapper = mount(
+      render(
         <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <RenderWatch name="field" subscription={{ valid: true }} />
         </FormManagerContext.Provider>
@@ -322,21 +318,19 @@ describe('useField', () => {
       await act(async () => {
         managerApi().rerender(['values']);
       });
-      wrapper.update();
 
       expect(renderCount).toEqual(1);
 
       await act(async () => {
         managerApi().rerender(['valid']);
       });
-      wrapper.update();
 
       expect(renderCount).toEqual(2);
     });
 
     it('should only render field that changed its validation status', async () => {
       const managerApi = createManagerApi({ subscription: { valid: true } });
-      const wrapper = mount(
+      render(
         <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <RenderWatch validate={() => 'Error'} name="field-1" subscription={{ valid: true }} />
           <RenderWatch validate={() => 'Error'} name="field-2" subscription={{ valid: true }} />
@@ -344,8 +338,8 @@ describe('useField', () => {
       );
 
       /**
-       * We have four renders after mount, two per each component
-       * One is after mount and the scond after initial validation
+       * We have four renders after render, two per each component
+       * One is after render and the scond after initial validation
        */
       expect(renderCount).toEqual(4);
       await act(async () => {
@@ -360,7 +354,13 @@ describe('useField', () => {
 
   describe('validation', () => {
     const fooValidator = (value) => (value === 'foo' ? 'error' : undefined);
-    const asyncValidator = (value) => new Promise((res, rej) => setTimeout(() => (fooValidator(value) ? rej('error') : res()), 100));
+
+    let resolveAsync;
+
+    const asyncValidator = (value) =>
+      new Promise((res, rej) => {
+        resolveAsync = fooValidator(value) ? () => rej('error') : () => res();
+      });
 
     it('should correct set meta data on sync validation', async () => {
       const managerApi = createManagerApi({});
@@ -368,63 +368,43 @@ describe('useField', () => {
         name: 'sync-validate',
         validate: fooValidator,
       };
-      const wrapper = mount(<DummyComponent managerApi={managerApi} subscriberProps={subscriberProps} />);
-      const spy = wrapper.find(SpyComponent);
-      const input = wrapper.find('input');
-      expect(spy.prop('meta')).toEqual(expect.objectContaining({ error: undefined, valid: true, invalid: false }));
-      await act(async () => {
-        input.simulate('change', { target: { value: 'foo' } });
-      });
+      render(<DummyComponent managerApi={managerApi} subscriberProps={subscriberProps} />);
 
-      wrapper.update();
-      expect(wrapper.find(SpyComponent).prop('meta')).toEqual(expect.objectContaining({ error: 'error', valid: false, invalid: true }));
+      expect(spyProps.meta).toEqual(expect.objectContaining({ error: undefined, valid: true, invalid: false }));
 
-      await act(async () => {
-        input.simulate('change', { target: { value: 'bar' } });
-      });
+      await userEvent.type(screen.getByRole('textbox'), 'foo');
 
-      wrapper.update();
-      expect(wrapper.find(SpyComponent).prop('meta')).toEqual(expect.objectContaining({ error: undefined, valid: true, invalid: false }));
+      expect(spyProps.meta).toEqual(expect.objectContaining({ error: 'error', valid: false, invalid: true }));
+
+      await userEvent.clear(screen.getByRole('textbox'));
+      await userEvent.type(screen.getByRole('textbox'), 'bar');
+
+      expect(spyProps.meta).toEqual(expect.objectContaining({ error: undefined, valid: true, invalid: false }));
     });
 
     it('should correct set meta data on assync validation', async () => {
-      expect.assertions(4);
-      jest.useFakeTimers();
       const managerApi = createManagerApi({});
       const subscriberProps = {
         name: 'sync-validate',
         validate: asyncValidator,
       };
-      const wrapper = mount(<DummyComponent managerApi={managerApi} subscriberProps={subscriberProps} />);
-      const spy = wrapper.find(SpyComponent);
-      const input = wrapper.find('input');
-      expect(spy.prop('meta')).toEqual(expect.objectContaining({ error: undefined, valid: true, invalid: false }));
+      render(<DummyComponent managerApi={managerApi} subscriberProps={subscriberProps} />);
+      expect(spyProps.meta).toEqual(expect.objectContaining({ error: undefined, valid: true, invalid: false }));
 
-      input.simulate('change', { target: { value: 'foo' } });
-      jest.advanceTimersByTime(10);
+      await userEvent.type(screen.getByRole('textbox'), 'foo');
 
-      wrapper.update();
-      expect(wrapper.find(SpyComponent).prop('meta')).toEqual(
-        expect.objectContaining({ error: undefined, validating: true, valid: true, invalid: false })
-      );
+      expect(spyProps.meta).toEqual(expect.objectContaining({ error: undefined, validating: true, valid: true, invalid: false }));
 
-      await act(async () => {
-        jest.advanceTimersByTime(91);
-      });
+      resolveAsync();
 
-      wrapper.update();
-      expect(wrapper.find(SpyComponent).prop('meta')).toEqual(
-        expect.objectContaining({ error: 'error', validating: false, valid: false, invalid: true })
-      );
+      await waitFor(() => expect(spyProps.meta).toEqual(expect.objectContaining({ error: 'error', validating: false, valid: false, invalid: true })));
 
-      input.simulate('change', { target: { value: 'bar' } });
+      await userEvent.clear(screen.getByRole('textbox'));
+      await userEvent.type(screen.getByRole('textbox'), 'bar');
 
-      await act(async () => {
-        jest.advanceTimersByTime(101);
-      });
+      resolveAsync();
 
-      wrapper.update();
-      expect(wrapper.find(SpyComponent).prop('meta')).toEqual(expect.objectContaining({ error: undefined, valid: true, invalid: false }));
+      await waitFor(() => expect(spyProps.meta).toEqual(expect.objectContaining({ error: undefined, valid: true, invalid: false })));
     });
 
     it('should set form level error key on sync validation', async () => {
@@ -433,77 +413,75 @@ describe('useField', () => {
         name: 'sync-validate',
         validate: fooValidator,
       };
-      const wrapper = mount(<DummyComponent managerApi={managerApi} subscriberProps={subscriberProps} />);
-      const input = wrapper.find('input');
+      render(<DummyComponent managerApi={managerApi} subscriberProps={subscriberProps} />);
       expect(managerApi().errors).toEqual({});
 
-      await act(async () => {
-        input.simulate('change', { target: { value: 'foo' } });
-      });
+      await userEvent.type(screen.getByRole('textbox'), 'foo');
+
       expect(managerApi().errors).toEqual({
         'sync-validate': 'error',
       });
 
-      await act(async () => {
-        input.simulate('change', { target: { value: 'bar' } });
-      });
+      await userEvent.clear(screen.getByRole('textbox'));
+      await userEvent.type(screen.getByRole('textbox'), 'bar');
+
       expect(managerApi().errors).toEqual({
         'sync-validate': undefined,
       });
     });
 
     it('should correctly set validaintg flag on multiple validate calls', async () => {
-      expect.assertions(5);
-      jest.useFakeTimers();
+      let resSlow1;
+      let resSlow2;
+      let resFast;
+
       const asyncValidator = jest
         .fn()
-        .mockImplementationOnce(() => new Promise((res) => setTimeout(() => res('slow'), 500)))
-        .mockImplementationOnce(() => new Promise((res) => setTimeout(() => res('slow'), 500)))
-        .mockImplementationOnce(() => new Promise((res) => setTimeout(() => res('fast'), 250)));
+        .mockImplementationOnce(
+          () =>
+            new Promise((res) => {
+              resSlow1 = res;
+            })
+        )
+        .mockImplementationOnce(
+          () =>
+            new Promise((res) => {
+              resSlow2 = res;
+            })
+        )
+        .mockImplementationOnce(
+          () =>
+            new Promise((res) => {
+              resFast = res;
+            })
+        );
       const managerApi = createManagerApi({});
       const subscriberProps = {
         name: 'async-validate',
         validate: asyncValidator,
       };
 
-      const wrapper = mount(<DummyComponent managerApi={managerApi} subscriberProps={subscriberProps} />);
-      const input = wrapper.find('input');
-      expect(wrapper.find(SpyComponent).prop('meta')).toEqual(expect.objectContaining({ validating: true, valid: true }));
+      render(<DummyComponent managerApi={managerApi} subscriberProps={subscriberProps} />);
+      expect(spyProps.meta).toEqual(expect.objectContaining({ validating: true, valid: true }));
 
       await act(async () => {
-        jest.runAllTimers(); // skip initial validation
+        resSlow1('ok');
       });
-      wrapper.update();
 
-      expect(wrapper.find(SpyComponent).prop('meta')).toEqual(expect.objectContaining({ validating: false, valid: true }));
+      expect(spyProps.meta).toEqual(expect.objectContaining({ validating: false, valid: true }));
 
-      await act(async () => {
-        input.simulate('change', { target: { value: 'foo' } });
-      });
-      /**
-       * All validations are pending
-       */
-      await act(async () => {
-        jest.advanceTimersByTime(10);
-      });
-      wrapper.update();
-      expect(wrapper.find(SpyComponent).prop('meta')).toEqual(expect.objectContaining({ validating: true, valid: true }));
-      /**
-       * Second faster async validation has finished
-       */
-      await act(async () => {
-        jest.advanceTimersByTime(290);
-      });
-      wrapper.update();
-      expect(wrapper.find(SpyComponent).prop('meta')).toEqual(expect.objectContaining({ validating: true, valid: true }));
-      /**
-       * First slow async validation has finished
-       */
-      await act(async () => {
-        jest.advanceTimersByTime(200);
-      });
-      wrapper.update();
-      expect(wrapper.find(SpyComponent).prop('meta')).toEqual(expect.objectContaining({ validating: false, valid: true }));
+      fireEvent.change(screen.getByRole('textbox'), { target: { value: 'f' } });
+      fireEvent.change(screen.getByRole('textbox'), { target: { value: 'fo' } });
+
+      await waitFor(() => expect(spyProps.meta).toEqual(expect.objectContaining({ validating: true, valid: true })));
+
+      resSlow2('ok');
+
+      await waitFor(() => expect(spyProps.meta).toEqual(expect.objectContaining({ validating: true, valid: true })));
+
+      resFast('ok');
+
+      await waitFor(() => expect(spyProps.meta).toEqual(expect.objectContaining({ validating: false, valid: true })));
     });
   });
 
@@ -516,23 +494,24 @@ describe('useField', () => {
           input: { onChange },
         } = useField(props);
 
-        return <button onClick={() => onChange(undefined)}>clear</button>;
+        return (
+          <button type="button" onClick={() => onChange(undefined)}>
+            clear
+          </button>
+        );
       };
     });
 
     it('should clearValue on field level', async () => {
       const managerApi = createManagerApi({});
 
-      const wrapper = mount(
+      render(
         <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <CleanButton name="field" value="some value" clearedValue={null} />
         </FormManagerContext.Provider>
       );
 
-      await act(async () => {
-        wrapper.find('button').simulate('click');
-      });
-      wrapper.update();
+      await userEvent.click(screen.getByText('clear'));
 
       expect(managerApi().values.field).toEqual(null);
     });
@@ -540,16 +519,13 @@ describe('useField', () => {
     it('should clearValue on form level', async () => {
       const managerApi = createManagerApi({});
 
-      const wrapper = mount(
+      render(
         <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi(), clearedValue: null }}>
           <CleanButton name="field" value="some value" />
         </FormManagerContext.Provider>
       );
 
-      await act(async () => {
-        wrapper.find('button').simulate('click');
-      });
-      wrapper.update();
+      await userEvent.click(screen.getByText('clear'));
 
       expect(managerApi().values.field).toEqual(null);
     });
@@ -557,16 +533,13 @@ describe('useField', () => {
     it('field cleared value has higher priority', async () => {
       const managerApi = createManagerApi({});
 
-      const wrapper = mount(
+      render(
         <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi(), clearedValue: null }}>
           <CleanButton name="field" value="some value" clearedValue="cleared" />
         </FormManagerContext.Provider>
       );
 
-      await act(async () => {
-        wrapper.find('button').simulate('click');
-      });
-      wrapper.update();
+      await userEvent.click(screen.getByText('clear'));
 
       expect(managerApi().values.field).toEqual('cleared');
     });
@@ -586,7 +559,6 @@ describe('useField', () => {
   describe('dataType', () => {
     let Setter;
     let managerApi;
-    let wrapper;
 
     beforeEach(() => {
       managerApi = createManagerApi({});
@@ -601,107 +573,79 @@ describe('useField', () => {
     });
 
     it('should parse string', async () => {
-      wrapper = mount(
+      render(
         <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Setter name="field" dataType="string" />
         </FormManagerContext.Provider>
       );
 
-      await act(async () => {
-        const input = wrapper.find('input');
-        input.instance().value = 123;
-        input.simulate('change');
-      });
-      wrapper.update();
+      await userEvent.type(screen.getByRole('textbox'), '123');
 
       expect(managerApi().values.field).toEqual('123');
     });
 
     it('should parse float', async () => {
-      wrapper = mount(
+      render(
         <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Setter name="field" dataType="float" />
         </FormManagerContext.Provider>
       );
 
-      await act(async () => {
-        const input = wrapper.find('input');
-        input.instance().value = '12.34';
-        input.simulate('change');
-      });
-      wrapper.update();
+      await userEvent.type(screen.getByRole('textbox'), '12.34');
 
       expect(managerApi().values.field).toEqual(12.34);
     });
 
     it('should parse number', async () => {
-      wrapper = mount(
+      render(
         <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Setter name="field" dataType="number" />
         </FormManagerContext.Provider>
       );
 
-      await act(async () => {
-        const input = wrapper.find('input');
-        input.instance().value = '243242.809';
-        input.simulate('change');
-      });
-      wrapper.update();
+      await userEvent.type(screen.getByRole('textbox'), '243242.809');
 
       expect(managerApi().values.field).toEqual(243242.809);
     });
 
     it('should parse boolean', async () => {
-      wrapper = mount(
+      render(
         <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Setter name="field" dataType="boolean" />
         </FormManagerContext.Provider>
       );
 
-      await act(async () => {
-        const input = wrapper.find('input');
-        input.instance().value = 'true';
-        input.simulate('change');
-      });
-      wrapper.update();
+      await userEvent.type(screen.getByRole('textbox'), 'true');
 
       expect(managerApi().values.field).toEqual(true);
     });
 
     it('should parse integer', async () => {
-      wrapper = mount(
+      render(
         <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Setter name="field" dataType="integer" />
         </FormManagerContext.Provider>
       );
 
-      await act(async () => {
-        const input = wrapper.find('input');
-        input.instance().value = '12.34';
-        input.simulate('change');
-      });
-      wrapper.update();
+      await userEvent.type(screen.getByRole('textbox'), '12.809');
 
       expect(managerApi().values.field).toEqual(12);
     });
 
     it('should parse array of numbers', async () => {
-      wrapper = mount(
+      render(
         <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Setter name="field" dataType="number" value={['1', '2', '45']} />
         </FormManagerContext.Provider>
       );
 
-      await act(async () => {
-        wrapper.find('input').simulate('change');
-      });
-      wrapper.update();
+      await userEvent.type(screen.getByRole('textbox'), ' ');
 
       expect(managerApi().values.field).toEqual([1, 2, 45]);
     });
 
     it('should parse initialValue - float', async () => {
-      wrapper = mount(
+      render(
         <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Setter name="field" dataType="float" initialValue="12.34" />
         </FormManagerContext.Provider>
@@ -711,7 +655,7 @@ describe('useField', () => {
     });
 
     it('should parse defaultValue - float', async () => {
-      wrapper = mount(
+      render(
         <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Setter name="field" dataType="float" defaultValue="12.34" />
         </FormManagerContext.Provider>
@@ -721,7 +665,7 @@ describe('useField', () => {
     });
 
     it('should parse defaultValue - objects', async () => {
-      wrapper = mount(
+      render(
         <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Setter name="field" dataType="float" defaultValue={[{ value: '23.67' }, { value: '123.34' }]} />
         </FormManagerContext.Provider>
@@ -733,7 +677,7 @@ describe('useField', () => {
 
   describe('type', () => {
     let Typper;
-    let wrapper;
+
     let spy;
 
     beforeEach(() => {
@@ -750,7 +694,7 @@ describe('useField', () => {
     });
 
     it('checkbox with no value', async () => {
-      wrapper = mount(
+      render(
         <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Typper name="field" type="checkbox" spy={spy} />
         </FormManagerContext.Provider>
@@ -768,11 +712,7 @@ describe('useField', () => {
       });
       spy.mockReset();
 
-      // >>>>>>>>>>>>>>>> SELECT
-      await act(async () => {
-        wrapper.find('input').simulate('change', { target: { checked: true, type: 'checkbox' } });
-      });
-      wrapper.update();
+      await userEvent.click(screen.getByRole('checkbox'));
 
       expect(managerApi().values).toEqual({ field: true });
 
@@ -787,11 +727,7 @@ describe('useField', () => {
         value: '',
       });
 
-      // >>>>>>>>>>>>>>>> DESELECT
-      await act(async () => {
-        wrapper.find('input').simulate('change', { target: { checked: false, type: 'checkbox' } });
-      });
-      wrapper.update();
+      await userEvent.click(screen.getByRole('checkbox'));
 
       expect(managerApi().values).toEqual({ field: false });
 
@@ -812,7 +748,7 @@ describe('useField', () => {
       const spyCat = jest.fn();
       const spyHamster = jest.fn();
 
-      wrapper = mount(
+      render(
         <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Typper name="field" value="dog" type="checkbox" spy={spyDog} />
           <Typper name="field" value="cat" type="checkbox" spy={spyCat} />
@@ -855,14 +791,7 @@ describe('useField', () => {
       spyCat.mockReset();
       spyHamster.mockReset();
 
-      // >>>>>>>>>>>>>>>> SELECT CATS
-      await act(async () => {
-        wrapper
-          .find('input')
-          .at(1)
-          .simulate('change', { target: { checked: true, type: 'checkbox' } });
-      });
-      wrapper.update();
+      await userEvent.click(screen.getAllByRole('checkbox')[1]);
 
       expect(managerApi().values).toEqual({ field: ['cat'] });
 
@@ -900,14 +829,7 @@ describe('useField', () => {
       spyCat.mockReset();
       spyHamster.mockReset();
 
-      // >>>>>>>>>>>>>>>> SELECT HAMSTERS
-      await act(async () => {
-        wrapper
-          .find('input')
-          .at(2)
-          .simulate('change', { target: { checked: true, type: 'checkbox' } });
-      });
-      wrapper.update();
+      await userEvent.click(screen.getAllByRole('checkbox')[2]);
 
       expect(managerApi().values).toEqual({ field: ['cat', 'hamster'] });
 
@@ -945,14 +867,7 @@ describe('useField', () => {
       spyCat.mockReset();
       spyHamster.mockReset();
 
-      // >>>>>>>>>>>>>>>> DESELECT HAMSTERS
-      await act(async () => {
-        wrapper
-          .find('input')
-          .at(2)
-          .simulate('change', { target: { checked: false, type: 'checkbox' } });
-      });
-      wrapper.update();
+      await userEvent.click(screen.getAllByRole('checkbox')[2]);
 
       expect(managerApi().values).toEqual({ field: ['cat'] });
 
@@ -993,7 +908,7 @@ describe('useField', () => {
       const spyCat = jest.fn();
       const spyHamster = jest.fn();
 
-      wrapper = mount(
+      render(
         <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Typper name="field" value="dog" type="radio" spy={spyDog} />
           <Typper name="field" value="cat" type="radio" spy={spyCat} />
@@ -1036,14 +951,7 @@ describe('useField', () => {
       spyCat.mockReset();
       spyHamster.mockReset();
 
-      // >>>>>>>>>>>>>>>> SELECT CATS
-      await act(async () => {
-        wrapper
-          .find('input')
-          .at(1)
-          .simulate('change', { target: { value: 'cat' } });
-      });
-      wrapper.update();
+      await userEvent.click(screen.getAllByRole('radio')[1]);
 
       expect(managerApi().values).toEqual({ field: 'cat' });
 
@@ -1081,14 +989,7 @@ describe('useField', () => {
       spyCat.mockReset();
       spyHamster.mockReset();
 
-      // >>>>>>>>>>>>>>>> SELECT HAMSTER
-      await act(async () => {
-        wrapper
-          .find('input')
-          .at(2)
-          .simulate('change', { target: { value: 'hamster' } });
-      });
-      wrapper.update();
+      await userEvent.click(screen.getAllByRole('radio')[2]);
 
       expect(managerApi().values).toEqual({ field: 'hamster' });
 
@@ -1126,53 +1027,18 @@ describe('useField', () => {
       spyCat.mockReset();
       spyHamster.mockReset();
 
-      // >>>>>>>>>>>>>>>> SELECT HAMSTER - AGAIN
-      await act(async () => {
-        wrapper
-          .find('input')
-          .at(2)
-          .simulate('change', { target: { value: 'hamster' } });
-      });
-      wrapper.update();
+      await userEvent.click(screen.getAllByRole('radio')[2]);
 
       expect(managerApi().values).toEqual({ field: 'hamster' });
 
-      expect(spyDog).toHaveBeenCalledWith({
-        checked: false,
-        multiple: undefined,
-        name: 'field',
-        onBlur: expect.any(Function),
-        onChange: expect.any(Function),
-        onFocus: expect.any(Function),
-        type: 'radio',
-        value: 'dog',
-      });
-      expect(spyCat).toHaveBeenCalledWith({
-        checked: false,
-        multiple: undefined,
-        name: 'field',
-        onBlur: expect.any(Function),
-        onChange: expect.any(Function),
-        onFocus: expect.any(Function),
-        type: 'radio',
-        value: 'cat',
-      });
-      expect(spyHamster).toHaveBeenCalledWith({
-        checked: true,
-        multiple: undefined,
-        name: 'field',
-        onBlur: expect.any(Function),
-        onChange: expect.any(Function),
-        onFocus: expect.any(Function),
-        type: 'radio',
-        value: 'hamster',
-      });
+      expect(spyDog).not.toHaveBeenCalledWith();
+      expect(spyCat).not.toHaveBeenCalledWith();
+      expect(spyHamster).not.toHaveBeenCalledWith();
     });
   });
 
   describe('format & parse', () => {
     let Dummy;
-    let wrapper;
 
     beforeEach(() => {
       managerApi = createManagerApi({});
@@ -1185,16 +1051,13 @@ describe('useField', () => {
 
     it('parse value on change', async () => {
       const parse = jest.fn().mockImplementation((value, name) => value * 2);
-      wrapper = mount(
+      render(
         <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Dummy name="field" parse={parse} />
         </FormManagerContext.Provider>
       );
 
-      await act(async () => {
-        wrapper.find('input').simulate('change', { target: { value: '2' } });
-      });
-      wrapper.update();
+      await userEvent.type(screen.getByRole('textbox'), '2');
 
       expect(parse).toHaveBeenCalledWith('2', 'field');
       expect(managerApi().values).toEqual({ field: 4 });
@@ -1202,108 +1065,92 @@ describe('useField', () => {
 
     it('format value', async () => {
       const format = jest.fn().mockImplementation((value, name) => value * 2);
-      wrapper = mount(
+      render(
         <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Dummy name="field" format={format} />
         </FormManagerContext.Provider>
       );
 
-      await act(async () => {
-        wrapper.find('input').simulate('change', { target: { value: '2' } });
-      });
-      wrapper.update();
+      await userEvent.type(screen.getByRole('textbox'), '2');
 
       expect(format).toHaveBeenCalledWith('2', 'field');
       expect(managerApi().values).toEqual({ field: '2' });
-      expect(wrapper.find('input').props().value).toEqual(4);
+      expect(screen.getByRole('textbox')).toHaveValue('4');
     });
 
     it('format value on blur', async () => {
       const format = jest.fn().mockImplementation((value, name) => value * 2);
-      wrapper = mount(
+      render(
         <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Dummy name="field" format={format} formatOnBlur />
         </FormManagerContext.Provider>
       );
 
-      await act(async () => {
-        wrapper.find('input').simulate('focus');
-      });
-      wrapper.update();
+      await userEvent.click(screen.getByRole('textbox'));
 
       format.mockClear(); // initialFormat
 
-      await act(async () => {
-        wrapper.find('input').simulate('change', { target: { value: '2' } });
-      });
-      wrapper.update();
+      await userEvent.type(screen.getByRole('textbox'), '2');
 
       expect(managerApi().values).toEqual({ field: '2' });
       expect(format).not.toHaveBeenCalled();
-      expect(wrapper.find('input').props().value).toEqual('2');
+      expect(screen.getByRole('textbox')).toHaveValue('2');
 
       await act(async () => {
-        wrapper.find('input').simulate('blur');
+        screen.getByRole('textbox').blur();
       });
-      wrapper.update();
 
       expect(format).toHaveBeenCalledWith('2', 'field');
-      expect(wrapper.find('input').props().value).toEqual(4);
+      expect(screen.getByRole('textbox')).toHaveValue('4');
     });
 
     it('default parse and format handles undefined/empty string', async () => {
-      wrapper = mount(
+      render(
         <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Dummy name="field" />
         </FormManagerContext.Provider>
       );
 
-      // set undefined
-      await act(async () => {
-        wrapper.find('input').simulate('change', { target: { value: undefined } });
-      });
-      wrapper.update();
+      await fireEvent.change(screen.getByRole('textbox'), { target: { value: undefined } });
 
       expect(managerApi().values).toEqual({ field: undefined });
-      expect(wrapper.find('input').props().value).toEqual(''); // it's controlled
+      expect(screen.getByRole('textbox')).toHaveValue('');
 
-      // set '' empty string
-      await act(async () => {
-        wrapper.find('input').simulate('change', { target: { value: '' } });
-      });
-      wrapper.update();
+      await userEvent.type(screen.getByRole('textbox'), ' ');
+      await userEvent.clear(screen.getByRole('textbox'));
 
       expect(managerApi().values).toEqual({ field: undefined });
-      expect(wrapper.find('input').props().value).toEqual(''); // it's controlled
+      expect(screen.getByRole('textbox')).toHaveValue('');
     });
   });
 
   describe('allowNull', () => {
     let Dummy;
-    let wrapper;
+    let dummyProps;
 
     beforeEach(() => {
       managerApi = createManagerApi({});
 
       Dummy = (props) => {
         const { input } = useField(props);
-        return <input {...input} />;
+
+        dummyProps = { input };
+
+        return <input {...input} onChange={() => input.onChange({ target: { value: null } })} />;
       };
     });
 
     it('by default converts null to empty string', async () => {
-      wrapper = mount(
+      render(
         <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Dummy name="field" />
         </FormManagerContext.Provider>
       );
 
-      await act(async () => {
-        wrapper.find('input').simulate('change', { target: { value: null } });
-      });
-      wrapper.update();
+      await userEvent.type(screen.getByRole('textbox'), ' ');
 
-      expect(wrapper.find('input').props().value).toEqual('');
+      expect(screen.getByRole('textbox')).toHaveValue('');
+      expect(dummyProps.input.value).toEqual('');
     });
 
     it('allows null', async () => {
@@ -1317,18 +1164,16 @@ describe('useField', () => {
       // eslint-disable-next-line no-console
       console.error = jest.fn();
 
-      wrapper = mount(
+      render(
         <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Dummy name="field" allowNull />
         </FormManagerContext.Provider>
       );
 
-      await act(async () => {
-        wrapper.find('input').simulate('change', { target: { value: null } });
-      });
-      wrapper.update();
+      await userEvent.type(screen.getByRole('textbox'), ' ');
 
-      expect(wrapper.find('input').props().value).toEqual(null);
+      expect(screen.getByRole('textbox')).toHaveValue('');
+      expect(dummyProps.input.value).toEqual(null);
 
       // eslint-disable-next-line no-console
       console.error = _consoleError;
@@ -1337,11 +1182,14 @@ describe('useField', () => {
 
   describe('multiple', () => {
     let Select;
-    let wrapper;
+    let value;
 
     beforeEach(() => {
       Select = (props) => {
         const { input } = useField(props);
+
+        value = input.value;
+
         return (
           <select {...input}>
             <option value="dogs">Dogs</option>
@@ -1353,40 +1201,30 @@ describe('useField', () => {
     });
 
     it('select and deselect multiple', async () => {
-      wrapper = mount(
+      render(
         <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Select name="field" multiple />
         </FormManagerContext.Provider>
       );
 
-      expect(wrapper.find('select').props().value).toEqual([]);
+      expect(value).toEqual([]);
 
-      await act(async () => {
-        wrapper.find('option').first().simulate('change');
-      });
-      wrapper.update();
+      fireEvent.change(screen.getByRole('listbox'), { target: { value: 'dogs' } });
 
-      expect(wrapper.find('select').props().value).toEqual(['dogs']);
+      await waitFor(() => expect(value).toEqual(['dogs']));
 
-      await act(async () => {
-        wrapper.find('option').last().simulate('change');
-      });
-      wrapper.update();
+      fireEvent.change(screen.getByRole('listbox'), { target: { value: 'hamsters' } });
 
-      expect(wrapper.find('select').props().value).toEqual(['dogs', 'hamsters']);
+      await waitFor(() => expect(value).toEqual(['dogs', 'hamsters']));
 
-      await act(async () => {
-        wrapper.find('option').first().simulate('change');
-      });
-      wrapper.update();
+      fireEvent.change(screen.getByRole('listbox'), { target: { value: 'dogs' } });
 
-      expect(wrapper.find('select').props().value).toEqual(['hamsters']);
+      await waitFor(() => expect(value).toEqual(['hamsters']));
     });
   });
 
   describe('fileInput', () => {
     let Dummy;
-    let wrapper;
 
     beforeEach(() => {
       managerApi = createManagerApi({});
@@ -1397,7 +1235,7 @@ describe('useField', () => {
         } = useField(props);
         return (
           <React.Fragment>
-            <input {...rest} />
+            <input {...rest} placeholder={rest.name} />
             <span>{value}</span>
           </React.Fragment>
         );
@@ -1406,41 +1244,51 @@ describe('useField', () => {
 
     it('register inputFile name and uregister', async () => {
       expect(managerApi().fileInputs).toEqual([]);
-      wrapper = mount(
+      render(
         <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Dummy name="field" type="file" />
         </FormManagerContext.Provider>
       );
       expect(managerApi().fileInputs).toEqual(['field']);
 
-      await act(async () => {
-        wrapper.unmount();
-      });
-      wrapper.update();
+      await cleanup();
 
       expect(managerApi().fileInputs).toEqual([]);
     });
 
     it('sanitize value', async () => {
-      wrapper = mount(
+      Dummy = (props) => {
+        const {
+          input: { value, ...rest },
+        } = useField(props);
+        return (
+          <React.Fragment>
+            <button
+              type="button"
+              onClick={() =>
+                rest.onChange({
+                  target: {
+                    value: '/path/',
+                    files: ['blabla'],
+                    type: 'file',
+                  },
+                })
+              }
+            >
+              upload
+            </button>
+            <span>{value}</span>
+          </React.Fragment>
+        );
+      };
+
+      render(
         <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Dummy name="field" type="file" />
         </FormManagerContext.Provider>
       );
 
-      await act(async () => {
-        wrapper
-          .find('input')
-          .first()
-          .simulate('change', {
-            target: {
-              value: '/path/',
-              files: ['blabla'],
-              type: 'file',
-            },
-          });
-      });
-      wrapper.update();
+      await userEvent.click(screen.getByText('upload'));
 
       expect(managerApi().getState().values).toEqual({
         field: {
@@ -1448,7 +1296,7 @@ describe('useField', () => {
           inputValue: '/path/',
         },
       });
-      expect(wrapper.find('span').text()).toEqual('/path/');
+      expect(screen.getByText('/path/')).toBeInTheDocument();
     });
   });
 });
