@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, Fragment } from 'react';
-import { act, render as rtlRender, screen, fireEvent } from '@testing-library/react';
+import { act, render as rtlRender, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import useField from '../../use-field';
