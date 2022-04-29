@@ -5,7 +5,6 @@ import assignSpecialType from './assign-special-type';
 import componentTypes from '../component-types';
 import { prepareArrayValidator, getValidate } from './validator-helpers';
 import composeValidators from '../compose-validators';
-import get from 'lodash/get';
 
 const calculateArrayValidator = (props, validate, component, validatorMapper) => {
   if ((validate || props.dataType) && componentTypes.FIELD_ARRAY === component) {
