@@ -33,6 +33,7 @@ describe('useFieldApi', () => {
         <form onSubmit={handleSubmit}>
           <RendererContext.Provider
             value={{
+              formOptions: {},
               validatorMapper: { required: () => (value) => !value ? 'required' : undefined },
             }}
           >

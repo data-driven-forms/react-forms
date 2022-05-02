@@ -18,31 +18,18 @@ const schema = {
       component: 'text-field',
       name: 'field-2',
       label: 'last name',
+      condition: { when: 'field-1', is: 'pepa' },
     },
     {
       component: 'text-field',
-      name: 'field-3',
-      label: 'occupation',
-      condition: {
-        sequence: [
-          {
-            and: [
-              { when: 'field-1', is: 'james' },
-              { when: 'field-2', is: 'bond' },
-            ],
-            then: { set: { 'field-3': 'SPY' } },
-            else: { visible: true },
-          },
-          {
-            and: [
-              { when: 'field-1', is: 'steve' },
-              { when: 'field-2', is: 'jobs' },
-            ],
-            then: { set: { 'field-3': 'CEO' } },
-            else: { visible: true },
-          },
-        ],
-      },
+      name: 'field-2',
+      label: 'last name',
+      condition: { when: 'field-1', is: 'pepa' },
+    },
+    {
+      component: 'text-field',
+      name: 'field-2',
+      label: 'last name',
     },
   ],
 };

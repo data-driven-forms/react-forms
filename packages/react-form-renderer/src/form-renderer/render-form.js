@@ -25,7 +25,6 @@ const FormConditionWrapper = ({ condition, children, field }) => {
       <FieldSpy names={triggers}>
         {({ values }) => (
           <Condition condition={condition} values={values} field={field}>
-            {console.log(values)}
             {children}
           </Condition>
         )}

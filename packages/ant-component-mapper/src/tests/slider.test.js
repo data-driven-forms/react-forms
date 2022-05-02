@@ -7,7 +7,7 @@ import Slider from '../slider';
 
 const Form = (props) => (
   <OriginalForm>
-    <RendererContext.Provider>
+    <RendererContext.Provider value={{}}>
       <DDFForm onSubmit={jest.fn()} {...props} />
     </RendererContext.Provider>
   </OriginalForm>
