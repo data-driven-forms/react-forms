@@ -1,6 +1,6 @@
 export type ComponentType = 'text-field'|'field-array'|'checkbox'|'sub-form'|'radio'|'tabs'|'tab-item'|'date-picker'|'time-picker'|'wizard'|'switch'|'textarea'|'select'|'plain-text'|'button'|'input-addon-group'|'input-addon-button-group'|'dual-list-select'|'slider';
 
-interface componentTypes {
+interface IcomponentTypes {
   TEXT_FIELD: 'text-field';
   FIELD_ARRAY: 'field-array';
   CHECKBOX: 'checkbox';
@@ -22,6 +22,6 @@ interface componentTypes {
   SLIDER: 'slider';
 }
 
-declare const componentTypes: componentTypes;
+declare const componentTypes: IcomponentTypes;
 
 export default componentTypes;

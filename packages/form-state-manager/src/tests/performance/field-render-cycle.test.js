@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, Fragment } from 'react';
-import { act } from 'react-dom/test-utils';
-import { mount } from 'enzyme';
+import { act, render as rtlRender, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import useField from '../../use-field';
 import FormStateManager from '../../form-state-manager';
@@ -19,8 +19,8 @@ const TestSubject = ({ fieldSpy, subscription }) => (
     {() => {
       return (
         <form onSubmit={jest.fn()}>
-          <Field fieldSpy={fieldSpy} name="one" id="one" type="text" />
-          <Field fieldSpy={fieldSpy} name="two" id="two" type="text" />
+          <Field fieldSpy={fieldSpy} name="one" id="one" type="text" placeholder="one" />
+          <Field fieldSpy={fieldSpy} name="two" id="two" type="text" placeholder="two" />
           <button type="submit">Submit</button>
         </form>
       );
@@ -29,11 +29,11 @@ const TestSubject = ({ fieldSpy, subscription }) => (
 );
 
 describe('useField rendering cycle', () => {
-  it('should render first field twice and second once', () => {
+  it('should render first field twice and second once', async () => {
     const fieldSpy = jest.fn();
-    const wrapper = mount(<TestSubject fieldSpy={fieldSpy} subscription={{}} />);
+    rtlRender(<TestSubject fieldSpy={fieldSpy} subscription={{}} />);
     /**
-     * Initial mount render of both fields
+     * Initial rtlRender render of both fields
      */
     expect(fieldSpy).toHaveBeenCalledTimes(2);
     expect(fieldSpy.mock.calls[0][0]).toEqual('one');
@@ -43,33 +43,27 @@ describe('useField rendering cycle', () => {
      * Change value of field#one twice which should trigger its render twice
      * Field#two should not render
      */
-    act(() => {
-      wrapper.find('input#one').prop('onChange')({ target: { value: 'foo', type: 'text' } });
-    });
-    act(() => {
-      wrapper.find('input#one').prop('onChange')({ target: { value: 'bar', type: 'text' } });
-    });
-    expect(fieldSpy).toHaveBeenCalledTimes(2);
-    expect(fieldSpy.mock.calls[0][0]).toEqual('one');
-    expect(fieldSpy.mock.calls[1][0]).toEqual('one');
+
+    await userEvent.type(screen.getByPlaceholderText('one'), 'foo');
+    await userEvent.type(screen.getByPlaceholderText('one'), 'bar');
+
+    expect(fieldSpy).toHaveBeenCalledTimes(7);
+    expect(fieldSpy.mock.calls.every(([name]) => name === 'one')).toBeTruthy();
   });
 
-  it('should render both fields when subscription {values: true} on change', () => {
+  it('should render both fields when subscription {values: true} on change', async () => {
     const fieldSpy = jest.fn();
-    const wrapper = mount(<TestSubject fieldSpy={fieldSpy} subscription={{ values: true }} />);
+    rtlRender(<TestSubject fieldSpy={fieldSpy} subscription={{ values: true }} />);
 
     expect(fieldSpy).toHaveBeenCalledTimes(2);
     expect(fieldSpy.mock.calls[0][0]).toEqual('one');
     expect(fieldSpy.mock.calls[1][0]).toEqual('two');
     fieldSpy.mockReset();
 
-    act(() => {
-      wrapper.find('input#one').prop('onChange')({ target: { value: 'foo', type: 'text' } });
-    });
+    await userEvent.type(screen.getByPlaceholderText('one'), 'foo');
 
-    expect(fieldSpy).toHaveBeenCalledTimes(2);
-    expect(fieldSpy.mock.calls[0][0]).toEqual('one');
-    expect(fieldSpy.mock.calls[1][0]).toEqual('two');
+    expect(fieldSpy).toHaveBeenCalledTimes(7);
+    expect(fieldSpy.mock.calls.map(([name]) => name)).toEqual(['one', 'one', 'two', 'one', 'two', 'one', 'two']);
   });
 
   describe('callable function rerender forms', () => {
@@ -81,10 +75,18 @@ describe('useField rendering cycle', () => {
 
       return (
         <Fragment>
-          <button id="initialize" onClick={() => formOptions.initialize({ one: 'changed' })} />
-          <button id="reset" onClick={() => formOptions.reset()} />
-          <button id="resetfieldstate" onClick={() => formOptions.resetFieldState('one')} />
-          <button id="submit" type="submit" />
+          <button type="button" id="initialize" onClick={() => formOptions.initialize({ one: 'changed' })}>
+            initialize
+          </button>
+          <button type="button" id="reset" onClick={() => formOptions.reset()}>
+            reset
+          </button>
+          <button type="button" id="resetfieldstate" onClick={() => formOptions.resetFieldState('one')}>
+            resetfieldstate
+          </button>
+          <button id="submit" type="submit">
+            submit
+          </button>
         </Fragment>
       );
     };
@@ -97,7 +99,7 @@ describe('useField rendering cycle', () => {
           {() => {
             return (
               <form onSubmit={jest.fn()}>
-                <Field fieldSpy={renderSpy} name="one" id="one" type="text" />
+                <Field fieldSpy={renderSpy} name="one" id="one" type="text" placeholder="one" />
                 <Buttons />
               </form>
             );
@@ -107,90 +109,77 @@ describe('useField rendering cycle', () => {
     });
 
     it('should rerender on initilize', async () => {
-      const wrapper = mount(<Tester />);
+      rtlRender(<Tester />);
       renderSpy.mockReset();
 
-      await act(async () => {
-        wrapper.find('#initialize').simulate('click');
-      });
-      wrapper.update();
+      await userEvent.click(screen.getByText('initialize'));
 
       expect(renderSpy).toHaveBeenCalledTimes(1);
       expect(renderSpy.mock.calls[0][0]).toEqual('one');
     });
 
     it('should rerender on resetFieldState', async () => {
-      const wrapper = mount(<Tester />);
+      rtlRender(<Tester />);
       renderSpy.mockReset();
 
+      await userEvent.type(screen.getByPlaceholderText('one'), 'foo');
       await act(async () => {
-        wrapper.find('input#one').prop('onChange')({ target: { value: 'foo', type: 'text' } });
+        screen.getByPlaceholderText('one').blur();
       });
-      wrapper.update();
 
       renderSpy.mockReset();
 
-      await act(async () => {
-        wrapper.find('#resetfieldstate').simulate('click');
-      });
-      wrapper.update();
+      await userEvent.click(screen.getByText('resetfieldstate'));
 
       expect(renderSpy).toHaveBeenCalledTimes(1);
       expect(renderSpy.mock.calls[0][0]).toEqual('one');
     });
 
     it('should rerender on reset', async () => {
-      const wrapper = mount(<Tester />);
+      rtlRender(<Tester />);
 
+      await userEvent.type(screen.getByPlaceholderText('one'), 'foo');
       await act(async () => {
-        wrapper.find('input#one').prop('onChange')({ target: { value: 'foo', type: 'text' } });
+        screen.getByPlaceholderText('one').blur();
       });
-      wrapper.update();
 
       renderSpy.mockReset();
 
-      await act(async () => {
-        wrapper.find('#reset').simulate('click');
-      });
-      wrapper.update();
+      await userEvent.click(screen.getByText('reset'));
 
       expect(renderSpy).toHaveBeenCalledTimes(1);
       expect(renderSpy.mock.calls[0][0]).toEqual('one');
     });
 
     it('should rerender on focus & blur', async () => {
-      const wrapper = mount(<Tester />);
+      rtlRender(<Tester />);
       renderSpy.mockReset();
 
       await act(async () => {
-        wrapper.find('input#one').simulate('focus');
+        screen.getByPlaceholderText('one').focus();
       });
-      wrapper.update();
 
       expect(renderSpy).toHaveBeenCalledTimes(1);
       expect(renderSpy.mock.calls[0][0]).toEqual('one');
       renderSpy.mockReset();
 
       await act(async () => {
-        wrapper.find('input#one').simulate('focus');
+        screen.getByPlaceholderText('one').focus();
       });
-      wrapper.update();
 
       expect(renderSpy).toHaveBeenCalledTimes(0);
 
       await act(async () => {
-        wrapper.find('input#one').simulate('blur');
+        screen.getByPlaceholderText('one').blur();
       });
-      wrapper.update();
 
       expect(renderSpy).toHaveBeenCalledTimes(1);
       expect(renderSpy.mock.calls[0][0]).toEqual('one');
       renderSpy.mockReset();
 
       await act(async () => {
-        wrapper.find('input#one').simulate('blur');
+        screen.getByPlaceholderText('one').blur();
       });
-      wrapper.update();
 
       expect(renderSpy).toHaveBeenCalledTimes(0);
     });

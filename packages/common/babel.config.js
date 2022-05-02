@@ -72,13 +72,13 @@ const createSuirCJSTransform = (env = 'commonjs') => [
 const createMuiTransform = (env) => [
   'transform-imports',
   {
-    '@material-ui/lab': {
-      transform: (importName) => (env ? `@material-ui/lab/${env}/${importName}` : `@material-ui/lab/${importName}`),
+    '@mui/lab': {
+      transform: (importName) => (env ? `@mui/lab/${env}/${importName}` : `@mui/lab/${importName}`),
       preventFullImport: false,
       skipDefaultConversion: false
     },
-    '@material-ui/core': {
-      transform: (importName) => (env ? `@material-ui/core/${env}/${importName}` : `@material-ui/core/${importName}`),
+    '@mui/material': {
+      transform: (importName) => (env ? `@mui/material/${env}/${importName}` : `@mui/material/${importName}`),
       preventFullImport: false,
       skipDefaultConversion: false
     }
@@ -181,7 +181,7 @@ const createCarbonCJSTransform = (env) => [
         let res;
         const files = glob.sync(
           path.resolve(__dirname, `../{..,carbon-component-mapper}/node_modules/carbon-components-react/${env === 'cjs' ? 'lib' : 'es'}/**/${carbonMapper(importName)}.js`)
-        );
+        ).filter(path => !path.includes('/next/'));
         if (files.length > 0) {
           res = files[0];
         } else {
@@ -200,7 +200,7 @@ const createCarbonCJSTransform = (env) => [
         let res;
         const files = glob.sync(
           path.resolve(__dirname, `../{..,carbon-component-mapper}/node_modules/carbon-components-react/${env === 'cjs' ? 'lib' : 'es'}/**/${carbonMapper(importName)}.js`)
-        );
+        ).filter(path => !path.includes('/next/'));
         if (files.length > 0) {
           res = files[0];
         } else {
@@ -219,7 +219,7 @@ const createCarbonCJSTransform = (env) => [
         let res;
         const files = glob.sync(
           path.resolve(__dirname, `../{..,carbon-component-mapper}/node_modules/carbon-components-react/${env === 'cjs' ? 'lib' : 'es'}/**/${carbonMapper(importName)}.js`)
-        );
+        ).filter(path => !path.includes('/next/'));
         if (files.length > 0) {
           res = files[0];
         } else {
@@ -294,7 +294,7 @@ module.exports = {
       presets: [['@babel/preset-env', { modules: 'commonjs' }]],
       plugins: [
         createSuirCJSTransform('commonjs'),
-        createMuiTransform(),
+        createMuiTransform('node'),
         createPfReactTransform('js'),
         createBluePrintTransform('cjs'),
         createAntTransform('cjs'),
@@ -306,7 +306,7 @@ module.exports = {
       presets: [['@babel/preset-env', { modules: false }]],
       plugins: [
         createSuirCJSTransform('es'),
-        createMuiTransform('esm'),
+        createMuiTransform(),
         createPfReactTransform('esm'),
         createBluePrintTransform('esm'),
         createAntTransform('esm'),

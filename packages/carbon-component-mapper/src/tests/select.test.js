@@ -1,11 +1,10 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 
 import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 
 import FormTemplate from '../form-template';
 import componentMapper from '../component-mapper';
-import { Select, MultiSelect, ComboBox, SelectItem, SelectItemGroup } from 'carbon-components-react';
 import { getMultiValue } from '../select/select';
 
 describe('<Select />', () => {
@@ -24,11 +23,13 @@ describe('<Select />', () => {
       ],
     };
 
-    const wrapper = mount(
+    render(
       <FormRenderer onSubmit={jest.fn()} FormTemplate={(props) => <FormTemplate {...props} />} schema={schema} componentMapper={componentMapper} />
     );
 
-    expect(wrapper.find(Select)).toHaveLength(1);
+    expect(screen.getByText('select', { selector: 'label' })).toBeInTheDocument();
+    expect(screen.getByText('option 1', { selector: 'option' })).toBeInTheDocument();
+    expect(screen.getByText('option 2', { selector: 'option' })).toBeInTheDocument();
   });
 
   it('renders select with categories', () => {
@@ -58,13 +59,19 @@ describe('<Select />', () => {
       ],
     };
 
-    const wrapper = mount(
+    const { container } = render(
       <FormRenderer onSubmit={jest.fn()} FormTemplate={(props) => <FormTemplate {...props} />} schema={schema} componentMapper={componentMapper} />
     );
 
-    expect(wrapper.find(Select)).toHaveLength(1);
-    expect(wrapper.find(SelectItemGroup)).toHaveLength(2);
-    expect(wrapper.find(SelectItem)).toHaveLength(4);
+    expect(screen.getByText('select', { selector: 'label' })).toBeInTheDocument();
+
+    expect([...container.getElementsByTagName('optgroup')].map((x) => x.label)).toEqual(['Category 1', 'Category 2']);
+
+    expect(screen.getByText('value 1', { selector: 'option' })).toBeInTheDocument();
+    expect(screen.getByText('value 2', { selector: 'option' })).toBeInTheDocument();
+
+    expect(screen.getByText('value 3', { selector: 'option' })).toBeInTheDocument();
+    expect(screen.getByText('value 4', { selector: 'option' })).toBeInTheDocument();
   });
 
   ['isSearchable', 'isClearable'].forEach((setting) => {
@@ -84,11 +91,11 @@ describe('<Select />', () => {
         ],
       };
 
-      const wrapper = mount(
+      render(
         <FormRenderer onSubmit={jest.fn()} FormTemplate={(props) => <FormTemplate {...props} />} schema={schema} componentMapper={componentMapper} />
       );
 
-      expect(wrapper.find(ComboBox)).toHaveLength(1);
+      expect(screen.getByRole('combobox')).toBeInTheDocument(1);
     });
   });
 
@@ -109,7 +116,7 @@ describe('<Select />', () => {
       ],
     };
 
-    const wrapper = mount(
+    render(
       <FormRenderer
         initialValues={{ select: 1 }}
         onSubmit={jest.fn()}
@@ -119,9 +126,7 @@ describe('<Select />', () => {
       />
     );
 
-    const valueInput = wrapper.find('input[name="select"]');
-    expect(valueInput).toHaveLength(1);
-    expect(valueInput.props().value).toEqual('option 1');
+    expect(screen.getByRole('combobox')).toHaveValue('option 1');
   });
 
   it('should render initial value label text when only value is passed as initial value with simpleValue option', () => {
@@ -142,7 +147,7 @@ describe('<Select />', () => {
       ],
     };
 
-    const wrapper = mount(
+    render(
       <FormRenderer
         initialValues={{ select: 1 }}
         onSubmit={jest.fn()}
@@ -152,9 +157,7 @@ describe('<Select />', () => {
       />
     );
 
-    const valueInput = wrapper.find('input[name="select"]');
-    expect(valueInput).toHaveLength(1);
-    expect(valueInput.props().value).toEqual('option 1');
+    expect(screen.getByRole('combobox')).toHaveValue('option 1');
   });
 
   it('renders multi select', () => {
@@ -174,11 +177,11 @@ describe('<Select />', () => {
       ],
     };
 
-    const wrapper = mount(
+    render(
       <FormRenderer onSubmit={jest.fn()} FormTemplate={(props) => <FormTemplate {...props} />} schema={schema} componentMapper={componentMapper} />
     );
 
-    expect(wrapper.find(MultiSelect)).toHaveLength(1);
+    expect(screen.getByText('Choose...')).toHaveAttribute('id', 'multiselect-field-label-1');
   });
 
   ['isSearchable', 'isClearable'].forEach((setting) => {
@@ -200,11 +203,11 @@ describe('<Select />', () => {
         ],
       };
 
-      const wrapper = mount(
+      render(
         <FormRenderer onSubmit={jest.fn()} FormTemplate={(props) => <FormTemplate {...props} />} schema={schema} componentMapper={componentMapper} />
       );
 
-      expect(wrapper.find(MultiSelect.Filterable)).toHaveLength(1);
+      expect(screen.getByRole('combobox')).toBeInTheDocument();
     });
   });
 

@@ -1,4 +1,4 @@
-PlainText is just a `Typography` component. It accepts all the [same props](https://material-ui.com/api/typography/).
+PlainText is just a `Typography` component. It accepts all the [same props](https://mui.com/api/typography/).
 
 ## component prop
 

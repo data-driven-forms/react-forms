@@ -14,20 +14,24 @@ import { render } from 'react-dom';
 import FormRenderer from '@data-driven-forms/react-form-renderer/form-renderer';
 import FormTemplate from '@data-driven-forms/mui-component-mapper/form-template';
 import componentMapper from '@data-driven-forms/mui-component-mapper/component-mapper';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
 
 import schema from './schema'
 
 class App extends Component {
   render() {
     return (
-      <div style={{margin: 24}}>
-        <FormRenderer
-          schema={schema}
-          FormTemplate={FormTemplate}
-          componentMapper={componentMapper}
-          onSubmit={console.log}
-        />
-      </div>
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <div style={{margin: 24}}>
+          <FormRenderer
+            schema={schema}
+            FormTemplate={FormTemplate}
+            componentMapper={componentMapper}
+            onSubmit={console.log}
+          />
+        </div>
+        </LocalizationProvider>
     );
   }
 }
@@ -68,8 +72,9 @@ export const dependencies = {
   '@data-driven-forms/react-form-renderer': 'latest',
   '@data-driven-forms/mui-component-mapper': 'latest',
   '@data-driven-forms/common': 'latest',
-  '@material-ui/core': 'latest',
-  '@material-ui/icons': 'latest',
-  '@material-ui/styles': 'latest',
+  '@mui/icons-material': 'latest',
+  '@mui/lab': 'latest',
+  '@mui/material': 'latest',
+  '@mui/styles': 'latest',
   'prop-types': 'latest',
 };

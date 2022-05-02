@@ -1,67 +1,133 @@
-import React, { useRef } from 'react';
+import React, { cloneElement, useCallback, useMemo, useRef } from 'react';
 import Form from '../form';
 import PropTypes from 'prop-types';
 
+import defaultSchemaValidator from '../default-schema-validator';
+import defaultValidatorMapper from '../validator-mapper';
 import RendererContext from '../renderer-context';
 import renderForm from './render-form';
-import defaultSchemaValidator from '../default-schema-validator';
 import SchemaErrorComponent from './schema-error-component';
-import defaultValidatorMapper from '../validator-mapper';
+
+const isFunc = (fn) => typeof fn === 'function';
+
+const renderChildren = (children, props) => {
+  if (isFunc(children)) {
+    return children(props);
+  }
+
+  let childElement = children;
+  if (Array.isArray(children)) {
+    /**
+     * Only permit one child element
+     */
+    if (children.length !== 1) {
+      throw new Error('FormRenderer expects only one child element!');
+    }
+
+    childElement = children[0];
+  }
+
+  if (typeof childElement === 'object') {
+    /**
+     * Clone react element, pass form fields and schema as props, but override them with child props if present
+     */
+    return cloneElement(children, { ...props, ...childElement.props });
+  }
+
+  throw new Error(`Invalid children prop! Expected one of [null, Function, object], got ${typeof children}`);
+};
 
 const FormRenderer = ({
-  componentMapper,
-  FormTemplate,
-  onSubmit,
-  onCancel,
-  onReset,
-  clearOnUnmount,
-  subscription,
-  clearedValue,
-  schema,
-  validatorMapper,
   actionMapper,
+  children,
+  clearedValue,
+  clearOnUnmount,
+  componentMapper,
+  decorators,
+  FormTemplate,
+  FormTemplateProps,
+  mutators,
+  onCancel,
+  onError,
+  onReset,
+  onSubmit,
+  schema,
   schemaValidatorMapper,
+  subscription,
+  validatorMapper,
   ...props
 }) => {
   const registeredFields = useRef({});
-  let schemaError;
 
-  const setRegisteredFields = (fn) => (registeredFields.current = fn({ ...registeredFields.current }));
-  const internalRegisterField = (name) => {
+  const formFields = useMemo(() => renderForm(schema.fields), [schema]);
+  const validatorMapperMerged = useMemo(() => {
+    return { ...defaultValidatorMapper, ...validatorMapper };
+  }, [validatorMapper]);
+
+  const handleSubmitCallback = useCallback(
+    (values, formApi, ...args) => {
+      return !isFunc(onSubmit) ? undefined : onSubmit(values, formApi, ...args);
+    },
+    [onSubmit]
+  );
+
+  const handleCancelCallback = useCallback(
+    (getState) => {
+      return (...args) => onCancel(getState().values, ...args);
+    },
+    [onCancel]
+  );
+
+  const handleResetCallback = useCallback(
+    (reset) =>
+      (...args) => {
+        reset();
+        return !isFunc(onReset) ? void 0 : onReset(...args);
+      },
+    [onReset]
+  );
+
+  const handleErrorCallback = useCallback(
+    (...args) => {
+      // eslint-disable-next-line no-console
+      console.error(...args);
+      return !isFunc(onError) ? void 0 : onError(...args);
+    },
+    [onError]
+  );
+
+  const setRegisteredFields = useCallback((fn) => {
+    return (registeredFields.current = fn({ ...registeredFields.current }));
+  }, []);
+
+  const internalRegisterField = useCallback((name) => {
     setRegisteredFields((prev) => (prev[name] ? { ...prev, [name]: prev[name] + 1 } : { ...prev, [name]: 1 }));
-  };
+  }, []);
 
-  const internalUnRegisterField = (name) => {
+  const internalUnRegisterField = useCallback((name) => {
     setRegisteredFields(({ [name]: currentField, ...prev }) => (currentField && currentField > 1 ? { [name]: currentField - 1, ...prev } : prev));
-  };
+  }, []);
 
-  const internalGetRegisteredFields = () =>
-    Object.entries(registeredFields.current).reduce((acc, [name, value]) => (value > 0 ? [...acc, name] : acc), []);
-
-  const validatorMapperMerged = { ...defaultValidatorMapper, ...validatorMapper };
+  const internalGetRegisteredFields = useCallback(() => {
+    const fields = registeredFields.current;
+    return Object.entries(fields).reduce((acc, [name, value]) => (value > 0 ? [...acc, name] : acc), []);
+  }, []);
 
   try {
     const validatorTypes = Object.keys(validatorMapperMerged);
     const actionTypes = actionMapper ? Object.keys(actionMapper) : [];
+
     defaultSchemaValidator(schema, componentMapper, validatorTypes, actionTypes, schemaValidatorMapper);
   } catch (error) {
-    schemaError = error;
-    // eslint-disable-next-line no-console
-    console.error(error);
-    // eslint-disable-next-line no-console
-    console.log('error: ', error.message);
-  }
-
-  if (schemaError) {
-    return <SchemaErrorComponent name={schemaError.name} message={schemaError.message} />;
+    handleErrorCallback('schema-error', error);
+    return <SchemaErrorComponent name={error.name} message={error.message} />;
   }
 
   return (
     <Form
-      {...props}
       clearedValue={clearedValue}
       clearOnUnmount={clearOnUnmount}
-      onSubmit={onSubmit}
+      onSubmit={handleSubmitCallback}
       subscription={{ pristine: true, submitting: true, valid: true, ...subscription }}
       render={({ formOptions: { reset, getState, ...formOptions } }) => (
         <RendererContext.Provider
@@ -71,11 +137,9 @@ const FormRenderer = ({
             actionMapper,
             formOptions: {
               onSubmit,
-              onCancel: onCancel ? (...args) => onCancel(getState().values, ...args) : undefined,
-              onReset: (...args) => {
-                onReset && onReset(...args);
-                reset();
-              },
+              onCancel: isFunc(onCancel) ? handleCancelCallback(getState) : undefined,
+              onReset: handleResetCallback(reset),
+              onError: handleErrorCallback,
               getState,
               reset,
               renderForm,
@@ -84,20 +148,27 @@ const FormRenderer = ({
               internalUnRegisterField,
               ffGetRegisteredFields: formOptions.getRegisteredFields,
               getRegisteredFields: internalGetRegisteredFields,
+              initialValues: props.initialValues,
+              schema,
             },
           }}
         >
-          <FormTemplate formFields={renderForm(schema.fields)} schema={schema} />
+          {FormTemplate && <FormTemplate formFields={formFields} schema={schema} {...FormTemplateProps} />}
+
+          {children && renderChildren(children, { formFields, schema })}
         </RendererContext.Provider>
       )}
+      {...props}
     />
   );
 };
 
 FormRenderer.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
+  children: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
+  onSubmit: PropTypes.func,
   onCancel: PropTypes.func,
   onReset: PropTypes.func,
+  onError: PropTypes.func,
   schema: PropTypes.object.isRequired,
   clearOnUnmount: PropTypes.bool,
   subscription: PropTypes.shape({ [PropTypes.string]: PropTypes.bool }),
@@ -105,7 +176,8 @@ FormRenderer.propTypes = {
   componentMapper: PropTypes.shape({
     [PropTypes.string]: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func, PropTypes.elementType]),
   }).isRequired,
-  FormTemplate: PropTypes.elementType.isRequired,
+  FormTemplate: PropTypes.elementType,
+  FormTemplateProps: PropTypes.object,
   validatorMapper: PropTypes.shape({
     [PropTypes.string]: PropTypes.func,
   }),
@@ -123,6 +195,9 @@ FormRenderer.propTypes = {
       [PropTypes.string]: PropTypes.func,
     }),
   }),
+  initialValues: PropTypes.object,
+  decorators: PropTypes.array,
+  mutators: PropTypes.object,
 };
 
 FormRenderer.defaultProps = {

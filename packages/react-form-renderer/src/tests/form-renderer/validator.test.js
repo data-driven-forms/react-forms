@@ -1,6 +1,6 @@
 import React from 'react';
-import { mount } from 'enzyme';
-import { act } from 'react-dom/test-utils';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import FormRenderer from '../../form-renderer';
 import componentTypes from '../../component-types';
@@ -12,7 +12,7 @@ describe('FormRenderer validator', () => {
     const { input, meta, ...rest } = useFieldApi(props);
     return (
       <div>
-        <input {...input} {...rest} />
+        <input {...input} {...rest} aria-label={props.name} />
         {meta.error && <div id="error">{meta.error}</div>}
       </div>
     );
@@ -27,7 +27,7 @@ describe('FormRenderer validator', () => {
     const META = expect.any(Object);
 
     const validator = (value, allValues, meta) => {
-      if (value) {
+      if (value === VALUE) {
         //skip initial validation
         expect(value).toEqual(VALUE);
         expect(allValues).toEqual({
@@ -38,7 +38,7 @@ describe('FormRenderer validator', () => {
       }
     };
 
-    const wrapper = mount(
+    render(
       <FormRenderer
         FormTemplate={(props) => <FormTemplate {...props} />}
         componentMapper={{
@@ -52,8 +52,6 @@ describe('FormRenderer validator', () => {
       />
     );
 
-    await act(async () => {
-      wrapper.find('input').simulate('change', { target: { value: VALUE } });
-    });
+    await userEvent.type(screen.getByLabelText(NAME), VALUE);
   });
 });

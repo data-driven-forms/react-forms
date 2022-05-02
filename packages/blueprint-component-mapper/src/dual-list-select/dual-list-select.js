@@ -143,6 +143,8 @@ const DualListInternal = ({
   LeftMenuItemProps,
   RightMenuProps,
   RightMenuItemProps,
+  leftSortTitle,
+  rightSortTitle,
 }) => {
   const { buttonGroup, wrapper } = useStyles();
 
@@ -159,6 +161,7 @@ const DualListInternal = ({
           ControlGroupProps={LeftControlGroupProps}
           InputGroupProps={LeftInputGroupProps}
           ButtonProps={LeftButtonProps}
+          sortTitle={leftSortTitle}
         />
         <List
           optionClick={handleOptionsClick}
@@ -216,6 +219,7 @@ const DualListInternal = ({
           ControlGroupProps={RightControlGroupProps}
           InputGroupProps={RightInputGroupProps}
           ButtonProps={RightButtonProps}
+          sortTitle={rightSortTitle}
         />
         <List
           optionClick={handleValuesClick}
@@ -279,6 +283,8 @@ DualListInternal.propTypes = {
   LeftMenuItemProps: PropTypes.object,
   RightMenuProps: PropTypes.object,
   RightMenuItemProps: PropTypes.object,
+  leftSortTitle: PropTypes.string,
+  rightSortTitle: PropTypes.string,
 };
 
 DualListInternal.defaultProps = {
@@ -294,6 +300,8 @@ DualListInternal.defaultProps = {
   filterValueTitle: 'Filter selected value',
   filterOptionsText: 'Remove your filter to see all options',
   filterValueText: 'Remove your filter to see all selected',
+  leftSortTitle: 'Sort options',
+  rightSortTitle: 'Sort value',
   options: [],
   allToLeft: true,
   allToRight: true,

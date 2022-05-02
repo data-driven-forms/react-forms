@@ -1,41 +1,42 @@
 /* eslint-disable react/prop-types */
 import React, { Fragment, useEffect, useState, useRef } from 'react';
-import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Link from '@material-ui/core/Link';
-import Box from '@material-ui/core/Box';
-import CodeIcon from '@material-ui/icons/Code';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
+import Grid from '@mui/material/Grid';
+import { styled } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
+import Link from '@mui/material/Link';
+import Box from '@mui/material/Box';
+import CodeIcon from '@mui/icons-material/Code';
+import CodeOffIcon from '@mui/icons-material/CodeOff';
+import Accordion from '@mui/material/Accordion';
+import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import PropTypes from 'prop-types';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import Paper from '@material-ui/core/Paper';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Paper from '@mui/material/Paper';
 import clsx from 'clsx';
-import grey from '@material-ui/core/colors/grey';
-import IconButton from '@material-ui/core/IconButton';
+import IconButton from '@mui/material/IconButton';
 import { getParameters } from 'codesandbox/lib/api/define';
-import Tooltip from '@material-ui/core/Tooltip';
+import Tooltip from '@mui/material/Tooltip';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-
 import GhIcon from './common/gh-svg-icon';
+
 import CodesandboxIcon from './common/code-sandbox-svg-icon';
 import CodeEditor from './code-editor';
 import { headerToId } from '../helpers/list-of-contents';
 import ShareButton from './mdx/share-button';
+import { grey } from '@mui/material/colors';
 
-const useHeadingStyles = makeStyles((theme) => ({
-  anchor: {
+const HeadingRoot = styled('div')(({ theme }) => ({
+  '& .anchor': {
     textDecoration: 'none',
     color: 'inherit',
     fontWeight: 'inherit',
   },
-  wrapper: {
+  '&.wrapper': {
     flexGrow: 1,
     display: 'flex',
   },
-  heading: {
+  '& .heading': {
     paddingTop: 4,
     fontSize: theme.typography.pxToRem(20),
     fontWeight: theme.typography.fontWeightRegular,
@@ -52,44 +53,44 @@ const useHeadingStyles = makeStyles((theme) => ({
 
 export const Heading = ({ level, children, component }) => {
   const router = useRouter();
-  const classes = useHeadingStyles();
   const id = headerToId(children);
   const path = `${router.asPath}#${id}`;
   return (
-    <div id={id} className={classes.wrapper} data-scroll="true">
-      <Typography id={`heading-${id}`} className={classes.heading} variant={`h${level}`} component={component}>
-        <a href={path} className={classes.anchor} data-mdlink="md-heading">
+    <HeadingRoot id={id} className={'wrapper'} data-scroll="true">
+      <Typography id={`heading-${id}`} className={'heading'} variant={`h${level}`} component={component}>
+        <a href={path} className={'anchor'} data-mdlink="md-heading">
           {children}
           <ShareButton path={path} />
         </a>
       </Typography>
-    </div>
+    </HeadingRoot>
   );
 };
 
-const useStyles = makeStyles((theme) => ({
-  container: {
-    [theme.breakpoints.down('sm')]: {
+const ExampleRoot = styled(Grid)(({ theme }) => ({
+  '&.container': {
+    [theme.breakpoints.down('md')]: {
       maxWidth: 'calc(100vw - 64px)',
     },
   },
-  codeWrapper: {
+  '& .codeWrapper': {
     background: '#1D1F21',
     paddingTop: 16,
     paddingBottom: 16,
     borderRadius: 4,
   },
-  componentPanel: {
+  '& .componentPanel': {
     padding: 16,
   },
-  accordion: {
+  '& .accordion': {
     border: 'none',
     boxShadow: 'none',
     background: 'none',
     padding: 0,
   },
-  accordionSummary: {
+  '& .accordionSummary': {
     padding: 0,
+    width: '100%',
   },
 }));
 
@@ -134,8 +135,8 @@ const getPayload = (code, sourceFiles = {}) =>
           dependencies: {
             '@data-driven-forms/mui-component-mapper': 'latest',
             '@data-driven-forms/react-form-renderer': 'latest',
-            '@material-ui/core': 'latest',
-            '@material-ui/icons': 'latest',
+            '@mui/material': 'latest',
+            '@mui/icons-material': 'latest',
             react: '16.12.0',
             'react-dom': '16.12.0',
             'react-scripts': '3.0.1',
@@ -159,7 +160,32 @@ const getPayload = (code, sourceFiles = {}) =>
       },
     },
   });
-
+const AccordionSummary = styled((props) => {
+  const [codeExpand, setCodeExpand] = useState(false);
+  return (
+    <MuiAccordionSummary
+      sx={{
+        pointerEvents: 'none',
+      }}
+      expandIcon={
+        <Tooltip title="Expand code example">
+          <IconButton size="small" display="flex" sx={{ pointerEvents: 'auto' }} onClick={() => setCodeExpand(!codeExpand)}>
+            {codeExpand ? <CodeOffIcon /> : <CodeIcon />}
+          </IconButton>
+        </Tooltip>
+      }
+      {...props}
+    />
+  );
+})(({ theme }) => ({
+  flexDirection: 'row',
+  '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
+    transform: 'none',
+  },
+  '& .MuiAccordionSummary-content': {
+    flexDirection: 'row-reverse',
+  },
+}));
 const CodeExample = ({ source, mode }) => {
   const [name, setName] = useState('');
   const [codeSource, setCodeSource] = useState('');
@@ -179,32 +205,35 @@ const CodeExample = ({ source, mode }) => {
       setCodeSource(file.default);
     });
   }, [source]);
-  const classes = useStyles();
   if (mode === 'preview') {
     return (
-      <Grid container spacing={0} className={clsx('DocRawComponent', classes.container)}>
+      <ExampleRoot container spacing={0} className={clsx('DocRawComponent', 'container')}>
+        {Component && (
+          <Heading component="h3" level="5">
+            {name}
+          </Heading>
+        )}
+        {Component && (
+          <Grid className={'formContainer'} item xs={12}>
+            <Paper className={'componentPanel'}>
+              <Component />
+            </Paper>
+          </Grid>
+        )}
         <Grid item xs={12}>
-          <Accordion className={classes.accordion}>
-            <AccordionSummary
-              className={classes.accordionSummary}
-              expandIcon={
-                <Tooltip title="Expand code example">
-                  <IconButton>
-                    <CodeIcon />
-                  </IconButton>
-                </Tooltip>
-              }
-            >
-              {Component && (
-                <Heading component="h3" level="5">
-                  {name}
-                </Heading>
-              )}
+          <Accordion className={'accordion'}>
+            <AccordionSummary className={'accordionSummary'}>
               <Box display="flex">
                 <form action="https://codesandbox.io/api/v1/sandboxes/define" method="POST" target="_blank">
                   <input type="hidden" name="parameters" value={getPayload(codeSource, sourceFiles)} />
                   <Tooltip title="Edit in codesandbox">
-                    <IconButton disableFocusRipple type="submit" onClick={(event) => event.stopPropagation()}>
+                    <IconButton
+                      disableFocusRipple
+                      type="submit"
+                      sx={{ pointerEvents: 'auto' }}
+                      onClick={(event) => event.stopPropagation()}
+                      size="small"
+                    >
                       <CodesandboxIcon />
                     </IconButton>
                   </Tooltip>
@@ -216,31 +245,24 @@ const CodeExample = ({ source, mode }) => {
                   onClick={(event) => event.stopPropagation()}
                 >
                   <Tooltip title="View source on github">
-                    <IconButton>
+                    <IconButton sx={{ pointerEvents: 'auto' }} size="small">
                       <GhIcon style={{ color: grey[700] }} />
                     </IconButton>
                   </Tooltip>
                 </Link>
               </Box>
             </AccordionSummary>
-            <AccordionDetails className={clsx(classes.accordionDetail, classes.codeWrapper)}>
+            <AccordionDetails className={clsx('accordionDetail', 'codeWrapper')}>
               <CodeEditor value={codeSource} inExample />
             </AccordionDetails>
           </Accordion>
         </Grid>
-        {Component && (
-          <Grid className={classes.formContainer} item xs={12}>
-            <Paper className={classes.componentPanel}>
-              <Component />
-            </Paper>
-          </Grid>
-        )}
-      </Grid>
+      </ExampleRoot>
     );
   }
 
   return (
-    <Grid container spacing={0} className="DocRawComponent">
+    <ExampleRoot container spacing={0} className="DocRawComponent">
       <Grid item xs={12}>
         <Box display="flex" justifyContent="flex-end">
           <Link
@@ -253,10 +275,10 @@ const CodeExample = ({ source, mode }) => {
           </Link>
         </Box>
       </Grid>
-      <Grid item xs={12} className={classes.codeWrapper}>
+      <Grid item xs={12} className={'codeWrapper'}>
         <CodeEditor value={codeSource} />
       </Grid>
-    </Grid>
+    </ExampleRoot>
   );
 };
 

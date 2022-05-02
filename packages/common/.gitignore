@@ -1,3 +1,5 @@
+# common
+
 # Logs
 logs
 *.log
@@ -64,7 +66,6 @@ yarn.lock
 
 # build output
 dist
-public
 vendor
 
 /*
@@ -89,4 +90,9 @@ vendor
 !rollup.config.js
 # because of the "config" string this fodler was not deleted with the clean script. Adding it to the list removes it.
 ./field-config/
+!generate-componen-examples.js
+!firebae.json
+!firebaseFunctions.js
+!scripts/
+
 .DS_STORE

@@ -1,15 +1,13 @@
 import React from 'react';
-import { act } from 'react-dom/test-utils';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { FormRenderer, componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
-import { mount } from 'enzyme';
 
 import { componentMapper, FormTemplate } from '../index';
-import { FormHelperText } from '@patternfly/react-core';
 
 describe('<FieldArray/>', () => {
   let initialProps;
   let onSubmit;
-  let wrapper;
 
   beforeEach(() => {
     onSubmit = jest.fn();
@@ -43,6 +41,7 @@ describe('<FieldArray/>', () => {
               {
                 component: componentTypes.TEXT_FIELD,
                 name: 'name',
+                'aria-label': 'name',
               },
             ],
           },
@@ -50,27 +49,21 @@ describe('<FieldArray/>', () => {
       },
     };
 
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...initialProps} />);
-    });
+    render(<FormRenderer {...initialProps} />);
 
-    expect(wrapper.find('input')).toHaveLength(0);
-    expect(wrapper.text().includes(label)).toEqual(true);
-    expect(wrapper.text().includes(description)).toEqual(true);
-    expect(wrapper.text().includes(noItemsMessage)).toEqual(true);
+    expect(screen.getByText(label)).toBeInTheDocument();
+    expect(screen.getByText(description)).toBeInTheDocument();
+    expect(screen.getByText(noItemsMessage)).toBeInTheDocument();
+    expect(() => screen.getByLabelText('name')).toThrow();
 
-    await act(async () => {
-      wrapper.find('AddCircleOIcon').first().simulate('click');
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByText('CUSTOM ADD'));
 
-    expect(wrapper.find('input')).toHaveLength(1);
-    expect(wrapper.text().includes(label)).toEqual(true);
-    expect(wrapper.text().includes(description)).toEqual(true);
-    expect(wrapper.text().includes(noItemsMessage)).toEqual(false);
+    expect(screen.getByLabelText('name')).toBeInTheDocument();
+    expect(() => screen.getByText(noItemsMessage)).toThrow();
+    expect(screen.getByLabelText('CUSTOM REMOVE')).toBeInTheDocument();
   });
 
-  it('allow to add/remove named fields', async () => {
+  it('allow to Add item/remove named fields', async () => {
     initialProps = {
       ...initialProps,
       schema: {
@@ -94,27 +87,14 @@ describe('<FieldArray/>', () => {
       },
     };
 
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...initialProps} />);
-    });
+    render(<FormRenderer {...initialProps} />);
 
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
-
+    await userEvent.click(screen.getByText('Submit'));
     expect(onSubmit).toHaveBeenCalledWith({});
     onSubmit.mockClear();
 
-    await act(async () => {
-      wrapper.find('AddCircleOIcon').first().simulate('click');
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByText('Add item'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: [{ name: 'enter a name', lastName: 'enter a last name' }],
@@ -122,22 +102,68 @@ describe('<FieldArray/>', () => {
 
     onSubmit.mockClear();
 
-    await act(async () => {
-      wrapper.find('CloseIcon').first().simulate('click');
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByLabelText('Remove'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: [],
     });
   });
 
-  it('allow to add/remove unnamed (array) fields', async () => {
+  it('allow to remove all', async () => {
+    initialProps = {
+      ...initialProps,
+      schema: {
+        fields: [
+          {
+            component: componentTypes.FIELD_ARRAY,
+            name: 'nicePeople',
+            defaultItem: { name: 'enter a name', lastName: 'enter a last name' },
+            fields: [
+              {
+                component: componentTypes.TEXT_FIELD,
+                name: 'name',
+              },
+              {
+                component: componentTypes.TEXT_FIELD,
+                name: 'lastName',
+              },
+            ],
+          },
+        ],
+      },
+    };
+
+    render(<FormRenderer {...initialProps} />);
+    await userEvent.click(screen.getByText('Submit'));
+
+    expect(onSubmit).toHaveBeenCalledWith({});
+    onSubmit.mockClear();
+
+    await userEvent.click(screen.getByText('Add item'));
+    await userEvent.click(screen.getByText('Add item'));
+    await userEvent.click(screen.getByText('Add item'));
+    await userEvent.click(screen.getByText('Submit'));
+
+    expect(onSubmit).toHaveBeenCalledWith({
+      nicePeople: [
+        { name: 'enter a name', lastName: 'enter a last name' },
+        { name: 'enter a name', lastName: 'enter a last name' },
+        { name: 'enter a name', lastName: 'enter a last name' },
+      ],
+    });
+
+    onSubmit.mockClear();
+
+    await userEvent.click(screen.getByText('Delete all'));
+    await userEvent.click(screen.getByText('Submit'));
+
+    expect(onSubmit).toHaveBeenCalledWith({
+      nicePeople: [],
+    });
+  });
+
+  it('allow to Add item/remove unnamed (array) fields', async () => {
     initialProps = {
       ...initialProps,
       schema: {
@@ -156,27 +182,14 @@ describe('<FieldArray/>', () => {
       },
     };
 
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...initialProps} />);
-    });
+    render(<FormRenderer {...initialProps} />);
 
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
-
+    await userEvent.click(screen.getByText('Submit'));
     expect(onSubmit).toHaveBeenCalledWith({});
     onSubmit.mockClear();
 
-    await act(async () => {
-      wrapper.find('AddCircleOIcon').first().simulate('click');
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByText('Add item'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: ['defaultItem'],
@@ -184,22 +197,15 @@ describe('<FieldArray/>', () => {
 
     onSubmit.mockClear();
 
-    await act(async () => {
-      wrapper.find('CloseIcon').first().simulate('click');
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByLabelText('Remove'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: [],
     });
   });
 
-  it('allow to add/remove within minItems/maxItems range', async () => {
+  it('allow to Add item/remove within minItems/maxItems range', async () => {
     initialProps = {
       ...initialProps,
       schema: {
@@ -220,79 +226,42 @@ describe('<FieldArray/>', () => {
       },
     };
 
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...initialProps} />);
-    });
+    render(<FormRenderer {...initialProps} />);
 
-    await act(async () => {
-      wrapper.find('AddCircleOIcon').first().simulate('click');
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByText('Add item'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: ['defaultItem'],
     });
     onSubmit.mockClear();
 
-    await act(async () => {
-      wrapper.find('AddCircleOIcon').first().simulate('click');
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByText('Add item'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: ['defaultItem', 'defaultItem'],
     });
     onSubmit.mockClear();
 
-    await act(async () => {
-      wrapper.find('AddCircleOIcon').first().simulate('click');
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByText('Add item'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: ['defaultItem', 'defaultItem'],
     });
     onSubmit.mockClear();
 
-    await act(async () => {
-      wrapper.find('CloseIcon').first().simulate('click');
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
+    await userEvent.click(screen.getAllByLabelText('Remove')[0]);
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: ['defaultItem'],
     });
     onSubmit.mockClear();
 
-    await act(async () => {
-      wrapper.find('CloseIcon').first().simulate('click');
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
+    await userEvent.click(screen.getAllByLabelText('Remove')[0]);
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
       nicePeople: ['defaultItem'],
@@ -318,26 +287,17 @@ describe('<FieldArray/>', () => {
       },
     };
 
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...initialProps} />);
-    });
+    render(<FormRenderer {...initialProps} />);
 
-    expect(wrapper.find(FormHelperText)).toHaveLength(0);
+    expect(() => screen.getByText('Must have at least 3 items.')).toThrow();
 
-    await act(async () => {
-      wrapper.find('AddCircleOIcon').first().simulate('click');
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByText('Add item'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).not.toHaveBeenCalled();
     onSubmit.mockClear();
 
-    expect(wrapper.find(FormHelperText).text()).toEqual('Must have at least 3 items.');
+    expect(screen.getByText('Must have at least 3 items.')).toBeInTheDocument();
   });
 
   it('should render array field correctly with props', async () => {
@@ -362,15 +322,11 @@ describe('<FieldArray/>', () => {
       },
     };
 
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...initialProps} />);
-    });
+    render(<FormRenderer {...initialProps} />);
 
-    expect(wrapper.find('label[id="label"]')).toHaveLength(1);
-    expect(wrapper.find('h4[id="message"]')).toHaveLength(1);
-    expect(wrapper.find('h3[id="desc"]')).toHaveLength(1);
-    expect(wrapper.find('AddCircleOIcon').props().className.includes('disabled')).toEqual(false);
-    expect(wrapper.find('CloseIcon')).toHaveLength(0);
+    expect(screen.getByText('hello')).toBeInTheDocument();
+    expect(screen.getByText('No items')).toBeInTheDocument();
+    expect(screen.getByText('No description')).toBeInTheDocument();
   });
 
   it('should render array field correctly with props and initial values', async () => {
@@ -396,18 +352,13 @@ describe('<FieldArray/>', () => {
       },
     };
 
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...initialProps} />);
-    });
+    render(<FormRenderer {...initialProps} />);
 
-    expect(wrapper.find('label[id="label"]')).toHaveLength(1);
-    expect(wrapper.find('h4[id="message"]')).toHaveLength(0);
-    expect(wrapper.find('h3[id="desc"]')).toHaveLength(1);
-    expect(wrapper.find('AddCircleOIcon').props().className.includes('disabled')).toEqual(false);
-    expect(wrapper.find('CloseIcon')).toHaveLength(2);
-    expect(wrapper.find('CloseIcon')).toHaveLength(2);
-    expect(wrapper.find('CloseIcon').first().props().className.includes('disabled')).toEqual(false);
-    expect(wrapper.find('CloseIcon').last().props().className.includes('disabled')).toEqual(false);
+    expect(screen.getByText('hello')).toBeInTheDocument();
+    expect(() => screen.getByText('No items')).toThrow();
+    expect(screen.getByText('No description')).toBeInTheDocument();
+
+    expect(screen.getAllByLabelText('Remove')).toHaveLength(2);
   });
 
   it('should remove nested field to form', async () => {
@@ -423,6 +374,7 @@ describe('<FieldArray/>', () => {
               {
                 component: componentTypes.TEXT_FIELD,
                 label: 'foo',
+                'aria-label': 'foo',
               },
             ],
           },
@@ -430,18 +382,13 @@ describe('<FieldArray/>', () => {
       },
     };
 
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...initialProps} />);
-    });
+    render(<FormRenderer {...initialProps} />);
 
-    expect(wrapper.find('input')).toHaveLength(1);
+    expect(screen.getByLabelText('foo')).toBeInTheDocument();
 
-    await act(async () => {
-      wrapper.find('CloseIcon').simulate('click');
-    });
+    await userEvent.click(screen.getAllByLabelText('Remove')[0]);
 
-    wrapper.update();
-    expect(wrapper.find('input')).toHaveLength(0);
+    expect(() => screen.getByLabelText('foo')).toThrow();
   });
 
   it('should extract dynamic field name if it contains custom name', async () => {
@@ -459,6 +406,7 @@ describe('<FieldArray/>', () => {
                 component: componentTypes.TEXT_FIELD,
                 name: 'nested-component',
                 label: 'foo',
+                'aria-label': 'foo',
               },
             ],
           },
@@ -466,11 +414,11 @@ describe('<FieldArray/>', () => {
       },
     };
 
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...initialProps} />);
-    });
+    render(<FormRenderer {...initialProps} />);
 
-    expect(wrapper.find({ name: 'foo[0]nested-component' })).toBeTruthy();
+    await userEvent.click(screen.getByText('Add item'));
+
+    expect(screen.getByLabelText('foo')).toHaveAttribute('name', 'foo[0].nested-component');
   });
 
   it('should extract dynamic field name if it not contains name', async () => {
@@ -487,6 +435,7 @@ describe('<FieldArray/>', () => {
               {
                 component: componentTypes.TEXT_FIELD,
                 label: 'foo',
+                'aria-label': 'foo',
               },
             ],
           },
@@ -494,10 +443,9 @@ describe('<FieldArray/>', () => {
       },
     };
 
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...initialProps} />);
-    });
+    render(<FormRenderer {...initialProps} />);
 
-    expect(wrapper.find({ name: 'foo[0]' })).toBeTruthy();
+    await userEvent.click(screen.getByText('Add item'));
+    expect(screen.getByLabelText('foo')).toHaveAttribute('name', 'foo[0]');
   });
 });

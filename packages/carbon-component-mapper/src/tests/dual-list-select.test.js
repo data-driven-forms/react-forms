@@ -1,10 +1,9 @@
 import React from 'react';
-import { act } from 'react-dom/test-utils';
 import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { componentMapper, FormTemplate } from '../index';
-import { Search, Button, TooltipIcon } from 'carbon-components-react';
 
 describe('DualListSelect', () => {
   let onSubmit;
@@ -18,7 +17,8 @@ describe('DualListSelect', () => {
       fields: [
         {
           component: componentTypes.DUAL_LIST_SELECT,
-          name: 'dual-StructuredListWrapper',
+          name: 'dual-list',
+          label: 'dual-list-select',
           options: [
             {
               value: 'cats',
@@ -48,311 +48,245 @@ describe('DualListSelect', () => {
     initialProps = {
       onSubmit: (values) => onSubmit(values),
       componentMapper,
-      FormTemplate: (props) => <FormTemplate {...props} showFormControls={false} />,
+      FormTemplate: (props) => <FormTemplate {...props} />,
       schema,
     };
   });
 
   it('renders correctly', () => {
-    const wrapper = mount(<FormRenderer {...initialProps} />);
+    render(<FormRenderer {...initialProps} />);
 
-    expect(wrapper.find('StructuredListWrapper')).toHaveLength(2);
-    expect(wrapper.find(Search)).toHaveLength(2);
-    expect(wrapper.find(Button)).toHaveLength(4);
-    expect(wrapper.find('StructuredListRow')).toHaveLength(schema.fields[0].options.length + 1); // + empty placeholder
+    expect(screen.getByText('cats')).toBeInTheDocument();
+    expect(screen.getByText('cats_1')).toBeInTheDocument();
+    expect(screen.getByText('cats_2')).toBeInTheDocument();
+    expect(screen.getByText('zebras')).toBeInTheDocument();
+    expect(screen.getByText('pigeons')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Filter options')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Filter values')).toBeInTheDocument();
+    expect(screen.getByText('No option selected')).toBeInTheDocument();
   });
 
   it('switch left option', async () => {
-    const wrapper = mount(<FormRenderer {...initialProps} />);
+    render(<FormRenderer {...initialProps} />);
 
-    wrapper.find('form').simulate('submit');
+    await userEvent.click(screen.getByText('Submit'));
+
     expect(onSubmit).toHaveBeenCalledWith({});
-    onSubmit.mockClear();
 
-    await act(async () => {
-      wrapper.find('StructuredListRow').first().props().onClick({});
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByText('cats'));
+    await userEvent.click(screen.getByText('Add'));
+    await userEvent.click(screen.getByText('Submit'));
 
-    await act(async () => {
-      wrapper.find('button#move-right').props().onClick({});
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-
-    expect(onSubmit).toHaveBeenCalledWith({ 'dual-StructuredListWrapper': ['cats'] });
+    expect(onSubmit).toHaveBeenLastCalledWith({ 'dual-list': ['cats'] });
   });
 
   it('switch left option with holding ctrl', async () => {
-    const wrapper = mount(<FormRenderer {...initialProps} />);
+    render(<FormRenderer {...initialProps} />);
 
-    await act(async () => {
-      wrapper.find('StructuredListWrapper').first().find('StructuredListRow').first().props().onClick({});
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByText('cats'));
 
-    await act(async () => {
-      wrapper.find('StructuredListWrapper').first().find('StructuredListRow').last().props().onClick({ ctrlKey: true });
-    });
-    wrapper.update();
+    const user = userEvent.setup();
 
-    await act(async () => {
-      wrapper.find('button#move-right').props().onClick({});
-    });
-    wrapper.update();
+    await user.keyboard('{Control>}');
+    await user.click(screen.getByText('zebras'));
+    await user.keyboard('{/Control}');
 
-    wrapper.find('form').simulate('submit');
+    await userEvent.click(screen.getByText('Add'));
+    await userEvent.click(screen.getByText('Submit'));
 
-    expect(onSubmit).toHaveBeenCalledWith({ 'dual-StructuredListWrapper': ['cats', 'zebras'] });
+    expect(onSubmit).toHaveBeenLastCalledWith({ 'dual-list': ['cats', 'zebras'] });
   });
 
   it('switch left option with holding shift', async () => {
-    const wrapper = mount(<FormRenderer {...initialProps} />);
+    render(<FormRenderer {...initialProps} />);
 
-    await act(async () => {
-      wrapper.find('StructuredListWrapper').first().find('StructuredListRow').first().props().onClick({});
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByText('cats'));
 
-    await act(async () => {
-      wrapper.find('StructuredListWrapper').first().find('StructuredListRow').last().props().onClick({ shiftKey: true });
-    });
-    wrapper.update();
+    const user = userEvent.setup();
 
-    await act(async () => {
-      wrapper.find('button#move-right').props().onClick({});
-    });
-    wrapper.update();
+    await user.keyboard('{Shift>}');
+    await user.click(screen.getByText('zebras'));
+    await user.keyboard('{/Shift}');
 
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
+    await userEvent.click(screen.getByText('Add'));
+    await userEvent.click(screen.getByText('Submit'));
 
-    expect(onSubmit).toHaveBeenCalledWith({ 'dual-StructuredListWrapper': ['cats', 'cats_1', 'cats_2', 'pigeons', 'zebras'] });
+    expect(onSubmit).toHaveBeenLastCalledWith({ 'dual-list': ['cats', 'cats_1', 'cats_2', 'pigeons', 'zebras'] });
   });
 
   it('switch left option with holding and removing by ctrl', async () => {
-    const wrapper = mount(<FormRenderer {...initialProps} />);
+    render(<FormRenderer {...initialProps} />);
 
-    await act(async () => {
-      wrapper.find('StructuredListWrapper').first().find('StructuredListRow').first().props().onClick({});
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByText('cats'));
 
-    await act(async () => {
-      wrapper.find('StructuredListWrapper').first().find('StructuredListRow').last().props().onClick({ shiftKey: true });
-    });
-    wrapper.update();
+    const user = userEvent.setup();
 
-    await act(async () => {
-      wrapper.find('StructuredListWrapper').first().find('StructuredListRow').first().props().onClick({ ctrlKey: true });
-    });
-    wrapper.update();
+    await user.keyboard('{Shift>}');
+    await user.click(screen.getByText('zebras'));
+    await user.keyboard('{/Shift}');
 
-    await act(async () => {
-      wrapper.find('button#move-right').props().onClick({});
-    });
-    wrapper.update();
+    await user.keyboard('{Control>}');
+    await user.click(screen.getByText('cats'));
+    await user.keyboard('{/Control}');
 
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
+    await userEvent.click(screen.getByText('Add'));
+    await userEvent.click(screen.getByText('Submit'));
 
-    expect(onSubmit).toHaveBeenCalledWith({ 'dual-StructuredListWrapper': ['cats_1', 'cats_2', 'pigeons', 'zebras'] });
+    expect(onSubmit).toHaveBeenLastCalledWith({ 'dual-list': ['cats_1', 'cats_2', 'pigeons', 'zebras'] });
   });
 
   it('switch right option', async () => {
-    const wrapper = mount(<FormRenderer {...initialProps} initialValues={{ 'dual-StructuredListWrapper': ['cats'] }} />);
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    expect(onSubmit).toHaveBeenCalledWith({ 'dual-StructuredListWrapper': ['cats'] });
-    onSubmit.mockClear();
-    await act(async () => {
-      wrapper.find('StructuredListRow').last().props().onClick({});
-    });
-    wrapper.update();
+    render(<FormRenderer {...initialProps} initialValues={{ 'dual-list': ['cats'] }} />);
 
-    await act(async () => {
-      wrapper.find('button#move-all-left').props().onClick({});
-    });
-    wrapper.update();
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
+    await userEvent.click(screen.getByText('Submit'));
+    expect(onSubmit).toHaveBeenLastCalledWith({ 'dual-list': ['cats'] });
 
-    expect(onSubmit).toHaveBeenCalledWith({
-      'dual-StructuredListWrapper': [],
+    await userEvent.click(screen.getByText('cats'));
+    await userEvent.click(screen.getByText('Remove'));
+    await userEvent.click(screen.getByText('Submit'));
+
+    expect(onSubmit).toHaveBeenLastCalledWith({
+      'dual-list': [],
     });
   });
 
   it('switch all to right', async () => {
-    const wrapper = mount(<FormRenderer {...initialProps} />);
-    await act(async () => {
-      wrapper.find('button#move-all-right').props().onClick({});
-    });
-    wrapper.update();
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
+    render(<FormRenderer {...initialProps} />);
 
-    expect(onSubmit).toHaveBeenCalledWith({ 'dual-StructuredListWrapper': ['cats', 'cats_1', 'cats_2', 'pigeons', 'zebras'] });
+    await userEvent.click(screen.getByText('Add All'));
+    await userEvent.click(screen.getByText('Submit'));
+
+    expect(onSubmit).toHaveBeenCalledWith({ 'dual-list': ['cats', 'cats_1', 'cats_2', 'pigeons', 'zebras'] });
   });
 
   it('switch all to left', async () => {
-    const wrapper = mount(
-      <FormRenderer {...initialProps} initialValues={{ 'dual-StructuredListWrapper': schema.fields[0].options.map(({ value }) => value) }} />
-    );
-    await act(async () => {
-      wrapper.find('button#move-all-left').props().onClick({});
-    });
-    wrapper.update();
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
+    render(<FormRenderer {...initialProps} initialValues={{ 'dual-list': schema.fields[0].options.map(({ value }) => value) }} />);
+
+    await userEvent.click(screen.getByText('Remove All'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
-      'dual-StructuredListWrapper': [],
+      'dual-list': [],
     });
   });
 
   it('filters options', async () => {
-    const wrapper = mount(<FormRenderer {...initialProps} />);
+    render(<FormRenderer {...initialProps} />);
 
-    expect(wrapper.find('StructuredListWrapper').first().find('StructuredListRow')).toHaveLength(schema.fields[0].options.length);
-    await act(async () => {
-      wrapper.find('input').first().instance().value = 'cats';
-    });
-    await act(async () => {
-      wrapper.find('input').first().simulate('change');
-    });
-    wrapper.update();
+    await userEvent.type(screen.getByPlaceholderText('Filter options'), 'cats');
 
-    expect(wrapper.find('StructuredListWrapper').first().find('StructuredListRow')).toHaveLength(3);
-    wrapper
-      .find('StructuredListWrapper')
-      .first()
-      .find('StructuredListRow')
-      .forEach((option) => expect(option.text()).toEqual(expect.stringContaining('cats')));
+    expect(screen.getByText('cats')).toBeInTheDocument();
+    expect(screen.getByText('cats_1')).toBeInTheDocument();
+    expect(screen.getByText('cats_2')).toBeInTheDocument();
+    expect(() => screen.getByText('zebras')).toThrow();
+    expect(() => screen.getByText('pigeons')).toThrow();
   });
 
   it('filters value', async () => {
-    const wrapper = mount(
-      <FormRenderer {...initialProps} initialValues={{ 'dual-StructuredListWrapper': schema.fields[0].options.map(({ value }) => value) }} />
-    );
+    render(<FormRenderer {...initialProps} initialValues={{ 'dual-list': schema.fields[0].options.map(({ value }) => value) }} />);
 
-    expect(wrapper.find('StructuredListWrapper').last().find('StructuredListRow')).toHaveLength(schema.fields[0].options.length);
-    await act(async () => {
-      wrapper.find('input').last().instance().value = 'cats';
-    });
+    await userEvent.type(screen.getByPlaceholderText('Filter values'), 'cats');
 
-    await act(async () => {
-      wrapper.find('input').last().simulate('change');
-    });
-    wrapper.update();
-
-    expect(wrapper.find('StructuredListWrapper').last().find('StructuredListRow')).toHaveLength(3);
-    wrapper
-      .find('StructuredListWrapper')
-      .last()
-      .find('StructuredListRow')
-      .forEach((option) => expect(option.text()).toEqual(expect.stringContaining('cats')));
+    expect(screen.getByText('cats')).toBeInTheDocument();
+    expect(screen.getByText('cats_1')).toBeInTheDocument();
+    expect(screen.getByText('cats_2')).toBeInTheDocument();
+    expect(() => screen.getByText('zebras')).toThrow();
+    expect(() => screen.getByText('pigeons')).toThrow();
   });
 
   it('sort options', async () => {
-    const wrapper = mount(<FormRenderer {...initialProps} />);
+    const { container } = render(<FormRenderer {...initialProps} />);
 
-    expect(wrapper.find('StructuredListWrapper').first().find('StructuredListRow').first().text()).toEqual('cats');
-    expect(wrapper.find('StructuredListWrapper').first().find('StructuredListRow').last().text()).toEqual('zebras');
-    await act(async () => {
-      wrapper.find(TooltipIcon).at(0).props().onClick({});
-    });
-    wrapper.update();
+    expect([...container.getElementsByClassName('bx--structured-list-td')].map((el) => el.textContent)).toEqual([
+      'cats',
+      'cats_1',
+      'cats_2',
+      'pigeons',
+      'zebras',
+      'No option selected',
+    ]);
 
-    expect(wrapper.find('StructuredListWrapper').first().find('StructuredListRow').first().text()).toEqual('zebras');
-    expect(wrapper.find('StructuredListWrapper').first().find('StructuredListRow').last().text()).toEqual('cats');
-    await act(async () => {
-      wrapper.find(TooltipIcon).at(0).props().onClick({});
-    });
-    wrapper.update();
+    await userEvent.click(screen.getAllByRole('button')[1]);
 
-    expect(wrapper.find('StructuredListWrapper').first().find('StructuredListRow').first().text()).toEqual('cats');
-    expect(wrapper.find('StructuredListWrapper').first().find('StructuredListRow').last().text()).toEqual('zebras');
+    expect([...container.getElementsByClassName('bx--structured-list-td')].map((el) => el.textContent)).toEqual([
+      'zebras',
+      'pigeons',
+      'cats_2',
+      'cats_1',
+      'cats',
+      'No option selected',
+    ]);
+
+    await userEvent.click(screen.getAllByRole('button')[1]);
+
+    expect([...container.getElementsByClassName('bx--structured-list-td')].map((el) => el.textContent)).toEqual([
+      'cats',
+      'cats_1',
+      'cats_2',
+      'pigeons',
+      'zebras',
+      'No option selected',
+    ]);
   });
 
   it('sort value', async () => {
-    const wrapper = mount(
-      <FormRenderer {...initialProps} initialValues={{ 'dual-StructuredListWrapper': schema.fields[0].options.map(({ value }) => value) }} />
+    const { container } = render(
+      <FormRenderer {...initialProps} initialValues={{ 'dual-list': schema.fields[0].options.map(({ value }) => value) }} />
     );
 
-    expect(wrapper.find('StructuredListWrapper').last().find('StructuredListRow').first().text()).toEqual('cats');
-    expect(wrapper.find('StructuredListWrapper').last().find('StructuredListRow').last().text()).toEqual('zebras');
-    await act(async () => {
-      wrapper.find(TooltipIcon).last().props().onClick({});
-    });
-    wrapper.update();
+    expect([...container.getElementsByClassName('bx--structured-list-td')].map((el) => el.textContent)).toEqual([
+      'No option available',
+      'cats',
+      'cats_1',
+      'cats_2',
+      'pigeons',
+      'zebras',
+    ]);
 
-    expect(wrapper.find('StructuredListWrapper').last().find('StructuredListRow').first().text()).toEqual('zebras');
-    expect(wrapper.find('StructuredListWrapper').last().find('StructuredListRow').last().text()).toEqual('cats');
-    await act(async () => {
-      wrapper.find(TooltipIcon).last().props().onClick({});
-    });
-    wrapper.update();
+    await userEvent.click(screen.getAllByRole('button')[7]);
 
-    expect(wrapper.find('StructuredListWrapper').last().find('StructuredListRow').first().text()).toEqual('cats');
-    expect(wrapper.find('StructuredListWrapper').last().find('StructuredListRow').last().text()).toEqual('zebras');
+    expect([...container.getElementsByClassName('bx--structured-list-td')].map((el) => el.textContent)).toEqual([
+      'No option available',
+      'zebras',
+      'pigeons',
+      'cats_2',
+      'cats_1',
+      'cats',
+    ]);
+
+    await userEvent.click(screen.getAllByRole('button')[7]);
+
+    expect([...container.getElementsByClassName('bx--structured-list-td')].map((el) => el.textContent)).toEqual([
+      'No option available',
+      'cats',
+      'cats_1',
+      'cats_2',
+      'pigeons',
+      'zebras',
+    ]);
   });
 
   describe('filtered options', () => {
     it('switch all visible to right', async () => {
-      const wrapper = mount(<FormRenderer {...initialProps} />);
-      await act(async () => {
-        wrapper.find('input').first().instance().value = 'cats';
-      });
+      render(<FormRenderer {...initialProps} />);
 
-      await act(async () => {
-        wrapper.find('input').first().simulate('change');
-      });
-      wrapper.update();
-      await act(async () => {
-        wrapper.find('button#move-all-right').props().onClick({});
-      });
-      wrapper.update();
+      await userEvent.type(screen.getByPlaceholderText('Filter options'), 'cats');
+      await userEvent.click(screen.getByText('Add All'));
+      await userEvent.click(screen.getByText('Submit'));
 
-      await act(async () => {
-        wrapper.find('form').simulate('submit');
-      });
-
-      expect(onSubmit).toHaveBeenCalledWith({ 'dual-StructuredListWrapper': ['cats', 'cats_1', 'cats_2'] });
+      expect(onSubmit).toHaveBeenCalledWith({ 'dual-list': ['cats', 'cats_1', 'cats_2'] });
     });
   });
 
   describe('filtered value', () => {
     it('switch all visible to left', async () => {
-      const wrapper = mount(
-        <FormRenderer {...initialProps} initialValues={{ 'dual-StructuredListWrapper': schema.fields[0].options.map(({ value }) => value) }} />
-      );
-      await act(async () => {
-        wrapper.find('input').last().instance().value = 'cats';
-      });
-      await act(async () => {
-        wrapper.find('input').last().simulate('change');
-      });
-      wrapper.update();
+      render(<FormRenderer {...initialProps} initialValues={{ 'dual-list': schema.fields[0].options.map(({ value }) => value) }} />);
 
-      await act(async () => {
-        wrapper.find('button#move-all-left').props().onClick({});
-      });
-      wrapper.update();
+      await userEvent.type(screen.getByPlaceholderText('Filter values'), 'cats');
+      await userEvent.click(screen.getByText('Remove All'));
+      await userEvent.click(screen.getByText('Submit'));
 
-      await act(async () => {
-        wrapper.find('form').simulate('submit');
-      });
-
-      expect(onSubmit).toHaveBeenCalledWith({ 'dual-StructuredListWrapper': ['zebras', 'pigeons'] });
+      expect(onSubmit).toHaveBeenCalledWith({ 'dual-list': ['zebras', 'pigeons'] });
     });
   });
 });

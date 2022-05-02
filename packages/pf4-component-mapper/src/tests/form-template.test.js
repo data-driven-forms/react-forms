@@ -1,36 +1,40 @@
 import React from 'react';
-import { mount } from 'enzyme';
-import { Button as PF4Button, ActionGroup, TextContent, Text } from '@patternfly/react-core';
+import { render, screen } from '@testing-library/react';
 
 import { Button, Title, ButtonGroup, Description } from '../form-template';
 
 describe('Layout mapper', () => {
   it('should return PF4 Button', () => {
-    expect(mount(<Button label="some label" />).find(PF4Button)).toHaveLength(1);
+    render(<Button label="some label" />);
+
+    expect(screen.getByText('some label', { selector: 'button' })).toBeInTheDocument();
   });
 
   it('should return PF4 ButtonGroup', () => {
-    expect(mount(<ButtonGroup />).find(ActionGroup)).toHaveLength(1);
+    render(
+      <ButtonGroup>
+        <Button label="some label" />
+      </ButtonGroup>
+    );
+
+    expect(screen.getByText('some label', { selector: 'button' }).closest('.pf-c-form__actions')).toBeInTheDocument();
   });
 
   it('should return PF4 Title', () => {
-    const wrapper = mount(<Title />);
+    render(<Title>Title</Title>);
 
-    expect(wrapper.find(TextContent)).toHaveLength(1);
-    expect(wrapper.find(Text)).toHaveLength(1);
+    expect(screen.getByText('Title', { selector: 'h1' })).toBeInTheDocument();
   });
 
   it('should return PF4 Description', () => {
-    const wrapper = mount(<Description />);
+    render(<Description>Description</Description>);
 
-    expect(wrapper.find(TextContent)).toHaveLength(1);
-    expect(wrapper.find(Text)).toHaveLength(1);
+    expect(screen.getByText('Description', { selector: 'p' })).toBeInTheDocument();
   });
 
   it('should return PF4 Button disabled', () => {
-    const wrapper = mount(<Button disabled={true} label="some label" />);
+    render(<Button disabled={true} label="some label" />);
 
-    expect(wrapper.find(PF4Button)).toHaveLength(1);
-    expect(wrapper.find(PF4Button).props().isDisabled).toEqual(true);
+    expect(screen.getByText('some label', { selector: 'button' })).toBeDisabled();
   });
 });

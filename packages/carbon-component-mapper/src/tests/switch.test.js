@@ -1,12 +1,11 @@
 import React from 'react';
-import { act } from 'react-dom/test-utils';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 
 import FormTemplate from '../form-template';
 import componentMapper from '../component-mapper';
-import { Toggle } from 'carbon-components-react';
 
 describe('<Switch />', () => {
   it('initialValue works', async () => {
@@ -18,11 +17,12 @@ describe('<Switch />', () => {
           name: 'switch',
           label: 'Switch',
           initialValue: true,
+          'data-testid': 'Switch',
         },
       ],
     };
 
-    const wrapper = mount(
+    render(
       <FormRenderer
         onSubmit={(values) => spy(values)}
         FormTemplate={(props) => <FormTemplate {...props} />}
@@ -31,29 +31,19 @@ describe('<Switch />', () => {
       />
     );
 
-    expect(wrapper.find(Toggle)).toHaveLength(1);
-    expect(wrapper.find(Toggle).props().toggled).toEqual(true);
+    expect(screen.getByTestId('Switch')).toBeChecked();
 
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(spy).toHaveBeenCalledWith({ switch: true });
     spy.mockClear();
 
-    await act(async () => {
-      wrapper.find('input').simulate('change', { target: { checked: false } });
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByText('Switch'));
 
-    expect(wrapper.find(Toggle).props().toggled).toEqual(false);
+    expect(screen.getByTestId('Switch')).not.toBeChecked();
 
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByText('Submit'));
 
-    expect(spy).toHaveBeenCalledWith({});
+    expect(spy).toHaveBeenCalledWith({ switch: false });
   });
 });

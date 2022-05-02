@@ -228,6 +228,7 @@ const DynamicArray = ({ ...props }) => {
                   <Button
                     icon="undo"
                     className="ddorg__suir__mapper__field-array-undo"
+                    aria-label="undo"
                     {...UndoButtonProps}
                     type="button"
                     disabled={state.index === 0}
@@ -236,6 +237,7 @@ const DynamicArray = ({ ...props }) => {
                   <Button
                     icon="redo"
                     className="ddorg__suir__mapper__field-array-redo"
+                    aria-label="redo"
                     {...RedoButtonProps}
                     type="button"
                     disabled={state.index === state.history.length}

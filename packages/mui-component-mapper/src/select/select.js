@@ -7,9 +7,9 @@ import { meta } from '@data-driven-forms/common/prop-types-templates';
 import DDFSelect from '@data-driven-forms/common/select';
 import parseInternalValue from '@data-driven-forms/common/select/parse-internal-value';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
-import { TextField, CircularProgress } from '@material-ui/core';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import { TextField, CircularProgress } from '@mui/material';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { Autocomplete } from '@mui/material';
 
 /**
  * Returns label of selected option

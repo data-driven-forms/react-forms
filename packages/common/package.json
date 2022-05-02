@@ -1,6 +1,6 @@
 {
   "name": "@data-driven-forms/common",
-  "version": "3.12.1",
+  "version": "3.17.4",
   "description": "Common components, helpers and other pieces of code for Data Driven Forms",
   "license": "Apache-2.0",
   "main": "index.js",
@@ -20,8 +20,7 @@
     "url": "https://github.com/data-driven-forms/react-forms",
     "directory": "packages/common"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "dependencies": {
     "clsx": "^1.0.4",
     "lodash": "^4.17.15",
@@ -29,7 +28,7 @@
     "prop-types": "^15.7.2"
   },
   "peerDependencies": {
-    "react": "^16.13.1 || ^17.0.2",
-    "react-dom": "^16.13.1 || ^17.0.2"
+    "react": "^16.13.1 || ^17.0.2 || ^18.0.0",
+    "react-dom": "^16.13.1 || ^17.0.2 || ^18.0.0"
   }
 }

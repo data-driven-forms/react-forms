@@ -255,6 +255,8 @@ const addIfUnique = (array: Array<string>, item: string) => !array.includes(item
 export const shouldExecute = (formLevel: boolean | undefined, fieldLevel: boolean | undefined): boolean =>
   Boolean((formLevel || fieldLevel) && fieldLevel !== false);
 
+export const isDefined = (object: AnyObject, key: string): boolean => Object.prototype.hasOwnProperty.call(object, key);
+
 type objectMapFunction = (value: any, key: any) => any;
 
 // TODO: try to optimize
@@ -775,8 +777,8 @@ const createManagerApi: CreateManagerApi = ({
 
       const allIsEqual: Array<IsEqual> = state.fieldListeners[name]
         ? Object.values(state.fieldListeners[name].fields)
-            .map(({ isEqual }) => isEqual as IsEqual, [])
-            .filter(Boolean)
+          .map(({ isEqual }) => isEqual as IsEqual, [])
+          .filter(Boolean)
         : [];
 
       const isEqualFn =
@@ -987,6 +989,36 @@ const createManagerApi: CreateManagerApi = ({
     return Object.prototype.hasOwnProperty.call(state.fieldListeners, name);
   }
 
+  function initializeFieldValue(field: FieldConfig | UpdatedConfig): boolean {
+    if (
+      shouldExecute(config.initializeOnMount, field.initializeOnMount) ||
+      (!isInitialized(field.name) && typeof field.initialValue !== 'undefined')
+    ) {
+      let initialValue: any;
+
+      if (shouldExecute(config.initializeOnMount, field.initializeOnMount) && isDefined(field, 'initialValue')) {
+        initialValue = field.initialValue;
+      } else {
+        initialValue = get(state.initialValues, field.name);
+        initialValue = typeof initialValue === 'undefined' ? field.initialValue : initialValue;
+      }
+
+      set(
+        state.values,
+        field.name,
+        initialValue
+      );
+    }
+
+    let setDirty = false;
+    if (!isInitialized(field.name) && typeof field.defaultValue !== 'undefined' && typeof get(state.values, field.name) === 'undefined') {
+      set(state.values, field.name, field.defaultValue);
+      setDirty = true;
+    }
+
+    return setDirty;
+  }
+
   function registerField(field: FieldConfig): void {
     isSilent = field.silent ? isSilent + 1 : isSilent;
     registeringField = field.internalId || field.name;
@@ -995,22 +1027,7 @@ const createManagerApi: CreateManagerApi = ({
       const render = prepareRerender();
       addIfUnique(state.registeredFields, field.name);
 
-      if (
-        shouldExecute(config.initializeOnMount, field.initializeOnMount) ||
-        (!isInitialized(field.name) && typeof field.initialValue !== 'undefined')
-      ) {
-        set(
-          state.values,
-          field.name,
-          Object.prototype.hasOwnProperty.call(field, 'initialValue') ? field.initialValue : get(state.initialValues, field.name)
-        );
-      }
-
-      let setDirty = false;
-      if (!isInitialized(field.name) && typeof field.defaultValue !== 'undefined' && typeof get(state.values, field.name) === 'undefined') {
-        set(state.values, field.name, field.defaultValue);
-        setDirty = true;
-      }
+      let setDirty = initializeFieldValue(field);
 
       subscribe(field as SubscriberConfig, true);
 
@@ -1238,10 +1255,10 @@ const createManagerApi: CreateManagerApi = ({
       ...state.fieldListeners[subscriberConfig.name],
       ...(isField
         ? {
-            state:
-              state.fieldListeners[subscriberConfig.name]?.state ||
-              createField(String(subscriberConfig.name), get(state.values, subscriberConfig.name))
-          }
+          state:
+            state.fieldListeners[subscriberConfig.name]?.state ||
+            createField(String(subscriberConfig.name), get(state.values, subscriberConfig.name))
+        }
         : {}),
       count: (state.fieldListeners[subscriberConfig.name]?.count || 0) + 1,
       validateFields: subscriberConfig.validateFields,
@@ -1311,22 +1328,7 @@ const createManagerApi: CreateManagerApi = ({
 
     const render = prepareRerender();
 
-    if (
-      shouldExecute(config.initializeOnMount, field.initializeOnMount) ||
-      (!isInitialized(field.name) && typeof field.initialValue !== 'undefined')
-    ) {
-      set(
-        state.values,
-        field.name,
-        Object.prototype.hasOwnProperty.call(field, 'initialValue') ? field.initialValue : get(state.initialValues, field.name)
-      );
-    }
-
-    let setDirty = false;
-    if (!isInitialized(field.name) && typeof field.defaultValue !== 'undefined' && typeof get(state.values, field.name) === 'undefined') {
-      set(state.values, field.name, field.defaultValue);
-      setDirty = true;
-    }
+    let setDirty = initializeFieldValue(field);
 
     if (setDirty) {
       state.pristine = false;

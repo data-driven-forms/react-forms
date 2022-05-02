@@ -46,6 +46,10 @@ const getConditionTriggers = (condition, field) => {
     }
   });
 
+  if (typeof condition.not === 'object') {
+    triggers = [...triggers, ...getConditionTriggers(condition.not, field)];
+  }
+
   return Array.from(new Set(triggers));
 };
 

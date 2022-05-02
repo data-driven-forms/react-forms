@@ -1,10 +1,9 @@
 import React from 'react';
-import { act } from 'react-dom/test-utils';
 import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
-import { mount } from 'enzyme';
+import { act, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { componentMapper, FormTemplate } from '../index';
-import { Transfer } from 'antd';
 
 describe('DualListSelect', () => {
   let onSubmit;
@@ -48,63 +47,62 @@ describe('DualListSelect', () => {
     initialProps = {
       onSubmit: (values) => onSubmit(values),
       componentMapper,
-      FormTemplate: (props) => <FormTemplate {...props} showFormControls={false} />,
+      FormTemplate: (props) => <FormTemplate {...props} />,
       schema,
     };
   });
 
-  it('renders correctly', () => {
-    const wrapper = mount(<FormRenderer {...initialProps} />);
+  it('renders correctly', async () => {
+    await act(async () => {
+      render(<FormRenderer {...initialProps} />);
+    });
 
-    expect(wrapper.find(Transfer)).toHaveLength(1);
+    expect(screen.getByText('cats')).toBeInTheDocument();
+    expect(screen.getByText('cats_1')).toBeInTheDocument();
+    expect(screen.getByText('cats_2')).toBeInTheDocument();
+    expect(screen.getByText('zebras')).toBeInTheDocument();
+    expect(screen.getByText('pigeons')).toBeInTheDocument();
   });
 
   it('switch left option', async () => {
-    const wrapper = mount(<FormRenderer {...initialProps} />);
+    await act(async () => {
+      render(<FormRenderer {...initialProps} />);
+    });
 
     await act(async () => {
-      wrapper.find('form').simulate('submit');
+      await userEvent.click(screen.getByText('Submit'));
     });
-    wrapper.update();
 
     expect(onSubmit).toHaveBeenCalledWith({});
     onSubmit.mockClear();
 
-    await act(async () => {
-      wrapper.find('.ant-transfer-list-content-item').first().props().onClick({});
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByText('cats'));
+    await userEvent.click(screen.getByLabelText('right'));
 
     await act(async () => {
-      wrapper.find('button').at(0).props().onClick();
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
+      await userEvent.click(screen.getByText('Submit'));
     });
 
     expect(onSubmit).toHaveBeenCalledWith({ 'dual-Menu': ['cats'] });
   });
 
   it('switch right option', async () => {
-    const wrapper = mount(<FormRenderer {...initialProps} initialValues={{ 'dual-Menu': ['cats'] }} />);
     await act(async () => {
-      wrapper.find('form').simulate('submit');
+      render(<FormRenderer {...initialProps} initialValues={{ 'dual-Menu': ['cats'] }} />);
     });
-    expect(onSubmit).toHaveBeenCalledWith({ 'dual-Menu': ['cats'] });
-    onSubmit.mockClear();
-    await act(async () => {
-      wrapper.find('.ant-transfer-list-content-item').last().props().onClick({});
-    });
-    wrapper.update();
 
     await act(async () => {
-      wrapper.find('button').at(1).props().onClick();
+      await userEvent.click(screen.getByText('Submit'));
     });
-    wrapper.update();
+
+    expect(onSubmit).toHaveBeenCalledWith({ 'dual-Menu': ['cats'] });
+    onSubmit.mockClear();
+
+    await userEvent.click(screen.getByText('cats'));
+    await userEvent.click(screen.getByLabelText('left'));
+
     await act(async () => {
-      wrapper.find('form').simulate('submit');
+      await userEvent.click(screen.getByText('Submit'));
     });
 
     expect(onSubmit).toHaveBeenCalledWith({

@@ -227,7 +227,7 @@ Please use our [documentation site](https://data-driven-forms.org/). In case of 
 
 - [Data Driven Forms documentation](https://data-driven-forms.org/)
 - [PatternFly 4 Design documentation](https://www.patternfly.org/v4/)
-- [Material-UI documentation](https://material-ui.com/)
+- [Material-UI documentation](https://mui.com/)
 - [Ant Design documentation](https://ant.design/)
 - [Semantic UI React](https://react.semantic-ui.com/)
 - [BlueprintJS](https://blueprintjs.com/)

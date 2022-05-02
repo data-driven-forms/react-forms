@@ -4,9 +4,11 @@ import DocPage from '@docs/doc-page';
 
 # Schema Introduction
 
+<br/>
+
 ## Schema definition
 
-A schema is an object consists of fields:
+A schema is an object consists of `fields`:
 
 ```jsx
 {
@@ -14,7 +16,9 @@ A schema is an object consists of fields:
 }
 ```
 
-Other attribues, such as title or description, can be used in [form templates](/components/form-template).
+Other attributes, such as `title` or `description`, can be used in [form templates](/components/form-template).
+
+<br/>
 
 ## Field definition
 
@@ -39,12 +43,44 @@ Other attribues, such as title or description, can be used in [form templates](/
     ...componentSpecificAttributes
 }
 ```
+<br/>
 
 ### component (required)
 
 *string*
 
-`component` is a string value representing used component. Available options depends on the component mapper. Data Driven Forms automatically checks if the component is available, if not, it shows an error message. You can use [componentTypes](/schema/constants#componenttypes) to prevent typos. This attribute is not required for fields of these components: `wizard`, `field-array` and `tabs` as these fields include only special components with no implementation.
+The value of `component` is a *string* that represents used component. Available options depend on the [component mapper](/mappers/custom-mapper#Componentmapper). 
+
+**Data Driven Forms** automatically checks if the component is available; if not, it shows an error message. You can use [componentTypes](/schema/constants#componenttypes) to prevent typos. 
+
+This attribute is not required for the first level of the `fields` in the following components, as this first level of the `fields` is implemented with special predefined components: 
+
+`wizard`, `field-array`, `tabs`
+
+<br/>
+
+Here is an example for `wizard`:
+``` jsx
+const schema = {
+  fields: [{
+    component: 'wizard', // here you define the wizard component
+    name: 'wizard-field',
+    ...
+    // first level of this `fields` are the direct children of wizard - wizard-steps
+    fields: [{
+      name: 'step-1',
+      title: 'Foo',
+      ...
+      fields: [{
+        // these are not children of the wizard step and you require a component attribute again
+        component: 'text-field',
+        name: 'bar',
+        ...
+      }]
+    }]
+  }]
+}
+```
 
 ---
 
@@ -52,7 +88,7 @@ Other attribues, such as title or description, can be used in [form templates](/
 
 *string*
 
-`name` represents the variable the form value is stored in. You can use [dot notation](https://final-form.org/docs/final-form/field-names) to create nested objects.
+`name` represents the variable that stores the form value. You can use [dot notation](https://final-form.org/docs/final-form/field-names) to create nested objects.
 
 ```jsx
 {
@@ -61,7 +97,7 @@ Other attribues, such as title or description, can be used in [form templates](/
 }
 ```
 
-will be transformed to
+ The code above will be automatically transformed to:
 
 ```jsx
 {
@@ -71,13 +107,19 @@ will be transformed to
 }
 ```
 
+
 ---
 
 ### actions
 
 *object*
 
-An object that allows to map other properties to globally defined actions. For example, a select has lazy loaded option and with this you can define parameters for the function and keep them in a string format. Read more [here](/mappers/action-mapper).
+The *object* of actions maps other properties to globally defined actions. 
+
+For example, a `select` has lazy loaded option. With actions, you can define parameters for the function, and keep them in a *string* format. 
+
+[Read more.](/mappers/action-mapper)
+
 
 ---
 
@@ -85,7 +127,10 @@ An object that allows to map other properties to globally defined actions. For e
 
 *any*
 
-A value that will be used if the field is cleared. Read more [here](/schema/cleared-value).
+If the field is cleared, clearedValue defines the value that will be used.
+
+[Read more.](/schema/cleared-value)
+
 
 ---
 
@@ -93,7 +138,9 @@ A value that will be used if the field is cleared. Read more [here](/schema/clea
 
 *bool*
 
-When `true`, the value will be cleared after the component is unmounted. Read more [here](/schema/clear-on-unmount)
+When clearOnUnmount is `true`, after the component is unmounted, the value will be cleared.
+
+[Read more](/schema/clear-on-unmount).
 
 ---
 
@@ -101,9 +148,9 @@ When `true`, the value will be cleared after the component is unmounted. Read mo
 
 *object* | *array*
 
-`condition` allows to hide/show field when a [condition](/schema/condition-schema) is fulfilled.
+When a [`condition`](/schema/condition-schema) is fulfilled, it can show or hide a component.
 
-Example:
+Here is an example:
 
 ```jsx
 {
@@ -115,21 +162,45 @@ Example:
 }
 ```
 
-A field with this configuration will be shown only if the first name is Douglas.
+In this example, only if the `first-name` is `Douglas`, the field appears.
 
-There are multiple condition types: [and](/schema/and), [or](/schema/or), [not](/schema/not), [sequence](/schema/condition-sequence) that can be [nested](/schema/condition-nesting).
+<br/>
 
-And there are multiple matchers: [is](/schema/is), [isEmpty](/schema/is-empty), [isNotEmpty](/schema/is-not-empty), [pattern](/schema/pattern). Some of these matchers can be inverted by using [notMatch](/schema/not-match).
+The following multiple condition types can be [nested](/schema/condition-nesting): 
 
-There are also two actions that can be binded to conditions: [set](/schema/condition-set) and [visible](/schema/condition-visible).
+[`and`](/schema/and), [`or`](/schema/or), [`not`](/schema/not), [`sequence`](/schema/condition-sequence).
+
+<br/>
+
+The following are multiple matchers: 
+
+[`is`](/schema/is), [`isEmpty`](/schema/is-empty), [`isNotEmpty`](/schema/is-not-empty), [`pattern`](/schema/pattern). 
+
+You can use [`notMatch`](/schema/not-match) to invert matchers.
+
+<br/>
+
+The following actions can be binded to conditions: 
+
+[`set`](/schema/condition-set), [`visible`](/schema/condition-visible).
+
 
 ---
 
 ### dataType
 
-one of strings: *integer | float | number | boolean | string*
+*string*
 
-Data type sets the type the value will be converted to. Read more [here](/schema/data-types).
+The value of dataType must be one of the following strings: 
+
+`"integer"`, `"float"`, `"number"`, `"boolean"` or `"string"`.
+
+<br/>
+
+The value of this component will be converted to the type that dataType indicates.
+
+[Read more.](/schema/data-types)
+
 
 ---
 
@@ -139,13 +210,15 @@ Data type sets the type the value will be converted to. Read more [here](/schema
 
 You can pass additional [Final Form FieldProps](https://final-form.org/docs/react-final-form/types/FieldProps) via FieldProps object. This prop is made to avoid conflicts between Final Form props and component props.
 
+
 ---
 
 ### hideField
 
 *bool*
 
-When `true`, then this will be hidden by CSS. The value will be still registered and submitted.
+When the hideField is `true`, CSS hides this filed. The value will be still registered and submitted.
+
 
 ---
 
@@ -153,7 +226,10 @@ When `true`, then this will be hidden by CSS. The value will be still registered
 
 *bool*
 
-When `true`, the value will be re-initialized every time the component is mounted. Read more [here](/schema/initialize-on-mount).
+When initializeOnMount is `true`, every time the component is mounted, the value will be re-initialized. 
+
+[Read more.](/schema/initialize-on-mount)
+
 
 ---
 
@@ -161,7 +237,10 @@ When `true`, the value will be re-initialized every time the component is mounte
 
 *any*
 
-Sets an initial value of the field. Read more [here](https://final-form.org/docs/react-final-form/types/FieldProps#initialvalue).
+Sets an initial value of the field. 
+
+[Read more.](https://final-form.org/docs/react-final-form/types/FieldProps#initialvalue)
+
 
 ---
 
@@ -169,9 +248,12 @@ Sets an initial value of the field. Read more [here](https://final-form.org/docs
 
 *function (props, {meta, input}, formOptions) => props*
 
-**Only applicable for fields connected to the form state.**
+**resolveProps is only applicable for fields that connected to the form state.**
 
-A function allowing to compute field properties from the current state of the field. Read more [here](/schema/resolve-props).
+The function of resolveProps can compute field properties from the current state of the field. 
+
+[Read more.](/schema/resolve-props)
+
 
 ---
 
@@ -179,9 +261,11 @@ A function allowing to compute field properties from the current state of the fi
 
 *array*
 
-`validate` array sets up validation of the field. It is an array of objects/functions:
+`validate` array sets up validation of the field. It is an array of the following objects or functions:
 
-**object**
+<br/>
+
+**Object**
 
 ```jsx
 {
@@ -190,19 +274,27 @@ A function allowing to compute field properties from the current state of the fi
 }
 ```
 
-Type is one of our provided validators: [required](/schema/required-validator), [length](/schema/length-validator), [URL](/schema/url-validator), [pattern](/schema/pattern-validator), [number value](/schema/number-value-validator). You can use [validatorTypes](/schema/constants#validatortypes) to prevent typos.
+Type is one of our provided validators: 
 
-Or you can implement your own via creating a [validator mapper](/mappers/validator-mapper).
+[`REQUIRED`](/schema/required-validator), [`[MIN|MAX|EXACT]_LENGTH`](/schema/length-validator), [`URL`](/schema/url-validator), [`PATTERN`](/schema/pattern-validator) or [`[MIN|MAX]_NUMBER_VALUE`](/schema/number-value-validator). 
+
+You can use [validatorTypes](/schema/constants#validatortypes) to prevent typos.
+
+You can also implement your own validator by creating a [validator mapper](/mappers/validator-mapper).
+
+<br/>
 
 **Message**
 
-All provided validators let you change the message via [message attribute](/schema/custom-validator-message) or you can set them [globally](/schema/overwriting-default-message).
+All provided validators allows you to change the message via [message attribute](/schema/custom-validator-message); you can also set the message [globally](/schema/overwriting-default-message).
 
 By default, each validator provides a default message in English.
 
-**function**
+<br/>
 
-You can pass a [custom function](/schema/custom-validator):
+**Function**
+
+You can pass a [custom function](/schema/custom-validator) as the following example:
 
 ```jsx
 {
@@ -213,11 +305,12 @@ You can pass a [custom function](/schema/custom-validator):
 
 This also supports using [async functions](/schema/async-validator).
 
+
 ---
 
 ### componentSpecificAttributes
 
-Each component defines its required and optional props. Read more [here](/provided-mappers/component-api).
+Each component defines its required and optional props.
 
 ```jsx
 {
@@ -228,5 +321,7 @@ Each component defines its required and optional props. Read more [here](/provid
     helperText: 'Please enter your password' // component defined prop
 }
 ```
+
+[Read more.](/provided-mappers/component-api)
 
 </DocPage>

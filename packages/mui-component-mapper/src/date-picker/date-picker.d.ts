@@ -1,11 +1,8 @@
-import { DatePickerProps as MuiDatePickerProps } from "@material-ui/pickers/DatePicker";
+import { DatePickerProps as MuiDatePickerProps } from "@mui/lab/DatePicker";
 import { UseFieldApiComponentConfig } from "@data-driven-forms/react-form-renderer";
-import { GridProps } from "@material-ui/core";
-import { MuiPickersUtilsProviderProps } from "@material-ui/pickers/MuiPickersUtilsProvider";
-
+import { GridProps } from "@mui/material";
 interface InternalDatePickerProps extends MuiDatePickerProps {
   FormFieldGridProps: GridProps;
-  MuiPickersUtilsProviderProps: MuiPickersUtilsProviderProps;
   DatePickerProps: MuiDatePickerProps;
 }
 

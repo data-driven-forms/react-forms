@@ -1,14 +1,10 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 
 import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 
 import FormTemplate from '../form-template/form-template';
 import componentMapper from '../component-mapper/component-mapper';
-import WrapperTextField from '../text-field/text-field';
-import WrapperSlider from '../slider/slider';
-import SubForm from '../sub-form/sub-form';
-import { H3, H4 } from '@blueprintjs/core';
 
 describe('<Tabs />', () => {
   it('renders correctly', () => {
@@ -20,21 +16,20 @@ describe('<Tabs />', () => {
           title: 'Title',
           description: 'desc',
           fields: [
-            { component: componentTypes.SLIDER, name: 'slider' },
-            { component: componentTypes.TEXT_FIELD, name: 'text_field' },
+            { component: componentTypes.SLIDER, name: 'slider', label: 'slider' },
+            { component: componentTypes.TEXT_FIELD, name: 'text_field', label: 'text-field' },
           ],
         },
       ],
     };
 
-    const wrapper = mount(
+    render(
       <FormRenderer onSubmit={jest.fn()} FormTemplate={(props) => <FormTemplate {...props} />} schema={schema} componentMapper={componentMapper} />
     );
 
-    expect(wrapper.find(SubForm)).toHaveLength(1);
-    expect(wrapper.find(WrapperTextField)).toHaveLength(1);
-    expect(wrapper.find(WrapperSlider)).toHaveLength(1);
-    expect(wrapper.find(H3).text()).toEqual('Title');
-    expect(wrapper.find(H4).text()).toEqual('desc');
+    expect(screen.getByText('Title')).toBeInTheDocument();
+    expect(screen.getByText('desc')).toBeInTheDocument();
+    expect(screen.getByText('slider')).toBeInTheDocument();
+    expect(screen.getByText('text-field')).toBeInTheDocument();
   });
 });

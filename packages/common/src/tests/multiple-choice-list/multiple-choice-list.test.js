@@ -1,19 +1,18 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { act } from 'react-dom/test-utils';
-import { FormRenderer, componentTypes, useFormApi } from '@data-driven-forms/react-form-renderer';
-import { mount } from 'enzyme';
+import { FormRenderer, componentTypes, useFormApi, validatorTypes } from '@data-driven-forms/react-form-renderer';
+import { render, screen, fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import MultipleChoiceList from '../../multiple-choice-list';
 
 describe('multiple choice list', () => {
-  let wrapper;
   let wrapperProps;
 
   const SingleCheckbox = ({ isDisabled, label, option, meta, ...props }) => (
     <React.Fragment>
       <label>{label}</label>
-      <input {...props} disabled={isDisabled} />
+      <input {...props} aria-label={option.value} disabled={isDisabled} />
     </React.Fragment>
   );
 
@@ -28,7 +27,12 @@ describe('multiple choice list', () => {
     onSubmit: jest.fn(),
     FormTemplate: ({ formFields }) => {
       const { handleSubmit } = useFormApi();
-      return <form onSubmit={handleSubmit}>{formFields}</form>;
+      return (
+        <form onSubmit={handleSubmit}>
+          {formFields}
+          <button type="submit">Submit</button>
+        </form>
+      );
     },
     componentMapper: { [componentTypes.CHECKBOX]: Checkbox },
     schema: {
@@ -67,10 +71,7 @@ describe('multiple choice list', () => {
   };
 
   it('renders correctly', async () => {
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...rendererProps} />);
-    });
-    wrapper.update();
+    const { container } = render(<FormRenderer {...rendererProps} />);
 
     expect(wrapperProps).toEqual({
       description: undefined,
@@ -103,42 +104,29 @@ describe('multiple choice list', () => {
       rest: {},
       showError: false,
     });
-    expect(wrapper.find(SingleCheckbox)).toHaveLength(5);
 
-    expect(wrapper.find('label').map((l) => l.text())).toEqual(['l cats', 'l cats_1', 'l cats_2', 'l zebras', 'l pigeons']);
-    expect(wrapper.find('input').map((i) => i.props().value)).toEqual(['cats', 'cats_1', 'cats_2', 'zebras', 'pigeons']);
+    expect([...container.getElementsByTagName('label')].map((l) => l.textContent)).toEqual([
+      'l cats',
+      'l cats_1',
+      'l cats_2',
+      'l zebras',
+      'l pigeons',
+    ]);
+    expect([...container.getElementsByTagName('input')].map((i) => i.value)).toEqual(['cats', 'cats_1', 'cats_2', 'zebras', 'pigeons']);
   });
 
   it('show error', async () => {
-    await act(async () => {
-      wrapper = mount(
-        <FormRenderer
-          {...rendererProps}
-          schema={{
-            fields: [{ ...rendererProps.schema.fields[0], validate: [{ type: 'required' }] }],
-          }}
-        />
-      );
-    });
-    wrapper.update();
+    render(
+      <FormRenderer
+        {...rendererProps}
+        schema={{
+          fields: [{ ...rendererProps.schema.fields[0], validate: [{ type: 'required' }] }],
+        }}
+      />
+    );
 
-    await act(async () => {
-      wrapper.find('input').first().simulate('focus');
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper
-        .find('input')
-        .first()
-        .simulate('change', { target: { checked: false, type: 'checkbox' } });
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('input').first().simulate('blur');
-    });
-    wrapper.update();
+    fireEvent.focusIn(screen.getByLabelText('cats'));
+    fireEvent.focusOut(screen.getByLabelText('cats'));
 
     expect(wrapperProps).toEqual({
       description: undefined,
@@ -149,14 +137,14 @@ describe('multiple choice list', () => {
       meta: {
         active: false,
         data: {},
-        dirty: true,
+        dirty: false,
         dirtySinceLastSubmit: false,
         error: 'Required',
         initial: undefined,
         invalid: true,
         modified: false,
         modifiedSinceLastSubmit: false,
-        pristine: false,
+        pristine: true,
         submitError: undefined,
         submitFailed: false,
         submitSucceeded: false,
@@ -169,20 +157,14 @@ describe('multiple choice list', () => {
       },
       name: 'check',
       rest: {},
-      showError: 'Required',
+      showError: true,
     });
   });
 
   it('show submit error', async () => {
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...rendererProps} subscription={{ submitFailed: true }} onSubmit={() => ({ check: 'submitError' })} />);
-    });
-    wrapper.update();
+    render(<FormRenderer {...rendererProps} onSubmit={() => ({ check: 'submitError' })} />);
 
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(wrapperProps).toEqual({
       description: undefined,
@@ -191,7 +173,7 @@ describe('multiple choice list', () => {
       isRequired: true,
       label: 'Select animals',
       meta: {
-        active: false,
+        active: true,
         data: {},
         dirty: false,
         dirtySinceLastSubmit: false,
@@ -208,12 +190,57 @@ describe('multiple choice list', () => {
         touched: true,
         valid: false,
         validating: false,
-        visited: false,
+        visited: true,
         warning: undefined,
       },
       name: 'check',
       rest: {},
-      showError: 'submitError',
+      showError: true,
+    });
+  });
+
+  it('should set showError to true if validateOnMount prop is set to true on mount', () => {
+    render(
+      <FormRenderer
+        {...rendererProps}
+        schema={{
+          ...rendererProps.schema,
+          fields: [{ ...rendererProps.schema.fields[0], validateOnMount: true, validate: [{ type: validatorTypes.REQUIRED }] }],
+        }}
+        onSubmit={() => undefined}
+      />
+    );
+
+    expect(wrapperProps).toEqual({
+      description: undefined,
+      error: 'Required',
+      helperText: 'some helper text',
+      isRequired: true,
+      label: 'Select animals',
+      meta: {
+        active: false,
+        data: {},
+        dirty: false,
+        dirtySinceLastSubmit: false,
+        error: 'Required',
+        initial: undefined,
+        invalid: true,
+        length: undefined,
+        modified: false,
+        modifiedSinceLastSubmit: false,
+        pristine: true,
+        submitError: undefined,
+        submitFailed: false,
+        submitSucceeded: false,
+        submitting: false,
+        touched: false,
+        valid: false,
+        validating: false,
+        visited: false,
+      },
+      name: 'check',
+      rest: {},
+      showError: true,
     });
   });
 });

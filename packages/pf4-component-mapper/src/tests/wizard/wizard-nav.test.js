@@ -1,16 +1,9 @@
 import React from 'react';
-import { mount } from 'enzyme';
-import { act } from 'react-dom/test-utils';
+import { render } from '@testing-library/react';
 
 import WizardNavigation from '../../wizard/wizard-components/wizard-nav';
 
 describe('WizardNav', () => {
-  class ClassWrapper extends React.Component {
-    render() {
-      return <WizardNavigation {...this.props} />;
-    }
-  }
-
   it('WizardNavigationClass rerender nav schema only when values are changed', async () => {
     const initialProps = {
       activeStepIndex: 0,
@@ -24,31 +17,23 @@ describe('WizardNav', () => {
       crossroads: ['name'],
     };
 
-    const wrapper = mount(<ClassWrapper {...initialProps} />);
+    const { rerender } = render(<WizardNavigation {...initialProps} />);
 
     expect(initialProps.setPrevSteps).not.toHaveBeenCalled();
 
-    await act(async () => {
-      wrapper.setProps({ values: { name: 'different value' } });
-    });
+    rerender(<WizardNavigation {...initialProps} values={{ name: 'different value' }} />);
 
     expect(initialProps.setPrevSteps.mock.calls).toHaveLength(1);
 
-    await act(async () => {
-      wrapper.setProps({ values: { name: 'different value' } });
-    });
+    rerender(<WizardNavigation {...initialProps} values={{ name: 'different value' }} />);
 
     expect(initialProps.setPrevSteps.mock.calls).toHaveLength(1);
 
-    await act(async () => {
-      wrapper.setProps({ values: { name: 'another value' } });
-    });
+    rerender(<WizardNavigation {...initialProps} values={{ name: 'another value' }} />);
 
     expect(initialProps.setPrevSteps.mock.calls).toHaveLength(2);
 
-    await act(async () => {
-      wrapper.setProps({ values: { name: 'another value', password: 'do not render nav' } });
-    });
+    rerender(<WizardNavigation {...initialProps} values={{ name: 'another value', password: 'do not render nav' }} />);
 
     expect(initialProps.setPrevSteps.mock.calls).toHaveLength(2);
   });

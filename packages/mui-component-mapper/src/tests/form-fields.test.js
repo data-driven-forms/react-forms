@@ -1,25 +1,27 @@
 import React from 'react';
-import { mount } from 'enzyme';
-import { act } from 'react-dom/test-utils';
-import { FormLabel } from '@material-ui/core';
-import MultipleChoiceListCommon from '@data-driven-forms/common/multiple-choice-list';
 import { FormRenderer, componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import { act, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
 import Checkbox from '../checkbox';
 
 import RenderWithProvider from '../../../../__mocks__/with-provider';
 import FormTemplate from '../form-template';
 import componentMapper from '../component-mapper';
-import { Radio } from '@material-ui/core';
 
 const RendererWrapper = ({ schema = { fields: [] }, ...props }) => (
-  <FormRenderer
-    onSubmit={jest.fn()}
-    FormTemplate={(props) => <FormTemplate {...props} />}
-    schema={schema}
-    componentMapper={componentMapper}
-    subscription={{ submitFailed: true }}
-    {...props}
-  />
+  <LocalizationProvider dateAdapter={AdapterDateFns}>
+    <FormRenderer
+      onSubmit={jest.fn()}
+      FormTemplate={(props) => <FormTemplate {...props} />}
+      schema={schema}
+      componentMapper={componentMapper}
+      subscription={{ submitFailed: true }}
+      {...props}
+    />
+  </LocalizationProvider>
 );
 
 describe('formFields', () => {
@@ -71,28 +73,28 @@ describe('formFields', () => {
         });
 
         it('renders correctly', () => {
-          const wrapper = mount(<RendererWrapper schema={schema} />);
+          render(<RendererWrapper schema={schema} />);
 
           if (component === componentTypes.RADIO) {
-            expect(wrapper.find(Radio)).toHaveLength(options.length);
-          } else {
-            expect(wrapper.find(componentMapper[component])).toHaveLength(1);
+            options.forEach((opt) => {
+              expect(screen.getByText(opt.label)).toBeInTheDocument();
+            });
           }
 
-          expect(wrapper.find(FormLabel).text()).toEqual(field.label);
-          expect(wrapper.find('.Mui-error')).toHaveLength(0);
-          expect(wrapper.find('.MuiFormHelperText-root')).toHaveLength(0);
-          expect(wrapper.find('.MuiFormLabel-asterisk')).toHaveLength(0);
+          expect(screen.getAllByText(field.label)).toBeTruthy();
+          expect(() => screen.getByText(errorText)).toThrow();
         });
 
-        it('renders with error', () => {
+        it('renders with error', async () => {
           const errorField = {
             ...field,
             validate: [{ type: validatorTypes.REQUIRED }],
           };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [errorField] }} />);
-          wrapper.find('form').simulate('submit');
-          expect(wrapper.find('.Mui-error').last().text()).toEqual(errorText);
+          render(<RendererWrapper schema={{ fields: [errorField] }} />);
+
+          await userEvent.click(screen.getByText('Submit'));
+
+          expect(screen.getByText(errorText)).toBeInTheDocument();
         });
 
         it('renders with warning', async () => {
@@ -100,10 +102,9 @@ describe('formFields', () => {
             ...field,
             validate: [{ type: validatorTypes.REQUIRED, warning: true }],
           };
-          let wrapper;
 
           await act(async () => {
-            wrapper = mount(
+            render(
               <RendererWrapper
                 schema={{
                   fields: [errorField, { name: 'error-reset-touched', component: componentTypes.TEXT_FIELD, validate: [{ type: 'required' }] }],
@@ -111,14 +112,10 @@ describe('formFields', () => {
               />
             );
           });
-          wrapper.update();
 
-          await act(async () => {
-            wrapper.find('form').simulate('submit');
-          });
-          wrapper.update();
+          await userEvent.click(screen.getByText('Submit'));
 
-          expect(wrapper.find('.MuiFormHelperText-root').first().text()).toEqual(errorText);
+          expect(screen.getAllByText(errorText)).toBeTruthy();
         });
 
         it('renders with helperText', async () => {
@@ -126,9 +123,10 @@ describe('formFields', () => {
             ...field,
             helperText,
           };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [helpertextField] }} />);
 
-          expect(wrapper.find('.MuiFormHelperText-root').last().text()).toEqual(helperText);
+          render(<RendererWrapper schema={{ fields: [helpertextField] }} />);
+
+          expect(screen.getByText(helperText)).toBeInTheDocument();
         });
 
         it('renders with description', () => {
@@ -136,9 +134,10 @@ describe('formFields', () => {
             ...field,
             description,
           };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [descriptionField] }} />);
 
-          expect(wrapper.find('.MuiFormHelperText-root').last().text()).toEqual(description);
+          render(<RendererWrapper schema={{ fields: [descriptionField] }} />);
+
+          expect(screen.getByText(description)).toBeInTheDocument();
         });
 
         it('renders with description and helperText', () => {
@@ -147,21 +146,26 @@ describe('formFields', () => {
             description,
             helperText,
           };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [descriptionField] }} />);
 
-          expect(wrapper.find('.MuiFormHelperText-root').last().text()).toEqual(helperText);
+          render(<RendererWrapper schema={{ fields: [descriptionField] }} />);
+
+          expect(screen.getByText(helperText)).toBeInTheDocument();
+          expect(() => screen.getByText(description)).toThrow();
         });
 
-        it('renders with error and helperText', () => {
+        it('renders with error and helperText', async () => {
           const errorFields = {
             ...field,
             helperText,
             validate: [{ type: validatorTypes.REQUIRED }],
           };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [errorFields] }} />);
-          wrapper.find('form').simulate('submit');
 
-          expect(wrapper.find('.Mui-error').last().text()).toEqual(errorText);
+          render(<RendererWrapper schema={{ fields: [errorFields] }} />);
+
+          await userEvent.click(screen.getByText('Submit'));
+
+          expect(screen.getByText(errorText)).toBeInTheDocument();
+          expect(() => screen.getByText(helperText)).toThrow();
         });
 
         it('renders isRequired', () => {
@@ -169,47 +173,92 @@ describe('formFields', () => {
             ...field,
             isRequired: true,
           };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [requiredField] }} />);
 
-          expect(wrapper.find('.MuiFormLabel-asterisk')).toHaveLength(1);
+          render(<RendererWrapper schema={{ fields: [requiredField] }} />);
+
+          expect(screen.getByText('*')).toBeInTheDocument();
         });
 
         it('renders isDisabled', () => {
           const disabledField = {
             ...field,
             isDisabled: true,
+            ...([componentTypes.RADIO].includes(field.component) && {
+              RadioProps: {
+                inputProps: { 'aria-label': field.name },
+              },
+            }),
+            ...([componentTypes.SLIDER].includes(field.component) && {
+              'aria-label': field.name,
+            }),
+            ...(![componentTypes.RADIO, componentTypes.SLIDER, componentTypes.DATE_PICKER, componentTypes.TIME_PICKER].includes(field.component) && {
+              inputProps: { 'aria-label': field.name },
+            }),
           };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [disabledField] }} />);
 
-          if (component === componentTypes.TEXTAREA) {
-            expect(wrapper.find('textarea').first().props().disabled).toEqual(true);
-          } else if (component === componentTypes.SLIDER) {
-            expect(wrapper.find('.Mui-disabled')).toHaveLength(2);
-          } else {
-            expect(wrapper.find('input').first().props().disabled).toEqual(true);
+          render(<RendererWrapper schema={{ fields: [disabledField] }} />);
+
+          if (componentTypes.DATE_PICKER === field.component) {
+            expect(screen.getAllByLabelText('Choose date')[0]).toBeDisabled();
+
+            return;
           }
+
+          if (componentTypes.TIME_PICKER === field.component) {
+            expect(screen.getAllByLabelText('Choose time')[0]).toBeDisabled();
+
+            return;
+          }
+
+          expect(screen.getAllByLabelText(field.name)[0]).toBeDisabled();
         });
 
         it('renders isReadOnly', () => {
           const disabledField = {
             ...field,
             isReadOnly: true,
+            ...([componentTypes.RADIO].includes(field.component) && {
+              RadioProps: {
+                inputProps: { 'aria-label': field.name },
+              },
+            }),
+            ...([componentTypes.SLIDER].includes(field.component) && {
+              'aria-label': field.name,
+            }),
+            ...(![componentTypes.RADIO, componentTypes.SLIDER, componentTypes.DATE_PICKER, componentTypes.TIME_PICKER].includes(field.component) && {
+              inputProps: { 'aria-label': field.name },
+            }),
           };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [disabledField] }} />);
 
-          if (component === componentTypes.TEXTAREA) {
-            expect(wrapper.find('textarea').first().props().readOnly).toEqual(true);
-          } else if (component === componentTypes.SLIDER) {
-            expect(wrapper.find('.Mui-disabled')).toHaveLength(2);
-          } else {
-            expect(wrapper.find('input').first().props().readOnly).toEqual(true);
+          render(<RendererWrapper schema={{ fields: [disabledField] }} />);
+
+          if (componentTypes.DATE_PICKER === field.component) {
+            expect(screen.getAllByLabelText('Choose date')[0]).toBeDisabled();
+
+            return;
           }
+
+          if (componentTypes.TIME_PICKER === field.component) {
+            expect(screen.getAllByLabelText('Choose time')[0]).toBeDisabled();
+
+            return;
+          }
+
+          if (componentTypes.SLIDER === field.component) {
+            expect(screen.getAllByLabelText(field.name)[0]).toBeDisabled();
+
+            return;
+          }
+
+          expect(screen.getAllByLabelText(field.name)[0]).toHaveAttribute('readonly', '');
         });
 
-        it('renders with submitError', () => {
-          const wrapper = mount(<RendererWrapper schema={schema} onSubmit={() => ({ [field.name]: errorText })} />);
-          wrapper.find('form').simulate('submit');
-          expect(wrapper.find('.Mui-error').last().text()).toEqual(errorText);
+        it('renders with submitError', async () => {
+          render(<RendererWrapper schema={schema} onSubmit={() => ({ [field.name]: errorText })} />);
+
+          await userEvent.click(screen.getByText('Submit'));
+
+          expect(screen.getByText(errorText)).toBeInTheDocument();
         });
       });
     });
@@ -230,19 +279,18 @@ describe('formFields', () => {
     });
 
     it('renders correctly', () => {
-      const wrapper = mount(
+      render(
         <RenderWithProvider>
           <Checkbox {...initialProps} />
         </RenderWithProvider>
       );
 
-      expect(wrapper.find(MultipleChoiceListCommon)).toHaveLength(1);
-      expect(wrapper.find('.Mui-error')).toHaveLength(0);
-      expect(wrapper.find('.MuiFormHelperText-root')).toHaveLength(0);
-      expect(wrapper.find('.MuiFormLabel-asterisk')).toHaveLength(0);
+      expect(screen.getByText('Cat')).toBeInTheDocument();
+      expect(screen.getByText('Dog')).toBeInTheDocument();
+      expect(screen.getByText('Hamster')).toBeInTheDocument();
     });
 
-    it('renders with error', () => {
+    it('renders with error', async () => {
       const schema = {
         fields: [
           {
@@ -252,10 +300,12 @@ describe('formFields', () => {
           },
         ],
       };
-      const wrapper = mount(<RendererWrapper schema={schema} />);
-      wrapper.find('form').simulate('submit');
 
-      expect(wrapper.find('.Mui-error').last().text()).toEqual(errorText);
+      render(<RendererWrapper schema={schema} />);
+
+      await userEvent.click(screen.getByText('Submit'));
+
+      expect(screen.getByText(errorText)).toBeInTheDocument();
     });
 
     it('renders with helperText', () => {
@@ -268,9 +318,10 @@ describe('formFields', () => {
           },
         ],
       };
-      const wrapper = mount(<RendererWrapper schema={schema} />);
 
-      expect(wrapper.find('.MuiFormHelperText-root').last().text()).toEqual(helperText);
+      render(<RendererWrapper schema={schema} />);
+
+      expect(screen.getByText(helperText)).toBeInTheDocument();
     });
 
     it('renders with description', () => {
@@ -283,9 +334,10 @@ describe('formFields', () => {
           },
         ],
       };
-      const wrapper = mount(<RendererWrapper schema={schema} />);
 
-      expect(wrapper.find('.MuiFormHelperText-root').last().text()).toEqual(description);
+      render(<RendererWrapper schema={schema} />);
+
+      expect(screen.getByText(description)).toBeInTheDocument();
     });
 
     it('renders with description and helperText', () => {
@@ -299,12 +351,14 @@ describe('formFields', () => {
           },
         ],
       };
-      const wrapper = mount(<RendererWrapper schema={schema} />);
 
-      expect(wrapper.find('.MuiFormHelperText-root').last().text()).toEqual(helperText);
+      render(<RendererWrapper schema={schema} />);
+
+      expect(screen.getByText(helperText)).toBeInTheDocument();
+      expect(() => screen.getByText(description)).toThrow();
     });
 
-    it('renders with error and helperText', () => {
+    it('renders with error and helperText', async () => {
       const schema = {
         fields: [
           {
@@ -315,10 +369,12 @@ describe('formFields', () => {
           },
         ],
       };
-      const wrapper = mount(<RendererWrapper schema={schema} />);
-      wrapper.find('form').simulate('submit');
 
-      expect(wrapper.find('.Mui-error').last().text()).toEqual(errorText);
+      render(<RendererWrapper schema={schema} />);
+
+      await userEvent.click(screen.getByText('Submit'));
+
+      expect(screen.getByText(errorText)).toBeInTheDocument();
     });
   });
 });

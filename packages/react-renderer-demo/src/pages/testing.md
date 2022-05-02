@@ -7,7 +7,7 @@ import CodeExample from '@docs/code-example';
 
 Always make sure that your **custom components** and their features are tested to avoid bugs and runtime crashes.
 
-In these examples, we will use [Jest](https://jestjs.io/) and [Enzyme](https://enzymejs.github.io/enzyme/docs/api/) but the same rules apply to any other testing libraries.
+In these examples, we will use [Jest](https://jestjs.io/) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) but the same rules apply to any other testing libraries.
 
 
 ## Testing the renderer
@@ -18,8 +18,8 @@ Below is an example of a form with an async validation and a conditional field. 
 
 ```jsx
 import React from 'react';
-import { act } from 'react-dom/test-utils';
-import { mount } from 'enzyme';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { FormRenderer } from '@data-driven-forms/react-form-renderer';
 import { componentMapper, FormTemplate } from '@data-driven-forms/mui-component-mapper';
@@ -48,12 +48,14 @@ describe('<FormRendererTest />', () => {
         name: 'username',
         label: 'Username',
         isRequired: true,
-        validate: [{ type: 'required', message: 'Username is required' }]
+        validate: [{ type: 'required', message: 'Username is required' }],
+        inputProps: { 'aria-label': 'Username field' },
       },
       {
         component: 'switch',
         name: 'enable-emails',
-        label: 'Do you wish to receive promotinal emails?'
+        label: 'Do you wish to receive promotinal emails?',
+        inputProps: { 'aria-label': 'Enable emails' },
       },
       {
         component: 'text-field',
@@ -62,30 +64,33 @@ describe('<FormRendererTest />', () => {
         label: 'Email adress',
         condition: {
           when: 'enable-emails',
-          is: true
+          is: true,
         },
-        validate: [validate, { type: 'required' }] // validation will be run immediatelly after the component is mounted and after changes
-      }
-    ]
+        validate: [validate, { type: 'required' }], // validation will be run immediatelly after the component is mounted and after changes
+        inputProps: { 'aria-label': 'Email field' },
+      },
+    ],
   };
 
   it('should validate and submit the form', async () => {
     /**
-     * we will be using mount because we will need the DOM updates
+     * we will be using render because we will need the DOM updates
      */
-    const wrapper = mount(<FormRenderer onSubmit={submitSpy} componentMapper={componentMapper} FormTemplate={FormTemplate} schema={schema} />);
+    render(<FormRenderer onSubmit={submitSpy} componentMapper={componentMapper} FormTemplate={FormTemplate} schema={schema} />);
 
     /**
      * we can try submit the form when the validation is not met
      */
-    wrapper.find('form').simulate('submit');
+    await userEvent.click(screen.getByText('Submit'));
     expect(submitSpy).not.toHaveBeenCalled(); // true
 
     /**
      * fill the user name to pass the validation
      */
-    wrapper.find('input[name="username"]').simulate('change', { target: { value: 'John' } });
-    wrapper.find('form').simulate('submit');
+    await userEvent.type(screen.getByLabelText('Username field'), 'John');
+
+    await userEvent.click(screen.getByText('Submit'));
+
     /**
      * first argument are the values and the second one is formApi
      */
@@ -94,46 +99,46 @@ describe('<FormRendererTest />', () => {
     /**
      * now lets check the email subscription
      */
-    expect(wrapper.find('input[name="email"]')).toHaveLength(0);
-    wrapper.find('input[name="enable-emails"]').simulate('change', { target: { checked: true } });
-    wrapper.update();
+    expect(() => screen.getByLabelText('Email field')).toThrow();
+
+    await userEvent.click(screen.getByLabelText('Enable emails'));
+
     /**
      * there should be new form field
+     * we need to use waitFor because of the async validation
      */
-    expect(wrapper.find('input[name="email"]')).toHaveLength(1);
+    await waitFor(() => expect(screen.getByLabelText('Email field')).toBeInTheDocument());
     /**
      * submit should not occur
      */
-    wrapper.find('form').simulate('submit');
+    await userEvent.click(screen.getByText('Submit'), undefined, { skipPointerEventsCheck: true });
     expect(submitSpy).not.toHaveBeenCalled(); // true
 
     /**
      * field should be in error state
      * we only allow value of John
      */
-    await act(async () => {
-      wrapper.find('input[name="email"]').simulate('change', { target: { value: 'Marty' } });
-    });
-    wrapper.find('form').simulate('submit');
-    expect(submitSpy).not.toHaveBeenCalled(); // true
-    expect(wrapper.find('input[name="email"]').props()['aria-invalid']).toEqual(true);
+    await userEvent.type(screen.getByLabelText('Email field'), 'Marty');
+    await userEvent.click(screen.getByText('Submit'), undefined, { skipPointerEventsCheck: true });
+    await waitFor(() => expect(screen.getByLabelText('Email field')).toBeInvalid());
     /**
      * set value to John and submit the form
      */
-    await act(async () => {
-      wrapper.find('input[name="email"]').simulate('change', { target: { value: 'John' } });
-    });
-    wrapper.update();
-    wrapper.find('input[name="email"]').simulate('focus', { target: { value: 'John' } });
-    wrapper.find('form').simulate('submit');
-    expect(submitSpy).toHaveBeenCalledWith(
-      {
-        email: 'John',
-        username: 'John',
-        'enable-emails': true
-      },
-      expect.any(Object),
-      expect.any(Function)
+    await userEvent.clear(screen.getByLabelText('Email field'));
+    await userEvent.type(screen.getByLabelText('Email field'), 'John');
+    await waitFor(() => expect(screen.getByLabelText('Email field')).toHaveAttribute('aria-invalid', 'false'));
+
+    await userEvent.click(screen.getByText('Submit'));
+    await waitFor(() =>
+      expect(submitSpy).toHaveBeenCalledWith(
+        {
+          email: 'John',
+          username: 'John',
+          'enable-emails': true,
+        },
+        expect.any(Object),
+        expect.any(Function)
+      )
     ); // true
   });
 });
@@ -151,20 +156,22 @@ Set up your renderer to make it easier to test the component-specific features. 
 
 ```jsx
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { FormRenderer, useFieldApi } from '@data-driven-forms/react-form-renderer';
 import { FormTemplate } from '@data-driven-forms/mui-component-mapper';
-
-import toJson from 'enzyme-to-json';
 
 const CustomComponent = (props) => {
   const { input, meta, label, sideEffect } = useFieldApi(props);
   return (
     <div className="input-wrapper">
-      <label className="input-label">{label}</label>
+      <label className="input-label" htmlFor={input.name}>
+        {label}
+      </label>
       <input
         {...input}
+        id={input.name}
         onChange={(...args) => {
           sideEffect(...args); // do something in addition to just changing the value in form state
           input.onChange(...args);
@@ -180,7 +187,7 @@ const CustomComponent = (props) => {
 };
 
 CustomComponent.defaultProps = {
-  sideEffect: () => {}
+  sideEffect: () => {},
 };
 
 const createSchema = ({ label = 'Custom label', validate = [], ...rest }) => ({
@@ -190,9 +197,9 @@ const createSchema = ({ label = 'Custom label', validate = [], ...rest }) => ({
       component: 'custom-component',
       label,
       validate,
-      ...rest
-    }
-  ]
+      ...rest,
+    },
+  ],
 });
 
 const RendererWrapper = (props) => (
@@ -200,7 +207,7 @@ const RendererWrapper = (props) => (
     onSubmit={() => {}}
     FormTemplate={FormTemplate}
     componentMapper={{
-      'custom-component': CustomComponent
+      'custom-component': CustomComponent,
     }}
     schema={{ fields: [] }}
     {...props}
@@ -209,19 +216,19 @@ const RendererWrapper = (props) => (
 
 describe('<CustomComponent /> with renderer', () => {
   it('should render component to snapshot', () => {
-    const wrapper = mount(<RendererWrapper schema={createSchema({})} />);
-    expect(toJson(wrapper.find(CustomComponent))).toMatchSnapshot();
+    const { asFragment } = render(<RendererWrapper schema={createSchema({})} />);
+    expect(asFragment()).toMatchSnapshot();
   });
   it('should render component in error state to snapshot', () => {
-    const wrapper = mount(<RendererWrapper schema={createSchema({ validate: [{ type: 'required' }] })} />);
-    expect(toJson(wrapper.find(CustomComponent))).toMatchSnapshot();
+    const { asFragment } = render(<RendererWrapper schema={createSchema({ validate: [{ type: 'required' }] })} />);
+    expect(asFragment()).toMatchSnapshot();
   });
 
   it('should call sideEffect when the input change', () => {
     const sideEffect = jest.fn();
-    const wrapper = mount(<RendererWrapper schema={createSchema({ sideEffect })} />);
-    wrapper.find('input[name="custom-component"]').simulate('change', { target: { value: 'foo' } });
-    expect(sideEffect).toHaveBeenCalledTimes(1);
+    render(<RendererWrapper schema={createSchema({ sideEffect })} />);
+    await userEvent.type(screen.getByLabelText('Custom label'), 'foo');
+    expect(sideEffect).toHaveBeenCalledTimes(3);
   });
 });
 
@@ -234,19 +241,21 @@ Rendering components outside of the renderer will require some additional set up
 
 ```jsx
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { Form, RendererContext, useFieldApi } from '@data-driven-forms/react-form-renderer';
-
-import toJson from 'enzyme-to-json';
 
 const CustomComponent = (props) => {
   const { input, meta, label, sideEffect } = useFieldApi(props);
   return (
     <div className="input-wrapper">
-      <label className="input-label">{label}</label>
+      <label className="input-label" htmlFor={input.name}>
+        {label}
+      </label>
       <input
         {...input}
+        id={input.name}
         onChange={(...args) => {
           sideEffect(...args); // do something in addition to just changing the value in form state
           input.onChange(...args);
@@ -262,7 +271,7 @@ const CustomComponent = (props) => {
 };
 
 CustomComponent.defaultProps = {
-  sideEffect: () => {}
+  sideEffect: () => {},
 };
 
 const FormWrapper = ({ props, children }) => (
@@ -271,8 +280,8 @@ const FormWrapper = ({ props, children }) => (
       <form>
         <RendererContext.Provider
           value={{
-            formOptions: {},
-            validatorMapper: { required: () => (value) => (value ? undefined : 'required') }
+            formOptions: { internalRegisterField: jest.fn(), internalUnRegisterField: jest.fn() },
+            validatorMapper: { required: () => (value) => value ? undefined : 'required' },
           }}
         >
           {children}
@@ -284,31 +293,31 @@ const FormWrapper = ({ props, children }) => (
 
 describe('<CustomComponent /> outside renderer', () => {
   it('should render component to snapshot', () => {
-    const wrapper = mount(
+    const { asFragment } = render(
       <FormWrapper>
         <CustomComponent name="custom-component" label="custom-component" />
       </FormWrapper>
     );
-    expect(toJson(wrapper.find(CustomComponent))).toMatchSnapshot();
+    expect(asFragment()).toMatchSnapshot();
   });
   it('should render component in error state to snapshot', () => {
-    const wrapper = mount(
+    const { asFragment } = render(
       <FormWrapper>
         <CustomComponent name="custom-component" label="custom-component" validate={[{ type: 'required' }]} />
       </FormWrapper>
     );
-    expect(toJson(wrapper.find(CustomComponent))).toMatchSnapshot();
+    expect(asFragment()).toMatchSnapshot();
   });
 
   it('should call sideEffect when the input change', () => {
     const sideEffect = jest.fn();
-    const wrapper = mount(
+    render(
       <FormWrapper>
         <CustomComponent name="custom-component" label="custom-component" sideEffect={sideEffect} />
       </FormWrapper>
     );
-    wrapper.find('input[name="custom-component"]').simulate('change', { target: { value: 'foo' } });
-    expect(sideEffect).toHaveBeenCalledTimes(1);
+    await userEvent.type(screen.getByLabelText('custom-component'), 'foo');
+    expect(sideEffect).toHaveBeenCalledTimes(3);
   });
 });
 

@@ -4,11 +4,13 @@ import DocPage from '@docs/doc-page';
 
 # Constants
 
-Data Driven Forms provides two constants files to keep consistency across all projects and prevent typos.
+**Data Driven Forms** provides two constant files to keep consistency across all projects and prevent typos.
+
+<br/>
 
 ## componentTypes
 
-Strings values used in `component` field attributes.
+`componentTypes` are string values used in `component` field attributes.
 
 ```jsx
 import { componentTypes } from '@data-driven-forms/react-form-renderer';
@@ -48,9 +50,11 @@ Usage:
 }
 ```
 
+<br/>
+
 ## validatorTypes
 
-Strings values used in `validate` [type attribute](/schema/introduction#validate).
+`validatorTypes` are string values used in `validate` [type attribute](/schema/introduction#validate).
 
 ```jsx
 import { validatorTypes } from '@data-driven-forms/react-form-renderer';

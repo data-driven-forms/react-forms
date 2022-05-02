@@ -1,11 +1,10 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 
 import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 
 import FormTemplate from '../form-template/form-template';
 import componentMapper from '../component-mapper/component-mapper';
-import { Select, MultiSelect } from '@blueprintjs/select';
 
 import { itemPredicate, tagRenderer, multiOnChange } from '../select/select';
 
@@ -25,14 +24,14 @@ describe('<Select />', () => {
       ],
     };
 
-    const wrapper = mount(
+    render(
       <FormRenderer onSubmit={jest.fn()} FormTemplate={(props) => <FormTemplate {...props} />} schema={schema} componentMapper={componentMapper} />
     );
 
-    expect(wrapper.find(Select)).toHaveLength(1);
+    expect(screen.getByText('select')).toBeInTheDocument();
   });
 
-  it('renders multi select', () => {
+  it('renders multi select', async () => {
     const schema = {
       fields: [
         {
@@ -41,6 +40,12 @@ describe('<Select />', () => {
           label: 'select',
           initialValue: [1],
           isMulti: true,
+          tagInputProps: {
+            inputProps: {
+              'aria-label': 'select item',
+            },
+          },
+          placeholder: 'search',
           options: [
             { label: 'option 1', value: 1 },
             { label: 'option 2', value: 2 },
@@ -49,12 +54,13 @@ describe('<Select />', () => {
       ],
     };
 
-    const wrapper = mount(
+    render(
       <FormRenderer onSubmit={jest.fn()} FormTemplate={(props) => <FormTemplate {...props} />} schema={schema} componentMapper={componentMapper} />
     );
 
-    expect(wrapper.find(MultiSelect)).toHaveLength(1);
-    expect(wrapper.find('.bp3-tag')).toHaveLength(1);
+    expect(screen.getByText('select')).toBeInTheDocument();
+    expect(screen.getByText('option 1')).toBeInTheDocument();
+    expect(screen.getByLabelText('Remove')).toHaveClass('bp3-tag-remove');
   });
 
   it('multi on change - undefined', () => {

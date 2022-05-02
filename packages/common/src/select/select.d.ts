@@ -28,6 +28,7 @@ export interface SelectProps {
   isSearchable?: boolean;
   SelectComponent?: React.ComponentType;
   noValueUpdates?: boolean;
+  optionsTransformer?: (options: AnyObject[]) => option[];
 }
 
 declare const Select: React.ComponentType<SelectProps>;

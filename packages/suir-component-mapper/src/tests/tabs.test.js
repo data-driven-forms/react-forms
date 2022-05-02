@@ -1,11 +1,11 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import FormTabs from '../tabs';
 import RenderWithProvider from '../../../../__mocks__/with-provider';
 import { FormRenderer, validatorTypes } from '@data-driven-forms/react-form-renderer';
 import { componentMapper, FormTemplate } from '../index';
-import { Tab } from 'semantic-ui-react';
 
 describe('tabs', () => {
   const props = {
@@ -28,37 +28,34 @@ describe('tabs', () => {
   };
 
   it('should render tabs correctly', () => {
-    const wrapper = mount(
+    render(
       <RenderWithProvider value={{ formOptions }}>
         <FormTabs {...props} />
       </RenderWithProvider>
     );
 
-    expect(wrapper.find(Tab)).toHaveLength(1);
-    expect(wrapper.find(Tab.Pane)).toHaveLength(2);
+    expect(screen.getAllByText('Content')).toHaveLength(2);
+    expect(screen.getByText('cosiTitle')).toBeInTheDocument();
+    expect(screen.getByText('cosiTitle2')).toBeInTheDocument();
   });
 
-  it('should switch tabs correctly', () => {
-    const wrapper = mount(
+  it('should switch tabs correctly', async () => {
+    render(
       <RenderWithProvider value={{ formOptions }}>
         <FormTabs {...props} />
       </RenderWithProvider>
     );
 
-    expect(wrapper.find(Tab.Pane).first().prop('active')).toEqual(true);
-    expect(wrapper.find(Tab.Pane).last().prop('active')).toEqual(false);
+    expect(screen.getByText('cosiTitle')).toHaveClass('active item');
 
-    const secondTabButton = wrapper.find('a.item').last();
-    secondTabButton.simulate('click');
-    wrapper.update();
+    await userEvent.click(screen.getByText('cosiTitle2'));
 
-    expect(wrapper.find(Tab.Pane).first().prop('active')).toEqual(false);
-    expect(wrapper.find(Tab.Pane).last().prop('active')).toEqual(true);
+    expect(screen.getByText('cosiTitle2')).toHaveClass('active item');
   });
 
-  it('validate all tabs', () => {
+  it('validate all tabs', async () => {
     const onSubmit = jest.fn();
-    const wrapper = mount(
+    render(
       <FormRenderer
         componentMapper={componentMapper}
         FormTemplate={(props) => <FormTemplate {...props} />}
@@ -78,6 +75,7 @@ describe('tabs', () => {
                       component: 'text-field',
                       name: 'name',
                       validate: [{ type: validatorTypes.REQUIRED }],
+                      'aria-label': 'name',
                     },
                   ],
                 },
@@ -89,6 +87,7 @@ describe('tabs', () => {
                       component: 'text-field',
                       name: 'password',
                       validate: [{ type: validatorTypes.REQUIRED }],
+                      'aria-label': 'password',
                     },
                   ],
                 },
@@ -99,24 +98,13 @@ describe('tabs', () => {
       />
     );
 
-    wrapper
-      .find('input')
-      .first()
-      .simulate('change', { target: { value: 'NAME' } });
-    wrapper.update();
-
-    wrapper.find('form').simulate('submit');
-    wrapper.update();
+    await userEvent.type(screen.getByLabelText('name'), 'NAME');
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).not.toHaveBeenCalled();
 
-    wrapper
-      .find('input')
-      .last()
-      .simulate('change', { target: { value: 'PASSWORD' } });
-    wrapper.update();
-
-    wrapper.find('form').simulate('submit');
+    await userEvent.type(screen.getByLabelText('password'), 'PASSWORD');
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({ name: 'NAME', password: 'PASSWORD' });
   });

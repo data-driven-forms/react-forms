@@ -1,6 +1,6 @@
 {
   "name": "@data-driven-forms/parsers",
-  "version": "3.12.1",
+  "version": "3.17.4",
   "description": "Parsers for Data Driven Forms.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -22,8 +22,7 @@
     "forms",
     "javascript"
   ],
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "dependencies": {
     "@data-driven-forms/react-form-renderer": "*"
   }

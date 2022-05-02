@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { StepLabelProps, StepProps, GridProps, StepperProps } from "@material-ui/core";
+import { StepLabelProps, StepProps, GridProps, StepperProps } from "@mui/material";
 
 export interface WizardButtonLabels {
   next?: ReactNode;

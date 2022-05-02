@@ -1,7 +1,6 @@
 import React from 'react';
-import { mount } from 'enzyme';
-import { TextInput, Button, WizardNavItem } from '@patternfly/react-core';
-import { act } from 'react-dom/test-utils';
+import { render, screen, cleanup, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { FormRenderer, componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
 import * as enterHandle from '@data-driven-forms/common/wizard/enter-handler';
@@ -19,34 +18,6 @@ describe('<Wizard />', () => {
   let Title;
   let Description;
   let initialValuesNestedSchema;
-  let wrapper;
-
-  const nextButtonClick = (wrapper) => {
-    wrapper.find('.pf-c-wizard__footer').find('button').at(0).simulate('click');
-
-    wrapper.update();
-  };
-
-  const backButtonClick = (wrapper) => {
-    wrapper.find('.pf-c-wizard__footer').find('button').at(1).simulate('click');
-    wrapper.update();
-  };
-
-  const cancelButtonClick = (wrapper) => {
-    wrapper.find('.pf-c-wizard__footer').find('button').at(2).simulate('click');
-    wrapper.update();
-  };
-
-  const closeIconClickWithHeader = (wrapper) => {
-    wrapper.find('button').at(0).simulate('click');
-    wrapper.update();
-  };
-
-  const changeValue = (wrapper, value) => {
-    wrapper.find('input').instance().value = value;
-    wrapper.find('input').simulate('change');
-    wrapper.update();
-  };
 
   beforeEach(() => {
     initialValues = {
@@ -68,6 +39,7 @@ describe('<Wizard />', () => {
                 {
                   name: 'foo-field',
                   component: 'text-field',
+                  'aria-label': 'foo',
                 },
               ],
               nextStep: '2',
@@ -79,6 +51,7 @@ describe('<Wizard />', () => {
                 {
                   name: 'bar-field',
                   component: 'text-field',
+                  'aria-label': 'bar',
                 },
               ],
             },
@@ -148,6 +121,7 @@ describe('<Wizard />', () => {
           title: <Title />,
           description: <Description />,
           inModal: true,
+          closeButtonAriaLabel: 'Close wizard',
           fields: [
             {
               title: 'foo-step',
@@ -165,50 +139,44 @@ describe('<Wizard />', () => {
     };
   });
 
-  it('should render correctly and unmount', () => {
-    const wrapper = mount(<FormRenderer {...initialProps} />);
+  it('should render correctly and unrender', () => {
+    render(<FormRenderer {...initialProps} />);
 
-    expect(wrapper.find('WizardFunction')).toHaveLength(1);
-    wrapper.unmount();
-    wrapper.update();
-    expect(wrapper.find('WizardFunction')).toHaveLength(0);
+    expect(screen.getByText('foo-step', { selector: 'button' })).toBeInTheDocument();
+
+    cleanup();
   });
 
   it('should open nav', async () => {
-    const wrapper = mount(<FormRenderer {...initialProps} />);
+    render(<FormRenderer {...initialProps} />);
 
-    expect(wrapper.find('WizardToggle').props().isOpen).toEqual(false);
+    expect(screen.getByText('foo-step', { selector: 'button.pf-m-current' }).closest('.pf-m-expanded')).toBeNull();
 
-    await act(async () => {
-      wrapper.find('.pf-c-wizard__toggle').simulate('click');
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByLabelText('Wizard Toggle'));
 
-    expect(wrapper.find('WizardToggle').props().isOpen).toEqual(true);
+    expect(screen.getByText('foo-step', { selector: 'button.pf-m-current' }).closest('.pf-m-expanded')).toBeDefined();
   });
 
-  it('should call enter handler when pressing enter', () => {
+  it('should call enter handler when pressing enter', async () => {
     // eslint-disable-next-line no-import-assign
     enterHandle.default = jest.fn();
 
-    const wrapper = mount(<FormRenderer {...initialProps} />);
+    render(<FormRenderer {...initialProps} />);
 
     expect(enterHandle.default).not.toHaveBeenCalled();
 
-    const wizard = wrapper.find('.pf-c-wizard');
-
-    const event = { someEvent: true };
+    const event = expect.objectContaining({ key: 'Enter' });
     const formOptions = expect.any(Object);
     const handleNext = expect.any(Function);
     const handleSubmit = expect.any(Function);
     const findCurrentStep = expect.any(Function);
 
-    wizard.props().onKeyDown(event);
+    await userEvent.type(screen.getByLabelText('foo'), '{enter}');
 
     expect(enterHandle.default).toHaveBeenCalledWith(event, formOptions, '1', findCurrentStep, handleNext, handleSubmit);
   });
 
-  it('should call onCancel handler when pressing escape in modal', () => {
+  it('should call onCancel handler when pressing escape in modal', async () => {
     schema = {
       fields: [
         {
@@ -223,6 +191,7 @@ describe('<Wizard />', () => {
                 {
                   name: 'foo-field',
                   component: 'text-field',
+                  'aria-label': 'foo',
                 },
               ],
             },
@@ -233,17 +202,13 @@ describe('<Wizard />', () => {
 
     const onCancel = jest.fn();
 
-    const wrapper = mount(<FormRenderer {...initialProps} schema={schema} onCancel={onCancel} />);
+    render(<FormRenderer {...initialProps} schema={schema} onCancel={onCancel} />);
 
     expect(onCancel).not.toHaveBeenCalled();
 
-    const wizard = wrapper.find('.pf-c-wizard');
+    await userEvent.type(screen.getByLabelText('foo'), '{escape}');
 
-    const event = { key: 'Escape' };
-
-    wizard.props().onKeyDown(event);
-
-    expect(onCancel).toHaveBeenCalledWith(expect.any(Object), expect.any(Object));
+    expect(onCancel).toHaveBeenCalledWith({}, expect.any(Object));
   });
 
   it('should render correctly with objects as substepOf and nodes titles', () => {
@@ -278,13 +243,11 @@ describe('<Wizard />', () => {
       ],
     };
 
-    const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
+    render(<FormRenderer {...initialProps} schema={schema} />);
 
-    expect(wrapper.find(WizardNavItem).first().props().content).toEqual(<h2>Custom title 2</h2>);
-
-    expect(wrapper.find(WizardNavItem).first().children().find(WizardNavItem)).toHaveLength(2);
-
-    expect(wrapper.find(WizardNavItem).last().props().content).toEqual(<h3>Custom title 3</h3>);
+    expect(screen.getAllByText('Custom title')).toBeTruthy();
+    expect(screen.getAllByText('Custom title 2')).toBeTruthy();
+    expect(screen.getAllByText('Custom title 3')).toBeTruthy();
   });
 
   it('should render correctly with custom StepTemplate on field', () => {
@@ -307,9 +270,9 @@ describe('<Wizard />', () => {
       ],
     };
 
-    const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
+    render(<FormRenderer {...initialProps} schema={schema} />);
 
-    expect(wrapper.find(StepTemplate)).toHaveLength(1);
+    expect(screen.getByText('Custom StepTemplate')).toBeInTheDocument();
   });
 
   it('should render correctly with custom StepTemplate on wizard', () => {
@@ -332,9 +295,9 @@ describe('<Wizard />', () => {
       ],
     };
 
-    const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
+    render(<FormRenderer {...initialProps} schema={schema} />);
 
-    expect(wrapper.find(StepTemplate)).toHaveLength(1);
+    expect(screen.getByText('Custom StepTemplate')).toBeInTheDocument();
   });
 
   it('should render correctly with custom StepTemplate on wizard and step', () => {
@@ -359,13 +322,13 @@ describe('<Wizard />', () => {
       ],
     };
 
-    const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
+    render(<FormRenderer {...initialProps} schema={schema} />);
 
-    expect(wrapper.find(StepTemplate)).toHaveLength(0);
-    expect(wrapper.find(StepTemplateField)).toHaveLength(1);
+    expect(() => screen.getByText('Custom StepTemplate')).toThrow();
+    expect(screen.getByText('Custom Field StepTemplate')).toBeInTheDocument();
   });
 
-  it('should render correctly in modal and unmount', () => {
+  it('should render correctly in modal and unrender', () => {
     schema = {
       fields: [
         {
@@ -399,18 +362,18 @@ describe('<Wizard />', () => {
       ],
     };
 
-    const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
-    expect(wrapper.find('WizardFunction')).toHaveLength(1);
-    wrapper.unmount();
-    wrapper.update();
-    expect(wrapper.find('WizardFunction')).toHaveLength(0);
+    render(<FormRenderer {...initialProps} schema={schema} />);
+
+    expect(screen.getByText('foo-step', { selector: 'button' })).toBeInTheDocument();
+
+    cleanup();
   });
 
   it('should render correctly with custom title and description', () => {
-    const wrapper = mount(<FormRenderer {...initialProps} schema={schemaWithHeader} />);
+    render(<FormRenderer {...initialProps} schema={schemaWithHeader} />);
 
-    expect(wrapper.find(Title)).toHaveLength(1);
-    expect(wrapper.find(Description)).toHaveLength(1);
+    expect(screen.getByText('Title')).toBeInTheDocument();
+    expect(screen.getByText('description')).toBeInTheDocument();
   });
 
   it('should render correctly with custom buttons', () => {
@@ -438,35 +401,34 @@ describe('<Wizard />', () => {
       ],
     };
 
-    const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
+    render(<FormRenderer {...initialProps} schema={schema} />);
 
-    expect(wrapper.find(Buttons)).toHaveLength(1);
+    expect(screen.getByText('Hello')).toBeInTheDocument();
   });
 
-  it('should call submit function', () => {
+  it('should call submit function', async () => {
     const onSubmit = jest.fn();
 
-    const wrapper = mount(<FormRenderer {...initialProps} onSubmit={onSubmit} />);
+    render(<FormRenderer {...initialProps} onSubmit={onSubmit} />);
 
-    nextButtonClick(wrapper);
-    nextButtonClick(wrapper);
+    await userEvent.click(screen.getByText('Next'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalled();
   });
 
-  it('should go to next step correctly and submit data and formOptions', () => {
+  it('should go to next step correctly and submit data and formOptions', async () => {
     const onSubmit = jest.fn();
 
-    const wrapper = mount(<FormRenderer {...initialProps} onSubmit={onSubmit} initialValues={initialValues} />);
+    render(<FormRenderer {...initialProps} onSubmit={onSubmit} initialValues={initialValues} />);
 
-    expect(wrapper.find('.pf-m-current').text()).toEqual('foo-step');
+    expect(screen.getByText('foo-step', { selector: '.pf-m-current' })).toBeInTheDocument();
 
-    nextButtonClick(wrapper);
+    await userEvent.click(screen.getByText('Next'));
 
-    expect(wrapper.find('.pf-m-current').text()).toEqual('bar-step');
+    expect(screen.getByText('bar-step', { selector: '.pf-m-current' })).toBeInTheDocument();
 
-    nextButtonClick(wrapper);
-
+    await userEvent.click(screen.getByText('Submit'));
     const formOptions = expect.any(Object);
     const state = {
       activeStep: '2',
@@ -492,12 +454,12 @@ describe('<Wizard />', () => {
     );
   });
 
-  it('should pass values and state to cancel button', () => {
+  it('should pass values and state to cancel button', async () => {
     const onCancel = jest.fn();
 
-    const wrapper = mount(<FormRenderer {...initialProps} onCancel={(values, state) => onCancel(values, state)} initialValues={initialValues} />);
+    render(<FormRenderer {...initialProps} onCancel={(values, state) => onCancel(values, state)} initialValues={initialValues} />);
 
-    cancelButtonClick(wrapper);
+    await userEvent.click(screen.getByText('Cancel'));
 
     const state = expect.objectContaining({
       activeStep: expect.any(String),
@@ -512,14 +474,14 @@ describe('<Wizard />', () => {
     expect(onCancel).toHaveBeenCalledWith(initialValues, state);
   });
 
-  it('should pass values and state to cancel - close icon', () => {
+  it('should pass values and state to cancel - close icon', async () => {
     const onCancel = jest.fn();
 
-    const wrapper = mount(
+    render(
       <FormRenderer {...initialProps} onCancel={(values, state) => onCancel(values, state)} initialValues={initialValues} schema={schemaWithHeader} />
     );
 
-    closeIconClickWithHeader(wrapper);
+    await userEvent.click(screen.getByLabelText('Close wizard'));
 
     const state = expect.objectContaining({
       activeStep: expect.any(String),
@@ -534,13 +496,13 @@ describe('<Wizard />', () => {
     expect(onCancel).toHaveBeenCalledWith(initialValues, state);
   });
 
-  it('should submit data when nested schema', () => {
+  it('should submit data when nested schema', async () => {
     const onSubmit = jest.fn();
 
-    const wrapper = mount(<FormRenderer {...initialProps} schema={nestedSchema} onSubmit={onSubmit} initialValues={initialValuesNestedSchema} />);
+    render(<FormRenderer {...initialProps} schema={nestedSchema} onSubmit={onSubmit} initialValues={initialValuesNestedSchema} />);
 
-    nextButtonClick(wrapper);
-    nextButtonClick(wrapper);
+    await userEvent.click(screen.getByText('Next'));
+    await userEvent.click(screen.getByText('Submit'));
 
     const formOptions = expect.any(Object);
     const state = expect.any(Object);
@@ -560,50 +522,38 @@ describe('<Wizard />', () => {
   });
 
   it('should build simple navigation', () => {
-    const wrapper = mount(<FormRenderer {...initialProps} />);
+    render(<FormRenderer {...initialProps} />);
 
-    expect(wrapper.find('.pf-c-wizard__nav-item')).toHaveLength(2);
-    expect(wrapper.find('.pf-c-wizard__nav-item').first().childAt(0).text()).toEqual('foo-step');
-    expect(wrapper.find('.pf-c-wizard__nav-item').last().childAt(0).text()).toEqual('bar-step');
+    expect(screen.getByText('foo-step', { selector: '.pf-c-wizard__nav-link' })).toBeInTheDocument();
+    expect(screen.getByText('bar-step', { selector: '.pf-c-wizard__nav-link' })).toBeInTheDocument();
   });
 
-  it('should jump when click simple navigation', () => {
-    const wrapper = mount(<FormRenderer {...initialProps} />);
+  it('should jump when click simple navigation', async () => {
+    render(<FormRenderer {...initialProps} />);
 
-    expect(wrapper.find(TextInput).props().name).toEqual('foo-field');
+    expect(screen.getByLabelText('foo', { selector: 'input' })).toBeInTheDocument();
 
-    nextButtonClick(wrapper);
+    await userEvent.click(screen.getByText('Next'));
 
-    expect(wrapper.find(TextInput).props().name).toEqual('bar-field');
+    expect(screen.getByLabelText('bar', { selector: 'input' })).toBeInTheDocument();
 
-    // click on first nav link
-    wrapper.find('.pf-c-wizard__nav-item').first().childAt(0).simulate('click');
-    wrapper.update();
+    await userEvent.click(screen.getByText('foo-step', { selector: '.pf-c-wizard__nav-link' }));
 
-    expect(wrapper.find(TextInput).props().name).toEqual('foo-field');
+    expect(screen.getByLabelText('foo', { selector: 'input' })).toBeInTheDocument();
 
-    // go back
-    wrapper.find('.pf-c-wizard__nav-item').last().childAt(0).simulate('click');
-    wrapper.update();
+    await userEvent.click(screen.getByText('bar-step', { selector: '.pf-c-wizard__nav-link' }));
 
-    expect(wrapper.find(TextInput).props().name).toEqual('bar-field');
+    expect(screen.getByLabelText('bar', { selector: 'input' })).toBeInTheDocument();
   });
 
   it('should not fail when click on the first step', async () => {
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...initialProps} />);
-    });
-    wrapper.update();
+    render(<FormRenderer {...initialProps} />);
 
-    expect(wrapper.find(TextInput).props().name).toEqual('foo-field');
+    expect(screen.getByLabelText('foo', { selector: 'input' })).toBeInTheDocument();
 
-    // click on first nav link
-    await act(async () => {
-      wrapper.find('.pf-c-wizard__nav-item').first().childAt(0).simulate('click');
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByText('foo-step', { selector: '.pf-c-wizard__nav-link' }));
 
-    expect(wrapper.find(TextInput).props().name).toEqual('foo-field');
+    expect(screen.getByLabelText('foo', { selector: 'input' })).toBeInTheDocument();
   });
 
   it('should build simple navigation with substeps', () => {
@@ -620,6 +570,7 @@ describe('<Wizard />', () => {
                 {
                   name: 'foo-field',
                   component: 'text-field',
+                  'aria-label': 'foo',
                 },
               ],
               nextStep: '2',
@@ -632,6 +583,7 @@ describe('<Wizard />', () => {
                 {
                   name: 'bar-field',
                   component: 'text-field',
+                  'aria-label': 'bar',
                 },
               ],
             },
@@ -640,15 +592,14 @@ describe('<Wizard />', () => {
       ],
     };
 
-    const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
+    render(<FormRenderer {...initialProps} schema={schema} />);
 
-    expect(wrapper.find('.pf-c-wizard__nav-list')).toHaveLength(2);
-    expect(wrapper.find('.pf-c-wizard__nav-item')).toHaveLength(3);
-    expect(wrapper.find('.pf-c-wizard__nav-item').at(1).childAt(0).text()).toEqual('barbar');
-    expect(wrapper.find('.pf-c-wizard__nav-list').last().childAt(0).childAt(0).text()).toEqual('bar-step');
+    expect(screen.getAllByText('foo-step', { selector: '.pf-c-wizard__nav-link' })).toBeTruthy();
+    expect(screen.getAllByText('bar-step', { selector: '.pf-c-wizard__nav-link' })).toBeTruthy();
+    expect(screen.getAllByText('barbar', { selector: '.pf-c-wizard__nav-link' })).toBeTruthy();
   });
 
-  it('should jump with substeps', () => {
+  it('should jump with substeps', async () => {
     schema = {
       fields: [
         {
@@ -662,6 +613,7 @@ describe('<Wizard />', () => {
                 {
                   name: 'foo-field',
                   component: 'text-field',
+                  'aria-label': 'foo',
                 },
               ],
               nextStep: '2',
@@ -674,6 +626,7 @@ describe('<Wizard />', () => {
                 {
                   name: 'bar-field',
                   component: 'text-field',
+                  'aria-label': 'bar',
                 },
               ],
             },
@@ -682,38 +635,32 @@ describe('<Wizard />', () => {
       ],
     };
 
-    const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
+    render(<FormRenderer {...initialProps} schema={schema} />);
 
-    expect(wrapper.find(TextInput).props().name).toEqual('foo-field');
+    expect(screen.getByLabelText('foo', { selector: 'input' })).toBeInTheDocument();
 
-    nextButtonClick(wrapper);
+    await userEvent.click(screen.getByText('Next'));
 
-    expect(wrapper.find(TextInput).props().name).toEqual('bar-field');
+    expect(screen.getByLabelText('bar', { selector: 'input' })).toBeInTheDocument();
 
-    // click on first nav link
-    wrapper.find('.pf-c-wizard__nav-item').first().childAt(0).simulate('click');
-    wrapper.update();
+    await userEvent.click(screen.getByText('foo-step', { selector: '.pf-c-wizard__nav-link' }));
 
-    expect(wrapper.find(TextInput).props().name).toEqual('foo-field');
+    expect(screen.getByLabelText('foo', { selector: 'input' })).toBeInTheDocument();
 
-    // go back through the primary step
-    wrapper.find('.pf-c-wizard__nav-item').at(1).childAt(0).simulate('click');
-    wrapper.update();
+    await userEvent.click(screen.getByText('barbar', { selector: '.pf-c-wizard__nav-link' }));
 
-    expect(wrapper.find(TextInput).props().name).toEqual('bar-field');
+    expect(screen.getByLabelText('bar', { selector: 'input' })).toBeInTheDocument();
 
-    backButtonClick(wrapper);
+    await userEvent.click(screen.getByText('Back'));
 
-    expect(wrapper.find(TextInput).props().name).toEqual('foo-field');
+    expect(screen.getByLabelText('foo', { selector: 'input' })).toBeInTheDocument();
 
-    // go back through the substep
-    wrapper.find('.pf-c-wizard__nav-item').last().childAt(0).simulate('click');
-    wrapper.update();
+    await userEvent.click(screen.getByText('bar-step', { selector: '.pf-c-wizard__nav-link' }));
 
-    expect(wrapper.find(TextInput).props().name).toEqual('bar-field');
+    expect(screen.getByLabelText('bar', { selector: 'input' })).toBeInTheDocument();
   });
 
-  it('should jump with substeps and dynamic', () => {
+  it('should jump with substeps and dynamic', async () => {
     schema = {
       fields: [
         {
@@ -728,6 +675,7 @@ describe('<Wizard />', () => {
                 {
                   name: 'foo-field',
                   component: 'text-field',
+                  'aria-label': 'foo',
                 },
               ],
               nextStep: '2',
@@ -740,6 +688,7 @@ describe('<Wizard />', () => {
                 {
                   name: 'bar-field',
                   component: 'text-field',
+                  'aria-label': 'bar',
                 },
               ],
             },
@@ -748,32 +697,29 @@ describe('<Wizard />', () => {
       ],
     };
 
-    const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
+    const { container } = render(<FormRenderer {...initialProps} schema={schema} />);
 
-    expect(wrapper.find(TextInput).props().name).toEqual('foo-field');
-    expect(wrapper.find('.pf-c-wizard__nav-item')).toHaveLength(3);
-    expect(wrapper.find('.pf-c-wizard__nav-link.pf-m-disabled')).toHaveLength(2); // steps + substep
+    expect(screen.getByLabelText('foo', { selector: 'input' })).toBeInTheDocument();
+    expect(container.querySelectorAll('.pf-c-wizard__nav-item')).toHaveLength(3);
+    expect(container.querySelectorAll('.pf-c-wizard__nav-link.pf-m-disabled')).toHaveLength(2); // steps + substep
 
-    nextButtonClick(wrapper);
+    await userEvent.click(screen.getByText('Next'));
 
-    expect(wrapper.find(TextInput).props().name).toEqual('bar-field');
-    expect(wrapper.find('.pf-c-wizard__nav-link.pf-m-disabled')).toHaveLength(0);
+    expect(screen.getByLabelText('bar', { selector: 'input' })).toBeInTheDocument();
+    expect(container.querySelectorAll('.pf-c-wizard__nav-link.pf-m-disabled')).toHaveLength(0);
 
-    // click on first nav link
-    wrapper.find('.pf-c-wizard__nav-item').first().childAt(0).simulate('click');
-    wrapper.update();
+    await userEvent.click(screen.getByText('foo-step', { selector: '.pf-c-wizard__nav-link' }));
 
-    expect(wrapper.find(TextInput).props().name).toEqual('foo-field');
-    expect(wrapper.find('.pf-c-wizard__nav-item')).toHaveLength(3);
+    expect(screen.getByLabelText('foo', { selector: 'input' })).toBeInTheDocument();
+    expect(container.querySelectorAll('.pf-c-wizard__nav-item')).toHaveLength(3);
 
-    nextButtonClick(wrapper);
+    await userEvent.click(screen.getByText('Next'));
 
-    expect(wrapper.find(TextInput).props().name).toEqual('bar-field');
-    expect(wrapper.find('.pf-c-wizard__nav-item')).toHaveLength(3);
+    expect(screen.getByLabelText('bar', { selector: 'input' })).toBeInTheDocument();
+    expect(container.querySelectorAll('.pf-c-wizard__nav-item')).toHaveLength(3);
   });
 
   it('should disabled button when validating', async () => {
-    jest.useFakeTimers();
     const asyncValidator = () => new Promise((res) => setTimeout(() => res(), 100));
 
     schema = {
@@ -809,29 +755,22 @@ describe('<Wizard />', () => {
       ],
     };
 
-    let wrapper;
+    render(<FormRenderer {...initialProps} schema={schema} />);
 
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
-    });
-    wrapper.update();
+    expect(screen.getByText('Next')).toBeDisabled();
 
-    expect(wrapper.find(Button).first().props().isDisabled).toEqual(true);
-
-    await act(async () => {
-      jest.runAllTimers();
-    });
-    wrapper.update();
-
-    expect(wrapper.find(Button).first().props().isDisabled).toEqual(false);
-
-    jest.useRealTimers();
+    await waitFor(() => expect(screen.getByText('Next')).not.toBeDisabled());
   });
 
   it('should disabled navigation when validating', async () => {
-    jest.useFakeTimers();
+    let resFn;
 
-    const asyncValidator = jest.fn().mockImplementation(() => new Promise((res) => setTimeout(() => res(), 50)));
+    const asyncValidator = jest.fn().mockImplementation(
+      () =>
+        new Promise((res) => {
+          resFn = res;
+        })
+    );
 
     schema = {
       fields: [
@@ -847,6 +786,7 @@ describe('<Wizard />', () => {
                   name: 'foo-field',
                   component: 'text-field',
                   validate: [asyncValidator],
+                  'aria-label': 'foo',
                 },
               ],
               nextStep: 'bar',
@@ -866,57 +806,28 @@ describe('<Wizard />', () => {
       ],
     };
 
-    await act(async () => {
-      wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
-    });
-    wrapper.update();
+    render(<FormRenderer {...initialProps} schema={schema} />);
 
-    await act(async () => {
-      jest.runAllTimers();
-    });
-    wrapper.update();
+    resFn();
 
-    await act(async () => {
-      wrapper.find(Button).first().simulate('click');
-    });
-    wrapper.update();
+    await waitFor(() => expect(screen.getByText('Next')).not.toBeDisabled());
 
-    await act(async () => {
-      jest.runAllTimers();
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByText('Next'));
 
-    expect(wrapper.find('.pf-c-wizard__nav-item').last().childAt(0).prop('aria-disabled')).toEqual(null);
+    await waitFor(() => expect(screen.getByText('bar-step', { selector: '.pf-c-wizard__nav-link' })).not.toBeDisabled());
 
-    await act(async () => {
-      wrapper.find(Button).at(1).simulate('click');
-    });
-    wrapper.update();
+    await userEvent.click(screen.getByText('Back'));
 
-    await act(async () => {
-      wrapper.find('input').instance().value = 'asdsa';
-      wrapper.find('input').simulate('change');
-    });
-    wrapper.update();
+    await userEvent.type(screen.getByLabelText('foo'), 'X');
 
-    expect(wrapper.find('.pf-c-wizard__nav-item').last().childAt(0).prop('aria-disabled')).toEqual(true);
+    expect(screen.getByText('bar-step', { selector: '.pf-c-wizard__nav-link' })).toBeDisabled();
 
-    await act(async () => {
-      jest.advanceTimersByTime(100);
-    });
-    wrapper.update();
+    resFn();
 
-    await act(async () => {
-      jest.runAllTimers();
-    });
-    wrapper.update();
-
-    expect(wrapper.find('.pf-c-wizard__nav-item').last().childAt(0).prop('aria-disabled')).toEqual(null);
-
-    jest.useRealTimers();
+    await waitFor(() => expect(screen.getByText('bar-step', { selector: '.pf-c-wizard__nav-link' })).not.toBeDisabled());
   });
 
-  it('should disable steps when invalid', () => {
+  it('should disable steps when invalid', async () => {
     const schema = {
       fields: [
         {
@@ -931,6 +842,7 @@ describe('<Wizard />', () => {
                   name: 'foo-field',
                   label: 'foo',
                   component: componentTypes.TEXT_FIELD,
+                  'aria-label': 'foo',
                 },
               ],
               nextStep: '2',
@@ -950,6 +862,7 @@ describe('<Wizard />', () => {
                       type: validatorTypes.REQUIRED,
                     },
                   ],
+                  'aria-label': 'bar',
                 },
               ],
             },
@@ -962,6 +875,7 @@ describe('<Wizard />', () => {
                   name: 'conan-field',
                   label: 'conan',
                   component: componentTypes.TEXT_FIELD,
+                  'aria-label': 'conan',
                 },
               ],
             },
@@ -970,7 +884,7 @@ describe('<Wizard />', () => {
       ],
     };
 
-    const wrapper = mount(
+    render(
       <FormRenderer
         schema={schema}
         componentMapper={componentMapper}
@@ -980,52 +894,46 @@ describe('<Wizard />', () => {
       />
     );
 
-    expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('foo ');
-    expect(wrapper.find('.pf-c-wizard__nav-item')).toHaveLength(4);
+    expect(screen.getByLabelText('foo')).toBeInTheDocument();
 
-    nextButtonClick(wrapper);
+    await userEvent.click(screen.getByText('Next'));
+    expect(screen.getByLabelText('bar')).toBeInTheDocument();
 
-    expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('bar ');
-
-    nextButtonClick(wrapper);
-
+    await userEvent.click(screen.getByText('Next'));
     // however, it is not possible because form is invalid
-    expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('bar ');
+    expect(screen.getByLabelText('bar')).toBeInTheDocument();
 
-    changeValue(wrapper, 'hello');
-    nextButtonClick(wrapper);
-
+    await userEvent.type(screen.getByLabelText('bar'), 'hello');
+    await userEvent.click(screen.getByText('Next'));
     // voila
-    expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('conan ');
-    expect(wrapper.find('.pf-c-wizard__nav-item').last().childAt(0).prop('aria-disabled')).toEqual(null);
+    expect(screen.getByLabelText('conan')).toBeInTheDocument();
+    expect(screen.getByText('conan-step', { selector: '.pf-c-wizard__nav-link' })).not.toBeDisabled();
 
-    backButtonClick(wrapper);
+    await userEvent.click(screen.getByText('Back'));
 
-    expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('bar ');
+    expect(screen.getByLabelText('bar')).toBeInTheDocument();
 
-    changeValue(wrapper, '');
-    nextButtonClick(wrapper);
-
+    await userEvent.clear(screen.getByLabelText('bar'));
+    await userEvent.click(screen.getByText('Next'));
     // it is invalid :(
-    expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('bar ');
+    expect(screen.getByLabelText('bar')).toBeInTheDocument();
 
     // let's look if last nav item is disabled (click event is working with 'disabled' <a> element)
-    expect(wrapper.find('.pf-c-wizard__nav-item').last().childAt(0).prop('aria-disabled')).toEqual(true);
+    expect(screen.getByText('conan-step', { selector: '.pf-c-wizard__nav-link' })).toBeDisabled();
 
     // go to first step
-    wrapper.find('.pf-c-wizard__nav-item').first().childAt(0).simulate('click');
-    wrapper.update();
+    await userEvent.click(screen.getByText('foo-step', { selector: '.pf-c-wizard__nav-link' }));
 
     // still invalid :(
-    expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('foo ');
-    expect(wrapper.find('.pf-c-wizard__nav-item').last().childAt(0).prop('aria-disabled')).toEqual(true);
+    expect(screen.getByLabelText('foo')).toBeInTheDocument();
+    expect(screen.getByText('conan-step', { selector: '.pf-c-wizard__nav-link' })).toBeDisabled();
 
     // make form valid again
-    nextButtonClick(wrapper);
-    changeValue(wrapper, 'hello');
-    nextButtonClick(wrapper);
+    await userEvent.click(screen.getByText('Next'));
 
-    expect(wrapper.find('.pf-c-wizard__nav-item').last().childAt(0).prop('aria-disabled')).toEqual(null);
+    await userEvent.type(screen.getByLabelText('bar'), 'hello');
+    await userEvent.click(screen.getByText('Next'));
+    expect(screen.getByText('conan-step', { selector: '.pf-c-wizard__nav-link' })).not.toBeDisabled();
   });
 
   describe('predicting steps', () => {
@@ -1055,6 +963,7 @@ describe('<Wizard />', () => {
                   name: 'source.source-type',
                   label: 'Source type',
                   component: componentTypes.TEXT_FIELD,
+                  'aria-label': 'source_type',
                 },
               ],
             },
@@ -1067,6 +976,7 @@ describe('<Wizard />', () => {
                   component: componentTypes.TEXT_FIELD,
                   name: 'aws-field',
                   label: 'Aws field part',
+                  'aria-label': 'aws',
                 },
               ],
             },
@@ -1079,6 +989,7 @@ describe('<Wizard />', () => {
                   component: componentTypes.TEXT_FIELD,
                   name: 'google.google-field',
                   label: 'Google field part',
+                  'aria-label': 'google',
                 },
               ],
             },
@@ -1092,8 +1003,8 @@ describe('<Wizard />', () => {
       ],
     };
 
-    it('predict steps with dynamic wizard', () => {
-      const wrapper = mount(
+    it('predict steps with dynamic wizard', async () => {
+      const { container } = render(
         <FormRenderer
           schema={wizardSchema}
           componentMapper={componentMapper}
@@ -1103,20 +1014,20 @@ describe('<Wizard />', () => {
         />
       );
 
-      expect(wrapper.find(WizardNavItem)).toHaveLength(1);
-      expect(wrapper.find(WizardNavItem).at(0).text()).toEqual(FIRST_TITLE);
+      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.textContent)).toEqual([FIRST_TITLE]);
 
-      changeValue(wrapper, 'aws');
-      nextButtonClick(wrapper);
+      await userEvent.type(screen.getByLabelText('source_type'), 'aws');
+      await userEvent.click(screen.getByText('Next'));
 
-      expect(wrapper.find(WizardNavItem)).toHaveLength(3);
-      expect(wrapper.find(WizardNavItem).at(0).text()).toEqual(FIRST_TITLE);
-      expect(wrapper.find(WizardNavItem).at(1).text()).toEqual(SECOND_TITLE_AWS);
-      expect(wrapper.find(WizardNavItem).at(2).text()).toEqual(THIRD_TITLE);
+      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.textContent)).toEqual([
+        FIRST_TITLE,
+        SECOND_TITLE_AWS,
+        THIRD_TITLE,
+      ]);
     });
 
-    it('disable nav when jumped into compileMapper step', () => {
-      const wrapper = mount(
+    it('disable nav when jumped into compileMapper step', async () => {
+      const { container } = render(
         <FormRenderer
           schema={wizardSchema}
           componentMapper={componentMapper}
@@ -1126,19 +1037,14 @@ describe('<Wizard />', () => {
         />
       );
 
-      changeValue(wrapper, 'aws');
-      nextButtonClick(wrapper);
+      await userEvent.type(screen.getByLabelText('source_type'), 'aws');
+      await userEvent.click(screen.getByText('Next'));
+      await userEvent.click(screen.getByText('Back'));
 
-      expect(wrapper.find(WizardNavItem)).toHaveLength(3);
-
-      backButtonClick(wrapper);
-
-      expect(wrapper.find(WizardNavItem).at(0).props().isDisabled).toEqual(false);
-      expect(wrapper.find(WizardNavItem).at(1).props().isDisabled).toEqual(true);
-      expect(wrapper.find(WizardNavItem).at(2).props().isDisabled).toEqual(true);
+      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, true, true]);
     });
 
-    it('disable nav when jumped into compileMapper step from invalid step', () => {
+    it('disable nav when jumped into compileMapper step from invalid step', async () => {
       const wizardSchema = {
         fields: [
           {
@@ -1159,6 +1065,7 @@ describe('<Wizard />', () => {
                     name: 'source.source-type',
                     label: 'Source type',
                     component: componentTypes.TEXT_FIELD,
+                    'aria-label': 'source_type',
                   },
                 ],
               },
@@ -1172,6 +1079,7 @@ describe('<Wizard />', () => {
                     name: 'aws-field',
                     label: 'Aws field part',
                     validate: [{ type: validatorTypes.REQUIRED }],
+                    'aria-label': 'aws',
                   },
                 ],
               },
@@ -1180,7 +1088,7 @@ describe('<Wizard />', () => {
         ],
       };
 
-      const wrapper = mount(
+      const { container } = render(
         <FormRenderer
           schema={wizardSchema}
           componentMapper={componentMapper}
@@ -1190,21 +1098,17 @@ describe('<Wizard />', () => {
         />
       );
 
-      changeValue(wrapper, 'aws');
-      nextButtonClick(wrapper);
+      await userEvent.type(screen.getByLabelText('source_type'), 'aws');
+      await userEvent.click(screen.getByText('Next'));
+      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, false]);
 
-      expect(wrapper.find(WizardNavItem)).toHaveLength(2);
-      expect(wrapper.find(WizardNavItem).at(0).props().isDisabled).toEqual(false);
-      expect(wrapper.find(WizardNavItem).at(1).props().isDisabled).toEqual(false);
+      await userEvent.type(screen.getByLabelText('aws'), '{backspace}');
+      await userEvent.click(screen.getByText('Back'));
 
-      changeValue(wrapper, undefined);
-      backButtonClick(wrapper);
-
-      expect(wrapper.find(WizardNavItem).at(0).props().isDisabled).toEqual(false);
-      expect(wrapper.find(WizardNavItem).at(1).props().isDisabled).toEqual(true);
+      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, true]);
     });
 
-    it('disable nav when jumped into step with function nextStep', () => {
+    it('disable nav when jumped into step with function nextStep', async () => {
       const NEXTSTEP_FUNCTION = jest.fn().mockReturnValue('aws');
       const wizardSchemaWithNextStepFunction = {
         fields: [
@@ -1221,6 +1125,7 @@ describe('<Wizard />', () => {
                     name: 'source.source-type',
                     label: 'Source type',
                     component: componentTypes.TEXT_FIELD,
+                    'aria-label': 'source_type',
                   },
                 ],
               },
@@ -1233,6 +1138,7 @@ describe('<Wizard />', () => {
                     component: componentTypes.TEXT_FIELD,
                     name: 'aws-field',
                     label: 'Aws field part',
+                    'aria-label': 'aws',
                   },
                 ],
               },
@@ -1247,7 +1153,7 @@ describe('<Wizard />', () => {
         },
       };
 
-      const wrapper = mount(
+      const { container } = render(
         <FormRenderer
           schema={wizardSchemaWithNextStepFunction}
           componentMapper={componentMapper}
@@ -1257,21 +1163,20 @@ describe('<Wizard />', () => {
         />
       );
 
-      changeValue(wrapper, 'aws');
-      nextButtonClick(wrapper);
+      await userEvent.type(screen.getByLabelText('source_type'), 'aws');
+      await userEvent.click(screen.getByText('Next'));
 
-      expect(wrapper.find(WizardNavItem)).toHaveLength(2);
+      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, false]);
 
-      backButtonClick(wrapper);
+      await userEvent.click(screen.getByText('Back'));
 
-      expect(wrapper.find(WizardNavItem).at(0).props().isDisabled).toEqual(false);
-      expect(wrapper.find(WizardNavItem).at(1).props().isDisabled).toEqual(true);
+      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, true]);
 
       const firstArgumentOfLastNextStepCall = NEXTSTEP_FUNCTION.mock.calls[NEXTSTEP_FUNCTION.mock.calls.length - 1][0];
       expect(firstArgumentOfLastNextStepCall).toEqual({ values: EXPECTED_VALUES });
     });
 
-    it('disable nav when jumped into disableForwardJumping step', () => {
+    it('disable nav when jumped into disableForwardJumping step', async () => {
       const wizardSchema = {
         fields: [
           {
@@ -1288,6 +1193,7 @@ describe('<Wizard />', () => {
                     name: 'source.source-type',
                     label: 'Source type',
                     component: componentTypes.TEXT_FIELD,
+                    'aria-label': 'source_type',
                   },
                 ],
               },
@@ -1308,7 +1214,7 @@ describe('<Wizard />', () => {
         ],
       };
 
-      const wrapper = mount(
+      const { container } = render(
         <FormRenderer
           schema={wizardSchema}
           componentMapper={componentMapper}
@@ -1318,21 +1224,17 @@ describe('<Wizard />', () => {
         />
       );
 
-      changeValue(wrapper, 'aws');
-      nextButtonClick(wrapper);
+      await userEvent.type(screen.getByLabelText('source_type'), 'aws');
+      await userEvent.click(screen.getByText('Next'));
 
-      expect(wrapper.find(WizardNavItem)).toHaveLength(2);
-      expect(wrapper.find(WizardNavItem).at(0).props().isDisabled).toEqual(false);
-      expect(wrapper.find(WizardNavItem).at(1).props().isDisabled).toEqual(false);
+      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, false]);
 
-      backButtonClick(wrapper);
+      await userEvent.click(screen.getByText('Back'));
 
-      expect(wrapper.find(WizardNavItem)).toHaveLength(2);
-      expect(wrapper.find(WizardNavItem).at(0).props().isDisabled).toEqual(false);
-      expect(wrapper.find(WizardNavItem).at(1).props().isDisabled).toEqual(true);
+      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, true]);
     });
 
-    it('crossroads variable predicts in realtime', () => {
+    it('crossroads variable predicts in realtime', async () => {
       const wizardSchema = {
         fields: [
           {
@@ -1355,6 +1257,7 @@ describe('<Wizard />', () => {
                     name: 'source.source-type',
                     label: 'Source type',
                     component: componentTypes.TEXT_FIELD,
+                    'aria-label': 'source_type',
                   },
                 ],
               },
@@ -1374,55 +1277,56 @@ describe('<Wizard />', () => {
         ],
       };
 
-      const wrapper = mount(<FormRenderer {...initialProps} schema={wizardSchema} />);
+      const { container } = render(<FormRenderer {...initialProps} schema={wizardSchema} />);
 
-      expect(wrapper.find(WizardNavItem)).toHaveLength(1);
+      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false]);
+      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.textContent)).toEqual(['first-step']);
 
-      changeValue(wrapper, 'aws');
+      await userEvent.type(screen.getByLabelText('source_type'), 'aws');
 
-      // predict steps for aws
-      expect(wrapper.find(WizardNavItem)).toHaveLength(3);
-      expect(wrapper.find(WizardNavItem).at(0).props().isDisabled).toEqual(false);
-      expect(wrapper.find(WizardNavItem).at(1).props().isDisabled).toEqual(true);
-      expect(wrapper.find(WizardNavItem).at(2).props().isDisabled).toEqual(true);
+      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, true, true]);
+      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.textContent)).toEqual([
+        'first-step',
+        'second-step',
+        'summary',
+      ]);
 
-      changeValue(wrapper, 'google');
+      await userEvent.clear(screen.getByLabelText('source_type'));
+      await userEvent.type(screen.getByLabelText('source_type'), 'google');
 
       // predict steps for google
-      expect(wrapper.find(WizardNavItem)).toHaveLength(2);
-      expect(wrapper.find(WizardNavItem).at(0).props().isDisabled).toEqual(false);
-      expect(wrapper.find(WizardNavItem).at(1).props().isDisabled).toEqual(true);
+      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, true]);
+      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.textContent)).toEqual(['first-step', 'summary']);
 
-      nextButtonClick(wrapper);
+      await userEvent.click(screen.getByText('Next'));
 
-      expect(wrapper.find(WizardNavItem)).toHaveLength(2);
-      expect(wrapper.find(WizardNavItem).at(0).props().isDisabled).toEqual(false);
-      expect(wrapper.find(WizardNavItem).at(1).props().isDisabled).toEqual(false);
+      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, false]);
+      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.textContent)).toEqual(['first-step', 'summary']);
 
       // click on first nav link
-      wrapper.find('.pf-c-wizard__nav-item').first().childAt(0).simulate('click');
-      wrapper.update();
-
+      await userEvent.click(screen.getByText('first-step'));
       // keep the second step enabled
-      expect(wrapper.find(WizardNavItem)).toHaveLength(2);
-      expect(wrapper.find(WizardNavItem).at(0).props().isDisabled).toEqual(false);
-      expect(wrapper.find(WizardNavItem).at(1).props().isDisabled).toEqual(false);
+      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, false]);
+      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.textContent)).toEqual(['first-step', 'summary']);
 
-      changeValue(wrapper, 'aws');
+      await userEvent.clear(screen.getByLabelText('source_type'));
+      await userEvent.type(screen.getByLabelText('source_type'), 'aws');
 
-      expect(wrapper.find(WizardNavItem)).toHaveLength(3);
-      expect(wrapper.find(WizardNavItem).at(0).props().isDisabled).toEqual(false);
-      expect(wrapper.find(WizardNavItem).at(1).props().isDisabled).toEqual(true);
-      expect(wrapper.find(WizardNavItem).at(2).props().isDisabled).toEqual(true);
+      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, true, true]);
+      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.textContent)).toEqual([
+        'first-step',
+        'second-step',
+        'summary',
+      ]);
 
-      changeValue(wrapper, 'google');
+      await userEvent.clear(screen.getByLabelText('source_type'));
+      await userEvent.type(screen.getByLabelText('source_type'), 'google');
 
-      expect(wrapper.find(WizardNavItem)).toHaveLength(2);
-      expect(wrapper.find(WizardNavItem).at(0).props().isDisabled).toEqual(false);
-      expect(wrapper.find(WizardNavItem).at(1).props().isDisabled).toEqual(true);
+      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, true]);
+      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.textContent)).toEqual(['first-step', 'summary']);
     });
 
-    it('crossroads variable predicts in realtime - disableForwardJumping', () => {
+    it('crossroads variable predicts in realtime - disableForwardJumping', async () => {
       const wizardSchema = {
         fields: [
           {
@@ -1446,6 +1350,7 @@ describe('<Wizard />', () => {
                     name: 'source.source-type',
                     label: 'Source type',
                     component: componentTypes.TEXT_FIELD,
+                    'aria-label': 'source_type',
                   },
                 ],
               },
@@ -1465,27 +1370,26 @@ describe('<Wizard />', () => {
         ],
       };
 
-      const wrapper = mount(<FormRenderer {...initialProps} schema={wizardSchema} />);
+      const { container } = render(<FormRenderer {...initialProps} schema={wizardSchema} />);
 
-      expect(wrapper.find(WizardNavItem)).toHaveLength(1);
+      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false]);
+      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.textContent)).toEqual(['first-step']);
 
-      changeValue(wrapper, 'google');
+      await userEvent.clear(screen.getByLabelText('source_type'));
+      await userEvent.type(screen.getByLabelText('source_type'), 'google');
 
-      // predict steps for google
-      expect(wrapper.find(WizardNavItem)).toHaveLength(2);
-      expect(wrapper.find(WizardNavItem).at(0).props().isDisabled).toEqual(false);
-      expect(wrapper.find(WizardNavItem).at(1).props().isDisabled).toEqual(true);
+      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, true]);
+      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.textContent)).toEqual(['first-step', 'summary']);
 
-      nextButtonClick(wrapper);
+      await userEvent.click(screen.getByText('Next'));
 
-      // click on first nav link
-      wrapper.find('.pf-c-wizard__nav-item').first().childAt(0).simulate('click');
-      wrapper.update();
+      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, false]);
+      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.textContent)).toEqual(['first-step', 'summary']);
 
-      // keep the second step enabled
-      expect(wrapper.find(WizardNavItem)).toHaveLength(2);
-      expect(wrapper.find(WizardNavItem).at(0).props().isDisabled).toEqual(false);
-      expect(wrapper.find(WizardNavItem).at(1).props().isDisabled).toEqual(true);
+      await userEvent.click(screen.getByText('first-step'));
+
+      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, true]);
+      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.textContent)).toEqual(['first-step', 'summary']);
     });
   });
 
