@@ -1,8 +1,6 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { Field } from '@data-driven-forms/form-state-manager';
-import setWith from 'lodash/setWith';
-import cloneDeep from 'lodash/cloneDeep';
+import { FieldSpy } from '@data-driven-forms/form-state-manager';
 import RendererContext from '../renderer-context';
 import Condition from '../condition';
 import getConditionTriggers from '../get-condition-triggers';
@@ -19,61 +17,19 @@ FormFieldHideWrapper.defaultProps = {
   hideField: false,
 };
 
-const ConditionTriggerWrapper = ({ condition, values, children, field }) => (
-  <Condition condition={condition} values={values} field={field}>
-    {children}
-  </Condition>
-);
-
-ConditionTriggerWrapper.propTypes = {
-  condition: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-  children: PropTypes.node.isRequired,
-  field: PropTypes.object,
-  values: PropTypes.object.isRequired,
-};
-
-const ConditionTriggerDetector = ({ values = {}, triggers = [], children, condition, field }) => {
-  const internalTriggers = [...triggers];
-  if (internalTriggers.length === 0) {
-    return (
-      <ConditionTriggerWrapper condition={condition} values={values} field={field}>
-        {children}
-      </ConditionTriggerWrapper>
-    );
-  }
-
-  const name = internalTriggers.shift();
-  return (
-    <Field name={name} subscription={{ value: true }}>
-      {({ input: { value } }) => (
-        <ConditionTriggerDetector
-          triggers={[...internalTriggers]}
-          values={setWith(cloneDeep(values), name, value, Object)}
-          condition={condition}
-          field={field}
-        >
-          {children}
-        </ConditionTriggerDetector>
-      )}
-    </Field>
-  );
-};
-
-ConditionTriggerDetector.propTypes = {
-  values: PropTypes.object,
-  triggers: PropTypes.arrayOf(PropTypes.string),
-  children: PropTypes.node,
-  condition: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-  field: PropTypes.object.isRequired,
-};
-
 const FormConditionWrapper = ({ condition, children, field }) => {
   if (condition) {
     const triggers = getConditionTriggers(condition, field);
+
     return (
-      <ConditionTriggerDetector triggers={triggers} condition={condition} field={field}>
-        {children}
-      </ConditionTriggerDetector>
+      <FieldSpy names={triggers}>
+        {({ values }) => (
+          <Condition condition={condition} values={values} field={field}>
+            {console.log(values)}
+            {children}
+          </Condition>
+        )}
+      </FieldSpy>
     );
   }
 
