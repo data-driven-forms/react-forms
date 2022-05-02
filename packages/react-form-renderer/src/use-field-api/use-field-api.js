@@ -110,22 +110,6 @@ const useFieldApi = ({ name, resolveProps, skipRegistration = false, ...props })
      */
   }, [validate ? JSON.stringify(validate) : false, component, dataType]);
 
-  useEffect(() => {
-    mounted.current = true;
-
-    if (!skipRegistration) {
-      formOptions.internalRegisterField(name);
-    }
-
-    return () => {
-      mounted.current = false;
-
-      if (!skipRegistration) {
-        formOptions.internalUnRegisterField(name);
-      }
-    };
-  }, []);
-
   const finalProps = { ...rest, ...field };
 
   const {

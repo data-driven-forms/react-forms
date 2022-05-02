@@ -1,4 +1,4 @@
-import React, { cloneElement, useCallback, useMemo, useRef } from 'react';
+import React, { cloneElement, useCallback, useMemo } from 'react';
 import Form from '../form';
 import PropTypes from 'prop-types';
 
@@ -57,8 +57,6 @@ const FormRenderer = ({
   validatorMapper,
   ...props
 }) => {
-  const registeredFields = useRef({});
-
   const formFields = useMemo(() => renderForm(schema.fields), [schema]);
   const validatorMapperMerged = useMemo(() => {
     return { ...defaultValidatorMapper, ...validatorMapper };
@@ -96,23 +94,6 @@ const FormRenderer = ({
     [onError]
   );
 
-  const setRegisteredFields = useCallback((fn) => {
-    return (registeredFields.current = fn({ ...registeredFields.current }));
-  }, []);
-
-  const internalRegisterField = useCallback((name) => {
-    setRegisteredFields((prev) => (prev[name] ? { ...prev, [name]: prev[name] + 1 } : { ...prev, [name]: 1 }));
-  }, []);
-
-  const internalUnRegisterField = useCallback((name) => {
-    setRegisteredFields(({ [name]: currentField, ...prev }) => (currentField && currentField > 1 ? { [name]: currentField - 1, ...prev } : prev));
-  }, []);
-
-  const internalGetRegisteredFields = useCallback(() => {
-    const fields = registeredFields.current;
-    return Object.entries(fields).reduce((acc, [name, value]) => (value > 0 ? [...acc, name] : acc), []);
-  }, []);
-
   try {
     const validatorTypes = Object.keys(validatorMapperMerged);
     const actionTypes = actionMapper ? Object.keys(actionMapper) : [];
@@ -144,10 +125,6 @@ const FormRenderer = ({
               reset,
               renderForm,
               ...formOptions,
-              internalRegisterField,
-              internalUnRegisterField,
-              ffGetRegisteredFields: formOptions.getRegisteredFields,
-              getRegisteredFields: internalGetRegisteredFields,
               initialValues: props.initialValues,
               schema,
             },

@@ -280,7 +280,6 @@ const FormWrapper = ({ props, children }) => (
       <form>
         <RendererContext.Provider
           value={{
-            formOptions: { internalRegisterField: jest.fn(), internalUnRegisterField: jest.fn() },
             validatorMapper: { required: () => (value) => value ? undefined : 'required' },
           }}
         >
