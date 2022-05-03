@@ -952,6 +952,8 @@ const createManagerApi: CreateManagerApi = ({
       state.submitSucceeded = false;
       state.submitError = state.submitErrors?.[FORM_ERROR];
       flatSubmitErrors = flatObject(errors);
+      state.valid = false;
+      state.invalid = true;
     } else {
       state.submitErrors = undefined;
       state.hasSubmitErrors = false;
@@ -959,6 +961,8 @@ const createManagerApi: CreateManagerApi = ({
       state.submitSucceeded = true;
       state.submitError = undefined;
       flatSubmitErrors = {};
+      state.valid = true;
+      state.invalid = false;
     }
   }
 

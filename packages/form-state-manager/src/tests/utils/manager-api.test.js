@@ -593,6 +593,8 @@ describe('managerApi', () => {
     expect(managerApi().submitError).toEqual(undefined);
     expect(managerApi().submitFailed).toEqual(false);
     expect(managerApi().submitSucceeded).toEqual(true);
+    expect(managerApi().valid).toEqual(true);
+    expect(managerApi().invalid).toEqual(false);
   });
 
   it('onsubmit receives an error', () => {
@@ -617,6 +619,8 @@ describe('managerApi', () => {
     expect(managerApi().submitErrors).toEqual(error);
     expect(managerApi().hasSubmitErrors).toEqual(true);
     expect(managerApi().hasValidationErrors).toEqual(false);
+    expect(managerApi().valid).toEqual(false);
+    expect(managerApi().invalid).toEqual(true);
     expect(focusErrorSpy).toHaveBeenCalledWith({ field: 'some-error' }, undefined);
   });
 
@@ -657,6 +661,8 @@ describe('managerApi', () => {
     expect(managerApi().submitErrors).toEqual(error);
     expect(managerApi().hasSubmitErrors).toEqual(true);
     expect(managerApi().hasValidationErrors).toEqual(false);
+    expect(managerApi().valid).toEqual(false);
+    expect(managerApi().invalid).toEqual(true);
   });
 
   it('getField state should return correct field state', () => {
