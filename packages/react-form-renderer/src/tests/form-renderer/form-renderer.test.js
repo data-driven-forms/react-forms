@@ -9,12 +9,12 @@ import useFieldApi from '../../use-field-api';
 import useFormApi from '../../use-form-api';
 
 const PropsSpy = () => <Fragment />;
-const ContextSpy = ({ registerSpy, spyFF, ...props }) => {
+const ContextSpy = ({ registerSpy, ...props }) => {
   useFieldApi(props);
-  const { getRegisteredFields, ffGetRegisteredFields, ...formApi } = useFormApi();
+  const { getRegisteredFields, ...formApi } = useFormApi();
   return (
     <Fragment>
-      <button onClick={() => registerSpy(spyFF ? ffGetRegisteredFields() : getRegisteredFields())} aria-label={props.name}></button>
+      <button onClick={() => registerSpy(getRegisteredFields())} aria-label={props.name}></button>
       <PropsSpy {...formApi} />
     </Fragment>
   );
@@ -246,13 +246,13 @@ describe('<FormRenderer />', () => {
 
     await userEvent.click(screen.getByLabelText('trigger'));
 
-    expect(registerSpy).toHaveBeenCalledWith(['trigger', 'x', 'field-1']);
+    expect(registerSpy).toHaveBeenLastCalledWith(['trigger', 'x', 'field-1']);
 
     await userEvent.clear(screen.getByLabelText('x'));
 
     await userEvent.click(screen.getByLabelText('trigger'));
 
-    expect(registerSpy).toHaveBeenCalledWith(['trigger', 'x']);
+    expect(registerSpy).toHaveBeenLastCalledWith(['trigger', 'x']);
   });
 
   it('should not un-register field after unrender with multiple fields coppies', async () => {
@@ -287,27 +287,6 @@ describe('<FormRenderer />', () => {
     await userEvent.click(screen.getByLabelText('trigger'));
 
     expect(registerSpy).toHaveBeenCalledWith(['trigger', 'x', 'field-1']);
-  });
-
-  it('should skip field registration', async () => {
-    const registerSpy = jest.fn();
-    render(
-      <FormRenderer
-        FormTemplate={(props) => <FormTemplate {...props} />}
-        componentMapper={{
-          ...componentMapper,
-          spy: { component: ContextSpy, registerSpy },
-          duplicate: DuplicatedField,
-        }}
-        initialValues={{ x: 'a' }}
-        schema={{ fields: [{ component: 'spy', name: 'trigger', skipRegistration: true }] }}
-        onSubmit={jest.fn()}
-      />
-    );
-
-    await userEvent.click(screen.getByLabelText('trigger'));
-
-    expect(registerSpy).toHaveBeenCalledWith([]);
   });
 
   describe('children prop', () => {

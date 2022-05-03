@@ -1069,6 +1069,8 @@ const createManagerApi: CreateManagerApi = ({
   }
 
   function afterSilentRegistration(field: Omit<FieldConfig, 'render'>) {
+    registeringFields.splice(registeringFields.indexOf(field.name), 1);
+
     if (isSilent === 0 && silentRender.length > 0) {
       revalidateFields([field.name, ...(state.fieldListeners[field.name]?.validateFields || state.registeredFields.filter((n) => n !== field.name))]);
 
@@ -1080,8 +1082,6 @@ const createManagerApi: CreateManagerApi = ({
       rerender(silentRender);
       silentRender = [];
       registeringField = undefined;
-
-      registeringFields.splice(registeringFields.indexOf(field.name), 1);
     }
   }
 

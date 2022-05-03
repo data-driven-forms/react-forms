@@ -56,7 +56,7 @@ const createFieldProps = (name, formOptions) => {
   };
 };
 
-const useFieldApi = ({ name, resolveProps, skipRegistration = false, ...props }) => {
+const useFieldApi = ({ name, resolveProps, ...props }) => {
   const { validatorMapper, formOptions } = useContext(RendererContext);
 
   const resolvedProps = resolveProps ? resolveProps(props, createFieldProps(name, formOptions), formOptions) || {} : {};
@@ -113,16 +113,8 @@ const useFieldApi = ({ name, resolveProps, skipRegistration = false, ...props })
   useEffect(() => {
     mounted.current = true;
 
-    if (!skipRegistration) {
-      formOptions.internalRegisterField(name);
-    }
-
     return () => {
       mounted.current = false;
-
-      if (!skipRegistration) {
-        formOptions.internalUnRegisterField(name);
-      }
     };
   }, []);
 

@@ -3,20 +3,8 @@ import React from 'react';
 import { RendererContext } from '@data-driven-forms/react-form-renderer';
 import Form from '@data-driven-forms/react-form-renderer/form';
 
-const RenderWithProvider = ({ value = { formOptions: {internalRegisterField: jest.fn(), internalUnRegisterField: jest.fn()} }, children, onSubmit = () => {} }) => {
-  return (
-    <Form onSubmit={onSubmit}>
-      {() => (
-        <RendererContext.Provider
-          value={{
-            ...value
-          }}
-        >
-          {children}
-        </RendererContext.Provider>
-      )}
-    </Form>
-  );
+const RenderWithProvider = ({ value = {}, children, onSubmit = () => {} }) => {
+  return <Form onSubmit={onSubmit}>{() => <RendererContext.Provider value={value}>{children}</RendererContext.Provider>}</Form>;
 };
 
 export default RenderWithProvider;

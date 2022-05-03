@@ -1,4 +1,5 @@
 import { useReducer, useContext, useState, useEffect } from 'react';
+import cloneDeep from 'lodash/cloneDeep';
 import FormManagerContext from '../form-manager-context';
 import generateId from '../generate-id';
 import { ManagerState } from '../manager-api';
@@ -44,7 +45,7 @@ const FieldSpy: React.ComponentType<FieldSpyProps> = ({ names, children, onChang
     []
   );
 
-  const newState = { ...getState(), form: formOptions };
+  const newState = { ...cloneDeep(getState()), form: formOptions };
 
   if (onChange) {
     onChange(newState);

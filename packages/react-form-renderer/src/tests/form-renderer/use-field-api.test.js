@@ -33,10 +33,7 @@ describe('useFieldApi', () => {
         <form onSubmit={handleSubmit}>
           <RendererContext.Provider
             value={{
-              formOptions: {
-                internalRegisterField: jest.fn(),
-                internalUnRegisterField: jest.fn(),
-              },
+              formOptions: {},
               validatorMapper: { required: () => (value) => !value ? 'required' : undefined },
             }}
           >
@@ -162,10 +159,6 @@ describe('useFieldApi', () => {
             <RendererContext.Provider
               value={{
                 validatorMapper: { required: () => (value) => !value ? 'required' : undefined, url: () => jest.fn() },
-                formOptions: {
-                  internalRegisterField: jest.fn(),
-                  internalUnRegisterField: jest.fn(),
-                },
               }}
             >
               <TestDummy validate={validate} />
