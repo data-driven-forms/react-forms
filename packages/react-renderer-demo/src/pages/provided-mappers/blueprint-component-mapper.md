@@ -38,7 +38,7 @@ This field will show the error immediately.
 
 ## isRequired customization
 
-Blueprint components do not use asterisks for indicating that fields are required, instead of it, it uses `(required)` string. This message can be customized via `requiredLabelInfo` prop passed to the default `formTemplate`. By default this message is set to `<span className="bp3-text-muted">(required)</span>`. Notice the className, that provides default Blueprint styles.
+Blueprint components do not use asterisks for indicating that fields are required, instead of it, it uses `(required)` string. This message can be customized via `requiredLabelInfo` prop passed to the default `formTemplate`. By default this message is set to `<span className="bp4-text-muted">(required)</span>`. Notice the className, that provides default Blueprint styles.
 
 ```jsx
 import { FormTemplate } from '@data-driven-forms/blueprint-component-mapper';
@@ -46,7 +46,7 @@ import { FormTemplate } from '@data-driven-forms/blueprint-component-mapper';
 const FormTemplateWrapper = (props) => (
     <FormTemplate
         {...props}
-        requiredLabelInfo={<span className="bp3-text-muted">(povinné)</span>}
+        requiredLabelInfo={<span className="bp4-text-muted">(povinné)</span>}
     />
 ) // Czech translation
 ```
@@ -70,7 +70,7 @@ const FormTemplate = ({ formFields }) => {
     return (
         <form onSubmit={handleSubmit}>
             <BlueprintContext.Provider
-                value={{ required: { <span className="bp3-text-muted">(required)</span> }}}
+                value={{ required: { <span className="bp4-text-muted">(required)</span> }}}
             >
                 {formFields}
             </BlueprintContext.Provider>

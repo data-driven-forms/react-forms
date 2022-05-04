@@ -192,7 +192,7 @@ describe('DualListSelect', () => {
   it('sort options', async () => {
     const { container } = render(<FormRenderer {...initialProps} />);
 
-    expect([...container.getElementsByClassName('bp3-menu-item')].map((el) => el.text)).toEqual([
+    expect([...container.getElementsByClassName('bp4-menu-item')].map((el) => el.text)).toEqual([
       'cats',
       'cats_1',
       'cats_2',
@@ -203,7 +203,7 @@ describe('DualListSelect', () => {
 
     await userEvent.click(screen.getByTitle('Sort options'));
 
-    expect([...container.getElementsByClassName('bp3-menu-item')].map((el) => el.text)).toEqual([
+    expect([...container.getElementsByClassName('bp4-menu-item')].map((el) => el.text)).toEqual([
       'zebras',
       'pigeons',
       'cats_2',
@@ -214,7 +214,7 @@ describe('DualListSelect', () => {
 
     await userEvent.click(screen.getByTitle('Sort options'));
 
-    expect([...container.getElementsByClassName('bp3-menu-item')].map((el) => el.text)).toEqual([
+    expect([...container.getElementsByClassName('bp4-menu-item')].map((el) => el.text)).toEqual([
       'cats',
       'cats_1',
       'cats_2',
@@ -229,7 +229,7 @@ describe('DualListSelect', () => {
       <FormRenderer {...initialProps} initialValues={{ 'dual-list': schema.fields[0].options.map(({ value }) => value) }} />
     );
 
-    expect([...container.getElementsByClassName('bp3-menu-item')].map((el) => el.text)).toEqual([
+    expect([...container.getElementsByClassName('bp4-menu-item')].map((el) => el.text)).toEqual([
       'No available options',
       'cats',
       'cats_1',
@@ -240,7 +240,7 @@ describe('DualListSelect', () => {
 
     await userEvent.click(screen.getByTitle('Sort value'));
 
-    expect([...container.getElementsByClassName('bp3-menu-item')].map((el) => el.text)).toEqual([
+    expect([...container.getElementsByClassName('bp4-menu-item')].map((el) => el.text)).toEqual([
       'No available options',
       'zebras',
       'pigeons',
@@ -251,7 +251,7 @@ describe('DualListSelect', () => {
 
     await userEvent.click(screen.getByTitle('Sort value'));
 
-    expect([...container.getElementsByClassName('bp3-menu-item')].map((el) => el.text)).toEqual([
+    expect([...container.getElementsByClassName('bp4-menu-item')].map((el) => el.text)).toEqual([
       'No available options',
       'cats',
       'cats_1',
