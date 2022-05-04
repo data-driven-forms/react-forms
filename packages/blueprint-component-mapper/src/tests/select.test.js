@@ -60,7 +60,7 @@ describe('<Select />', () => {
 
     expect(screen.getByText('select')).toBeInTheDocument();
     expect(screen.getByText('option 1')).toBeInTheDocument();
-    expect(screen.getByLabelText('Remove')).toHaveClass('bp3-tag-remove');
+    expect(screen.getByLabelText('Remove')).toHaveClass('bp4-tag-remove');
   });
 
   it('multi on change - undefined', () => {
