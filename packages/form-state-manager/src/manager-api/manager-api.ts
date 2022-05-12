@@ -6,6 +6,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import merge from 'lodash/merge';
 import omit from 'lodash/omit';
 import isEmpty from 'lodash/isEmpty';
+import memoize from 'lodash/memoize';
 import composeValidators from '../compose-validators';
 import AnyObject, { AnyBooleanObject } from '../any-object';
 import FieldConfig, { AfterSubmit, BeforeSubmit, IsEqual } from '../field-config';
@@ -473,6 +474,7 @@ const createManagerApi: CreateManagerApi = ({
   let flatSubmitErrors: AnyObject = {};
   let flatErrors: AnyObject = {};
   const registeringFields: string[] = [];
+  const validationCache = new Map()
 
   function updateRunningValidators(increment: number): void {
     runningValidators = Math.max(runningValidators + increment, 0);
@@ -516,45 +518,92 @@ const createManagerApi: CreateManagerApi = ({
     runFormValidation = false;
   }
 
-  function handleFieldError(name: string, isValid: boolean, error: string | undefined = undefined, validating = false) {
+  function handleFieldError(name: string, isValid: boolean, error: string | undefined = undefined, validating = false, cacheKey: string) {
     const prevMeta = getFieldState(name)?.meta || ({} as Meta);
     const { error: prevError, valid: prevIsValid, validating: prevValidating } = prevMeta;
     if (error !== prevError || isValid !== prevIsValid || validating !== prevValidating) {
-      setFieldState(name, (prev: FieldState) => ({
-        ...prev,
-        meta: {
-          ...prev.meta,
-          error,
-          valid: isValid,
-          invalid: !isValid,
-          validating,
-          warning: undefined
+      setFieldState(name, (prev: FieldState) => {
+        const newState = {
+          ...prev,
+          meta: {
+            ...prev.meta,
+            error,
+            valid: isValid,
+            invalid: !isValid,
+            validating,
+            warning: undefined
+          }
         }
-      }));
+        validationCache.set(cacheKey, newState)
+        return newState
+      });
     }
 
     updateError(name, isValid ? undefined : error);
   }
 
-  function handleFieldWarning(name: string, warning: string | undefined = undefined, validating = false) {
+  function handleFieldWarning(name: string, warning: string | undefined = undefined, validating = false, cacheKey: string, ) {
     const prevMeta = getFieldState(name)?.meta || ({} as Meta);
     const { warning: prevWarning, validating: prevValidating } = prevMeta;
     if (warning !== prevWarning || validating !== prevValidating) {
-      setFieldState(name, (prev: FieldState) => ({
-        ...prev,
-        meta: {
-          ...prev.meta,
-          warning,
-          error: undefined,
-          valid: true,
-          invalid: false,
-          validating
-        }
-      }));
+      setFieldState(name, (prev: FieldState) => {        
+        const newState = {
+          ...prev,
+          meta: {
+            ...prev.meta,
+            warning,
+            error: undefined,
+            valid: true,
+            invalid: false,
+            validating
+          }}
+          validationCache.set(cacheKey, newState)
+        return newState});
     }
   }
 
+  function getCacheKey(keyTemplate: any): string {
+
+    if(keyTemplate === null) {
+      return 'null'
+    }
+
+    if(typeof keyTemplate === 'undefined') {
+      return 'undefined'
+    }
+
+    if(typeof keyTemplate === 'string' || typeof keyTemplate === 'number' || typeof keyTemplate === 'boolean') {
+      return keyTemplate.toString()
+    }
+
+    if(Array.isArray(keyTemplate)) {
+      let result = '';
+      for (let index = 0; index < keyTemplate.length; index++) {
+        result = result.concat(getCacheKey(keyTemplate[index]))        
+      }
+      return result
+    }
+
+    if (typeof keyTemplate === 'object') {
+      const keys = Object.keys(keyTemplate);
+      let result = ''
+      for (let index = 0; index < keys.length; index++) {
+        const key = keys[index];
+        result = result.concat(key + getCacheKey(keyTemplate[key]))        
+      }
+      return result
+    }
+
+    throw new Error(`Invalid cache keyTemplate type! ${keyTemplate}. Given type: ${typeof keyTemplate}`)
+  }
+
   async function validateField(name: string, value: any) {
+    const cacheKey = getCacheKey({ name, value })
+    if(validationCache.has(cacheKey)) {
+      setFieldState(name, () => validationCache.get(cacheKey))
+      return
+    }
+    // console.log('validate field call', name, cacheKey);
     if (validationPaused) {
       addIfUnique(revalidatedFields, name);
       return undefined;
@@ -570,22 +619,22 @@ const createManagerApi: CreateManagerApi = ({
       if (validators.length > 0) {
         const result = composeValidators(validators as Validator[])(value, state.values, { ...state.fieldListeners[name].state.meta });
         if (isPromise(result)) {
-          handleFieldError(name, true, undefined, true);
+          handleFieldError(name, true, undefined, true, cacheKey);
           (result as Promise<string | undefined>)
-            .then(() => handleFieldError(name, true, undefined, false))
+            .then(() => handleFieldError(name, true, undefined, false, cacheKey))
             .catch((response) => {
               if (response?.type === 'warning') {
-                handleFieldWarning(name, response.error);
+                handleFieldWarning(name, response.error, undefined, cacheKey);
               } else {
-                handleFieldError(name, false, response as string | undefined, false);
+                handleFieldError(name, false, response as string | undefined, false, cacheKey);
               }
             });
           listener.registerValidator(result as Promise<string | undefined>);
         } else {
           if ((result as WarningObject)?.type === 'warning') {
-            handleFieldWarning(name, (result as WarningObject).error);
+            handleFieldWarning(name, (result as WarningObject).error, undefined, cacheKey);
           } else {
-            handleFieldError(name, !result, result as string | undefined);
+            handleFieldError(name, !result, result as string | undefined, undefined, cacheKey);
           }
         }
       }
@@ -711,7 +760,7 @@ const createManagerApi: CreateManagerApi = ({
 
           flatErrors = flatObject(errors);
           Object.keys(flatErrors).forEach((name) => {
-            handleFieldError(name, false, flatErrors[name]);
+            handleFieldError(name, false, flatErrors[name], undefined, 'formLevel');
           });
 
           render();
@@ -722,7 +771,7 @@ const createManagerApi: CreateManagerApi = ({
     if (syncError) {
       flatErrors = flatObject(syncError);
       Object.keys(flatErrors).forEach((name) => {
-        handleFieldError(name, false, flatErrors[name]);
+        handleFieldError(name, false, flatErrors[name], undefined, 'formLevel');
       });
       state.errors = syncError;
       state.hasValidationErrors = true;
@@ -744,9 +793,10 @@ const createManagerApi: CreateManagerApi = ({
   }
 
   function revalidateFields(fields: string[]) {
-    fields.forEach((name) => {
+    for (let index = 0; index < fields.length; index++) {
+      const name = fields[index];
       validateField(name, get(state.values, name));
-    });
+    }
   }
 
   function prepareRerender() {
@@ -1030,6 +1080,8 @@ const createManagerApi: CreateManagerApi = ({
     batch(() => {
       const render = prepareRerender();
       addIfUnique(state.registeredFields, field.name);
+      const validate = field.validate ? memoize(field.validate) : field.validate
+      field.validate = validate;
 
       let setDirty = initializeFieldValue(field);
 
