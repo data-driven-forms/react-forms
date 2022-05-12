@@ -114,14 +114,20 @@ describe('managerApi', () => {
 
       managerApi().change('field1', 'cosi');
 
-      expect(validate1).toHaveBeenCalled();
+      // field 2 has cached validator for value `undefined`
+      expect(validate1).not.toHaveBeenCalled();
       expect(validate2).not.toHaveBeenCalled();
 
       validate1.mockReset();
+      validate2.mockReset();
 
       managerApi().change('field2', 'cosi');
 
       expect(validate1).toHaveBeenCalled();
+      // field 2 has cached validator for value `undefined`
+      expect(validate2).not.toHaveBeenCalled();
+
+      managerApi().change('field3', 'cosi');
       expect(validate2).toHaveBeenCalled();
     });
 
@@ -150,6 +156,24 @@ describe('managerApi', () => {
       validate1.mockReset();
 
       managerApi().change('field2', 'cosi');
+
+      expect(validate1).not.toHaveBeenCalled();
+      expect(validate2).toHaveBeenCalled();
+      validate1.mockClear();
+      validate2.mockClear();
+
+      // both validation results are cached for this value
+      managerApi().change('field1', 'cosi');
+      managerApi().change('field2', 'cosi');
+
+      expect(validate1).not.toHaveBeenCalled();
+      expect(validate2).not.toHaveBeenCalled();
+      validate1.mockClear();
+      validate2.mockClear();
+
+      // new values should trigger validation
+      managerApi().change('field1', 'foo');
+      managerApi().change('field2', 'foo');
 
       expect(validate1).toHaveBeenCalled();
       expect(validate2).toHaveBeenCalled();
@@ -261,7 +285,7 @@ describe('managerApi', () => {
     expect(managerApi().registeredFields).toEqual(['field']);
     expect(managerApi().fieldListeners).toEqual({
       field: {
-        asyncWatcher: { registerValidator: expect.any(Function) },
+        asyncWatcher: { registerValidator: expect.any(Function), getValidators: expect.any(Function) },
         count: 1,
         state: {
           name: 'field',
@@ -289,7 +313,7 @@ describe('managerApi', () => {
     expect(managerApi().registeredFields).toEqual(['field']);
     expect(managerApi().fieldListeners).toEqual({
       field: {
-        asyncWatcher: { registerValidator: expect.any(Function) },
+        asyncWatcher: { registerValidator: expect.any(Function), getValidators: expect.any(Function) },
         count: 2,
         state: {
           name: 'field',
@@ -334,7 +358,7 @@ describe('managerApi', () => {
 
     expect(managerApi().fieldListeners).toEqual({
       field: {
-        asyncWatcher: { registerValidator: expect.any(Function) },
+        asyncWatcher: { registerValidator: expect.any(Function), getValidators: expect.any(Function) },
         count: 2,
         state: {
           name: 'field',
@@ -353,7 +377,7 @@ describe('managerApi', () => {
 
     expect(managerApi().fieldListeners).toEqual({
       field: {
-        asyncWatcher: { registerValidator: expect.any(Function) },
+        asyncWatcher: { registerValidator: expect.any(Function), getValidators: expect.any(Function) },
         count: 1,
         state: {
           name: 'field',
@@ -372,7 +396,7 @@ describe('managerApi', () => {
     expect(managerApi().fieldListeners).toEqual({
       field: {
         count: 0,
-        asyncWatcher: { registerValidator: expect.any(Function) },
+        asyncWatcher: { registerValidator: expect.any(Function), getValidators: expect.any(Function) },
         state: {
           name: 'field',
           value: undefined,
@@ -1095,7 +1119,7 @@ describe('managerApi', () => {
       expect(managerApi().getState().validating).toEqual(false);
     });
 
-    it('should fail sync level validation', () => {
+    it('should fail sync level validation', async () => {
       const render = jest.fn();
       const managerApi = createManagerApi({ validate });
       const { registerField, change } = managerApi();
@@ -1105,6 +1129,8 @@ describe('managerApi', () => {
 
       change('foo', 'foo');
       change('bar', 'baz');
+
+      await new Promise(process.nextTick);
 
       expect(managerApi().getState().errors).toEqual({ foo: 'error' });
       expect(managerApi().getState().valid).toEqual(false);
@@ -1133,12 +1159,15 @@ describe('managerApi', () => {
       expect(managerApi().hasValidationErrors).toEqual(true);
     });
 
-    it('should fail sync level validation and set field error', () => {
+    it('should fail sync level validation and set field error', async () => {
       const render = jest.fn();
       const managerApi = createManagerApi({ validate: () => ({ nested: { foo: 'some-very-evil-error' } }) });
       const { registerField } = managerApi();
 
       registerField({ name: 'nested.foo', render });
+
+      // TODO: Replace flush promise. This will wait for all promises in que to finish instead of just one.
+      await new Promise(process.nextTick);
 
       expect(managerApi().getState().errors).toEqual({ nested: { foo: 'some-very-evil-error' } });
       expect(managerApi().getState().valid).toEqual(false);
@@ -1252,7 +1281,7 @@ describe('managerApi', () => {
       expect(managerApi().hasValidationErrors).toEqual(true);
     });
 
-    it('should fail and then pass sync validation', () => {
+    it('should fail and then pass sync validation', async () => {
       const render = jest.fn();
       const managerApi = createManagerApi({ validate });
       const { registerField, change } = managerApi();
@@ -1260,6 +1289,8 @@ describe('managerApi', () => {
       registerField({ name: 'foo', render });
 
       change('foo', 'foo');
+
+      await new Promise(process.nextTick);
 
       expect(managerApi().getState().errors).toEqual({
         foo: 'error',
@@ -1356,7 +1387,7 @@ describe('managerApi', () => {
     const formLevelValidate = (values) => (values.foo === 'foo' ? { foo: 'form-error' } : undefined);
     const fieldLevelValidate = (value) => (value === 'bar' ? 'field-error' : undefined);
 
-    it('should fail sync form level, but pass sync field level validation', () => {
+    it('should fail sync form level, but pass sync field level validation', async () => {
       const managerApi = createManagerApi({ validate: formLevelValidate });
       const { change, registerField, getFieldState } = managerApi();
       const getErrorState = () => {
@@ -1371,6 +1402,9 @@ describe('managerApi', () => {
       registerField({ name: 'foo', validate: fieldLevelValidate, render: jest.fn() });
 
       change('foo', 'foo');
+
+      await new Promise(process.nextTick);
+
       let expectedResult = getErrorState();
       expect(expectedResult).toEqual({
         valid: false,
@@ -1400,6 +1434,8 @@ describe('managerApi', () => {
 
       change('foo', 'foo');
 
+      await new Promise(process.nextTick);
+
       let expectedResult = getErrorState(managerApi);
       expect(expectedResult).toEqual({
         valid: false,
@@ -1415,6 +1451,8 @@ describe('managerApi', () => {
       change('foo', 'ok');
 
       await flushPromises();
+      await flushPromises();
+
       expectedResult = getErrorState(managerApi);
       expect(expectedResult).toEqual({
         valid: true,
@@ -1443,7 +1481,9 @@ describe('managerApi', () => {
       registerField({ name: 'foo', validate: fieldLevelValidate, render: jest.fn() });
 
       change('foo', 'bar');
+
       await flushPromises();
+
       let expectedResult = getErrorState();
       expect(expectedResult).toEqual({
         valid: false,
@@ -1458,7 +1498,7 @@ describe('managerApi', () => {
     });
 
     it('should fail first sync field level validation, but pass on second round', async () => {
-      const managerApi = createManagerApi({ validate: formLevelValidate });
+      const managerApi = createManagerApi({ validate: formLevelValidate, subscription: { errors: true } });
       const { change, registerField, getFieldState } = managerApi();
       const getErrorState = () => {
         let { valid, invalid, validating, errors } = managerApi();
@@ -1472,6 +1512,7 @@ describe('managerApi', () => {
       registerField({ name: 'foo', validate: fieldLevelValidate, render: jest.fn() });
 
       change('foo', 'bar');
+
       await flushPromises();
       let expectedResult = getErrorState();
       expect(expectedResult).toEqual({
@@ -2209,7 +2250,7 @@ describe('managerApi', () => {
     });
 
     it('warning should rewrite error - async', async () => {
-      expect.assertions(18);
+      expect.assertions(20);
 
       const asyncValidate = jest
         .fn()
@@ -2222,6 +2263,13 @@ describe('managerApi', () => {
 
       await flushPromises();
       await flushPromises();
+
+      /**
+       * Check initial validation call
+       * This will cache the validator result for 'warning value'
+       */
+      expect(asyncValidate).toHaveBeenCalledWith('warning', expect.anything(), expect.anything());
+      asyncValidate.mockClear();
 
       expect(managerApi().getFieldState('field').meta.warning).toEqual(someError);
       expect(managerApi().getFieldState('field').meta.error).toEqual(undefined);
@@ -2242,12 +2290,25 @@ describe('managerApi', () => {
       expect(managerApi().getFieldState('field').meta.invalid).toEqual(true);
       expect(managerApi().getFieldState('field').meta.validating).toEqual(false);
 
+      /**
+       * Resent call logs to prepare new asserion
+       */
+      asyncValidate.mockClear();
+
       managerApi().change('field', 'warning');
 
-      expect(managerApi().getFieldState('field').meta.validating).toEqual(true);
+      /**
+       * The warning value has alrady cached validator result from the initial validation run
+       */
+      expect(managerApi().getFieldState('field').meta.validating).toEqual(false);
 
       await flushPromises();
       await flushPromises();
+
+      /**
+       * Validator should be called because the value warning is cached
+       */
+      expect(asyncValidate).not.toHaveBeenCalled();
 
       expect(managerApi().getFieldState('field').meta.warning).toEqual(someError);
       expect(managerApi().getFieldState('field').meta.error).toEqual(undefined);

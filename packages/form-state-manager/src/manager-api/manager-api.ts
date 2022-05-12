@@ -6,7 +6,6 @@ import cloneDeep from 'lodash/cloneDeep';
 import merge from 'lodash/merge';
 import omit from 'lodash/omit';
 import isEmpty from 'lodash/isEmpty';
-import memoize from 'lodash/memoize';
 import composeValidators from '../compose-validators';
 import AnyObject, { AnyBooleanObject } from '../any-object';
 import FieldConfig, { AfterSubmit, BeforeSubmit, IsEqual } from '../field-config';
@@ -94,8 +93,14 @@ export interface UpdatedConfig {
   initializeOnMount?: boolean;
 }
 export type UpdateFieldConfig = (field: UpdatedConfig) => void;
+
+export interface AsyncWatcherRecord {
+  [key: number]: Promise<unknown>;
+}
+
 export interface AsyncWatcherApi {
   registerValidator: (callback: Promise<unknown>) => void;
+  getValidators: () => AsyncWatcherRecord
 }
 export interface ListenerField {
   render: FieldRender;
@@ -195,9 +200,7 @@ export interface CreateManagerApiConfig {
   destroyOnUnregister?: boolean;
   name?: string;
 }
-export interface AsyncWatcherRecord {
-  [key: number]: Promise<unknown>;
-}
+
 export type Debug = (formState: ManagerState) => void;
 
 export type AsyncWatcher = (
@@ -283,8 +286,11 @@ const asyncWatcher: AsyncWatcher = (updateValidating, updateSubmitting, updateFo
     nextKey = nextKey + 1;
   };
 
+  const getValidators = () => asyncValidators  
+
   return {
-    registerValidator
+    registerValidator,
+    getValidators,
   };
 };
 
@@ -474,7 +480,7 @@ const createManagerApi: CreateManagerApi = ({
   let flatSubmitErrors: AnyObject = {};
   let flatErrors: AnyObject = {};
   const registeringFields: string[] = [];
-  const validationCache = new Map()
+  const validationCache = new Map<string, FieldState>()
 
   function updateRunningValidators(increment: number): void {
     runningValidators = Math.max(runningValidators + increment, 0);
@@ -522,8 +528,7 @@ const createManagerApi: CreateManagerApi = ({
     const prevMeta = getFieldState(name)?.meta || ({} as Meta);
     const { error: prevError, valid: prevIsValid, validating: prevValidating } = prevMeta;
     if (error !== prevError || isValid !== prevIsValid || validating !== prevValidating) {
-      setFieldState(name, (prev: FieldState) => {
-        const newState = {
+      setFieldState(name, (prev: FieldState) => ({
           ...prev,
           meta: {
             ...prev.meta,
@@ -533,12 +538,10 @@ const createManagerApi: CreateManagerApi = ({
             validating,
             warning: undefined
           }
-        }
-        validationCache.set(cacheKey, newState)
-        return newState
-      });
+      }));
     }
-
+    
+    validationCache.set(cacheKey, getFieldState(name)!)
     updateError(name, isValid ? undefined : error);
   }
 
@@ -579,7 +582,7 @@ const createManagerApi: CreateManagerApi = ({
     if(Array.isArray(keyTemplate)) {
       let result = '';
       for (let index = 0; index < keyTemplate.length; index++) {
-        result = result.concat(getCacheKey(keyTemplate[index]))        
+        result = result.concat(getCacheKey(index.toString() + keyTemplate[index]))        
       }
       return result
     }
@@ -599,11 +602,18 @@ const createManagerApi: CreateManagerApi = ({
 
   async function validateField(name: string, value: any) {
     const cacheKey = getCacheKey({ name, value })
+
     if(validationCache.has(cacheKey)) {
-      setFieldState(name, () => validationCache.get(cacheKey))
+      const cacheState = validationCache.get(cacheKey)
+      /**
+       * Skip state update and object
+       * We don't want to create new object reference and this trigger additional rendering
+       * We can re-use the same object instead
+       */
+      state.fieldListeners[name].state = cacheState!;
+      updateError(name, cacheState!.meta.error)
       return
     }
-    // console.log('validate field call', name, cacheKey);
     if (validationPaused) {
       addIfUnique(revalidatedFields, name);
       return undefined;
@@ -771,7 +781,37 @@ const createManagerApi: CreateManagerApi = ({
     if (syncError) {
       flatErrors = flatObject(syncError);
       Object.keys(flatErrors).forEach((name) => {
-        handleFieldError(name, false, flatErrors[name], undefined, 'formLevel');
+        const value = getFieldValue(name)
+        const cacheKey = getCacheKey({name, value })
+        const listener = state.fieldListeners[name]?.asyncWatcher;
+        const fieldListeners = Object.values(state.fieldListeners[name]?.fields || {})
+        const validators = []
+        for (let index = 0; index < fieldListeners.length; index++) {
+          const { validate } = fieldListeners[index];
+          if(validate) {
+            validators.push(validate)
+          }
+        }
+        // TODO: Do not make the whole thing promise if not required
+        validators.push(() => Promise.reject(get(syncError, name)))
+        const result = composeValidators(validators as Validator[])(value, state.values, { ...state.fieldListeners[name]?.state.meta });
+        if(isPromise(result)) {
+          listener?.registerValidator(result as Promise<string | undefined>);
+          Promise.allSettled(Object.values(listener?.getValidators() || {})).then(() => {
+            handleFieldError(name, true, undefined, true, cacheKey);
+            (result as Promise<string | undefined>)
+              .then(() => {
+                handleFieldError(name, true, undefined, false, cacheKey)
+              })
+              .catch((response) => {
+                if (response?.type === 'warning') {
+                  handleFieldWarning(name, response.error, undefined, cacheKey);
+                } else {
+                  handleFieldError(name, false, response as string | undefined, false, cacheKey);
+                }
+              });
+          })
+        }
       });
       state.errors = syncError;
       state.hasValidationErrors = true;
@@ -1080,8 +1120,6 @@ const createManagerApi: CreateManagerApi = ({
     batch(() => {
       const render = prepareRerender();
       addIfUnique(state.registeredFields, field.name);
-      const validate = field.validate ? memoize(field.validate) : field.validate
-      field.validate = validate;
 
       let setDirty = initializeFieldValue(field);
 
@@ -1214,7 +1252,6 @@ const createManagerApi: CreateManagerApi = ({
 
   function updateError(name: string, error: string | undefined = undefined): void {
     const render = prepareRerender();
-
     if (error) {
       set(state.errors, name, error);
       flatErrors[name] = error;
