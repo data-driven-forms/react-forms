@@ -575,9 +575,13 @@ const createManagerApi: CreateManagerApi = ({
        * Skip state update and object
        * We don't want to create new object reference and this trigger additional rendering
        * We can re-use the same object instead
+       * 
+       * Error does not have to be updated as the field is in the exact same state as if was in the previous render
        */
-      state.fieldListeners[name].state = cacheState!;
-      updateError(name, cacheState!.meta.error)
+      if(state.fieldListeners[name].state !== cacheState) {
+        state.fieldListeners[name].state = cacheState!;
+        updateError(name, cacheState!.meta.error)
+      }
       return
     }
     if (validationPaused) {
