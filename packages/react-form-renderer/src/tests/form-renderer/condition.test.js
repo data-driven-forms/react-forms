@@ -277,10 +277,6 @@ describe('condition test', () => {
 
     await userEvent.click(screen.getByText('Reset'));
 
-    await act(async () => {
-      jest.runAllTimers();
-    });
-
     await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
