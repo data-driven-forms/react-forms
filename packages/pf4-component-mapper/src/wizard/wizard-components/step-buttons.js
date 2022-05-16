@@ -4,9 +4,10 @@ import { Button } from '@patternfly/react-core';
 import selectNext from '@data-driven-forms/common/wizard/select-next';
 import { FormSpy } from '@data-driven-forms/react-form-renderer';
 
-const NextButton = ({ nextStep, valid, handleNext, nextLabel, getState, handleSubmit, submitLabel, conditionalSubmitFlag }) => {
+const NextButton = ({ nextStep, handleNext, nextLabel, getState, handleSubmit, submitLabel, conditionalSubmitFlag }) => {
   const nextResult = nextStep ? selectNext(nextStep, getState) : nextStep;
   const progressNext = nextResult !== conditionalSubmitFlag && nextStep;
+  const { valid } = getState();
   return (
     <Button
       variant="primary"
@@ -23,7 +24,6 @@ NextButton.propTypes = {
   nextStep: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.object]),
   handleSubmit: PropTypes.func.isRequired,
   submitLabel: PropTypes.node.isRequired,
-  valid: PropTypes.bool,
   handleNext: PropTypes.func.isRequired,
   nextLabel: PropTypes.node.isRequired,
   getState: PropTypes.func.isRequired,

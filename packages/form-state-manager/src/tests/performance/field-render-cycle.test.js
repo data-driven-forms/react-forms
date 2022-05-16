@@ -2,7 +2,7 @@ import React, { useEffect, useContext, Fragment } from 'react';
 import { act, render as rtlRender, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import useField from '../../use-field';
+import useField from '../../use-field/use-field';
 import FormStateManager from '../../form-state-manager';
 import FormManagerContext from '../../form-manager-context';
 

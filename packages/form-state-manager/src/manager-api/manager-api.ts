@@ -740,15 +740,17 @@ const createManagerApi: CreateManagerApi = ({
 
           flatErrors = flatObject(errors);
           Object.keys(flatErrors).forEach((name) => {
-            handleFieldError(name, false, flatErrors[name], undefined, 'formLevel');
+            const cacheKey = getCacheKey(name)
+            handleFieldError(name, false, flatErrors[name], undefined, cacheKey);
           });
 
-          render();
+          render(['error']);
         });
     }
 
     const syncError = result as FormLevelError | undefined;
     if (syncError) {
+      console.warn({ syncError })
       flatErrors = flatObject(syncError);
       Object.keys(flatErrors).forEach((name) => {
         const value = getFieldValue(name)
@@ -762,8 +764,8 @@ const createManagerApi: CreateManagerApi = ({
             validators.push(validate)
           }
         }
-        // TODO: Do not make the whole thing promise if not required
-        validators.push(() => Promise.reject(get(syncError, name)))
+
+        validators.push(() => get(syncError, name))
         const result = composeValidators(validators as Validator[])(value, state.values, { ...state.fieldListeners[name]?.state.meta });
         if(isPromise(result)) {
           listener?.registerValidator(result as Promise<string | undefined>);
@@ -781,18 +783,27 @@ const createManagerApi: CreateManagerApi = ({
                 }
               });
           })
+        } else {
+          handleFieldError(name, !result, result as string | undefined, undefined, cacheKey);
         }
       });
       state.errors = syncError;
       state.hasValidationErrors = true;
       state.valid = false;
       state.invalid = true;
+      if(state.errors?.[FORM_ERROR] !== state.error) {
+        rerender(['error'])
+      }
       state.error = state.errors?.[FORM_ERROR];
     } else {
       state.errors = {};
       state.hasValidationErrors = false;
       state.valid = true;
       state.invalid = false;
+
+      if(state.errors?.[FORM_ERROR] !== state.error) {
+        rerender(['error'])
+      }
       state.error = undefined;
       flatErrors = {};
       /**
@@ -810,11 +821,11 @@ const createManagerApi: CreateManagerApi = ({
   }
 
   function prepareRerender() {
-    const snapshot = cloneDeep(state);
+    const snapshot = state;
+
 
     return (subscribeTo: Array<string> = []) => {
       const changedAttributes = [...findDifference(snapshot, state), ...subscribeTo];
-
       if (isSilent > 0) {
         changedAttributes.forEach((attr) => addIfUnique(silentRender, attr));
       } else if (changedAttributes.length > 0) {
@@ -867,7 +878,7 @@ const createManagerApi: CreateManagerApi = ({
         validateForm(config.validate);
       }
 
-      render();
+      render(['values', 'errors']);
     });
   }
 
@@ -943,12 +954,13 @@ const createManagerApi: CreateManagerApi = ({
       })
     );
 
+    
     if (error) {
       return;
     }
-
+    
     const result = config.onSubmit({ ...state.values }, { ...state, values: { ...state.values } }, event);
-
+        
     if (isPromise(result)) {
       setSubmitting();
       const render = prepareRerender();
@@ -957,7 +969,7 @@ const createManagerApi: CreateManagerApi = ({
         .then((errors: unknown) => {
           handleSubmitError(errors);
           updateFieldSubmitMeta();
-          render();
+          render(['error', 'errors']);
           focusError(flatSubmitErrors, config.name);
 
           runAfterSubmit();
@@ -965,7 +977,7 @@ const createManagerApi: CreateManagerApi = ({
         .catch(() => {
           handleSubmitError();
           updateFieldSubmitMeta();
-          render();
+          render(['error', 'errors']);
         });
     } else {
       const render = prepareRerender();
@@ -973,10 +985,9 @@ const createManagerApi: CreateManagerApi = ({
       handleSubmitError(result);
       updateFieldSubmitMeta();
 
-      render();
-
+      render(['error', 'errors']);
+      
       focusError(flatSubmitErrors, config.name);
-
       runAfterSubmit();
     }
   }
@@ -997,7 +1008,7 @@ const createManagerApi: CreateManagerApi = ({
               ...(flatSubmitErrors[name] && { touched: true, valid: false, invalid: true })
             }
           }),
-          true
+          false
         );
       }
     });
@@ -1038,7 +1049,7 @@ const createManagerApi: CreateManagerApi = ({
 
     updateFieldSubmitMeta();
 
-    render();
+    render(['submitting']);
   }
 
   function runAfterSubmit() {
@@ -1126,7 +1137,7 @@ const createManagerApi: CreateManagerApi = ({
         }
       }
 
-      render();
+      render(['error', 'touched']);
     });
     isSilent = field.silent ? Math.min(isSilent - 1, 0) : isSilent;
     registeringField = undefined;
@@ -1171,7 +1182,7 @@ const createManagerApi: CreateManagerApi = ({
         validateForm(config.validate);
       }
 
-      render();
+      render(['error']);
     });
   }
 
@@ -1239,7 +1250,7 @@ const createManagerApi: CreateManagerApi = ({
       state.hasValidationErrors = false;
     }
 
-    render();
+    render(['errors']);
   }
 
   function registerAsyncValidator(validator: Promise<unknown>) {
@@ -1261,15 +1272,16 @@ const createManagerApi: CreateManagerApi = ({
     } else {
       if (config.subscription) {
         let refreshForm: boolean | undefined = false;
-
+        
         traverseObject(config.subscription, (subscribed, key) => {
           if (!refreshForm) {
             refreshForm = subscribed && (key === 'all' || subscribeTo?.includes(key));
           }
         });
-
+        
         if (refreshForm) {
-          const formField = Object.values(state.fieldListeners)?.find((fieldListener: FieldListener) => fieldListener.isForm)?.fields[0];
+          const formFields = Object.values(state.fieldListeners)?.find((fieldListener: FieldListener) => fieldListener.isForm)?.fields;
+          const formField = Object.values(formFields || {})?.[0]
 
           if (formField) {
             formField.render();
@@ -1365,7 +1377,7 @@ const createManagerApi: CreateManagerApi = ({
       state.dirtyFields[name] = false;
       state.dirtyFieldsSinceLastSubmit[name] = false;
 
-      render();
+      render(['values']);
     });
   }
 

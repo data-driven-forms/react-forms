@@ -22,6 +22,7 @@ export interface Subscription {
   touched?: boolean;
   valid?: boolean;
   validating?: boolean;
+  values?: boolean;
   visited?: boolean;
   all?: boolean;
 }

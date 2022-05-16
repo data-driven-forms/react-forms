@@ -1264,6 +1264,7 @@ describe('useField', () => {
         return (
           <React.Fragment>
             <button
+              id={value}
               type="button"
               onClick={() =>
                 rest.onChange({
@@ -1282,21 +1283,24 @@ describe('useField', () => {
         );
       };
 
-      render(
+      const Component = () => (
         <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Dummy name="field" type="file" />
         </FormManagerContext.Provider>
       );
 
-      await userEvent.click(screen.getByText('upload'));
+      render(<Component />);
 
+      await userEvent.click(screen.getByText('upload'));
       expect(managerApi().getState().values).toEqual({
         field: {
           inputFiles: ['blabla'],
           inputValue: '/path/',
         },
       });
-      expect(screen.getByText('/path/')).toBeInTheDocument();
+
+      const spanElement = await screen.findByText('/path/');
+      expect(spanElement).toBeInTheDocument();
     });
   });
 });
