@@ -6,6 +6,7 @@ import mappersSchema from './mappers.schema';
 import customExamplesSchema from './custom-examples.schema';
 import providedMappersSchema from './provider-mappers.schema';
 import utilitiesSchema from './utilities.schema';
+import editorSchema from './editor.schema';
 
 const schema = [
   {
@@ -57,6 +58,12 @@ const schema = [
     link: 'examples',
     noRoute: true,
     fields: customExamplesSchema,
+  },
+  {
+    title: 'Pro Editor',
+    link: 'editor',
+    noRoute: true,
+    fields: editorSchema,
   },
   {
     linkText: 'Form builder',
