@@ -639,7 +639,7 @@ const createManagerApi: CreateManagerApi = ({
         validateForm(config.validate);
       }
 
-      render();
+      render(['pristine']);
     });
   }
 
@@ -749,7 +749,6 @@ const createManagerApi: CreateManagerApi = ({
 
     const syncError = result as FormLevelError | undefined;
     if (syncError) {
-      console.warn({ syncError })
       flatErrors = flatObject(syncError);
       Object.keys(flatErrors).forEach((name) => {
         const value = getFieldValue(name)
