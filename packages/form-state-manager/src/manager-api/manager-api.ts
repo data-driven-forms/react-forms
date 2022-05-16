@@ -13,7 +13,6 @@ import { Meta, Subscription } from '../use-field';
 import { WarningObject } from '../compose-validators';
 import { formLevelValidator, isPromise } from '../validate';
 import { FormValidator, FormLevelError, Validator } from '../validate';
-import findDifference from '../find-difference';
 import FORM_ERROR from '../form-error';
 import focusError from '../focus-error';
 import getCacheKey from '../get-cache-key';
@@ -821,11 +820,8 @@ const createManagerApi: CreateManagerApi = ({
   }
 
   function prepareRerender() {
-    const snapshot = state;
-
-
     return (subscribeTo: Array<string> = []) => {
-      const changedAttributes = [...findDifference(snapshot, state), ...subscribeTo];
+      const changedAttributes = subscribeTo;
       if (isSilent > 0) {
         changedAttributes.forEach((attr) => addIfUnique(silentRender, attr));
       } else if (changedAttributes.length > 0) {
