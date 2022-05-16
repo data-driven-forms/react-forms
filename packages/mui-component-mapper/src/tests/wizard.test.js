@@ -64,7 +64,7 @@ describe('wizard', () => {
     };
   });
 
-  it.only('simple next and back', async () => {
+  it('simple next and back', async () => {
     render(<FormRenderer {...initialProps} />);
 
     expect(screen.getByText('AWS step')).toHaveClass('Mui-active');
