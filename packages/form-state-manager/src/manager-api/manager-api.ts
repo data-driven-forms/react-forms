@@ -13,9 +13,9 @@ import { Meta, Subscription } from '../use-field';
 import { WarningObject } from '../compose-validators';
 import { formLevelValidator, isPromise } from '../validate';
 import { FormValidator, FormLevelError, Validator } from '../validate';
-import findDifference from '../find-difference';
 import FORM_ERROR from '../form-error';
 import focusError from '../focus-error';
+import getCacheKey from '../get-cache-key';
 
 export interface FieldState {
   value: any;
@@ -93,8 +93,14 @@ export interface UpdatedConfig {
   initializeOnMount?: boolean;
 }
 export type UpdateFieldConfig = (field: UpdatedConfig) => void;
+
+export interface AsyncWatcherRecord {
+  [key: number]: Promise<unknown>;
+}
+
 export interface AsyncWatcherApi {
   registerValidator: (callback: Promise<unknown>) => void;
+  getValidators: () => AsyncWatcherRecord
 }
 export interface ListenerField {
   render: FieldRender;
@@ -194,9 +200,7 @@ export interface CreateManagerApiConfig {
   destroyOnUnregister?: boolean;
   name?: string;
 }
-export interface AsyncWatcherRecord {
-  [key: number]: Promise<unknown>;
-}
+
 export type Debug = (formState: ManagerState) => void;
 
 export type AsyncWatcher = (
@@ -282,8 +286,11 @@ const asyncWatcher: AsyncWatcher = (updateValidating, updateSubmitting, updateFo
     nextKey = nextKey + 1;
   };
 
+  const getValidators = () => asyncValidators  
+
   return {
-    registerValidator
+    registerValidator,
+    getValidators,
   };
 };
 
@@ -473,6 +480,7 @@ const createManagerApi: CreateManagerApi = ({
   let flatSubmitErrors: AnyObject = {};
   let flatErrors: AnyObject = {};
   const registeringFields: string[] = [];
+  const validationCache = new Map<string, FieldState>()
 
   function updateRunningValidators(increment: number): void {
     runningValidators = Math.max(runningValidators + increment, 0);
@@ -516,45 +524,65 @@ const createManagerApi: CreateManagerApi = ({
     runFormValidation = false;
   }
 
-  function handleFieldError(name: string, isValid: boolean, error: string | undefined = undefined, validating = false) {
+  function handleFieldError(name: string, isValid: boolean, error: string | undefined = undefined, validating = false, cacheKey: string) {
     const prevMeta = getFieldState(name)?.meta || ({} as Meta);
     const { error: prevError, valid: prevIsValid, validating: prevValidating } = prevMeta;
     if (error !== prevError || isValid !== prevIsValid || validating !== prevValidating) {
       setFieldState(name, (prev: FieldState) => ({
-        ...prev,
-        meta: {
-          ...prev.meta,
-          error,
-          valid: isValid,
-          invalid: !isValid,
-          validating,
-          warning: undefined
-        }
+          ...prev,
+          meta: {
+            ...prev.meta,
+            error,
+            valid: isValid,
+            invalid: !isValid,
+            validating,
+            warning: undefined
+          }
       }));
     }
-
+    
+    validationCache.set(cacheKey, getFieldState(name)!)
     updateError(name, isValid ? undefined : error);
   }
 
-  function handleFieldWarning(name: string, warning: string | undefined = undefined, validating = false) {
+  function handleFieldWarning(name: string, warning: string | undefined = undefined, validating = false, cacheKey: string, ) {
     const prevMeta = getFieldState(name)?.meta || ({} as Meta);
     const { warning: prevWarning, validating: prevValidating } = prevMeta;
     if (warning !== prevWarning || validating !== prevValidating) {
-      setFieldState(name, (prev: FieldState) => ({
-        ...prev,
-        meta: {
-          ...prev.meta,
-          warning,
-          error: undefined,
-          valid: true,
-          invalid: false,
-          validating
-        }
-      }));
+      setFieldState(name, (prev: FieldState) => {        
+        const newState = {
+          ...prev,
+          meta: {
+            ...prev.meta,
+            warning,
+            error: undefined,
+            valid: true,
+            invalid: false,
+            validating
+          }}
+          validationCache.set(cacheKey, newState)
+        return newState});
     }
   }
 
   async function validateField(name: string, value: any) {
+    const cacheKey = getCacheKey({ name, value })
+
+    if(validationCache.has(cacheKey)) {
+      const cacheState = validationCache.get(cacheKey)
+      /**
+       * Skip state update and object
+       * We don't want to create new object reference and this trigger additional rendering
+       * We can re-use the same object instead
+       * 
+       * Error does not have to be updated as the field is in the exact same state as if was in the previous render
+       */
+      if(state.fieldListeners[name].state !== cacheState) {
+        state.fieldListeners[name].state = cacheState!;
+        updateError(name, cacheState!.meta.error)
+      }
+      return
+    }
     if (validationPaused) {
       addIfUnique(revalidatedFields, name);
       return undefined;
@@ -570,22 +598,22 @@ const createManagerApi: CreateManagerApi = ({
       if (validators.length > 0) {
         const result = composeValidators(validators as Validator[])(value, state.values, { ...state.fieldListeners[name].state.meta });
         if (isPromise(result)) {
-          handleFieldError(name, true, undefined, true);
+          handleFieldError(name, true, undefined, true, cacheKey);
           (result as Promise<string | undefined>)
-            .then(() => handleFieldError(name, true, undefined, false))
+            .then(() => handleFieldError(name, true, undefined, false, cacheKey))
             .catch((response) => {
               if (response?.type === 'warning') {
-                handleFieldWarning(name, response.error);
+                handleFieldWarning(name, response.error, undefined, cacheKey);
               } else {
-                handleFieldError(name, false, response as string | undefined, false);
+                handleFieldError(name, false, response as string | undefined, false, cacheKey);
               }
             });
           listener.registerValidator(result as Promise<string | undefined>);
         } else {
           if ((result as WarningObject)?.type === 'warning') {
-            handleFieldWarning(name, (result as WarningObject).error);
+            handleFieldWarning(name, (result as WarningObject).error, undefined, cacheKey);
           } else {
-            handleFieldError(name, !result, result as string | undefined);
+            handleFieldError(name, !result, result as string | undefined, undefined, cacheKey);
           }
         }
       }
@@ -611,7 +639,7 @@ const createManagerApi: CreateManagerApi = ({
         validateForm(config.validate);
       }
 
-      render();
+      render(['pristine']);
     });
   }
 
@@ -711,10 +739,11 @@ const createManagerApi: CreateManagerApi = ({
 
           flatErrors = flatObject(errors);
           Object.keys(flatErrors).forEach((name) => {
-            handleFieldError(name, false, flatErrors[name]);
+            const cacheKey = getCacheKey(name)
+            handleFieldError(name, false, flatErrors[name], undefined, cacheKey);
           });
 
-          render();
+          render(['error']);
         });
     }
 
@@ -722,18 +751,57 @@ const createManagerApi: CreateManagerApi = ({
     if (syncError) {
       flatErrors = flatObject(syncError);
       Object.keys(flatErrors).forEach((name) => {
-        handleFieldError(name, false, flatErrors[name]);
+        const value = getFieldValue(name)
+        const cacheKey = getCacheKey({name, value })
+        const listener = state.fieldListeners[name]?.asyncWatcher;
+        const fieldListeners = Object.values(state.fieldListeners[name]?.fields || {})
+        const validators = []
+        for (let index = 0; index < fieldListeners.length; index++) {
+          const { validate } = fieldListeners[index];
+          if(validate) {
+            validators.push(validate)
+          }
+        }
+
+        validators.push(() => get(syncError, name))
+        const result = composeValidators(validators as Validator[])(value, state.values, { ...state.fieldListeners[name]?.state.meta });
+        if(isPromise(result)) {
+          listener?.registerValidator(result as Promise<string | undefined>);
+          Promise.allSettled(Object.values(listener?.getValidators() || {})).then(() => {
+            handleFieldError(name, true, undefined, true, cacheKey);
+            (result as Promise<string | undefined>)
+              .then(() => {
+                handleFieldError(name, true, undefined, false, cacheKey)
+              })
+              .catch((response) => {
+                if (response?.type === 'warning') {
+                  handleFieldWarning(name, response.error, undefined, cacheKey);
+                } else {
+                  handleFieldError(name, false, response as string | undefined, false, cacheKey);
+                }
+              });
+          })
+        } else {
+          handleFieldError(name, !result, result as string | undefined, undefined, cacheKey);
+        }
       });
       state.errors = syncError;
       state.hasValidationErrors = true;
       state.valid = false;
       state.invalid = true;
+      if(state.errors?.[FORM_ERROR] !== state.error) {
+        rerender(['error'])
+      }
       state.error = state.errors?.[FORM_ERROR];
     } else {
       state.errors = {};
       state.hasValidationErrors = false;
       state.valid = true;
       state.invalid = false;
+
+      if(state.errors?.[FORM_ERROR] !== state.error) {
+        rerender(['error'])
+      }
       state.error = undefined;
       flatErrors = {};
       /**
@@ -744,17 +812,15 @@ const createManagerApi: CreateManagerApi = ({
   }
 
   function revalidateFields(fields: string[]) {
-    fields.forEach((name) => {
+    for (let index = 0; index < fields.length; index++) {
+      const name = fields[index];
       validateField(name, get(state.values, name));
-    });
+    }
   }
 
   function prepareRerender() {
-    const snapshot = cloneDeep(state);
-
     return (subscribeTo: Array<string> = []) => {
-      const changedAttributes = [...findDifference(snapshot, state), ...subscribeTo];
-
+      const changedAttributes = subscribeTo;
       if (isSilent > 0) {
         changedAttributes.forEach((attr) => addIfUnique(silentRender, attr));
       } else if (changedAttributes.length > 0) {
@@ -807,7 +873,7 @@ const createManagerApi: CreateManagerApi = ({
         validateForm(config.validate);
       }
 
-      render();
+      render(['values', 'errors', 'valid', 'invalid']);
     });
   }
 
@@ -883,12 +949,13 @@ const createManagerApi: CreateManagerApi = ({
       })
     );
 
+    
     if (error) {
       return;
     }
-
+    
     const result = config.onSubmit({ ...state.values }, { ...state, values: { ...state.values } }, event);
-
+        
     if (isPromise(result)) {
       setSubmitting();
       const render = prepareRerender();
@@ -897,7 +964,7 @@ const createManagerApi: CreateManagerApi = ({
         .then((errors: unknown) => {
           handleSubmitError(errors);
           updateFieldSubmitMeta();
-          render();
+          render(['error', 'errors', 'valid', 'invalid']);
           focusError(flatSubmitErrors, config.name);
 
           runAfterSubmit();
@@ -905,7 +972,7 @@ const createManagerApi: CreateManagerApi = ({
         .catch(() => {
           handleSubmitError();
           updateFieldSubmitMeta();
-          render();
+          render(['error', 'errors', 'valid', 'invalid']);
         });
     } else {
       const render = prepareRerender();
@@ -913,10 +980,9 @@ const createManagerApi: CreateManagerApi = ({
       handleSubmitError(result);
       updateFieldSubmitMeta();
 
-      render();
-
+      render(['error', 'errors', 'valid', 'invalid']);
+      
       focusError(flatSubmitErrors, config.name);
-
       runAfterSubmit();
     }
   }
@@ -937,7 +1003,7 @@ const createManagerApi: CreateManagerApi = ({
               ...(flatSubmitErrors[name] && { touched: true, valid: false, invalid: true })
             }
           }),
-          true
+          false
         );
       }
     });
@@ -978,7 +1044,7 @@ const createManagerApi: CreateManagerApi = ({
 
     updateFieldSubmitMeta();
 
-    render();
+    render(['submitting']);
   }
 
   function runAfterSubmit() {
@@ -1066,7 +1132,7 @@ const createManagerApi: CreateManagerApi = ({
         }
       }
 
-      render();
+      render(['errors', 'touched', 'valid', 'invalid']);
     });
     isSilent = field.silent ? Math.min(isSilent - 1, 0) : isSilent;
     registeringField = undefined;
@@ -1111,7 +1177,7 @@ const createManagerApi: CreateManagerApi = ({
         validateForm(config.validate);
       }
 
-      render();
+      render(['error', 'errors', 'valid', 'invalid']);
     });
   }
 
@@ -1162,7 +1228,6 @@ const createManagerApi: CreateManagerApi = ({
 
   function updateError(name: string, error: string | undefined = undefined): void {
     const render = prepareRerender();
-
     if (error) {
       set(state.errors, name, error);
       flatErrors[name] = error;
@@ -1180,7 +1245,7 @@ const createManagerApi: CreateManagerApi = ({
       state.hasValidationErrors = false;
     }
 
-    render();
+    render(['error', 'errors', 'valid', 'invalid']);
   }
 
   function registerAsyncValidator(validator: Promise<unknown>) {
@@ -1202,15 +1267,16 @@ const createManagerApi: CreateManagerApi = ({
     } else {
       if (config.subscription) {
         let refreshForm: boolean | undefined = false;
-
+        
         traverseObject(config.subscription, (subscribed, key) => {
           if (!refreshForm) {
             refreshForm = subscribed && (key === 'all' || subscribeTo?.includes(key));
           }
         });
-
+        
         if (refreshForm) {
-          const formField = Object.values(state.fieldListeners)?.find((fieldListener: FieldListener) => fieldListener.isForm)?.fields[0];
+          const formFields = Object.values(state.fieldListeners)?.find((fieldListener: FieldListener) => fieldListener.isForm)?.fields;
+          const formField = Object.values(formFields || {})?.[0]
 
           if (formField) {
             formField.render();
@@ -1306,7 +1372,7 @@ const createManagerApi: CreateManagerApi = ({
       state.dirtyFields[name] = false;
       state.dirtyFieldsSinceLastSubmit[name] = false;
 
-      render();
+      render(['values']);
     });
   }
 

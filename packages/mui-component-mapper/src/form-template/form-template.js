@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { isValidElement } from 'react';
 import { styled } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 import { Grid, Button as MUIButton, Typography } from '@mui/material';
@@ -99,21 +99,21 @@ const StyledAlert = styled(Alert)(() => ({
 }));
 
 export const FormError = ({ formError, alertProps }) => {
-  if (typeof formError === 'object' && (formError.title || formError.title)) {
+  if (isValidElement(formError) || typeof formError === 'string' || typeof formError === 'number') {
+    return (
+      <StyledAlert severity="error" {...alertProps} className={clsx('alert', alertProps?.className)}>
+        {formError}
+      </StyledAlert>
+    );
+  }
+
+  if (typeof formError === 'object' && (formError.title || formError.description)) {
     const { title, description, TitleProps, className, ...props } = formError;
 
     return (
       <StyledAlert severity="error" {...props} {...alertProps} className={clsx('alert', alertProps?.className, className)}>
         {title && <AlertTitle {...TitleProps}>{title}</AlertTitle>}
         {description}
-      </StyledAlert>
-    );
-  }
-
-  if (formError) {
-    return (
-      <StyledAlert severity="error" {...alertProps} className={clsx('alert', alertProps?.className)}>
-        {formError}
       </StyledAlert>
     );
   }

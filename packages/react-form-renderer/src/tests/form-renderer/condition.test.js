@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import FormTemplate from '../../../../../__mocks__/mock-form-template';
@@ -276,10 +276,6 @@ describe('condition test', () => {
     onSubmit.mockClear();
 
     await userEvent.click(screen.getByText('Reset'));
-
-    await act(async () => {
-      jest.runAllTimers();
-    });
 
     await userEvent.click(screen.getByText('Submit'));
 

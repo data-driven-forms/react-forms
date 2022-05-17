@@ -346,9 +346,9 @@ describe('useField', () => {
         managerApi().change('field-1', 'foo');
       });
       /**
-       * Only field one should trigger render only one extra render should be triggered
+       * Both fields should trigger render because they are subscribed to the "valid" event
        */
-      expect(renderCount).toEqual(5);
+      expect(renderCount).toEqual(6);
     });
   });
 
@@ -1282,21 +1282,24 @@ describe('useField', () => {
         );
       };
 
-      render(
+      const Component = () => (
         <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Dummy name="field" type="file" />
         </FormManagerContext.Provider>
       );
 
-      await userEvent.click(screen.getByText('upload'));
+      render(<Component />);
 
+      await userEvent.click(screen.getByText('upload'));
       expect(managerApi().getState().values).toEqual({
         field: {
           inputFiles: ['blabla'],
           inputValue: '/path/',
         },
       });
-      expect(screen.getByText('/path/')).toBeInTheDocument();
+
+      const spanElement = await screen.findByText('/path/');
+      expect(spanElement).toBeInTheDocument();
     });
   });
 });

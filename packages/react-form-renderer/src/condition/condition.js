@@ -46,26 +46,21 @@ const Condition = React.memo(
       if (setters && setters.length > 0 && (state.initial || !isEqual(setters, state.sets))) {
         setters.forEach((setter, index) => {
           if (setter && (state.initial || !isEqual(setter, state.sets[index]))) {
-            setTimeout(() => {
-              /**
-               * We have to get the meta in the timetout to wait for state initialization
-               */
-              const meta = formOptions.getFieldState(field.name);
-              const isFormModified = Object.values(formOptions.getState().modified).some(Boolean);
-              /**
-               * Apply setter only
-               *    - field has no initial value
-               *    - form is modified
-               *    - when meta is false = field was unmounted before timeout, we finish the condition
-               */
-              if (!meta || isFormModified || typeof meta.initial === 'undefined') {
-                formOptions.batch(() => {
-                  Object.entries(setter).forEach(([name, value]) => {
-                    formOptions.change(name, value);
-                  });
+            const meta = formOptions.getFieldState(field.name);
+            const isFormModified = Object.values(formOptions.getState().modified).some(Boolean);
+            /**
+             * Apply setter only
+             *    - field has no initial value
+             *    - form is modified
+             *    - when meta is false = field was unmounted before timeout, we finish the condition
+             */
+            if (!meta || isFormModified || typeof meta.initial === 'undefined') {
+              formOptions.batch(() => {
+                Object.entries(setter).forEach(([name, value]) => {
+                  formOptions.change(name, value);
                 });
-              }
-            });
+              });
+            }
           }
         });
         dispatch({ type: 'rememberSets', sets: setters });
