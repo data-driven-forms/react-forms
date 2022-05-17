@@ -121,6 +121,7 @@ export interface FieldListener {
   fields: FieldListenerFields;
   validateFields?: Array<string>;
   isForm?: boolean;
+  isEqual?: IsEqual;
 }
 
 export interface FieldListeners {
@@ -841,14 +842,7 @@ const createManagerApi: CreateManagerApi = ({
       state.dirtyFields[name] = true;
       state.dirtyFieldsSinceLastSubmit[name] = true;
 
-      const allIsEqual: Array<IsEqual> = state.fieldListeners[name]
-        ? Object.values(state.fieldListeners[name].fields)
-          .map(({ isEqual }) => isEqual as IsEqual, [])
-          .filter(Boolean)
-        : [];
-
-      const isEqualFn =
-        allIsEqual.length > 0 ? (a: any, b: any) => allIsEqual.reduce((acc: boolean, curr: IsEqual) => acc && curr(a, b), true) : defaultIsEqual;
+      const isEqualFn = state.fieldListeners[name]?.isEqual || defaultIsEqual;
 
       const pristine = isEqualFn(value, state.fieldListeners[name]?.state?.meta?.initial || get(state.initialValues, name));
 
@@ -1089,6 +1083,16 @@ const createManagerApi: CreateManagerApi = ({
     return setDirty;
   }
 
+  function recalculateIsEqual(field: FieldConfig) {
+    const allIsEqual: Array<IsEqual> = state.fieldListeners[field.name]
+      ? Object.values(state.fieldListeners[field.name].fields)
+        .map(({ isEqual }) => isEqual as IsEqual, [])
+        .filter(Boolean)
+      : [];
+
+    state.fieldListeners[field.name].isEqual = allIsEqual.length > 0 ? (a: any, b: any) => allIsEqual.reduce((acc: boolean, curr: IsEqual) => acc && curr(a, b), true) : undefined;
+  }
+
   function registerField(field: FieldConfig): void {
     isSilent = field.silent ? isSilent + 1 : isSilent;
     registeringField = field.internalId || field.name;
@@ -1131,6 +1135,8 @@ const createManagerApi: CreateManagerApi = ({
           validateForm(config.validate);
         }
       }
+
+      recalculateIsEqual(field);
 
       render(['errors', 'touched', 'valid', 'invalid']);
     });
@@ -1176,6 +1182,8 @@ const createManagerApi: CreateManagerApi = ({
       if (config.validate) {
         validateForm(config.validate);
       }
+
+      recalculateIsEqual(field as FieldConfig);
 
       render(['error', 'errors', 'valid', 'invalid']);
     });
