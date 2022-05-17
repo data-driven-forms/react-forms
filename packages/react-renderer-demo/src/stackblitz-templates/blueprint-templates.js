@@ -2,11 +2,11 @@ export const html = `
 <html>
   <head>
     <!-- Style dependencies -->
-    <link href="https://unpkg.com/normalize.css@^7.0.0" rel="stylesheet" />
+    <link href="https://unpkg.com/normalize.css@^8.0.1" rel="stylesheet" />
     <!-- Blueprint stylesheets -->
-    <link href="https://unpkg.com/@blueprintjs/icons@^3.4.0/lib/css/blueprint-icons.css" rel="stylesheet" />
-    <link href="https://unpkg.com/@blueprintjs/core@^3.10.0/lib/css/blueprint.css" rel="stylesheet" />
-    <link href="https://unpkg.com/@blueprintjs/datetime@^3.10.0/lib/css/blueprint-datetime.css" rel="stylesheet" />
+    <link href="https://unpkg.com/@blueprintjs/icons@^4.2.4/lib/css/blueprint-icons.css" rel="stylesheet" />
+    <link href="https://unpkg.com/@blueprintjs/core@^4.2.1/lib/css/blueprint.css" rel="stylesheet" />
+    <link href="https://unpkg.com/@blueprintjs/datetime@^4.1.4//lib/css/blueprint-datetime.css" rel="stylesheet" />
   </head>
   <body>
     <div id="root"></div>

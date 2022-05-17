@@ -32,7 +32,7 @@ const List = ({ value, optionClick, noOptionsTitle, filterValue, filterValueText
   const { menu } = useStyles();
 
   return (
-    <Menu {...MenuProps} className={clsx('bp3-elevation-1', menu, MenuProps.className)}>
+    <Menu {...MenuProps} className={clsx('bp4-elevation-1', menu, MenuProps.className)}>
       {value.length < 1 && <MenuItem text={filterValue ? filterValueText : noOptionsTitle} disabled {...MenuItemProps} />}
       {value.length > 0 &&
         value.map(({ value, label, MenuItemProps: ItemMenuItemProps }) => (

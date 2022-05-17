@@ -2,7 +2,7 @@ const withMDX = require('@next/mdx')({
   extension: /\.mdx?$/,
 });
 const path = require('path');
-const withOffline = require('next-offline');
+const withOffline = require('@rvsia/next-offline');
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',

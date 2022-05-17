@@ -2,7 +2,7 @@ import React from 'react';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Link from 'next/link';
-import { Star } from 'react-github-buttons';
+import GitHubButton from 'react-github-btn';
 
 import LandingPageTitle from '@docs/components/landing-page/landing-page-title';
 import LandingPageCards from '@docs/components/landing-page/landing-page-cards';
@@ -46,6 +46,7 @@ const Root = styled(Typography)(({ theme }) => ({
   },
   '& .github-star': {
     textDecoration: 'none',
+    marginRight: '8px',
     '& button': {
       lineHeight: 1.43,
       padding: '1px 6px',
@@ -76,7 +77,14 @@ const LandingPage = () => (
       </div>
       <div className="landing-page-npm-link">
         <span className="github-star">
-          <Star owner="data-driven-forms" repo="react-forms" />
+          <GitHubButton
+            href="https://github.com/data-driven-forms/react-forms"
+            data-icon="octicon-star"
+            data-show-count="true"
+            aria-label="Star data-driven-forms/react-forms on GitHub"
+          >
+            Star
+          </GitHubButton>{' '}
         </span>
         <a href="https://badge.fury.io/js/%40data-driven-forms%2Freact-form-renderer" rel="noopener noreferrer" target="_blank">
           <img src="https://badge.fury.io/js/%40data-driven-forms%2Freact-form-renderer.svg" alt="current version" />
