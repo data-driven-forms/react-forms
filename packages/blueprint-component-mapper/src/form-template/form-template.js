@@ -65,7 +65,7 @@ InnerButton.propTypes = {
 };
 
 const BlueprintFormTemplate = ({ requiredLabelInfo, ...props }) => (
-  <BlueprintContext.Provider value={{ required: requiredLabelInfo || <span className="bp3-text-muted">(required)</span> }}>
+  <BlueprintContext.Provider value={{ required: requiredLabelInfo || <span className="bp4-text-muted">(required)</span> }}>
     <FormTemplate FormWrapper={Form} Button={InnerButton} ButtonGroup={ButtonGroup} Title={Title} Description={Description} {...props} />
   </BlueprintContext.Provider>
 );

@@ -176,10 +176,10 @@ describe('formFields generated tests', () => {
 
           if (component === componentTypes.RADIO) {
             options.forEach((opt) => {
-              expect(screen.getByText(opt.label)).toHaveClass('bp3-disabled');
+              expect(screen.getByText(opt.label)).toHaveClass('bp4-disabled');
             });
           } else if ([componentTypes.SLIDER, componentTypes.DATE_PICKER, componentTypes.TIME_PICKER, componentTypes.SELECT].includes(component)) {
-            expect(container.getElementsByClassName('bp3-disabled')).toHaveLength(1);
+            expect(container.getElementsByClassName('bp4-disabled')).toHaveLength(1);
           } else {
             expect(screen.getAllByLabelText(field.name)[0]).toBeDisabled();
           }
@@ -195,10 +195,10 @@ describe('formFields generated tests', () => {
 
           if (component === componentTypes.RADIO) {
             options.forEach((opt) => {
-              expect(screen.getByText(opt.label)).toHaveClass('bp3-disabled');
+              expect(screen.getByText(opt.label)).toHaveClass('bp4-disabled');
             });
           } else if ([componentTypes.SLIDER, componentTypes.DATE_PICKER, componentTypes.TIME_PICKER, componentTypes.SELECT].includes(component)) {
-            expect(container.getElementsByClassName('bp3-disabled')).toHaveLength(1);
+            expect(container.getElementsByClassName('bp4-disabled')).toHaveLength(1);
           } else {
             expect(screen.getAllByLabelText(field.name)[0]).toBeDisabled();
           }
