@@ -36,10 +36,9 @@ const StyledGrid = styled(Grid)(() => ({
   },
 }));
 
-const NextButton = ({ nextStep, handleNext, nextLabel, getState, handleSubmit, submitLabel, conditionalSubmitFlag }) => {
+const NextButton = ({ nextStep, valid, handleNext, nextLabel, getState, handleSubmit, submitLabel, conditionalSubmitFlag }) => {
   const nextResult = nextStep ? selectNext(nextStep, getState) : nextStep;
   const progressNext = nextResult !== conditionalSubmitFlag && nextStep;
-  const { valid } = getState();
   return (
     <Button
       variant="contained"
@@ -56,6 +55,7 @@ NextButton.propTypes = {
   nextStep: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.object]),
   handleSubmit: PropTypes.func.isRequired,
   submitLabel: PropTypes.node.isRequired,
+  valid: PropTypes.bool,
   handleNext: PropTypes.func.isRequired,
   nextLabel: PropTypes.node.isRequired,
   getState: PropTypes.func.isRequired,
@@ -86,7 +86,7 @@ const WizardStepButtons = ({ buttons: Buttons, ...props }) => {
       {...ButtonContainerProps}
       className={clsx(classes.buttonsContainer, ButtonContainerProps.className)}
     >
-      <FormSpy>
+      <FormSpy subscription={{ values: true, valid: true, validating: true, submitting: true }}>
         {() => (
           <React.Fragment>
             <Grid item md={2} xs={2}>

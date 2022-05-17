@@ -15,7 +15,7 @@ describe('<WizardStep />', () => {
         renderForm: (item) => <div key={item}>{item}</div>,
         onCancel: jest.fn(),
         handleSubmit: jest.fn(),
-        getState: jest.fn().mockReturnValue({}),
+        getState: jest.fn(),
       },
       handlePrev: jest.fn(),
       handleNext: jest.fn(),

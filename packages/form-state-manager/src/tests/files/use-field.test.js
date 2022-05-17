@@ -346,9 +346,9 @@ describe('useField', () => {
         managerApi().change('field-1', 'foo');
       });
       /**
-       * Only field one should trigger render only one extra render should be triggered
+       * Both fields should trigger render because they are subscribed to the "valid" event
        */
-      expect(renderCount).toEqual(5);
+      expect(renderCount).toEqual(6);
     });
   });
 
@@ -1264,7 +1264,6 @@ describe('useField', () => {
         return (
           <React.Fragment>
             <button
-              id={value}
               type="button"
               onClick={() =>
                 rest.onChange({

@@ -843,8 +843,14 @@ describe('managerApi', () => {
       managerApi().registerField({ ...field1, subscription: { valid: true } }, false, true);
       managerApi().registerField({ ...field2 });
 
-      expect(renderField1).not.toHaveBeenCalled();
+      /**
+       * Valid render is done uppon registration
+       */
+      expect(renderField1).toHaveBeenCalled();
       expect(renderField2).not.toHaveBeenCalled();
+
+      renderField1.mockReset();
+      renderField2.mockReset();
 
       managerApi().rerender(['values']);
 
@@ -920,6 +926,14 @@ describe('managerApi', () => {
       managerApi().registerField(field2);
       managerApi().registerField(field3);
 
+      expect(render.mock.calls.length).toEqual(0); // values subscribtion is not triggered uppon registration
+      expect(render2.mock.calls.length).toEqual(1); // valid subscription is triggerd uppon registration
+      expect(render3.mock.calls.length).toEqual(0); // invalid subscription triggered but form state is valid
+
+      render.mockReset();
+      render2.mockReset();
+      render3.mockReset();
+
       managerApi().batch(() => {
         managerApi().rerender(['values']);
         managerApi().rerender(['values']);
@@ -972,6 +986,14 @@ describe('managerApi', () => {
       managerApi().registerField(field);
       managerApi().registerField(field2);
       managerApi().registerField(field3);
+
+      expect(render.mock.calls.length).toEqual(0); // values subscribtion is not triggered uppon registration
+      expect(render2.mock.calls.length).toEqual(1); // valid subscription is triggerd uppon registration
+      expect(render3.mock.calls.length).toEqual(0); // invalid subscription triggered but form state is valid
+
+      render.mockReset();
+      render2.mockReset();
+      render3.mockReset();
 
       managerApi().batch(() => {
         managerApi().rerender(['values']);

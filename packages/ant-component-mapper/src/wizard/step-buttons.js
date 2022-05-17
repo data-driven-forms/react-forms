@@ -3,10 +3,19 @@ import PropTypes from 'prop-types';
 import { Button } from 'antd';
 import selectNext from '@data-driven-forms/common/wizard/select-next';
 
-const NextButton = ({ nextStep, handleNext, handleSubmit, buttonLabels, getState, NextButtonProps, SubmitButtonProps, conditionalSubmitFlag }) => {
+const NextButton = ({
+  nextStep,
+  handleNext,
+  handleSubmit,
+  buttonLabels,
+  getState,
+  valid,
+  NextButtonProps,
+  SubmitButtonProps,
+  conditionalSubmitFlag,
+}) => {
   const nextResult = nextStep ? selectNext(nextStep, getState) : nextStep;
   const progressNext = nextResult !== conditionalSubmitFlag && nextStep;
-  const { valid } = getState();
   return (
     <Button
       type="primary"

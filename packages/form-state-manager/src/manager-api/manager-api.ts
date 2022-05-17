@@ -873,7 +873,7 @@ const createManagerApi: CreateManagerApi = ({
         validateForm(config.validate);
       }
 
-      render(['values', 'errors']);
+      render(['values', 'errors', 'valid', 'invalid']);
     });
   }
 
@@ -964,7 +964,7 @@ const createManagerApi: CreateManagerApi = ({
         .then((errors: unknown) => {
           handleSubmitError(errors);
           updateFieldSubmitMeta();
-          render(['error', 'errors']);
+          render(['error', 'errors', 'valid', 'invalid']);
           focusError(flatSubmitErrors, config.name);
 
           runAfterSubmit();
@@ -972,7 +972,7 @@ const createManagerApi: CreateManagerApi = ({
         .catch(() => {
           handleSubmitError();
           updateFieldSubmitMeta();
-          render(['error', 'errors']);
+          render(['error', 'errors', 'valid', 'invalid']);
         });
     } else {
       const render = prepareRerender();
@@ -980,7 +980,7 @@ const createManagerApi: CreateManagerApi = ({
       handleSubmitError(result);
       updateFieldSubmitMeta();
 
-      render(['error', 'errors']);
+      render(['error', 'errors', 'valid', 'invalid']);
       
       focusError(flatSubmitErrors, config.name);
       runAfterSubmit();
@@ -1132,7 +1132,7 @@ const createManagerApi: CreateManagerApi = ({
         }
       }
 
-      render(['error', 'touched']);
+      render(['errors', 'touched', 'valid', 'invalid']);
     });
     isSilent = field.silent ? Math.min(isSilent - 1, 0) : isSilent;
     registeringField = undefined;
@@ -1177,7 +1177,7 @@ const createManagerApi: CreateManagerApi = ({
         validateForm(config.validate);
       }
 
-      render(['error']);
+      render(['error', 'errors', 'valid', 'invalid']);
     });
   }
 
@@ -1245,7 +1245,7 @@ const createManagerApi: CreateManagerApi = ({
       state.hasValidationErrors = false;
     }
 
-    render(['errors']);
+    render(['error', 'errors', 'valid', 'invalid']);
   }
 
   function registerAsyncValidator(validator: Promise<unknown>) {

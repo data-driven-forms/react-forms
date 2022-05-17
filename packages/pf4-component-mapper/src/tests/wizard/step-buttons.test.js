@@ -28,8 +28,8 @@ describe('<WizardSTepButtons', () => {
         onCancel: jest.fn(),
         handleSubmit: jest.fn(),
         submit: jest.fn(),
+        valid: true,
         getState: () => ({
-          valid: true,
           validating: false,
         }),
       },
@@ -84,10 +84,7 @@ describe('<WizardSTepButtons', () => {
           handleNext={handleNext}
           formOptions={{
             ...initialProps.formOptions,
-            getState: () => ({
-              valid: true,
-              values: { foo: 'foo' },
-            }),
+            getState: () => ({ values: { foo: 'foo' } }),
           }}
           nextStep={{
             when: 'foo',
