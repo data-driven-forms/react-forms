@@ -6,7 +6,7 @@ export interface TextFieldProps {
   id: string;
 }
 
-const TextField: React.ComponentType<React.HTMLProps<HTMLInputElement> & TextFieldProps & UseFieldConfig> = ({ label, id, ...props }) => {
+const TextField: React.FunctionComponent<React.HTMLProps<HTMLInputElement> & TextFieldProps & UseFieldConfig> = ({ label, id, ...props }) => {
   const {
     input,
     meta: { valid, error, validating, touched },

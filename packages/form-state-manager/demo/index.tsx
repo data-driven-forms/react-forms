@@ -23,8 +23,8 @@ const App = () => {
           {({ handleSubmit }) => {
             return (
               <form onSubmit={handleSubmit}>
-                <Field name="one" id="one" type="text" placeholder="one" />
-                <Field name="two" id="two" type="text" placeholder="two" />
+                <TextField label="pepa" name="one" id="one" type="text" placeholder="one" />
+                <TextField label="pep1a" name="two" id="two" type="text" placeholder="two" />
                 <button type="submit">Submit</button>
               </form>
             );

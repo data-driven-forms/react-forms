@@ -255,6 +255,8 @@ const isLast = (fieldListeners: AnyObject, name: string, registeringFields: stri
 
 const noState = (fieldListeners: AnyObject, name: string) => !fieldListeners?.[name]?.state;
 
+const shouldAddUnique = (array: Array<string>, item: string) => !array.includes(item);
+
 const addIfUnique = (array: Array<string>, item: string) => !array.includes(item) && array.push(item);
 
 export const shouldExecute = (formLevel: boolean | undefined, fieldLevel: boolean | undefined): boolean =>
@@ -623,7 +625,7 @@ const createManagerApi: CreateManagerApi = ({
 
   function reset(resetInitialValues?: AnyObject) {
     batch(() => {
-      const render = prepareRerender();
+      const [,render] = prepareRerender();
 
       state = {
         ...state,
@@ -646,8 +648,8 @@ const createManagerApi: CreateManagerApi = ({
 
   function initialize(initialValues: AnyObject | InitilizeInputFunction = {}) {
     batch(() => {
-      const render = prepareRerender();
-      state.pristine = true;
+      const [modify, render, modifyNamed] = prepareRerender();
+      modify('pristine', true);
 
       const convertedValues = typeof initialValues === 'function' ? initialValues(state.values) : initialValues;
       let clonedValues = cloneDeep(convertedValues);
@@ -677,7 +679,7 @@ const createManagerApi: CreateManagerApi = ({
                 }
               }));
 
-              state.dirtyFields[key] = fieldState.meta.dirty;
+              modifyNamed('dirtyFields', fieldState.meta.dirty, key);
             } else {
               clonedValues = omit(clonedValues, key);
             }
@@ -692,14 +694,13 @@ const createManagerApi: CreateManagerApi = ({
               }
             }));
 
-            state.dirtyFields[key] = fieldState.meta.dirty;
+            modifyNamed('dirtyFields', fieldState.meta.dirty, key);
           }
         }
       });
 
-      state.initialValues = initialValues;
-
-      state.values = merge(removeEmpty(clonedValues), dirtyFields);
+      modify('initialValues', initialValues);
+      modify('values', merge(removeEmpty(clonedValues), dirtyFields))
 
       render();
     });
@@ -716,12 +717,15 @@ const createManagerApi: CreateManagerApi = ({
     if (isPromise(result)) {
       const asyncResult = result as Promise<FormLevelError>;
 
-      flatErrors = {};
-      state.errors = {};
-      state.hasValidationErrors = false;
-      state.valid = true;
-      state.invalid = false;
-      state.error = undefined;
+      const [modify,render] = prepareRerender();
+
+      modify('errors', {});
+      modify('hasValidationErrors', false);
+      modify('valid', true);
+      modify('invalid', false);
+      modify('error', undefined);
+
+      render();
 
       return asyncResult
         .then(() => {
@@ -730,13 +734,13 @@ const createManagerApi: CreateManagerApi = ({
           }
         })
         .catch((errors) => {
-          const render = prepareRerender();
+          const [modify,render] = prepareRerender();
 
-          state.errors = errors;
-          state.hasValidationErrors = true;
-          state.valid = false;
-          state.invalid = true;
-          state.error = state.errors?.[FORM_ERROR];
+          modify('errors', errors);
+          modify('hasValidationErrors', true);
+          modify('valid', false);
+          modify('invalid', true);
+          modify('error', state.errors?.[FORM_ERROR]);
 
           flatErrors = flatObject(errors);
           Object.keys(flatErrors).forEach((name) => {
@@ -744,7 +748,7 @@ const createManagerApi: CreateManagerApi = ({
             handleFieldError(name, false, flatErrors[name], undefined, cacheKey);
           });
 
-          render(['error']);
+          render();
         });
     }
 
@@ -786,25 +790,27 @@ const createManagerApi: CreateManagerApi = ({
           handleFieldError(name, !result, result as string | undefined, undefined, cacheKey);
         }
       });
-      state.errors = syncError;
-      state.hasValidationErrors = true;
-      state.valid = false;
-      state.invalid = true;
-      if(state.errors?.[FORM_ERROR] !== state.error) {
-        rerender(['error'])
-      }
-      state.error = state.errors?.[FORM_ERROR];
-    } else {
-      state.errors = {};
-      state.hasValidationErrors = false;
-      state.valid = true;
-      state.invalid = false;
+      const [modify,render] = prepareRerender();
 
-      if(state.errors?.[FORM_ERROR] !== state.error) {
-        rerender(['error'])
-      }
-      state.error = undefined;
+      modify('errors', syncError);
+      modify('hasValidationErrors', true);
+      modify('valid', false);
+      modify('invalid', true);
+      modify('error', state.errors?.[FORM_ERROR]);
+      flatErrors = flatObject(syncError);
+
+      render();
+    } else {
+      const [modify,render] = prepareRerender();
+
+      modify('errors', {});
+      modify('hasValidationErrors', false);
+      modify('valid', true);
+      modify('invalid', false);
+      modify('error', undefined);
       flatErrors = {};
+
+      render();
       /**
        * Fields have to be revalidated on field level to synchronize the form and field errors
        */
@@ -819,28 +825,56 @@ const createManagerApi: CreateManagerApi = ({
     }
   }
 
-  function prepareRerender() {
-    return (subscribeTo: Array<string> = []) => {
-      const changedAttributes = subscribeTo;
+  type ModifyFn = (attribute: keyof Omit<ManagerState, ManagerApiFunctions | 'destroyOnUnregister'>, value: unknown) => void;
+
+  type PrepareRenderReturnType = [
+    ModifyFn,
+    (subscribeTo?: Array<keyof Omit<ManagerState, ManagerApiFunctions | 'destroyOnUnregister'>>) => void,
+    (attribute: keyof Omit<ManagerState, ManagerApiFunctions | 'destroyOnUnregister'>, value: unknown, name: string) => void
+  ];
+
+  function prepareRerender(): PrepareRenderReturnType {
+    let changedAttributes: (keyof Omit<ManagerState, ManagerApiFunctions | 'destroyOnUnregister'>)[] = [];
+
+    const modify = (attribute:  keyof Omit<ManagerState, ManagerApiFunctions | 'destroyOnUnregister'>, value: unknown) => {
+      if(state[attribute] !== value) {
+        addIfUnique(changedAttributes, attribute);
+        state[attribute] = value;
+      }
+    }
+
+    const modifyNamed = (attribute: keyof Omit<ManagerState, ManagerApiFunctions | 'destroyOnUnregister'>, value: unknown, name: string) => {
+      if(state[attribute][name] !== value) {
+        addIfUnique(changedAttributes, attribute);
+        state[attribute][name] = value;
+      }
+    }
+
+    const render = (subscribeTo: Array<keyof Omit<ManagerState, ManagerApiFunctions | 'destroyOnUnregister'>> = []) => {
+      changedAttributes = [...changedAttributes, ...subscribeTo];
       if (isSilent > 0) {
         changedAttributes.forEach((attr) => addIfUnique(silentRender, attr));
       } else if (changedAttributes.length > 0) {
         rerender(changedAttributes);
       }
-    };
+    }
+
+    return [modify, render, modifyNamed];
   }
 
   function change(name: string, value?: any): void {
     // TODO modify all affected field state variables
     batch(() => {
-      const render = prepareRerender();
+      const [modify, render, modifyNamed] = prepareRerender();
+
       set(state.values, name, value);
-      state.visited[name] = true;
-      state.modified[name] = true;
-      state.modifiedSinceLastSubmit = true;
-      state.dirtySinceLastSubmit = true;
-      state.dirtyFields[name] = true;
-      state.dirtyFieldsSinceLastSubmit[name] = true;
+
+      modifyNamed('visited', true, name);
+      modifyNamed('modified', true, name);
+      modifyNamed('dirtyFields', true, name);
+      modifyNamed('dirtyFieldsSinceLastSubmit', true, name);
+      modify('modifiedSinceLastSubmit', true)
+      modify('dirtySinceLastSubmit', true)
 
       const isEqualFn = state.fieldListeners[name]?.isEqual || defaultIsEqual;
 
@@ -858,8 +892,8 @@ const createManagerApi: CreateManagerApi = ({
 
       const setDirty = isFormDirty();
 
-      state.pristine = !setDirty;
-      state.dirty = setDirty;
+      modify('pristine', !setDirty)
+      modify('dirty', setDirty)
 
       revalidateFields([name, ...(state.fieldListeners[name]?.validateFields || state.registeredFields.filter((n) => n !== name))]);
 
@@ -867,7 +901,7 @@ const createManagerApi: CreateManagerApi = ({
         validateForm(config.validate);
       }
 
-      render(['values', 'errors', 'valid', 'invalid']);
+      render(['values']);
     });
   }
 
@@ -877,10 +911,10 @@ const createManagerApi: CreateManagerApi = ({
 
   function focus(name: string): void {
     if (state.active !== name) {
-      const render = prepareRerender();
+      const [modify, render, modifyNamed] = prepareRerender();
 
-      state.active = name;
-      state.visited[name] = true;
+      modify('active', name);
+      modifyNamed('visited', true, name);
       setFieldState(name, (prevState) => ({ ...prevState, meta: { ...prevState.meta, visited: true, active: true } }));
 
       render();
@@ -943,39 +977,39 @@ const createManagerApi: CreateManagerApi = ({
       })
     );
 
-    
+
     if (error) {
       return;
     }
-    
+
     const result = config.onSubmit({ ...state.values }, { ...state, values: { ...state.values } }, event);
-        
+
     if (isPromise(result)) {
       setSubmitting();
-      const render = prepareRerender();
+      const [modify, render] = prepareRerender();
 
       result
         .then((errors: unknown) => {
-          handleSubmitError(errors);
+          handleSubmitError(modify, errors);
           updateFieldSubmitMeta();
-          render(['error', 'errors', 'valid', 'invalid']);
+          render();
           focusError(flatSubmitErrors, config.name);
 
           runAfterSubmit();
         })
         .catch(() => {
-          handleSubmitError();
+          handleSubmitError(modify);
           updateFieldSubmitMeta();
-          render(['error', 'errors', 'valid', 'invalid']);
+          render();
         });
     } else {
-      const render = prepareRerender();
+      const [modify,render] = prepareRerender();
 
-      handleSubmitError(result);
+      handleSubmitError(modify, result);
       updateFieldSubmitMeta();
 
-      render(['error', 'errors', 'valid', 'invalid']);
-      
+      render();
+
       focusError(flatSubmitErrors, config.name);
       runAfterSubmit();
     }
@@ -1003,42 +1037,43 @@ const createManagerApi: CreateManagerApi = ({
     });
   }
 
-  function handleSubmitError(errors?: any): void {
-    state.submitting = false;
+  function handleSubmitError(modify: ModifyFn, errors?: unknown): void {
+    modify('submitting', false);
+
     if (errors) {
-      state.submitErrors = errors;
-      state.hasSubmitErrors = true;
-      state.submitFailed = true;
-      state.submitSucceeded = false;
-      state.submitError = state.submitErrors?.[FORM_ERROR];
-      flatSubmitErrors = flatObject(errors);
-      state.valid = false;
-      state.invalid = true;
+      modify('submitErrors', errors);
+      modify('hasSubmitErrors', true);
+      modify('submitFailed', true);
+      modify('submitSucceeded', false);
+      modify('submitError', state.submitErrors?.[FORM_ERROR]);
+      modify('valid', false);
+      modify('invalid', true);
+      flatSubmitErrors = flatObject(errors as AnyObject);
     } else {
-      state.submitErrors = undefined;
-      state.hasSubmitErrors = false;
-      state.submitFailed = false;
-      state.submitSucceeded = true;
-      state.submitError = undefined;
+      modify('submitErrors', undefined);
+      modify('hasSubmitErrors', false);
+      modify('submitFailed', false);
+      modify('submitSucceeded', true);
+      modify('submitError', undefined);
+      modify('valid', true);
+      modify('invalid', false);
       flatSubmitErrors = {};
-      state.valid = true;
-      state.invalid = false;
     }
   }
 
   function setSubmitting() {
-    const render = prepareRerender();
+    const [modify, render] = prepareRerender();
 
-    state.submitErrors = undefined;
-    state.hasSubmitErrors = false;
-    state.submitFailed = false;
-    state.submitSucceeded = false;
-    state.submitting = true;
-    state.submitError = undefined;
+    modify('submitErrors', undefined);
+    modify('hasSubmitErrors', false);
+    modify('submitFailed', false);
+    modify('submitSucceeded', false);
+    modify('submitError', undefined);
+    modify('submitting', true);
 
     updateFieldSubmitMeta();
 
-    render(['submitting']);
+    render();
   }
 
   function runAfterSubmit() {
@@ -1097,9 +1132,13 @@ const createManagerApi: CreateManagerApi = ({
     isSilent = field.silent ? isSilent + 1 : isSilent;
     registeringField = field.internalId || field.name;
     field.silent && registeringFields.push(field.name);
+
     batch(() => {
-      const render = prepareRerender();
-      addIfUnique(state.registeredFields, field.name);
+      const [modify, render, modifyNamed] = prepareRerender();
+
+      if(shouldAddUnique(state.registeredFields, field.name)) {
+        modify('registeredFields', [...state.registeredFields, field.name])
+      }
 
       let setDirty = initializeFieldValue(field);
 
@@ -1119,9 +1158,10 @@ const createManagerApi: CreateManagerApi = ({
       }
 
       if (setDirty) {
-        state.pristine = false;
-        state.dirty = true;
-        state.dirtyFields[field.name] = true;
+        modify('pristine', false);
+        modify('dirty', true);
+        modifyNamed('dirtyFields', true, field.name);
+
         state.fieldListeners[field.name].state.meta.dirty = true;
         state.fieldListeners[field.name].state.meta.pristine = false;
       }
@@ -1138,7 +1178,7 @@ const createManagerApi: CreateManagerApi = ({
 
       recalculateIsEqual(field);
 
-      render(['errors', 'touched', 'valid', 'invalid']);
+      render(['valid']);
     });
     isSilent = field.silent ? Math.min(isSilent - 1, 0) : isSilent;
     registeringField = undefined;
@@ -1163,13 +1203,15 @@ const createManagerApi: CreateManagerApi = ({
 
   function unregisterField(field: Omit<FieldConfig, 'render'>): void {
     batch(() => {
-      const render = prepareRerender();
+      const [modify,render] = prepareRerender();
       delete state.fieldListeners[field.name].fields[field.internalId];
+      let valuesChanged = false;
 
       if (isLast(state.fieldListeners, field.name, registeringFields)) {
-        state.registeredFields = state.registeredFields.filter((fieldName: string) => fieldName !== field.name);
+        modify('registeredFields', state.registeredFields.filter((fieldName: string) => fieldName !== field.name));
         if (shouldExecute(config.clearOnUnmount || config.destroyOnUnregister, field.clearOnUnmount)) {
           set(state.values, field.name, field.value);
+          valuesChanged = true;
         }
 
         updateError(field.name);
@@ -1185,7 +1227,7 @@ const createManagerApi: CreateManagerApi = ({
 
       recalculateIsEqual(field as FieldConfig);
 
-      render(['error', 'errors', 'valid', 'invalid']);
+      render(valuesChanged ? ['values'] : []);
     });
   }
 
@@ -1235,25 +1277,27 @@ const createManagerApi: CreateManagerApi = ({
   }
 
   function updateError(name: string, error: string | undefined = undefined): void {
-    const render = prepareRerender();
+    const [modify,render] = prepareRerender();
+    let changedErrors = false;
     if (error) {
       set(state.errors, name, error);
       flatErrors[name] = error;
-      state.valid = false;
-      state.invalid = true;
-      state.hasValidationErrors = true;
+      modify('valid', false);
+      modify('invalid', true);
+      modify('hasValidationErrors', true);
     } else {
       set(state.errors, name, undefined);
+      changedErrors = true;
       delete flatErrors[name];
     }
 
     if (Object.keys(flatErrors).length === 0) {
-      state.valid = true;
-      state.invalid = false;
-      state.hasValidationErrors = false;
+      modify('valid', true);
+      modify('invalid', false);
+      modify('hasValidationErrors', false);
     }
 
-    render(['error', 'errors', 'valid', 'invalid']);
+    render(changedErrors ? ['errors'] : []);
   }
 
   function registerAsyncValidator(validator: Promise<unknown>) {
@@ -1369,16 +1413,17 @@ const createManagerApi: CreateManagerApi = ({
 
   function resetFieldState(name: string): void {
     batch(() => {
-      const render = prepareRerender();
+      const [, render, modifyNamed] = prepareRerender();
       // TODO: have initialValue and initialValues in one place
       const initialValue = get(state.initialValues, name) || state.fieldListeners[name].state.meta.initial;
       state.fieldListeners[name].state = createField(name, initialValue);
 
       set(state.values, name, initialValue);
-      state.visited[name] = false;
-      state.modified[name] = false;
-      state.dirtyFields[name] = false;
-      state.dirtyFieldsSinceLastSubmit[name] = false;
+
+      modifyNamed('visited', false, name);
+      modifyNamed('modified', false, name);
+      modifyNamed('dirtyFields', false, name);
+      modifyNamed('dirtyFieldsSinceLastSubmit', false, name);
 
       render(['values']);
     });
@@ -1404,14 +1449,15 @@ const createManagerApi: CreateManagerApi = ({
       validate
     };
 
-    const render = prepareRerender();
+    const [modify, render, modifyNamed] = prepareRerender();
 
     let setDirty = initializeFieldValue(field);
 
     if (setDirty) {
-      state.pristine = false;
-      state.dirty = true;
-      state.dirtyFields[field.name] = true;
+      modify('pristine', false);
+      modify('dirty', true);
+      modifyNamed('dirtyFields', true, field.name);
+
       state.fieldListeners[field.name].state.meta.dirty = true;
       state.fieldListeners[field.name].state.meta.pristine = false;
     }

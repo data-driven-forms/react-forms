@@ -93,3 +93,6 @@ vendor
 !scripts/
 
 .DS_STORE
+
+# because of the "config" string this fodler was not deleted with the clean script. Adding it to the list removes it.
+./field-config/
