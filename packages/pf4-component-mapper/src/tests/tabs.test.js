@@ -26,7 +26,7 @@ describe('Tabs component', () => {
       <RenderWithProvider
         value={{
           formOptions: {
-            renderForm: (fields, formOptions) => <span className="content">Here would be form</span>,
+            renderForm: () => <span className="content">Here would be form</span>,
           },
         }}
       >
@@ -44,7 +44,7 @@ describe('Tabs component', () => {
       <RenderWithProvider
         value={{
           formOptions: {
-            renderForm: (fields, formOptions) => <div>{'Here would be form'}</div>,
+            renderForm: () => <div>{'Here would be form'}</div>,
           },
         }}
       >

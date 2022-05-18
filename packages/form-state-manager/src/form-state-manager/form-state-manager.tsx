@@ -33,7 +33,7 @@ const FormStateManager: React.FunctionComponent<FormStateManagerProps> = ({
   initializeOnMount,
   validate,
   debug,
-  render
+  render,
 }) => {
   const { current: managerApi } = useRef(
     createManagerApi({ onSubmit, clearOnUnmount, validate, subscription, initialValues, initializeOnMount, debug })
@@ -70,7 +70,7 @@ const FormStateManager: React.FunctionComponent<FormStateManagerProps> = ({
     formOptions: managerApi(),
     clearedValue,
     ...managerApi().getState(),
-    ...fieldArrayApi
+    ...fieldArrayApi,
   };
 
   const finalRender = render ? render : children;

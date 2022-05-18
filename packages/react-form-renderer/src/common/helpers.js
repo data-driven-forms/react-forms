@@ -42,6 +42,7 @@ const defaultMessage = (type, values) => {
 };
 
 export const prepareMsg = (msg, type, values) => {
+  // eslint-disable-next-line eqeqeq
   if (msg == null) {
     return defaultMessage(type, values);
   }
@@ -50,6 +51,7 @@ export const prepareMsg = (msg, type, values) => {
     msg = msg.props;
   }
 
+  // eslint-disable-next-line eqeqeq
   if (msg[type] != null) {
     msg = msg[type];
   }

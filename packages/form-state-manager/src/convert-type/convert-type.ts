@@ -13,12 +13,12 @@ export const dataTypes: DataTypes = {
   FLOAT: 'float',
   NUMBER: 'number',
   BOOLEAN: 'boolean',
-  STRING: 'string'
+  STRING: 'string',
 };
 
 const canBeConvertedToNumber = (value: any): any => !isNaN(Number(value)) && value !== '';
 
-const convertType = (dataType: DataType, value: any): any  => {
+const convertType = (dataType: DataType, value: any): any => {
   switch (dataType) {
     case dataTypes.INTEGER:
       return canBeConvertedToNumber(value) ? parseInt(value) : value;

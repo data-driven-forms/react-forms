@@ -8,7 +8,6 @@ import FieldSpy from '../../field-spy';
 import TextField from '../helpers/text-field';
 
 describe('<FieldSpy />', () => {
-  let wrapper;
   let render;
   let state;
 

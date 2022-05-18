@@ -194,7 +194,7 @@ const DualList = ({
           }
         }
         id={id || input.name}
-        control={(props) => null}
+        control={() => null}
         {...LabelProps}
         className={clsx(classes.formField, labelClassName)}
       />

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const DiscordIcon = (props) => (
+const DiscordIcon = () => (
   <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 245 240">
     <path
       fill="#7289DA"

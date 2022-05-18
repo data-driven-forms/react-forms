@@ -52,7 +52,7 @@ module.exports = withBundleAnalyzer(
       pageExtensions: ['js', 'jsx', 'md', 'mdx'],
       distDir: '../dist',
       swcMinify: true,
-      webpack: (config, options) => {
+      webpack: (config) => {
         config.resolve.alias = {
           ...config.resolve.alias,
           react: path.resolve(__dirname, '../../../node_modules/react'),

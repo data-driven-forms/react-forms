@@ -22,13 +22,35 @@
     "arguments": true
   },
   "plugins": ["react", "jest"],
-  "extends": ["react-app", "eslint:recommended", "plugin:react/recommended", "plugin:prettier/recommended", "prettier"],
+  "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:prettier/recommended", "prettier", "plugin:react-hooks/recommended"],
   "env": {
     "es6": true,
     "browser": true,
     "node": true,
     "jest": true
   },
+  "overrides": [
+    {
+      "parser": "@typescript-eslint/parser",
+      "files": ["packages/**/src/**/*.ts", "packages/**/src/**/*.tsx"],
+      "plugins": [
+        "@typescript-eslint"
+      ],
+      "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:prettier/recommended"
+      ],
+      "rules": {
+        "react/prop-types": "off",
+        "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".ts"] }],
+        "@typescript-eslint/no-unused-vars": ["error", { "ignoreRestSiblings": true }],
+        "no-use-before-define": "off",
+        "@typescript-eslint/no-use-before-define": ["off"]
+      }
+    }
+  ],
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/display-name": "off",
@@ -76,17 +98,17 @@
     "yoda": ["error", "never"],
     "jsx-a11y/href-no-hash": "off",
     "react/jsx-curly-spacing": "off",
-    "no-unused-vars": "error",
+    "no-unused-vars": ["error", { "ignoreRestSiblings": true }],
     "react/no-unused-prop-types": "error",
     "react-hooks/rules-of-hooks": "error",
     "react/prop-types": "error",
     "react/no-unescaped-entities": "error",
     "no-prototype-builtins": "error",
     "no-mixed-operators": "error",
-    "no-unused-expressions": "error",
     "no-sequences": "error",
     "react-hooks/exhaustive-deps": 0,
     "jest/no-focused-tests": "error",
-    "jest/no-identical-title": "error"
+    "jest/no-identical-title": "error",
+    "no-unused-expressions": ["error", { "allowShortCircuit": true }]
   }
 }

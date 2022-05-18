@@ -1050,7 +1050,7 @@ describe('useField', () => {
     });
 
     it('parse value on change', async () => {
-      const parse = jest.fn().mockImplementation((value, name) => value * 2);
+      const parse = jest.fn().mockImplementation((value) => value * 2);
       render(
         <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Dummy name="field" parse={parse} />
@@ -1064,7 +1064,7 @@ describe('useField', () => {
     });
 
     it('format value', async () => {
-      const format = jest.fn().mockImplementation((value, name) => value * 2);
+      const format = jest.fn().mockImplementation((value) => value * 2);
       render(
         <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Dummy name="field" format={format} />
@@ -1079,7 +1079,7 @@ describe('useField', () => {
     });
 
     it('format value on blur', async () => {
-      const format = jest.fn().mockImplementation((value, name) => value * 2);
+      const format = jest.fn().mockImplementation((value) => value * 2);
       render(
         <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Dummy name="field" format={format} formatOnBlur />

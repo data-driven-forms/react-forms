@@ -2,7 +2,7 @@ import composeValidators from '../../compose-validators';
 
 describe('Compose validators', () => {
   const syncValidator = (value) => (value === 'sync-error' ? 'sync-error' : undefined);
-  const asyncValidator = (value, allValues) =>
+  const asyncValidator = (value) =>
     new Promise((resolve, reject) =>
       setTimeout(() => {
         if (value === 'error') {

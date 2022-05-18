@@ -100,7 +100,7 @@ export interface AsyncWatcherRecord {
 
 export interface AsyncWatcherApi {
   registerValidator: (callback: Promise<unknown>) => void;
-  getValidators: () => AsyncWatcherRecord
+  getValidators: () => AsyncWatcherRecord;
 }
 export interface ListenerField {
   render: FieldRender;
@@ -289,7 +289,7 @@ const asyncWatcher: AsyncWatcher = (updateValidating, updateSubmitting, updateFo
     nextKey = nextKey + 1;
   };
 
-  const getValidators = () => asyncValidators  
+  const getValidators = () => asyncValidators;
 
   return {
     registerValidator,
@@ -372,13 +372,13 @@ export const initialMeta = (initial: any): Meta => ({
   valid: true,
   validating: false,
   visited: false,
-  warning: undefined
+  warning: undefined,
 });
 
 export const createField = (name: string, value: any): FieldState => ({
   name,
   value,
-  meta: initialMeta(value)
+  meta: initialMeta(value),
 });
 
 export const initialFormState = (initialValues: AnyObject = {}): Omit<ManagerState, ManagerApiFunctions | 'destroyOnUnregister'> => ({
@@ -408,7 +408,7 @@ export const initialFormState = (initialValues: AnyObject = {}): Omit<ManagerSta
   valid: true,
   validating: false,
   visited: {},
-  fileInputs: []
+  fileInputs: [],
 });
 
 const createManagerApi: CreateManagerApi = ({
@@ -421,7 +421,7 @@ const createManagerApi: CreateManagerApi = ({
   debug,
   keepDirtyOnReinitialize,
   destroyOnUnregister,
-  name
+  name,
 }) => {
   const config: CreateManagerApiConfig = {
     onSubmit,
@@ -432,7 +432,7 @@ const createManagerApi: CreateManagerApi = ({
     debug,
     keepDirtyOnReinitialize,
     destroyOnUnregister,
-    name
+    name,
   };
 
   let state: ManagerState = {
@@ -468,7 +468,7 @@ const createManagerApi: CreateManagerApi = ({
     unregisterInputFile,
     getRegisteredFields,
     updateFieldConfig,
-    ...initialFormState(initialValues)
+    ...initialFormState(initialValues),
   };
   let inBatch = 0;
   let batched: Array<string> = [];
@@ -483,7 +483,7 @@ const createManagerApi: CreateManagerApi = ({
   let flatSubmitErrors: AnyObject = {};
   let flatErrors: AnyObject = {};
   const registeringFields: string[] = [];
-  const validationCache = new Map<string, FieldState>()
+  const validationCache = new Map<string, FieldState>();
 
   function updateRunningValidators(increment: number): void {
     runningValidators = Math.max(runningValidators + increment, 0);
@@ -532,27 +532,27 @@ const createManagerApi: CreateManagerApi = ({
     const { error: prevError, valid: prevIsValid, validating: prevValidating } = prevMeta;
     if (error !== prevError || isValid !== prevIsValid || validating !== prevValidating) {
       setFieldState(name, (prev: FieldState) => ({
-          ...prev,
-          meta: {
-            ...prev.meta,
-            error,
-            valid: isValid,
-            invalid: !isValid,
-            validating,
-            warning: undefined
-          }
+        ...prev,
+        meta: {
+          ...prev.meta,
+          error,
+          valid: isValid,
+          invalid: !isValid,
+          validating,
+          warning: undefined,
+        },
       }));
     }
-    
-    validationCache.set(cacheKey, getFieldState(name)!)
+
+    validationCache.set(cacheKey, getFieldState(name)!);
     updateError(name, isValid ? undefined : error);
   }
 
-  function handleFieldWarning(name: string, warning: string | undefined = undefined, validating = false, cacheKey: string, ) {
+  function handleFieldWarning(name: string, warning: string | undefined = undefined, validating = false, cacheKey: string) {
     const prevMeta = getFieldState(name)?.meta || ({} as Meta);
     const { warning: prevWarning, validating: prevValidating } = prevMeta;
     if (warning !== prevWarning || validating !== prevValidating) {
-      setFieldState(name, (prev: FieldState) => {        
+      setFieldState(name, (prev: FieldState) => {
         const newState = {
           ...prev,
           meta: {
@@ -561,31 +561,35 @@ const createManagerApi: CreateManagerApi = ({
             error: undefined,
             valid: true,
             invalid: false,
-            validating
-          }}
-          validationCache.set(cacheKey, newState)
-        return newState});
+            validating,
+          },
+        };
+        validationCache.set(cacheKey, newState);
+        return newState;
+      });
     }
   }
 
   async function validateField(name: string, value: any) {
-    const cacheKey = getCacheKey({ name, value })
+    const cacheKey = getCacheKey({ name, value });
 
-    if(validationCache.has(cacheKey)) {
-      const cacheState = validationCache.get(cacheKey)
+    if (validationCache.has(cacheKey)) {
+      const cacheState = validationCache.get(cacheKey);
       /**
        * Skip state update and object
        * We don't want to create new object reference and this trigger additional rendering
        * We can re-use the same object instead
-       * 
+       *
        * Error does not have to be updated as the field is in the exact same state as if was in the previous render
        */
-      if(state.fieldListeners[name].state !== cacheState) {
+      if (state.fieldListeners[name].state !== cacheState) {
         state.fieldListeners[name].state = cacheState!;
-        updateError(name, cacheState!.meta.error)
+        updateError(name, cacheState!.meta.error);
       }
-      return
+
+      return;
     }
+
     if (validationPaused) {
       addIfUnique(revalidatedFields, name);
       return undefined;
@@ -625,13 +629,13 @@ const createManagerApi: CreateManagerApi = ({
 
   function reset(resetInitialValues?: AnyObject) {
     batch(() => {
-      const [,render] = prepareRerender();
+      const [, render] = prepareRerender();
 
       state = {
         ...state,
         ...initialFormState(resetInitialValues || initialValues),
         fieldListeners: state.fieldListeners,
-        registeredFields: state.registeredFields
+        registeredFields: state.registeredFields,
       };
 
       state.registeredFields.forEach(resetFieldState);
@@ -675,8 +679,8 @@ const createManagerApi: CreateManagerApi = ({
                 meta: {
                   ...prevState.meta,
                   pristine: true,
-                  dirty: false
-                }
+                  dirty: false,
+                },
               }));
 
               modifyNamed('dirtyFields', fieldState.meta.dirty, key);
@@ -690,8 +694,8 @@ const createManagerApi: CreateManagerApi = ({
               meta: {
                 ...prevState.meta,
                 pristine: true,
-                dirty: false
-              }
+                dirty: false,
+              },
             }));
 
             modifyNamed('dirtyFields', fieldState.meta.dirty, key);
@@ -700,7 +704,7 @@ const createManagerApi: CreateManagerApi = ({
       });
 
       modify('initialValues', initialValues);
-      modify('values', merge(removeEmpty(clonedValues), dirtyFields))
+      modify('values', merge(removeEmpty(clonedValues), dirtyFields));
 
       render();
     });
@@ -717,7 +721,7 @@ const createManagerApi: CreateManagerApi = ({
     if (isPromise(result)) {
       const asyncResult = result as Promise<FormLevelError>;
 
-      const [modify,render] = prepareRerender();
+      const [modify, render] = prepareRerender();
 
       modify('errors', {});
       modify('hasValidationErrors', false);
@@ -734,7 +738,7 @@ const createManagerApi: CreateManagerApi = ({
           }
         })
         .catch((errors) => {
-          const [modify,render] = prepareRerender();
+          const [modify, render] = prepareRerender();
 
           modify('errors', errors);
           modify('hasValidationErrors', true);
@@ -744,7 +748,7 @@ const createManagerApi: CreateManagerApi = ({
 
           flatErrors = flatObject(errors);
           Object.keys(flatErrors).forEach((name) => {
-            const cacheKey = getCacheKey(name)
+            const cacheKey = getCacheKey(name);
             handleFieldError(name, false, flatErrors[name], undefined, cacheKey);
           });
 
@@ -756,27 +760,27 @@ const createManagerApi: CreateManagerApi = ({
     if (syncError) {
       flatErrors = flatObject(syncError);
       Object.keys(flatErrors).forEach((name) => {
-        const value = getFieldValue(name)
-        const cacheKey = getCacheKey({name, value })
+        const value = getFieldValue(name);
+        const cacheKey = getCacheKey({ name, value });
         const listener = state.fieldListeners[name]?.asyncWatcher;
-        const fieldListeners = Object.values(state.fieldListeners[name]?.fields || {})
-        const validators = []
+        const fieldListeners = Object.values(state.fieldListeners[name]?.fields || {});
+        const validators = [];
         for (let index = 0; index < fieldListeners.length; index++) {
           const { validate } = fieldListeners[index];
-          if(validate) {
-            validators.push(validate)
+          if (validate) {
+            validators.push(validate);
           }
         }
 
-        validators.push(() => get(syncError, name))
+        validators.push(() => get(syncError, name));
         const result = composeValidators(validators as Validator[])(value, state.values, { ...state.fieldListeners[name]?.state.meta });
-        if(isPromise(result)) {
+        if (isPromise(result)) {
           listener?.registerValidator(result as Promise<string | undefined>);
           Promise.allSettled(Object.values(listener?.getValidators() || {})).then(() => {
             handleFieldError(name, true, undefined, true, cacheKey);
             (result as Promise<string | undefined>)
               .then(() => {
-                handleFieldError(name, true, undefined, false, cacheKey)
+                handleFieldError(name, true, undefined, false, cacheKey);
               })
               .catch((response) => {
                 if (response?.type === 'warning') {
@@ -785,12 +789,12 @@ const createManagerApi: CreateManagerApi = ({
                   handleFieldError(name, false, response as string | undefined, false, cacheKey);
                 }
               });
-          })
+          });
         } else {
           handleFieldError(name, !result, result as string | undefined, undefined, cacheKey);
         }
       });
-      const [modify,render] = prepareRerender();
+      const [modify, render] = prepareRerender();
 
       modify('errors', syncError);
       modify('hasValidationErrors', true);
@@ -801,7 +805,7 @@ const createManagerApi: CreateManagerApi = ({
 
       render();
     } else {
-      const [modify,render] = prepareRerender();
+      const [modify, render] = prepareRerender();
 
       modify('errors', {});
       modify('hasValidationErrors', false);
@@ -836,19 +840,19 @@ const createManagerApi: CreateManagerApi = ({
   function prepareRerender(): PrepareRenderReturnType {
     let changedAttributes: (keyof Omit<ManagerState, ManagerApiFunctions | 'destroyOnUnregister'>)[] = [];
 
-    const modify = (attribute:  keyof Omit<ManagerState, ManagerApiFunctions | 'destroyOnUnregister'>, value: unknown) => {
-      if(state[attribute] !== value) {
+    const modify = (attribute: keyof Omit<ManagerState, ManagerApiFunctions | 'destroyOnUnregister'>, value: unknown) => {
+      if (state[attribute] !== value) {
         addIfUnique(changedAttributes, attribute);
         state[attribute] = value;
       }
-    }
+    };
 
     const modifyNamed = (attribute: keyof Omit<ManagerState, ManagerApiFunctions | 'destroyOnUnregister'>, value: unknown, name: string) => {
-      if(state[attribute][name] !== value) {
+      if (state[attribute][name] !== value) {
         addIfUnique(changedAttributes, attribute);
         state[attribute][name] = value;
       }
-    }
+    };
 
     const render = (subscribeTo: Array<keyof Omit<ManagerState, ManagerApiFunctions | 'destroyOnUnregister'>> = []) => {
       changedAttributes = [...changedAttributes, ...subscribeTo];
@@ -857,7 +861,7 @@ const createManagerApi: CreateManagerApi = ({
       } else if (changedAttributes.length > 0) {
         rerender(changedAttributes);
       }
-    }
+    };
 
     return [modify, render, modifyNamed];
   }
@@ -873,8 +877,8 @@ const createManagerApi: CreateManagerApi = ({
       modifyNamed('modified', true, name);
       modifyNamed('dirtyFields', true, name);
       modifyNamed('dirtyFieldsSinceLastSubmit', true, name);
-      modify('modifiedSinceLastSubmit', true)
-      modify('dirtySinceLastSubmit', true)
+      modify('modifiedSinceLastSubmit', true);
+      modify('dirtySinceLastSubmit', true);
 
       const isEqualFn = state.fieldListeners[name]?.isEqual || defaultIsEqual;
 
@@ -885,15 +889,15 @@ const createManagerApi: CreateManagerApi = ({
         meta: {
           ...prevState.meta,
           pristine,
-          dirty: !pristine
+          dirty: !pristine,
         },
-        value
+        value,
       }));
 
       const setDirty = isFormDirty();
 
-      modify('pristine', !setDirty)
-      modify('dirty', setDirty)
+      modify('pristine', !setDirty);
+      modify('dirty', setDirty);
 
       revalidateFields([name, ...(state.fieldListeners[name]?.validateFields || state.registeredFields.filter((n) => n !== name))]);
 
@@ -946,8 +950,8 @@ const createManagerApi: CreateManagerApi = ({
           ...state,
           meta: {
             ...state.meta,
-            touched: true
-          }
+            touched: true,
+          },
         }));
       });
 
@@ -964,8 +968,8 @@ const createManagerApi: CreateManagerApi = ({
           ...state,
           meta: {
             ...state.meta,
-            touched: true
-          }
+            touched: true,
+          },
         }));
       }
     });
@@ -976,7 +980,6 @@ const createManagerApi: CreateManagerApi = ({
         error = error || (field.beforeSubmit && field.beforeSubmit() === false);
       })
     );
-
 
     if (error) {
       return;
@@ -1003,7 +1006,7 @@ const createManagerApi: CreateManagerApi = ({
           render();
         });
     } else {
-      const [modify,render] = prepareRerender();
+      const [modify, render] = prepareRerender();
 
       handleSubmitError(modify, result);
       updateFieldSubmitMeta();
@@ -1028,8 +1031,8 @@ const createManagerApi: CreateManagerApi = ({
               submitSucceeded: state.submitSucceeded,
               submitError: flatSubmitErrors[name],
               submitting: state.submitting,
-              ...(flatSubmitErrors[name] && { touched: true, valid: false, invalid: true })
-            }
+              ...(flatSubmitErrors[name] && { touched: true, valid: false, invalid: true }),
+            },
           }),
           false
         );
@@ -1102,11 +1105,7 @@ const createManagerApi: CreateManagerApi = ({
         initialValue = typeof initialValue === 'undefined' ? field.initialValue : initialValue;
       }
 
-      set(
-        state.values,
-        field.name,
-        initialValue
-      );
+      set(state.values, field.name, initialValue);
     }
 
     let setDirty = false;
@@ -1121,11 +1120,12 @@ const createManagerApi: CreateManagerApi = ({
   function recalculateIsEqual(field: FieldConfig) {
     const allIsEqual: Array<IsEqual> = state.fieldListeners[field.name]
       ? Object.values(state.fieldListeners[field.name].fields)
-        .map(({ isEqual }) => isEqual as IsEqual, [])
-        .filter(Boolean)
+          .map(({ isEqual }) => isEqual as IsEqual, [])
+          .filter(Boolean)
       : [];
 
-    state.fieldListeners[field.name].isEqual = allIsEqual.length > 0 ? (a: any, b: any) => allIsEqual.reduce((acc: boolean, curr: IsEqual) => acc && curr(a, b), true) : undefined;
+    state.fieldListeners[field.name].isEqual =
+      allIsEqual.length > 0 ? (a: any, b: any) => allIsEqual.reduce((acc: boolean, curr: IsEqual) => acc && curr(a, b), true) : undefined;
   }
 
   function registerField(field: FieldConfig): void {
@@ -1136,11 +1136,11 @@ const createManagerApi: CreateManagerApi = ({
     batch(() => {
       const [modify, render, modifyNamed] = prepareRerender();
 
-      if(shouldAddUnique(state.registeredFields, field.name)) {
-        modify('registeredFields', [...state.registeredFields, field.name])
+      if (shouldAddUnique(state.registeredFields, field.name)) {
+        modify('registeredFields', [...state.registeredFields, field.name]);
       }
 
-      let setDirty = initializeFieldValue(field);
+      const setDirty = initializeFieldValue(field);
 
       subscribe(field as SubscriberConfig, true);
 
@@ -1169,7 +1169,7 @@ const createManagerApi: CreateManagerApi = ({
       if (!field.silent) {
         revalidateFields([
           field.name,
-          ...(state.fieldListeners[field.name]?.validateFields || state.registeredFields.filter((n) => n !== field.name))
+          ...(state.fieldListeners[field.name]?.validateFields || state.registeredFields.filter((n) => n !== field.name)),
         ]);
         if (config.validate) {
           validateForm(config.validate);
@@ -1203,12 +1203,15 @@ const createManagerApi: CreateManagerApi = ({
 
   function unregisterField(field: Omit<FieldConfig, 'render'>): void {
     batch(() => {
-      const [modify,render] = prepareRerender();
+      const [modify, render] = prepareRerender();
       delete state.fieldListeners[field.name].fields[field.internalId];
       let valuesChanged = false;
 
       if (isLast(state.fieldListeners, field.name, registeringFields)) {
-        modify('registeredFields', state.registeredFields.filter((fieldName: string) => fieldName !== field.name));
+        modify(
+          'registeredFields',
+          state.registeredFields.filter((fieldName: string) => fieldName !== field.name)
+        );
         if (shouldExecute(config.clearOnUnmount || config.destroyOnUnregister, field.clearOnUnmount)) {
           set(state.values, field.name, field.value);
           valuesChanged = true;
@@ -1251,7 +1254,7 @@ const createManagerApi: CreateManagerApi = ({
         ...fieldState.meta,
         change: (value: any) => change(name, value),
         blur: () => change(name),
-        focus: () => change(name)
+        focus: () => change(name),
       };
     }
 
@@ -1277,7 +1280,7 @@ const createManagerApi: CreateManagerApi = ({
   }
 
   function updateError(name: string, error: string | undefined = undefined): void {
-    const [modify,render] = prepareRerender();
+    const [modify, render] = prepareRerender();
     let changedErrors = false;
     if (error) {
       set(state.errors, name, error);
@@ -1319,16 +1322,16 @@ const createManagerApi: CreateManagerApi = ({
     } else {
       if (config.subscription) {
         let refreshForm: boolean | undefined = false;
-        
+
         traverseObject(config.subscription, (subscribed, key) => {
           if (!refreshForm) {
             refreshForm = subscribed && (key === 'all' || subscribeTo?.includes(key));
           }
         });
-        
+
         if (refreshForm) {
           const formFields = Object.values(state.fieldListeners)?.find((fieldListener: FieldListener) => fieldListener.isForm)?.fields;
-          const formField = Object.values(formFields || {})?.[0]
+          const formField = Object.values(formFields || {})?.[0];
 
           if (formField) {
             formField.render();
@@ -1377,10 +1380,10 @@ const createManagerApi: CreateManagerApi = ({
       ...state.fieldListeners[subscriberConfig.name],
       ...(isField
         ? {
-          state:
-            state.fieldListeners[subscriberConfig.name]?.state ||
-            createField(String(subscriberConfig.name), get(state.values, subscriberConfig.name))
-        }
+            state:
+              state.fieldListeners[subscriberConfig.name]?.state ||
+              createField(String(subscriberConfig.name), get(state.values, subscriberConfig.name)),
+          }
         : {}),
       count: (state.fieldListeners[subscriberConfig.name]?.count || 0) + 1,
       validateFields: subscriberConfig.validateFields,
@@ -1392,10 +1395,10 @@ const createManagerApi: CreateManagerApi = ({
           subscription: subscriberConfig.subscription,
           afterSubmit: subscriberConfig.afterSubmit,
           beforeSubmit: subscriberConfig.beforeSubmit,
-          isEqual: subscriberConfig.isEqual
-        }
+          isEqual: subscriberConfig.isEqual,
+        },
       },
-      ...(isForm && { isForm: true })
+      ...(isForm && { isForm: true }),
     };
   }
 
@@ -1446,12 +1449,12 @@ const createManagerApi: CreateManagerApi = ({
 
     state.fieldListeners[name].fields[internalId] = {
       ...state.fieldListeners[name].fields[internalId],
-      validate
+      validate,
     };
 
     const [modify, render, modifyNamed] = prepareRerender();
 
-    let setDirty = initializeFieldValue(field);
+    const setDirty = initializeFieldValue(field);
 
     if (setDirty) {
       modify('pristine', false);
@@ -1468,9 +1471,9 @@ const createManagerApi: CreateManagerApi = ({
       ...(Object.prototype.hasOwnProperty.call(field, 'initialValue') && {
         meta: {
           ...prev.meta,
-          initial: field.initialValue
-        }
-      })
+          initial: field.initialValue,
+        },
+      }),
     }));
 
     revalidateFields([field.name, ...(state.fieldListeners[field.name]?.validateFields || state.registeredFields.filter((n) => n !== field.name))]);
