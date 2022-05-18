@@ -348,7 +348,7 @@ describe('useField', () => {
       /**
        * Both fields should trigger render because they are subscribed to the "valid" event
        */
-      expect(renderCount).toEqual(6);
+      expect(renderCount).toEqual(5);
     });
   });
 
