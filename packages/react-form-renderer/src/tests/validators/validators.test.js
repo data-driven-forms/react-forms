@@ -198,6 +198,18 @@ describe('New validators', () => {
       expect(dataTypeValidator('float')()(123.232)).toBeUndefined();
     });
 
+    it('should return negative number and pass', () => {
+      expect(dataTypeValidator('number')()(-123.232)).toBeUndefined();
+    });
+
+    it('should return negative integer and pass', () => {
+      expect(dataTypeValidator('integer')()(-123)).toBeUndefined();
+    });
+
+    it('should return negative float and pass', () => {
+      expect(dataTypeValidator('float')()(-123.123)).toBeUndefined();
+    });
+
     it('should return float and pass 2', () => {
       expect(dataTypeValidator('float')()(123)).toBeUndefined();
     });
