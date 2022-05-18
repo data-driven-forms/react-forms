@@ -6,3 +6,4 @@
 /**/*.config.js
 /templates/
 packages/**/service-worker.js
+/packages/**/src/**/*.d.ts
