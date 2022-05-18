@@ -107,7 +107,6 @@ const Menu = ({
   filterOptions,
   isSearchable,
   filterValue,
-  options,
   getItemProps,
   getInputProps,
   highlightedIndex,

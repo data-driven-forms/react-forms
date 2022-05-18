@@ -73,7 +73,7 @@ const useFieldArrayApi = (change: Change, getFieldValue: GetFieldValue): FieldAr
     shift,
     swap,
     unshift,
-    update
+    update,
   };
 };
 

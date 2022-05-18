@@ -177,7 +177,7 @@ const AccordionSummary = styled((props) => {
       {...props}
     />
   );
-})(({ theme }) => ({
+})(() => ({
   flexDirection: 'row',
   '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
     transform: 'none',

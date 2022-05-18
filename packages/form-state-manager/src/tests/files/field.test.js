@@ -5,8 +5,6 @@ import FormStateManager from '../../form-state-manager';
 import Field from '../../field';
 
 describe('<Field />', () => {
-  let wrapper;
-
   const initialProps = { name: 'some-field', initialValue: 'some-value' };
 
   it('renders with children', () => {

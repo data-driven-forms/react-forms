@@ -108,7 +108,7 @@ const sanitizeValue = (event: OnChangeEvent): any => {
     if (event.target.type === 'file') {
       return {
         inputValue: event.target.value,
-        inputFiles: event.target.files
+        inputFiles: event.target.files,
       };
     }
 
@@ -165,9 +165,8 @@ const useField = ({
   allowNull,
   ...props
 }: UseFieldConfig): UseFieldData => {
-  const { registerField, unregisterField, change, getFieldValue, blur, focus, formOptions, updateFieldConfig, ...rest } = useContext(
-    FormManagerContext
-  );
+  const { registerField, unregisterField, change, getFieldValue, blur, focus, formOptions, updateFieldConfig, ...rest } =
+    useContext(FormManagerContext);
   const [, render] = useReducer((count) => count + 1, 0);
   const mounted = useRef(false);
   const [id] = useState(() => {
@@ -176,7 +175,7 @@ const useField = ({
     registerField({
       name,
       ...(Object.prototype.hasOwnProperty.call(props, 'initialValue') && {
-        initialValue: dataType ? convertValue(props.initialValue, dataType) : props.initialValue
+        initialValue: dataType ? convertValue(props.initialValue, dataType) : props.initialValue,
       }),
       initializeOnMount,
       render: render as () => void,
@@ -186,7 +185,7 @@ const useField = ({
       defaultValue: dataType ? convertValue(defaultValue, dataType) : defaultValue,
       beforeSubmit,
       afterSubmit,
-      silent: true
+      silent: true,
     });
 
     return internalId;
@@ -229,11 +228,11 @@ const useField = ({
         name,
         internalId: id,
         ...(Object.prototype.hasOwnProperty.call(props, 'initialValue') && {
-          initialValue: dataType ? convertValue(props.initialValue, dataType) : props.initialValue
+          initialValue: dataType ? convertValue(props.initialValue, dataType) : props.initialValue,
         }),
         defaultValue: dataType ? convertValue(defaultValue, dataType) : defaultValue,
         validate,
-        initializeOnMount
+        initializeOnMount,
       });
     }
   }, [dataType, validateToCheck, props.initialValue, defaultValue]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -315,10 +314,10 @@ const useField = ({
       name,
       multiple,
       type,
-      checked
+      checked,
     },
     meta: state!.meta,
-    ...clearedProps
+    ...clearedProps,
   };
 };
 

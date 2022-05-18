@@ -63,7 +63,7 @@ const createFieldArrayMethods = (fieldArrayApi: FieldArrayApi, name: string): Us
   const obj = Object.entries(fieldArrayApi).reduce(
     (acc, [methodName, apiMethod]) => ({
       ...acc,
-      [methodName]: (...args: unknown[]) => apiMethod(name, ...args)
+      [methodName]: (...args: unknown[]) => apiMethod(name, ...args),
     }),
     {}
   );
@@ -88,12 +88,12 @@ const useFieldArray: UseFieldArray = (props) => {
     name,
     value,
     ...fieldArrayMethods,
-    ...rest
+    ...rest,
   };
   return {
     fields,
     meta: { ...meta, length: internalValue.length },
-    ...passProps
+    ...passProps,
   };
 };
 

@@ -21,7 +21,7 @@ describe('FormTemplate PF4 Common', () => {
       pristine: true,
       getState: jest.fn().mockImplementation(() => ({})),
     };
-    ContextWrapper = ({ children, ...props }) => (
+    ContextWrapper = ({ children }) => (
       <RenderWithProvider value={{ formOptions }}>
         <Form onSubmit={jest.fn()}>{() => children}</Form>
       </RenderWithProvider>

@@ -7,7 +7,7 @@ import useFieldArray from '../../use-field-array';
 import FormStateManager from '../../form-state-manager';
 
 const DummyInput = (props) => {
-  const { input, meta } = useField({ ...props });
+  const { input } = useField({ ...props });
   return <input {...input} placeholder={input.name} />;
 };
 
@@ -84,7 +84,7 @@ const DummyArrayHookSpy = ({ push, remove, pop, shift, update, move, swap, unshi
 const DummyArray = ({ compositeField, ...props }) => {
   const hookValue = useFieldArray(props);
   const {
-    fields: { map, value },
+    fields: { map },
   } = hookValue;
   const Component = compositeField ? CompositeDummyInput : DummyInput;
   return (

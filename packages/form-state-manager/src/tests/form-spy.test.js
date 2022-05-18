@@ -11,7 +11,7 @@ describe('<FormSpy />', () => {
 
     const render = jest.fn().mockImplementation(() => null);
 
-    const wrapper = rtlRender(
+    rtlRender(
       <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
         <FormSpy subscription={{ valid: true }}>{render}</FormSpy>
       </FormManagerContext.Provider>

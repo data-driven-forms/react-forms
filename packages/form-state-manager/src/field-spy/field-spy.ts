@@ -1,4 +1,4 @@
-import { useReducer, useContext, useState, useEffect } from 'react';
+import React, { useReducer, useContext, useState, useEffect } from 'react';
 import cloneDeep from 'lodash/cloneDeep';
 import FormManagerContext from '../form-manager-context';
 import generateId from '../generate-id';
@@ -15,9 +15,10 @@ export interface FieldSpyProps {
   subscription?: Subscription;
   onChange?: OnChange;
   names: string[];
+  children: (state: ManagerState) => React.ReactElement;
 }
 
-const FieldSpy: React.ComponentType<FieldSpyProps> = ({ names, children, onChange, subscription }) => {
+const FieldSpy: React.FC<FieldSpyProps> = ({ names, children, onChange, subscription }) => {
   const { subscribe, unsubscribe, getState, formOptions, batch } = useContext(FormManagerContext);
   const [, rerender] = useReducer((prev) => prev + 1, 0);
 

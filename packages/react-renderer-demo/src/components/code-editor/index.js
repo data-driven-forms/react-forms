@@ -43,7 +43,7 @@ const Root = styled('div')(({ theme }) => ({
   },
 }));
 
-const CodeEditor = ({ value, children, className, inExample, editorClassname, keepLastLine }) => {
+const CodeEditor = ({ value, children, className, editorClassname, keepLastLine }) => {
   const lang = className ? className.toLowerCase().replace('language-', '') : undefined;
   let content = value || children || '';
 

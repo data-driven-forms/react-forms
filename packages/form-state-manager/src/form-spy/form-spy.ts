@@ -12,6 +12,7 @@ type OnChange = (managerState: ChildrenFormSpyProps) => void;
 export interface FormSpyProps {
   subscription?: Subscription;
   onChange?: OnChange;
+  children: (state: ManagerState) => React.ReactElement;
 }
 
 const FormSpy: React.FunctionComponent<FormSpyProps> = ({ children, onChange, subscription = { all: true } }) => {

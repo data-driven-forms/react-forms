@@ -20,40 +20,42 @@ type ComposeValidators<T = WarningObject | string | undefined> = (
  * Synchronous validators are run in synchrounously and sync error is prioritized over async errors.
  * @returns {Function} New validation function
  */
-const composeValidators: ComposeValidators = (validators = []) => (value, allValues, meta) => {
-  const promises: Promise<any>[] = [];
-  let index = 0;
-  let error: any;
-  while (validators.length > 0 && !error && index < validators.length) {
-    const result = validators[index](value, allValues, meta);
-    if (isPromise(result)) {
-      promises.push(result as Promise<any>);
-    } else {
-      error = result as any;
+const composeValidators: ComposeValidators =
+  (validators = []) =>
+  (value, allValues, meta) => {
+    const promises: Promise<any>[] = [];
+    let index = 0;
+    let error: any;
+    while (validators.length > 0 && !error && index < validators.length) {
+      const result = validators[index](value, allValues, meta);
+      if (isPromise(result)) {
+        promises.push(result as Promise<any>);
+      } else {
+        error = result as any;
+      }
+
+      index = index + 1;
     }
 
-    index = index + 1;
-  }
+    if (error) {
+      return error;
+    }
 
-  if (error) {
-    return error;
-  }
+    if (promises.length > 0) {
+      return Promise.all(promises)
+        .catch((asyncError) => {
+          throw error || asyncError;
+        })
+        .then(() => {
+          if (error) {
+            throw error;
+          }
 
-  if (promises.length > 0) {
-    return Promise.all(promises)
-      .catch((asyncError) => {
-        throw error || asyncError;
-      })
-      .then(() => {
-        if (error) {
-          throw error;
-        }
+          return undefined;
+        });
+    }
 
-        return undefined;
-      });
-  }
-
-  return undefined;
-};
+    return undefined;
+  };
 
 export default composeValidators;
