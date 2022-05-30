@@ -30,7 +30,7 @@
         "@actions/github": "^5.0.0",
         "@data-driven-forms/form-builder": "0.0.13-rc1",
         "@data-driven-forms/mui-component-mapper": "*",
-        "@data-driven-forms/editor-pro": "0.0.2",
+        "@data-driven-forms/editor-pro": "0.0.10",
         "@data-driven-forms/react-form-renderer": "*",
         "@emotion/react": "^11.7.1",
         "@emotion/styled": "^11.6.0",

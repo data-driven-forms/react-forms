@@ -50,7 +50,7 @@ module.exports = withBundleAnalyzer(
       },
       crossOrigin: 'anonymous',
       pageExtensions: ['js', 'jsx', 'md', 'mdx'],
-      distDir: '../dist',
+      distDir: './dist',
       swcMinify: true,
       webpack: (config, options) => {
         config.resolve.alias = {

@@ -1276,31 +1276,29 @@
     enabled "2.0.x"
     kuler "^2.0.0"
 
-"@data-driven-forms/dnd@*":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@data-driven-forms/dnd/-/dnd-0.0.1.tgz#662f59f254234faea690d8ce937a74eab9d42387"
-  integrity sha512-QylRXB6rJ7K+Uvs/akFQIRcFSQAjjYtlECcmb9PAYETU1SHLu9VGiyjwH8pBKHJiJunScrYXBs4bsMTyhUc0Ag==
+"@data-driven-forms/dnd@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@data-driven-forms/dnd/-/dnd-0.0.6.tgz#dd90ae787ff20f0f3d942f8391918a2de68669e4"
+  integrity sha512-vAZgOR8bQJOArPsxZYakkfxL0YlYpWpPbe85Mvj+AyOsXLfyFlF7+sU+bgUEwZcCL3JuH53ZADoRIlZ0e+cQ4g==
 
-"@data-driven-forms/editor-core@*":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@data-driven-forms/editor-core/-/editor-core-0.0.1.tgz#2a98596a385b6207625f3d8f7703d20db4a9593b"
-  integrity sha512-QUHSw1sgMb4aSyPKbm84wvKNSbnOmlPbzfE/vTwOW5fjIlZZwk2At3nRwUsdE/Hsknobezz6bjB0ElaFO+SOnQ==
+"@data-driven-forms/editor-core@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@data-driven-forms/editor-core/-/editor-core-0.0.7.tgz#e9ae04410035809387eaa5576215a8024de171ec"
+  integrity sha512-YzqgLTopyAD8XMZ3rP/KJuEoNQE5xFrysZgVpnKZmJGz+AwhIOz8sF6o2DPfp3xUhubjQAX2o+0iEnbSQzQkdQ==
+
+"@data-driven-forms/editor-pro@0.0.10":
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/@data-driven-forms/editor-pro/-/editor-pro-0.0.10.tgz#07865de25c02bb2b34cbca3f1f47efdcee245e2e"
+  integrity sha512-0WuSOsPQslzxqrRwK7zFBQuBTUwDDRKX6P8NvHDtk65Nq+F98MaA8VQEUA27Pr1i1OnBYNVN2BlpRyqGYWGmsw==
   dependencies:
-    "@data-driven-forms/dnd" "*"
+    "@data-driven-forms/dnd" "^0.0.6"
+    "@data-driven-forms/editor-core" "^0.0.7"
+    "@data-driven-forms/evergreen-component-mapper" "^0.0.8"
 
-"@data-driven-forms/editor-pro@0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@data-driven-forms/editor-pro/-/editor-pro-0.0.2.tgz#c3d5b5a1fac6ae27feb469c640ff512005da0f76"
-  integrity sha512-69MGth7p0DI2BqZ74qPdGladHJWk0+5+7pNqERohfikHUyERo2+Dzfd5WisxQuGHDD0hyie874AbeWEXYMCXqw==
-  dependencies:
-    "@data-driven-forms/dnd" "*"
-    "@data-driven-forms/editor-core" "*"
-    "@data-driven-forms/evergreen-component-mapper" "*"
-
-"@data-driven-forms/evergreen-component-mapper@*":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@data-driven-forms/evergreen-component-mapper/-/evergreen-component-mapper-0.0.1.tgz#9446bbc1ba460a095a2c593c614a026150b6ebc4"
-  integrity sha512-QFtpAbIOGaObrW/uHpEJncFHFjkuw0JHPCnbQPd9nCLSwF9SQlobZ4LavAQ292vGPdNC9O4iucXzEoG9tZ91zg==
+"@data-driven-forms/evergreen-component-mapper@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@data-driven-forms/evergreen-component-mapper/-/evergreen-component-mapper-0.0.8.tgz#203be4cf6138e0ce86db3bb3be6df2b932302add"
+  integrity sha512-98sYRStBSfFP2xXAqrmLd5epvt7EwtowylMyWKIpTWDJeCzuNril44Zzj0cJjaeymby0KH8tJkkeWsHE5fLgYg==
   dependencies:
     lodash "^4.17.15"
     prop-types "^15.7.2"
