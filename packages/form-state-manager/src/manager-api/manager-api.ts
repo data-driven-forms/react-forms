@@ -623,6 +623,11 @@ const createManagerApi: CreateManagerApi = ({
             handleFieldError(name, !result, result as string | undefined, undefined, cacheKey);
           }
         }
+      } else {
+        // clear form validate error leftover
+        if (state.fieldListeners[name].state.meta.invalid) {
+          handleFieldError(name, true, undefined, undefined, cacheKey);
+        }
       }
     }
   }
@@ -723,10 +728,6 @@ const createManagerApi: CreateManagerApi = ({
 
       const [modify, render] = prepareRerender();
 
-      modify('errors', {});
-      modify('hasValidationErrors', false);
-      modify('valid', true);
-      modify('invalid', false);
       modify('error', undefined);
 
       render();
@@ -740,11 +741,12 @@ const createManagerApi: CreateManagerApi = ({
         .catch((errors) => {
           const [modify, render] = prepareRerender();
 
-          modify('errors', errors);
+          modify('errors', merge(state.errors, syncError));
           modify('hasValidationErrors', true);
           modify('valid', false);
           modify('invalid', true);
           modify('error', state.errors?.[FORM_ERROR]);
+          flatErrors = flatObject(state.errors);
 
           flatErrors = flatObject(errors);
           Object.keys(flatErrors).forEach((name) => {
@@ -758,8 +760,7 @@ const createManagerApi: CreateManagerApi = ({
 
     const syncError = result as FormLevelError | undefined;
     if (syncError) {
-      flatErrors = flatObject(syncError);
-      Object.keys(flatErrors).forEach((name) => {
+      Object.keys(flatObject(syncError)).forEach((name) => {
         const value = getFieldValue(name);
         const cacheKey = getCacheKey({ name, value });
         const listener = state.fieldListeners[name]?.asyncWatcher;
@@ -796,23 +797,26 @@ const createManagerApi: CreateManagerApi = ({
       });
       const [modify, render] = prepareRerender();
 
-      modify('errors', syncError);
+      modify('errors', merge(state.errors, syncError));
       modify('hasValidationErrors', true);
       modify('valid', false);
       modify('invalid', true);
       modify('error', state.errors?.[FORM_ERROR]);
-      flatErrors = flatObject(syncError);
+      flatErrors = flatObject(state.errors);
 
       render();
     } else {
       const [modify, render] = prepareRerender();
 
-      modify('errors', {});
-      modify('hasValidationErrors', false);
-      modify('valid', true);
-      modify('invalid', false);
       modify('error', undefined);
-      flatErrors = {};
+
+      if (currentInvalidFields.length === 0) {
+        modify('errors', {});
+        modify('hasValidationErrors', false);
+        modify('valid', true);
+        modify('invalid', false);
+        flatErrors = {};
+      }
 
       render();
       /**
@@ -1281,16 +1285,13 @@ const createManagerApi: CreateManagerApi = ({
 
   function updateError(name: string, error: string | undefined = undefined): void {
     const [modify, render] = prepareRerender();
-    let changedErrors = false;
+    const changedErrors = flatErrors[name] === error;
+
     if (error) {
       set(state.errors, name, error);
       flatErrors[name] = error;
-      modify('valid', false);
-      modify('invalid', true);
-      modify('hasValidationErrors', true);
     } else {
       set(state.errors, name, undefined);
-      changedErrors = true;
       delete flatErrors[name];
     }
 
@@ -1298,6 +1299,10 @@ const createManagerApi: CreateManagerApi = ({
       modify('valid', true);
       modify('invalid', false);
       modify('hasValidationErrors', false);
+    } else {
+      modify('valid', false);
+      modify('invalid', true);
+      modify('hasValidationErrors', true);
     }
 
     render(changedErrors ? ['errors'] : []);
