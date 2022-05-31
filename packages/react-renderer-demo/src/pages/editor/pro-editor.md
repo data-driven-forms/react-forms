@@ -14,5 +14,32 @@ import Alert from '@mui/material/Alert';
 
 <br />
 
-`@data-driven-forms/editor-pro` is a component
+`@data-driven-forms/editor-pro` is a prebuilt Drag And Drop editor supporting custom provided mappers. The UI is built on Evergreen UI Framework. Check the [live example](/editor/live-editor).
+
+## Installation
+
+```bash
+npm install --save @data-driven-forms/editor-pro
+```
+or
+```bash
+yarn add @data-driven-forms/editor-pro
+```
+
+
+**Features**
+
+- component editing
+- condition editing
+- validator editing
+
+## Usage
+
+```jsx
+import Editor from '@data-driven-forms/editor-pro/editor'
+
+<Editor />
+```
+
+
 </DocPage>

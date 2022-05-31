@@ -1,11 +1,15 @@
 const editorSchema = [
   {
-    component: 'pro-editor',
-    linkText: 'Pro Editor',
-  },
-  {
     component: 'dnd',
     linkText: 'Drag and Drop',
+  },
+  {
+    component: 'core-editor',
+    linkText: 'Core editor',
+  },
+  {
+    component: 'pro-editor',
+    linkText: 'Pro Editor',
   },
   {
     component: 'live-editor',

@@ -17,6 +17,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import PanToolIcon from '@mui/icons-material/PanTool';
 import PropTypes from 'prop-types';
 import componentMapper from '@data-driven-forms/mui-component-mapper/component-mapper';
+import Alert from '@mui/material/Alert';
 
 import CodeEditor from '../components/code-editor';
 import {
@@ -35,6 +36,7 @@ import {
   RIGHT_TITLE,
   STEP,
 } from '../helpers/field-properties';
+import Link from 'next/link';
 
 const Root = styled('div')(({ theme }) => ({
   '& .builderWrapper': {
@@ -183,6 +185,9 @@ const LiveEditor = () => {
       <Typography variant="h4" component="h1" gutterBottom>
         Form builder
       </Typography>
+      <Alert severity="warning">
+        This editor is no longer supported. Please check <Link href="/editor/pro-editor">Pro Editor</Link> instead.
+      </Alert>
       <FormBuilder
         builderMapper={reducedMapper}
         pickerMapper={pickerMapper}

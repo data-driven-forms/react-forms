@@ -60,10 +60,11 @@ const schema = [
     fields: customExamplesSchema,
   },
   {
-    title: 'Pro Editor',
+    title: 'Editor utilities',
     link: 'editor',
     noRoute: true,
     fields: editorSchema,
+    chip: 'Preview',
   },
   {
     linkText: 'Form builder',
