@@ -44,6 +44,10 @@ const providedMappersSchema = [
     linkText: 'AWS Northstar',
   },
   {
+    link: 'evergreen',
+    linkText: 'Evergreen',
+  },
+  {
     subHeader: true,
     noRoute: true,
     title: 'Mapper components',
