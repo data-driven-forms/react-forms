@@ -178,20 +178,20 @@ export const dataTypeValidator = (type) =>
     string: (options) => stringValidator({ message: 'Field value has to be string', ...options }),
     integer: (options) =>
       pattern({
-        pattern: /^\d*$/,
+        pattern: /^-?\d*$/,
         message: 'Value must be integer',
         ...options,
       }),
     boolean: (options) => booleanValidator({ message: 'Field value has to be boolean', ...options }),
     number: (options) =>
       pattern({
-        pattern: /^\d*[.]{0,1}\d*$/,
+        pattern: /^-?\d*[.]{0,1}\d*$/,
         message: 'Values must be number',
         ...options,
       }),
     float: (options) =>
       pattern({
-        pattern: /^\d*[.]{0,1}\d*$/,
+        pattern: /^-?\d*[.]{0,1}\d*$/,
         message: 'Values must be number',
         ...options,
       }),

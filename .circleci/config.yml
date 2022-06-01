@@ -1,16 +1,17 @@
 version: 2.1
 orbs:
   codecov: codecov/codecov@1.0.4
+  node: circleci/node@5.0.2
 jobs:
   build:
     working_directory: ~/react-forms
     docker:
-      - image: circleci/node:16
+      - image: 'cimg/base:stable'
     steps:
       - checkout
-      - run:
-          name: update-npm
-          command: 'sudo npm install -g npm@latest'
+      - node/install:
+          install-yarn: true
+          node-version: '16.13'
       - run:
           name: install-deps
           command: yarn
@@ -33,10 +34,13 @@ jobs:
   release:
     working_directory: ~/react-forms
     docker:
-      - image: circleci/node:16
+      - image: 'cimg/base:stable'
     steps:
       - attach_workspace:
           at: ~/react-forms
+      - node/install:
+          install-yarn: true
+          node-version: '16.13'
       - run:
           name: Release new version
           command: |
@@ -45,10 +49,13 @@ jobs:
   predeploy:
     working_directory: ~/react-forms
     docker:
-      - image: circleci/node:16
+      - image: 'cimg/base:stable'
     steps:
       - attach_workspace:
           at: ~/react-forms
+      - node/install:
+          install-yarn: true
+          node-version: '16.13'
       - run:
           name: Predeploy demo
           command: |
@@ -60,10 +67,13 @@ jobs:
   deploy:
     working_directory: ~/react-forms
     docker:
-      - image: circleci/node:16
+      - image: 'cimg/base:stable'
     steps:
       - attach_workspace:
           at: ~/react-forms
+      - node/install:
+          install-yarn: true
+          node-version: '16.13'
       - run:
           name: Deploy demo
           command: |

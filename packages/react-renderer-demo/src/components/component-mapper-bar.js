@@ -44,9 +44,11 @@ const ComponentMapperBar = ({ prefix, href, github, npm, npmSvg }) => {
       >
         <img src={npmSvg || `https://badge.fury.io/js/%40data-driven-forms%2F${prefix}-component-mapper.svg`} alt="current version" />
       </a>
-      <IconButton aria-label="web" title="Library web" href={href} rel="noopener noreferrer" target="_blank" size="large">
-        <LanguageIcon />
-      </IconButton>
+      {href && (
+        <IconButton aria-label="web" title="Library web" href={href} rel="noopener noreferrer" target="_blank" size="large">
+          <LanguageIcon />
+        </IconButton>
+      )}
       <IconButton
         aria-label="github"
         title="Git Hub package"
