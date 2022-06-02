@@ -144,9 +144,7 @@ describe('DualListSelect', () => {
     await userEvent.click(screen.getByTitle('Move selected to left'));
     await userEvent.click(screen.getByText('Submit'));
 
-    expect(onSubmit).toHaveBeenLastCalledWith({
-      'dual-list': [],
-    });
+    expect(onSubmit).toHaveBeenLastCalledWith({});
   });
 
   it('switch all to right', async () => {
@@ -164,9 +162,7 @@ describe('DualListSelect', () => {
     await userEvent.click(screen.getByTitle('Move all to left'));
     await userEvent.click(screen.getByText('Submit'));
 
-    expect(onSubmit).toHaveBeenCalledWith({
-      'dual-list': [],
-    });
+    expect(onSubmit).toHaveBeenCalledWith({});
   });
 
   it('filters options', async () => {

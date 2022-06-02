@@ -507,7 +507,7 @@ describe('useField', () => {
 
       render(
         <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
-          <CleanButton name="field" value="some value" clearedValue={null} />
+          <CleanButton name="field" initialValue="some value" clearedValue={null} />
         </FormManagerContext.Provider>
       );
 
@@ -521,7 +521,7 @@ describe('useField', () => {
 
       render(
         <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi(), clearedValue: null }}>
-          <CleanButton name="field" value="some value" />
+          <CleanButton name="field" initialValue="some value" />
         </FormManagerContext.Provider>
       );
 
@@ -535,7 +535,7 @@ describe('useField', () => {
 
       render(
         <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi(), clearedValue: null }}>
-          <CleanButton name="field" value="some value" clearedValue="cleared" />
+          <CleanButton name="field" initialValue="some value" clearedValue="cleared" />
         </FormManagerContext.Provider>
       );
 

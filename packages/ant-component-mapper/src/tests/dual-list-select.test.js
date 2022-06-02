@@ -105,8 +105,6 @@ describe('DualListSelect', () => {
       await userEvent.click(screen.getByText('Submit'));
     });
 
-    expect(onSubmit).toHaveBeenCalledWith({
-      'dual-Menu': [],
-    });
+    expect(onSubmit).toHaveBeenCalledWith({});
   });
 });

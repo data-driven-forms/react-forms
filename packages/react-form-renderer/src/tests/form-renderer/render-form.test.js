@@ -1029,7 +1029,7 @@ describe('renderForm function', () => {
       await userEvent.type(screen.getByLabelText('foo'), 'barrr');
       await userEvent.click(screen.getByText('Submit'));
 
-      expect(onSubmit).toHaveBeenCalledWith({ foo: 'BlaBlaBlabarrr', unmnounted: 'bla' });
+      expect(onSubmit).toHaveBeenCalledWith({ foo: 'barrr', unmnounted: 'bla' });
     });
 
     it('should clear values after unrender and set to form cleared value', async () => {
@@ -1079,7 +1079,7 @@ describe('renderForm function', () => {
       await userEvent.type(screen.getByLabelText('foo'), 'barrr');
       await userEvent.click(screen.getByText('Submit'));
 
-      expect(onSubmit).toHaveBeenCalledWith({ foo: 'BlaBlaBlabarrr', unmnounted: 'BlaBlaBla' });
+      expect(onSubmit).toHaveBeenCalledWith({ foo: 'barrr', unmnounted: 'BlaBlaBla' });
     });
   });
 
