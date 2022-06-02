@@ -6,6 +6,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListSubheader from '@mui/material/ListSubheader';
 import Typography from '@mui/material/Typography';
+import Chip from '@mui/material/Chip';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import Collapse from '@mui/material/Collapse';
@@ -78,7 +79,7 @@ const StyledList = styled(List)(() => ({
   },
 }));
 
-const FinalList = ({ title, level, link, fields, previousLinks = [], renderItems, openable = true, open = false }) => {
+const FinalList = ({ title, level, link, fields, previousLinks = [], renderItems, openable = true, open = false, chip }) => {
   const [isOpen, setIsOpen] = useState(openable ? open : true);
 
   const closeNav = () => setIsOpen((state) => !state);
@@ -88,6 +89,7 @@ const FinalList = ({ title, level, link, fields, previousLinks = [], renderItems
       {title && (
         <ListItem button onClick={openable ? closeNav : null} className={'listItem'}>
           <ListItemText primary={title} className={'listItemText'} />
+          {chip && <Chip label={chip} size="small" color="warning" variant="outlined" />}
           {openable ? isOpen ? <ExpandLess /> : <ExpandMore /> : null}
         </ListItem>
       )}
