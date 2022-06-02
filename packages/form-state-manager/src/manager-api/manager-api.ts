@@ -1366,7 +1366,7 @@ const createManagerApi: CreateManagerApi = ({
       });
     }
 
-    config.debug && config.debug(state);
+    config.debug && config.debug(getState());
   }
 
   function batch(callback: Callback): void {
