@@ -17,6 +17,11 @@ import FORM_ERROR from '../form-error';
 import focusError from '../focus-error';
 import getCacheKey from '../get-cache-key';
 
+export interface ValidateResult {
+  error: string | undefined;
+  type: 'error' | 'warning';
+}
+
 export interface FieldState {
   value: any;
   meta: Meta;
@@ -604,17 +609,18 @@ const createManagerApi: CreateManagerApi = ({
 
       if (validators.length > 0) {
         const result = composeValidators(validators as Validator[])(value, state.values, { ...state.fieldListeners[name].state.meta });
+
         if (isPromise(result)) {
           handleFieldError(name, true, undefined, true, cacheKey);
-          (result as Promise<string | undefined>)
-            .then(() => handleFieldError(name, true, undefined, false, cacheKey))
-            .catch((response) => {
-              if (response?.type === 'warning') {
-                handleFieldWarning(name, response.error, undefined, cacheKey);
-              } else {
-                handleFieldError(name, false, response as string | undefined, false, cacheKey);
-              }
-            });
+          (result as Promise<string | undefined | ValidateResult>).then((response) => {
+            if ((response as ValidateResult)?.type === 'warning') {
+              handleFieldWarning(name, (response as ValidateResult).error, undefined, cacheKey);
+            } else if (response) {
+              handleFieldError(name, false, response as string | undefined, false, cacheKey);
+            } else {
+              handleFieldError(name, true, undefined, false, cacheKey);
+            }
+          });
           listener.registerValidator(result as Promise<string | undefined>);
         } else {
           if ((result as WarningObject)?.type === 'warning') {
@@ -732,13 +738,8 @@ const createManagerApi: CreateManagerApi = ({
 
       render();
 
-      return asyncResult
-        .then(() => {
-          if (!state.validating) {
-            revalidateFields(currentInvalidFields);
-          }
-        })
-        .catch((errors) => {
+      return asyncResult.then((errors) => {
+        if (errors) {
           const [modify, render] = prepareRerender();
 
           modify('errors', merge(state.errors, syncError));
@@ -755,7 +756,10 @@ const createManagerApi: CreateManagerApi = ({
           });
 
           render();
-        });
+        } else if (!state.validating) {
+          revalidateFields(currentInvalidFields);
+        }
+      });
     }
 
     const syncError = result as FormLevelError | undefined;
@@ -779,17 +783,15 @@ const createManagerApi: CreateManagerApi = ({
           listener?.registerValidator(result as Promise<string | undefined>);
           Promise.allSettled(Object.values(listener?.getValidators() || {})).then(() => {
             handleFieldError(name, true, undefined, true, cacheKey);
-            (result as Promise<string | undefined>)
-              .then(() => {
+            (result as Promise<string | undefined | ValidateResult>).then((response) => {
+              if ((response as ValidateResult)?.type === 'warning') {
+                handleFieldWarning(name, (response as ValidateResult).error, undefined, cacheKey);
+              } else if (response) {
+                handleFieldError(name, false, response as string | undefined, false, cacheKey);
+              } else {
                 handleFieldError(name, true, undefined, false, cacheKey);
-              })
-              .catch((response) => {
-                if (response?.type === 'warning') {
-                  handleFieldWarning(name, response.error, undefined, cacheKey);
-                } else {
-                  handleFieldError(name, false, response as string | undefined, false, cacheKey);
-                }
-              });
+              }
+            });
           });
         } else {
           handleFieldError(name, !result, result as string | undefined, undefined, cacheKey);
@@ -995,20 +997,14 @@ const createManagerApi: CreateManagerApi = ({
       setSubmitting();
       const [modify, render] = prepareRerender();
 
-      result
-        .then((errors: unknown) => {
-          handleSubmitError(modify, errors);
-          updateFieldSubmitMeta();
-          render();
-          focusError(flatSubmitErrors, config.name);
+      result.then((errors: unknown) => {
+        handleSubmitError(modify, errors);
+        updateFieldSubmitMeta();
+        render();
+        focusError(flatSubmitErrors, config.name);
 
-          runAfterSubmit();
-        })
-        .catch(() => {
-          handleSubmitError(modify);
-          updateFieldSubmitMeta();
-          render();
-        });
+        runAfterSubmit();
+      });
     } else {
       const [modify, render] = prepareRerender();
 

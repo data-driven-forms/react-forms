@@ -14,9 +14,9 @@ describe('validate', () => {
       jest.useFakeTimers();
       const managerApi = createManagerApi(jest.fn());
       const validator = () =>
-        new Promise((_res, reject) =>
+        new Promise((_res, res) =>
           setTimeout(() => {
-            return reject('failed');
+            return res('failed');
           }, 50)
         );
       const promise = fieldLevelValidator(validator, 'foo', {}, managerApi);

@@ -42,17 +42,7 @@ const composeValidators: ComposeValidators =
     }
 
     if (promises.length > 0) {
-      return Promise.all(promises)
-        .catch((asyncError) => {
-          throw error || asyncError;
-        })
-        .then(() => {
-          if (error) {
-            throw error;
-          }
-
-          return undefined;
-        });
+      return Promise.all(promises).then((results) => results.find((x) => typeof x !== 'undefined'));
     }
 
     return undefined;

@@ -358,8 +358,8 @@ describe('useField', () => {
     let resolveAsync;
 
     const asyncValidator = (value) =>
-      new Promise((res, rej) => {
-        resolveAsync = fooValidator(value) ? () => rej('error') : () => res();
+      new Promise((res) => {
+        resolveAsync = fooValidator(value) ? () => res('error') : () => res();
       });
 
     it('should correct set meta data on sync validation', async () => {
@@ -465,7 +465,7 @@ describe('useField', () => {
       expect(spyProps.meta).toEqual(expect.objectContaining({ validating: true, valid: true }));
 
       await act(async () => {
-        resSlow1('ok');
+        resSlow1();
       });
 
       expect(spyProps.meta).toEqual(expect.objectContaining({ validating: false, valid: true }));
@@ -475,11 +475,11 @@ describe('useField', () => {
 
       await waitFor(() => expect(spyProps.meta).toEqual(expect.objectContaining({ validating: true, valid: true })));
 
-      resSlow2('ok');
+      resSlow2();
 
       await waitFor(() => expect(spyProps.meta).toEqual(expect.objectContaining({ validating: true, valid: true })));
 
-      resFast('ok');
+      resFast();
 
       await waitFor(() => expect(spyProps.meta).toEqual(expect.objectContaining({ validating: false, valid: true })));
     });
