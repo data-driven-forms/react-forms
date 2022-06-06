@@ -1,5 +1,5 @@
+import { FormSpyProps } from '@data-driven-forms/form-state-manager/form-spy';
 import { ComponentType } from 'react';
-import { FormSpyProps } from '@data-driven-forms/form-state-manager';
 
 declare const FormSpy: ComponentType<FormSpyProps>;
 

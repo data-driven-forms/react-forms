@@ -49,17 +49,17 @@ export interface Meta {
   warning: any;
 }
 
-export type OnChange = (value: any) => void;
-export type OnBlur = (value: any) => void;
-export type OnFocus = (value: any) => void;
+export type OnChange<FieldValue = any> = (event: React.ChangeEvent<FieldValue>) => void;
+export type OnBlur<T> = (event: React.FocusEvent<T>) => void;
+export type OnFocus<T> = (value: React.FocusEvent<T>) => void;
 
-export interface Input {
+export interface Input<FieldValue = any, T extends HTMLElement = HTMLElement> {
   name: string;
-  value: any;
+  value: FieldValue;
   checked?: boolean;
-  onChange: OnChange;
-  onBlur: OnBlur;
-  onFocus: OnFocus;
+  onChange: OnChange<FieldValue>;
+  onBlur: OnBlur<T>;
+  onFocus: OnFocus<T>;
   multiple?: boolean;
   type?: string;
 }
