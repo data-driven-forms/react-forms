@@ -1111,10 +1111,10 @@ describe('managerApi', () => {
   describe('Form level validation', () => {
     const validate = (values) => (values.foo === 'foo' ? { foo: 'error' } : undefined);
     const asyncValidate = (values) =>
-      new Promise((res, rej) =>
+      new Promise((res) =>
         setTimeout(() => {
           if (values?.foo === 'foo') {
-            rej({ foo: 'error' });
+            res({ foo: 'error' });
           }
 
           return res();
@@ -1202,7 +1202,7 @@ describe('managerApi', () => {
     it('should fail async level validation and set field error', async () => {
       expect.assertions(6);
 
-      const asyncValidateWithError = () => Promise.reject({ nested: { foo: 'some-very-evil-error' } });
+      const asyncValidateWithError = () => Promise.resolve({ nested: { foo: 'some-very-evil-error' } });
 
       const render = jest.fn();
       const managerApi = createManagerApi({ validate: asyncValidateWithError });
@@ -1569,10 +1569,10 @@ describe('managerApi', () => {
     const syncValidate2 = jest.fn().mockImplementation((value) => (value === 'two' ? 'error-two' : undefined));
     const asyncValidate1 = jest
       .fn()
-      .mockImplementation((value) => new Promise((res, rej) => setTimeout(() => (value === 'one' ? rej('error-one') : res()), 200)));
+      .mockImplementation((value) => new Promise((res) => setTimeout(() => (value === 'one' ? res('error-one') : res()), 200)));
     const asyncValidate2 = jest
       .fn()
-      .mockImplementation((value) => new Promise((res, rej) => setTimeout(() => (value === 'two' ? rej('error-two') : res()), 200)));
+      .mockImplementation((value) => new Promise((res) => setTimeout(() => (value === 'two' ? res('error-two') : res()), 200)));
 
     it('should pass first sync validation but fail second sync validation', async () => {
       const render = jest.fn();
@@ -2079,7 +2079,7 @@ describe('managerApi', () => {
     it('calls async submit - submit fails on catch (i.e. network error), return to normal', async () => {
       jest.useFakeTimers();
 
-      const onSubmit = jest.fn().mockImplementation(() => new Promise((res, rej) => setTimeout(() => rej(), 1000)));
+      const onSubmit = jest.fn().mockImplementation(() => new Promise((res) => setTimeout(() => res(), 1000)));
       const render = jest.fn();
 
       const managerApi = createManagerApi({ onSubmit });
@@ -2259,7 +2259,7 @@ describe('managerApi', () => {
     it('should save type: warning as warning - async', async () => {
       expect.assertions(2);
 
-      const asyncValidate = jest.fn().mockImplementation(() => Promise.reject({ type: 'warning', error: someError }));
+      const asyncValidate = jest.fn().mockImplementation(() => Promise.resolve({ type: 'warning', error: someError }));
 
       const managerApi = createManagerApi({});
       managerApi().registerField({ name: 'field', validate: asyncValidate, render, internalId: 1 });
@@ -2276,7 +2276,7 @@ describe('managerApi', () => {
 
       const asyncValidate = jest
         .fn()
-        .mockImplementation((value) => Promise.reject(value === 'warning' ? { type: 'warning', error: someError } : 'error'));
+        .mockImplementation((value) => Promise.resolve(value === 'warning' ? { type: 'warning', error: someError } : 'error'));
 
       const managerApi = createManagerApi({});
       managerApi().registerField({ name: 'field', initialValue: 'warning', validate: asyncValidate, render, internalId: 1 });

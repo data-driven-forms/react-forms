@@ -203,7 +203,7 @@ const useField = ({
       sanitizedValue = convertValue(sanitizedValue, dataType);
     }
 
-    if (hasClearedValue && checkEmpty(sanitizedValue) && typeof state?.meta.initial === 'undefined') {
+    if (hasClearedValue && checkEmpty(sanitizedValue) && typeof state?.meta.initial !== 'undefined') {
       sanitizedValue = finalClearedValue;
     }
 

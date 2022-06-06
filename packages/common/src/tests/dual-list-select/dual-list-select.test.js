@@ -155,7 +155,7 @@ describe('dual list select', () => {
       selectedRightValues: [],
       sortLeftDesc: true,
       sortRightDesc: true,
-      value: [],
+      value: '',
     });
   });
 
@@ -351,7 +351,7 @@ describe('dual list select', () => {
       selectedRightValues: [],
       sortLeftDesc: true,
       sortRightDesc: true,
-      value: [],
+      value: '',
     });
   });
 
