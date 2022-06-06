@@ -2,7 +2,7 @@ import { Validator } from "../validators";
 import { ConditionDefinition } from '../condition';
 import { DataType } from "../data-types";
 import { AnyObject } from "../common-types/any-object";
-import { FieldInputProps } from "react-final-form";
+import { Input } from "@data-driven-forms/form-state-manager/use-field";
 import { FormOptions } from "../renderer-context";
 import { Meta } from "../use-field-api";
 
@@ -13,8 +13,8 @@ export interface FieldActions {
 }
 
 export interface FieldApi<FieldValue, T extends HTMLElement = HTMLElement> {
-  meta: Meta<FieldValue>;
-  input: FieldInputProps<FieldValue, T>;
+  meta: Meta;
+  input: Input<FieldValue, T>;
 }
 
 export type ResolvePropsFunction = (props: AnyObject, fieldApi: FieldApi<any>, formOptions: FormOptions) => AnyObject;
