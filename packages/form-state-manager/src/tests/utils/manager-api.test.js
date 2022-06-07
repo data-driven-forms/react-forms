@@ -2056,8 +2056,6 @@ describe('managerApi', () => {
 
   describe('sync submit', () => {
     it('without errors', () => {
-      jest.useFakeTimers();
-
       const onSubmit = jest.fn();
       const render = jest.fn();
 
@@ -2086,8 +2084,6 @@ describe('managerApi', () => {
     });
 
     it('with errors', () => {
-      jest.useFakeTimers();
-
       const onSubmit = jest.fn().mockImplementation(() => ({ field: 'some error' }));
       const render = jest.fn();
 
@@ -2121,8 +2117,6 @@ describe('managerApi', () => {
     });
 
     it('should calculate dirty on submit correctly', () => {
-      jest.useFakeTimers();
-
       const onSubmit = jest.fn();
       const render = jest.fn();
 
@@ -2158,8 +2152,6 @@ describe('managerApi', () => {
     });
 
     it('should calculate dirty on submit correctly with an initial value', () => {
-      jest.useFakeTimers();
-
       const onSubmit = jest.fn();
       const render = jest.fn();
 
