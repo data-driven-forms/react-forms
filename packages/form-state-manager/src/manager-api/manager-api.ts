@@ -487,6 +487,7 @@ const createManagerApi: CreateManagerApi = ({
   let runningValidators = 0;
   let flatSubmitErrors: AnyObject = {};
   let flatErrors: AnyObject = {};
+  let lastSubmittedValues: AnyObject;
   const registeringFields: string[] = [];
   const validationCache = new Map<string, FieldState>();
 
@@ -881,29 +882,35 @@ const createManagerApi: CreateManagerApi = ({
 
       modifyNamed('visited', true, name);
       modifyNamed('modified', true, name);
-      modifyNamed('dirtyFields', true, name);
-      modifyNamed('dirtyFieldsSinceLastSubmit', true, name);
       modify('modifiedSinceLastSubmit', true);
-      modify('dirtySinceLastSubmit', true);
 
       const isEqualFn = state.fieldListeners[name]?.isEqual || defaultIsEqual;
 
       const pristine = isEqualFn(value, state.fieldListeners[name]?.state?.meta?.initial || get(state.initialValues, name));
+      const dirtySinceLastSubmit = lastSubmittedValues ? !isEqualFn(value, get(lastSubmittedValues, name)) : !pristine;
+
+      modifyNamed('dirtyFields', !pristine, name);
+      modifyNamed('dirtyFieldsSinceLastSubmit', dirtySinceLastSubmit, name);
 
       setFieldState(name, (prevState) => ({
         ...prevState,
         meta: {
           ...prevState.meta,
+          modified: true,
+          modifiedSinceLastSubmit: true,
           pristine,
           dirty: !pristine,
+          dirtySinceLastSubmit,
         },
         value,
       }));
 
       const setDirty = isFormDirty();
+      const setDirtySinceLastSubmit = isFormDirtySinceLastSubmit();
 
       modify('pristine', !setDirty);
       modify('dirty', setDirty);
+      modify('dirtySinceLastSubmit', setDirtySinceLastSubmit);
 
       revalidateFields([name, ...(state.fieldListeners[name]?.validateFields || state.registeredFields.filter((n) => n !== name))]);
 
@@ -917,6 +924,10 @@ const createManagerApi: CreateManagerApi = ({
 
   function isFormDirty(): boolean {
     return Object.entries(state.fieldListeners).some(([, field]) => field?.state?.meta?.dirty);
+  }
+
+  function isFormDirtySinceLastSubmit(): boolean {
+    return Object.entries(state.fieldListeners).some(([, field]) => field?.state?.meta?.dirtySinceLastSubmit);
   }
 
   function focus(name: string): void {
@@ -993,9 +1004,15 @@ const createManagerApi: CreateManagerApi = ({
 
     const result = config.onSubmit({ ...state.values }, { ...state, values: { ...state.values } }, event);
 
+    lastSubmittedValues = { ...state.values };
+
     if (isPromise(result)) {
       setSubmitting();
       const [modify, render] = prepareRerender();
+
+      modify('modifiedSinceLastSubmit', false);
+      modify('dirtySinceLastSubmit', false);
+      modify('dirtyFieldsSinceLastSubmit', {});
 
       result.then((errors: unknown) => {
         handleSubmitError(modify, errors);
@@ -1007,6 +1024,10 @@ const createManagerApi: CreateManagerApi = ({
       });
     } else {
       const [modify, render] = prepareRerender();
+
+      modify('modifiedSinceLastSubmit', false);
+      modify('dirtySinceLastSubmit', false);
+      modify('dirtyFieldsSinceLastSubmit', {});
 
       handleSubmitError(modify, result);
       updateFieldSubmitMeta();
@@ -1027,6 +1048,8 @@ const createManagerApi: CreateManagerApi = ({
             ...prevState,
             meta: {
               ...prevState.meta,
+              modifiedSinceLastSubmit: false,
+              dirtySinceLastSubmit: false,
               submitFailed: state.submitFailed,
               submitSucceeded: state.submitSucceeded,
               submitError: flatSubmitErrors[name],

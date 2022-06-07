@@ -422,6 +422,9 @@ describe('managerApi', () => {
         name: 'field',
         meta: {
           ...initialMeta('123'),
+          modified: true,
+          modifiedSinceLastSubmit: true,
+          dirtySinceLastSubmit: true,
           dirty: true,
           pristine: false,
         },
@@ -468,6 +471,9 @@ describe('managerApi', () => {
         name: 'field',
         meta: {
           ...initialMeta('123'),
+          modified: true,
+          modifiedSinceLastSubmit: true,
+          dirtySinceLastSubmit: true,
           dirty: true,
           pristine: false,
         },
@@ -501,6 +507,9 @@ describe('managerApi', () => {
         name: 'field',
         meta: {
           ...initialMeta('123'),
+          modified: true,
+          modifiedSinceLastSubmit: true,
+          dirtySinceLastSubmit: true,
           dirty: true,
           pristine: false,
         },
@@ -2045,6 +2054,135 @@ describe('managerApi', () => {
     });
   });
 
+  describe('sync submit', () => {
+    it('without errors', () => {
+      const onSubmit = jest.fn();
+      const render = jest.fn();
+
+      const managerApi = createManagerApi({ onSubmit });
+
+      managerApi().registerField({ name: 'field', internalId: '1', render });
+
+      expect(managerApi().submitting).toEqual(false);
+      expect(render).not.toHaveBeenCalled();
+
+      managerApi().change('field', 'value');
+      managerApi().submit();
+
+      expect(render).toHaveBeenCalled();
+      expect(onSubmit.mock.calls[0][0]).toEqual({ field: 'value' });
+
+      expect(managerApi().submitting).toEqual(false);
+      expect(managerApi().submitError).toEqual(undefined);
+      expect(managerApi().submitFailed).toEqual(false);
+      expect(managerApi().submitSucceeded).toEqual(true);
+      expect(managerApi().submitErrors).toEqual(undefined);
+      expect(managerApi().hasSubmitErrors).toEqual(false);
+      expect(managerApi().modifiedSinceLastSubmit).toEqual(false);
+      expect(managerApi().dirtySinceLastSubmit).toEqual(false);
+      expect(managerApi().dirtyFieldsSinceLastSubmit).toEqual({});
+    });
+
+    it('with errors', () => {
+      const onSubmit = jest.fn().mockImplementation(() => ({ field: 'some error' }));
+      const render = jest.fn();
+
+      const managerApi = createManagerApi({ onSubmit });
+
+      managerApi().registerField({ name: 'field', internalId: '1', render });
+
+      expect(managerApi().submitting).toEqual(false);
+      expect(render).not.toHaveBeenCalled();
+
+      managerApi().submit();
+
+      expect(render).toHaveBeenCalled();
+
+      expect(managerApi().submitting).toEqual(false);
+      expect(managerApi().submitError).toEqual(undefined);
+      expect(managerApi().submitFailed).toEqual(true);
+      expect(managerApi().submitSucceeded).toEqual(false);
+      expect(managerApi().submitErrors).toEqual({ field: 'some error' });
+      expect(managerApi().hasSubmitErrors).toEqual(true);
+      expect(managerApi().modifiedSinceLastSubmit).toEqual(false);
+      expect(managerApi().dirtySinceLastSubmit).toEqual(false);
+      expect(managerApi().dirtyFieldsSinceLastSubmit).toEqual({});
+
+      expect(focusErrorSpy).toHaveBeenCalledWith({ field: 'some error' }, undefined);
+
+      expect(managerApi().getFieldState('field').submitError).toEqual('some error');
+      expect(managerApi().getFieldState('field').submitting).toEqual(false);
+      expect(managerApi().getFieldState('field').submitFailed).toEqual(true);
+      expect(managerApi().getFieldState('field').submitSucceeded).toEqual(false);
+    });
+
+    it('should calculate dirty on submit correctly', () => {
+      const onSubmit = jest.fn();
+      const render = jest.fn();
+
+      const managerApi = createManagerApi({ onSubmit });
+
+      managerApi().registerField({ name: 'field', internalId: '1', render });
+
+      expect(managerApi().submitting).toEqual(false);
+      expect(render).not.toHaveBeenCalled();
+
+      expect(managerApi().getFieldState('field').dirtySinceLastSubmit).toEqual(false);
+      expect(managerApi().getFieldState('field').modifiedSinceLastSubmit).toEqual(false);
+
+      managerApi().change('field', 'value');
+
+      expect(managerApi().getFieldState('field').dirtySinceLastSubmit).toEqual(true);
+      expect(managerApi().getFieldState('field').modifiedSinceLastSubmit).toEqual(true);
+
+      managerApi().submit();
+
+      expect(managerApi().getFieldState('field').dirtySinceLastSubmit).toEqual(false);
+      expect(managerApi().getFieldState('field').modifiedSinceLastSubmit).toEqual(false);
+
+      managerApi().change('field', 'value1');
+
+      expect(managerApi().getFieldState('field').dirtySinceLastSubmit).toEqual(true);
+      expect(managerApi().getFieldState('field').modifiedSinceLastSubmit).toEqual(true);
+
+      managerApi().change('field', 'value');
+
+      expect(managerApi().getFieldState('field').dirtySinceLastSubmit).toEqual(false);
+      expect(managerApi().getFieldState('field').modifiedSinceLastSubmit).toEqual(true);
+    });
+
+    it('should calculate dirty on submit correctly with an initial value', () => {
+      const onSubmit = jest.fn();
+      const render = jest.fn();
+
+      const managerApi = createManagerApi({ onSubmit });
+
+      managerApi().registerField({ name: 'field', internalId: '1', render, initialValue: 'value' });
+
+      expect(managerApi().submitting).toEqual(false);
+      expect(render).not.toHaveBeenCalled();
+
+      expect(managerApi().dirtySinceLastSubmit).toEqual(false);
+      expect(managerApi().dirtyFieldsSinceLastSubmit).toEqual({});
+      expect(managerApi().getFieldState('field').dirtySinceLastSubmit).toEqual(false);
+      expect(managerApi().getFieldState('field').modifiedSinceLastSubmit).toEqual(false);
+
+      managerApi().change('field', 'value1');
+
+      expect(managerApi().dirtySinceLastSubmit).toEqual(true);
+      expect(managerApi().dirtyFieldsSinceLastSubmit).toEqual({ field: true });
+      expect(managerApi().getFieldState('field').dirtySinceLastSubmit).toEqual(true);
+      expect(managerApi().getFieldState('field').modifiedSinceLastSubmit).toEqual(true);
+
+      managerApi().change('field', 'value');
+
+      expect(managerApi().dirtySinceLastSubmit).toEqual(false);
+      expect(managerApi().dirtyFieldsSinceLastSubmit).toEqual({ field: false });
+      expect(managerApi().getFieldState('field').dirtySinceLastSubmit).toEqual(false);
+      expect(managerApi().getFieldState('field').modifiedSinceLastSubmit).toEqual(true);
+    });
+  });
+
   describe('async submit', () => {
     it('calls async submit', async () => {
       jest.useFakeTimers();
@@ -2074,6 +2212,9 @@ describe('managerApi', () => {
       expect(managerApi().submitSucceeded).toEqual(true);
       expect(managerApi().submitErrors).toEqual(undefined);
       expect(managerApi().hasSubmitErrors).toEqual(false);
+      expect(managerApi().modifiedSinceLastSubmit).toEqual(false);
+      expect(managerApi().dirtySinceLastSubmit).toEqual(false);
+      expect(managerApi().dirtyFieldsSinceLastSubmit).toEqual({});
     });
 
     it('calls async submit - submit fails on catch (i.e. network error), return to normal', async () => {
@@ -2105,6 +2246,9 @@ describe('managerApi', () => {
       expect(managerApi().submitSucceeded).toEqual(true);
       expect(managerApi().submitErrors).toEqual(undefined);
       expect(managerApi().hasSubmitErrors).toEqual(false);
+      expect(managerApi().modifiedSinceLastSubmit).toEqual(false);
+      expect(managerApi().dirtySinceLastSubmit).toEqual(false);
+      expect(managerApi().dirtyFieldsSinceLastSubmit).toEqual({});
     });
 
     it('calls async submit - failed', async () => {
@@ -2138,6 +2282,9 @@ describe('managerApi', () => {
       expect(managerApi().submitSucceeded).toEqual(false);
       expect(managerApi().submitErrors).toEqual(error);
       expect(managerApi().hasSubmitErrors).toEqual(true);
+      expect(managerApi().modifiedSinceLastSubmit).toEqual(false);
+      expect(managerApi().dirtySinceLastSubmit).toEqual(false);
+      expect(managerApi().dirtyFieldsSinceLastSubmit).toEqual({});
     });
 
     it('calls async submit - failed with form level', async () => {
@@ -2171,6 +2318,9 @@ describe('managerApi', () => {
       expect(managerApi().submitSucceeded).toEqual(false);
       expect(managerApi().submitErrors).toEqual(error);
       expect(managerApi().hasSubmitErrors).toEqual(true);
+      expect(managerApi().modifiedSinceLastSubmit).toEqual(false);
+      expect(managerApi().dirtySinceLastSubmit).toEqual(false);
+      expect(managerApi().dirtyFieldsSinceLastSubmit).toEqual({});
     });
 
     it('calls async submit - failed - set async error on field', async () => {
@@ -2205,6 +2355,9 @@ describe('managerApi', () => {
       expect(managerApi().submitSucceeded).toEqual(false);
       expect(managerApi().submitErrors).toEqual(error);
       expect(managerApi().hasSubmitErrors).toEqual(true);
+      expect(managerApi().modifiedSinceLastSubmit).toEqual(false);
+      expect(managerApi().dirtySinceLastSubmit).toEqual(false);
+      expect(managerApi().dirtyFieldsSinceLastSubmit).toEqual({});
       expect(focusErrorSpy).toHaveBeenCalledWith({ 'nested.field': 'some evil error' }, undefined);
 
       expect(managerApi().getFieldState('nested.field').submitError).toEqual('some evil error');
