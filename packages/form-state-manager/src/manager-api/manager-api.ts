@@ -997,6 +997,10 @@ const createManagerApi: CreateManagerApi = ({
       setSubmitting();
       const [modify, render] = prepareRerender();
 
+      modify('modifiedSinceLastSubmit', false);
+      modify('dirtySinceLastSubmit', false);
+      modify('dirtyFieldsSinceLastSubmit', {});
+
       result.then((errors: unknown) => {
         handleSubmitError(modify, errors);
         updateFieldSubmitMeta();
@@ -1007,6 +1011,10 @@ const createManagerApi: CreateManagerApi = ({
       });
     } else {
       const [modify, render] = prepareRerender();
+
+      modify('modifiedSinceLastSubmit', false);
+      modify('dirtySinceLastSubmit', false);
+      modify('dirtyFieldsSinceLastSubmit', {});
 
       handleSubmitError(modify, result);
       updateFieldSubmitMeta();
