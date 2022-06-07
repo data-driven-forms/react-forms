@@ -905,8 +905,8 @@ const createManagerApi: CreateManagerApi = ({
         value,
       }));
 
-      const setDirty = isFormDirty();
-      const setDirtySinceLastSubmit = isFormDirtySinceLastSubmit();
+      const setDirty = !pristine || isFormDirty();
+      const setDirtySinceLastSubmit = dirtySinceLastSubmit || isFormDirtySinceLastSubmit();
 
       modify('pristine', !setDirty);
       modify('dirty', setDirty);
