@@ -7,6 +7,11 @@ const fse = require('fs-extra');
 const glob = require('glob');
 
 const root = path.resolve(__dirname, '../');
+
+try {
+  fse.rmSync(path.resolve(root, './packages/dist'), { recursive: true })
+} catch {}
+
 const x = glob.sync(path.resolve(root, './packages/*'));
 
 function cleanPackage(p) {
