@@ -77,16 +77,20 @@ const WizardInternal = (props) => {
         {() => (
           <React.Fragment>
             {currentStep.nextStep && (
-              <button disabled={!formOptions.getState().valid} onClick={() => handleNext(selectNext(currentStep.nextStep, formOptions.getState))}>
+              <button
+                type="button"
+                disabled={!formOptions.getState().valid}
+                onClick={() => handleNext(selectNext(currentStep.nextStep, formOptions.getState))}
+              >
                 Next
               </button>
             )}
             {!currentStep.nextStep && (
-              <button disabled={!formOptions.getState().valid} onClick={() => formOptions.handleSubmit()}>
+              <button type="button" disabled={!formOptions.getState().valid} onClick={() => formOptions.handleSubmit()}>
                 Submit
               </button>
             )}
-            <button onClick={handlePrev} disabled={activeStepIndex === 0}>
+            <button type="button" onClick={handlePrev} disabled={activeStepIndex === 0}>
               Back
             </button>
           </React.Fragment>
@@ -98,6 +102,8 @@ const WizardInternal = (props) => {
 
 const WrappedWizard = (props) => <Wizard Wizard={WizardInternal} {...props} />;
 
+const FormTemplateCb = (props) => <FormTemplate {...props} showFormControls={false} />;
+
 const CustomWizard = () => {
   const [values, setValues] = useState();
 
@@ -106,7 +112,7 @@ const CustomWizard = () => {
       <FormRenderer
         schema={schema}
         componentMapper={{ 'text-field': TextField, select: Select, wizard: WrappedWizard }}
-        FormTemplate={(props) => <FormTemplate {...props} showFormControls={false} />}
+        FormTemplate={FormTemplateCb}
         onSubmit={(values) => setValues(values)}
       />
       {values && <pre>{JSON.stringify(values, null, 2)}</pre>}
