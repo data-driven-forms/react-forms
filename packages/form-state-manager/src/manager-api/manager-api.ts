@@ -882,15 +882,15 @@ const createManagerApi: CreateManagerApi = ({
 
       modifyNamed('visited', true, name);
       modifyNamed('modified', true, name);
-      modifyNamed('dirtyFields', true, name);
-      modifyNamed('dirtyFieldsSinceLastSubmit', true, name);
       modify('modifiedSinceLastSubmit', true);
-      modify('dirtySinceLastSubmit', true);
 
       const isEqualFn = state.fieldListeners[name]?.isEqual || defaultIsEqual;
 
       const pristine = isEqualFn(value, state.fieldListeners[name]?.state?.meta?.initial || get(state.initialValues, name));
       const dirtySinceLastSubmit = lastSubmittedValues ? !isEqualFn(value, get(lastSubmittedValues, name)) : !pristine;
+
+      modifyNamed('dirtyFields', !pristine, name);
+      modifyNamed('dirtyFieldsSinceLastSubmit', dirtySinceLastSubmit, name);
 
       setFieldState(name, (prevState) => ({
         ...prevState,
@@ -906,9 +906,11 @@ const createManagerApi: CreateManagerApi = ({
       }));
 
       const setDirty = isFormDirty();
+      const setDirtySinceLastSubmit = isFormDirtySinceLastSubmit();
 
       modify('pristine', !setDirty);
       modify('dirty', setDirty);
+      modify('dirtySinceLastSubmit', setDirtySinceLastSubmit);
 
       revalidateFields([name, ...(state.fieldListeners[name]?.validateFields || state.registeredFields.filter((n) => n !== name))]);
 
@@ -922,6 +924,10 @@ const createManagerApi: CreateManagerApi = ({
 
   function isFormDirty(): boolean {
     return Object.entries(state.fieldListeners).some(([, field]) => field?.state?.meta?.dirty);
+  }
+
+  function isFormDirtySinceLastSubmit(): boolean {
+    return Object.entries(state.fieldListeners).some(([, field]) => field?.state?.meta?.dirtySinceLastSubmit);
   }
 
   function focus(name: string): void {
