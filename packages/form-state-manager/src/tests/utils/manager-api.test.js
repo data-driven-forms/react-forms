@@ -422,6 +422,9 @@ describe('managerApi', () => {
         name: 'field',
         meta: {
           ...initialMeta('123'),
+          modified: true,
+          modifiedSinceLastSubmit: true,
+          dirtySinceLastSubmit: true,
           dirty: true,
           pristine: false,
         },
@@ -468,6 +471,9 @@ describe('managerApi', () => {
         name: 'field',
         meta: {
           ...initialMeta('123'),
+          modified: true,
+          modifiedSinceLastSubmit: true,
+          dirtySinceLastSubmit: true,
           dirty: true,
           pristine: false,
         },
@@ -501,6 +507,9 @@ describe('managerApi', () => {
         name: 'field',
         meta: {
           ...initialMeta('123'),
+          modified: true,
+          modifiedSinceLastSubmit: true,
+          dirtySinceLastSubmit: true,
           dirty: true,
           pristine: false,
         },
@@ -2109,6 +2118,43 @@ describe('managerApi', () => {
       expect(managerApi().getFieldState('field').submitting).toEqual(false);
       expect(managerApi().getFieldState('field').submitFailed).toEqual(true);
       expect(managerApi().getFieldState('field').submitSucceeded).toEqual(false);
+    });
+
+    it('should calculate dirty on submit correctly', () => {
+      jest.useFakeTimers();
+
+      const onSubmit = jest.fn();
+      const render = jest.fn();
+
+      const managerApi = createManagerApi({ onSubmit });
+
+      managerApi().registerField({ name: 'field', internalId: '1', render });
+
+      expect(managerApi().submitting).toEqual(false);
+      expect(render).not.toHaveBeenCalled();
+
+      expect(managerApi().getFieldState('field').dirtySinceLastSubmit).toEqual(false);
+      expect(managerApi().getFieldState('field').modifiedSinceLastSubmit).toEqual(false);
+
+      managerApi().change('field', 'value');
+
+      expect(managerApi().getFieldState('field').dirtySinceLastSubmit).toEqual(true);
+      expect(managerApi().getFieldState('field').modifiedSinceLastSubmit).toEqual(true);
+
+      managerApi().submit();
+
+      expect(managerApi().getFieldState('field').dirtySinceLastSubmit).toEqual(false);
+      expect(managerApi().getFieldState('field').modifiedSinceLastSubmit).toEqual(false);
+
+      managerApi().change('field', 'value1');
+
+      expect(managerApi().getFieldState('field').dirtySinceLastSubmit).toEqual(true);
+      expect(managerApi().getFieldState('field').modifiedSinceLastSubmit).toEqual(true);
+
+      managerApi().change('field', 'value');
+
+      expect(managerApi().getFieldState('field').dirtySinceLastSubmit).toEqual(false);
+      expect(managerApi().getFieldState('field').modifiedSinceLastSubmit).toEqual(true);
     });
   });
 

@@ -487,6 +487,7 @@ const createManagerApi: CreateManagerApi = ({
   let runningValidators = 0;
   let flatSubmitErrors: AnyObject = {};
   let flatErrors: AnyObject = {};
+  let lastSubmittedValues = {};
   const registeringFields: string[] = [];
   const validationCache = new Map<string, FieldState>();
 
@@ -889,13 +890,17 @@ const createManagerApi: CreateManagerApi = ({
       const isEqualFn = state.fieldListeners[name]?.isEqual || defaultIsEqual;
 
       const pristine = isEqualFn(value, state.fieldListeners[name]?.state?.meta?.initial || get(state.initialValues, name));
+      const dirtySinceLastSubmit = !isEqualFn(value, get(lastSubmittedValues, name));
 
       setFieldState(name, (prevState) => ({
         ...prevState,
         meta: {
           ...prevState.meta,
+          modified: true,
+          modifiedSinceLastSubmit: true,
           pristine,
           dirty: !pristine,
+          dirtySinceLastSubmit,
         },
         value,
       }));
@@ -993,6 +998,8 @@ const createManagerApi: CreateManagerApi = ({
 
     const result = config.onSubmit({ ...state.values }, { ...state, values: { ...state.values } }, event);
 
+    lastSubmittedValues = { ...state.values };
+
     if (isPromise(result)) {
       setSubmitting();
       const [modify, render] = prepareRerender();
@@ -1035,6 +1042,8 @@ const createManagerApi: CreateManagerApi = ({
             ...prevState,
             meta: {
               ...prevState.meta,
+              modifiedSinceLastSubmit: false,
+              dirtySinceLastSubmit: false,
               submitFailed: state.submitFailed,
               submitSucceeded: state.submitSucceeded,
               submitError: flatSubmitErrors[name],
