@@ -487,7 +487,7 @@ const createManagerApi: CreateManagerApi = ({
   let runningValidators = 0;
   let flatSubmitErrors: AnyObject = {};
   let flatErrors: AnyObject = {};
-  let lastSubmittedValues = {};
+  let lastSubmittedValues: AnyObject;
   const registeringFields: string[] = [];
   const validationCache = new Map<string, FieldState>();
 
@@ -890,7 +890,7 @@ const createManagerApi: CreateManagerApi = ({
       const isEqualFn = state.fieldListeners[name]?.isEqual || defaultIsEqual;
 
       const pristine = isEqualFn(value, state.fieldListeners[name]?.state?.meta?.initial || get(state.initialValues, name));
-      const dirtySinceLastSubmit = !isEqualFn(value, get(lastSubmittedValues, name));
+      const dirtySinceLastSubmit = lastSubmittedValues ? !isEqualFn(value, get(lastSubmittedValues, name)) : !pristine;
 
       setFieldState(name, (prevState) => ({
         ...prevState,

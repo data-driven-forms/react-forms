@@ -2156,6 +2156,33 @@ describe('managerApi', () => {
       expect(managerApi().getFieldState('field').dirtySinceLastSubmit).toEqual(false);
       expect(managerApi().getFieldState('field').modifiedSinceLastSubmit).toEqual(true);
     });
+
+    it('should calculate dirty on submit correctly with an initial value', () => {
+      jest.useFakeTimers();
+
+      const onSubmit = jest.fn();
+      const render = jest.fn();
+
+      const managerApi = createManagerApi({ onSubmit });
+
+      managerApi().registerField({ name: 'field', internalId: '1', render, initialValue: 'value' });
+
+      expect(managerApi().submitting).toEqual(false);
+      expect(render).not.toHaveBeenCalled();
+
+      expect(managerApi().getFieldState('field').dirtySinceLastSubmit).toEqual(false);
+      expect(managerApi().getFieldState('field').modifiedSinceLastSubmit).toEqual(false);
+
+      managerApi().change('field', 'value1');
+
+      expect(managerApi().getFieldState('field').dirtySinceLastSubmit).toEqual(true);
+      expect(managerApi().getFieldState('field').modifiedSinceLastSubmit).toEqual(true);
+
+      managerApi().change('field', 'value');
+
+      expect(managerApi().getFieldState('field').dirtySinceLastSubmit).toEqual(false);
+      expect(managerApi().getFieldState('field').modifiedSinceLastSubmit).toEqual(true);
+    });
   });
 
   describe('async submit', () => {
