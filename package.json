@@ -112,7 +112,7 @@
     "regenerator-runtime": "^0.13.9",
     "replace-in-file": "^6.3.2",
     "sass-loader": "^12.4.0",
-    "semantic-release": "^18.0.1",
+    "semantic-release": "^19.0.3",
     "strip-ansi": "^7.0.1",
     "style-loader": "^3.3.1",
     "terser-webpack-plugin": "^5.3.0",
