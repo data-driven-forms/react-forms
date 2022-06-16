@@ -1,6 +1,6 @@
 {
   "name": "@data-driven-forms/pf4-component-mapper",
-  "version": "3.18.1",
+  "version": "3.18.2",
   "description": "Patternfly 4 React component mapper for Data Driven Forms.",
   "main": "index.js",
   "module": "esm/index.js",
