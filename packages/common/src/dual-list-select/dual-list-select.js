@@ -73,7 +73,7 @@ const DualListSelectCommon = (props) => {
   };
 
   const handleClearRightValues = () => {
-    dispatch({ type: 'clearRightValue' });
+    dispatch({ type: 'clearRightValues' });
     rest.input.onChange([...rest.input.value.filter((val) => !rightValues.find(({ value }) => val === value))]);
   };
 
