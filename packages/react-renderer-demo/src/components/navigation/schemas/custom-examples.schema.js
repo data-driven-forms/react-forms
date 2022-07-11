@@ -31,6 +31,10 @@ const customExamplesSchema = [
     component: 'value-listener',
     linkText: 'Value listener',
   },
+  {
+    component: 'cascading-select',
+    linkText: 'Cascading select',
+  },
 ];
 
 export default customExamplesSchema;
