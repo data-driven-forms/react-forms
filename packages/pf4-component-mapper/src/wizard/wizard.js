@@ -178,7 +178,7 @@ WizardInternal.propTypes = {
   container: PropTypes.instanceOf(Element),
   StepTemplate: PropTypes.elementType,
   className: PropTypes.string,
-  conditionalSubmitFlag: PropTypes.string.isRequired,
+  conditionalSubmitFlag: PropTypes.string,
 };
 
 const defaultLabels = {
