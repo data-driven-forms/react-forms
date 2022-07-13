@@ -1,5 +1,9 @@
 const customExamplesSchema = [
   {
+    component: 'custom-component-mapper',
+    linkText: 'Custom component mapper',
+  },
+  {
     component: 'mui-one-row-layout',
     linkText: 'MUI one row layout',
   },
