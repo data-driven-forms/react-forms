@@ -27,7 +27,7 @@ NextButton.propTypes = {
   handleNext: PropTypes.func.isRequired,
   nextLabel: PropTypes.node.isRequired,
   getState: PropTypes.func.isRequired,
-  conditionalSubmitFlag: PropTypes.string.isRequired,
+  conditionalSubmitFlag: PropTypes.string,
 };
 
 const WizardStepButtons = ({
@@ -84,7 +84,7 @@ const WizardStepButtons = ({
 
 WizardStepButtons.propTypes = {
   disableBack: PropTypes.bool,
-  conditionalSubmitFlag: PropTypes.string.isRequired,
+  conditionalSubmitFlag: PropTypes.string,
   handlePrev: PropTypes.func.isRequired,
   handleNext: PropTypes.func.isRequired,
   nextStep: PropTypes.oneOfType([

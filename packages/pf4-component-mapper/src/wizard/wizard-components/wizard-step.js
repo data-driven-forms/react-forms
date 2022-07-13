@@ -95,7 +95,7 @@ WizardStep.propTypes = {
   name: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   hasNoBodyPadding: PropTypes.bool,
   StepTemplate: PropTypes.elementType,
-  conditionalSubmitFlag: PropTypes.string.isRequired,
+  conditionalSubmitFlag: PropTypes.string,
 };
 
 WizardStep.defaultProps = {
