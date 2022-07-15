@@ -72,8 +72,8 @@ const createSuirCJSTransform = (env = 'commonjs') => [
 const createMuiTransform = (env) => [
   'transform-imports',
   {
-    '@mui/lab': {
-      transform: (importName) => (env ? `@mui/lab/${env}/${importName}` : `@mui/lab/${importName}`),
+    '@mui/x-date-pickers': {
+      transform: (importName) => (env ? `@mui/x-date-pickers/${env}/${importName}` : `@mui/x-date-pickers/${importName}`),
       preventFullImport: false,
       skipDefaultConversion: false
     },

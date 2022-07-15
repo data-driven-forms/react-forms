@@ -42,7 +42,7 @@
     "@data-driven-forms/common": "*",
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
-    "@mui/lab": "^5.0.0-alpha.53",
+    "@mui/x-date-pickers": "^5.0.0-beta.0",
     "clsx": "^1.0.4",
     "date-fns": "^2.16.1",
     "lodash": "^4.17.21"
