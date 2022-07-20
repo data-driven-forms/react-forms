@@ -1,6 +1,6 @@
 {
   "name": "@data-driven-forms/blueprint-component-mapper",
-  "version": "3.18.4",
+  "version": "3.18.5",
   "description": "BlueprintJS React component mapper for Data Driven Forms.",
   "main": "index.js",
   "module": "esm/index.js",
