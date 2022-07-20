@@ -75,7 +75,7 @@ const createMuiTransform = (env) => [
     '@mui/x-date-pickers': {
       transform: (importName) => (env ? `@mui/x-date-pickers/${env}/${importName}` : `@mui/x-date-pickers/${importName}`),
       preventFullImport: false,
-      skipDefaultConversion: false
+      skipDefaultConversion: true
     },
     '@mui/material': {
       transform: (importName) => (env ? `@mui/material/${env}/${importName}` : `@mui/material/${importName}`),
