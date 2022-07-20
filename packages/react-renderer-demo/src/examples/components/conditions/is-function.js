@@ -6,8 +6,8 @@ import DatePicker from '@data-driven-forms/mui-component-mapper/date-picker';
 import PlainText from '@data-driven-forms/mui-component-mapper/plain-text';
 import FormTemplate from '@data-driven-forms/mui-component-mapper/form-template';
 
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/x-date-pickers/LocalizationProvider';
+import AdapterDateFns from '@mui/x-date-pickers/AdapterDateFns';
 
 const calculateAge = (birthday) => {
   let ageDifMs = Date.now() - birthday;

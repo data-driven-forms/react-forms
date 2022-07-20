@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { DatePicker as MUIDatePicker } from '@mui/lab';
+import { DatePicker as MUIDatePicker } from '@mui/x-date-pickers';
 
 import FormFieldGrid from '../form-field-grid/form-field-grid';
 import { validationError } from '../validation-error/validation-error';

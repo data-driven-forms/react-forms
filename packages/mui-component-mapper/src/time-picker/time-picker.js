@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { TimePicker as MUITimePicker } from '@mui/lab';
+import { TimePicker as MUITimePicker } from '@mui/x-date-pickers';
 
 import FormFieldGrid from '../form-field-grid/form-field-grid';
 import { validationError } from '../validation-error/validation-error';

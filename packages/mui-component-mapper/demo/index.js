@@ -6,11 +6,11 @@ import Grid from '@mui/material/Grid';
 import { componentMapper, FormTemplate } from '../src';
 import { createTheme } from '@mui/material/styles';
 import { ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import Typography from '@mui/material/Typography';
 import demoSchema from '../../../shared/demoschema';
 import fieldArraySchema from './demo-schemas/field-array-schema';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 
 import Button from '@mui/material/Button';
 import wizardSchema from './demo-schemas/wizard-schema';

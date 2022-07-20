@@ -14,8 +14,8 @@ import { render } from 'react-dom';
 import FormRenderer from '@data-driven-forms/react-form-renderer/form-renderer';
 import FormTemplate from '@data-driven-forms/mui-component-mapper/form-template';
 import componentMapper from '@data-driven-forms/mui-component-mapper/component-mapper';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/x-date-pickers/LocalizationProvider';
+import AdapterDateFns from '@mui/x-date-pickers/AdapterDateFns';
 
 import schema from './schema'
 
@@ -73,7 +73,7 @@ export const dependencies = {
   '@data-driven-forms/mui-component-mapper': 'latest',
   '@data-driven-forms/common': 'latest',
   '@mui/icons-material': 'latest',
-  '@mui/lab': 'latest',
+  '@mui/x-date-pickers': 'latest',
   '@mui/material': 'latest',
   '@mui/styles': 'latest',
   'prop-types': 'latest',
