@@ -1288,23 +1288,23 @@
     enabled "2.0.x"
     kuler "^2.0.0"
 
-"@data-driven-forms/dnd@^0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@data-driven-forms/dnd/-/dnd-0.0.6.tgz#dd90ae787ff20f0f3d942f8391918a2de68669e4"
-  integrity sha512-vAZgOR8bQJOArPsxZYakkfxL0YlYpWpPbe85Mvj+AyOsXLfyFlF7+sU+bgUEwZcCL3JuH53ZADoRIlZ0e+cQ4g==
-
-"@data-driven-forms/editor-core@^0.0.7":
+"@data-driven-forms/dnd@^0.0.7":
   version "0.0.7"
-  resolved "https://registry.yarnpkg.com/@data-driven-forms/editor-core/-/editor-core-0.0.7.tgz#e9ae04410035809387eaa5576215a8024de171ec"
-  integrity sha512-YzqgLTopyAD8XMZ3rP/KJuEoNQE5xFrysZgVpnKZmJGz+AwhIOz8sF6o2DPfp3xUhubjQAX2o+0iEnbSQzQkdQ==
+  resolved "https://registry.yarnpkg.com/@data-driven-forms/dnd/-/dnd-0.0.7.tgz#b2646ca42d61158c97f1a95a4e08961ba600f8d1"
+  integrity sha512-cqAx5eU1mrwTS28MeM1rJniH3+QWTX3qGMlF4vJqYix3ToT/xyCD08no3PDabN9eXV0BkIaeilsDjvT8mPMfng==
 
-"@data-driven-forms/editor-pro@0.0.10":
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/@data-driven-forms/editor-pro/-/editor-pro-0.0.10.tgz#07865de25c02bb2b34cbca3f1f47efdcee245e2e"
-  integrity sha512-0WuSOsPQslzxqrRwK7zFBQuBTUwDDRKX6P8NvHDtk65Nq+F98MaA8VQEUA27Pr1i1OnBYNVN2BlpRyqGYWGmsw==
+"@data-driven-forms/editor-core@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@data-driven-forms/editor-core/-/editor-core-0.0.8.tgz#160ca7c2a8a6f28a849373008cd0d4758563b5c6"
+  integrity sha512-UsOrlLsNWY0olD8oXyPs9gAhk5Cn3tLY4WIIGXMLwh6lj1JwPOrIr2I8WNGf9xqq6Hhc8nlWOWh5TsZmUBQ4Aw==
+
+"@data-driven-forms/editor-pro@0.0.13":
+  version "0.0.13"
+  resolved "https://registry.yarnpkg.com/@data-driven-forms/editor-pro/-/editor-pro-0.0.13.tgz#8b224a39c64bb203557896d6e6320794a0da2c9a"
+  integrity sha512-k99aeTXDgrG/ykj7mlQDCQO/Cv4Pr5NAbcp2W1IFKRqSa6kwSPWpPpx8pXxvPrDx9sCHzllkT72oqKt1ovq58g==
   dependencies:
-    "@data-driven-forms/dnd" "^0.0.6"
-    "@data-driven-forms/editor-core" "^0.0.7"
+    "@data-driven-forms/dnd" "^0.0.7"
+    "@data-driven-forms/editor-core" "^0.0.8"
     "@data-driven-forms/evergreen-component-mapper" "^0.0.8"
 
 "@data-driven-forms/evergreen-component-mapper@^0.0.8":
