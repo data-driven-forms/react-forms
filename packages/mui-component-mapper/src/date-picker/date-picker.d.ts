@@ -6,6 +6,10 @@ type InternalDatePickerProps<TInputDate, TDate> = MuiDatePickerProps<TInputDate,
 }
 
 export type DatePickerProps<TInputDate, TDate> = InternalDatePickerProps<TInputDate, TDate> & UseFieldApiComponentConfig;
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 declare const DatePicker: React.ComponentType<DatePickerProps<any, any>>;
 
 export default DatePicker;

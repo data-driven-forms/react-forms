@@ -164,101 +164,6 @@ const createAntTransform = (env) => [
   `ant-${env}`
 ];
 
-const carbonMapper = (importName) =>
-  ({
-    StructuredListWrapper: 'StructuredList',
-    StructuredListBody: 'StructuredList',
-    StructuredListRow: 'StructuredList',
-    StructuredListCell: 'StructuredList',
-    ProgressStep: 'ProgressIndicator'
-  }[importName] || importName);
-
-const createCarbonCJSTransform = (env) => [
-  'transform-imports',
-  {
-    'carbon-components-react': {
-      transform: (importName) => {
-        let res;
-        const files = glob.sync(
-          path.resolve(__dirname, `../{..,carbon-component-mapper}/node_modules/carbon-components-react/${env === 'cjs' ? 'lib' : 'es'}/**/${carbonMapper(importName)}.js`)
-        ).filter(path => !path.includes('/next/'));
-        if (files.length > 0) {
-          res = files[0];
-        } else {
-          throw new Error(`File with importName ${importName} does not exist`);
-        }
-
-        res = res.replace(/^.*node_modules\//, '');
-        res = res.replace(/^\//, '');
-        return res;
-      },
-      preventFullImport: false,
-      skipDefaultConversion: false
-    },
-    'carbon-components-react/lib/components/StructuredList/StructuredList': {
-      transform: (importName) => {
-        let res;
-        const files = glob.sync(
-          path.resolve(__dirname, `../{..,carbon-component-mapper}/node_modules/carbon-components-react/${env === 'cjs' ? 'lib' : 'es'}/**/${carbonMapper(importName)}.js`)
-        ).filter(path => !path.includes('/next/'));
-        if (files.length > 0) {
-          res = files[0];
-        } else {
-          throw new Error(`File with importName ${importName} does not exist`);
-        }
-
-        res = res.replace(/^.*node_modules\//, '');
-        res = res.replace(/^\//, '');
-        return res;
-      },
-      preventFullImport: false,
-      skipDefaultConversion: true
-    },
-    'carbon-components-react/lib/components/ProgressIndicator/ProgressIndicator': {
-      transform: (importName) => {
-        let res;
-        const files = glob.sync(
-          path.resolve(__dirname, `../{..,carbon-component-mapper}/node_modules/carbon-components-react/${env === 'cjs' ? 'lib' : 'es'}/**/${carbonMapper(importName)}.js`)
-        ).filter(path => !path.includes('/next/'));
-        if (files.length > 0) {
-          res = files[0];
-        } else {
-          throw new Error(`File with importName ${importName} does not exist`);
-        }
-
-        res = res.replace(/^.*node_modules\//, '');
-        res = res.replace(/^\//, '');
-        return res;
-      },
-      preventFullImport: false,
-      skipDefaultConversion: true
-    },
-    '@carbon/icons-react': {
-      transform: (importName) => {
-        let size = importName.match(/\d+/)[0];
-        let iconName = pascalToKebabCaseCarbonIcons(importName.replace(/\d+/, ''));
-
-        let res;
-        const files = glob.sync(
-          path.resolve(__dirname, `../{..,carbon-component-mapper}/node_modules/@carbon/icons-react/${env === 'cjs' ? 'lib' : 'es'}/${iconName}/${size}.js`)
-        );
-        if (files.length > 0) {
-          res = files[0];
-        } else {
-          throw new Error(`File with importName ${importName} does not exist`);
-        }
-
-        res = res.replace(/^.*node_modules\//, '');
-        res = res.replace(/^\//, '');
-        return res;
-      },
-      preventFullImport: false,
-      skipDefaultConversion: false
-    }
-  },
-  `carbon-components-react-${env}`
-];
-
 const createReactJSSTransform = (env) => [
   'transform-imports',
   {
@@ -298,7 +203,6 @@ module.exports = {
         createPfReactTransform('js'),
         createBluePrintTransform('cjs'),
         createAntTransform('cjs'),
-        createCarbonCJSTransform('cjs'),
         createReactJSSTransform('cjs')
       ]
     },
@@ -310,7 +214,6 @@ module.exports = {
         createPfReactTransform('esm'),
         createBluePrintTransform('esm'),
         createAntTransform('esm'),
-        createCarbonCJSTransform('esm'),
         createReactJSSTransform('esm')
       ]
     }
