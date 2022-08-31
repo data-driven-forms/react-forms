@@ -27,7 +27,7 @@ class App extends React.Component {
     return (
       <div style={{ widht: '100%' }}>
         <div style={{ maxWidth: 800, marginLeft: 'auto', marginRight: 'auto' }}>
-          <h1>cool_library-1 component mapper</h1>
+          <h1>{{componentmapper}} component mapper</h1>
           <div style={{ marginBottom: 20, marginTop: 20 }}>
             <button
               onClick={() => this.setState((state) => ({ schema: wizardSchema, additionalOptions: { showFormControls: false, wizard: true } }))}
@@ -47,7 +47,6 @@ class App extends React.Component {
             FormTemplate={(props) => <FormTemplate {...props} showFormControls={this.state.additionalOptions.showFormControls} />}
             onCancel={console.log}
             schema={this.state.schema}
-            uiSchema={this.state.ui}
             {...this.state.additionalOptions}
           />
         </div>

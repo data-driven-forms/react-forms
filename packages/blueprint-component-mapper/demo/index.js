@@ -56,7 +56,6 @@ class App extends React.Component {
             FormTemplate={(props) => <FormTemplate {...props} showFormControls={this.state.additionalOptions.showFormControls} />}
             onCancel={console.log}
             schema={this.state.schema}
-            uiSchema={this.state.ui}
             {...this.state.additionalOptions}
           />
         </div>
