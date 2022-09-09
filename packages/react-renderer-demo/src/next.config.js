@@ -55,8 +55,12 @@ module.exports = withBundleAnalyzer(
       webpack: (config, options) => {
         config.resolve.alias = {
           ...config.resolve.alias,
-          react: path.resolve(__dirname, '../../../node_modules/react'),
-          'react-dom': path.resolve(__dirname, '../../../node_modules/react-dom'),
+          ...(process.env.DEPLOY === 'true'
+            ? {}
+            : {
+                react: path.resolve(__dirname, '../../../node_modules/react'),
+                'react-dom': path.resolve(__dirname, '../../../node_modules/react-dom'),
+              }),
           '@docs/doc-components': path.resolve(__dirname, './doc-components'),
           '@docs/components': path.resolve(__dirname, './components'),
           '@docs/pages': path.resolve(__dirname, './pages'),
