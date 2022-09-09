@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 
 import { componentMapper, FormTemplate } from '../src';
@@ -12,8 +12,8 @@ import { Button } from 'semantic-ui-react';
 const compositeMapper = {
   ...componentMapper,
   [componentTypes.SWITCH]: {
-    component: componentMapper[componentTypes.SWITCH]
-  }
+    component: componentMapper[componentTypes.SWITCH],
+  },
 };
 
 const App = () => {
@@ -45,4 +45,6 @@ const App = () => {
   );
 };
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const container = document.getElementById('root');
+const root = createRoot(container);
+root.render(<App />);
