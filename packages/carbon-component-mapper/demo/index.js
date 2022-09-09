@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { FormRenderer } from '@data-driven-forms/react-form-renderer';
 import { arraySchemaDDF } from './demo-schemas/widget-schema';
 import { componentMapper, FormTemplate } from '../src';
@@ -14,9 +14,9 @@ const fieldArrayState = {
   additionalOptions: {
     initialValues: {
       number: [1, 2, 3, 4],
-      minMax: [null, null, null, null]
-    }
-  }
+      minMax: [null, null, null, null],
+    },
+  },
 };
 
 class App extends React.Component {
@@ -54,4 +54,6 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const container = document.getElementById('root');
+const root = createRoot(container);
+root.render(<App />);

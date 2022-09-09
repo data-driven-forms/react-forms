@@ -1,6 +1,6 @@
-/* eslint-disable */
+/* eslint-disable no-unused-vars */
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom';
 import FormRenderer from '@data-driven-forms/react-form-renderer/form-renderer';
 import { arraySchemaDDF } from './demo-schemas/widget-schema';
 import { componentMapper, FormTemplate } from '../src';
@@ -10,7 +10,7 @@ import {
   wizardSchemaWithFunction,
   wizardSchemaSimple,
   wizardSchemaSubsteps,
-  wizardSchemaMoreSubsteps
+  wizardSchemaMoreSubsteps,
 } from './demo-schemas/wizard-schema';
 import sandboxSchema from './demo-schemas/sandbox';
 import demoSchema from '../../../shared/demoschema';
@@ -23,9 +23,9 @@ const fieldArrayState = {
   additionalOptions: {
     initialValues: {
       number: [1, 2, 3, 4],
-      minMax: [null, null, null, null]
-    }
-  }
+      minMax: [null, null, null, null],
+    },
+  },
 };
 
 class App extends React.Component {
@@ -51,7 +51,7 @@ class App extends React.Component {
             onSubmit={console.log}
             componentMapper={{
               ...componentMapper,
-              summary: Summary
+              summary: Summary,
             }}
             FormTemplate={(props) => <FormTemplate {...props} showFormControls={this.state.additionalOptions.showFormControls} />}
             onCancel={console.log}
@@ -64,4 +64,6 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const container = document.getElementById('root');
+const root = createRoot(container);
+root.render(<App />);
