@@ -199,7 +199,7 @@ module.exports = {
       presets: [['@babel/preset-env', { modules: 'commonjs' }]],
       plugins: [
         createSuirCJSTransform('commonjs'),
-        createMuiTransform('node'),
+        createMuiTransform(),
         createPfReactTransform('js'),
         createBluePrintTransform('cjs'),
         createAntTransform('cjs'),
