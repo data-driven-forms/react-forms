@@ -92,6 +92,14 @@ describe('data types', () => {
       it('converts a negative integer', () => {
         expect(convertType(dataTypes.INTEGER, '-12132')).toEqual(-12132);
       });
+
+      it('converts a floating number with nothing preceding decimal', () => {
+        expect(convertType(dataTypes.FLOAT, '123.')).toEqual('123.');
+      });
+
+      it('converts a floating number', () => {
+        expect(convertType(dataTypes.FLOAT, '123.0')).toEqual(123.0);
+      });
     });
   });
 });
