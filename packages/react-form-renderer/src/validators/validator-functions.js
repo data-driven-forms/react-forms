@@ -2,7 +2,7 @@ import { memoize, prepare, prepareMsg, selectNum, isNumber, trunc } from '../com
 
 export const required = memoize(({ message } = {}) => {
   return prepare((value) => {
-    const cond = typeof value === 'string' ? !value.trim() : value && !isNaN(value.length) ? !value.length : !value;
+    const cond = typeof value === 'string' ? !value.trim() : value && !isNaN(value.length) ? !value.length : value == null;
     if (cond) {
       return prepareMsg(message, 'required').defaultMessage;
     }
