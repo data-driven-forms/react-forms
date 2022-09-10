@@ -23,7 +23,9 @@ const canBeConvertedToNumber = (value) => !isNaN(Number(value)) && value !== '';
  * @param {Any} value value to be checked
  */
 const canBeConvertedToFloat = (value) => {
-  if (typeof value == 'string' && value.endsWith('.')) return false;
+  if (typeof value == 'string' && value.endsWith('.')) {
+    return false;
+  }
   return canBeConvertedToNumber(value);
 };
 
