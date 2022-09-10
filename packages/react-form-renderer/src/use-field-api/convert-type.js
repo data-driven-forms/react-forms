@@ -26,6 +26,7 @@ const canBeConvertedToFloat = (value) => {
   if (typeof value == 'string' && value.endsWith('.')) {
     return false;
   }
+
   return canBeConvertedToNumber(value);
 };
 
