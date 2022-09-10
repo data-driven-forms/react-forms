@@ -10,6 +10,14 @@ describe('New validators', () => {
       expect(validatorMapper[validatorTypes.REQUIRED]()('Foo')).toBeUndefined();
     });
 
+    it('should pass required validator with false value', () => {
+      expect(validatorMapper[validatorTypes.REQUIRED]()(false)).toBeUndefined();
+    });
+
+    it('should fail required validator for null value', () => {
+      expect(validatorMapper[validatorTypes.REQUIRED]()(null)).toBe('Required');
+    });
+
     it('should fail required validator', () => {
       expect(validatorMapper[validatorTypes.REQUIRED]()()).toBe('Required');
     });
