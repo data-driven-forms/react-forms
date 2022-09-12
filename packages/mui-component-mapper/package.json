@@ -25,24 +25,23 @@
     "directory": "packages/mui-component-mapper"
   },
   "devDependencies": {
-    "@mui/icons-material": "5.2.5",
-    "@mui/material": "5.2.8",
-    "@mui/styles": "5.2.3"
+    "@mui/icons-material": "^5.10.3",
+    "@mui/material": "^5.10.4"
   },
   "peerDependencies": {
     "@data-driven-forms/react-form-renderer": "*",
-    "@mui/icons-material": "5.2.5",
-    "@mui/material": "5.2.8",
-    "@mui/styles": "5.2.3",
+    "@mui/icons-material": "^5.10.3",
+    "@mui/material": "^5.10.4",
     "prop-types": ">=15.7.2",
     "react": "^17.0.2 || ^18.0.0",
     "react-dom": "^17.0.2 || ^18.0.0"
   },
   "dependencies": {
     "@data-driven-forms/common": "*",
-    "@emotion/react": "^11.5.0",
-    "@emotion/styled": "^11.3.0",
-    "@mui/x-date-pickers": "^5.0.0-beta.0",
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@mui/system": "^5.10.4",
+    "@mui/x-date-pickers": "^5.0.1",
     "clsx": "^1.0.4",
     "date-fns": "^2.16.1",
     "lodash": "^4.17.21"

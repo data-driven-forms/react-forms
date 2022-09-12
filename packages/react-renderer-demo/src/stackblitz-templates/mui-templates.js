@@ -75,6 +75,5 @@ export const dependencies = {
   '@mui/icons-material': 'latest',
   '@mui/x-date-pickers': 'latest',
   '@mui/material': 'latest',
-  '@mui/styles': 'latest',
   'prop-types': 'latest',
 };

@@ -5,6 +5,5 @@ describe('package.json', () => {
   it('mui-mapper has the same version as react-renderer-demo', () => {
     expect(MUIJson.devDependencies['@mui/material']).toEqual(DEMOJson.dependencies['@mui/material']);
     expect(MUIJson.devDependencies['@mui/icons-material']).toEqual(DEMOJson.dependencies['@mui/icons-material']);
-    expect(MUIJson.devDependencies['@mui/styles']).toEqual(DEMOJson.dependencies['@mui/styles']);
   });
 });

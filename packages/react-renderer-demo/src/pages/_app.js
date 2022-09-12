@@ -1,45 +1,45 @@
-import React from 'react';
-import App from 'next/app';
+import * as React from 'react';
+import PropTypes from 'prop-types';
 import Head from 'next/head';
 import { ThemeProvider } from '@mui/material/styles';
-import { StyledEngineProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import theme from '../theme';
+import { CacheProvider } from '@emotion/react';
 import Layout from '@docs/components/layout';
 import { MDXProvider } from '@mdx-js/react';
 import MdxComponents from '@docs/components/mdx/mdx-components';
+
 import CookieModal from '../components/cookie-modal';
+import theme from '../theme';
+import createEmotionCache from '../utils/create-emotion-cache';
 
-export default class MyApp extends App {
-  componentDidMount() {
-    // Remove the server-side injected CSS.
-    const jssStyles = document.querySelector('#jss-server-side');
-    if (jssStyles) {
-      jssStyles.parentNode.removeChild(jssStyles);
-    }
-  }
+// Client-side cache, shared for the whole session of the user in the browser.
+const clientSideEmotionCache = createEmotionCache();
 
-  render() {
-    const { Component, pageProps } = this.props;
+export default function App(props) {
+  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
-    return (
-      <React.Fragment>
-        <Head>
-          <title>Data driven forms</title>
-        </Head>
-        <StyledEngineProvider injectFirst>
-          <ThemeProvider theme={theme}>
-            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-            <CssBaseline />
-            <MDXProvider components={MdxComponents}>
-              <Layout>
-                <Component {...pageProps} />
-              </Layout>
-            </MDXProvider>
-            <CookieModal />
-          </ThemeProvider>
-        </StyledEngineProvider>
-      </React.Fragment>
-    );
-  }
+  return (
+    <CacheProvider value={emotionCache}>
+      <Head>
+        <title>Data driven forms</title>
+        <meta name="viewport" content="initial-scale=1, width=device-width" />
+      </Head>
+      <ThemeProvider theme={theme}>
+        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+        <CssBaseline />
+        <MDXProvider components={MdxComponents}>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </MDXProvider>
+        <CookieModal />
+      </ThemeProvider>
+    </CacheProvider>
+  );
 }
+
+App.propTypes = {
+  Component: PropTypes.elementType.isRequired,
+  emotionCache: PropTypes.object,
+  pageProps: PropTypes.object.isRequired,
+};
