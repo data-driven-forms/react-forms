@@ -64,6 +64,7 @@
     "devDependencies": {
         "cpx": "^1.5.0",
         "cross-env": "^7.0.3",
+        "glob": "^8.0.3",
         "firebase-functions-test": "^0.3.3",
         "firebase-tools": "^10.1.0",
         "rimraf": "^3.0.2"
