@@ -24,7 +24,7 @@
         "logs": "firebase functions:log",
         "analyze": "ANALYZE=true next build src/",
         "lint": "eslint ./src",
-        "generate:examples": "node ./scripts/generate-component-examples && yarn lint --fix"
+        "generate:examples": "node ./scripts/generate-component-examples"
     },
     "dependencies": {
         "@actions/github": "^5.0.0",
