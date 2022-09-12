@@ -77,11 +77,11 @@ jobs:
       - run:
           name: Separate docs project
           command: |
-            cp -r packages/react-renderer-demo ~/ && cd ~/react-renderer-demo && yarn
+            cp -r packages/react-renderer-demo ~/ && cd ~/react-renderer-demo && yarn && yarn add -D eslint && rm -rf dist
       - run:
           name: Deploy demo
           command: |
-             yarn deploy --token=$FIREBASE_TOKEN
+             cd ~/react-renderer-demo && yarn deploy --token=$FIREBASE_TOKEN
       - save_cache:
           key: dependency-cache-{{ checksum "yarn.lock" }}
           paths:
