@@ -77,7 +77,7 @@ jobs:
       - run:
           name: Separate docs project
           command: |
-            cp -r packages/react-renderer-demo ~/ && cd ~/react-renderer-demo && rm -rf dist
+            cp -r packages/react-renderer-demo ~/ && cd ~/react-renderer-demo && rm -rf dist && rm -rf node_modules && yarn
       - run:
           name: Deploy demo
           command: |
