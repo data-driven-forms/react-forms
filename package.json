@@ -189,7 +189,5 @@
       ]
     ]
   },
-  "dependencies": {
-    "yarn": "^1.22.19"
-  }
+  "dependencies": {}
 }
