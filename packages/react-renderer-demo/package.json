@@ -1,6 +1,6 @@
 {
     "name": "@data-driven-forms/react-renderer-demo",
-    "version": "3.18.10",
+    "version": "3.18.11",
     "main": "firebaseFunctions.js",
     "description": "Documentation page for Data Driven Forms.",
     "homepage": "https://data-driven-forms.org/",
@@ -32,7 +32,7 @@
         "@data-driven-forms/mui-component-mapper": "*",
         "@data-driven-forms/react-form-renderer": "*",
         "@docsearch/css": "^3.2.1",
-        "@docsearch/react":"^3.2.1",
+        "@docsearch/react": "^3.2.1",
         "@emotion/cache": "^11.10.3",
         "@emotion/react": "^11.10.4",
         "@emotion/server": "^11.10.0",
