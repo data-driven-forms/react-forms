@@ -24,7 +24,6 @@
   "dependencies": {
     "clsx": "^1.0.4",
     "lodash": "^4.17.15",
-    "react-select": "^3.0.8",
     "prop-types": "^15.7.2"
   },
   "peerDependencies": {

@@ -1,59 +1,32 @@
-import React from 'react';
-import Document, { Head, Main, NextScript } from 'next/document';
-import { ServerStyleSheets } from '@mui/styles';
+import * as React from 'react';
+import Document, { Html, Head, Main, NextScript } from 'next/document';
+import createEmotionServer from '@emotion/server/create-instance';
+import theme from '../theme';
+import createEmotionCache from '../utils/create-emotion-cache';
 
-class MyDocument extends Document {
+export default class MyDocument extends Document {
   render() {
     return (
-      <html lang="en">
+      <Html lang="en">
         <Head>
-          <meta charSet="utf-8" />
-          <meta name="author" content="Data Driven Forms" />
-          <link rel="manifest" href="/manifest.json" />
-          <link rel="shortcut icon" href="/favicon.ico" />
-          <link rel="apple-touch-icon" href="/192x192.png"></link>
-          <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no" />
           {/* PWA primary color */}
-          <meta name="theme-color" content="#430f8f" />
-          <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
-          <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Montserrat:700&display=swap" />
-          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
-          <style
-            dangerouslySetInnerHTML={{
-              __html: `
-          html {
-            box-sizing: border-box;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-          }
-          *, *::before, *::after {
-            box-sizing: inherit;
-          }
-          strong, b {
-            font-weight: bolder !important;
-          }
-          body {
-            color: rgba(0, 0, 0, 0.87) !important;
-            margin: 0 !important;
-            font-size: 0.875rem !important;
-            font-family: "Roboto", "Helvetica", "Arial", sans-serif !important;
-            font-weight: 400 !important;
-            line-height: 1.43 !important;
-            letter-spacing: 0.01071em !important;
-            background-color: #fafafa !important;
-          }`,
-            }}
-          />
+          <meta name="theme-color" content={theme.palette.primary.main} />
+          <link rel="shortcut icon" href="/favicon.ico" />
+          <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+          <meta name="emotion-insertion-point" content="" />
+          {this.props.emotionStyleTags}
         </Head>
         <body>
           <Main />
           <NextScript />
         </body>
-      </html>
+      </Html>
     );
   }
 }
 
+// `getInitialProps` belongs to `_document` (instead of `_app`),
+// it's compatible with static-site generation (SSG).
 MyDocument.getInitialProps = async (ctx) => {
   // Resolution order
   //
@@ -77,27 +50,36 @@ MyDocument.getInitialProps = async (ctx) => {
   // 3. app.render
   // 4. page.render
 
-  // Render app and page and get the context of the page with collected side effects.
-  const sheets = new ServerStyleSheets();
   const originalRenderPage = ctx.renderPage;
+
+  // You can consider sharing the same Emotion cache between all the SSR requests to speed up performance.
+  // However, be aware that it can have global side effects.
+  const cache = createEmotionCache();
+  const { extractCriticalToChunks } = createEmotionServer(cache);
 
   ctx.renderPage = () =>
     originalRenderPage({
-      enhanceApp: (App) => (props) => sheets.collect(<App {...props} />),
+      enhanceApp: (App) =>
+        function EnhanceApp(props) {
+          return <App emotionCache={cache} {...props} />;
+        },
     });
 
   const initialProps = await Document.getInitialProps(ctx);
+  // This is important. It prevents Emotion to render invalid HTML.
+  // See https://github.com/mui/material-ui/issues/26561#issuecomment-855286153
+  const emotionStyles = extractCriticalToChunks(initialProps.html);
+  const emotionStyleTags = emotionStyles.styles.map((style) => (
+    <style
+      data-emotion={`${style.key} ${style.ids.join(' ')}`}
+      key={style.key}
+      // eslint-disable-next-line react/no-danger
+      dangerouslySetInnerHTML={{ __html: style.css }}
+    />
+  ));
 
   return {
     ...initialProps,
-    // Styles fragment is rendered after the app and page rendering finish.
-    styles: [
-      <React.Fragment key="styles">
-        {initialProps.styles}
-        {sheets.getStyleElement()}
-      </React.Fragment>,
-    ],
+    emotionStyleTags,
   };
 };
-
-export default MyDocument;
