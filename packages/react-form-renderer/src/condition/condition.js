@@ -1,9 +1,19 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useCallback, useEffect, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import isEqual from 'lodash/isEqual';
 
 import useFormApi from '../use-form-api';
 import parseCondition from '../parse-condition';
+
+const setterValueCheck = (setterValue) => {
+  if (setterValue === null || Array.isArray(setterValue)) {
+    console.error('Received invalid setterValue. Expected object, received: ', setterValue);
+
+    return false;
+  }
+
+  return typeof setterValue === 'object';
+};
 
 export const reducer = (state, { type, sets }) => {
   switch (type) {
@@ -42,6 +52,12 @@ const Condition = React.memo(
       }
     }, [dirty]);
 
+    const setValue = useCallback((setter) => {
+      Object.entries(setter).forEach(([name, value]) => {
+        formOptions.change(name, value);
+      });
+    }, []);
+
     useEffect(() => {
       if (setters && setters.length > 0 && (state.initial || !isEqual(setters, state.sets))) {
         setters.forEach((setter, index) => {
@@ -60,9 +76,17 @@ const Condition = React.memo(
                */
               if (!meta || isFormModified || typeof meta.initial === 'undefined') {
                 formOptions.batch(() => {
-                  Object.entries(setter).forEach(([name, value]) => {
-                    formOptions.change(name, value);
-                  });
+                  if (typeof setter !== 'function') {
+                    setValue(setter);
+                  } else {
+                    const setterValue = setter(formOptions.getState(), formOptions.getFieldState);
+
+                    if (setterValueCheck(setterValue)) {
+                      setValue(setterValue);
+                    } else {
+                      console.error('Received invalid setterValue. Expected object, received: ', setterValue);
+                    }
+                  }
                 });
               }
             });
@@ -101,11 +125,11 @@ const conditionProps = {
   notMatch: PropTypes.any,
   then: PropTypes.shape({
     visible: PropTypes.bool,
-    set: PropTypes.object,
+    set: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   }),
   else: PropTypes.shape({
     visible: PropTypes.bool,
-    set: PropTypes.object,
+    set: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   }),
 };
 

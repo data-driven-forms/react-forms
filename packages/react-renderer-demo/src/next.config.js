@@ -57,16 +57,16 @@ module.exports = withBundleAnalyzer(
           ...config.resolve.alias,
           ...(process.env.DEPLOY === 'true'
             ? {
-                "@emotion/react": path.resolve(__dirname, '../node_modules/@emotion/react'),
-                "@emotion/server": path.resolve(__dirname, '../node_modules/@emotion/server'),
-                "@emotion/styled": path.resolve(__dirname, '../node_modules/@emotion/styled'),
+                '@emotion/react': path.resolve(__dirname, '../node_modules/@emotion/react'),
+                '@emotion/server': path.resolve(__dirname, '../node_modules/@emotion/server'),
+                '@emotion/styled': path.resolve(__dirname, '../node_modules/@emotion/styled'),
               }
             : {
                 react: path.resolve(__dirname, '../../../node_modules/react'),
                 'react-dom': path.resolve(__dirname, '../../../node_modules/react-dom'),
-                "@emotion/react": path.resolve(__dirname, '../../../node_modules/@emotion/react'),
-                "@emotion/server": path.resolve(__dirname, '../../../node_modules/@emotion/server'),
-                "@emotion/styled": path.resolve(__dirname, '../../../node_modules/@emotion/styled'),
+                '@emotion/react': path.resolve(__dirname, '../../../node_modules/@emotion/react'),
+                '@emotion/server': path.resolve(__dirname, '../../../node_modules/@emotion/server'),
+                '@emotion/styled': path.resolve(__dirname, '../../../node_modules/@emotion/styled'),
               }),
 
           '@docs/doc-components': path.resolve(__dirname, './doc-components'),
