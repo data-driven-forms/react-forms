@@ -113,4 +113,6 @@ const InitializeOnMountWizardExample = () => {
   );
 };
 
+InitializeOnMountWizardExample.displayName = 'Initialize on mount wizard example';
+
 export default InitializeOnMountWizardExample;

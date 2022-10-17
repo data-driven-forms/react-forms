@@ -35,5 +35,6 @@ const ResolvePropsSubscription = () => (
     subscription={{ values: true }}
   />
 );
+ResolvePropsSubscription.displayName = 'Resolve props subscription';
 
 export default ResolvePropsSubscription;

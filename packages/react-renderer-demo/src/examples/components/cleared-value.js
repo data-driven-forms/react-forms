@@ -49,4 +49,6 @@ const ClearedValueExample = () => {
   );
 };
 
+ClearedValueExample.displayName = 'Cleard value example';
+
 export default ClearedValueExample;

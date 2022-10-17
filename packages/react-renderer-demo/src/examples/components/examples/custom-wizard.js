@@ -120,4 +120,6 @@ const CustomWizard = () => {
   );
 };
 
+CustomWizard.displayName = 'Custom wizard';
+
 export default CustomWizard;

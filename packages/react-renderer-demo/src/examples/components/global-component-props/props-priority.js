@@ -34,4 +34,6 @@ const PropsPriority = () => {
   return <FormRenderer FormTemplate={FormTemplate} schema={schema} componentMapper={componentMapper} onSubmit={console.log} />;
 };
 
+PropsPriority.displayName = 'Props priority';
+
 export default PropsPriority;

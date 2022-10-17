@@ -21,5 +21,6 @@ const schema = {
 };
 
 const CustomValidator = () => <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />;
+CustomValidator.displayName = 'Custom validator';
 
 export default CustomValidator;

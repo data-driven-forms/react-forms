@@ -12,4 +12,6 @@ const TsExample = () => {
   );
 };
 
+TsExample.displayName = 'TsExample';
+
 export default TsExample;

@@ -31,5 +31,6 @@ const componentMapper = {
 };
 
 const NotMatch = () => <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />;
+NotMatch.displayName = 'Not match';
 
 export default NotMatch;

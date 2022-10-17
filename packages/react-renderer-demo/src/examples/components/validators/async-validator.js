@@ -42,5 +42,6 @@ const schema = {
 };
 
 const AsyncValidator = () => <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />;
+AsyncValidator.displayName = 'Async validator';
 
 export default AsyncValidator;

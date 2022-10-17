@@ -50,5 +50,6 @@ const schema = {
 };
 
 const UrlValidators = () => <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />;
+UrlValidators.displayName = 'Url validators';
 
 export default UrlValidators;

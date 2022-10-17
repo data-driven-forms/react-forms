@@ -56,4 +56,6 @@ const ValueListener = () => (
   />
 );
 
+ValueListener.displayName = 'Value listener';
+
 export default ValueListener;

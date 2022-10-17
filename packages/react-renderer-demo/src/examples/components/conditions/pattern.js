@@ -30,5 +30,6 @@ const componentMapper = {
 };
 
 const Pattern = () => <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />;
+Pattern.displayName = 'Pattern';
 
 export default Pattern;

@@ -48,5 +48,6 @@ const actionMapper = {
 const ActionMapper = () => (
   <FormRenderer FormTemplate={FormTemplate} actionMapper={actionMapper} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />
 );
+ActionMapper.displayName = 'Action mapper';
 
 export default ActionMapper;

@@ -115,4 +115,6 @@ const MUIFieldArray = () => {
   );
 };
 
+MUIFieldArray.displayName = 'MUI Field array';
+
 export default MUIFieldArray;

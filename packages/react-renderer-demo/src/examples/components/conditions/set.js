@@ -46,5 +46,6 @@ const componentMapper = {
 };
 
 const SetAction = () => <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />;
+SetAction.displayName = 'Set action';
 
 export default SetAction;

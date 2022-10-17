@@ -81,4 +81,6 @@ const StandaloneValidation = () => {
   );
 };
 
+StandaloneValidation.displayName = 'Standalone validation';
+
 export default StandaloneValidation;

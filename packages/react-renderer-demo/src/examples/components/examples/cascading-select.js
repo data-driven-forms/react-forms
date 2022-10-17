@@ -81,5 +81,6 @@ const componentMapper = {
 };
 
 const CascadingSelect = () => <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />;
+CascadingSelect.displayName = 'Cascading select';
 
 export default CascadingSelect;

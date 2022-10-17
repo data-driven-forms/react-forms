@@ -45,4 +45,6 @@ const schema = {
 
 const LengthValidators = () => <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />;
 
+LengthValidators.displayName = 'Length validators';
+
 export default LengthValidators;

@@ -60,5 +60,6 @@ const componentMapper = {
 const CustomLayoutComponent = () => (
   <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />
 );
+CustomLayoutComponent.displayName = 'Custom layout component';
 
 export default CustomLayoutComponent;

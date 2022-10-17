@@ -88,5 +88,6 @@ const componentMapper = {
 const FormTemplateWrapper = (props) => <FormTemplate {...props} showFormControls={false} />;
 
 const Condition = () => <FormRenderer FormTemplate={FormTemplateWrapper} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />;
+Condition.displayName = 'Condition';
 
 export default Condition;

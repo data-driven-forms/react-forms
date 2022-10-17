@@ -35,5 +35,6 @@ const componentMapper = {
 };
 
 const ResolveProps = () => <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />;
+ResolveProps.displayName = 'Resolve props';
 
 export default ResolveProps;

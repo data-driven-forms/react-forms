@@ -46,5 +46,6 @@ const componentMapper = {
 };
 
 const IsCondition = () => <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />;
+IsCondition.displayName = 'Is condition';
 
 export default IsCondition;

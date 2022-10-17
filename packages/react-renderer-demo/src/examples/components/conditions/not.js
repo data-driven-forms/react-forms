@@ -33,5 +33,6 @@ const componentMapper = {
 };
 
 const NotCondition = () => <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />;
+NotCondition.displayName = 'Not condition';
 
 export default NotCondition;

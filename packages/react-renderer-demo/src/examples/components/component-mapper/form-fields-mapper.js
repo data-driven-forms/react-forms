@@ -149,4 +149,6 @@ const ComponentMapper = () => {
   );
 };
 
+ComponentMapper.displayName = 'Component mapper';
+
 export default ComponentMapper;
