@@ -1,8 +1,9 @@
 import Field from "../common-types/field";
-
+import type { FormState, FormApi } from "final-form";
+ 
 export interface ActionResolution {
   visible?: boolean;
-  set?: object; // TO DO specify this
+  set?: object | ((formState:FormState<Record<string, any>>, getFieldState:FormApi["getFieldState"]) => object) ; // TO DO specify this
 }
 
 export type InnerWhenFunction = (currentField: string) => string;

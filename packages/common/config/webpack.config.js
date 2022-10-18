@@ -15,10 +15,15 @@ const devConfig = {
     filename: '[name].[hash].js'
   },
   devtool: 'eval-source-map',
+  resolve: {
+    fallback: {
+      process: 'process/browser.js',
+    },
+  },
   plugins: [
     htmlPlugin,
     new webpack.ProvidePlugin({
-      process: 'process/browser'
+      process: 'process/browser.js'
     })
   ],
   module: {

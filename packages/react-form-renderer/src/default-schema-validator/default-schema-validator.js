@@ -24,7 +24,7 @@ const checkConditionalAction = (type, action, fieldName) => {
     `);
   }
 
-  if (action.hasOwnProperty('set') && (typeof action.set !== 'object' || Array.isArray(action.set))) {
+  if (action.hasOwnProperty('set') && ((typeof action.set !== 'object' && typeof action.set !== 'function') || Array.isArray(action.set))) {
     throw new DefaultSchemaError(`
       Error occured in field definition with "name" property: "${fieldName}".
       'set' property in action "${type}" has to be a object! Received: ${typeof action.visible}, isArray: ${Array.isArray(action.set)}.

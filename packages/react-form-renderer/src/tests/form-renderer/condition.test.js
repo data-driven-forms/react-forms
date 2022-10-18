@@ -531,6 +531,150 @@ describe('condition test', () => {
     await waitFor(() => expect(screen.getByLabelText('field2')).toHaveValue('set with then'));
   });
 
+  it('should change fields value by set funciton', async () => {
+    const schema = {
+      fields: [
+        {
+          component: 'text-field',
+          name: 'field1',
+          label: 'field1',
+        },
+        {
+          component: 'text-field',
+          name: 'field2',
+          label: 'field2',
+          condition: {
+            when: 'field1',
+            is: 'foo',
+            then: {
+              set: (formState) => {
+                return { field2: formState.values.field1 };
+              },
+            },
+            else: { visible: true, set: {} },
+          },
+        },
+      ],
+    };
+
+    render(<FormRenderer {...initialProps} schema={schema} />);
+    expect(screen.getByLabelText('field2')).toHaveValue('');
+
+    await userEvent.type(screen.getByLabelText('field1'), 'foo');
+    await waitFor(() => expect(screen.getByLabelText('field2')).toHaveValue('foo'));
+  });
+
+  it('check the set function received valid arguments', async () => {
+    const setSpy = jest.fn();
+
+    setSpy.mockImplementation(() => ({}));
+
+    const schema = {
+      fields: [
+        {
+          component: 'text-field',
+          name: 'field1',
+          label: 'field1',
+        },
+        {
+          component: 'text-field',
+          name: 'field2',
+          label: 'field2',
+          condition: {
+            when: 'field1',
+            is: 'foo',
+            then: {
+              set: setSpy,
+            },
+            else: { visible: true, set: {} },
+          },
+        },
+      ],
+    };
+
+    render(<FormRenderer {...initialProps} schema={schema} />);
+
+    await userEvent.type(screen.getByLabelText('field1'), 'foo');
+
+    await waitFor(() => expect(setSpy).toHaveBeenCalledTimes(1));
+
+    const expected = { active: 'field1', dirty: true };
+
+    await waitFor(() => expect(setSpy).toHaveBeenCalledWith(expect.objectContaining(expected), expect.any(Function)));
+  });
+
+  it('check the object', async () => {
+    const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+    const schema = {
+      fields: [
+        {
+          component: 'text-field',
+          name: 'field1',
+          label: 'field1',
+        },
+        {
+          component: 'text-field',
+          name: 'field2',
+          label: 'field2',
+          condition: {
+            when: 'field1',
+            is: 'foo',
+            then: {
+              set: (formState) => {
+                return null;
+              },
+            },
+            else: { visible: true, set: {} },
+          },
+        },
+      ],
+    };
+
+    render(<FormRenderer {...initialProps} schema={schema} />);
+
+    await userEvent.type(screen.getByLabelText('field1'), 'foo');
+
+    await waitFor(() => {
+      expect(errorSpy).toHaveBeenCalled();
+      expect(console.error.mock.calls[0][0]).toContain('Received invalid setterValue. Expected object, received: ');
+    });
+  });
+
+  it('check the getFieldState object', async () => {
+    const schema = {
+      fields: [
+        {
+          component: 'text-field',
+          name: 'field1',
+          label: 'field1',
+        },
+        {
+          component: 'text-field',
+          name: 'field2',
+          label: 'field2',
+          condition: {
+            when: 'field1',
+            is: 'foo',
+            then: {
+              set: (_formState, getFieldState) => {
+                return { field2: getFieldState('field1').value };
+              },
+            },
+            else: { visible: true, set: {} },
+          },
+        },
+      ],
+    };
+    render(<FormRenderer {...initialProps} schema={schema} />);
+
+    await userEvent.type(screen.getByLabelText('field1'), 'foo');
+
+    await waitFor(() => {
+      expect(screen.getByLabelText('field2')).toHaveValue('foo');
+    });
+  });
+
   describe('reducer', () => {
     it('returns default', () => {
       const initialState = {
