@@ -44,5 +44,6 @@ const ResolvePropsDb = () => (
     actionMapper={actionMapper}
   />
 );
+ResolvePropsDb.displayName = 'Resolve props DB';
 
 export default ResolvePropsDb;

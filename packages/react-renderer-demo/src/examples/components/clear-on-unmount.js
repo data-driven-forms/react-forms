@@ -62,4 +62,6 @@ const ClearOnUnmount = () => {
   );
 };
 
+ClearOnUnmount.displayName = 'Clear on umnout';
+
 export default ClearOnUnmount;

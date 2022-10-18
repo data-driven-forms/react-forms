@@ -20,5 +20,6 @@ const schema = {
 };
 
 const CustomMessage = () => <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />;
+CustomMessage.displayName = 'Custom message';
 
 export default CustomMessage;

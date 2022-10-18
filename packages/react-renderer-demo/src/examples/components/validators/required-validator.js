@@ -27,5 +27,6 @@ const schema = {
 };
 
 const RequiredValidator = () => <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />;
+RequiredValidator.displayName = 'Required validator';
 
 export default RequiredValidator;

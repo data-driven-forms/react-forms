@@ -55,4 +55,6 @@ const ValidatorMapper = () => (
   />
 );
 
+ValidatorMapper.displayName = 'Validator mapper';
+
 export default ValidatorMapper;

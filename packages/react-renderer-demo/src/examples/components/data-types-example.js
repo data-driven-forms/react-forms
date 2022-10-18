@@ -56,4 +56,6 @@ const DataTypesExample = () => {
   );
 };
 
+DataTypesExample.displayName = 'Data types example';
+
 export default DataTypesExample;

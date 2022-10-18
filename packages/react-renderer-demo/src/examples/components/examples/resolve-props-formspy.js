@@ -32,5 +32,6 @@ const componentMapper = {
 const ResolvePropsFormSpy = () => (
   <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />
 );
+ResolvePropsFormSpy.displayName = 'Resolve props form spy';
 
 export default ResolvePropsFormSpy;

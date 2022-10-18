@@ -87,4 +87,6 @@ const FormWithFileUpload = () => {
   );
 };
 
+FormWithFileUpload.displayName = 'Form with file upload';
+
 export default FormWithFileUpload;

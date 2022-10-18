@@ -45,5 +45,6 @@ const OrCondition = () => (
     <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />
   </div>
 );
+OrCondition.displayName = 'Or condition';
 
 export default OrCondition;

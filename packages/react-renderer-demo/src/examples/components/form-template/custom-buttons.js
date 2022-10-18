@@ -75,4 +75,6 @@ const FormControls = () => (
   />
 );
 
+FormControls.displayName = 'Form controls';
+
 export default FormControls;

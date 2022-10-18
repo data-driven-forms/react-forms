@@ -45,5 +45,6 @@ const SequenceCondition = () => (
     <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />
   </div>
 );
+SequenceCondition.displayName = 'Sequence condition';
 
 export default SequenceCondition;

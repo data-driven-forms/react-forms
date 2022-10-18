@@ -31,5 +31,6 @@ const componentMapper = {
 };
 
 const IsEmpty = () => <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />;
+IsEmpty.displayName = 'Is empty';
 
 export default IsEmpty;

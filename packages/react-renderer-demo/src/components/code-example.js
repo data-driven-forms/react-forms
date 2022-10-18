@@ -193,7 +193,7 @@ const CodeExample = ({ source, mode }) => {
     mode === 'preview'
       ? dynamic(
           import(`@docs/examples/${source}`).then((mod) => {
-            setName(mod.default.name);
+            setName(mod.default?.displayName || '');
             return mod;
           })
         )

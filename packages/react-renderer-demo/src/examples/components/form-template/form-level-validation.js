@@ -135,4 +135,6 @@ const FormLevelErrors = () => (
   </Grid>
 );
 
+FormLevelErrors.displayName = 'Form level errors';
+
 export default FormLevelErrors;

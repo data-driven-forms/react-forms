@@ -43,5 +43,6 @@ const SchemaValidationExample = () => (
     schemaValidatorMapper={schemaValidatorMapper}
   />
 );
+SchemaValidationExample.displayName = 'Schema validation example';
 
 export default SchemaValidationExample;

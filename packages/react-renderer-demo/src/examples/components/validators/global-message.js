@@ -47,5 +47,6 @@ const schema = {
 };
 
 const OverridingMessage = () => <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />;
+OverridingMessage.displayName = 'Overriding message';
 
 export default OverridingMessage;

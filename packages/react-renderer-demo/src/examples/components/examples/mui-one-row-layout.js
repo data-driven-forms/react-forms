@@ -26,5 +26,6 @@ const componentMapper = {
 };
 
 const OneRowLayout = () => <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />;
+OneRowLayout.displayName = 'One row layout';
 
 export default OneRowLayout;

@@ -46,4 +46,6 @@ const AddGlobalPropToComponent = () => {
   return <FormRenderer FormTemplate={FormTemplate} schema={schema} componentMapper={componentMapper} onSubmit={console.log} />;
 };
 
+AddGlobalPropToComponent.displayName = 'Add global prop to component';
+
 export default AddGlobalPropToComponent;

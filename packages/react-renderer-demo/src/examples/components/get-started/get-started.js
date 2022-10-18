@@ -57,4 +57,6 @@ const GetStartedForm = () => (
   </Grid>
 );
 
+GetStartedForm.displayName = 'Get started form';
+
 export default GetStartedForm;

@@ -41,5 +41,6 @@ const componentMapper = {
 };
 
 const AndCondition = () => <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />;
+AndCondition.displayName = 'And condition';
 
 export default AndCondition;
