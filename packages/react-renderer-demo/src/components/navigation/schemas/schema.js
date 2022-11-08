@@ -67,10 +67,6 @@ const schema = [
     chip: 'Preview',
   },
   {
-    linkText: 'Form builder',
-    link: 'live-editor',
-  },
-  {
     linkText: 'Testing',
     link: 'testing',
   },
