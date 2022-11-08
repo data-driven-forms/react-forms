@@ -21,6 +21,7 @@ const rerouting = {
   '/renderer/condition': '/schema/introduction#condition',
   '/renderer/validators': '/schema/introduction#validate',
   '/mappers/component-api': '/provided-mappers/component-api',
+  '/live-editor': '/editor/live-editor',
 };
 
 const validatorHashMapper = {
