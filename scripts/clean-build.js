@@ -12,6 +12,10 @@ try {
   fse.rmSync(path.resolve(root, './packages/dist'), { recursive: true })
 } catch {}
 
+try {
+  fse.rmSync(path.resolve(root, './packages/react-renderer-demo/dist'), { recursive: true })
+} catch {}
+
 const x = glob.sync(path.resolve(root, './packages/*'));
 
 function cleanPackage(p) {
