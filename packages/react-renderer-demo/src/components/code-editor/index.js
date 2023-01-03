@@ -44,8 +44,8 @@ const Root = styled('div')(({ theme }) => ({
 }));
 
 const CodeEditor = ({ value, children, className, inExample, editorClassname, keepLastLine }) => {
-  const lang = className ? className.toLowerCase().replace('language-', '') : undefined;
-  let content = value || children || '';
+  const lang = (className || children?.props?.className || '').toLowerCase().replace('language-', '');
+  let content = value || children?.props?.value || children?.props?.children || '';
 
   // read props from code in --- { "key": value } ---\n format
   let propsFromMD = content.match(/--- .* ---/);
@@ -83,7 +83,7 @@ const CodeEditor = ({ value, children, className, inExample, editorClassname, ke
 
 CodeEditor.propTypes = {
   value: PropTypes.string,
-  children: PropTypes.string,
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   className: PropTypes.string,
   inExample: PropTypes.bool,
   editorClassname: PropTypes.string,

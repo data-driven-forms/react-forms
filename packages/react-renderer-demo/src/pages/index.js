@@ -1,11 +1,11 @@
 import React from 'react';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import Link from 'next/link';
 import GitHubButton from 'react-github-btn';
 
 import LandingPageTitle from '@docs/components/landing-page/landing-page-title';
 import LandingPageCards from '@docs/components/landing-page/landing-page-cards';
+import DocLink from '../components/common/doc-link';
 
 import { styled } from '@mui/material/styles';
 
@@ -67,13 +67,11 @@ const LandingPage = () => (
       <LandingPageTitle />
       <Typography className="landing-page-text">Data Driven Forms converts JSON form definitions into fully functional React forms.</Typography>
       <div className="landing-page-get-started-link">
-        <Link href="/introduction">
-          <a className="get-started-anchor" href="/introduction">
-            <Button variant="outlined" className="get-started-button">
-              Get started
-            </Button>
-          </a>
-        </Link>
+        <DocLink href="/introduction">
+          <Button variant="outlined" className="get-started-button">
+            Get started
+          </Button>
+        </DocLink>
       </div>
       <div className="landing-page-npm-link">
         <span className="github-star">

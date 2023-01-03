@@ -22,7 +22,6 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CardHeader from '@mui/material/CardHeader';
 import IconButton from '@mui/material/IconButton';
 
-import Link from 'next/link';
 import clsx from 'clsx';
 
 import * as mui from '../stackblitz-templates/mui-templates';
@@ -35,6 +34,7 @@ import * as carbon from '../stackblitz-templates/carbon-templates';
 import avalableMappers from '../helpers/available-mappers';
 import GhIcon from './common/gh-svg-icon';
 import originalComponentLink from '../helpers/original-component-link';
+import DocLink from './common/doc-link';
 
 const PREFIX = 'ComponentExample';
 
@@ -251,11 +251,11 @@ const ComponentExample = ({ variants, schema, activeMapper, component, schemaVar
         onClick={() => push(`${pathname}?mapper=${mapper}${activeSchema ? `&schema=${activeSchema}` : ''}`)}
         className={clsx(classes.tab, { active: activeMapper === mapper })}
         label={
-          <Link href={`${pathname}?mapper=${mapper}${activeSchema ? `&schema=${activeSchema}` : ''}`}>
+          <DocLink href={`${pathname}?mapper=${mapper}${activeSchema ? `&schema=${activeSchema}` : ''}`}>
             <a href={`${pathname}?mapper=${mapper}${activeSchema ? `&schema=${activeSchema}` : ''}`} className={classes.tabLink}>
               {title}
             </a>
-          </Link>
+          </DocLink>
         }
       />
     ));
@@ -338,11 +338,11 @@ const ComponentExample = ({ variants, schema, activeMapper, component, schemaVar
                 <Tab
                   onClick={() => push(`${pathname}?mapper=${activeMapper}&schema=${variant.value}`)}
                   label={
-                    <Link href={`${pathname}?mapper=${activeMapper}&schema=${variant.value}`}>
+                    <DocLink href={`${pathname}?mapper=${activeMapper}&schema=${variant.value}`}>
                       <a href={`${pathname}?mapper=${activeMapper}&schema=${variant.value}`} className={classes.tabLink}>
                         {variant.label}
                       </a>
-                    </Link>
+                    </DocLink>
                   }
                   value={variant.value}
                   key={variant.value}

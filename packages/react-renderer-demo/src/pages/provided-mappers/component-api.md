@@ -66,7 +66,7 @@ Basic components that can change the form state (inputs) share common props. The
 |Prop|Type|Description|
 |----|:--:|----------:|
 |placeholder|node/string|A placeholder|
-|options|array|Options in format of { label: 'Label', value: value }|
+|options|array|Options in format of `{ label: 'Label', value: value }`|
 |loadOptions|function|A function for loading a options asynchronously|
 |loadingMessage|node/string|A message which will shown as a placeholder during the loading|
 |simpleValue|boolean|Simple value (no isMulti)|
@@ -80,7 +80,7 @@ Basic components that can change the form state (inputs) share common props. The
 
 |Prop|Type|Description|
 |----|:--:|----------:|
-|options|array|Options in format { label: 'Label', value: value }, it will make it multiple a choice list. (optional)|
+|options|array|Options in format `{ label: 'Label', value: value }`, it will make it multiple a choice list. (optional)|
 
 <ExampleLink to='checkbox-multiple' text='Multiple checkbox example'/>
 <br />
@@ -90,7 +90,7 @@ Basic components that can change the form state (inputs) share common props. The
 
 |Prop|Type|Description|
 |----|:--:|----------:|
-|options|array|Options in format { label: 'Label', value: value }|
+|options|array|Options in format `{ label: 'Label', value: value }`|
 
 <ExampleLink to='radio' />
 
@@ -143,7 +143,7 @@ This component is using [react-day-picker](https://react-day-picker.js.org/docs/
 
 |Prop|Type|Description|
 |----|:--:|----------:|
-|options|array|Options in format of { label: 'Label', value: value }|
+|options|array|Options in format of `{ label: 'Label', value: value }`|
 
 <ExampleLink to='dual-list-select' />
 

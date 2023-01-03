@@ -30,13 +30,13 @@ yarn add @data-driven-forms/editor-core @data-driven-forms/dnd
 
 ### Component
 
-*({ id: string, container: string, HandleProps?: AnyObject, Handle?: Component }) => React.Node*
+*(&#123; id: string, container: string, HandleProps?: AnyObject, Handle?: Component &#125;) => React.Node*
 
 A wrapper around [useComponent](/editor/dnd#usecomponent) and [useHandle](/editor/dnd#usehandle). Returns a wrapper around a rendered form field.
 
 ### Container
 
-*({ id: string, container?: string, isRoot?: boolean, Handle?: Component, HandleProps?: AnyProps, ListProps?: AnyProps, Component: Component }) => React.Node*
+*(&#123; id: string, container?: string, isRoot?: boolean, Handle?: Component, HandleProps?: AnyProps, ListProps?: AnyProps, Component: Component &#125;) => React.Node*
 
 A wrapper around [useContainer](/editor/dnd#usecontainer).
 
@@ -52,7 +52,7 @@ A wrapper providing DnD and Editor functionality.
 
 ### MenuItem
 
-*({ component: string, Component?: Component, componentInitialProps?: AnyObject }) => React.Node*
+*(&#123; component: string, Component?: Component, componentInitialProps?: AnyObject &#125;) => React.Node*
 
 A component for selecting new components and dragging them into the form container.
 

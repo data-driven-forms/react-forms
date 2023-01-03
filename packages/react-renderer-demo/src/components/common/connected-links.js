@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import ChevronRight from '@mui/icons-material/ChevronRight';
 import ChevronLeft from '@mui/icons-material/ChevronLeft';
-import Link from 'next/link';
+import DocLink from './doc-link';
 
 import MenuContext from '../navigation/menu-context';
 import useMapperLink from '../../hooks/use-mapper-link';
@@ -46,26 +46,22 @@ const ConnectedLinks = () => {
     <StyledGrid container justifyContent="space-between" className={classes.linksContainer}>
       <Grid item>
         {prev && prev.link && (
-          <Link href={prevLink}>
-            <a className={classes.link} href={prevLink}>
-              <Button>
-                <ChevronLeft />
-                {prev.label}
-              </Button>
-            </a>
-          </Link>
+          <DocLink className={classes.link} href={prevLink}>
+            <Button>
+              <ChevronLeft />
+              {prev.label}
+            </Button>
+          </DocLink>
         )}
       </Grid>
       <Grid item>
         {next && next.link && (
-          <Link href={nextLink}>
-            <a className={classes.link} href={nextLink}>
-              <Button>
-                {next.label}
-                <ChevronRight />
-              </Button>
-            </a>
-          </Link>
+          <DocLink className={classes.link} href={nextLink}>
+            <Button>
+              {next.label}
+              <ChevronRight />
+            </Button>
+          </DocLink>
         )}
       </Grid>
     </StyledGrid>

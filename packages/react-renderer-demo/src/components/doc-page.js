@@ -52,7 +52,7 @@ const DocPage = ({ children }) => {
         <Hidden mdUp>
           <ListOfContentsMobile found={found} />
         </Hidden>
-        <Hidden mdDown className={classes.hidden}>
+        <Hidden mdDown>
           <ListOfContents found={found} />
         </Hidden>
       </Grid>
