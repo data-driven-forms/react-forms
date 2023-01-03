@@ -93,7 +93,7 @@ import { FieldArray } from  '@data-driven-forms/react-form-renderer';
 
 ### onStateUpdate removed, replaced by debug
 
--   onStateUpdate prop is removed from the renderer, instead of it use debug (please see <https://final-form.org/docs/react-final-form/types/FormProps#debug>)
+-   onStateUpdate prop is removed from the renderer, instead of it use debug (please see &#60;https://final-form.org/docs/react-final-form/types/FormProps#debug&#62;)
 
 ```jsx
 <FormRenderer {...} debug={console.log} />

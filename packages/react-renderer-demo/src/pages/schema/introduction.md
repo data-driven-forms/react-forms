@@ -246,7 +246,7 @@ Sets an initial value of the field.
 
 ### resolveProps
 
-*function (props, {meta, input}, formOptions) => props*
+*function (props, &#123;meta, input&#125;, formOptions) => props*
 
 **resolveProps is only applicable for fields that connected to the form state.**
 

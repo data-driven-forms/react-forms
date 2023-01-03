@@ -27,8 +27,8 @@
         "@next/mdx": "12.3.0",
         "@rvsia/next-offline": "^5.0.5",
         "clsx": "^1.1.1",
-        "firebase-admin": "^10.0.1",
-        "firebase-functions": "^3.16.0",
+        "firebase-admin": "^11.4.1",
+        "firebase-functions": "^4.1.1",
         "next": "12.3.0"
     },
     "devDependencies": {

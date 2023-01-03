@@ -25,6 +25,7 @@ import CodeEditor from './code-editor';
 import { headerToId } from '../helpers/list-of-contents';
 import ShareButton from './mdx/share-button';
 import { grey } from '@mui/material/colors';
+import ErrorBoundary from './error-boundary';
 
 const HeadingRoot = styled('div')(({ theme }) => ({
   '& .anchor': {
@@ -207,78 +208,82 @@ const CodeExample = ({ source, mode }) => {
   }, [source]);
   if (mode === 'preview') {
     return (
-      <ExampleRoot container spacing={0} className={clsx('DocRawComponent', 'container')}>
-        {Component && (
-          <Heading component="h3" level="5">
-            {name}
-          </Heading>
-        )}
-        {Component && (
-          <Grid className={'formContainer'} item xs={12}>
-            <Paper className={'componentPanel'}>
-              <Component />
-            </Paper>
+      <ErrorBoundary>
+        <ExampleRoot container spacing={0} className={clsx('DocRawComponent', 'container')}>
+          {Component && (
+            <Heading component="h3" level="5">
+              {name}
+            </Heading>
+          )}
+          {Component && (
+            <Grid className={'formContainer'} item xs={12}>
+              <Paper className={'componentPanel'}>
+                <Component />
+              </Paper>
+            </Grid>
+          )}
+          <Grid item xs={12}>
+            <Accordion className={'accordion'}>
+              <AccordionSummary className={'accordionSummary'}>
+                <Box display="flex">
+                  <form action="https://codesandbox.io/api/v1/sandboxes/define" method="POST" target="_blank">
+                    <input type="hidden" name="parameters" value={getPayload(codeSource, sourceFiles)} />
+                    <Tooltip title="Edit in codesandbox">
+                      <IconButton
+                        disableFocusRipple
+                        type="submit"
+                        sx={{ pointerEvents: 'auto' }}
+                        onClick={(event) => event.stopPropagation()}
+                        size="small"
+                      >
+                        <CodesandboxIcon />
+                      </IconButton>
+                    </Tooltip>
+                  </form>
+                  <Link
+                    href={`https://github.com/data-driven-forms/react-forms/tree/master/packages/react-renderer-demo/src/examples/${source}.js`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(event) => event.stopPropagation()}
+                  >
+                    <Tooltip title="View source on github">
+                      <IconButton sx={{ pointerEvents: 'auto' }} size="small">
+                        <GhIcon style={{ color: grey[700] }} />
+                      </IconButton>
+                    </Tooltip>
+                  </Link>
+                </Box>
+              </AccordionSummary>
+              <AccordionDetails className={clsx('accordionDetail', 'codeWrapper')}>
+                <CodeEditor value={codeSource} inExample />
+              </AccordionDetails>
+            </Accordion>
           </Grid>
-        )}
-        <Grid item xs={12}>
-          <Accordion className={'accordion'}>
-            <AccordionSummary className={'accordionSummary'}>
-              <Box display="flex">
-                <form action="https://codesandbox.io/api/v1/sandboxes/define" method="POST" target="_blank">
-                  <input type="hidden" name="parameters" value={getPayload(codeSource, sourceFiles)} />
-                  <Tooltip title="Edit in codesandbox">
-                    <IconButton
-                      disableFocusRipple
-                      type="submit"
-                      sx={{ pointerEvents: 'auto' }}
-                      onClick={(event) => event.stopPropagation()}
-                      size="small"
-                    >
-                      <CodesandboxIcon />
-                    </IconButton>
-                  </Tooltip>
-                </form>
-                <Link
-                  href={`https://github.com/data-driven-forms/react-forms/tree/master/packages/react-renderer-demo/src/examples/${source}.js`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(event) => event.stopPropagation()}
-                >
-                  <Tooltip title="View source on github">
-                    <IconButton sx={{ pointerEvents: 'auto' }} size="small">
-                      <GhIcon style={{ color: grey[700] }} />
-                    </IconButton>
-                  </Tooltip>
-                </Link>
-              </Box>
-            </AccordionSummary>
-            <AccordionDetails className={clsx('accordionDetail', 'codeWrapper')}>
-              <CodeEditor value={codeSource} inExample />
-            </AccordionDetails>
-          </Accordion>
-        </Grid>
-      </ExampleRoot>
+        </ExampleRoot>
+      </ErrorBoundary>
     );
   }
 
   return (
-    <ExampleRoot container spacing={0} className="DocRawComponent">
-      <Grid item xs={12}>
-        <Box display="flex" justifyContent="flex-end">
-          <Link
-            href={`https://github.com/data-driven-forms/react-forms/tree/master/packages/react-renderer-demo/src/app/examples/${source}.js`}
-            target="_blank"
-            rel="noopener noreferrer"
-            variant="subtitle1"
-          >
-            View source on github
-          </Link>
-        </Box>
-      </Grid>
-      <Grid item xs={12} className={'codeWrapper'}>
-        <CodeEditor value={codeSource} />
-      </Grid>
-    </ExampleRoot>
+    <ErrorBoundary>
+      <ExampleRoot container spacing={0} className="DocRawComponent">
+        <Grid item xs={12}>
+          <Box display="flex" justifyContent="flex-end">
+            <Link
+              href={`https://github.com/data-driven-forms/react-forms/tree/master/packages/react-renderer-demo/src/app/examples/${source}.js`}
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="subtitle1"
+            >
+              View source on github
+            </Link>
+          </Box>
+        </Grid>
+        <Grid item xs={12} className={'codeWrapper'}>
+          <CodeEditor value={codeSource} />
+        </Grid>
+      </ExampleRoot>
+    </ErrorBoundary>
   );
 };
 

@@ -18,7 +18,7 @@ The component implements three following custom props:
 
 ### options
 
-*Array<string | node | dualListSelectOption>*
+*Array&#60;string &#124; node &#124; dualListSelectOption&#62;*
 
 You have multiple ways how to set up your options:
 
@@ -90,7 +90,7 @@ You can use the provided button or implement your own button.
 
 **A. Provided button**
 
-This component requires a prop `position`: `left` (availableOption) | `right` (chosenOptions)
+This component requires a prop `position`: `left` (availableOption) &#124; `right` (chosenOptions)
 
 ```jsx
 import { DualListSortButton } from '@data-driven-forms/pf4-component-mapper';

@@ -58,13 +58,13 @@ An utility to create an context for a drag and drop `state`.
 
 ### useComponent
 
-*({ id: any }) => { ref, component }*
+*(&#123; id: any &#125;) => &#123; ref, component &#125;*
 
 A hook to connect a component to DnD state. Requires an id of the component. Returns a `ref` and the `component` object from the state.
 
 ### useContainer
 
-*({ id?: any, isRoot?: boolean }) => { ref, container, id }*
+*(&#123; id?: any, isRoot?: boolean &#125;) => &#123; ref, container, id &#125;*
 
 A hook to connect a container to DnD state. Requires an id of the container or a root in case the container is the root container. Returns a `ref`, `id` and the `container` object from the state.
 
@@ -74,7 +74,7 @@ An utility to obtain a dispatch function for the DnD reducer.
 
 ### useHandle
 
-*({component: string, sourceContainer?: string }) => { onClick, onMouseDown, onTouchStart }*
+*(&#123;component: string, sourceContainer?: string &#125;) => &#123; onClick, onMouseDown, onTouchStart &#125;*
 
 A hook returning handle events for a component handle. Requires an `id` of the component.
 

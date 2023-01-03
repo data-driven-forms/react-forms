@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import RouterLink from 'next/link';
-
 import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
@@ -21,6 +19,7 @@ import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
 import FormExample from './formExample';
 
 import CodeEditor from '@docs/components/code-editor';
+import DocLink from '../common/doc-link';
 
 const value = `import React from 'react';
 import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
@@ -123,11 +122,9 @@ const buildFeatures = [
 
   if (link) {
     return (
-      <RouterLink href={link} key={idx}>
-        <Link href={link} style={{ textDecoration: 'none', color: 'inherit' }}>
-          {children}
-        </Link>
-      </RouterLink>
+      <DocLink href={link} style={{ textDecoration: 'none', color: 'inherit' }} key={idx}>
+        {children}
+      </DocLink>
     );
   }
 
@@ -251,71 +248,55 @@ const LandingPageCards = () => {
               <Typography variant="h6" className="textBottom">
                 MaterialUI
               </Typography>
-              <RouterLink href="/provided-mappers/mui-component-mapper">
-                <a href="/provided-mappers/mui-component-mapper">
-                  <img className="logo" alt="material ui logo" src="/mui-logo.svg" />
-                </a>
-              </RouterLink>
+              <DocLink href="/provided-mappers/mui-component-mapper">
+                <img className="logo" alt="material ui logo" src="/mui-logo.svg" />
+              </DocLink>
             </Grid>
             <Grid item xs={6} md={4} xl={2}>
               <Typography variant="h6" className="textBottom">
                 PatternFly 4
               </Typography>
-              <RouterLink href="/provided-mappers/pf4-component-mapper">
-                <a href="/provided-mappers/pf4-component-mapper">
-                  <img className="logo" alt="pf4 logo" src="/pf4-logo.svg" />
-                </a>
-              </RouterLink>
+              <DocLink href="/provided-mappers/pf4-component-mapper">
+                <img className="logo" alt="pf4 logo" src="/pf4-logo.svg" />
+              </DocLink>
             </Grid>
             <Grid item xs={6} md={4} xl={2}>
               <Typography variant="h6" className="textBottom">
                 BlueprintJS
               </Typography>
-              <RouterLink href="/provided-mappers/blueprint-component-mapper">
-                <a href="/provided-mappers/blueprint-component-mapper">
-                  <img className="logo" alt="blueprintjs logo" src="/blueprintjs-logo.svg" />
-                </a>
-              </RouterLink>
+              <DocLink href="/provided-mappers/blueprint-component-mapper">
+                <img className="logo" alt="blueprintjs logo" src="/blueprintjs-logo.svg" />
+              </DocLink>
             </Grid>
             <Grid item xs={6} md={4} xl={2}>
               <Typography variant="h6" className="textBottom">
                 Semantic UI
               </Typography>
-              <RouterLink href="/provided-mappers/suir-component-mapper">
-                <a href="/provided-mappers/suir-component-mapper">
-                  <img className="logo" alt="semantic ui logo" src="/semantic-ui-logo.svg" />
-                </a>
-              </RouterLink>
+              <DocLink href="/provided-mappers/suir-component-mapper">
+                <img className="logo" alt="semantic ui logo" src="/semantic-ui-logo.svg" />
+              </DocLink>
             </Grid>
             <Grid item xs={6} md={4} xl={2}>
               <Typography variant="h6" className="textBottom">
                 Ant Design
               </Typography>
-              <RouterLink href="/provided-mappers/ant-component-mapper">
-                <a href="/provided-mappers/ant-component-mapper">
-                  <img className="logo" alt="ant logo" src="/ant-logo.svg" />
-                </a>
-              </RouterLink>
+              <DocLink href="/provided-mappers/ant-component-mapper">
+                <img className="logo" alt="ant logo" src="/ant-logo.svg" />
+              </DocLink>
             </Grid>
             <Grid item xs={6} md={4} xl={2}>
               <Typography variant="h6" className="textBottom">
                 Carbon Design System
               </Typography>
-              <RouterLink href="/provided-mappers/carbon-component-mapper">
-                <a href="/provided-mappers/carbon-component-mapper">
-                  <img className="logo" alt="ant logo" src="/carbon-logo.svg" />
-                </a>
-              </RouterLink>
+              <DocLink href="/provided-mappers/carbon-component-mapper">
+                <img className="logo" alt="ant logo" src="/carbon-logo.svg" />
+              </DocLink>
             </Grid>
             <Grid item xs={8} md={8} xl={8}>
               <Typography variant="body2" gutterBottom className="mappersText">
                 This list represents a set of provided mappers. Each mapper brings all basic form components from its design system. You can
                 immediately use form inputs such as text fields, selects, radios, checkboxes or wizards. However, this selection does not limit you as
-                integrating custom components is simple as it can be - all it takes is just{' '}
-                <RouterLink href="/hooks/use-field-api">
-                  <a href="/hooks/use-field-api">one hook</a>
-                </RouterLink>
-                .
+                integrating custom components is simple as it can be - all it takes is just <DocLink href="/hooks/use-field-api">one hook</DocLink>.
               </Typography>
             </Grid>
           </Grid>

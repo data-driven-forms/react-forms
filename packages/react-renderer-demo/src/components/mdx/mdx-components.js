@@ -17,7 +17,7 @@ import { headerToId } from '../../helpers/list-of-contents';
 import ShareButton from './share-button';
 import { useRouter } from 'next/router';
 
-import RouterLink from 'next/link';
+import DocLink from '../common/doc-link';
 import CodeEditor from '../code-editor';
 
 const PREFIX = 'MdxComponents';
@@ -125,11 +125,9 @@ const StyledLink = styled(Link)(() => ({
 
 const MdLink = ({ href, children }) =>
   href.startsWith('/') ? (
-    <RouterLink href={href}>
-      <Link href={href} underline="hover">
-        {children}
-      </Link>
-    </RouterLink>
+    <DocLink href={href} underline="hover">
+      {children}
+    </DocLink>
   ) : (
     <StyledLink underline="hover" className={'link'} href={href} rel="noopener noreferrer" target="_blank">
       {children}
@@ -151,7 +149,7 @@ const MdxComponents = {
       {children}
     </Typography>
   ),
-  code: (props) => <CodeEditor {...props} />,
+  pre: (props) => <CodeEditor {...props} />,
   a: MdLink,
   h1: (props) => <Heading {...props} level={4} component="h1" />,
   h2: (props) => <Heading {...props} level={5} component="h2" />,

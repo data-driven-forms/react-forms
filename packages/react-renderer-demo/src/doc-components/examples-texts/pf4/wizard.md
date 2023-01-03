@@ -87,7 +87,7 @@ The components receives these props:
 
 ## How to do substeps
 
-Field in Wizard fields should contain `substepOf` <`string`> which is title of the primary step. Steps with the same substepOf are grouped together by the title of primary step.
+Field in Wizard fields should contain `substepOf` &#60;`string`&#62; which is title of the primary step. Steps with the same substepOf are grouped together by the title of primary step.
 
 Example
 

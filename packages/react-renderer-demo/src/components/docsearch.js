@@ -2,14 +2,14 @@ import React from 'react';
 import { DocSearch as AlgDocSearch } from '@docsearch/react';
 
 import '@docsearch/css';
-import Link from 'next/link';
+import DocLink from './common/doc-link';
 
 const DocSearch = () => (
   <AlgDocSearch
     hitComponent={({ hit, children }) => (
-      <Link href={hit.url.replace('https://data-driven-forms.org', '')}>
+      <DocLink href={hit.url.replace('https://data-driven-forms.org', '')}>
         <a href={hit.url.replace('https://data-driven-forms.org', '')}>{children}</a>
-      </Link>
+      </DocLink>
     )}
     debug
     apiKey="89894d702d5ead6999eaf04e3b34012a"

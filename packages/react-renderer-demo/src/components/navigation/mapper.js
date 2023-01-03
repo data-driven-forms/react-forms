@@ -11,13 +11,12 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import Collapse from '@mui/material/Collapse';
 import { styled } from '@mui/material/styles';
-import Link from '@mui/material/Link';
-import RouterNavLink from 'next/link';
 import { useRouter } from 'next/router';
 
 import { query } from './find-connected-links';
 import useMapperLink from '../../hooks/use-mapper-link';
 import clsx from 'clsx';
+import DocLink from '../common/doc-link';
 
 const StyledListItem = styled(ListItem)(() => ({
   '&.item': {
@@ -48,9 +47,7 @@ const Item = ({ href, linkText, component, divider, level }) => {
         nested: level > 0,
       })}
       component={forwardRef((props, ref) => (
-        <RouterNavLink key={component} href={finalHref}>
-          <Link ref={ref} style={{ color: 'rgba(0, 0, 0, 0.87)' }} {...props} href={finalHref} />
-        </RouterNavLink>
+        <DocLink key={component} ref={ref} style={{ color: 'rgba(0, 0, 0, 0.87)' }} {...props} href={finalHref} />
       ))}
     >
       <Typography variant="button" gutterBottom style={{ textTransform: 'capitalize', fontWeight: 'initial' }}>

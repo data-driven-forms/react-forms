@@ -20,7 +20,7 @@ const Root = styled('div')({
 const ExampleLink = ({ to, text = 'To example' }) => (
   <React.Fragment>
     <Root style={{ float: 'right' }}>
-      <RouterLink href={`/provided-mappers/${to}?mapper=mui`}>
+      <RouterLink legacyBehavior href={`/provided-mappers/${to}?mapper=mui`}>
         <a className={classes.toExampleLink} href={`/provided-mappers/${to}?mapper=mui`}>
           <Button color="primary">{text}</Button>
         </a>
