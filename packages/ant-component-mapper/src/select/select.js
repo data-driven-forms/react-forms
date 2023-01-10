@@ -38,6 +38,7 @@ const Select = (props) => {
       description={description}
       FormItemProps={FormItemProps}
       isRequired={isRequired}
+      input={input}
     >
       <AntSelect
         {...input}

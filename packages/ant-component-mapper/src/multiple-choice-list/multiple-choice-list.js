@@ -16,7 +16,7 @@ FinalCheckbox.propTypes = {
   label: PropTypes.node,
 };
 
-const Wrapper = ({ label, isRequired, children, meta, validateOnMount, helperText, description, FormItemProps }) => (
+const Wrapper = ({ label, isRequired, children, meta, input, validateOnMount, helperText, description, FormItemProps }) => (
   <FormGroup
     label={label}
     meta={meta}
@@ -25,6 +25,7 @@ const Wrapper = ({ label, isRequired, children, meta, validateOnMount, helperTex
     description={description}
     FormItemProps={FormItemProps}
     isRequired={isRequired}
+    input={input}
   >
     {children}
   </FormGroup>

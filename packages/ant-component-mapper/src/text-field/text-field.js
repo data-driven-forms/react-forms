@@ -18,6 +18,7 @@ const TextField = (props) => {
       description={description}
       FormItemProps={FormItemProps}
       isRequired={isRequired}
+      input={input}
     >
       <Input
         {...input}

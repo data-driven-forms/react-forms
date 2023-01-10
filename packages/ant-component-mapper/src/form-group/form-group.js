@@ -5,7 +5,7 @@ import { Form } from 'antd';
 import { validationError } from '../validation-error/';
 import { childrenPropTypes } from '@data-driven-forms/common/prop-types-templates';
 
-const FormGroup = ({ label, children, isRequired, FormItemProps, meta, validateOnMount, helperText, description, hideLabel }) => {
+const FormGroup = ({ label, children, isRequired, FormItemProps, meta, validateOnMount, helperText, description, hideLabel, input }) => {
   const invalid = validationError(meta, validateOnMount);
   const warning = (meta.touched || validateOnMount) && meta.warning;
   const help = invalid || warning || helperText || description;
@@ -16,6 +16,7 @@ const FormGroup = ({ label, children, isRequired, FormItemProps, meta, validateO
       help={help}
       label={!hideLabel && label}
       required={isRequired}
+      name={input?.name}
       {...FormItemProps}
     >
       {children}
@@ -35,6 +36,7 @@ FormGroup.propTypes = {
   helperText: PropTypes.node,
   description: PropTypes.node,
   hideLabel: PropTypes.bool,
+  input: PropTypes.object,
 };
 
 export default FormGroup;
