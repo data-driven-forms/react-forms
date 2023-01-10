@@ -75,6 +75,10 @@ describe('formFields generated tests', () => {
           }
 
           expect(screen.getByText(field.label)).toBeInTheDocument();
+
+          if (![componentTypes.RADIO, componentTypes.SLIDER].includes(component)) {
+            expect(screen.getByLabelText(field.label)).toBeInTheDocument();
+          }
         });
 
         it('renders with error', async () => {

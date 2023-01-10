@@ -19,6 +19,7 @@ const TimePicker = (props) => {
       description={description}
       FormItemProps={FormItemProps}
       isRequired={isRequired}
+      input={input}
     >
       <AntTimePicker
         use12Hours={true}

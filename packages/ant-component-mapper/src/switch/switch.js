@@ -34,6 +34,7 @@ export const Switch = (props) => {
       description={description}
       FormItemProps={FormItemProps}
       isRequired={isRequired}
+      input={input}
     >
       <AntSwitch
         {...rest}

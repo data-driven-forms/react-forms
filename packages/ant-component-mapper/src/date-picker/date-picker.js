@@ -19,6 +19,7 @@ const DatePicker = (props) => {
       description={description}
       FormItemProps={FormItemProps}
       isRequired={isRequired}
+      input={input}
     >
       <AntDatePicker
         disabled={isDisabled || isReadOnly}

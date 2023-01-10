@@ -20,6 +20,7 @@ const Textarea = (props) => {
       description={description}
       FormItemProps={FormItemProps}
       isRequired={isRequired}
+      input={input}
     >
       <TextArea
         {...input}
