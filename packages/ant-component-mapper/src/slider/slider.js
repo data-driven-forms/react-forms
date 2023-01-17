@@ -43,6 +43,7 @@ const Slider = (props) => {
         range={range}
         min={min}
         max={max}
+        id={input.name}
         {...rest}
       />
     </FormGroup>

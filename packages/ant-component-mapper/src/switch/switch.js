@@ -37,6 +37,7 @@ export const Switch = (props) => {
       input={input}
     >
       <AntSwitch
+        id={input.name}
         {...rest}
         defaultValue={input.checked ? input.checked : undefined}
         onChange={onChange}
