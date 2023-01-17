@@ -26,6 +26,7 @@ const TextField = (props) => {
         disabled={isDisabled}
         readOnly={isReadOnly}
         placeholder={placeholder}
+        id={input.name}
         {...rest}
       />
     </FormGroup>

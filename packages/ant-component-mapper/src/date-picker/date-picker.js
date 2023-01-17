@@ -30,6 +30,7 @@ const DatePicker = (props) => {
         readOnly={isReadOnly}
         {...input}
         value={input.value || null}
+        id={input.name}
         {...rest}
       />
     </FormGroup>

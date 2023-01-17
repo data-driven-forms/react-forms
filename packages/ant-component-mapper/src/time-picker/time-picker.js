@@ -32,6 +32,7 @@ const TimePicker = (props) => {
         defaultValue={input.value ? input.value : undefined}
         {...input}
         value={input.value || null}
+        id={input.name}
         {...rest}
       />
     </FormGroup>

@@ -54,6 +54,7 @@ const Select = (props) => {
         disabled={isDisabled || isReadOnly}
         onChange={(value, option) => input.onChange(isMulti ? selectValue(option) : option ? option.value : undefined)}
         input={input}
+        id={input.name}
         {...rest}
       >
         {options

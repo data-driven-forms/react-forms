@@ -16,7 +16,7 @@ const FormGroup = ({ label, children, isRequired, FormItemProps, meta, validateO
       help={help}
       label={!hideLabel && label}
       required={isRequired}
-      name={input?.name}
+      htmlFor={input?.name}
       {...FormItemProps}
     >
       {children}
