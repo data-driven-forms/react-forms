@@ -90,12 +90,12 @@ const WizardInternal = ({
   return (
     <Modal inModal={inModal} container={state.container} aria-labelledby={rest.name}>
       <div
+        tabIndex={inModal ? 0 : null}
         className={`pf-c-wizard ${inModal ? '' : 'no-shadow'} ddorg__pf4-component-mapper__wizard ${className ? className : ''}`}
         role="dialog"
         aria-modal={inModal ? 'true' : undefined}
         onKeyDown={(e) => {
           onKeyDown(e);
-
           if (e.key === 'Escape' && inModal) {
             formOptions.onCancel();
           }
