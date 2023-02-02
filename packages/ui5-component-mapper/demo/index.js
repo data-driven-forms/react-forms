@@ -1,61 +1,97 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { FormRenderer } from '@data-driven-forms/react-form-renderer';
 import { arraySchemaDDF } from './demo-schemas/widget-schema';
-import { componentMapper, FormTemplate } from '../src';
+import FormTemplate from '../src/form-template';
+import componentMapper from '../src/component-mapper';
 import { wizardSchema } from './demo-schemas/wizard-schema';
 import sandboxSchema from './demo-schemas/sandbox';
 import demoSchema from '../../../shared/demoschema';
-import { ThemeProvider } from '@ui5/webcomponents-react';
-import { Button } from '@ui5/webcomponents-react';
 
-const fieldArrayState = {
-  schema: arraySchemaDDF,
-  additionalOptions: {
-    initialValues: {
-      number: [1, 2, 3, 4],
-      minMax: [null, null, null, null],
+import { ThemeProvider } from '@ui5/webcomponents-react';
+import { Page, Title, Bar, Select, Option } from '@ui5/webcomponents-react';
+
+import './index.css';
+
+const simpleSchema = {
+  title: 'title',
+  description: 'description',
+  fields: [
+    {
+      component: 'text-field',
+      name: 'text-field-1674810975713',
+      label: 'Name',
+      helperText: 'Insert a name here',
+      isRequired: true,
+      validate: [
+        {
+          type: 'required',
+        },
+      ],
     },
-  },
+    {
+      component: 'text-field',
+      name: 'text-field-1674810976903',
+      label: 'Nickname',
+    },
+    {
+      component: 'sub-form',
+      name: 'sub-form-1674811011231',
+      title: 'Sub form',
+      fields: [
+        {
+          component: 'text-field',
+          name: 'text-field-1674811014424',
+          label: 'Number',
+          type: 'Number',
+          initialValue: '134',
+        },
+      ],
+    },
+  ],
 };
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = fieldArrayState;
-  }
+const schemas = {
+  simpleSchema,
+  demoSchema,
+  sandboxSchema,
+  wizardSchema,
+  arraySchemaDDF,
+};
 
-  render() {
-    return (
-      <div style={{ widht: '100%' }}>
-        <div style={{ maxWidth: 800, marginLeft: 'auto', marginRight: 'auto' }}>
-          <h1>ui5 component mapper</h1>
-          <div style={{ marginBottom: 20, marginTop: 20 }}>
-            <Button
-              onClick={() => this.setState((state) => ({ schema: wizardSchema, additionalOptions: { showFormControls: false, wizard: true } }))}
-            >
-              Wizard
-            </Button>
-            <Button onClick={() => this.setState((state) => fieldArrayState)}>arraySchema</Button>
-            <Button onClick={() => this.setState((state) => ({ schema: sandboxSchema, additionalOptions: {} }))}>Sandbox</Button>
-            <Button onClick={() => this.setState((state) => ({ schema: demoSchema, additionalOptions: {} }))}>Super schema</Button>
-          </div>
-          <FormRenderer
-            onSubmit={console.log}
-            initialValues={{
-              'async-drop-down': 'async-option-2',
-            }}
-            componentMapper={componentMapper}
-            FormTemplate={(props) => <FormTemplate {...props} showFormControls={this.state.additionalOptions.showFormControls} />}
-            onCancel={console.log}
-            schema={this.state.schema}
-            {...this.state.additionalOptions}
-          />
-        </div>
-      </div>
-    );
-  }
-}
+const App = () => {
+  const [schema, setSchema] = useState('demoSchema');
+
+  return (
+    <Page
+      backgroundDesign="Transparent"
+      className="page"
+      header={
+        <Bar
+          startContent={
+            <Select name="schema" value={schema} onChange={(e) => setSchema(e.detail.selectedOption.value)} selectedOption={schema}>
+              {Object.keys(schemas).map((key) => (
+                <Option value={key} key={key}>
+                  {key}
+                </Option>
+              ))}
+            </Select>
+          }
+        >
+          <Title>UI5-COMPONENT-MAPPER</Title>
+        </Bar>
+      }
+    >
+      <FormRenderer
+        onSubmit={console.log}
+        componentMapper={componentMapper}
+        FormTemplate={(props) => <FormTemplate {...props} />}
+        onCancel={console.log}
+        schema={schemas[schema]}
+      />
+    </Page>
+  );
+};
 
 ReactDOM.render(
   <ThemeProvider>
