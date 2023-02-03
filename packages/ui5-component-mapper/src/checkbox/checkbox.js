@@ -3,42 +3,37 @@ import PropTypes from 'prop-types';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import MultipleChoiceListCommon from '@data-driven-forms/common/multiple-choice-list';
 
-const Wrapper = ({ label, children }) => (
-  <div>
-    <h3>{label}</h3>
-    {children}
-  </div>
-);
+import { CheckBox } from '@ui5/webcomponents-react';
+
+import FormGroup from '../form-group';
+import convertProps from '../convert-props';
+import validationError from '../validation-error';
+
+const Wrapper = ({ children, ...props }) => <FormGroup label={convertProps(props).label}>{children}</FormGroup>;
 
 Wrapper.propTypes = {
   label: PropTypes.node,
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
-const SingleCheckbox = (props) => {
-  const { input, isDisabled, label, name } = useFieldApi({ ...props, type: 'checkbox' });
+const SingleCheckbox = ({ label, text, ...props }) => {
+  const { input, meta, validateOnMount, ...rest } = useFieldApi(convertProps(props));
 
   return (
-    <React.Fragment>
-      <label htmlFor={name}>{label}</label>
-      <input {...input} id={name} type="checkbox" disabled={isDisabled}/>
-    </React.Fragment>
+    <FormGroup>
+      <CheckBox {...input} text={text || label} onChange={undefined} onInput={input.onChange} {...rest} {...validationError(meta, validateOnMount)} />
+    </FormGroup>
   );
 };
 
-const SingleCheckboxInCommon = ({ label, isDisabled, id, ...props }) => (
-  <React.Fragment>
-    <label htmlFor={id}>{label}</label>
-    <input {...props} id={id} type="checkbox" disabled={isDisabled} />
-  </React.Fragment>
-);
+const SingleCheckboxInCommon = ({ label, text, id, ...props }) => <CheckBox {...convertProps(props)} text={text || label} id={id} />;
 
 SingleCheckboxInCommon.propTypes = {
   label: PropTypes.node,
   input: PropTypes.object,
   isDisabled: PropTypes.bool,
   name: PropTypes.string,
-  id: PropTypes.string
+  id: PropTypes.string,
 };
 
 const Checkbox = ({ options, ...props }) =>
@@ -49,7 +44,7 @@ const Checkbox = ({ options, ...props }) =>
   );
 
 Checkbox.propTypes = {
-  options: PropTypes.arrayOf(PropTypes.shape({ label: PropTypes.node, value: PropTypes.any }))
+  options: PropTypes.arrayOf(PropTypes.shape({ label: PropTypes.node, value: PropTypes.any })),
 };
 
 export default Checkbox;

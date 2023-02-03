@@ -1,15 +1,19 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
+import { Switch as UI5Switch } from '@ui5/webcomponents-react';
+
+import FormGroup from '../form-group';
+import convertProps from '../convert-props';
+import validationError from '../validation-error';
+
 const Switch = (props) => {
-  const { input } = useFieldApi({ ...props, type: 'checkbox' });
+  const { input, meta, label, validateOnMount, ...rest } = useFieldApi(convertProps(props));
 
   return (
-    <label>
-      <input {...input} />
-      <span />
-    </label>
+    <FormGroup label={label}>
+      <UI5Switch {...input} onChange={undefined} onInput={input.onChange} {...rest} {...validationError(meta, validateOnMount)} />
+    </FormGroup>
   );
 };
 

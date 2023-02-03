@@ -8,7 +8,7 @@ import { useFormApi } from '@data-driven-forms/react-form-renderer';
 const SubForm = ({ fields, title, titleText }) => {
   const formOptions = useFormApi();
 
-  return <FormGroup titleText={titleText || title}>{formOptions.renderForm(fields, formOptions)}</FormGroup>;
+  return <FormGroup titleText={titleText || title}>{formOptions.renderForm(fields)}</FormGroup>;
 };
 
 SubForm.propTypes = {
