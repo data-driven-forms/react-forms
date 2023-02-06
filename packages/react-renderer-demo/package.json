@@ -10,9 +10,6 @@
         "url": "https://github.com/data-driven-forms/react-forms",
         "directory": "packages/react-renderer-demo"
     },
-    "engines": {
-        "node": "16"
-    },
     "private": true,
     "scripts": {
         "dev": "next src/",
