@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, act } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import FormRenderer from '../../form-renderer';
@@ -84,22 +84,20 @@ describe('FormRenderer validator', () => {
     });
 
     it('should convert object validator to warning', async () => {
-      await act(async () => {
-        render(
-          <FormRenderer
-            FormTemplate={FormTemplate}
-            componentMapper={{
-              [componentTypes.TEXT_FIELD]: TextFieldWarning,
-            }}
-            schema={{
-              fields: [{ useWarnings: true, component: 'text-field', name: NAME, validate: [{ type: 'required', warning: true }] }],
-            }}
-            onSubmit={jest.fn()}
-          />
-        );
-      });
+      render(
+        <FormRenderer
+          FormTemplate={FormTemplate}
+          componentMapper={{
+            [componentTypes.TEXT_FIELD]: TextFieldWarning,
+          }}
+          schema={{
+            fields: [{ useWarnings: true, component: 'text-field', name: NAME, validate: [{ type: 'required', warning: true }] }],
+          }}
+          onSubmit={jest.fn()}
+        />
+      );
 
-      expect(screen.getByText('Required')).toBeInTheDocument();
+      expect(await screen.findByText('Required')).toBeInTheDocument();
     });
 
     it('should convert function validator to warning', async () => {
@@ -107,22 +105,20 @@ describe('FormRenderer validator', () => {
 
       const customValidator = () => ({ type: 'warning', error: ERROR });
 
-      await act(async () => {
-        render(
-          <FormRenderer
-            FormTemplate={FormTemplate}
-            componentMapper={{
-              [componentTypes.TEXT_FIELD]: TextFieldWarning,
-            }}
-            schema={{
-              fields: [{ useWarnings: true, component: 'text-field', name: NAME, validate: [customValidator] }],
-            }}
-            onSubmit={jest.fn()}
-          />
-        );
-      });
+      render(
+        <FormRenderer
+          FormTemplate={FormTemplate}
+          componentMapper={{
+            [componentTypes.TEXT_FIELD]: TextFieldWarning,
+          }}
+          schema={{
+            fields: [{ useWarnings: true, component: 'text-field', name: NAME, validate: [customValidator] }],
+          }}
+          onSubmit={jest.fn()}
+        />
+      );
 
-      expect(screen.getByText(ERROR)).toBeInTheDocument();
+      expect(await screen.findByText(ERROR)).toBeInTheDocument();
     });
 
     it('should convert async function validator to warning', async () => {
@@ -130,22 +126,20 @@ describe('FormRenderer validator', () => {
 
       const customValidator = () => new Promise((res, rej) => setTimeout(() => rej({ type: 'warning', error: ERROR })));
 
-      await act(async () => {
-        render(
-          <FormRenderer
-            FormTemplate={FormTemplate}
-            componentMapper={{
-              [componentTypes.TEXT_FIELD]: TextFieldWarning,
-            }}
-            schema={{
-              fields: [{ useWarnings: true, component: 'text-field', name: NAME, validate: [customValidator] }],
-            }}
-            onSubmit={jest.fn()}
-          />
-        );
-      });
+      render(
+        <FormRenderer
+          FormTemplate={FormTemplate}
+          componentMapper={{
+            [componentTypes.TEXT_FIELD]: TextFieldWarning,
+          }}
+          schema={{
+            fields: [{ useWarnings: true, component: 'text-field', name: NAME, validate: [customValidator] }],
+          }}
+          onSubmit={jest.fn()}
+        />
+      );
 
-      expect(screen.getByText(ERROR)).toBeInTheDocument();
+      expect(await screen.findByText(ERROR)).toBeInTheDocument();
     });
   });
 });
