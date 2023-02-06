@@ -7,7 +7,7 @@ import userEvent from '@testing-library/user-event';
 import { useFieldApi, FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 
 import Select from '../../select';
-import reducer from '../../select/reducer';
+import reducer from '../../use-select/reducer';
 
 describe('Select test', () => {
   let state;

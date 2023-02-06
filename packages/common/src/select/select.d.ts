@@ -1,6 +1,6 @@
 import { AnyObject } from "@data-driven-forms/react-form-renderer";
 
-type option = {
+export type option = {
   [key: string]: any;
   label?: React.ReactNode;
   value?: any;
