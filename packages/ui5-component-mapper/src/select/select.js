@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import useSelect from '@data-driven-forms/common/use-select';
 
-import { Select as UI5Select, Option } from '@ui5/webcomponents-react';
+import { Select as UI5Select, Option, ComboBox, ComboBoxItem, MultiComboBox, MultiComboBoxItem } from '@ui5/webcomponents-react';
 
 import FormGroup from '../form-group';
 import convertProps from '../convert-props';
@@ -46,6 +46,49 @@ const Select = (props) => {
     isMulti,
     simpleValue: false,
   });
+
+  if (isMulti) {
+    return (
+      <FormGroup label={label}>
+        <MultiComboBox
+          loading={state.isLoading || isFetching}
+          onInput={(event) => onInputChange(event.target.value)}
+          onSelectionChange={(event) =>
+            onChange(
+              event.target.items.filter((item) => item.selected).map((item) => state.options.find((option) => option.label === item.text)?.value)
+            )
+          }
+          {...rest}
+          {...validationError(meta, validateOnMount)}
+        >
+          {state.options &&
+            state.options.map(({ label, value, ...option }) => (
+              <MultiComboBoxItem key={value} text={label} {...option} selected={(selectValue || []).includes(value)} />
+            ))}
+        </MultiComboBox>
+      </FormGroup>
+    );
+  }
+
+  if (isSearchable) {
+    return (
+      <FormGroup label={label}>
+        <ComboBox
+          {...input}
+          loading={state.isLoading || isFetching}
+          value={
+            !selectValue ? state.options.find((option) => !option.value)?.label : state.options.find((option) => option.value === selectValue)?.label
+          }
+          onInput={(event) => onInputChange(event.target.value)}
+          onChange={(event) => onChange(state.options.find((option) => option.label === event.target.value)?.value)}
+          {...rest}
+          {...validationError(meta, validateOnMount)}
+        >
+          {state.options && state.options.map(({ label, value, ...option }) => <ComboBoxItem key={value} text={label} {...option} />)}
+        </ComboBox>
+      </FormGroup>
+    );
+  }
 
   return (
     <FormGroup label={label}>
