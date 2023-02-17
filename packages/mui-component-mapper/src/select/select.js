@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 
 import FormFieldGrid from '../form-field-grid/form-field-grid';
@@ -81,7 +81,10 @@ const InternalSelect = ({
   ...rest
 }) => {
   const invalid = validationError(meta, validateOnMount);
-  const internalValue = parseInternalValue(value, isMulti);
+  // When isMulti is true, the "parseInternalValue" always creates new value array, we need to memoize it to not create new array instance
+  // Memo is required to fix https://github.com/data-driven-forms/react-forms/issues/1366
+  const internalValue = useMemo(() => parseInternalValue(value, isMulti), [value, isMulti]);
+
   return (
     <FormFieldGrid {...FormFieldGridProps}>
       <Autocomplete
