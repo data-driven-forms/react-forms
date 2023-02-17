@@ -33,7 +33,7 @@ const WizardInternal = ({
 
   return (
     <div onKeyDown={onKeyDown} {...WizardProps}>
-      {title && <Modal title={title} onCancel={formOptions.onCanel} {...TitleProps} />}
+      {title && <Modal title={title} onCancel={formOptions.onCancel} {...TitleProps} />}
       {stepsInfo && (
         <Steps onChange={jumpToStep} current={activeStepIndex} {...StepProps}>
           {stepsInfo.map((step, stepIndex) => (
