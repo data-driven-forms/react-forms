@@ -38,9 +38,3 @@ You can perform the following tasks by running the offered commands:
     cd packages/react-renderer-demo
     yarn analyze
     ```
-
-- Emulate firebase server locally
-    ```bash
-    cd packages/react-renderer-demo
-    yarn build && yarn serve
-    ```
