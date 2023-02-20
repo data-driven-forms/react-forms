@@ -471,6 +471,8 @@ describe('Select test', () => {
         isSearchable: false,
         options: [],
         placeholder: undefined,
+        isMulti: undefined,
+        value: [],
       });
 
       await act(async () => {
