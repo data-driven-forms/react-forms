@@ -36,7 +36,7 @@ const Select = (props) => {
   } = useSelect({
     loadOptions,
     optionsTransformer,
-    options,
+    options: options || [],
     noValueUpdates,
     onChange: input.onChange,
     value: input.value,

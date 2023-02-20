@@ -173,7 +173,11 @@ const App = () => {
           <Title>UI5-COMPONENT-MAPPER</Title>
         </Bar>
       }
-      footer={<Text>{JSON.stringify(submit, null, 2)}</Text>}
+      footer={
+        <Text>
+          <pre>{JSON.stringify(submit, null, 2)}</pre>
+        </Text>
+      }
     >
       <div style={{ paddingTop: 36 }}>
         <FormRenderer
