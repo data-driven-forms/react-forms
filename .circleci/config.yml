@@ -64,29 +64,6 @@ jobs:
           root: ~/react-forms
           paths:
               - packages/react-renderer-demo/dist/*
-  deploy:
-    working_directory: ~/react-forms
-    docker:
-      - image: 'cimg/base:stable'
-    steps:
-      - attach_workspace:
-          at: ~/react-forms
-      - node/install:
-          install-yarn: true
-          node-version: '16.13'
-      - run:
-          name: Separate docs project
-          command: |
-            cp -r packages/react-renderer-demo ~/ && cd ~/react-renderer-demo && rm -rf dist && rm -rf node_modules && yarn
-      - run:
-          name: Deploy demo
-          command: |
-             cd ~/react-renderer-demo && yarn deploy --token=$FIREBASE_TOKEN
-      - save_cache:
-          key: dependency-cache-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/react-forms/node_modules
-            - ~/react-forms/packages/react-renderer-demo/dist/functions/next/cache
 
 workflows:
   version: 2
@@ -104,10 +81,3 @@ workflows:
               only:
                 - master
                 - beta
-      - deploy:
-          requires:
-            - build
-            - predeploy
-          filters:
-            branches:
-              only: master
