@@ -7,20 +7,21 @@ import Field from '../common-types/field';
 import { AnyObject } from '../common-types/any-object';
 import Schema from '../common-types/schema';
 
-export interface FormOptions extends FormApi {
-  registerInputFile?: (name: string) => void;
-  unRegisterInputFile?: (name: string) => void;
-  onCancel?: (values: object, ...args: any[]) => void;
+export interface FormOptions<FormValues = Record<string, any>, InitialFormValues = Partial<FormValues>>
+  extends FormApi<FormValues, InitialFormValues> {
+  registerInputFile?: (name: keyof FormValues) => void;
+  unRegisterInputFile?: (name: keyof FormValues) => void;
+  onCancel?: (values: FormValues, ...args: any[]) => void;
   onReset?: () => void;
-  handleSubmit: () => Promise<AnyObject | undefined> | undefined;
+  handleSubmit: () => Promise<FormValues | undefined> | undefined;
   clearedValue?: any;
   renderForm: (fields: Field[]) => ReactNode[];
-  internalRegisterField: (name: string) => void;
-  internalUnregisterField: (name: string) => void;
+  internalRegisterField: (name: keyof FormValues) => void;
+  internalUnregisterField: (name: keyof FormValues) => void;
   getRegisteredFields: () => string[];
   ffGetRegisteredFields: () => string[];
-  initialValues: AnyObject;
-  schema: Schema,
+  initialValues: InitialFormValues;
+  schema: Schema;
 }
 
 export interface RendererContextValue {
