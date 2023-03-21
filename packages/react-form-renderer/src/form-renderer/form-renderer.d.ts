@@ -6,13 +6,13 @@ import { ValidatorMapper } from '../validator-mapper';
 import { ActionMapper } from './action-mapper';
 import SchemaValidatorMapper from '../common-types/schema-validator-mapper';
 import { FormTemplateRenderProps } from '../common-types/form-template-render-props';
-import { AnyObject } from '../common-types/any-object';
+import { NoIndex } from '../common-types/no-index';
 
 export interface FormRendererProps<
   FormValues = Record<string, any>,
   InitialFormValues = Partial<FormValues>,
   FormTemplateProps extends FormTemplateRenderProps = FormTemplateRenderProps
-> extends Omit<FormProps<FormValues, InitialFormValues>, 'onSubmit'> {
+> extends Omit<NoIndex<FormProps<FormValues, InitialFormValues>>, 'onSubmit' | 'children'> {
   initialValues?: InitialFormValues;
   onCancel?: (values: FormValues, ...args: any[]) => void;
   onReset?: () => void;
