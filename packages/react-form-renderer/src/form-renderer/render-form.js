@@ -86,15 +86,21 @@ FormConditionWrapper.propTypes = {
   field: PropTypes.object,
 };
 
-const SingleField = ({ component, condition, hideField, ...rest }) => {
+const SingleField = ({ component, ...rest }) => {
   const { actionMapper, componentMapper } = useContext(RendererContext);
 
   const { componentProps, Component, overrideProps, mergedResolveProps } = prepareComponentProps({ component, rest, componentMapper, actionMapper });
 
+  const { condition, hideField, ...restProps } = {
+    ...componentProps,
+    ...overrideProps,
+    ...(mergedResolveProps && { resolveProps: mergedResolveProps }),
+  };
+
   return (
-    <FormConditionWrapper condition={condition} field={componentProps}>
+    <FormConditionWrapper condition={condition} field={restProps}>
       <FormFieldHideWrapper hideField={hideField}>
-        <Component {...componentProps} {...overrideProps} {...(mergedResolveProps && { resolveProps: mergedResolveProps })} />
+        <Component {...restProps} />
       </FormFieldHideWrapper>
     </FormConditionWrapper>
   );
