@@ -17,6 +17,7 @@ Don't forget hide form controls by setting \`showFormControls\` to \`false\` as 
 |showTitles|bool|undefined|If true, step titles will be shown in the wizard body|
 |crossroads|array|undefined|Array of field names, which change next steps|
 |StepTemplate|componenr|DefaultStepTemplate|Custom component for rendering wizard body content.|
+|ModalProps|PF4 Modal props object. Used to customize the Modal element if `inModal` is true|
 
 Also accepts these props from the original component: `titleId`, `descriptionId`, `hideClose`, `hasNoBodyPadding`, `navAriaLabel` and `closeButtonAriaLabel`.
 

@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { Field, AnyObject } from "@data-driven-forms/react-form-renderer";
+import { ModalProps } from "@patternfly/react-core";
 
 export interface WizardButtonLabels {
   submit?: ReactNode;
@@ -92,6 +93,7 @@ export interface WizardProps {
   hasNoBodyPadding?: boolean;
   navAriaLabel?: string;
   StepTemplate?: React.ComponentType<StepTemplateProps>;
+  ModalProps?: ModalProps
 }
 
 declare const Wizard: React.ComponentType<WizardProps>;

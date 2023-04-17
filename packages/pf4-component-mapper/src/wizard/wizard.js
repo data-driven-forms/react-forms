@@ -44,6 +44,7 @@ const WizardInternal = ({
   StepTemplate,
   className,
   conditionalSubmitFlag,
+  ModalProps = {},
   ...rest
 }) => {
   const {
@@ -71,7 +72,10 @@ const WizardInternal = ({
   }, [inModal]);
 
   useEffect(() => {
-    if (state.container) {
+    if (ModalProps.appendTo) {
+      // override with default append to
+      dispatch({ type: 'finishLoading' });
+    } else if (state.container) {
       document.body.appendChild(state.container);
       dispatch({ type: 'finishLoading' });
     }
@@ -88,7 +92,7 @@ const WizardInternal = ({
   }
 
   return (
-    <Modal inModal={inModal} container={state.container} aria-labelledby={rest.name}>
+    <Modal inModal={inModal} container={state.container} aria-labelledby={rest.name} {...ModalProps}>
       <div
         tabIndex={inModal ? 0 : null}
         className={`pf-c-wizard ${inModal ? '' : 'no-shadow'} ddorg__pf4-component-mapper__wizard ${className ? className : ''}`}
@@ -179,6 +183,7 @@ WizardInternal.propTypes = {
   StepTemplate: PropTypes.elementType,
   className: PropTypes.string,
   conditionalSubmitFlag: PropTypes.string,
+  ModalProps: PropTypes.object,
 };
 
 const defaultLabels = {
