@@ -29,9 +29,9 @@
     "javascript"
   ],
   "devDependencies": {
-    "@ui5/webcomponents": "1.9.3",
-    "@ui5/webcomponents-fiori": "1.9.3",
-    "@ui5/webcomponents-react": "1.7.1"
+    "@ui5/webcomponents": "1.12.2",
+    "@ui5/webcomponents-fiori": "1.12.2",
+    "@ui5/webcomponents-react": "1.13.1"
   },
   "peerDependencies": {
     "@data-driven-forms/react-form-renderer": "*",
