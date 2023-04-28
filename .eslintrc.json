@@ -1,0 +1,92 @@
+{
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true,
+      "experimentalObjectRestSpread": true
+    }
+  },
+  "settings": {
+    "react": {
+      "version": "16.6"
+    }
+  },
+  "globals": {
+    "beforeAll": true,
+    "describe": true,
+    "expect": true,
+    "it": true,
+    "arguments": true
+  },
+  "plugins": ["react", "jest"],
+  "extends": ["react-app", "eslint:recommended", "plugin:react/recommended", "plugin:prettier/recommended", "prettier"],
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true,
+    "jest": true
+  },
+  "rules": {
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/display-name": "off",
+    "comma-spacing": ["error", {
+      "after": true
+    }],
+    "comma-style": "error",
+    "camelcase": "error",
+    "curly": ["error", "all"],
+    "eol-last": "error",
+    "eqeqeq": "error",
+    "key-spacing": "error",
+    "keyword-spacing": "error",
+    "linebreak-style": ["warn", "unix"],
+    "new-cap": "error",
+    "no-bitwise": "error",
+    "no-caller": "error",
+    "no-console": "warn",
+    "no-mixed-spaces-and-tabs": "error",
+    "no-multiple-empty-lines": ["error", {
+      "max": 1
+    }],
+    "no-trailing-spaces": "error",
+    "no-use-before-define": ["error", {
+      "functions": false
+    }],
+    "no-undef": "error",
+    "no-var": "error",
+    "no-with": "error",
+    "object-shorthand": "error",
+    "one-var": ["error", "never"],
+    "padding-line-between-statements": ["error", {
+      "blankLine": "always",
+      "prev": "block-like",
+      "next": "*"
+    }],
+    "quote-props": ["error", "as-needed"],
+    "quotes": ["error", "single", {
+      "allowTemplateLiterals": true
+    }],
+    "semi": ["error", "always"],
+    "space-in-parens": "error",
+    "space-infix-ops": "error",
+    "wrap-iife": "error",
+    "yoda": ["error", "never"],
+    "jsx-a11y/href-no-hash": "off",
+    "react/jsx-curly-spacing": "off",
+    "no-unused-vars": "error",
+    "react/no-unused-prop-types": "error",
+    "react-hooks/rules-of-hooks": "error",
+    "react/prop-types": "error",
+    "react/no-unescaped-entities": "error",
+    "no-prototype-builtins": "error",
+    "no-mixed-operators": "error",
+    "no-unused-expressions": "error",
+    "no-sequences": "error",
+    "react-hooks/exhaustive-deps": 0,
+    "jest/no-focused-tests": "error",
+    "jest/no-identical-title": "error"
+  }
+}

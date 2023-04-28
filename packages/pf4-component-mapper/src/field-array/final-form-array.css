@@ -1,0 +1,9 @@
+.ddf-final-form-hr {
+    color: var(--pf-global_BorderColor_100);
+    border-bottom-width: 0;
+}
+.ddf-final-form-spacer{
+    display: inline-block;
+    min-width: 100%;
+    min-height: 32px;
+}

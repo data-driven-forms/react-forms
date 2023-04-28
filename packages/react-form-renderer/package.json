@@ -1,0 +1,46 @@
+{
+  "name": "@data-driven-forms/react-form-renderer",
+  "version": "3.20.7",
+  "description": "React Form Renderer. Data Driven Forms converts JSON form definitions into fully functional React forms.",
+  "main": "index.js",
+  "module": "esm/index.js",
+  "license": "Apache-2.0",
+  "scripts": {
+    "start": "webpack-dev-server --config ./config/webpack.config.js --open --hot",
+    "build": "yarn build:cjs && yarn build:esm && yarn build:typings && yarn build:packages",
+    "build:cjs": "BABEL_ENV=cjs babel src --out-dir ./ --ignore \"src/tests/*\"",
+    "build:esm": "BABEL_ENV=esm babel src --out-dir ./esm --ignore \"src/tests/*\"",
+    "build:typings": "node ../../scripts/generate-typings.js",
+    "build:packages": "node ../../scripts/generate-packages.js",
+    "release": "semantic-release",
+    "test": "yarn --cwd ../.. test packages/react-form-renderer"
+  },
+  "homepage": "https://data-driven-forms.org/",
+  "bugs": "https://github.com/data-driven-forms/react-forms/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/data-driven-forms/react-forms",
+    "directory": "packages/react-form-renderer"
+  },
+  "keywords": [
+    "react",
+    "forms",
+    "javascript"
+  ],
+  "devDependencies": {
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "final-form": "^4.20.4",
+    "final-form-arrays": "^3.0.2",
+    "final-form-focus": "^1.1.2",
+    "lodash": "^4.17.15",
+    "prop-types": "^15.7.2",
+    "react-final-form": "^6.5.0",
+    "react-final-form-arrays": "^3.1.1"
+  },
+  "peerDependencies": {
+    "react": "^16.13.1 || ^17.0.2 || ^18.0.0",
+    "react-dom": "^16.13.1 || ^17.0.2 || ^18.0.0"
+  }
+}

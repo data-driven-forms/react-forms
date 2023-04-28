@@ -1,0 +1,49 @@
+{
+  "name": "@data-driven-forms/pf4-component-mapper",
+  "version": "3.20.7",
+  "description": "Patternfly 4 React component mapper for Data Driven Forms.",
+  "main": "index.js",
+  "module": "esm/index.js",
+  "typings": "index.d.ts",
+  "license": "Apache-2.0",
+  "scripts": {
+    "start": "webpack-dev-server --config ./config/webpack.config.js --open --hot",
+    "build": "yarn build:cjs && yarn build:esm && yarn build:typings && yarn build:packages && yarn build:css",
+    "build:cjs": "BABEL_ENV=cjs babel src --out-dir ./ --ignore \"src/tests/*\"",
+    "build:esm": "BABEL_ENV=esm babel src --out-dir ./esm --ignore \"src/tests/*\"",
+    "build:typings": "node ../../scripts/generate-typings.js",
+    "build:packages": "node ../../scripts/generate-packages.js",
+    "build:css": "node ../../scripts/copy-css.js",
+    "release": "semantic-release",
+    "test": "yarn --cwd ../.. test packages/pf4-component-mapper"
+  },
+  "homepage": "https://data-driven-forms.org/",
+  "bugs": "https://github.com/data-driven-forms/react-forms/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/data-driven-forms/react-forms",
+    "directory": "packages/pf4-component-mapper"
+  },
+  "keywords": [
+    "react",
+    "forms",
+    "javascript"
+  ],
+  "devDependencies": {
+    "@patternfly/react-core": "^4.157.3",
+    "@patternfly/react-icons": "^4.11.7"
+  },
+  "peerDependencies": {
+    "@data-driven-forms/react-form-renderer": "*",
+    "@patternfly/react-core": "^4.157.3",
+    "@patternfly/react-icons": "^4.11.7",
+    "react": "^16.13.1 || ^17.0.2 || ^18.0.0",
+    "react-dom": "^16.13.1 || ^17.0.2 || ^18.0.0"
+  },
+  "dependencies": {
+    "@data-driven-forms/common": "*",
+    "prop-types": "^15.7.2",
+    "downshift": "^5.4.3",
+    "lodash": "^4.17.21"
+  }
+}

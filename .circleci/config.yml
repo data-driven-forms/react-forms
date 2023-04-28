@@ -1,0 +1,83 @@
+version: 2.1
+orbs:
+  codecov: codecov/codecov@1.0.4
+  node: circleci/node@5.0.2
+jobs:
+  build:
+    working_directory: ~/react-forms
+    docker:
+      - image: 'cimg/base:stable'
+    steps:
+      - checkout
+      - node/install:
+          install-yarn: true
+          node-version: '16.13'
+      - run:
+          name: install-deps
+          command: yarn
+      - run:
+          name: build-packages
+          command: yarn build
+      - run:
+          name: test
+          command: yarn test:ci
+      - run:
+          name: lint
+          command: yarn lint
+      - codecov/upload:
+          file: coverage/*.json
+          token: aa1b6b4d-79a1-49f6-bcb2-d6069134a772
+      - persist_to_workspace:
+          root: ~/react-forms
+          paths:
+              - "*"
+  release:
+    working_directory: ~/react-forms
+    docker:
+      - image: 'cimg/base:stable'
+    steps:
+      - attach_workspace:
+          at: ~/react-forms
+      - node/install:
+          install-yarn: true
+          node-version: '16.13'
+      - run:
+          name: Release new version
+          command: |
+            echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/react-forms/.npmrc
+            yarn release
+  predeploy:
+    working_directory: ~/react-forms
+    docker:
+      - image: 'cimg/base:stable'
+    steps:
+      - attach_workspace:
+          at: ~/react-forms
+      - node/install:
+          install-yarn: true
+          node-version: '16.13'
+      - run:
+          name: Predeploy demo
+          command: |
+              yarn --cwd packages/react-renderer-demo/ build
+      - persist_to_workspace:
+          root: ~/react-forms
+          paths:
+              - packages/react-renderer-demo/dist/*
+
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build
+      - predeploy:
+          requires:
+            - build
+      - release:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - master
+                - beta

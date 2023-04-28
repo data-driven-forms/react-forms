@@ -1,0 +1,15 @@
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  github-action-show-version:
+    runs-on: ubuntu-latest
+    name: Next version is
+    steps:
+      - name: Publish a version comment
+        uses: rvsia/github-action-show-version@v1.9alpha
+        id: comment
+        with:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
