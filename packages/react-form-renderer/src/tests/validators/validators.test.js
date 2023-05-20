@@ -131,6 +131,10 @@ describe('New validators', () => {
     it('should not pass the validation and return custom message', () => {
       expect(validatorMapper[validatorTypes.MIN_NUMBER_VALUE]({ value: 99, message: 'Foo' })(1)).toEqual('Foo');
     });
+
+    it('should not pass the validation (with value as 0)', () => {
+      expect(validatorMapper[validatorTypes.MIN_NUMBER_VALUE]({ value: 2 })(0)).toEqual('Value must be greater than or equal to 2.');
+    });
   });
 
   describe('max value validator', () => {
