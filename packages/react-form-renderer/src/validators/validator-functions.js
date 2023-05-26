@@ -90,7 +90,7 @@ export const numericality = memoize(
     lessOrEqual = selectNum(lessOrEqual, lessThanOrEqualTo);
 
     return prepare((value) => {
-      if (!value) {
+      if (value === null || value === undefined) {
         return;
       }
 
