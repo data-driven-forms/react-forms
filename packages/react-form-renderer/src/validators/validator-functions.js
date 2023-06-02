@@ -95,7 +95,7 @@ export const numericality = memoize(
       }
 
       if (!isNumber(value)) {
-        return prepareMsg(message, 'notANumber').defaultMessage;
+        return prepareMsg(null, 'notANumber').defaultMessage;
       }
 
       if (equal !== null && +value !== equal) {
