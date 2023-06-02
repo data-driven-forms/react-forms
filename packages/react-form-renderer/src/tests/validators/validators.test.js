@@ -133,9 +133,9 @@ describe('New validators', () => {
     });
 
     it('should not pass the validation and return type error message', () => {
-      expect(validatorMapper[validatorTypes.MIN_NUMBER_VALUE]({ value: 99, message: 'Foo' })("oo")).toEqual('Value is not a number');
+      expect(validatorMapper[validatorTypes.MIN_NUMBER_VALUE]({ value: 99, message: 'Foo' })('oo')).toEqual('Value is not a number');
     });
-    
+
     it('should not pass the validation (with value as 0)', () => {
       expect(validatorMapper[validatorTypes.MIN_NUMBER_VALUE]({ value: 2 })(0)).toEqual('Value must be greater than or equal to 2.');
     });
