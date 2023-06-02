@@ -100,6 +100,46 @@ describe('condition test', () => {
     expect(() => screen.getByLabelText('field-2')).toThrow();
   });
 
+  it('should render when condition is fulfill - when is a function from action mapper', async () => {
+    const whenSpy = jest.fn().mockImplementation(() => 'field-1');
+    const actionMapper = {
+      condition: () => [
+        {
+          when: whenSpy,
+          is: 'show',
+        },
+      ],
+    };
+
+    schema = {
+      fields: [
+        {
+          component: componentTypes.TEXT_FIELD,
+          name: 'field-1',
+        },
+        {
+          component: componentTypes.TEXT_FIELD,
+          name: 'field-2',
+          actions: { condition: ['condition'] },
+        },
+      ],
+    };
+
+    render(<FormRenderer {...initialProps} schema={schema} actionMapper={actionMapper} />);
+
+    expect(whenSpy.mock.calls[0][0]).toEqual({ component: 'text-field', name: 'field-2' });
+
+    expect(() => screen.getByLabelText('field-2')).toThrow();
+
+    await userEvent.type(screen.getByLabelText('field-1'), 'show');
+
+    expect(screen.getByLabelText('field-2')).toBeInTheDocument();
+
+    await userEvent.type(screen.getByLabelText('field-1'), 'dont');
+
+    expect(() => screen.getByLabelText('field-2')).toThrow();
+  });
+
   it('sets value when condition is fulfill', async () => {
     schema = {
       fields: [
