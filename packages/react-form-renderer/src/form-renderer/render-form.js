@@ -44,7 +44,7 @@ const ConditionTriggerDetector = ({ values = {}, triggers = [], children, condit
 
   const name = internalTriggers.shift();
   return (
-    <Field name={name} subscription={{ value: true }}>
+    <Field name={name} subscription={{ value: true, initial: true }}>
       {({ input: { value } }) => (
         <ConditionTriggerDetector
           triggers={[...internalTriggers]}
