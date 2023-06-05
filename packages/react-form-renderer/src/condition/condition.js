@@ -43,7 +43,10 @@ const Condition = React.memo(
       initial: true,
     });
 
-    const conditionResult = parseCondition(condition, values, field);
+    // It is required to get the context state values from in order to get the latest state.
+    // Using the trigger values can cause issues with the radio field as each input is registered separately to state and does not yield the actual field value.
+    const conditionResult = parseCondition(condition, formOptions.getState().values, field);
+
     const setters = conditionResult.set ? [conditionResult.set] : conditionResult.sets;
 
     useEffect(() => {

@@ -13,12 +13,59 @@ import useFieldApi from '../../use-field-api';
 import FieldProvider from '../../field-provider';
 import Form from '../../form';
 
+import initialValuesConditionSchema from './initial-values-condition-schema.json';
+import useFormApi from '../../use-form-api/use-form-api';
+
 const TextField = (props) => {
   const { input, meta, ...rest } = useFieldApi(props);
   return (
     <div>
       <input {...input} {...rest} aria-label={input.name} />
       {meta.error && <div id="error">{meta.error}</div>}
+    </div>
+  );
+};
+
+const SubForm = ({ fields, title, ...props }) => {
+  const formOptions = useFormApi();
+  return <div>{formOptions.renderForm(fields)}</div>;
+};
+
+const RadioOption = ({ name, option }) => {
+  const { input } = useFieldApi({
+    name,
+    type: 'radio',
+    value: option.value,
+  });
+  return (
+    <div>
+      <label htmlFor={option.label}>{option.label}</label>
+      <input
+        type="radio"
+        {...input}
+        id={option.label}
+        name={name}
+        onChange={(e) => {
+          input.onChange(option.value);
+        }}
+      />
+    </div>
+  );
+};
+
+const Radio = (props) => {
+  const { label, options } = useFieldApi({
+    ...props,
+    type: 'radio',
+  });
+  return (
+    <div>
+      <fieldset>
+        <legend>{label}</legend>
+        {options.map(({ value, label }) => {
+          return <RadioOption key={value} option={{ value, label }} name={props.name} />;
+        })}
+      </fieldset>
     </div>
   );
 };
@@ -320,14 +367,18 @@ describe('renderForm function', () => {
           },
         },
       ];
+
       render(
-        <ContextWrapper
+        <FormRenderer
           componentMapper={{
             'custom-component': CustomComponent,
           }}
+          schema={{
+            fields: formFields,
+          }}
         >
-          {renderForm(formFields)}
-        </ContextWrapper>
+          {({ formFields }) => formFields}
+        </FormRenderer>
       );
       expect(() => screen.getByLabelText('foo')).toThrow();
 
@@ -354,13 +405,16 @@ describe('renderForm function', () => {
       ];
 
       render(
-        <ContextWrapper
+        <FormRenderer
           componentMapper={{
             'custom-component': CustomComponent,
           }}
+          schema={{
+            fields: formFields,
+          }}
         >
-          {renderForm(formFields)}
-        </ContextWrapper>
+          {({ formFields }) => formFields}
+        </FormRenderer>
       );
 
       expect(screen.getByLabelText('foo')).toBeInTheDocument();
@@ -391,13 +445,16 @@ describe('renderForm function', () => {
       ];
 
       render(
-        <ContextWrapper
+        <FormRenderer
           componentMapper={{
             'custom-component': CustomComponent,
           }}
+          schema={{
+            fields: formFields,
+          }}
         >
-          {renderForm(formFields)}
-        </ContextWrapper>
+          {({ formFields }) => formFields}
+        </FormRenderer>
       );
       expect(() => screen.getByLabelText('foo')).toThrow();
 
@@ -421,15 +478,17 @@ describe('renderForm function', () => {
           },
         },
       ];
-
       render(
-        <ContextWrapper
+        <FormRenderer
           componentMapper={{
             'custom-component': CustomComponent,
           }}
+          schema={{
+            fields: formFields,
+          }}
         >
-          {renderForm(formFields)}
-        </ContextWrapper>
+          {({ formFields }) => formFields}
+        </FormRenderer>
       );
 
       expect(screen.getByLabelText('foo')).toBeInTheDocument();
@@ -459,13 +518,16 @@ describe('renderForm function', () => {
         },
       ];
       render(
-        <ContextWrapper
+        <FormRenderer
           componentMapper={{
             'custom-component': CustomComponent,
           }}
+          schema={{
+            fields: formFields,
+          }}
         >
-          {renderForm(formFields)}
-        </ContextWrapper>
+          {({ formFields }) => formFields}
+        </FormRenderer>
       );
       expect(() => screen.getByLabelText('foo')).toThrow();
 
@@ -490,13 +552,16 @@ describe('renderForm function', () => {
         },
       ];
       render(
-        <ContextWrapper
+        <FormRenderer
           componentMapper={{
             'custom-component': CustomComponent,
           }}
+          schema={{
+            fields: formFields,
+          }}
         >
-          {renderForm(formFields)}
-        </ContextWrapper>
+          {({ formFields }) => formFields}
+        </FormRenderer>
       );
 
       expect(() => screen.getByLabelText('foo')).toThrow();
@@ -523,13 +588,16 @@ describe('renderForm function', () => {
         },
       ];
       render(
-        <ContextWrapper
+        <FormRenderer
           componentMapper={{
             'custom-component': CustomComponent,
           }}
+          schema={{
+            fields: formFields,
+          }}
         >
-          {renderForm(formFields)}
-        </ContextWrapper>
+          {({ formFields }) => formFields}
+        </FormRenderer>
       );
 
       expect(() => screen.getByLabelText('foo')).toThrow();
@@ -556,13 +624,16 @@ describe('renderForm function', () => {
         },
       ];
       render(
-        <ContextWrapper
+        <FormRenderer
           componentMapper={{
             'custom-component': CustomComponent,
           }}
+          schema={{
+            fields: formFields,
+          }}
         >
-          {renderForm(formFields)}
-        </ContextWrapper>
+          {({ formFields }) => formFields}
+        </FormRenderer>
       );
 
       expect(screen.getByLabelText('foo')).toBeInTheDocument();
@@ -597,13 +668,16 @@ describe('renderForm function', () => {
         },
       ];
       render(
-        <ContextWrapper
+        <FormRenderer
           componentMapper={{
             'custom-component': CustomComponent,
           }}
+          schema={{
+            fields: formFields,
+          }}
         >
-          {renderForm(formFields)}
-        </ContextWrapper>
+          {({ formFields }) => formFields}
+        </FormRenderer>
       );
 
       await userEvent.type(screen.getByLabelText('a'), 'x');
@@ -644,13 +718,16 @@ describe('renderForm function', () => {
         },
       ];
       render(
-        <ContextWrapper
+        <FormRenderer
           componentMapper={{
             'custom-component': CustomComponent,
           }}
+          schema={{
+            fields: formFields,
+          }}
         >
-          {renderForm(formFields)}
-        </ContextWrapper>
+          {({ formFields }) => formFields}
+        </FormRenderer>
       );
 
       await userEvent.clear(screen.getByLabelText('a'));
@@ -689,13 +766,16 @@ describe('renderForm function', () => {
       ];
 
       render(
-        <ContextWrapper
+        <FormRenderer
           componentMapper={{
             'custom-component': CustomComponent,
           }}
+          schema={{
+            fields: formFields,
+          }}
         >
-          {renderForm(formFields)}
-        </ContextWrapper>
+          {({ formFields }) => formFields}
+        </FormRenderer>
       );
 
       expect(() => screen.getByLabelText('foo.bar')).toThrow();
@@ -750,6 +830,38 @@ describe('renderForm function', () => {
       await userEvent.type(screen.getByLabelText('b'), 'x');
 
       expect(screen.getByLabelText('foo')).toBeInTheDocument();
+    });
+
+    it('should correctly re-mount field after condition is met, when condition is based on initial values.', async () => {
+      render(
+        <FormRenderer
+          componentMapper={{
+            'text-field': CustomComponent,
+            radio: Radio,
+            'sub-form': SubForm,
+          }}
+          schema={{
+            fields: initialValuesConditionSchema.schema.fields,
+          }}
+          initialValues={initialValuesConditionSchema.initialValues}
+        >
+          {({ formFields }) => formFields}
+        </FormRenderer>
+      );
+
+      // field should be visible on initial mount as condition is met
+      expect(screen.getByLabelText('txtField3')).toBeInTheDocument();
+
+      // select form1 option to hide the `form2` and the `txtField3`
+      await userEvent.click(screen.getByText('form1'));
+
+      // field should not be visible after hiding its parent sub form
+      expect(() => screen.getByLabelText('txtField3')).toThrow();
+
+      // select form2 option to reveal the subform `form2`
+      await userEvent.click(screen.getByText('form2'));
+      // field should be visible on re-mount and if the condition is met
+      expect(screen.getByLabelText('txtField3')).toBeInTheDocument();
     });
   });
 
