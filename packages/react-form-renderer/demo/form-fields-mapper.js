@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import { componentTypes } from '../src';
+import { componentTypes, useFormApi } from '../src';
 import FieldProvider from '../src/field-provider';
 import useFieldApi from '../src/use-field-api';
 
@@ -71,13 +71,62 @@ const AsyncComponent = (props) => {
   );
 };
 
+const SubForm = ({ fields, title, ...props }) => {
+  const formOptions = useFormApi();
+  return (
+    <div>
+      <h2>{title}</h2>
+      <div>{formOptions.renderForm(fields)}</div>
+    </div>
+  );
+};
+
+const RadioOption = ({ name, option }) => {
+  const { input } = useFieldApi({
+    name,
+    type: 'radio',
+    value: option.value,
+  });
+  return (
+    <div>
+      <label htmlFor={option.label}>{option.label}</label>
+      <input
+        type="radio"
+        {...input}
+        id={option.label}
+        name={name}
+        onChange={(e) => {
+          input.onChange(option.value);
+        }}
+      />
+    </div>
+  );
+};
+
+const Radio = (props) => {
+  const { label, options } = useFieldApi({
+    ...props,
+    type: 'radio',
+  });
+  return (
+    <div>
+      <fieldset>
+        <legend>{label}</legend>
+        {options.map(({ value, label }) => {
+          return <RadioOption key={value} option={{ value, label }} name={props.name} />;
+        })}
+      </fieldset>
+    </div>
+  );
+};
+
 const mapper = {
   [componentTypes.TEXT_FIELD]: TextField,
   [componentTypes.TEXTAREA]: TextField,
   [componentTypes.SELECT]: SelectField,
   [componentTypes.CHECKBOX]: (props) => <div>checkbox</div>,
-  [componentTypes.SUB_FORM]: (props) => <div>sub form</div>,
-  [componentTypes.RADIO]: (props) => <div>radio</div>,
+  [componentTypes.SUB_FORM]: SubForm,
+  [componentTypes.RADIO]: Radio,
   [componentTypes.TABS]: (props) => <div>tabs</div>,
   [componentTypes.TAB_ITEM]: (props) => <div>tab item</div>,
   [componentTypes.DATE_PICKER]: (props) => <div>date picker</div>,
@@ -85,8 +134,8 @@ const mapper = {
   dataShower: AsyncComponent,
   'composite-mapper-field': {
     component: TextField,
-    className: 'composite-component-class'
-  }
+    className: 'composite-component-class',
+  },
 };
 
 export default mapper;
