@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -10,8 +10,8 @@ import FormRenderer from '../../form-renderer';
 import { reducer } from '../../condition';
 
 const TextField = (props) => {
-  const { input } = useFieldApi(props);
-  return <input aria-label={input.name} {...input} />;
+  const { input, placeholder } = useFieldApi(props);
+  return <input aria-label={input.name} placeholder={placeholder} {...input} />;
 };
 
 describe('condition test', () => {
@@ -713,6 +713,60 @@ describe('condition test', () => {
     await waitFor(() => {
       expect(screen.getByLabelText('field2')).toHaveValue('foo');
     });
+  });
+
+  it('should be possible to change props to component with condition', async () => {
+    const Dummy = () => {
+      const [conditionalField, setConditionalField] = useState({
+        component: componentTypes.TEXT_FIELD,
+        name: 'field-2',
+        condition: [
+          {
+            when: 'field-1',
+            is: 'show',
+          },
+        ],
+      });
+
+      const onButton = () =>
+        setConditionalField({
+          ...conditionalField,
+          placeholder: 'Changed placeholder',
+        });
+
+      return (
+        <React.Fragment>
+          <button type="button" onClick={onButton}>
+            Change field
+          </button>
+          <FormRenderer
+            {...initialProps}
+            schema={{
+              fields: [
+                {
+                  component: componentTypes.TEXT_FIELD,
+                  name: 'field-1',
+                },
+                conditionalField,
+              ],
+            }}
+          />
+        </React.Fragment>
+      );
+    };
+
+    render(<Dummy />);
+
+    expect(screen.queryByLabelText('field-2')).not.toBeInTheDocument();
+
+    await userEvent.type(screen.getByLabelText('field-1'), 'show');
+
+    expect(screen.getByLabelText('field-2')).toBeInTheDocument();
+    expect(screen.queryByPlaceholderText('Changed placeholder')).not.toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Change field'));
+
+    expect(screen.getByPlaceholderText('Changed placeholder')).toBeInTheDocument();
   });
 
   describe('reducer', () => {

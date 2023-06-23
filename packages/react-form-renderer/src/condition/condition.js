@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useReducer } from 'react';
+import { useCallback, useEffect, useMemo, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import isEqual from 'lodash/isEqual';
 
@@ -33,76 +33,73 @@ export const reducer = (state, { type, sets }) => {
   }
 };
 
-const Condition = React.memo(
-  ({ condition, children, values, field }) => {
-    const formOptions = useFormApi();
-    const dirty = formOptions.getState().dirty;
+const Condition = ({ condition, children, field }) => {
+  const formOptions = useFormApi();
+  const formState = formOptions.getState();
 
-    const [state, dispatch] = useReducer(reducer, {
-      sets: [],
-      initial: true,
+  const [state, dispatch] = useReducer(reducer, {
+    sets: [],
+    initial: true,
+  });
+
+  // It is required to get the context state values from in order to get the latest state.
+  // Using the trigger values can cause issues with the radio field as each input is registered separately to state and does not yield the actual field value.
+  const conditionResult = useMemo(() => parseCondition(condition, formState.values, field), [formState.values, condition, field]);
+
+  const setters = conditionResult.set ? [conditionResult.set] : conditionResult.sets;
+
+  useEffect(() => {
+    if (!formState.dirty) {
+      dispatch({ type: 'formResetted' });
+    }
+  }, [formState.dirty]);
+
+  const setValue = useCallback((setter) => {
+    Object.entries(setter).forEach(([name, value]) => {
+      formOptions.change(name, value);
     });
+  }, []);
 
-    // It is required to get the context state values from in order to get the latest state.
-    // Using the trigger values can cause issues with the radio field as each input is registered separately to state and does not yield the actual field value.
-    const conditionResult = parseCondition(condition, formOptions.getState().values, field);
+  useEffect(() => {
+    if (setters && setters.length > 0 && (state.initial || !isEqual(setters, state.sets))) {
+      setters.forEach((setter, index) => {
+        if (setter && (state.initial || !isEqual(setter, state.sets[index]))) {
+          setTimeout(() => {
+            /**
+             * We have to get the meta in the timetout to wait for state initialization
+             */
+            const meta = formOptions.getFieldState(field.name);
+            const isFormModified = Object.values(formOptions.getState().modified).some(Boolean);
+            /**
+             * Apply setter only
+             *    - field has no initial value
+             *    - form is modified
+             *    - when meta is false = field was unmounted before timeout, we finish the condition
+             */
+            if (!meta || isFormModified || typeof meta.initial === 'undefined') {
+              formOptions.batch(() => {
+                if (typeof setter !== 'function') {
+                  setValue(setter);
+                } else {
+                  const setterValue = setter(formOptions.getState(), formOptions.getFieldState);
 
-    const setters = conditionResult.set ? [conditionResult.set] : conditionResult.sets;
-
-    useEffect(() => {
-      if (!dirty) {
-        dispatch({ type: 'formResetted' });
-      }
-    }, [dirty]);
-
-    const setValue = useCallback((setter) => {
-      Object.entries(setter).forEach(([name, value]) => {
-        formOptions.change(name, value);
-      });
-    }, []);
-
-    useEffect(() => {
-      if (setters && setters.length > 0 && (state.initial || !isEqual(setters, state.sets))) {
-        setters.forEach((setter, index) => {
-          if (setter && (state.initial || !isEqual(setter, state.sets[index]))) {
-            setTimeout(() => {
-              /**
-               * We have to get the meta in the timetout to wait for state initialization
-               */
-              const meta = formOptions.getFieldState(field.name);
-              const isFormModified = Object.values(formOptions.getState().modified).some(Boolean);
-              /**
-               * Apply setter only
-               *    - field has no initial value
-               *    - form is modified
-               *    - when meta is false = field was unmounted before timeout, we finish the condition
-               */
-              if (!meta || isFormModified || typeof meta.initial === 'undefined') {
-                formOptions.batch(() => {
-                  if (typeof setter !== 'function') {
-                    setValue(setter);
+                  if (setterValueCheck(setterValue)) {
+                    setValue(setterValue);
                   } else {
-                    const setterValue = setter(formOptions.getState(), formOptions.getFieldState);
-
-                    if (setterValueCheck(setterValue)) {
-                      setValue(setterValue);
-                    } else {
-                      console.error('Received invalid setterValue. Expected object, received: ', setterValue);
-                    }
+                    console.error('Received invalid setterValue. Expected object, received: ', setterValue);
                   }
-                });
-              }
-            });
-          }
-        });
-        dispatch({ type: 'rememberSets', sets: setters });
-      }
-    }, [setters, state.initial]);
+                }
+              });
+            }
+          });
+        }
+      });
+      dispatch({ type: 'rememberSets', sets: setters });
+    }
+  }, [setters, state.initial]);
 
-    return conditionResult.visible ? children : null;
-  },
-  (a, b) => isEqual(a.values, b.values) && isEqual(a.condition, b.condition)
-);
+  return conditionResult.visible ? children : null;
+};
 
 const conditionProps = {
   when: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string), PropTypes.func]),
