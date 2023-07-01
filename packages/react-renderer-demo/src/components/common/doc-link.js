@@ -16,6 +16,7 @@ export const NextLinkComposed = React.forwardRef(function NextLinkComposed(props
     <NextLink
       style={{
         textDecoration: 'none',
+        color: 'inherit',
       }}
       href={to}
       prefetch={prefetch}
@@ -94,7 +95,7 @@ const DocLink = React.forwardRef(function Link(props, ref) {
     return <NextLinkComposed className={className} ref={ref} {...nextjsProps} {...other} />;
   }
 
-  return <MuiLink sx={{ textDecoration: 'none' }} component={NextLinkComposed} className={className} ref={ref} {...nextjsProps} {...other} />;
+  return <MuiLink component={NextLinkComposed} className={className} ref={ref} {...nextjsProps} {...other} />;
 });
 
 DocLink.propTypes = {

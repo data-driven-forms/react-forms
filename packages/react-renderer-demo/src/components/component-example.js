@@ -251,7 +251,10 @@ const ComponentExample = ({ variants, schema, activeMapper, component, schemaVar
         onClick={() => push(`${pathname}?mapper=${mapper}${activeSchema ? `&schema=${activeSchema}` : ''}`)}
         className={clsx(classes.tab, { active: activeMapper === mapper })}
         label={
-          <DocLink href={`${pathname}?mapper=${mapper}${activeSchema ? `&schema=${activeSchema}` : ''}`}>
+          <DocLink
+            style={{ textDecoration: 'none', color: 'inherit' }}
+            href={`${pathname}?mapper=${mapper}${activeSchema ? `&schema=${activeSchema}` : ''}`}
+          >
             <a href={`${pathname}?mapper=${mapper}${activeSchema ? `&schema=${activeSchema}` : ''}`} className={classes.tabLink}>
               {title}
             </a>
