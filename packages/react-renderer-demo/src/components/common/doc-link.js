@@ -16,7 +16,7 @@ export const NextLinkComposed = React.forwardRef(function NextLinkComposed(props
     <NextLink
       style={{
         textDecoration: 'none',
-        color: 'inherit'
+        color: 'inherit',
       }}
       href={to}
       prefetch={prefetch}
