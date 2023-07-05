@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import IconButton from '@mui/material/IconButton';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import SvgIcon from '@mui/material/SvgIcon';
+import { urlFormatter } from '../../helpers/url-formatter';
 
 const HashTagSvg = (props) => (
   // eslint-disable-next-line max-len
@@ -14,15 +15,19 @@ const HashTagSvg = (props) => (
   ></path>
 );
 
-const ShareButton = ({ path }) => (
-  <CopyToClipboard text={path}>
-    <IconButton size="medium">
-      <SvgIcon fontSize="small" viewBox="0 0 48 48">
-        <HashTagSvg />
-      </SvgIcon>
-    </IconButton>
-  </CopyToClipboard>
-);
+const ShareButton = ({ path }) => {
+  console.log(process.env.NEXT_PUBLIC_VAR_VAL);
+
+  return (
+    <CopyToClipboard text={urlFormatter(path)}>
+      <IconButton size="medium">
+        <SvgIcon fontSize="small" viewBox="0 0 48 48">
+          <HashTagSvg />
+        </SvgIcon>
+      </IconButton>
+    </CopyToClipboard>
+  );
+};
 
 ShareButton.propTypes = {
   path: PropTypes.string.isRequired,
