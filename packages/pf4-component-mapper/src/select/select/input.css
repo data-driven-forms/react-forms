@@ -2,3 +2,7 @@
   border: none;
   flex: 1;
 }
+
+.ddorg__pf4-component-mapper__select-input-wrapper {
+  background-color: transparent;
+}

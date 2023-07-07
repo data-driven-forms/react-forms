@@ -9,12 +9,13 @@ import { CaretDownIcon, CloseIcon, CircleNotchIcon } from '@patternfly/react-ico
 import './select-styles.css';
 import '@patternfly/react-styles/css/components/Select/select.css';
 import '@patternfly/react-styles/css/components/Chip/chip.css';
-import '@patternfly/react-styles/css/components/ChipGroup/chip-group.css';
+import '@patternfly/react-styles/css/components/Chip/chip-group.css';
 import '@patternfly/react-styles/css/components/Divider/divider.css';
 
 import Menu from './menu';
 import ClearIndicator from './clear-indicator';
 import ValueContainer from './value-container';
+import { Icon } from '@patternfly/react-core';
 
 const itemToString = (value, isMulti, showMore, handleShowMore, handleChange) => {
   if (!value) {
@@ -29,17 +30,22 @@ const itemToString = (value, isMulti, showMore, handleShowMore, handleChange) =>
     if (isMulti) {
       const visibleOptions = showMore ? value : value.slice(0, 3);
       return (
-        <div className="pf-c-chip-group pf-u-ml-sm" onClick={(event) => event.stopPropagation()}>
-          <ul className="pf-c-chip-group__list" aria-label="Chip group category">
+        <div className="pf-v5-c-chip-group pf-v5-u-ml-sm" onClick={(event) => event.stopPropagation()}>
+          <ul className="pf-v5-c-chip-group__list" aria-label="Chip group category">
             {visibleOptions.map((item, index) => {
               const label = typeof item === 'object' ? item.label : item;
               return (
-                <li className="pf-c-chip-group__list-item" onClick={(event) => event.stopPropagation()} key={item.key || item.value || item}>
-                  <div className="pf-c-chip">
-                    <span className="pf-c-chip__text" id={`pf-random-id-${index}-${label}`}>
+                <li className="pf-v5-c-chip-group__list-item" onClick={(event) => event.stopPropagation()} key={item.key || item.value || item}>
+                  <div className="pf-v5-c-chip">
+                    <span className="pf-v5-c-chip__text" id={`pf-random-id-${index}-${label}`}>
                       {label}
                     </span>
-                    <button onClick={() => handleChange(item)} className="pf-c-button pf-m-plain" type="button" aria-label="remove option">
+                    <button
+                      onClick={() => handleChange(item)}
+                      className="pf-v5-c-button pf-u-plain pf-v5-u-pt-0 pf-v5-u-pb-0"
+                      type="button"
+                      aria-label="remove option"
+                    >
                       <CloseIcon />
                     </button>
                   </div>
@@ -47,9 +53,9 @@ const itemToString = (value, isMulti, showMore, handleShowMore, handleChange) =>
               );
             })}
             {value.length > 3 && (
-              <li className="pf-c-chip-group__list-item">
-                <button type="button" onClick={handleShowMore} className="pf-c-chip pf-m-overflow">
-                  <span className="pf-c-chip__text">{showMore ? 'Show less' : `${value.length - 3} more`}</span>
+              <li className="pf-v5-c-chip-group__list-item">
+                <button type="button" onClick={handleShowMore} className="pf-v5-c-chip pf-m-overflow">
+                  <span className="pf-v5-c-chip__text">{showMore ? 'Show less' : `${value.length - 3} more`}</span>
                 </button>
               </li>
             )}
@@ -207,17 +213,17 @@ const InternalSelect = ({
       {({ isOpen, inputValue, itemToString, selectedItem, clearSelection, getInputProps, getToggleButtonProps, getItemProps, highlightedIndex }) => {
         const toggleButtonProps = getToggleButtonProps();
         return (
-          <div className="pf-c-select">
+          <div className="pf-v5-c-select">
             <div
               ref={selectToggleRef}
               disabled={isDisabled}
-              className={`pf-c-select__toggle${isDisabled ? ' pf-m-disabled' : ''}${
-                isSearchable ? ' pf-m-typeahead' : ''
+              className={`pf-v5-c-select__toggle${isDisabled ? ' pf-v5-m-disabled' : ''}${
+                isSearchable ? ' pf-v5-m-typeahead' : ''
               } ddorg__pf4-component-mapper__select-toggle`}
               tabIndex={0}
               {...toggleButtonProps}
             >
-              <div className="pf-c-select_toggle-wrapper ddorg__pf4-component-mapper__select-toggle-wrapper">
+              <div className="pf-v5-c-select_toggle-wrapper ddorg__pf4-component-mapper__select-toggle-wrapper">
                 <ValueContainer
                   isMulti={isMulti}
                   isSearchable={isSearchable}
@@ -228,8 +234,8 @@ const InternalSelect = ({
                 />
               </div>
               {isClearable && parsedValue && <ClearIndicator clearSelection={clearSelection} />}
-              <span className="pf-c-select__toggle-arrow">
-                {isFetching ? <CircleNotchIcon className="ddorg__pf4-component-mapper__select-loading-icon" /> : <CaretDownIcon />}
+              <span className="pf-v5-c-select__toggle-arrow">
+                <Icon>{isFetching ? <CircleNotchIcon className="ddorg__pf4-component-mapper__select-loading-icon" /> : <CaretDownIcon />}</Icon>
               </span>
             </div>
             {isOpen && (

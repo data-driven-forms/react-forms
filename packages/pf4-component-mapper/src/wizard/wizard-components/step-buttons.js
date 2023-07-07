@@ -41,7 +41,7 @@ const WizardStepButtons = ({
   formOptions,
   conditionalSubmitFlag,
 }) => (
-  <footer className={`pf-c-wizard__footer ${buttonsClassName ? buttonsClassName : ''}`}>
+  <footer className={`pf-v5-c-wizard__footer ${buttonsClassName ? buttonsClassName : ''}`}>
     {Buttons ? (
       <Buttons
         disableBack={disableBack}
@@ -70,7 +70,7 @@ const WizardStepButtons = ({
             <Button type="button" variant="secondary" isDisabled={disableBack} onClick={handlePrev}>
               {back}
             </Button>
-            <div className="pf-c-wizard__footer-cancel">
+            <div className="pf-v5-c-wizard__footer-cancel">
               <Button type="button" variant="link" onClick={formOptions.onCancel}>
                 {cancel}
               </Button>

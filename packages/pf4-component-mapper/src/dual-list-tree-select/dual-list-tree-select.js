@@ -84,7 +84,7 @@ const DualListTreeSelect = (props) => {
   const leftOptions = selectedOptions(options, value, false);
   const rightOptions = selectedOptions(options, value, true);
 
-  const onListChange = (_newLeft, newRight) => input.onChange(getValueFromSelected(newRight));
+  const onListChange = (_e, _newLeft, newRight) => input.onChange(getValueFromSelected(newRight));
 
   return (
     <FormGroup

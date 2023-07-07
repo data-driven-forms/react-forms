@@ -524,8 +524,8 @@ describe('<Wizard />', () => {
   it('should build simple navigation', () => {
     render(<FormRenderer {...initialProps} />);
 
-    expect(screen.getByText('foo-step', { selector: '.pf-c-wizard__nav-link' })).toBeInTheDocument();
-    expect(screen.getByText('bar-step', { selector: '.pf-c-wizard__nav-link' })).toBeInTheDocument();
+    expect(screen.getByText('foo-step', { selector: '.pf-v5-c-wizard__nav-link' })).toBeInTheDocument();
+    expect(screen.getByText('bar-step', { selector: '.pf-v5-c-wizard__nav-link' })).toBeInTheDocument();
   });
 
   it('should jump when click simple navigation', async () => {
@@ -537,11 +537,11 @@ describe('<Wizard />', () => {
 
     expect(screen.getByLabelText('bar', { selector: 'input' })).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('foo-step', { selector: '.pf-c-wizard__nav-link' }));
+    await userEvent.click(screen.getByText('foo-step', { selector: '.pf-v5-c-wizard__nav-link' }));
 
     expect(screen.getByLabelText('foo', { selector: 'input' })).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('bar-step', { selector: '.pf-c-wizard__nav-link' }));
+    await userEvent.click(screen.getByText('bar-step', { selector: '.pf-v5-c-wizard__nav-link' }));
 
     expect(screen.getByLabelText('bar', { selector: 'input' })).toBeInTheDocument();
   });
@@ -551,7 +551,7 @@ describe('<Wizard />', () => {
 
     expect(screen.getByLabelText('foo', { selector: 'input' })).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('foo-step', { selector: '.pf-c-wizard__nav-link' }));
+    await userEvent.click(screen.getByText('foo-step', { selector: '.pf-v5-c-wizard__nav-link' }));
 
     expect(screen.getByLabelText('foo', { selector: 'input' })).toBeInTheDocument();
   });
@@ -594,9 +594,9 @@ describe('<Wizard />', () => {
 
     render(<FormRenderer {...initialProps} schema={schema} />);
 
-    expect(screen.getAllByText('foo-step', { selector: '.pf-c-wizard__nav-link' })).toBeTruthy();
-    expect(screen.getAllByText('bar-step', { selector: '.pf-c-wizard__nav-link' })).toBeTruthy();
-    expect(screen.getAllByText('barbar', { selector: '.pf-c-wizard__nav-link' })).toBeTruthy();
+    expect(screen.getAllByText('foo-step', { selector: '.pf-v5-c-wizard__nav-link' })).toBeTruthy();
+    expect(screen.getAllByText('bar-step', { selector: '.pf-v5-c-wizard__nav-link' })).toBeTruthy();
+    expect(screen.getAllByText('barbar', { selector: '.pf-v5-c-wizard__nav-link' })).toBeTruthy();
   });
 
   it('should jump with substeps', async () => {
@@ -643,11 +643,11 @@ describe('<Wizard />', () => {
 
     expect(screen.getByLabelText('bar', { selector: 'input' })).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('foo-step', { selector: '.pf-c-wizard__nav-link' }));
+    await userEvent.click(screen.getByText('foo-step', { selector: '.pf-v5-c-wizard__nav-link' }));
 
     expect(screen.getByLabelText('foo', { selector: 'input' })).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('barbar', { selector: '.pf-c-wizard__nav-link' }));
+    await userEvent.click(screen.getByText('barbar', { selector: '.pf-v5-c-wizard__nav-link' }));
 
     expect(screen.getByLabelText('bar', { selector: 'input' })).toBeInTheDocument();
 
@@ -655,7 +655,7 @@ describe('<Wizard />', () => {
 
     expect(screen.getByLabelText('foo', { selector: 'input' })).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('bar-step', { selector: '.pf-c-wizard__nav-link' }));
+    await userEvent.click(screen.getByText('bar-step', { selector: '.pf-v5-c-wizard__nav-link' }));
 
     expect(screen.getByLabelText('bar', { selector: 'input' })).toBeInTheDocument();
   });
@@ -700,23 +700,23 @@ describe('<Wizard />', () => {
     const { container } = render(<FormRenderer {...initialProps} schema={schema} />);
 
     expect(screen.getByLabelText('foo', { selector: 'input' })).toBeInTheDocument();
-    expect(container.querySelectorAll('.pf-c-wizard__nav-item')).toHaveLength(3);
-    expect(container.querySelectorAll('.pf-c-wizard__nav-link.pf-m-disabled')).toHaveLength(2); // steps + substep
+    expect(container.querySelectorAll('.pf-v5-c-wizard__nav-item')).toHaveLength(3);
+    expect(container.querySelectorAll('.pf-v5-c-wizard__nav-link.pf-m-disabled')).toHaveLength(2); // steps + substep
 
     await userEvent.click(screen.getByText('Next'));
 
     expect(screen.getByLabelText('bar', { selector: 'input' })).toBeInTheDocument();
-    expect(container.querySelectorAll('.pf-c-wizard__nav-link.pf-m-disabled')).toHaveLength(0);
+    expect(container.querySelectorAll('.pf-v5-c-wizard__nav-link.pf-m-disabled')).toHaveLength(0);
 
-    await userEvent.click(screen.getByText('foo-step', { selector: '.pf-c-wizard__nav-link' }));
+    await userEvent.click(screen.getByText('foo-step', { selector: '.pf-v5-c-wizard__nav-link' }));
 
     expect(screen.getByLabelText('foo', { selector: 'input' })).toBeInTheDocument();
-    expect(container.querySelectorAll('.pf-c-wizard__nav-item')).toHaveLength(3);
+    expect(container.querySelectorAll('.pf-v5-c-wizard__nav-item')).toHaveLength(3);
 
     await userEvent.click(screen.getByText('Next'));
 
     expect(screen.getByLabelText('bar', { selector: 'input' })).toBeInTheDocument();
-    expect(container.querySelectorAll('.pf-c-wizard__nav-item')).toHaveLength(3);
+    expect(container.querySelectorAll('.pf-v5-c-wizard__nav-item')).toHaveLength(3);
   });
 
   it('should disabled button when validating', async () => {
@@ -814,17 +814,17 @@ describe('<Wizard />', () => {
 
     await userEvent.click(screen.getByText('Next'));
 
-    await waitFor(() => expect(screen.getByText('bar-step', { selector: '.pf-c-wizard__nav-link' })).not.toBeDisabled());
+    await waitFor(() => expect(screen.getByText('bar-step', { selector: '.pf-v5-c-wizard__nav-link' })).not.toBeDisabled());
 
     await userEvent.click(screen.getByText('Back'));
 
     await userEvent.type(screen.getByLabelText('foo'), 'X');
 
-    expect(screen.getByText('bar-step', { selector: '.pf-c-wizard__nav-link' })).toBeDisabled();
+    expect(screen.getByText('bar-step', { selector: '.pf-v5-c-wizard__nav-link' })).toBeDisabled();
 
     resFn();
 
-    await waitFor(() => expect(screen.getByText('bar-step', { selector: '.pf-c-wizard__nav-link' })).not.toBeDisabled());
+    await waitFor(() => expect(screen.getByText('bar-step', { selector: '.pf-v5-c-wizard__nav-link' })).not.toBeDisabled());
   });
 
   it('should disable steps when invalid', async () => {
@@ -907,7 +907,7 @@ describe('<Wizard />', () => {
     await userEvent.click(screen.getByText('Next'));
     // voila
     expect(screen.getByLabelText('conan')).toBeInTheDocument();
-    expect(screen.getByText('conan-step', { selector: '.pf-c-wizard__nav-link' })).not.toBeDisabled();
+    expect(screen.getByText('conan-step', { selector: '.pf-v5-c-wizard__nav-link' })).not.toBeDisabled();
 
     await userEvent.click(screen.getByText('Back'));
 
@@ -919,21 +919,21 @@ describe('<Wizard />', () => {
     expect(screen.getByLabelText('bar')).toBeInTheDocument();
 
     // let's look if last nav item is disabled (click event is working with 'disabled' <a> element)
-    expect(screen.getByText('conan-step', { selector: '.pf-c-wizard__nav-link' })).toBeDisabled();
+    expect(screen.getByText('conan-step', { selector: '.pf-v5-c-wizard__nav-link' })).toBeDisabled();
 
     // go to first step
-    await userEvent.click(screen.getByText('foo-step', { selector: '.pf-c-wizard__nav-link' }));
+    await userEvent.click(screen.getByText('foo-step', { selector: '.pf-v5-c-wizard__nav-link' }));
 
     // still invalid :(
     expect(screen.getByLabelText('foo')).toBeInTheDocument();
-    expect(screen.getByText('conan-step', { selector: '.pf-c-wizard__nav-link' })).toBeDisabled();
+    expect(screen.getByText('conan-step', { selector: '.pf-v5-c-wizard__nav-link' })).toBeDisabled();
 
     // make form valid again
     await userEvent.click(screen.getByText('Next'));
 
     await userEvent.type(screen.getByLabelText('bar'), 'hello');
     await userEvent.click(screen.getByText('Next'));
-    expect(screen.getByText('conan-step', { selector: '.pf-c-wizard__nav-link' })).not.toBeDisabled();
+    expect(screen.getByText('conan-step', { selector: '.pf-v5-c-wizard__nav-link' })).not.toBeDisabled();
   });
 
   describe('predicting steps', () => {
@@ -1014,12 +1014,12 @@ describe('<Wizard />', () => {
         />
       );
 
-      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.textContent)).toEqual([FIRST_TITLE]);
+      expect([...container.getElementsByClassName('pf-v5-c-wizard__nav-link')].map((e) => e.textContent)).toEqual([FIRST_TITLE]);
 
       await userEvent.type(screen.getByLabelText('source_type'), 'aws');
       await userEvent.click(screen.getByText('Next'));
 
-      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.textContent)).toEqual([
+      expect([...container.getElementsByClassName('pf-v5-c-wizard__nav-link')].map((e) => e.textContent)).toEqual([
         FIRST_TITLE,
         SECOND_TITLE_AWS,
         THIRD_TITLE,
@@ -1041,7 +1041,7 @@ describe('<Wizard />', () => {
       await userEvent.click(screen.getByText('Next'));
       await userEvent.click(screen.getByText('Back'));
 
-      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, true, true]);
+      expect([...container.getElementsByClassName('pf-v5-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, true, true]);
     });
 
     it('disable nav when jumped into compileMapper step from invalid step', async () => {
@@ -1100,12 +1100,12 @@ describe('<Wizard />', () => {
 
       await userEvent.type(screen.getByLabelText('source_type'), 'aws');
       await userEvent.click(screen.getByText('Next'));
-      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, false]);
+      expect([...container.getElementsByClassName('pf-v5-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, false]);
 
       await userEvent.type(screen.getByLabelText('aws'), '{backspace}');
       await userEvent.click(screen.getByText('Back'));
 
-      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, true]);
+      expect([...container.getElementsByClassName('pf-v5-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, true]);
     });
 
     it('disable nav when jumped into step with function nextStep', async () => {
@@ -1166,11 +1166,11 @@ describe('<Wizard />', () => {
       await userEvent.type(screen.getByLabelText('source_type'), 'aws');
       await userEvent.click(screen.getByText('Next'));
 
-      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, false]);
+      expect([...container.getElementsByClassName('pf-v5-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, false]);
 
       await userEvent.click(screen.getByText('Back'));
 
-      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, true]);
+      expect([...container.getElementsByClassName('pf-v5-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, true]);
 
       const firstArgumentOfLastNextStepCall = NEXTSTEP_FUNCTION.mock.calls[NEXTSTEP_FUNCTION.mock.calls.length - 1][0];
       expect(firstArgumentOfLastNextStepCall).toEqual({ values: EXPECTED_VALUES });
@@ -1227,11 +1227,11 @@ describe('<Wizard />', () => {
       await userEvent.type(screen.getByLabelText('source_type'), 'aws');
       await userEvent.click(screen.getByText('Next'));
 
-      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, false]);
+      expect([...container.getElementsByClassName('pf-v5-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, false]);
 
       await userEvent.click(screen.getByText('Back'));
 
-      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, true]);
+      expect([...container.getElementsByClassName('pf-v5-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, true]);
     });
 
     it('crossroads variable predicts in realtime', async () => {
@@ -1279,13 +1279,13 @@ describe('<Wizard />', () => {
 
       const { container } = render(<FormRenderer {...initialProps} schema={wizardSchema} />);
 
-      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false]);
-      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.textContent)).toEqual(['first-step']);
+      expect([...container.getElementsByClassName('pf-v5-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false]);
+      expect([...container.getElementsByClassName('pf-v5-c-wizard__nav-link')].map((e) => e.textContent)).toEqual(['first-step']);
 
       await userEvent.type(screen.getByLabelText('source_type'), 'aws');
 
-      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, true, true]);
-      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.textContent)).toEqual([
+      expect([...container.getElementsByClassName('pf-v5-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, true, true]);
+      expect([...container.getElementsByClassName('pf-v5-c-wizard__nav-link')].map((e) => e.textContent)).toEqual([
         'first-step',
         'second-step',
         'summary',
@@ -1295,25 +1295,25 @@ describe('<Wizard />', () => {
       await userEvent.type(screen.getByLabelText('source_type'), 'google');
 
       // predict steps for google
-      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, true]);
-      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.textContent)).toEqual(['first-step', 'summary']);
+      expect([...container.getElementsByClassName('pf-v5-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, true]);
+      expect([...container.getElementsByClassName('pf-v5-c-wizard__nav-link')].map((e) => e.textContent)).toEqual(['first-step', 'summary']);
 
       await userEvent.click(screen.getByText('Next'));
 
-      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, false]);
-      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.textContent)).toEqual(['first-step', 'summary']);
+      expect([...container.getElementsByClassName('pf-v5-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, false]);
+      expect([...container.getElementsByClassName('pf-v5-c-wizard__nav-link')].map((e) => e.textContent)).toEqual(['first-step', 'summary']);
 
       // click on first nav link
       await userEvent.click(screen.getByText('first-step'));
       // keep the second step enabled
-      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, false]);
-      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.textContent)).toEqual(['first-step', 'summary']);
+      expect([...container.getElementsByClassName('pf-v5-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, false]);
+      expect([...container.getElementsByClassName('pf-v5-c-wizard__nav-link')].map((e) => e.textContent)).toEqual(['first-step', 'summary']);
 
       await userEvent.clear(screen.getByLabelText('source_type'));
       await userEvent.type(screen.getByLabelText('source_type'), 'aws');
 
-      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, true, true]);
-      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.textContent)).toEqual([
+      expect([...container.getElementsByClassName('pf-v5-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, true, true]);
+      expect([...container.getElementsByClassName('pf-v5-c-wizard__nav-link')].map((e) => e.textContent)).toEqual([
         'first-step',
         'second-step',
         'summary',
@@ -1322,8 +1322,8 @@ describe('<Wizard />', () => {
       await userEvent.clear(screen.getByLabelText('source_type'));
       await userEvent.type(screen.getByLabelText('source_type'), 'google');
 
-      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, true]);
-      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.textContent)).toEqual(['first-step', 'summary']);
+      expect([...container.getElementsByClassName('pf-v5-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, true]);
+      expect([...container.getElementsByClassName('pf-v5-c-wizard__nav-link')].map((e) => e.textContent)).toEqual(['first-step', 'summary']);
     });
 
     it('crossroads variable predicts in realtime - disableForwardJumping', async () => {
@@ -1372,24 +1372,24 @@ describe('<Wizard />', () => {
 
       const { container } = render(<FormRenderer {...initialProps} schema={wizardSchema} />);
 
-      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false]);
-      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.textContent)).toEqual(['first-step']);
+      expect([...container.getElementsByClassName('pf-v5-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false]);
+      expect([...container.getElementsByClassName('pf-v5-c-wizard__nav-link')].map((e) => e.textContent)).toEqual(['first-step']);
 
       await userEvent.clear(screen.getByLabelText('source_type'));
       await userEvent.type(screen.getByLabelText('source_type'), 'google');
 
-      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, true]);
-      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.textContent)).toEqual(['first-step', 'summary']);
+      expect([...container.getElementsByClassName('pf-v5-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, true]);
+      expect([...container.getElementsByClassName('pf-v5-c-wizard__nav-link')].map((e) => e.textContent)).toEqual(['first-step', 'summary']);
 
       await userEvent.click(screen.getByText('Next'));
 
-      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, false]);
-      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.textContent)).toEqual(['first-step', 'summary']);
+      expect([...container.getElementsByClassName('pf-v5-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, false]);
+      expect([...container.getElementsByClassName('pf-v5-c-wizard__nav-link')].map((e) => e.textContent)).toEqual(['first-step', 'summary']);
 
       await userEvent.click(screen.getByText('first-step'));
 
-      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, true]);
-      expect([...container.getElementsByClassName('pf-c-wizard__nav-link')].map((e) => e.textContent)).toEqual(['first-step', 'summary']);
+      expect([...container.getElementsByClassName('pf-v5-c-wizard__nav-link')].map((e) => e.disabled)).toEqual([false, true]);
+      expect([...container.getElementsByClassName('pf-v5-c-wizard__nav-link')].map((e) => e.textContent)).toEqual(['first-step', 'summary']);
     });
   });
 

@@ -6,7 +6,22 @@ const mapper = {
   TextVariants: 'Text',
   ButtonVariant: 'Button',
   TextListVariants: 'TextList',
-  TextListItemVariants: 'TextListItem'
+  TextListItemVariants: 'TextListItem',
+  FlexItem: 'Flex',
+  FormFieldGroup: 'Form',
+  FormFieldGroupHeader: 'Form',
+  FormHelperText: 'Form',
+  FormGroup: 'Form',
+  GridItem: 'Grid',
+  TextContent: 'Text',
+  HelperTextItem: 'HelperText',
+  ActionGroup: 'Form',
+  Tab: 'Tabs',
+  TabTitleText: 'Tabs',
+  WizardNavItem: 'Wizard',
+  WizardNav: 'Wizard',
+  WizardBody: 'Wizard',
+  WizardHeader: 'Wizard'
 };
 
 const blueprintMapper = {
@@ -93,7 +108,7 @@ const createPfReactTransform = (env) => [
       transform: (importName) => {
         let res;
         const files = glob.sync(
-          path.resolve(__dirname, `../{..,pf4-component-mapper}//node_modules/@patternfly/react-core/dist/${env}/**/${mapper[importName] || importName}.js`)
+          path.resolve(__dirname, `../{..,pf4-component-mapper}//node_modules/@patternfly/react-core/dist/dynamic/**/${mapper[importName] || importName}`)
         );
         if (files.length > 0) {
           res = files[0];
@@ -110,7 +125,7 @@ const createPfReactTransform = (env) => [
     },
     '@patternfly/react-icons': {
       transform: (importName) =>
-        `@patternfly/react-icons/dist/${env}/icons/${importName
+        `@patternfly/react-icons/dist/dynamic/icons/${importName
           .split(/(?=[A-Z])/)
           .join('-')
           .toLowerCase()}`,

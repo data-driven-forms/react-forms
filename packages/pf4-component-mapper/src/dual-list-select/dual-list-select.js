@@ -51,7 +51,9 @@ const DualList = (props) => {
       .filter((option) => (typeof option === 'object' ? value.includes(option.value) : value.includes(option)))
       .map((option) => option.label || option);
 
-    onListChange = (_newLeft, newRight) => input.onChange(newRight);
+    onListChange = (_e, _newLeft, newRight) => {
+      input.onChange(newRight);
+    };
 
     filterOption = (option, input) => (option.value ? option.value.includes(input) : option.includes(input));
   } else {
@@ -63,7 +65,9 @@ const DualList = (props) => {
       .filter((option) => (option.value ? value.includes(option.value) : value.includes(getValueFromNode(option))))
       .map((option) => option.label || option);
 
-    onListChange = (_newLeft, newRight) => input.onChange(newRight?.map(getValueFromNode));
+    onListChange = (_e, _newLeft, newRight) => {
+      input.onChange(newRight?.map(getValueFromNode));
+    };
 
     filterOption = (option, input) => (option.value ? option.value.includes(input) : getValueFromNode(option).includes(input));
   }
