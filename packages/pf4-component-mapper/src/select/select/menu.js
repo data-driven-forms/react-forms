@@ -84,7 +84,7 @@ const MenuPortal = ({ selectToggleRef, menuPortalTarget, children }) => {
   const portalDiv = (
     <div
       ref={menuRef}
-      className="pf-c-select ddorg_pf4-component-mapper__select-portal-menu"
+      className="pf-v5-c-select ddorg_pf4-component-mapper__select-portal-menu"
       style={{
         zIndex: 401,
         position: 'absolute',
@@ -138,7 +138,7 @@ const Menu = ({
   };
 
   const menuItems = (
-    <ul className={`pf-c-select__menu${menuIsPortal ? ' ddorg__pf4-component-mapper__select-menu-portal' : ''}`}>
+    <ul className={`pf-v5-c-select__menu${menuIsPortal ? ' ddorg__pf4-component-mapper__select-menu-portal' : ''}`}>
       {filteredOptions.length === 0 && (
         <EmptyOption
           isSearchable={isSearchable}
@@ -151,15 +151,15 @@ const Menu = ({
       {filteredOptions.map((item, arrayIndex) => {
         if (item.options) {
           return (
-            <div className="pf-c-select__menu-group" key={`group-${arrayIndex}`}>
-              <div className="pf-c-select__menu-group-title">{item.label}</div>
+            <div className="pf-v5-c-select__menu-group" key={`group-${arrayIndex}`}>
+              <div className="pf-v5-c-select__menu-group-title">{item.label}</div>
               {item.options.map((nestedItem) => createOption(nestedItem))}
             </div>
           );
         }
 
         if (item.divider) {
-          return <hr className="pf-c-divider" key={`divider-${index}`} />;
+          return <hr className="pf-v5-c-divider" key={`divider-${index}`} />;
         }
 
         return createOption(item);

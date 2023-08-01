@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '@patternfly/react-styles/css/components/TextInputGroup/text-input-group.css';
 
 import './input.css';
 
@@ -23,21 +24,23 @@ const Input = ({ inputRef, isSearchable, isDisabled, getInputProps, value, ...pr
   const inputProps = getInputProps({ disabled: isDisabled });
   const initialInputValue = getInputString(inputProps.value, value);
   return (
-    <input
-      value=""
-      {...props}
-      className="pf-c-form-control pf-c-select__toggle-typeahead"
-      ref={inputRef}
-      {...{
-        ...inputProps,
-        value: initialInputValue,
-        onKeyDown: (event, ...args) => {
-          event.stopPropagation();
-          inputProps.onKeyDown(event, ...args);
-        },
-        onChange: inputProps.onChange || Function,
-      }}
-    />
+    <div className="ddorg__pf4-component-mapper__select-input-wrapper pf-v5-c-text-input-group pf-m-typeahead">
+      <input
+        value=""
+        {...props}
+        className="pf-v5-c-text-input-group__text-input"
+        ref={inputRef}
+        {...{
+          ...inputProps,
+          value: initialInputValue,
+          onKeyDown: (event, ...args) => {
+            event.stopPropagation();
+            inputProps.onKeyDown(event, ...args);
+          },
+          onChange: inputProps.onChange || Function,
+        }}
+      />
+    </div>
   );
 };
 

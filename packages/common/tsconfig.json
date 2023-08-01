@@ -10,7 +10,7 @@
     "noErrorTruncation": true,
     "allowJs": true,
     "strict": true,
-    "noEmit": true,
+    "noEmit": true
   },
   "include": ["./src/**/*.ts", "./src/**/*.tsx", "./src/**/*.js"],
   "exclude": ["./dist"]

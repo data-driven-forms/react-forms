@@ -52,10 +52,10 @@ describe('Tabs component', () => {
       </RenderWithProvider>
     );
 
-    expect(screen.getByText('cosiTitle').closest('.pf-c-tabs__item')).toHaveClass('pf-m-current');
+    expect(screen.getByText('cosiTitle').closest('.pf-v5-c-tabs__item')).toHaveClass('pf-m-current');
 
     await userEvent.click(screen.getByText('cosiTitle2'));
 
-    expect(screen.getByText('cosiTitle2').closest('.pf-c-tabs__item')).toHaveClass('pf-m-current');
+    expect(screen.getByText('cosiTitle2').closest('.pf-v5-c-tabs__item')).toHaveClass('pf-m-current');
   });
 });

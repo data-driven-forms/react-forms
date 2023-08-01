@@ -95,7 +95,7 @@ const WizardInternal = ({
     <Modal inModal={inModal} container={state.container} aria-labelledby={rest.name} {...ModalProps}>
       <div
         tabIndex={inModal ? 0 : null}
-        className={`pf-c-wizard ${inModal ? '' : 'no-shadow'} ddorg__pf4-component-mapper__wizard ${className ? className : ''}`}
+        className={`pf-v5-c-wizard ${inModal ? '' : 'no-shadow'} ddorg__pf4-component-mapper__wizard ${className ? className : ''}`}
         role="dialog"
         aria-modal={inModal ? 'true' : undefined}
         onKeyDown={(e) => {
@@ -118,8 +118,8 @@ const WizardInternal = ({
           />
         )}
         <WizardToggle activeStepIndex={activeStepIndex} currentStep={currentStep} navSchema={navSchema} isOpen={state.openNav} dispatch={dispatch} />
-        <div className="pf-c-wizard__outer-wrap">
-          <div className="pf-c-wizard__inner-wrap">
+        <div className="pf-v5-c-wizard__outer-wrap">
+          <div className="pf-v5-c-wizard__inner-wrap">
             <WizardNav aria-label={navAriaLabel} isOpen={state.openNav}>
               <FormSpy subscription={{ values: true, valid: true, validating: true }}>
                 {({ values, valid, validating }) => (

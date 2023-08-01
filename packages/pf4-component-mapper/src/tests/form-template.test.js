@@ -17,7 +17,7 @@ describe('Layout mapper', () => {
       </ButtonGroup>
     );
 
-    expect(screen.getByText('some label', { selector: 'button' }).closest('.pf-c-form__actions')).toBeInTheDocument();
+    expect(screen.getByText('some label', { selector: 'button' }).closest('.pf-v5-c-form__actions')).toBeInTheDocument();
   });
 
   it('should return PF4 Title', () => {

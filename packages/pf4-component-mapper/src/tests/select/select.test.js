@@ -57,7 +57,7 @@ describe('<Select />', () => {
     await userEvent.click(screen.getByLabelText('open menu'));
     await userEvent.click(screen.getByText('Translated'));
 
-    expect(screen.getByText('Translated', { selector: 'h1' }).closest('.pf-c-select__toggle-text')).toBeInTheDocument();
+    expect(screen.getByText('Translated', { selector: 'h1' }).closest('.pf-v5-c-select__toggle-text')).toBeInTheDocument();
   });
 
   it('should render description', async () => {
@@ -134,10 +134,10 @@ describe('<Select />', () => {
 
     await userEvent.click(screen.getByLabelText('open menu'));
 
-    expect(screen.getByText('Category 1')).toHaveClass('pf-c-select__menu-group-title');
-    expect(screen.getByText('Category 2')).toHaveClass('pf-c-select__menu-group-title');
-    expect(container.getElementsByClassName('pf-c-divider')).toHaveLength(3);
-    expect([...container.getElementsByClassName('pf-c-select__menu-item')].map((opt) => opt.textContent)).toEqual([
+    expect(screen.getByText('Category 1')).toHaveClass('pf-v5-c-select__menu-group-title');
+    expect(screen.getByText('Category 2')).toHaveClass('pf-v5-c-select__menu-group-title');
+    expect(container.getElementsByClassName('pf-v5-c-divider')).toHaveLength(3);
+    expect([...container.getElementsByClassName('pf-v5-c-select__menu-item')].map((opt) => opt.textContent)).toEqual([
       'value 1',
       'value 2',
       'independent 1',
@@ -150,7 +150,7 @@ describe('<Select />', () => {
 
     await userEvent.click(screen.getByLabelText('open menu'));
 
-    expect(screen.getByText('value 1', { selector: 'button.pf-c-select__menu-item' })).toHaveClass('pf-m-selected');
+    expect(screen.getByText('value 1', { selector: 'button.pf-v5-c-select__menu-item' })).toHaveClass('pf-m-selected');
 
     await userEvent.click(screen.getByText('Submit'));
 
@@ -200,11 +200,11 @@ describe('<Select />', () => {
     await userEvent.click(screen.getByLabelText('open menu'));
 
     await userEvent.type(screen.getByPlaceholderText('Choose...'), 'value');
-    expect(screen.getByText('Category 1')).toHaveClass('pf-c-select__menu-group-title');
-    expect(screen.getByText('Category 2')).toHaveClass('pf-c-select__menu-group-title');
-    expect(container.getElementsByClassName('pf-c-divider')).toHaveLength(0);
+    expect(screen.getByText('Category 1')).toHaveClass('pf-v5-c-select__menu-group-title');
+    expect(screen.getByText('Category 2')).toHaveClass('pf-v5-c-select__menu-group-title');
+    expect(container.getElementsByClassName('pf-v5-c-divider')).toHaveLength(0);
 
-    expect([...container.getElementsByClassName('pf-c-select__menu-item')].map((opt) => opt.textContent)).toEqual([
+    expect([...container.getElementsByClassName('pf-v5-c-select__menu-item')].map((opt) => opt.textContent)).toEqual([
       'value 1',
       'value 2',
       'value 3',
@@ -213,10 +213,13 @@ describe('<Select />', () => {
 
     await userEvent.clear(screen.getByPlaceholderText('Choose...'));
     await userEvent.type(screen.getByPlaceholderText('Choose...'), 'independent');
-    expect(container.getElementsByClassName('pf-c-divider')).toHaveLength(0);
-    expect(container.getElementsByClassName('pf-c-select__menu-group-title')).toHaveLength(0);
+    expect(container.getElementsByClassName('pf-v5-c-divider')).toHaveLength(0);
+    expect(container.getElementsByClassName('pf-v5-c-select__menu-group-title')).toHaveLength(0);
 
-    expect([...container.getElementsByClassName('pf-c-select__menu-item')].map((opt) => opt.textContent)).toEqual(['independent 1', 'independent 2']);
+    expect([...container.getElementsByClassName('pf-v5-c-select__menu-item')].map((opt) => opt.textContent)).toEqual([
+      'independent 1',
+      'independent 2',
+    ]);
   });
 
   it('should return single simple value', async () => {
@@ -244,7 +247,7 @@ describe('<Select />', () => {
     render(<Select {...initialProps} value={value} isMulti onChange={onChange} closeMenuOnSelect={false} />);
 
     await userEvent.click(screen.getByLabelText('open menu'));
-    await userEvent.click(screen.getByText('First option', { selector: '.pf-c-select__menu-item' }));
+    await userEvent.click(screen.getByText('First option', { selector: '.pf-v5-c-select__menu-item' }));
     await userEvent.click(screen.getByText('Second option'));
 
     expect(onChange).toHaveBeenCalledTimes(2);
@@ -258,7 +261,7 @@ describe('<Select />', () => {
     render(<Select {...initialProps} value={value} simpleValue={false} isMulti onChange={onChange} closeMenuOnSelect={false} />);
 
     await userEvent.click(screen.getByLabelText('open menu'));
-    await userEvent.click(screen.getByText('First option', { selector: '.pf-c-select__menu-item' }));
+    await userEvent.click(screen.getByText('First option', { selector: '.pf-v5-c-select__menu-item' }));
     await userEvent.click(screen.getByText('Second option'));
 
     expect(onChange).toHaveBeenCalledTimes(2);
@@ -280,12 +283,12 @@ describe('<Select />', () => {
     ];
     const { container } = render(<Select {...initialProps} options={options} value={value} isMulti closeMenuOnSelect={false} />);
 
-    expect(container.querySelectorAll('.pf-c-chip-group')).toHaveLength(1);
-    expect(container.querySelectorAll('div.pf-c-chip')).toHaveLength(3);
+    expect(container.querySelectorAll('.pf-v5-c-chip-group')).toHaveLength(1);
+    expect(container.querySelectorAll('div.pf-v5-c-chip')).toHaveLength(3);
 
     await userEvent.click(screen.getByText('1 more'));
 
-    expect(container.querySelectorAll('div.pf-c-chip')).toHaveLength(4);
+    expect(container.querySelectorAll('div.pf-v5-c-chip')).toHaveLength(4);
   });
 
   it('should call on change when removing chip', async () => {
@@ -345,7 +348,7 @@ describe('<Select />', () => {
     );
 
     await userEvent.click(screen.getByLabelText('open menu'));
-    await waitFor(() => expect(screen.getByText('label', { selector: '.pf-c-select__menu-item' })).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText('label', { selector: '.pf-v5-c-select__menu-item' })).toBeInTheDocument());
 
     expect(onChange).toHaveBeenCalledWith(['123']);
   });
@@ -367,7 +370,7 @@ describe('<Select />', () => {
     );
 
     await userEvent.click(screen.getByLabelText('open menu'));
-    await waitFor(() => expect(screen.getByText('label', { selector: '.pf-c-select__menu-item' })).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText('label', { selector: '.pf-v5-c-select__menu-item' })).toBeInTheDocument());
 
     expect(onChange).toHaveBeenCalledWith([{ label: 'label', value: '123' }]);
   });
@@ -407,13 +410,13 @@ describe('<Select />', () => {
 
       await userEvent.click(screen.getByLabelText('open menu'));
 
-      expect([...container.getElementsByClassName('pf-c-select__menu-item')].map((opt) => opt.textContent)).toEqual(
+      expect([...container.getElementsByClassName('pf-v5-c-select__menu-item')].map((opt) => opt.textContent)).toEqual(
         initialProps.options.map((opt) => opt.label)
       );
 
       rerender(<Select {...initialProps} options={NEW_OPTIONS} />);
 
-      expect([...container.getElementsByClassName('pf-c-select__menu-item')].map((opt) => opt.textContent)).toEqual(
+      expect([...container.getElementsByClassName('pf-v5-c-select__menu-item')].map((opt) => opt.textContent)).toEqual(
         NEW_OPTIONS.map((opt) => opt.label)
       );
     });
@@ -423,7 +426,7 @@ describe('<Select />', () => {
 
       await userEvent.click(screen.getByLabelText('open menu'));
 
-      expect([...container.getElementsByClassName('pf-c-select__menu-item')].map((opt) => opt.textContent)).toEqual(
+      expect([...container.getElementsByClassName('pf-v5-c-select__menu-item')].map((opt) => opt.textContent)).toEqual(
         initialProps.options.map((opt) => opt.label)
       );
 
@@ -431,7 +434,7 @@ describe('<Select />', () => {
         rerender(<Select {...initialProps} loadOptions={asyncLoadingNew} />);
       });
 
-      expect([...container.getElementsByClassName('pf-c-select__menu-item')].map((opt) => opt.textContent)).toEqual(
+      expect([...container.getElementsByClassName('pf-v5-c-select__menu-item')].map((opt) => opt.textContent)).toEqual(
         NEW_OPTIONS.map((opt) => opt.label)
       );
     });

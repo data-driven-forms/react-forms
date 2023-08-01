@@ -16,7 +16,7 @@ const ValueContainer = ({ value, isMulti, placeholder, getInputProps, isSearchab
     return <Input placeholder={placeholder} inputRef={inputRef} getInputProps={getInputProps} value={value} />;
   }
 
-  return <span className="pf-c-select__toggle-text">{value || placeholder}</span>;
+  return <span className="pf-v5-c-select__toggle-text">{value || placeholder}</span>;
 };
 
 ValueContainer.propTypes = {

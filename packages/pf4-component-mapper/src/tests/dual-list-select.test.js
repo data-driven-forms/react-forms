@@ -257,7 +257,7 @@ describe('DualListSelect', () => {
         };
 
         const { container } = render(<FormRenderer {...initialProps} schema={schema} />);
-        expect([...container.getElementsByClassName('pf-c-dual-list-selector__item-text')].map((e) => e.textContent)).toEqual([
+        expect([...container.getElementsByClassName('pf-v5-c-dual-list-selector__item-text')].map((e) => e.textContent)).toEqual([
           'cats',
           'cats_1',
           'cats_2',
@@ -267,7 +267,7 @@ describe('DualListSelect', () => {
 
         await userEvent.click(screen.getByLabelText('sort-options'));
 
-        expect([...container.getElementsByClassName('pf-c-dual-list-selector__item-text')].map((e) => e.textContent)).toEqual([
+        expect([...container.getElementsByClassName('pf-v5-c-dual-list-selector__item-text')].map((e) => e.textContent)).toEqual([
           'zebras',
           'pigeons',
           'cats_2',
@@ -277,7 +277,7 @@ describe('DualListSelect', () => {
 
         await userEvent.click(screen.getByLabelText('sort-options'));
 
-        expect([...container.getElementsByClassName('pf-c-dual-list-selector__item-text')].map((e) => e.textContent)).toEqual([
+        expect([...container.getElementsByClassName('pf-v5-c-dual-list-selector__item-text')].map((e) => e.textContent)).toEqual([
           'cats',
           'cats_1',
           'cats_2',
@@ -310,7 +310,7 @@ describe('DualListSelect', () => {
           />
         );
 
-        expect([...container.getElementsByClassName('pf-c-dual-list-selector__item-text')].map((e) => e.textContent)).toEqual([
+        expect([...container.getElementsByClassName('pf-v5-c-dual-list-selector__item-text')].map((e) => e.textContent)).toEqual([
           'cats',
           'cats_1',
           'cats_2',
@@ -320,7 +320,7 @@ describe('DualListSelect', () => {
 
         await userEvent.click(screen.getByLabelText('sort-values'));
 
-        expect([...container.getElementsByClassName('pf-c-dual-list-selector__item-text')].map((e) => e.textContent)).toEqual([
+        expect([...container.getElementsByClassName('pf-v5-c-dual-list-selector__item-text')].map((e) => e.textContent)).toEqual([
           'zebras',
           'pigeons',
           'cats_2',
@@ -330,7 +330,7 @@ describe('DualListSelect', () => {
 
         await userEvent.click(screen.getByLabelText('sort-values'));
 
-        expect([...container.getElementsByClassName('pf-c-dual-list-selector__item-text')].map((e) => e.textContent)).toEqual([
+        expect([...container.getElementsByClassName('pf-v5-c-dual-list-selector__item-text')].map((e) => e.textContent)).toEqual([
           'cats',
           'cats_1',
           'cats_2',
