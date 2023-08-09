@@ -73,7 +73,7 @@ export const dependencies = {
   '@data-driven-forms/mui-component-mapper': 'latest',
   '@data-driven-forms/common': 'latest',
   '@mui/icons-material': 'latest',
-  '@mui/x-date-pickers': 'latest',
+  '@mui/x-date-pickers': '^5.0.20',
   '@mui/material': 'latest',
   'prop-types': 'latest',
 };
