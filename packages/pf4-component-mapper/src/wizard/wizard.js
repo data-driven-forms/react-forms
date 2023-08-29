@@ -97,7 +97,7 @@ const WizardInternal = ({
       container={state.container}
       aria-labelledby={rest.name}
       {...ModalProps}
-      className={inModal ? ` pf-v5-c-wizard${ModalProps.className || ''}` : ModalProps.className}
+      className={inModal ? `pf-v5-c-form${ModalProps.className || ''}` : ModalProps.className}
     >
       <div
         tabIndex={inModal ? 0 : null}
