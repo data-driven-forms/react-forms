@@ -92,7 +92,13 @@ const WizardInternal = ({
   }
 
   return (
-    <Modal inModal={inModal} container={state.container} aria-labelledby={rest.name} {...ModalProps}>
+    <Modal
+      inModal={inModal}
+      container={state.container}
+      aria-labelledby={rest.name}
+      {...ModalProps}
+      className={inModal ? ` pf-v5-c-wizard${ModalProps.className || ''}` : ModalProps.className}
+    >
       <div
         tabIndex={inModal ? 0 : null}
         className={`pf-v5-c-wizard ${inModal ? '' : 'no-shadow'} ddorg__pf4-component-mapper__wizard ${className ? className : ''}`}
