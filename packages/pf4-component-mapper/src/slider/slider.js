@@ -19,7 +19,7 @@ const Slider = (props) => {
       id={id || input.name}
       FormGroupProps={FormGroupProps}
     >
-      <PF4Slider onChange={input.onChange} onValueChange={input.onChange} currentValue={input.value} inputValue={input.value} {...rest} />
+      <PF4Slider onChange={input.onChange} value={input.value} inputValue={input.value} isDisabled={isDisabled || isReadOnly} {...rest} />
     </FormGroup>
   );
 };
