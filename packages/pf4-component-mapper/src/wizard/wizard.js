@@ -117,7 +117,7 @@ const WizardInternal = ({
             title={title}
             description={description}
             onClose={formOptions.onCancel}
-            hideClose={hideClose}
+            isCloseHidden={hideClose}
             titleId={titleId}
             descriptionId={descriptionId}
             closeButtonAriaLabel={closeButtonAriaLabel}
@@ -126,7 +126,7 @@ const WizardInternal = ({
         <WizardToggle activeStepIndex={activeStepIndex} currentStep={currentStep} navSchema={navSchema} isOpen={state.openNav} dispatch={dispatch} />
         <div className="pf-v5-c-wizard__outer-wrap">
           <div className="pf-v5-c-wizard__inner-wrap">
-            <WizardNav aria-label={navAriaLabel} isOpen={state.openNav}>
+            <WizardNav aria-label={navAriaLabel} isExpanded={state.openNav}>
               <FormSpy subscription={{ values: true, valid: true, validating: true }}>
                 {({ values, valid, validating }) => (
                   <WizardNavigation

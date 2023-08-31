@@ -26,9 +26,8 @@ const TextField = (props) => {
         {...rest}
         id={id || input.name}
         isRequired={isRequired}
-        isReadOnly={isReadOnly}
         isDisabled={isDisabled}
-        readOnly={isReadOnly}
+        readOnlyVariant={isReadOnly ? 'default' : undefined}
       />
     </FormGroup>
   );

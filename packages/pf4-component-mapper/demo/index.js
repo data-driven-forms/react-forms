@@ -77,10 +77,6 @@ class App extends React.Component {
             }}
             componentMapper={{
               ...componentMapper,
-              'dual-list-select': {
-                component: componentMapper['dual-list-select'],
-                renderStatus: ({ selected, options }) => `selected ${selected} from ${options}`,
-              },
               summary: Summary,
             }}
             FormTemplate={(props) => <FormTemplate {...props} showFormControls={this.state.additionalOptions.showFormControls} />}
