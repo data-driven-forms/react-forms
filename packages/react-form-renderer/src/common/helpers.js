@@ -7,22 +7,28 @@ export const TO_STRING = {}.toString;
 
 const isObject = (obj) => typeof obj === 'object' && TO_STRING.call(obj) === '[object Object]' && obj !== null;
 
-const stringify = (args) => {
-  let arr = [];
-  let value;
-  let options = args;
-  if (typeof options === 'number') {
-    options = options.toString();
+const stringify = (value) => {
+  if (value === null) {
+    return 'null';
   }
 
-  for (let k in options) {
-    if (HAS_PROP.call(options, k)) {
-      value = options[k];
-      arr.push(k, isValidElement(value) ? stringify(value.props) : isObject(value) ? stringify(value) : value.toString());
-    }
+  if (typeof value === 'boolean') {
+    return value ? 'true' : 'false';
   }
 
-  return JSON.stringify(arr);
+  if (!value) {
+    return '';
+  }
+
+  if (typeof value === 'string') {
+    return value;
+  }
+
+  if (typeof value === 'number') {
+    return value.toString();
+  }
+
+  return JSON.stringify(value);
 };
 
 export const memoize = (func) => {
@@ -31,7 +37,7 @@ export const memoize = (func) => {
   }
 
   return (value, allValues, ...options) => {
-    const key = stringify(value, allValues);
+    const key = stringify(allValues);
     return HAS_PROP.call(func.cache, key) ? func.cache[key] : (func.cache[key] = func(value, allValues, ...options));
   };
 };
