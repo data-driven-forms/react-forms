@@ -6,7 +6,7 @@ import convertInitialValue from './convert-initial-value';
 import assignSpecialType from './assign-special-type';
 import componentTypes from '../component-types';
 import { prepareArrayValidator, getValidate } from './validator-helpers';
-import composeValidators from './compose-validators';
+import composeValidators from '../compose-validators';
 import isEqual from 'lodash/isEqual';
 import get from 'lodash/get';
 
