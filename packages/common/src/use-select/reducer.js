@@ -40,10 +40,16 @@ const reducer = (state, { type, payload, options = [], optionsTransformer }) => 
           ...payload,
         },
         options: optionsTransformer
-          ? optionsTransformer([...state.options, ...options.filter(({ value }) => !state.options.find((option) => option.value === value))])
-          : [...state.options, ...options.filter(({ value }) => !state.options.find((option) => option.value === value))],
+          ? optionsTransformer([
+              ...state.options,
+              ...options.filter(({ value }) => !state.options.find((option) => payload.compareValues(option.value, value))),
+            ])
+          : [...state.options, ...options.filter(({ value }) => !state.options.find((option) => payload.compareValues(option.value, value)))],
         ...(optionsTransformer && {
-          originalOptions: [...state.options, ...options.filter(({ value }) => !state.options.find((option) => option.value === value))],
+          originalOptions: [
+            ...state.options,
+            ...options.filter(({ value }) => !state.options.find((option) => payload.compareValues(option.value, value))),
+          ],
         }),
       };
     default:

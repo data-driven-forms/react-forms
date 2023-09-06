@@ -29,6 +29,7 @@ export interface SelectProps {
   SelectComponent?: React.ComponentType;
   noValueUpdates?: boolean;
   optionsTransformer?: (options: AnyObject[]) => option[];
+  compareValues?: (valueA: any, valueB: any) => boolean;
 }
 
 declare const Select: React.ComponentType<SelectProps>;

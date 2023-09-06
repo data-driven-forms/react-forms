@@ -4,6 +4,7 @@ import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import useSelect from '../use-select/use-select';
+import deepEqual from './deep-equal';
 
 const Select = ({
   invalid,
@@ -24,6 +25,7 @@ const Select = ({
   SelectComponent,
   noValueUpdates,
   optionsTransformer,
+  compareValues = deepEqual,
   ...props
 }) => {
   const {
@@ -44,6 +46,7 @@ const Select = ({
     pluckSingleValue,
     isMulti,
     simpleValue,
+    compareValues,
   });
 
   const renderNoOptionsMessage = () => (Object.values(state.promises).some((value) => value) ? () => updatingMessage : () => noOptionsMessage);
@@ -119,6 +122,7 @@ Select.propTypes = {
   SelectComponent: PropTypes.elementType.isRequired,
   noValueUpdates: PropTypes.bool,
   optionsTransformer: PropTypes.func,
+  compareValues: PropTypes.func,
 };
 
 Select.defaultProps = {
@@ -129,6 +133,7 @@ Select.defaultProps = {
   placeholder: 'Choose...',
   isSearchable: false,
   isClearable: false,
+  compareValues: deepEqual,
 };
 
 export default Select;

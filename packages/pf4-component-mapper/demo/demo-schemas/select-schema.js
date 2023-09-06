@@ -4,24 +4,24 @@ import componentTypes from '@data-driven-forms/react-form-renderer/component-typ
 const options = [
   {
     label: 'Morton',
-    value: 'Jenifer'
+    value: 'Jenifer',
   },
   {
     label: 'Vega',
-    value: 'Cervantes'
+    value: 'Cervantes',
   },
   {
     label: 'Gilbert',
-    value: 'Wallace'
+    value: 'Wallace',
   },
   {
     label: 'Jami',
-    value: 'Cecilia'
+    value: 'Cecilia',
   },
   {
     label: 'Ebony',
-    value: 'Kay'
-  }
+    value: 'Kay',
+  },
 ];
 
 const loadOptions = (inputValue = '') => {
@@ -37,7 +37,7 @@ const loadOptions = (inputValue = '') => {
 };
 
 const loadOptionsLong = (inputValue = '') => {
-  const options = [...Array(99)].map((_v, index) => ({ label: `${index}`, value: `${index}` }));
+  const options = [...Array(99)].map((_v, index) => ({ label: `${index}`, value: { index } }));
   return new Promise((res) =>
     setTimeout(() => {
       if (inputValue.length === 0) {
@@ -56,8 +56,12 @@ const selectSchema = {
       name: 'long-searchable-async-select',
       label: 'Long searchable async select',
       loadOptions: loadOptionsLong,
+      compareValues: (a, b) => {
+        console.log('Custom compare is beeing used.');
+        return a.value === b.value;
+      },
       isSearchable: true,
-      menuIsPortal: true
+      menuIsPortal: true,
     },
     {
       component: componentTypes.SELECT,
@@ -65,41 +69,41 @@ const selectSchema = {
       label: 'Simple portal select',
       options,
       isSearchable: true,
-      menuIsPortal: true
+      menuIsPortal: true,
     },
     {
       component: componentTypes.SELECT,
       name: 'simple-async-select',
       label: 'Simple async select',
-      loadOptions
+      loadOptions,
     },
     {
       component: componentTypes.SELECT,
       name: 'simple-searchable-async-select',
       label: 'Simple searchable async select',
       loadOptions,
-      isSearchable: true
+      isSearchable: true,
     },
     {
       component: componentTypes.SELECT,
       name: 'multi-async-select',
       label: 'multi async select',
       loadOptions,
-      isMulti: true
+      isMulti: true,
     },
     {
       component: componentTypes.SELECT,
       name: 'searchable-multi-async-select',
       label: 'Multi searchable async select',
       loadOptions,
-      isSearchable: true
+      isSearchable: true,
     },
     {
       component: componentTypes.SELECT,
       name: 'multi-simple-select',
       label: 'Simple multi select',
       options,
-      isMulti: true
+      isMulti: true,
     },
     {
       component: componentTypes.SELECT,
@@ -107,7 +111,7 @@ const selectSchema = {
       label: 'Searchable multi select',
       options,
       isMulti: true,
-      isSearchable: true
+      isSearchable: true,
     },
     {
       component: componentTypes.SELECT,
@@ -116,40 +120,40 @@ const selectSchema = {
       options,
       isMulti: true,
       isSearchable: true,
-      isClearable: true
+      isClearable: true,
     },
     {
       component: componentTypes.SELECT,
       name: 'simple-select',
       label: 'Simple-select',
-      options
+      options,
     },
     {
       component: componentTypes.SELECT,
       name: 'disabled-select',
       label: 'Disabled-select',
       options,
-      isDisabled: true
+      isDisabled: true,
     },
     {
       component: componentTypes.SELECT,
       name: 'clearable-select',
       label: 'Clearable-select',
       options,
-      isClearable: true
+      isClearable: true,
     },
     {
       component: componentTypes.SELECT,
       name: 'searchable-select',
       label: 'Clearable-select',
       options,
-      isSearchable: true
+      isSearchable: true,
     },
     {
       component: componentTypes.SELECT,
       name: 'dosbaled-option-select',
       label: 'Disabled-option-select',
-      options: [...options, { label: 'Disabled option', value: 'disabled', isDisabled: true }]
+      options: [...options, { label: 'Disabled option', value: 'disabled', isDisabled: true }],
     },
     {
       component: componentTypes.SELECT,
@@ -158,13 +162,13 @@ const selectSchema = {
       options: [
         {
           label: <span>None</span>,
-          key: 'none'
+          key: 'none',
         },
         {
           label: <span>Jack</span>,
-          value: 'jack'
-        }
-      ]
+          value: 'jack',
+        },
+      ],
     },
     {
       component: componentTypes.SELECT,
@@ -174,18 +178,18 @@ const selectSchema = {
       options: [
         {
           label: <span>Jack</span>,
-          value: 'jack'
+          value: 'jack',
         },
         {
           label: <span>Mary</span>,
-          value: 'Mary'
-        }
-      ]
-    }
-  ]
+          value: 'Mary',
+        },
+      ],
+    },
+  ],
 };
 
 export default {
   ...selectSchema,
-  fields: [selectSchema.fields[0]]
+  fields: [selectSchema.fields[0]],
 };

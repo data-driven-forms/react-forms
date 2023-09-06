@@ -3,6 +3,7 @@
 import React from 'react';
 import { render, screen, act, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import cloneDeep from 'lodash/cloneDeep';
 
 import { useFieldApi, FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 
@@ -501,7 +502,146 @@ describe('Select test', () => {
       jest.useRealTimers();
     });
 
-    it('initial values is not in options', async () => {
+    it('initial value is object', async () => {
+      const loadOptions = jest.fn().mockImplementation(() =>
+        Promise.resolve([
+          { value: { value: '111' }, label: 'first' },
+          { value: { value: '1111' }, label: 'second' },
+        ])
+      );
+      field = { ...field, loadOptions, options: [] };
+
+      await act(async () => {
+        render(
+          <FormRenderer
+            {...rendererProps}
+            schema={{
+              fields: [
+                {
+                  ...field,
+                  isMulti: true,
+                  isSearchable: true,
+                  isClearable: true,
+                  initialValue: [{ value: { value: '111' }, label: 'first' }],
+                  component: componentTypes.SELECT,
+                  name: 'select',
+                },
+              ],
+            }}
+          />
+        );
+      });
+
+      expect(inputValue).toEqual([{ value: { value: '111' }, label: 'first' }]);
+    });
+
+    describe('options compareValues', () => {
+      const loadOptions = jest.fn().mockImplementation(() =>
+        Promise.resolve([
+          { value: { value: '111' }, label: 'first' },
+          { value: { value: '1111' }, label: 'second' },
+          { value: { value: '3' }, label: 'third' },
+        ])
+      );
+
+      const customCompareField = {
+        ...field,
+        component: componentTypes.SELECT,
+        name: 'select',
+        loadOptions,
+        options: [],
+        isMulti: true,
+        isSearchable: true,
+        isClearable: true,
+      };
+
+      it('custom function compares options with object value', async () => {
+        await act(async () => {
+          render(
+            <FormRenderer
+              {...rendererProps}
+              schema={{
+                fields: [
+                  {
+                    ...customCompareField,
+                    compareValues: (a, b) => {
+                      return a.value.value === b.value.value;
+                    },
+                    initialValue: [{ value: { value: '111' }, label: 'first' }],
+                  },
+                ],
+              }}
+            />
+          );
+        });
+
+        expect(inputValue).toEqual([{ value: { value: '111' }, label: 'first' }]);
+      });
+
+      it('default function compares options with object value', async () => {
+        await act(async () => {
+          render(
+            <FormRenderer
+              {...rendererProps}
+              schema={{
+                fields: [
+                  {
+                    ...customCompareField,
+                    initialValue: [{ value: { value: '111' }, label: 'first' }],
+                  },
+                ],
+              }}
+            />
+          );
+        });
+
+        expect(inputValue).toEqual([{ value: { value: '111' }, label: 'first' }]);
+      });
+
+      it('default function logs an error for highly nested values ', async () => {
+        const consoleSpy = jest.spyOn(console, 'error').mockImplementationOnce(() => undefined);
+        const nestedOptions = {
+          label: 'Nested',
+          value: {
+            value: {
+              value: {
+                value: {
+                  value: {
+                    value: 'foo',
+                  },
+                },
+              },
+            },
+          },
+        };
+        const loadOptions = jest.fn().mockImplementation(() => Promise.resolve([{ ...nestedOptions }]));
+        await act(async () => {
+          render(
+            <FormRenderer
+              {...rendererProps}
+              schema={{
+                fields: [
+                  {
+                    ...customCompareField,
+                    loadOptions,
+                    initialValue: [cloneDeep(nestedOptions)],
+                  },
+                ],
+              }}
+            />
+          );
+        });
+
+        // Console error should be triggered for large object depth
+        expect(consoleSpy).toHaveBeenCalledWith('Recursion limit of 5 has been exceeded.');
+        // Should have no value because he options are not matched if the depth limit was exceeded
+        expect(inputValue).toEqual('');
+
+        consoleSpy.mockReset();
+      });
+    });
+
+    it('initial values are not in options', async () => {
       const loadOptions = jest.fn().mockImplementation(() =>
         Promise.resolve([
           { value: '111', label: 'first' },

@@ -13,6 +13,7 @@ interface UseSelectProps {
     pluckSingleValue?: boolean;
     isMulti?: boolean;
     simpleValue?: boolean;
+    compareValues?: (value1: any, value2: any) => any;
 }
 
 interface SelectState {
