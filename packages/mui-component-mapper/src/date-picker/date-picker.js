@@ -29,6 +29,18 @@ const DatePicker = (props) => {
   return (
     <FormFieldGrid {...FormFieldGridProps}>
       <MUIDatePicker
+        slotProps={{
+          textField: {
+            fullWidth: true,
+            margin: 'normal',
+            label,
+            helperText: invalid || ((meta.touched || validateOnMount) && meta.warning) || helperText || description,
+            placeholder,
+            required: isRequired,
+            error: !!invalid,
+          },
+        }}
+        // legacy version
         renderInput={(props) => (
           <TextField
             {...props}
