@@ -4,6 +4,14 @@ import Chip from '@mui/material/Chip';
 
 This mapper component is using the common select component to provide additional features.
 
+## compareValues
+
+*(optionValueA, optionValueB) => boolean*
+
+If the option values are not primitive types, this option can be used to compare the option values to properly identify selected option(s).
+
+> **__NOTE:__** By default, the select will run a `deepEqual` compare function. This function is expensive and will only compare 5 levels of the value. To improve performance or overcome this limit define custom `compareValues` prop.
+
 ## loadOptions
 
 *(currentSearchValue: string) => Promise< Options >*

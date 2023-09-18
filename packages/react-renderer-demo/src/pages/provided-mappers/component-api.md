@@ -67,6 +67,7 @@ Basic components that can change the form state (inputs) share common props. The
 |----|:--:|----------:|
 |placeholder|node/string|A placeholder|
 |options|array|Options in format of `{ label: 'Label', value: value }`|
+|compareValues|`func`|A custom function to compare select options `(valueA, valueB) => boolean`|
 |loadOptions|function|A function for loading a options asynchronously|
 |loadingMessage|node/string|A message which will shown as a placeholder during the loading|
 |simpleValue|boolean|Simple value (no isMulti)|

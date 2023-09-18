@@ -67,6 +67,7 @@ const useSelect = ({
   pluckSingleValue,
   isMulti,
   simpleValue,
+  compareValues,
 }) => {
   const [state, originalDispatch] = useReducer(reducer, { optionsTransformer, propsOptions }, init);
   const dispatch = (action) => originalDispatch({ ...action, optionsTransformer });
@@ -81,10 +82,12 @@ const useSelect = ({
         if (!noValueUpdates) {
           if (value && Array.isArray(value)) {
             const selectValue = value.filter((value) =>
-              typeof value === 'object' ? data.find((option) => value.value === option.value) : data.find((option) => value === option.value)
+              typeof value === 'object'
+                ? data.find((option) => compareValues(value.value, option.value))
+                : data.find((option) => compareValues(value, option.value))
             );
             onChange(selectValue.length === 0 ? undefined : selectValue);
-          } else if (value && !data.find(({ value: internalValue }) => internalValue === value)) {
+          } else if (value && !data.find(({ value: internalValue }) => compareValues(internalValue, value))) {
             onChange(undefined);
           }
         }
@@ -122,14 +125,14 @@ const useSelect = ({
 
   const onInputChange = (inputValue) => {
     if (inputValue && loadOptions && state.promises[inputValue] === undefined && isSearchable) {
-      dispatch({ type: 'setPromises', payload: { [inputValue]: true } });
+      dispatch({ type: 'setPromises', payload: { [inputValue]: true, compareValues } });
 
       loadOptions(inputValue)
         .then((options) => {
           if (isMounted.current) {
             dispatch({
               type: 'setPromises',
-              payload: { [inputValue]: false },
+              payload: { [inputValue]: false, compareValues },
               options,
             });
           }
