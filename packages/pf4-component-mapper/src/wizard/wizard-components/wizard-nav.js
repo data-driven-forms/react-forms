@@ -24,7 +24,7 @@ const WizardNavigationInternal = React.memo(
     <WizardNav>
       {navSchema
         .filter((field) => field.primary)
-        .map((step, ind) => {
+        .map((step) => {
           const substeps = step.substepOf && navSchema.filter((field) => field.substepOf === step.substepOf);
 
           const isValid = valid && !validating;
@@ -37,7 +37,7 @@ const WizardNavigationInternal = React.memo(
               isDisabled={isValid ? maxStepIndex < step.index : step.index > activeStepIndex}
               onClick={(e) => {
                 e.preventDefault();
-                jumpToStep(ind, isValid);
+                jumpToStep(step.index, isValid);
               }}
               step={step.index}
               type="button"
