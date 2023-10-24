@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 
-import { WizardNavItem, WizardNav } from '@patternfly/react-core';
+import { WizardNav, WizardNavItem } from '@patternfly/react-core';
 
 import isEqual from 'lodash/isEqual';
 import get from 'lodash/get';
@@ -21,7 +21,7 @@ const memoValues = (initialValue) => {
 
 const WizardNavigationInternal = React.memo(
   ({ navSchema, activeStepIndex, maxStepIndex, jumpToStep, valid, validating }) => (
-    <WizardNav>
+    <Fragment>
       {navSchema
         .filter((field) => field.primary)
         .map((step) => {
@@ -63,7 +63,7 @@ const WizardNavigationInternal = React.memo(
             </WizardNavItem>
           );
         })}
-    </WizardNav>
+    </Fragment>
   ),
   isEqual
 );
