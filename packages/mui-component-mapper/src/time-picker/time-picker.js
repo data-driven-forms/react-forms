@@ -38,6 +38,8 @@ const TimePicker = (props) => {
             placeholder,
             required: isRequired,
             error: !!invalid,
+            onBlur: input.onBlur,
+            onFocus: input.onFocus,
           },
         }}
         // legacy version
