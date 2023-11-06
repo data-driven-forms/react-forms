@@ -542,6 +542,46 @@ describe('parseCondition', () => {
       expect(whenSpyX).toHaveBeenCalledWith(field);
       expect(whenSpyY).toHaveBeenCalledWith(field);
     });
+
+    it('when is function in sequence', () => {
+      const whenSpy = jest.fn().mockImplementation(() => 'x');
+
+      condition = {
+        sequence: [
+          {
+            when: whenSpy,
+            is: 'yes',
+          },
+        ],
+      };
+
+      values = {
+        x: 'yes',
+      };
+
+      expect(parseCondition(condition, values, field)).toEqual({ ...positiveResult, sets: [] });
+      expect(whenSpy).toHaveBeenCalledWith(field);
+    });
+
+    it('when is function in not', () => {
+      const whenSpy = jest.fn().mockImplementation(() => 'x');
+
+      condition = {
+        not: [
+          {
+            when: whenSpy,
+            is: 'yes',
+          },
+        ],
+      };
+
+      values = {
+        x: 'yes',
+      };
+
+      expect(parseCondition(condition, values, field)).toEqual(negativeResult);
+      expect(whenSpy).toHaveBeenCalledWith(field);
+    });
   });
 
   it('simple condition - custom function', () => {
