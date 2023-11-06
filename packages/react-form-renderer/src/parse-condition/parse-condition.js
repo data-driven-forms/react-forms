@@ -71,7 +71,7 @@ export const parseCondition = (condition, values, field) => {
   if (condition.sequence) {
     return condition.sequence.reduce(
       (acc, curr) => {
-        const result = parseCondition(curr, values);
+        const result = parseCondition(curr, values, field);
 
         return {
           sets: [...acc.sets, ...(result.set ? [result.set] : [])],
@@ -90,7 +90,7 @@ export const parseCondition = (condition, values, field) => {
   }
 
   if (condition.not) {
-    return !parseCondition(condition.not, values).result ? positiveResult : negativeResult;
+    return !parseCondition(condition.not, values, field).result ? positiveResult : negativeResult;
   }
 
   const finalWhen = typeof condition.when === 'function' ? condition.when(field) : condition.when;
