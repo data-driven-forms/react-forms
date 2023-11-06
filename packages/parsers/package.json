@@ -1,6 +1,6 @@
 {
   "name": "@data-driven-forms/parsers",
-  "version": "3.21.9",
+  "version": "3.21.10",
   "description": "Parsers for Data Driven Forms.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
