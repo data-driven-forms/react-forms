@@ -45,6 +45,7 @@ const FormRenderer = ({
   clearedValue,
   clearOnUnmount,
   componentMapper,
+  conditionMapper = {},
   decorators,
   FormTemplate,
   FormTemplateProps,
@@ -148,6 +149,7 @@ const FormRenderer = ({
             componentMapper,
             validatorMapper: validatorMapperMerged,
             actionMapper,
+            conditionMapper,
             formOptions: {
               registerInputFile,
               unRegisterInputFile,
@@ -220,6 +222,9 @@ FormRenderer.propTypes = {
   initialValues: PropTypes.object,
   decorators: PropTypes.array,
   mutators: PropTypes.object,
+  conditionMapper: PropTypes.shape({
+    [PropTypes.string]: PropTypes.func,
+  }),
 };
 
 FormRenderer.defaultProps = {

@@ -126,6 +126,28 @@ describe('Default schema validator', () => {
     ).toThrowErrorMatchingSnapshot();
   });
 
+  it('should not fail if field condition is missing when key but has mapped attribute when.', () => {
+    expect(() =>
+      defaultSchemaValidator(
+        {
+          fields: [
+            {
+              component: 'foo',
+              name: 'foo',
+              condition: {
+                mappedAttributes: {
+                  when: ['whenMapped'],
+                },
+                is: 'bar',
+              },
+            },
+          ],
+        },
+        componentMapper
+      )
+    ).not.toThrow();
+  });
+
   it('should fail if field condition is missing is key.', () => {
     expect(() =>
       defaultSchemaValidator(

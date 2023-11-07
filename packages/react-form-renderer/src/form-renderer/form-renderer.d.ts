@@ -7,6 +7,7 @@ import { ActionMapper } from './action-mapper';
 import SchemaValidatorMapper from '../common-types/schema-validator-mapper';
 import { FormTemplateRenderProps } from '../common-types/form-template-render-props';
 import { NoIndex } from '../common-types/no-index';
+import { ConditionMapper } from './condition-mapper';
 
 export interface FormRendererProps<
   FormValues = Record<string, any>,
@@ -25,6 +26,7 @@ export interface FormRendererProps<
   FormTemplate?: ComponentType<FormTemplateProps> | FunctionComponent<FormTemplateProps>;
   validatorMapper?: ValidatorMapper;
   actionMapper?: ActionMapper;
+  conditionMapper?: ConditionMapper;
   schemaValidatorMapper?: SchemaValidatorMapper;
   FormTemplateProps?: Partial<FormTemplateProps>;
   children?: ReactNode | ((props: FormTemplateRenderProps) => ReactNode);

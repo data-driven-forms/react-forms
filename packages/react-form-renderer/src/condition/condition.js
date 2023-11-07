@@ -1,9 +1,10 @@
-import { useCallback, useEffect, useMemo, useReducer } from 'react';
+import { useCallback, useContext, useEffect, useMemo, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import isEqual from 'lodash/isEqual';
 
 import useFormApi from '../use-form-api';
 import parseCondition from '../parse-condition';
+import RendererContext from '../renderer-context/renderer-context';
 
 const setterValueCheck = (setterValue) => {
   if (setterValue === null || Array.isArray(setterValue)) {
@@ -36,7 +37,7 @@ export const reducer = (state, { type, sets }) => {
 const Condition = ({ condition, children, field }) => {
   const formOptions = useFormApi();
   const formState = formOptions.getState();
-
+  const { conditionMapper } = useContext(RendererContext);
   const [state, dispatch] = useReducer(reducer, {
     sets: [],
     initial: true,
@@ -44,7 +45,10 @@ const Condition = ({ condition, children, field }) => {
 
   // It is required to get the context state values from in order to get the latest state.
   // Using the trigger values can cause issues with the radio field as each input is registered separately to state and does not yield the actual field value.
-  const conditionResult = useMemo(() => parseCondition(condition, formState.values, field), [formState.values, condition, field]);
+  const conditionResult = useMemo(
+    () => parseCondition(condition, formState.values, field, conditionMapper),
+    [formState.values, condition, field, conditionMapper]
+  );
 
   const setters = conditionResult.set ? [conditionResult.set] : conditionResult.sets;
 

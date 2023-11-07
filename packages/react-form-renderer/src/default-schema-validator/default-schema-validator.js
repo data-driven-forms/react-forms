@@ -32,6 +32,24 @@ const checkConditionalAction = (type, action, fieldName) => {
   }
 };
 
+const requiredOneOf = ['is', 'isEmpty', 'isNotEmpty', 'pattern', 'greaterThan', 'greaterThanOrEqualTo', 'lessThan', 'lessThanOrEqualTo'];
+
+const checkMappedAttributes = (condition) => {
+  const hasStaticAttribute = requiredOneOf.some((key) => condition.hasOwnProperty(key));
+  if (hasStaticAttribute) {
+    return true;
+  }
+
+  if (
+    condition.hasOwnProperty('mappedAttributes') &&
+    typeof condition.mappedAttributes === 'object' &&
+    !Array.isArray(condition.mappedAttributes) &&
+    condition.mappedAttributes !== null
+  ) {
+    return requiredOneOf.some((key) => condition.mappedAttributes.hasOwnProperty(key));
+  }
+};
+
 const checkCondition = (condition, fieldName, isRoot) => {
   /**
    * validate array condition
@@ -96,30 +114,22 @@ const checkCondition = (condition, fieldName, isRoot) => {
     !condition.hasOwnProperty('not') &&
     !condition.hasOwnProperty('sequence')
   ) {
-    if (!condition.hasOwnProperty('when')) {
+    const isWhenMapped = condition.hasOwnProperty('mappedAttributes') && condition.mappedAttributes?.hasOwnProperty('when');
+    if (!condition.hasOwnProperty('when') && !isWhenMapped) {
       throw new DefaultSchemaError(`
       Error occured in field definition with "name" property: "${fieldName}".
       Field condition must have "when" property! Properties received: [${Object.keys(condition)}].
     `);
     }
 
-    if (!(typeof condition.when === 'string' || typeof condition.when === 'function' || Array.isArray(condition.when))) {
+    if (!isWhenMapped && !(typeof condition.when === 'string' || typeof condition.when === 'function' || Array.isArray(condition.when))) {
       throw new DefaultSchemaError(`
       Error occured in field definition with name: "${fieldName}".
       Field condition property "when" must be of type "string", "function" or "array", ${typeof condition.when} received!].
     `);
     }
 
-    if (
-      !condition.hasOwnProperty('is') &&
-      !condition.hasOwnProperty('isEmpty') &&
-      !condition.hasOwnProperty('isNotEmpty') &&
-      !condition.hasOwnProperty('pattern') &&
-      !condition.hasOwnProperty('greaterThan') &&
-      !condition.hasOwnProperty('greaterThanOrEqualTo') &&
-      !condition.hasOwnProperty('lessThan') &&
-      !condition.hasOwnProperty('lessThanOrEqualTo')
-    ) {
+    if (!checkMappedAttributes(condition)) {
       throw new DefaultSchemaError(`
       Error occured in field definition with name: "${fieldName}".
       Field condition must have one of "is", "isEmpty", "isNotEmpty", "pattern", "greaterThan", "greaterThanOrEqualTo", "lessThan", "lessThanOrEqualTo" property! Properties received: [${Object.keys(

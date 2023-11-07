@@ -117,6 +117,14 @@ Value that will be set to field with **initialValue** after deleting it. Useful 
 
 ---
 
+### conditionMapper
+
+*object*
+
+Condition mapper allows to map condition attributes to functions.
+
+[Read more](/mappers/condition-mapper).
+
 ### onReset
 
 *func*

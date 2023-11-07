@@ -9,6 +9,22 @@ import mapper from './form-fields-mapper';
 const schema = {
   fields: [
     {
+      name: 'field1',
+      label: 'Field 1',
+      component: 'text-field',
+    },
+    {
+      name: 'mapped-condition',
+      label: 'Mapped Condition',
+      component: 'text-field',
+      condition: {
+        mappedAttributes: {
+          is: ['nameFn', 'John', 'Doe'],
+        },
+        when: 'field1',
+      },
+    },
+    {
       name: 'formRadio',
       label: 'SelectSubForm',
       component: 'radio',
@@ -107,12 +123,26 @@ const initialValues = {
   formRadio: 'form2',
   radioBtn2: 'stu',
   txtField3: 'data',
+  field1: 'John',
 };
 
 const App = () => {
   return (
     <div style={{ padding: 20 }}>
-      <FormRenderer initialValues={initialValues} componentMapper={mapper} onSubmit={console.log} FormTemplate={FormTemplate} schema={schema} />
+      <FormRenderer
+        conditionMapper={{
+          nameFn: (name, _surname) => {
+            return (value, _conditionConfig) => {
+              return value === name;
+            };
+          },
+        }}
+        initialValues={initialValues}
+        componentMapper={mapper}
+        onSubmit={console.log}
+        FormTemplate={FormTemplate}
+        schema={schema}
+      />
     </div>
   );
 };

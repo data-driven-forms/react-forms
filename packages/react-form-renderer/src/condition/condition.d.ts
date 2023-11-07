@@ -24,6 +24,11 @@ export interface ConditionProp {
 }
 
 export interface ConditionDefinition extends ConditionProp {
+  mappedAttributes?: {
+    is?: string;
+    when?: string;
+    set?: string;
+  },
   or?: ConditionProp | ConditionProp[];
   and?: ConditionProp | ConditionProp[];
   not?: ConditionProp | ConditionProp[];

@@ -43,7 +43,39 @@ const fieldCondition = (value, config) => {
   return config.notMatch ? !isMatched : isMatched;
 };
 
-export const parseCondition = (condition, values, field) => {
+const allowedMappedAttributes = ['when', 'is'];
+
+export const unpackMappedCondition = (condition, conditionMapper) => {
+  if (typeof condition.mappedAttributes !== 'object') {
+    return condition;
+  }
+
+  const { mappedAttributes } = condition;
+
+  const internalCondition = {
+    ...condition,
+    mappedAttributes: undefined,
+  };
+
+  Object.entries(mappedAttributes).forEach(([key, value]) => {
+    if (!allowedMappedAttributes.includes(key)) {
+      console.error(`Mapped condition attribute ${key} is not allowed! Allowed attributes are: ${allowedMappedAttributes.join(', ')}`);
+      return;
+    }
+
+    if (conditionMapper[value?.[0]]) {
+      const [fnName, ...args] = value;
+      const fn = conditionMapper[fnName];
+      internalCondition[key] = fn(...args);
+    } else {
+      console.error(`Missing conditionMapper entry for ${value}!`);
+    }
+  });
+
+  return internalCondition;
+};
+
+export const parseCondition = (condition, values, field, conditionMapper = {}) => {
   let positiveResult = {
     visible: true,
     ...condition.then,
@@ -62,14 +94,16 @@ export const parseCondition = (condition, values, field) => {
       : negativeResult;
   }
 
-  if (condition.and) {
-    return !condition.and.map((condition) => parseCondition(condition, values, field)).some(({ result }) => result === false)
+  const conditionInternal = unpackMappedCondition(condition, conditionMapper);
+
+  if (conditionInternal.and) {
+    return !conditionInternal.and.map((condition) => parseCondition(condition, values, field)).some(({ result }) => result === false)
       ? positiveResult
       : negativeResult;
   }
 
-  if (condition.sequence) {
-    return condition.sequence.reduce(
+  if (conditionInternal.sequence) {
+    return conditionInternal.sequence.reduce(
       (acc, curr) => {
         const result = parseCondition(curr, values, field);
 
@@ -83,25 +117,25 @@ export const parseCondition = (condition, values, field) => {
     );
   }
 
-  if (condition.or) {
-    return condition.or.map((condition) => parseCondition(condition, values, field)).some(({ result }) => result === true)
+  if (conditionInternal.or) {
+    return conditionInternal.or.map((condition) => parseCondition(condition, values, field)).some(({ result }) => result === true)
       ? positiveResult
       : negativeResult;
   }
 
-  if (condition.not) {
-    return !parseCondition(condition.not, values, field).result ? positiveResult : negativeResult;
+  if (conditionInternal.not) {
+    return !parseCondition(conditionInternal.not, values, field).result ? positiveResult : negativeResult;
   }
 
-  const finalWhen = typeof condition.when === 'function' ? condition.when(field) : condition.when;
+  const finalWhen = typeof conditionInternal.when === 'function' ? conditionInternal.when(field) : conditionInternal.when;
 
   if (typeof finalWhen === 'string') {
-    return fieldCondition(get(values, finalWhen), condition) ? positiveResult : negativeResult;
+    return fieldCondition(get(values, finalWhen), conditionInternal) ? positiveResult : negativeResult;
   }
 
   if (Array.isArray(finalWhen)) {
     return finalWhen
-      .map((fieldName) => fieldCondition(get(values, typeof fieldName === 'function' ? fieldName(field) : fieldName), condition))
+      .map((fieldName) => fieldCondition(get(values, typeof fieldName === 'function' ? fieldName(field) : fieldName), conditionInternal))
       .find((condition) => !!condition)
       ? positiveResult
       : negativeResult;
