@@ -26,6 +26,10 @@ const mappersSchema = [
     linkText: 'Action mapper',
   },
   {
+    link: 'condition-mapper',
+    linkText: 'Condition mapper',
+  },
+  {
     link: 'schema-validator-mapper ',
     linkText: 'Schema validator mapper',
   },

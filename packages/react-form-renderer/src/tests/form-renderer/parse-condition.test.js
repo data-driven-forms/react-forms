@@ -684,4 +684,70 @@ describe('parseCondition', () => {
       expect(parseCondition(condition, values)).toEqual(negativeResult);
     });
   });
+
+  describe('mapped attributes', () => {
+    const conditionMapper = {
+      whenFn: () => jest.fn().mockImplementation(() => 'x'),
+      isFn: (config) => jest.fn().mockImplementation((value) => value === config),
+      setFn: () => jest.fn().mockImplementation((value) => ({ y: value === true ? 'yes' : 'no' })),
+    };
+
+    positiveResult = { visible: true, result: true };
+    negativeResult = { visible: false, result: false };
+
+    [positiveResult, negativeResult].forEach((conditionResult) => {
+      const values = {
+        x: true,
+      };
+      it(`maps attribute - when - ${conditionResult.result ? 'positive' : 'negative'}`, () => {
+        const condition = {
+          mappedAttributes: {
+            when: ['whenFn'],
+          },
+          is: conditionResult.result,
+        };
+
+        expect(parseCondition(condition, values, undefined, conditionMapper)).toEqual(conditionResult);
+      });
+
+      it(`maps attribute - is - ${conditionResult.result ? 'positive' : 'negative'}`, () => {
+        const condition = {
+          mappedAttributes: {
+            is: ['isFn', true],
+          },
+          when: 'x',
+        };
+        expect(parseCondition(condition, { x: conditionResult.result }, undefined, conditionMapper)).toEqual(conditionResult);
+      });
+    });
+
+    it('should log an error if conditionMapper is missing mapped attribute', () => {
+      const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+      const conditionMapper = {};
+      const condition = {
+        mappedAttributes: {
+          when: ['whenFn'],
+        },
+        is: true,
+      };
+      expect(parseCondition(condition, { x: true }, undefined, conditionMapper)).toEqual(negativeResult);
+      expect(errorSpy).toHaveBeenCalledWith('Missing conditionMapper entry for whenFn!');
+      errorSpy.mockRestore();
+    });
+
+    it('should log an error if mapped attribute is not allowed', () => {
+      const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+      const conditionMapper = {};
+      const condition = {
+        mappedAttributes: {
+          when: ['whenFn'],
+          is: ['isFn', true],
+          not: ['notFn'],
+        },
+      };
+      expect(parseCondition(condition, { x: true }, undefined, conditionMapper)).toEqual(negativeResult);
+      expect(errorSpy).toHaveBeenCalledWith('Mapped condition attribute not is not allowed! Allowed attributes are: when, is');
+      errorSpy.mockRestore();
+    });
+  });
 });

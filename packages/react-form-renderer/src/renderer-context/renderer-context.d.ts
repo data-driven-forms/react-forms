@@ -6,6 +6,7 @@ import { ActionMapper } from '../form-renderer';
 import Field from '../common-types/field';
 import { AnyObject } from '../common-types/any-object';
 import Schema from '../common-types/schema';
+import { ConditionMapper } from '../form-renderer/condition-mapper';
 
 export interface FormOptions<FormValues = Record<string, any>, InitialFormValues = Partial<FormValues>>
   extends FormApi<FormValues, InitialFormValues> {
@@ -29,6 +30,7 @@ export interface RendererContextValue {
   validatorMapper: ValidatorMapper;
   actionMapper: ActionMapper;
   formOptions: FormOptions;
+  conditionMapper: ConditionMapper;
 }
 
 declare const RendererContext: React.Context<RendererContextValue>;
