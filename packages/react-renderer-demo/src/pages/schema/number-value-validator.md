@@ -17,7 +17,7 @@ import { validatorTypes } from '@data-driven-forms/react-form-renderer';
 
 {
     type: validatorTypes.MIN_NUMBER_VALUE,
-    threshold: 5
+    value: 5
 }
 ```
 
@@ -31,7 +31,7 @@ import { validatorTypes } from '@data-driven-forms/react-form-renderer';
 
 {
     type: validatorTypes.MAX_NUMBER_VALUE,
-    threshold: 5
+    value: 5
 }
 ```
 
