@@ -13,7 +13,7 @@ const mergeFunctionTrigger = (fn, field) => {
 const getConditionTriggers = (condition, field, conditionMapper = {}) => {
   let triggers = [];
   if (Array.isArray(condition)) {
-    return condition.reduce((acc, item) => [...acc, ...getConditionTriggers(item, field)], []);
+    return condition.reduce((acc, item) => [...acc, ...getConditionTriggers(item, field, conditionMapper)], []);
   }
 
   // extract mapped attributes to a new static condition object
@@ -58,13 +58,13 @@ const getConditionTriggers = (condition, field, conditionMapper = {}) => {
   nestedKeys.forEach((key) => {
     if (typeof rest[key] !== 'undefined') {
       rest[key].forEach((item) => {
-        triggers = [...triggers, ...getConditionTriggers(item, field)];
+        triggers = [...triggers, ...getConditionTriggers(item, field, conditionMapper)];
       });
     }
   });
 
   if (typeof condition.not === 'object') {
-    triggers = [...triggers, ...getConditionTriggers(condition.not, field)];
+    triggers = [...triggers, ...getConditionTriggers(condition.not, field, conditionMapper)];
   }
 
   return Array.from(new Set(triggers));

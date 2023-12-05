@@ -89,7 +89,7 @@ export const parseCondition = (condition, values, field, conditionMapper = {}) =
   };
 
   if (Array.isArray(condition)) {
-    return !condition.map((condition) => parseCondition(condition, values, field)).some(({ result }) => result === false)
+    return !condition.map((condition) => parseCondition(condition, values, field, conditionMapper)).some(({ result }) => result === false)
       ? positiveResult
       : negativeResult;
   }
@@ -97,7 +97,7 @@ export const parseCondition = (condition, values, field, conditionMapper = {}) =
   const conditionInternal = unpackMappedCondition(condition, conditionMapper);
 
   if (conditionInternal.and) {
-    return !conditionInternal.and.map((condition) => parseCondition(condition, values, field)).some(({ result }) => result === false)
+    return !conditionInternal.and.map((condition) => parseCondition(condition, values, field, conditionMapper)).some(({ result }) => result === false)
       ? positiveResult
       : negativeResult;
   }
@@ -105,7 +105,7 @@ export const parseCondition = (condition, values, field, conditionMapper = {}) =
   if (conditionInternal.sequence) {
     return conditionInternal.sequence.reduce(
       (acc, curr) => {
-        const result = parseCondition(curr, values, field);
+        const result = parseCondition(curr, values, field, conditionMapper);
 
         return {
           sets: [...acc.sets, ...(result.set ? [result.set] : [])],
@@ -118,13 +118,13 @@ export const parseCondition = (condition, values, field, conditionMapper = {}) =
   }
 
   if (conditionInternal.or) {
-    return conditionInternal.or.map((condition) => parseCondition(condition, values, field)).some(({ result }) => result === true)
+    return conditionInternal.or.map((condition) => parseCondition(condition, values, field, conditionMapper)).some(({ result }) => result === true)
       ? positiveResult
       : negativeResult;
   }
 
   if (conditionInternal.not) {
-    return !parseCondition(conditionInternal.not, values, field).result ? positiveResult : negativeResult;
+    return !parseCondition(conditionInternal.not, values, field, conditionMapper).result ? positiveResult : negativeResult;
   }
 
   const finalWhen = typeof conditionInternal.when === 'function' ? conditionInternal.when(field) : conditionInternal.when;
