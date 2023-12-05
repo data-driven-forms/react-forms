@@ -10,10 +10,27 @@ const mergeFunctionTrigger = (fn, field) => {
   return internalTriggers;
 };
 
-const getConditionTriggers = (condition, field) => {
+const getConditionTriggers = (condition, field, conditionMapper = {}) => {
   let triggers = [];
   if (Array.isArray(condition)) {
     return condition.reduce((acc, item) => [...acc, ...getConditionTriggers(item, field)], []);
+  }
+
+  // extract mapped attributes to a new static condition object
+  if (typeof condition.mappedAttributes === 'object') {
+    try {
+      const newCondition = { ...condition, mappedAttributes: undefined };
+      Object.entries(condition.mappedAttributes).forEach(([attribute, [functionName, ...args]]) => {
+        if (!conditionMapper[functionName]) {
+          throw new Error(`Missing condition mapper function "${functionName}" for field ${field.name}!`);
+        }
+
+        newCondition[attribute] = conditionMapper[functionName](...args);
+      });
+      return getConditionTriggers(newCondition, field, conditionMapper);
+    } catch (error) {
+      console.error(error.toString());
+    }
   }
 
   const { when, ...rest } = condition;

@@ -67,9 +67,9 @@ ConditionTriggerDetector.propTypes = {
   field: PropTypes.object.isRequired,
 };
 
-const FormConditionWrapper = ({ condition, children, field }) => {
+const FormConditionWrapper = ({ condition, children, field, conditionMapper }) => {
   if (condition) {
-    const triggers = getConditionTriggers(condition, field);
+    const triggers = getConditionTriggers(condition, field, conditionMapper);
     return (
       <ConditionTriggerDetector triggers={triggers} condition={condition} field={field}>
         {children}
@@ -84,10 +84,11 @@ FormConditionWrapper.propTypes = {
   condition: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   children: PropTypes.node.isRequired,
   field: PropTypes.object,
+  conditionMapper: PropTypes.object,
 };
 
 const SingleField = ({ component, ...rest }) => {
-  const { actionMapper, componentMapper } = useContext(RendererContext);
+  const { actionMapper, componentMapper, conditionMapper } = useContext(RendererContext);
 
   const { componentProps, Component, overrideProps, mergedResolveProps } = prepareComponentProps({ component, rest, componentMapper, actionMapper });
 
@@ -98,7 +99,7 @@ const SingleField = ({ component, ...rest }) => {
   };
 
   return (
-    <FormConditionWrapper condition={condition} field={restProps}>
+    <FormConditionWrapper condition={condition} field={restProps} conditionMapper={conditionMapper}>
       <FormFieldHideWrapper hideField={hideField}>
         <Component {...restProps} />
       </FormFieldHideWrapper>
