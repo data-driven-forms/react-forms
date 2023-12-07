@@ -1,6 +1,6 @@
 {
   "name": "@data-driven-forms/carbon-component-mapper",
-  "version": "3.22.0",
+  "version": "3.22.1",
   "description": "Carbon React component mapper for Data Driven Forms.",
   "main": "index.js",
   "module": "esm/index.js",
