@@ -32,7 +32,7 @@ const validation = async (schema, options) => {
     throw new Error(`options argument has to be type of object, provided: ${typeof options}`);
   }
 
-  const { values, componentMapper, validatorMapper, actionMapper, schemaValidatorMapper, omitWarnings } = options;
+  const { values, componentMapper, validatorMapper, actionMapper, schemaValidatorMapper, omitWarnings, conditionMapper } = options;
 
   const validatorMapperMerged = { ...defaultValidatorMapper, ...validatorMapper };
 
@@ -49,7 +49,7 @@ const validation = async (schema, options) => {
 
   defaultSchemaValidator(finalSchema, finalComponentMapper, validatorTypes, actionTypes, schemaValidatorMapper);
 
-  finalSchema = getVisibleFields(finalSchema, values);
+  finalSchema = getVisibleFields(finalSchema, values, undefined, conditionMapper);
 
   const validates = getValidates(finalSchema, { componentMapper: finalComponentMapper, actionMapper, values });
 

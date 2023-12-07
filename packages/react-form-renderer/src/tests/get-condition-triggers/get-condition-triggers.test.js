@@ -32,4 +32,32 @@ describe('getConditionTriggers', () => {
   test('should extract name from array of conditions', () => {
     expect(getConditionTriggers([{ when: 'a' }, { when: 'b' }])).toEqual(['a', 'b']);
   });
+
+  describe('mappedAttributes', () => {
+    it(`should extract the 'when' attribute from mappedAttributes`, () => {
+      expect(
+        getConditionTriggers(
+          { mappedAttributes: { when: ['equals', 'a'] } },
+          {},
+          {
+            equals: (a) => () => a,
+          }
+        )
+      ).toEqual(['a']);
+    });
+    it(`should log error if mapped condition is missing from condition mapper`, () => {
+      const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+      expect(
+        getConditionTriggers(
+          { mappedAttributes: { when: ['equals', 'a'] } },
+          { name: 'foo' },
+          // conditionMapper is deliberately empty
+          {}
+        )
+      ).toEqual([]);
+      expect(consoleSpy).toHaveBeenCalledTimes(1);
+      expect(consoleSpy).toHaveBeenCalledWith(`Error: Missing condition mapper function "equals" for field foo!`);
+      consoleSpy.mockRestore();
+    });
+  });
 });
