@@ -19,7 +19,14 @@ const TimePicker = (props) => {
       id={id || input.name}
       FormGroupProps={FormGroupProps}
     >
-      <PF4TimePicker {...input} time={input.value ? input.value : undefined} {...rest} id={id || input.name} isDisabled={isDisabled || isReadOnly} />
+      <PF4TimePicker
+        {...input}
+        onChange={(_e, value) => input.onChange(value)}
+        time={input.value ? input.value : undefined}
+        {...rest}
+        id={id || input.name}
+        isDisabled={isDisabled || isReadOnly}
+      />
     </FormGroup>
   );
 };
