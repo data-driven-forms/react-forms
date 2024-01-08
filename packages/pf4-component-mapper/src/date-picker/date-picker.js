@@ -19,7 +19,13 @@ const DatePicker = (props) => {
       id={id || input.name}
       FormGroupProps={FormGroupProps}
     >
-      <PF4DatePicker {...input} {...rest} id={id || input.name} isDisabled={isDisabled || isReadOnly} />
+      <PF4DatePicker
+        {...input}
+        onChange={(_e, value) => input.onChange(value)}
+        {...rest}
+        id={id || input.name}
+        isDisabled={isDisabled || isReadOnly}
+      />
     </FormGroup>
   );
 };
