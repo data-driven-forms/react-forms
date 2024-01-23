@@ -8,15 +8,11 @@ import Condition from '../condition';
 import getConditionTriggers from '../get-condition-triggers';
 import prepareComponentProps from '../prepare-component-props';
 
-const FormFieldHideWrapper = ({ hideField, children }) => (hideField ? <div hidden>{children}</div> : children);
+const FormFieldHideWrapper = ({ hideField = false, children }) => (hideField ? <div hidden>{children}</div> : children);
 
 FormFieldHideWrapper.propTypes = {
   hideField: PropTypes.bool,
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]).isRequired,
-};
-
-FormFieldHideWrapper.defaultProps = {
-  hideField: false,
 };
 
 const ConditionTriggerWrapper = ({ condition, values, children, field }) => (

@@ -8,9 +8,9 @@ const SubForm = ({
   title,
   description,
   component,
-  HeaderProps,
-  DescriptionProps: { element: descriptionElement, ...DescriptionProps },
-  FormFieldsGridProps: { element: formFieldsGridElement, ...FormFieldsGridProps },
+  HeaderProps = {},
+  DescriptionProps: { element: descriptionElement, ...DescriptionProps } = { element: 'p' },
+  FormFieldsGridProps: { element: formFieldsGridElement, ...FormFieldsGridProps } = { element: 'div' },
   ...rest
 }) => {
   const { renderForm } = useFormApi();
@@ -32,12 +32,6 @@ SubForm.propTypes = {
   HeaderProps: PropTypes.object,
   DescriptionProps: PropTypes.shape({ element: PropTypes.string.isRequired }),
   FormFieldsGridProps: PropTypes.shape({ element: PropTypes.string.isRequired }),
-};
-
-SubForm.defaultProps = {
-  HeaderProps: {},
-  DescriptionProps: { element: 'p' },
-  FormFieldsGridProps: { element: 'div' },
 };
 
 export default SubForm;

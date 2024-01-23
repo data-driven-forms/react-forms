@@ -163,7 +163,7 @@ import { FormRenderer, useFieldApi } from '@data-driven-forms/react-form-rendere
 import { FormTemplate } from '@data-driven-forms/mui-component-mapper';
 
 const CustomComponent = (props) => {
-  const { input, meta, label, sideEffect } = useFieldApi(props);
+  const { input, meta, label, sideEffect = () => {} } = useFieldApi(props);
   return (
     <div className="input-wrapper">
       <label className="input-label" htmlFor={input.name}>
@@ -184,10 +184,6 @@ const CustomComponent = (props) => {
       )}
     </div>
   );
-};
-
-CustomComponent.defaultProps = {
-  sideEffect: () => {},
 };
 
 const createSchema = ({ label = 'Custom label', validate = [], ...rest }) => ({
@@ -247,7 +243,7 @@ import userEvent from '@testing-library/user-event';
 import { Form, RendererContext, useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 const CustomComponent = (props) => {
-  const { input, meta, label, sideEffect } = useFieldApi(props);
+  const { input, meta, label, sideEffect = () => {} } = useFieldApi(props);
   return (
     <div className="input-wrapper">
       <label className="input-label" htmlFor={input.name}>
@@ -268,10 +264,6 @@ const CustomComponent = (props) => {
       )}
     </div>
   );
-};
-
-CustomComponent.defaultProps = {
-  sideEffect: () => {},
 };
 
 const FormWrapper = ({ props, children }) => (

@@ -5,8 +5,8 @@ import { validationError } from '../validation-error/validation-error';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import FormGroup from '../form-group';
 
-const DatePicker = (props) => {
-  const { input, isReadOnly, isDisabled, placeholder, isRequired, label, helperText, description, validateOnMount, meta, FormItemProps, ...rest } =
+const DatePicker = ({ placeholder = 'Select date', ...props }) => {
+  const { input, isReadOnly, isDisabled, isRequired, label, helperText, description, validateOnMount, meta, FormItemProps, ...rest } =
     useFieldApi(props);
   const invalid = validationError(meta, validateOnMount);
 
@@ -48,10 +48,6 @@ DatePicker.propTypes = {
   locale: PropTypes.string,
   description: PropTypes.node,
   FormItemProps: PropTypes.object,
-};
-
-DatePicker.defaultProps = {
-  placeholder: 'Select date',
 };
 
 export default DatePicker;

@@ -37,8 +37,8 @@ export const Switch = (props) => {
     onText,
     offText,
     className,
-    FormFieldGridProps,
-    HelpertextProps,
+    FormFieldGridProps = {},
+    HelpertextProps = {},
     type,
     ...rest
   } = useFieldApi({
@@ -85,11 +85,6 @@ Switch.propTypes = {
   /** Sub components customization API */
   FormFieldGridProps: PropTypes.object,
   HelpertextProps: PropTypes.object,
-};
-
-Switch.defaultProps = {
-  FormFieldGridProps: {},
-  HelpertextProps: {},
 };
 
 export default Switch;

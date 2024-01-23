@@ -7,8 +7,18 @@ import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import FormField from '../form-field/form-field';
 
 const TimePicker = (props) => {
-  const { input, isReadOnly, isDisabled, isRequired, helperText, validateOnMount, meta, FormFieldGridProps, HelpertextProps, ...rest } =
-    useFieldApi(props);
+  const {
+    input,
+    isReadOnly,
+    isDisabled,
+    isRequired,
+    helperText,
+    validateOnMount,
+    meta,
+    FormFieldGridProps = {},
+    HelpertextProps = {},
+    ...rest
+  } = useFieldApi(props);
   const invalid = validationError(meta, validateOnMount);
 
   return (
@@ -44,11 +54,6 @@ TimePicker.propTypes = {
   /** Sub component customization API */
   FormFieldGridProps: PropTypes.object,
   HelpertextProps: PropTypes.object,
-};
-
-TimePicker.defaultProps = {
-  FormFieldGridProps: {},
-  HelpertextProps: {},
 };
 
 export default TimePicker;

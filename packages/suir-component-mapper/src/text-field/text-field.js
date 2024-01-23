@@ -18,8 +18,8 @@ const TextField = (props) => {
     helperText,
     validateOnMount,
     meta,
-    FormFieldGridProps,
-    HelpertextProps,
+    FormFieldGridProps = {},
+    HelpertextProps = {},
     ...rest
   } = useFieldApi(props);
   const invalid = validationError(meta, validateOnMount);
@@ -56,11 +56,6 @@ TextField.propTypes = {
   /** Sub component customization */
   FormFieldGridProps: PropTypes.object,
   HelpertextProps: PropTypes.object,
-};
-
-TextField.defaultProps = {
-  FormFieldGridProps: {},
-  HelpertextProps: {},
 };
 
 export default TextField;

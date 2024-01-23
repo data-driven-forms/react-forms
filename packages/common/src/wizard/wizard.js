@@ -10,7 +10,7 @@ import reducer, { DYNAMIC_WIZARD_TYPES, findCurrentStep } from './reducer';
 import selectNext from './select-next';
 import { CONDITIONAL_SUBMIT_FLAG } from './consts';
 
-const Wizard = ({ fields, isDynamic, crossroads, Wizard, component, initialState, ...props }) => {
+const Wizard = ({ fields, isDynamic, crossroads, Wizard, component, initialState, conditionalSubmitFlag = CONDITIONAL_SUBMIT_FLAG, ...props }) => {
   const formOptions = useFormApi();
 
   const [state, dispatch] = useReducer(reducer, {
@@ -92,7 +92,7 @@ const Wizard = ({ fields, isDynamic, crossroads, Wizard, component, initialState
         selectNext,
       }}
     >
-      <Wizard {...props} />
+      <Wizard conditionalSubmitFlag={conditionalSubmitFlag} {...props} />
     </WizardContext.Provider>
   );
 };
@@ -109,10 +109,6 @@ Wizard.propTypes = {
   component: PropTypes.any,
   initialState: PropTypes.object,
   conditionalSubmitFlag: PropTypes.string,
-};
-
-Wizard.defaultProps = {
-  conditionalSubmitFlag: CONDITIONAL_SUBMIT_FLAG,
 };
 
 export default Wizard;

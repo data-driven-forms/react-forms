@@ -77,13 +77,13 @@ const StyledDualListSelect = styled(FormFieldGrid)(({ theme }) => ({
 }));
 
 const ListInternal = ({
-  value,
+  value = [],
   optionClick,
   noOptionsTitle,
   filterValue,
   filterValueText,
   selectedValues,
-  ListProps,
+  ListProps = {},
   ListItemProps,
   ListItemIconProps,
   ListItemTextProps,
@@ -164,11 +164,6 @@ ListInternal.propTypes = {
   LeftPaperProps: PropTypes.object,
 };
 
-ListInternal.defaultProps = {
-  value: [],
-  ListProps: {},
-};
-
 const ToolbarInternal = ({
   ToolbarProps,
   LeftToolbarProps,
@@ -241,23 +236,23 @@ ToolbarInternal.propTypes = {
 const DualListSelect = ({
   handleOptionsClick,
   rightValues,
-  noValueTitle,
-  filterValueText,
+  noValueTitle = 'No selected',
+  filterValueText = 'Remove your filter to see all selected',
   leftValues,
-  noOptionsTitle,
+  noOptionsTitle = 'No available options',
   state,
-  filterOptionsText,
+  filterOptionsText = 'Remove your filter to see all options',
   handleValuesClick,
   handleMoveRight,
-  moveRightTitle,
+  moveRightTitle = 'Move selected to right',
   handleClearLeftValues,
-  moveAllRightTitle,
+  moveAllRightTitle = 'Move all to right',
   handleClearRightValues,
-  moveAllLeftTitle,
+  moveAllLeftTitle = 'Move all to left',
   handleMoveLeft,
-  moveLeftTitle,
-  allToRight,
-  allToLeft,
+  moveLeftTitle = 'Move selected to left',
+  allToRight = true,
+  allToLeft = true,
   checkboxVariant,
   isRequired,
   meta,
@@ -265,15 +260,15 @@ const DualListSelect = ({
   label,
   helperText,
   description,
-  filterOptionsTitle,
-  leftTitle,
+  filterOptionsTitle = 'Filter options',
+  leftTitle = 'Options',
   filterOptions,
   sortOptions,
   sortValues,
-  filterValueTitle,
+  filterValueTitle = 'Filter selected value',
   filterValues,
-  rightTitle,
-  isFilterable,
+  rightTitle = 'Selected',
+  isFilterable = true,
   // Props
   FormFieldGridProps,
   InternalGridProps,
@@ -614,25 +609,6 @@ DualListSelect.propTypes = {
   PaperProps: PropTypes.object,
   LeftPaperProps: PropTypes.object,
   RightPaperProps: PropTypes.object,
-};
-
-DualListSelect.defaultProps = {
-  leftTitle: 'Options',
-  rightTitle: 'Selected',
-  moveLeftTitle: 'Move selected to left',
-  moveRightTitle: 'Move selected to right',
-  moveAllRightTitle: 'Move all to right',
-  moveAllLeftTitle: 'Move all to left',
-  noOptionsTitle: 'No available options',
-  noValueTitle: 'No selected',
-  filterOptionsTitle: 'Filter options',
-  filterValueTitle: 'Filter selected value',
-  filterOptionsText: 'Remove your filter to see all options',
-  filterValueText: 'Remove your filter to see all selected',
-  options: [],
-  allToLeft: true,
-  allToRight: true,
-  isFilterable: true,
 };
 
 const DualListSelectWrapper = (props) => <DualListSelectCommon {...props} DualListSelect={DualListSelect} />;

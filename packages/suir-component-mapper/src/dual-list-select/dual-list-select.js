@@ -20,13 +20,13 @@ const useListStyles = createUseStyles({
 });
 
 const List = ({
-  value,
+  value = [],
   optionClick,
   noOptionsTitle,
   filterValue,
   filterValueText,
   selectedValues,
-  OptionProps: { className, selectedClassName, ...OptionProps },
+  OptionProps: { className, selectedClassName, ...OptionProps } = {},
   ...rest
 }) => {
   const classes = useListStyles();
@@ -67,12 +67,18 @@ List.propTypes = {
   OptionProps: PropTypes.shape({ className: PropTypes.string, selectedClassName: PropTypes.string }),
 };
 
-List.defaultProps = {
-  value: [],
-  OptionProps: {},
-};
-
-const Toolbar = ({ sortTitle, onFilter, onSort, sortDirection, value, placeholder, id, sortUpIcon, sortDownIcon, ...rest }) => (
+const Toolbar = ({
+  sortTitle,
+  onFilter,
+  onSort,
+  sortDirection,
+  value,
+  placeholder,
+  id,
+  sortUpIcon = 'sort amount up',
+  sortDownIcon = 'sort amount down',
+  ...rest
+}) => (
   <div id={id}>
     <Input
       name="filterOptions"
@@ -101,11 +107,6 @@ Toolbar.propTypes = {
   sortDownIcon: PropTypes.string,
 };
 
-Toolbar.defaultProps = {
-  sortUpIcon: 'sort amount up',
-  sortDownIcon: 'sort amount down',
-};
-
 const useDualListStyles = createUseStyles({
   dualListButtons: {
     display: 'flex !important',
@@ -131,23 +132,9 @@ const useDualListStyles = createUseStyles({
 const DualList = ({
   meta,
   input,
-  allToRight,
-  allToLeft,
-  leftTitle,
-  moveAllLeftTitle,
-  moveAllRightTitle,
-  moveRightTitle,
-  moveLeftTitle,
-  rightTitle,
   label,
   isRequired,
   helperText,
-  noValueTitle,
-  noOptionsTitle,
-  filterOptionsTitle,
-  filterValueTitle,
-  filterValueText,
-  filterOptionsText,
   state,
   id,
   sortOptions,
@@ -163,21 +150,35 @@ const DualList = ({
   rightValues,
   handleValuesClick,
   validateOnMount,
-  leftSortTitle,
-  rightSortTitle,
-  OptionsListProps,
-  OptionProps,
-  LabelProps: { className: labelClassName, error: labelError, ...LabelProps },
-  ToolbarProps,
-  ButtonGridProps: { className: buttonGridClassName, ...ButtonGridProps },
-  RightButtonProps,
-  DoubleRightButtonProps,
-  LeftButtonProps,
-  DoubleLeftButtonProps,
-  OptionsHeaderProps,
-  ValuesHeaderProps,
-  HelperTextProps,
-  FormFieldGridProps,
+  LabelProps: { className: labelClassName, error: labelError, ...LabelProps } = {},
+  ButtonGridProps: { className: buttonGridClassName, ...ButtonGridProps } = {},
+  leftTitle = 'Options',
+  rightTitle = 'Selected',
+  moveLeftTitle = 'Move selected to left',
+  moveRightTitle = 'Move selected to right',
+  moveAllRightTitle = 'Move all to right',
+  moveAllLeftTitle = 'Move all to left',
+  noOptionsTitle = 'No available options',
+  noValueTitle = 'No selected',
+  filterOptionsTitle = 'Filter options',
+  filterValueTitle = 'Filter selected value',
+  filterOptionsText = 'Remove your filter to see all options',
+  filterValueText = 'Remove your filter to see all selected',
+  leftSortTitle = 'Sort options',
+  rightSortTitle = 'Sort value',
+  allToLeft = true,
+  allToRight = true,
+  OptionsListProps = {},
+  OptionProps = {},
+  ToolbarProps = {},
+  RightButtonProps = {},
+  DoubleRightButtonProps = {},
+  LeftButtonProps = {},
+  DoubleLeftButtonProps = {},
+  OptionsHeaderProps = {},
+  ValuesHeaderProps = {},
+  HelperTextProps = {},
+  FormFieldGridProps = {},
 }) => {
   const invalid = validationError(meta, validateOnMount);
   const classes = useDualListStyles();
@@ -375,39 +376,6 @@ DualList.propTypes = {
   ValuesHeaderProps: PropTypes.object,
   HelperTextProps: PropTypes.object,
   FormFieldGridProps: PropTypes.object,
-};
-
-DualList.defaultProps = {
-  leftTitle: 'Options',
-  rightTitle: 'Selected',
-  moveLeftTitle: 'Move selected to left',
-  moveRightTitle: 'Move selected to right',
-  moveAllRightTitle: 'Move all to right',
-  moveAllLeftTitle: 'Move all to left',
-  noOptionsTitle: 'No available options',
-  noValueTitle: 'No selected',
-  filterOptionsTitle: 'Filter options',
-  filterValueTitle: 'Filter selected value',
-  filterOptionsText: 'Remove your filter to see all options',
-  filterValueText: 'Remove your filter to see all selected',
-  leftSortTitle: 'Sort options',
-  rightSortTitle: 'Sort value',
-  options: [],
-  allToLeft: true,
-  allToRight: true,
-  OptionsListProps: {},
-  OptionProps: {},
-  LabelProps: {},
-  ToolbarProps: {},
-  ButtonGridProps: {},
-  RightButtonProps: {},
-  DoubleRightButtonProps: {},
-  LeftButtonProps: {},
-  DoubleLeftButtonProps: {},
-  OptionsHeaderProps: {},
-  ValuesHeaderProps: {},
-  HelperTextProps: {},
-  FormFieldGridProps: {},
 };
 
 const DualListSelectWrapper = (props) => <DualListSelectCommon {...props} DualListSelect={DualList} />;

@@ -8,7 +8,16 @@ import prepareProps from '../prepare-props';
 import HelperTextBlock from '../helper-text-block/helper-text-block';
 
 const DatePicker = (props) => {
-  const { input, datePickerType, meta, DatePickerProps, validateOnMount, helperText, WrapperProps, ...rest } = useFieldApi(prepareProps(props));
+  const {
+    input,
+    datePickerType = 'single',
+    meta,
+    DatePickerProps,
+    validateOnMount,
+    helperText,
+    WrapperProps,
+    ...rest
+  } = useFieldApi(prepareProps(props));
 
   const invalid = (meta.touched || validateOnMount) && (meta.error || meta.submitError);
   const warnText = (meta.touched || validateOnMount) && meta.warning;
@@ -29,10 +38,6 @@ DatePicker.propTypes = {
   datePickerType: PropTypes.string,
   DatePickerProps: PropTypes.object,
   WrapperProps: PropTypes.object,
-};
-
-DatePicker.defaultProps = {
-  datePickerType: 'single',
 };
 
 export default DatePicker;

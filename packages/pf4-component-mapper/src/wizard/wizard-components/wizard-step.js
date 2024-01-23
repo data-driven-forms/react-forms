@@ -46,7 +46,7 @@ const WizardStep = ({
   showTitle,
   customTitle,
   hasNoBodyPadding,
-  StepTemplate,
+  StepTemplate = DefaultStepTemplate,
   ...rest
 }) => {
   const formRef = useRef();
@@ -96,10 +96,6 @@ WizardStep.propTypes = {
   hasNoBodyPadding: PropTypes.bool,
   StepTemplate: PropTypes.elementType,
   conditionalSubmitFlag: PropTypes.string,
-};
-
-WizardStep.defaultProps = {
-  StepTemplate: DefaultStepTemplate,
 };
 
 export default WizardStep;

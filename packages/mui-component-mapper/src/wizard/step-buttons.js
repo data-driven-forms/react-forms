@@ -74,7 +74,7 @@ const WizardStepButtons = ({ buttons: Buttons, ...props }) => {
     handleNext,
     buttonLabels: { cancel, submit, back, next },
     formOptions,
-    ButtonContainerProps,
+    ButtonContainerProps = {},
     conditionalSubmitFlag,
   } = props;
 
@@ -137,10 +137,6 @@ WizardStepButtons.propTypes = {
     getState: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
   }),
-};
-
-WizardStepButtons.defaultProps = {
-  ButtonContainerProps: {},
 };
 
 export default WizardStepButtons;

@@ -470,8 +470,9 @@ describe('Select test', () => {
         isDisabled: true,
         isFetching: true,
         isSearchable: false,
+        loadingMessage: undefined,
         options: [],
-        placeholder: undefined,
+        placeholder: 'Choose...',
         isMulti: undefined,
         value: [],
       });

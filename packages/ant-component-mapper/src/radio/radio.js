@@ -17,11 +17,23 @@ RadioOption.propTypes = {
 };
 
 const Radio = ({ name, component, ...props }) => {
-  const { options, isDisabled, label, isRequired, helperText, description, isReadOnly, meta, validateOnMount, FormItemProps, input, ...rest } =
-    useFieldApi({
-      ...props,
-      name,
-    });
+  const {
+    options = [],
+    isDisabled,
+    label,
+    isRequired,
+    helperText,
+    description,
+    isReadOnly,
+    meta,
+    validateOnMount,
+    FormItemProps,
+    input,
+    ...rest
+  } = useFieldApi({
+    ...props,
+    name,
+  });
 
   return (
     <FormGroup
@@ -56,10 +68,6 @@ Radio.propTypes = {
   description: PropTypes.node,
   FormItemProps: PropTypes.object,
   component: PropTypes.string,
-};
-
-Radio.defaultProps = {
-  options: [],
 };
 
 export default Radio;

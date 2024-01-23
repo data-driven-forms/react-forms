@@ -5,7 +5,7 @@ import WizardStepButtons from './step-buttons';
 
 import './wizard-step.css';
 
-const WizardStep = ({ fields, formOptions, WizardStepProps, ...rest }) => (
+const WizardStep = ({ fields = [], formOptions, WizardStepProps, ...rest }) => (
   <Fragment>
     <div className="ddorg__ant-component-mapper_wizard-step" {...WizardStepProps}>
       {fields.map((item) => formOptions.renderForm([item], formOptions))}
@@ -20,10 +20,6 @@ WizardStep.propTypes = {
     renderForm: PropTypes.func.isRequired,
   }).isRequired,
   WizardStepProps: PropTypes.object,
-};
-
-WizardStep.defaultProps = {
-  fields: [],
 };
 
 export default WizardStep;

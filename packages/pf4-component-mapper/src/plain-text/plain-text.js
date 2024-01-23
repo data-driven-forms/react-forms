@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { TextContent, Text } from '@patternfly/react-core';
 import validTextFields from '@data-driven-forms/common/utils/valid-text-fields';
 
-const PlainText = ({ component, label, name, variant, TextContentProps, ...rest }) => (
+const PlainText = ({ component, label, name, variant = 'p', TextContentProps, ...rest }) => (
   <TextContent {...TextContentProps}>
     {typeof label === 'string'
       ? label.split('\n').map((paragraph, index) => (
@@ -22,10 +22,6 @@ PlainText.propTypes = {
   name: PropTypes.string.isRequired,
   TextContentProps: PropTypes.object,
   component: PropTypes.string,
-};
-
-PlainText.defaultProps = {
-  variant: 'p',
 };
 
 export default PlainText;

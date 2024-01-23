@@ -63,7 +63,7 @@ const InternalSelect = ({
   description,
   classNamePrefix,
   isMulti,
-  placeholder,
+  placeholder = 'Please choose',
   onInputChange,
   isFetching,
   noOptionsMessage,
@@ -73,11 +73,12 @@ const InternalSelect = ({
   onChange,
   onFocus,
   onBlur,
-  FormFieldGridProps,
-  TextFieldProps: { inputProps: textFieldInputProps, ...TextFieldProps },
-  inputProps,
+  FormFieldGridProps = {},
+  TextFieldProps: { inputProps: textFieldInputProps, ...TextFieldProps } = {},
+  inputProps = {},
   isClearable,
   isDisabled,
+  loadingText = 'Loading...',
   ...rest
 }) => {
   const invalid = validationError(meta, validateOnMount);
@@ -93,6 +94,7 @@ const InternalSelect = ({
         disableClearable={isClearable}
         popupIcon={isFetching ? <CircularProgress size={20} color="inherit" /> : <ArrowDropDownIcon />}
         fullWidth
+        loadingText={loadingText}
         {...rest}
         renderInput={(params) => (
           <TextField
@@ -154,14 +156,7 @@ InternalSelect.propTypes = {
   TextFieldProps: PropTypes.object,
   inputProps: PropTypes.object,
   isDisabled: PropTypes.bool,
-};
-
-InternalSelect.defaultProps = {
-  placeholder: 'Please choose',
-  FormFieldGridProps: {},
-  TextFieldProps: {},
-  inputProps: {},
-  loadingText: 'Loading...',
+  loadingText: PropTypes.node,
 };
 
 const Select = (props) => {

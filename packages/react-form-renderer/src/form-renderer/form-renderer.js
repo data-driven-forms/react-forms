@@ -43,7 +43,7 @@ const FormRenderer = ({
   actionMapper,
   children,
   clearedValue,
-  clearOnUnmount,
+  clearOnUnmount = false,
   componentMapper,
   conditionMapper = {},
   decorators,
@@ -58,6 +58,7 @@ const FormRenderer = ({
   schemaValidatorMapper,
   subscription,
   validatorMapper,
+  initialValues = {},
   ...props
 }) => {
   const [fileInputs, setFileInputs] = useState([]);
@@ -172,7 +173,7 @@ const FormRenderer = ({
               ...form,
               ffGetRegisteredFields: form.getRegisteredFields,
               getRegisteredFields: internalGetRegisteredFields,
-              initialValues: props.initialValues,
+              initialValues,
               schema,
             },
           }}
@@ -183,6 +184,7 @@ const FormRenderer = ({
         </RendererContext.Provider>
       )}
       {...props}
+      initialValues={initialValues}
     />
   );
 };
@@ -225,11 +227,6 @@ FormRenderer.propTypes = {
   conditionMapper: PropTypes.shape({
     [PropTypes.string]: PropTypes.func,
   }),
-};
-
-FormRenderer.defaultProps = {
-  initialValues: {},
-  clearOnUnmount: false,
 };
 
 export default FormRenderer;

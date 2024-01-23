@@ -32,7 +32,7 @@ const useStyles = createUseStyles({
 });
 
 const ArrayItem = memo(
-  ({ remove, fields, name, removeText, buttonDisabled, RemoveButtonProps, ArrayItemProps }) => {
+  ({ remove, fields, name, removeText, buttonDisabled, RemoveButtonProps = {}, ArrayItemProps = {} }) => {
     const formOptions = useFormApi();
     const { remove: removeStyle } = useStyles();
 
@@ -71,28 +71,23 @@ ArrayItem.propTypes = {
   ArrayItemProps: PropTypes.object,
 };
 
-ArrayItem.defaultProps = {
-  RemoveButtonProps: {},
-  ArrayItemProps: {},
-};
-
 const FieldArray = (props) => {
   const {
-    AddContainerProps,
-    AddButtonProps,
-    FormGroupProps,
-    WrapperProps,
-    ArrayItemProps,
-    RemoveButtonProps,
+    AddContainerProps = {},
+    AddButtonProps = {},
+    FormGroupProps = {},
+    WrapperProps = {},
+    ArrayItemProps = {},
+    RemoveButtonProps = {},
     defaultItem,
-    maxItems,
-    minItems,
+    maxItems = Infinity,
+    minItems = 0,
     fields,
     input,
     arrayValidator,
     labelText,
     buttonLabels,
-    noItemsMessage,
+    noItemsMessage = 'No items',
     meta,
     validateOnMount,
   } = useFieldApi(prepareProps(props));
@@ -168,18 +163,6 @@ FieldArray.propTypes = {
   defaultItem: PropTypes.any,
   isRequired: PropTypes.bool,
   fields: PropTypes.array,
-};
-
-FieldArray.defaultProps = {
-  noItemsMessage: 'No items',
-  maxItems: Infinity,
-  minItems: 0,
-  AddContainerProps: {},
-  AddButtonProps: {},
-  FormGroupProps: {},
-  WrapperProps: {},
-  ArrayItemProps: {},
-  RemoveButtonProps: {},
 };
 
 export default FieldArray;

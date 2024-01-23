@@ -20,13 +20,13 @@ export const Switch = (props) => {
     meta,
     onText,
     offText,
-    FormFieldGridProps,
-    FormControlProps,
-    FormGroupProps,
-    FormControlLabelProps,
-    SwitchProps,
-    FormLabelProps,
-    FormHelperTextProps,
+    FormFieldGridProps = {},
+    FormControlProps = {},
+    FormGroupProps = {},
+    FormControlLabelProps = {},
+    SwitchProps = {},
+    FormLabelProps = {},
+    FormHelperTextProps = {},
     ...rest
   } = useFieldApi({
     ...props,
@@ -79,16 +79,6 @@ Switch.propTypes = {
   SwitchProps: PropTypes.object,
   FormLabelProps: PropTypes.object,
   FormHelperTextProps: PropTypes.object,
-};
-
-Switch.defaultProps = {
-  FormFieldGridProps: {},
-  FormControlProps: {},
-  FormGroupProps: {},
-  FormControlLabelProps: {},
-  SwitchProps: {},
-  FormLabelProps: {},
-  FormHelperTextProps: {},
 };
 
 export default Switch;

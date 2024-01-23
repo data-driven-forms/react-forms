@@ -71,7 +71,7 @@ const FieldArray = (props) => {
     RemoveButtonProps,
     ArrayItemProps,
     FieldArrayProps,
-    noItemsMessage,
+    noItemsMessage = 'No items',
     validateOnMount,
     meta,
     helperText,
@@ -153,10 +153,6 @@ FieldArray.propTypes = {
   isRequired: PropTypes.bool,
   maxItems: PropTypes.number,
   minItems: PropTypes.number,
-};
-
-FieldArray.defaultProps = {
-  noItemsMessage: 'No items',
 };
 
 export default FieldArray;

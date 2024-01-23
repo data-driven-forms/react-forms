@@ -258,7 +258,18 @@ ClearedSelectSearchable.propTypes = {
 };
 
 const Select = (props) => {
-  const { isMulti, isSearchable, isClearable, loadOptions, input, meta, validateOnMount, helperText, ...rest } = useFieldApi(prepareProps(props));
+  const {
+    isMulti,
+    isSearchable,
+    isClearable,
+    loadOptions,
+    input,
+    meta,
+    validateOnMount,
+    helperText,
+    loadingMessage = 'Loading...',
+    ...rest
+  } = useFieldApi(prepareProps(props));
 
   const [loadOptionsChangeCounter, setCounter] = useState(0);
 
@@ -287,6 +298,7 @@ const Select = (props) => {
     <DataDrivenSelect
       SelectComponent={Component}
       simpleValue={false}
+      loadingMessage={loadingMessage}
       {...rest}
       {...input}
       isMulti={isMulti}
@@ -307,10 +319,6 @@ Select.propTypes = {
       label: PropTypes.node,
     })
   ),
-};
-
-Select.defaultProps = {
-  loadingMessage: 'Loading...',
 };
 
 export default Select;

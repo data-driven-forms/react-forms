@@ -82,8 +82,14 @@ const Wrapper = ({ label, isRequired, children, meta, validateOnMount, helperTex
 Wrapper.propTypes = {
   ...wrapperProps,
 };
-
-const MultipleChoiceList = ({ FormFieldGridProps, FormFieldProps, HeaderProps, OptionsListProps, HelperTextProps, ...props }) => (
+const MultipleChoiceList = ({
+  FormFieldGridProps = {},
+  FormFieldProps = {},
+  HeaderProps = {},
+  OptionsListProps = {},
+  HelperTextProps = {},
+  ...props
+}) => (
   <CheckboxContext.Provider value={{ props, FormFieldGridProps, FormFieldProps, HeaderProps, OptionsListProps, HelperTextProps }}>
     <MultipleChoiceListCommon {...props} Wrapper={Wrapper} Checkbox={FinalCheckbox} />
   </CheckboxContext.Provider>
@@ -95,14 +101,6 @@ MultipleChoiceList.propTypes = {
   HeaderProps: PropTypes.object,
   OptionsListProps: PropTypes.object,
   HelperTextProps: PropTypes.object,
-};
-
-MultipleChoiceList.defaultProps = {
-  FormFieldGridProps: {},
-  FormFieldProps: {},
-  HeaderProps: {},
-  OptionsListProps: {},
-  HelperTextProps: {},
 };
 
 export default MultipleChoiceList;
