@@ -69,9 +69,9 @@ const DynamicArray = ({ ...props }) => {
     fields: formFields,
     defaultItem,
     meta,
-    minItems,
-    maxItems,
-    noItemsMessage,
+    minItems = 0,
+    maxItems = Infinity,
+    noItemsMessage = 'No items added',
     buttonLabels,
     ...rest
   } = useFieldApi(props);
@@ -159,12 +159,6 @@ DynamicArray.propTypes = {
     remove: PropTypes.node,
     removeAll: PropTypes.node,
   }),
-};
-
-DynamicArray.defaultProps = {
-  maxItems: Infinity,
-  minItems: 0,
-  noItemsMessage: 'No items added',
 };
 
 export default DynamicArray;

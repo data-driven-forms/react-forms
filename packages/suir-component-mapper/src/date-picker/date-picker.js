@@ -17,8 +17,8 @@ const DatePicker = (props) => {
     helperText,
     validateOnMount,
     meta,
-    FormFieldGridProps,
-    HelperTextProps,
+    FormFieldGridProps = {},
+    HelperTextProps = {},
     ...rest
   } = useFieldApi(props);
   const invalid = validationError(meta, validateOnMount);
@@ -54,11 +54,6 @@ DatePicker.propTypes = {
   /** Sub components customization API */
   FormFieldGridProps: PropTypes.object,
   HelperTextProps: PropTypes.object,
-};
-
-DatePicker.defaultProps = {
-  FormFieldGridProps: {},
-  HelperTextProps: {},
 };
 
 export default DatePicker;

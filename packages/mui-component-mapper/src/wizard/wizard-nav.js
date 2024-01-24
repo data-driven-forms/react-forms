@@ -17,7 +17,7 @@ const StyledStepper = styled(Stepper)(() => ({
   },
 }));
 
-const WizardNav = ({ StepperProps, stepsInfo, activeStepIndex }) => (
+const WizardNav = ({ StepperProps = {}, stepsInfo, activeStepIndex }) => (
   <StyledStepper {...StepperProps} className={clsx(classes.stepper, StepperProps.className)} activeStep={activeStepIndex}>
     {stepsInfo.map(({ title, label, StepLabelProps, StepProps }, idx) => (
       <Step {...StepProps} key={idx}>
@@ -38,10 +38,6 @@ WizardNav.propTypes = {
     })
   ),
   activeStepIndex: PropTypes.number,
-};
-
-WizardNav.defaultProps = {
-  StepperProps: {},
 };
 
 export default WizardNav;

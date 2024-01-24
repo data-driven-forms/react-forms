@@ -103,13 +103,13 @@ VerticalLayout.propTypes = {
 const WizardInternal = ({
   stepsInfo,
   buttonLabels,
-  ButtonSetProps,
-  BackButtonProps,
-  NextButtonProps,
-  SubmitButtonProps,
-  ProgressIndicatorProps,
+  ButtonSetProps = {},
+  BackButtonProps = {},
+  NextButtonProps = {},
+  SubmitButtonProps = {},
+  ProgressIndicatorProps = {},
   vertical,
-  WizardBodyProps,
+  WizardBodyProps = {},
   conditionalSubmitFlag,
   ...props
 }) => {
@@ -185,15 +185,6 @@ WizardInternal.propTypes = {
   vertical: PropTypes.bool,
   WizardBodyProps: PropTypes.object,
   conditionalSubmitFlag: PropTypes.string.isRequired,
-};
-
-WizardInternal.defaultProps = {
-  BackButtonProps: {},
-  NextButtonProps: {},
-  SubmitButtonProps: {},
-  ButtonSetProps: {},
-  ProgressIndicatorProps: {},
-  WizardBodyProps: {},
 };
 
 const Wizard = (props) => <WizardCommon Wizard={WizardInternal} {...props} />;

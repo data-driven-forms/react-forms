@@ -40,7 +40,15 @@ export const itemPredicate = (query, item) => {
   }
 };
 
-const Select = ({ input, options, placeholder, isSearchable, noOptionsMessage, isMulti, ...props }) => {
+const Select = ({
+  input,
+  options,
+  placeholder = 'Please select',
+  isSearchable = false,
+  noOptionsMessage = 'No options found',
+  isMulti,
+  ...props
+}) => {
   const Component = isMulti ? MultiSelect : BSelect;
 
   const selectedOption = options.find(({ value }) => value === input.value);
@@ -79,12 +87,6 @@ Select.propTypes = {
   tagInputProps: PropTypes.object,
   isMulti: PropTypes.bool,
   disabled: PropTypes.bool,
-};
-
-Select.defaultProps = {
-  noOptionsMessage: 'No options found',
-  placeholder: 'Please select',
-  isSearchable: false,
 };
 
 const WrapperSelect = (props) => <FormGroupWrapper {...props} Component={Select} />;

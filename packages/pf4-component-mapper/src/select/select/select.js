@@ -294,7 +294,21 @@ InternalSelect.propTypes = {
   originalOptions: PropTypes.array,
 };
 
-const Select = ({ menuIsPortal, ...props }) => {
+const Select = ({
+  showMoreLabel = 'more',
+  showLessLabel = 'Show less',
+  simpleValue = true,
+  loadingMessage = 'Loading...',
+  updatingMessage = 'Loading data...',
+  options = [],
+  menuIsPortal = false,
+  placeholder = 'Choose...',
+  isSearchable = false,
+  isClearable = false,
+  noResultsMessage = 'No results found',
+  noOptionsMessage = 'No options',
+  ...props
+}) => {
   const menuPortalTarget = menuIsPortal ? document.body : undefined;
 
   return (
@@ -303,6 +317,17 @@ const Select = ({ menuIsPortal, ...props }) => {
       menuPortalTarget={menuPortalTarget}
       menuIsPortal={menuIsPortal}
       {...props}
+      showMoreLabel={showMoreLabel}
+      showLessLabel={showLessLabel}
+      simpleValue={simpleValue}
+      loadingMessage={loadingMessage}
+      updatingMessage={updatingMessage}
+      options={options}
+      placeholder={placeholder}
+      isSearchable={isSearchable}
+      isClearable={isClearable}
+      noResultsMessage={noResultsMessage}
+      noOptionsMessage={noOptionsMessage}
       optionsTransformer={flatOptions}
     />
   );
@@ -329,21 +354,7 @@ Select.propTypes = {
   placeholder: PropTypes.string,
   noResultsMessage: PropTypes.node,
   noOptionsMessage: PropTypes.node,
-};
-
-Select.defaultProps = {
-  showMoreLabel: 'more',
-  showLessLabel: 'Show less',
-  simpleValue: true,
-  loadingMessage: 'Loading...',
-  updatingMessage: 'Loading data...',
-  options: [],
-  menuIsPortal: false,
-  placeholder: 'Choose...',
-  isSearchable: false,
-  isClearable: false,
-  noResultsMessage: 'No results found',
-  noOptionsMessage: 'No options',
+  isClearable: PropTypes.bool,
 };
 
 export default Select;

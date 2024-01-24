@@ -57,10 +57,10 @@ const ArrayItem = memo(
     length,
     minItems,
     removeLabel,
-    FieldContainerProps,
-    FieldGroupGridProps,
-    RemoveButtonGridProps,
-    RemoveButtonProps,
+    FieldContainerProps = {},
+    FieldGroupGridProps = {},
+    RemoveButtonGridProps = {},
+    RemoveButtonProps = {},
   }) => {
     const { renderForm } = useFormApi();
 
@@ -99,13 +99,6 @@ ArrayItem.propTypes = {
   FieldGroupGridProps: PropTypes.object,
   RemoveButtonGridProps: PropTypes.object,
   RemoveButtonProps: PropTypes.object,
-};
-
-ArrayItem.defaultProps = {
-  FieldContainerProps: {},
-  FieldGroupGridProps: {},
-  RemoveButtonGridProps: {},
-  RemoveButtonProps: {},
 };
 
 const defaultButtonLabels = {
@@ -153,28 +146,28 @@ const DynamicArray = ({ ...props }) => {
     fields: formFields,
     defaultItem,
     meta,
-    minItems,
-    maxItems,
-    noItemsMessage,
-    FormFieldGridProps,
-    FormControlProps,
+    minItems = 0,
+    maxItems = Infinity,
+    noItemsMessage = 'No items added',
+    FormFieldGridProps = {},
+    FormControlProps = {},
     buttonLabels,
-    GridContainerProps,
-    HeaderGridProps,
-    HeaderProps,
-    UndoButtonProps,
-    RedoButtonProps,
-    AddButtonProps,
-    DescriptionGridProps,
-    DescriptionProps,
-    BodyGridProps,
-    NoItemsProps,
-    FormHelperTextGridProps,
-    FormHelperTextProps,
-    FieldContainerProps,
-    FieldGroupGridProps,
-    RemoveButtonGridProps,
-    RemoveButtonProps,
+    GridContainerProps = {},
+    HeaderGridProps = {},
+    HeaderProps = {},
+    UndoButtonProps = {},
+    RedoButtonProps = {},
+    AddButtonProps = {},
+    DescriptionGridProps = {},
+    DescriptionProps = {},
+    BodyGridProps = {},
+    NoItemsProps = {},
+    FormHelperTextGridProps = {},
+    FormHelperTextProps = {},
+    FieldContainerProps = {},
+    FieldGroupGridProps = {},
+    RemoveButtonGridProps = {},
+    RemoveButtonProps = {},
     ...rest
   } = useFieldApi(props);
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -323,30 +316,6 @@ DynamicArray.propTypes = {
   FieldGroupGridProps: PropTypes.object,
   RemoveButtonGridProps: PropTypes.object,
   RemoveButtonProps: PropTypes.object,
-};
-
-DynamicArray.defaultProps = {
-  maxItems: Infinity,
-  minItems: 0,
-  noItemsMessage: 'No items added',
-  FormControlProps: {},
-  FormFieldGridProps: {},
-  GridContainerProps: {},
-  HeaderGridProps: {},
-  HeaderProps: {},
-  UndoButtonProps: {},
-  RedoButtonProps: {},
-  AddButtonProps: {},
-  DescriptionGridProps: {},
-  DescriptionProps: {},
-  BodyGridProps: {},
-  NoItemsProps: {},
-  FormHelperTextGridProps: {},
-  FormHelperTextProps: {},
-  FieldContainerProps: {},
-  FieldGroupGridProps: {},
-  RemoveButtonGridProps: {},
-  RemoveButtonProps: {},
 };
 
 export default DynamicArray;

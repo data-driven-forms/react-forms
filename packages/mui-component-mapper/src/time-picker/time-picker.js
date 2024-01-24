@@ -21,7 +21,7 @@ const TimePicker = (props) => {
     validateOnMount,
     meta,
     MuiPickersUtilsProviderProps,
-    FormFieldGridProps,
+    FormFieldGridProps = {},
     ...rest
   } = useFieldApi(props);
   const invalid = validationError(meta, validateOnMount);
@@ -77,10 +77,6 @@ TimePicker.propTypes = {
   validateOnMount: PropTypes.bool,
   description: PropTypes.node,
   FormFieldGridProps: PropTypes.object,
-};
-
-TimePicker.defaultProps = {
-  FormFieldGridProps: {},
 };
 
 export default TimePicker;

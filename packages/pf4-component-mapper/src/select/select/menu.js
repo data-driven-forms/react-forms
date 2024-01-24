@@ -107,7 +107,6 @@ const Menu = ({
   filterOptions,
   isSearchable,
   filterValue,
-  options,
   getItemProps,
   getInputProps,
   highlightedIndex,
@@ -133,8 +132,18 @@ const Menu = ({
       isSelected: isMulti ? !!selectedItem.find(({ value }) => item.value === value) : selectedItem === item.value,
       onMouseUp: (e) => e.stopPropagation(), // we need this to prevent issues with portal menu not selecting a option
     });
+    let key = item.key;
+    if (!key && typeof item.value === 'object') {
+      try {
+        key = JSON.stringify(item.value);
+      } catch (error) {
+        key = index;
+      }
+    } else if (!key) {
+      key = (typeof item.label === 'string' && item.label) || index;
+    }
 
-    return <Option key={item.key || item.value || (typeof item.label === 'string' && item.label) || item} item={item} {...itemProps} />;
+    return <Option key={key} item={item} {...itemProps} />;
   };
 
   const menuItems = (

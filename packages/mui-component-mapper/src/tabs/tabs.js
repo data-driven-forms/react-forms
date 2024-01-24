@@ -6,7 +6,7 @@ import FormFieldGrid from '../form-field-grid';
 
 import { useFormApi } from '@data-driven-forms/react-form-renderer';
 
-const FormTabs = ({ fields, AppBarProps, TabsProps, TabProps, FormFieldGridProps, GridItemProps }) => {
+const FormTabs = ({ fields, AppBarProps = {}, TabsProps = {}, TabProps = {}, FormFieldGridProps = {}, GridItemProps = {} }) => {
   const formOptions = useFormApi();
   const [activeTab, setActiveTab] = useState(0);
 
@@ -43,14 +43,6 @@ FormTabs.propTypes = {
   TabProps: PropTypes.object,
   FormFieldGridProps: PropTypes.object,
   GridItemProps: PropTypes.object,
-};
-
-FormTabs.defaultProps = {
-  AppBarProps: {},
-  TabsProps: {},
-  TabProps: {},
-  FormFieldGridProps: {},
-  GridItemProps: {},
 };
 
 export default FormTabs;

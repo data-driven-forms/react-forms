@@ -19,8 +19,8 @@ const Textarea = (props) => {
     description,
     validateOnMount,
     meta,
-    FormFieldGridProps,
-    inputProps,
+    FormFieldGridProps = {},
+    inputProps = {},
     ...rest
   } = useFieldApi(props);
   const invalid = validationError(meta, validateOnMount);
@@ -59,11 +59,6 @@ Textarea.propTypes = {
   description: PropTypes.node,
   FormFieldGridProps: PropTypes.object,
   inputProps: PropTypes.object,
-};
-
-Textarea.defaultProps = {
-  FormFieldGridProps: {},
-  inputProps: {},
 };
 
 export default Textarea;

@@ -28,7 +28,7 @@ const useStyles = createUseStyles({
   },
 });
 
-const List = ({ value, optionClick, noOptionsTitle, filterValue, filterValueText, selectedValues, MenuProps, MenuItemProps }) => {
+const List = ({ value = [], optionClick, noOptionsTitle, filterValue, filterValueText, selectedValues, MenuProps = {}, MenuItemProps = {} }) => {
   const { menu } = useStyles();
 
   return (
@@ -66,13 +66,17 @@ List.propTypes = {
   MenuItemProps: PropTypes.object,
 };
 
-List.defaultProps = {
-  value: [],
-  MenuProps: {},
-  MenuItemProps: {},
-};
-
-const Toolbar = ({ sortTitle, onFilter, onSort, sortDirection, value, placeholder, ControlGroupProps, InputGroupProps, ButtonProps }) => (
+const Toolbar = ({
+  sortTitle,
+  onFilter,
+  onSort,
+  sortDirection,
+  value,
+  placeholder,
+  ControlGroupProps = {},
+  InputGroupProps = {},
+  ButtonProps = {},
+}) => (
   <ControlGroup {...ControlGroupProps}>
     <InputGroup placeholder={placeholder} onChange={(e) => onFilter(e.target.value)} value={value} {...InputGroupProps} />
     <Button icon={sortDirection ? 'sort-desc' : 'sort-asc'} title={sortTitle} onClick={onSort} {...ButtonProps} />
@@ -91,27 +95,21 @@ Toolbar.propTypes = {
   ButtonProps: PropTypes.object,
 };
 
-Toolbar.defaultProps = {
-  ControlGroupProps: {},
-  InputGroupProps: {},
-  ButtonProps: {},
-};
-
 const DualListInternal = ({
-  allToRight,
-  allToLeft,
-  leftTitle,
-  moveAllLeftTitle,
-  moveAllRightTitle,
-  moveRightTitle,
-  moveLeftTitle,
-  rightTitle,
-  noValueTitle,
-  noOptionsTitle,
-  filterOptionsTitle,
-  filterValueTitle,
-  filterValueText,
-  filterOptionsText,
+  allToRight = true,
+  allToLeft = true,
+  leftTitle = 'Options',
+  moveAllLeftTitle = 'Move all to left',
+  moveAllRightTitle = 'Move all to right',
+  moveRightTitle = 'Move selected to right',
+  moveLeftTitle = 'Move selected to left',
+  rightTitle = 'Selected',
+  noValueTitle = 'No selected',
+  noOptionsTitle = 'No available options',
+  filterOptionsTitle = 'Filter options',
+  filterValueTitle = 'Filter selected value',
+  filterValueText = 'Remove your filter to see all selected',
+  filterOptionsText = 'Remove your filter to see all options',
   state,
   sortOptions,
   filterOptions,
@@ -125,26 +123,26 @@ const DualListInternal = ({
   filterValues,
   rightValues,
   handleValuesClick,
-  WrapperProps,
-  LeftWrapperProps,
-  RightWrapperProps,
-  ButtonGroupProps,
-  ToRightButtonProps,
-  AllToRightButtonProps,
-  AllToLeftButtonProps,
-  ToLeftButtonProps,
-  LeftControlGroupProps,
-  LeftInputGroupProps,
-  LeftButtonProps,
-  RightControlGroupProps,
-  RightInputGroupProps,
-  RightButtonProps,
-  LeftMenuProps,
-  LeftMenuItemProps,
-  RightMenuProps,
-  RightMenuItemProps,
-  leftSortTitle,
-  rightSortTitle,
+  WrapperProps = {},
+  LeftWrapperProps = {},
+  RightWrapperProps = {},
+  ButtonGroupProps = {},
+  ToRightButtonProps = {},
+  AllToRightButtonProps = {},
+  AllToLeftButtonProps = {},
+  ToLeftButtonProps = {},
+  LeftControlGroupProps = {},
+  LeftInputGroupProps = {},
+  LeftButtonProps = {},
+  RightControlGroupProps = {},
+  RightInputGroupProps = {},
+  RightButtonProps = {},
+  LeftMenuProps = {},
+  LeftMenuItemProps = {},
+  RightMenuProps = {},
+  RightMenuItemProps = {},
+  leftSortTitle = 'Sort options',
+  rightSortTitle = 'Sort value',
 }) => {
   const { buttonGroup, wrapper } = useStyles();
 
@@ -285,44 +283,6 @@ DualListInternal.propTypes = {
   RightMenuItemProps: PropTypes.object,
   leftSortTitle: PropTypes.string,
   rightSortTitle: PropTypes.string,
-};
-
-DualListInternal.defaultProps = {
-  leftTitle: 'Options',
-  rightTitle: 'Selected',
-  moveLeftTitle: 'Move selected to left',
-  moveRightTitle: 'Move selected to right',
-  moveAllRightTitle: 'Move all to right',
-  moveAllLeftTitle: 'Move all to left',
-  noOptionsTitle: 'No available options',
-  noValueTitle: 'No selected',
-  filterOptionsTitle: 'Filter options',
-  filterValueTitle: 'Filter selected value',
-  filterOptionsText: 'Remove your filter to see all options',
-  filterValueText: 'Remove your filter to see all selected',
-  leftSortTitle: 'Sort options',
-  rightSortTitle: 'Sort value',
-  options: [],
-  allToLeft: true,
-  allToRight: true,
-  WrapperProps: {},
-  LeftWrapperProps: {},
-  RightWrapperProps: {},
-  ButtonGroupProps: {},
-  ToRightButtonProps: {},
-  AllToRightButtonProps: {},
-  AllToLeftButtonProps: {},
-  ToLeftButtonProps: {},
-  LeftControlGroupProps: {},
-  LeftInputGroupProps: {},
-  LeftButtonProps: {},
-  RightControlGroupProps: {},
-  RightInputGroupProps: {},
-  RightButtonProps: {},
-  LeftMenuProps: {},
-  LeftMenuItemProps: {},
-  RightMenuProps: {},
-  RightMenuItemProps: {},
 };
 
 const DualListWrapper = (props) => <FormGroupInternal {...props} Component={DualListInternal} />;

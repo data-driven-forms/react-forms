@@ -13,7 +13,18 @@ const useStyles = createUseStyles({
   },
 });
 
-const SubForm = ({ fields, component, title, description, TitleElement, DescriptionElement, TitleProps, DescriptionProps, HeaderProps, ...rest }) => {
+const SubForm = ({
+  fields,
+  component,
+  title,
+  description,
+  TitleElement = 'h3',
+  DescriptionElement = 'p',
+  TitleProps,
+  DescriptionProps,
+  HeaderProps,
+  ...rest
+}) => {
   const formOptions = useFormApi();
   const { tab } = useStyles();
 
@@ -40,11 +51,6 @@ SubForm.propTypes = {
   TitleProps: PropTypes.object,
   DescriptionProps: PropTypes.object,
   HeaderProps: PropTypes.object,
-};
-
-SubForm.defaultProps = {
-  TitleElement: 'h3',
-  DescriptionElement: 'p',
 };
 
 export default SubForm;

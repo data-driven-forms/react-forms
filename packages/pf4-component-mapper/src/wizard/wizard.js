@@ -199,7 +199,7 @@ const defaultLabels = {
   next: 'Next',
 };
 
-const WizardFunction = ({ buttonLabels, ...props }) => (
+const WizardFunction = ({ buttonLabels = {}, ...props }) => (
   <Wizard Wizard={WizardInternal} {...props} buttonLabels={{ ...defaultLabels, ...buttonLabels }} />
 );
 
@@ -209,10 +209,6 @@ WizardFunction.propTypes = {
     cancel: PropTypes.node,
     back: PropTypes.node,
   }),
-};
-
-WizardFunction.defaultProps = {
-  buttonLabels: {},
 };
 
 export default WizardFunction;

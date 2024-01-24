@@ -58,7 +58,7 @@ RadioOption.propTypes = {
 
 const Radio = ({ name, ...props }) => {
   const {
-    options,
+    options = [],
     isDisabled,
     label,
     isRequired,
@@ -67,10 +67,12 @@ const Radio = ({ name, ...props }) => {
     isReadOnly,
     meta,
     validateOnMount,
-    FormFieldGridProps,
-    FormControlProps,
-    FormLabelProps,
-    FormHelperTextProps,
+    FormFieldGridProps = {},
+    FormControlProps = {},
+    FormLabelProps = {},
+    FormHelperTextProps = {},
+    FormControlLabelProps = {},
+    RadioProps = {},
     ...rest
   } = useFieldApi({
     ...props,
@@ -87,7 +89,16 @@ const Radio = ({ name, ...props }) => {
           {label}
         </FormLabel>
         {options.map((option) => (
-          <RadioOption key={option.value} name={name} option={option} isDisabled={isDisabled} isReadOnly={isReadOnly} {...rest} />
+          <RadioOption
+            key={option.value}
+            name={name}
+            option={option}
+            isDisabled={isDisabled}
+            isReadOnly={isReadOnly}
+            FormControlLabelProps={FormControlLabelProps}
+            RadioProps={RadioProps}
+            {...rest}
+          />
         ))}
         {text && <FormHelperText {...FormHelperTextProps}>{text}</FormHelperText>}
       </FormControl>
@@ -112,16 +123,6 @@ Radio.propTypes = {
   RadioProps: PropTypes.object,
   FormLabelProps: PropTypes.object,
   FormHelperTextProps: PropTypes.object,
-};
-
-Radio.defaultProps = {
-  options: [],
-  FormFieldGridProps: {},
-  FormControlProps: {},
-  FormControlLabelProps: {},
-  RadioProps: {},
-  FormLabelProps: {},
-  FormHelperTextProps: {},
 };
 
 export default Radio;

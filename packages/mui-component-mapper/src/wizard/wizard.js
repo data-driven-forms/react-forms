@@ -24,7 +24,15 @@ const StyledWizard = styled(Grid)(() => ({
   },
 }));
 
-const WizardInternal = ({ buttonLabels, stepsInfo, ButtonContainerProps, StepperProps, WizardBodyProps, WizardProps, conditionalSubmitFlag }) => {
+const WizardInternal = ({
+  buttonLabels,
+  stepsInfo,
+  ButtonContainerProps,
+  StepperProps,
+  WizardBodyProps = {},
+  WizardProps,
+  conditionalSubmitFlag,
+}) => {
   const { formOptions, currentStep, handlePrev, onKeyDown, handleNext, activeStepIndex, prevSteps } = useContext(WizardContext);
 
   const buttonLabelsFinal = {
@@ -70,10 +78,6 @@ WizardInternal.propTypes = {
   WizardBodyProps: PropTypes.object,
   WizardProps: PropTypes.object,
   conditionalSubmitFlag: PropTypes.string.isRequired,
-};
-
-WizardInternal.defaultProps = {
-  WizardBodyProps: {},
 };
 
 const MuiWizard = (props) => <Wizard Wizard={WizardInternal} {...props} />;

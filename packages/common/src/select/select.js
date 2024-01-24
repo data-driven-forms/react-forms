@@ -7,14 +7,15 @@ import useSelect from '../use-select/use-select';
 import deepEqual from './deep-equal';
 
 const Select = ({
-  invalid,
+  invalid = false,
   classNamePrefix,
-  simpleValue,
+  simpleValue = true,
   isMulti,
-  pluckSingleValue,
-  options: propsOptions,
+  pluckSingleValue = true,
+  options: propsOptions = [],
   loadOptions,
   loadingMessage,
+  placeholder = 'Choose...',
   loadingProps,
   selectVariant,
   updatingMessage,
@@ -26,6 +27,8 @@ const Select = ({
   noValueUpdates,
   optionsTransformer,
   compareValues = deepEqual,
+  isSearchable = false,
+  isClearable = false,
   ...props
 }) => {
   const {
@@ -42,7 +45,7 @@ const Select = ({
     onChange,
     value,
     loadOptionsChangeCounter,
-    isSearchable: props.isSearchable,
+    isSearchable,
     pluckSingleValue,
     isMulti,
     simpleValue,
@@ -60,11 +63,14 @@ const Select = ({
   if (state.isLoading) {
     return (
       <SelectComponent
+        isClearable={isClearable}
+        isSearchable={isSearchable}
         {...props}
         classNamePrefix={classNamePrefix}
         isDisabled={true}
         isFetching={true}
-        placeholder={loadingMessage}
+        placeholder={placeholder}
+        loadingMessage={loadingMessage}
         options={state.options}
         onChange={() => {}}
         onInputChange={onInputChange}
@@ -83,6 +89,9 @@ const Select = ({
         'has-error': invalid,
       })}
       {...props}
+      isSearchable={isSearchable}
+      isClearable={isClearable}
+      placeholder={placeholder}
       isDisabled={props.isDisabled || props.isReadOnly}
       options={state.options}
       classNamePrefix={classNamePrefix}
@@ -119,21 +128,11 @@ Select.propTypes = {
   updatingMessage: PropTypes.node,
   noOptionsMessage: PropTypes.node,
   isSearchable: PropTypes.bool,
+  isClearable: PropTypes.bool,
   SelectComponent: PropTypes.elementType.isRequired,
   noValueUpdates: PropTypes.bool,
   optionsTransformer: PropTypes.func,
   compareValues: PropTypes.func,
-};
-
-Select.defaultProps = {
-  options: [],
-  invalid: false,
-  simpleValue: true,
-  pluckSingleValue: true,
-  placeholder: 'Choose...',
-  isSearchable: false,
-  isClearable: false,
-  compareValues: deepEqual,
 };
 
 export default Select;

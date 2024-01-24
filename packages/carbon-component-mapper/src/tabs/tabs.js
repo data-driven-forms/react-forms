@@ -15,7 +15,7 @@ const useStyles = createUseStyles({
   },
 });
 
-const Tabs = ({ fields, component, name, TabWrapperProps, ...props }) => {
+const Tabs = ({ fields, component, name, TabWrapperProps = {}, ...props }) => {
   const formOptions = useFormApi();
   const { tab } = useStyles();
 
@@ -44,10 +44,6 @@ Tabs.propTypes = {
       label: PropTypes.node,
     })
   ),
-};
-
-Tabs.defaultProps = {
-  TabWrapperProps: {},
 };
 
 export default Tabs;

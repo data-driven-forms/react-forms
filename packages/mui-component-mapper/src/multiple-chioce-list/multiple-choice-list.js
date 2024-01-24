@@ -51,13 +51,13 @@ Wrapper.propTypes = {
 };
 
 const MultipleChoiceList = ({
-  FormControlProps,
-  FormLabelProps,
-  FormGroupProps,
-  FormHelperTextProps,
-  FormFieldGridProps,
-  FormControlLabelProps,
-  CheckboxProps,
+  FormControlProps = {},
+  FormLabelProps = {},
+  FormGroupProps = {},
+  FormHelperTextProps = {},
+  FormFieldGridProps = {},
+  FormControlLabelProps = {},
+  CheckboxProps = {},
   ...props
 }) => (
   <CheckboxContext.Provider
@@ -78,15 +78,6 @@ MultipleChoiceList.propTypes = {
   CheckboxProps: PropTypes.object,
   FormLabelProps: PropTypes.object,
   FormHelperTextProps: PropTypes.object,
-};
-MultipleChoiceList.defaultProps = {
-  FormFieldGridProps: {},
-  FormControlProps: {},
-  FormGroupProps: {},
-  FormControlLabelProps: {},
-  CheckboxProps: {},
-  FormLabelProps: {},
-  FormHelperTextProps: {},
 };
 
 export default MultipleChoiceList;

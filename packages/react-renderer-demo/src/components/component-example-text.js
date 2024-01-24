@@ -32,7 +32,7 @@ const Root = styled('div')(({ theme }) => ({
   },
 }));
 
-const ComponentExampleText = ({ linkText, schema, variants, schemaVariants }) => {
+const ComponentExampleText = ({ linkText, schema, variants = [], schemaVariants }) => {
   const [activeMapper, component, activeSchema] = useComponentExample();
 
   return (
@@ -61,10 +61,6 @@ ComponentExampleText.propTypes = {
   schema: PropTypes.object.isRequired,
   variants: PropTypes.arrayOf(PropTypes.object),
   schemaVariants: PropTypes.object,
-};
-
-ComponentExampleText.defaultProps = {
-  variants: [],
 };
 
 export default ComponentExampleText;

@@ -19,13 +19,13 @@ export const SingleCheckbox = (props) => {
     description,
     validateOnMount,
     meta,
-    FormFieldGridProps,
-    FormControlProps,
-    FormGroupProps,
-    FormControlLabelProps,
-    CheckboxProps,
-    FormLabelProps,
-    FormHelperTextProps,
+    FormFieldGridProps = {},
+    FormControlProps = {},
+    FormGroupProps = {},
+    FormControlLabelProps = {},
+    CheckboxProps = {},
+    FormLabelProps = {},
+    FormHelperTextProps = {},
     inputProps,
     ...rest
   } = useFieldApi({
@@ -80,16 +80,6 @@ SingleCheckbox.propTypes = {
   CheckboxProps: PropTypes.object,
   FormLabelProps: PropTypes.object,
   FormHelperTextProps: PropTypes.object,
-};
-
-SingleCheckbox.defaultProps = {
-  FormFieldGridProps: {},
-  FormControlProps: {},
-  FormGroupProps: {},
-  FormControlLabelProps: {},
-  CheckboxProps: {},
-  FormLabelProps: {},
-  FormHelperTextProps: {},
 };
 
 const Checkbox = ({ options, ...props }) => (options ? <MultipleChoiceList options={options} {...props} /> : <SingleCheckbox {...props} />);

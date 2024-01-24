@@ -24,18 +24,18 @@ export const completeButtons = (buttonOrder) => {
 export const FormControls = ({
   onCancel,
   onReset,
-  submitLabel,
-  cancelLabel,
-  resetLabel,
-  canReset,
+  submitLabel = 'Submit',
+  cancelLabel = 'Cancel',
+  resetLabel = 'Reset',
+  canReset = false,
   disableSubmit,
-  buttonOrder,
+  buttonOrder = ['submit', 'reset', 'cancel'],
   buttonClassName,
   FormButtons,
   Button,
   ButtonGroup,
   formSpyProps,
-  buttonsProps,
+  buttonsProps = {},
   buttonGroupProps,
 }) => {
   if (FormButtons) {
@@ -96,16 +96,6 @@ FormControls.propTypes = {
   buttonsProps: PropTypes.object,
 };
 
-FormControls.defaultProps = {
-  submitLabel: 'Submit',
-  cancelLabel: 'Cancel',
-  resetLabel: 'Reset',
-  canReset: false,
-  canSubmit: false,
-  buttonOrder: ['submit', 'reset', 'cancel'],
-  buttonsProps: {},
-};
-
 const FormTemplate = ({
   FormWrapper,
   Title,
@@ -113,9 +103,9 @@ const FormTemplate = ({
   Button,
   ButtonGroup,
   formWrapperProps,
-  showFormControls,
-  disableSubmit,
-  Header,
+  showFormControls = true,
+  disableSubmit = [],
+  Header = React.Fragment,
   headerProps,
   titleProps,
   descriptionProps,
@@ -187,12 +177,6 @@ FormTemplate.propTypes = {
   buttonsProps: PropTypes.object,
   BeforeError: PropTypes.elementType,
   alertProps: PropTypes.object,
-};
-
-FormTemplate.defaultProps = {
-  showFormControls: true,
-  disableSubmit: [],
-  Header: React.Fragment,
 };
 
 export default FormTemplate;

@@ -20,18 +20,19 @@ const SuirSelect = ({
   isDisabled,
   isClearable,
   isSearchable,
-  options,
+  options = [],
   label,
   isMulti,
   isRequired,
   classNamePrefix,
   onInputChange,
   isFetching,
-  noOptionsMessage,
+  noOptionsMessage = 'No option found',
   hideSelectedOptions,
   closeMenuOnSelect,
-  FormFieldGridProps,
-  HelpertextProps,
+  FormFieldGridProps = {},
+  HelpertextProps = {},
+  placeholder = 'Please choose',
   ...rest
 }) => {
   const invalid = validationError(meta, validateOnMount);
@@ -68,6 +69,7 @@ const SuirSelect = ({
         error={invalid && { content: meta.error || meta.submitError }}
         control={Dropdown}
         value={internalValue}
+        placeholder={placeholder}
         {...rest}
       />
     </FormFieldGrid>
@@ -100,14 +102,6 @@ SuirSelect.propTypes = {
   /** Sub components customization API */
   FormFieldGridProps: PropTypes.object,
   HelpertextProps: PropTypes.object,
-};
-
-SuirSelect.defaultProps = {
-  placeholder: 'Please choose',
-  noOptionsMessage: 'No option found',
-  options: [],
-  FormFieldGridProps: {},
-  HelpertextProps: {},
 };
 
 const Select = (props) => {

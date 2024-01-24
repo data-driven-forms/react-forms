@@ -187,7 +187,7 @@ const AccordionSummary = styled((props) => {
     flexDirection: 'row-reverse',
   },
 }));
-const CodeExample = ({ source, mode }) => {
+const CodeExample = ({ source, mode = 'code' }) => {
   const [name, setName] = useState('');
   const [codeSource, setCodeSource] = useState('');
   const { current: Component } = useRef(
@@ -290,10 +290,6 @@ const CodeExample = ({ source, mode }) => {
 CodeExample.propTypes = {
   source: PropTypes.string.isRequired,
   mode: PropTypes.oneOf(['code', 'preview']),
-};
-
-CodeExample.defaultProps = {
-  mode: 'code',
 };
 
 export default CodeExample;

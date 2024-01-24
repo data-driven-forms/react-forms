@@ -18,8 +18,8 @@ export const SingleCheckbox = (props) => {
     description,
     validateOnMount,
     meta,
-    FormFieldGridProps,
-    HelperTextProps,
+    FormFieldGridProps = {},
+    HelperTextProps = {},
     ...rest
   } = useFieldApi({
     ...props,
@@ -69,11 +69,6 @@ Checkbox.propTypes = {
   /** Sub components customization API */
   FormFieldGridProps: PropTypes.object,
   HelperTextProps: PropTypes.object,
-};
-
-Checkbox.defaultProps = {
-  FormFieldGridProps: {},
-  HelperTextProps: {},
 };
 
 export default Checkbox;

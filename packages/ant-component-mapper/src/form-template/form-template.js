@@ -6,8 +6,8 @@ import { childrenPropTypes } from '@data-driven-forms/common/prop-types-template
 
 const { Title, Paragraph } = Typography;
 
-const Form = ({ children, onSubmit, ...props }) => (
-  <AntForm onFinish={onSubmit} {...props}>
+const Form = ({ children, onSubmit, layout = 'vertical', ...props }) => (
+  <AntForm onFinish={onSubmit} layout={layout} {...props}>
     {children}
   </AntForm>
 );
@@ -16,10 +16,6 @@ Form.propTypes = {
   layout: PropTypes.string,
   onSubmit: PropTypes.func,
   children: childrenPropTypes,
-};
-
-Form.defaultProps = {
-  layout: 'vertical',
 };
 
 const Description = ({ children, ...props }) => (
