@@ -138,11 +138,16 @@ const getPayload = (code, sourceFiles = {}) =>
             '@data-driven-forms/react-form-renderer': 'latest',
             '@mui/material': 'latest',
             '@mui/icons-material': 'latest',
-            react: '16.12.0',
-            'react-dom': '16.12.0',
-            'react-scripts': '3.0.1',
+            react: '^18.2.0',
+            'react-dom': '^18.2.0',
+            'react-scripts': '5.0.1',
           },
-          devDependencies: { typescript: '3.8.3' },
+          devDependencies: {
+            '@types/react': '18.2.38',
+            '@types/react-dom': '18.2.15',
+            'loader-utils': '3.2.1',
+            typescript: '4.4.4',
+          },
           scripts: {
             start: 'react-scripts start',
             build: 'react-scripts build',
@@ -153,8 +158,19 @@ const getPayload = (code, sourceFiles = {}) =>
         },
       },
       'src/index.js': {
-        content:
-          'import React from "react";\nimport ReactDOM from "react-dom";\n\nimport App from "./App";\n\nconst rootElement = document.getElementById("root");\nReactDOM.render(\n  <React.StrictMode>\n    <App />\n  </React.StrictMode>,\n  rootElement\n);\n',
+        content: `import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+        
+import App from "./App";
+        
+const rootElement = document.getElementById("root");
+const root = createRoot(rootElement);        
+root.render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+);
+`,
       },
       'src/App.js': {
         content: code,
