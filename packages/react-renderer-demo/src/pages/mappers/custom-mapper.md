@@ -45,11 +45,11 @@ Or you can import [FieldProvider](/components/field-provider) component from Dat
 ```jsx
 import { FieldProvider } from '@data-driven-forms/react-form-renderer'
 
-<FielProvider Component={TextField}>
+<FieldProvider Component={TextField}>
 
 // or
 
-<FielProvider render={({input, meta, ...props}) => <TextField {...props} input={input} meta={meta}>}>
+<FieldProvider render={({input, meta, ...props}) => <TextField {...props} input={input} meta={meta}>}>
 ```
 
 ## Non-input form components
