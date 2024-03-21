@@ -32,7 +32,10 @@ const reducer = (state, { type, payload, options = [], optionsTransformer }) => 
         ...state,
         isInitialLoaded: true,
       };
-    case 'setPromises':
+    case 'setPromises': {
+      const compareValues = payload.compareValues;
+      delete payload.compareValues;
+
       return {
         ...state,
         promises: {
@@ -42,16 +45,15 @@ const reducer = (state, { type, payload, options = [], optionsTransformer }) => 
         options: optionsTransformer
           ? optionsTransformer([
               ...state.options,
-              ...options.filter(({ value }) => !state.options.find((option) => payload.compareValues(option.value, value))),
+              ...options.filter(({ value }) => !state.options.find((option) => compareValues(option.value, value))),
             ])
-          : [...state.options, ...options.filter(({ value }) => !state.options.find((option) => payload.compareValues(option.value, value)))],
+          : [...state.options, ...options.filter(({ value }) => !state.options.find((option) => compareValues(option.value, value)))],
         ...(optionsTransformer && {
-          originalOptions: [
-            ...state.options,
-            ...options.filter(({ value }) => !state.options.find((option) => payload.compareValues(option.value, value))),
-          ],
+          originalOptions: [...state.options, ...options.filter(({ value }) => !state.options.find((option) => compareValues(option.value, value)))],
         }),
       };
+    }
+
     default:
       return state;
   }
