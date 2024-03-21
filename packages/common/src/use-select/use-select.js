@@ -71,7 +71,7 @@ const useSelect = ({
 }) => {
   const [propsOptions, setPropsCache] = useState(initialOptions);
   const [state, originalDispatch] = useReducer(reducer, { optionsTransformer, propsOptions: initialOptions }, init);
-  const dispatch = (action) => originalDispatch({ ...action, optionsTransformer });
+  const dispatch = (action) => originalDispatch({ ...action, optionsTransformer, compareValues });
 
   useEffect(() => {
     if (!isEqual(initialOptions, propsOptions)) {
@@ -132,14 +132,14 @@ const useSelect = ({
 
   const onInputChange = (inputValue) => {
     if (inputValue && loadOptions && state.promises[inputValue] === undefined && isSearchable) {
-      dispatch({ type: 'setPromises', payload: { [inputValue]: true, compareValues } });
+      dispatch({ type: 'setPromises', payload: { [inputValue]: true } });
 
       loadOptions(inputValue)
         .then((options) => {
           if (isMounted.current) {
             dispatch({
               type: 'setPromises',
-              payload: { [inputValue]: false, compareValues },
+              payload: { [inputValue]: false },
               options,
             });
           }
