@@ -114,7 +114,7 @@ const useSelect = ({
   }, [loadOptionsStr, loadOptionsChangeCounter]);
 
   useEffect(() => {
-    if (state.isInitialLoaded) {
+    if (!isEqual(state.options, propsOptions) && state.isInitialLoaded) {
       if (!noValueUpdates && value && !propsOptions.map(({ value }) => value).includes(value)) {
         onChange(undefined);
       }
