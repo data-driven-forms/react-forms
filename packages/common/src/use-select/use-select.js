@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 
 import isEqual from 'lodash/isEqual';
 
@@ -58,7 +58,7 @@ const handleSelectChange = (option, simpleValue, isMulti, onChange, allOptions, 
 const useSelect = ({
   loadOptions,
   optionsTransformer,
-  options: propsOptions,
+  options: initialOptions = [],
   noValueUpdates,
   onChange,
   value,
@@ -69,8 +69,15 @@ const useSelect = ({
   simpleValue,
   compareValues,
 }) => {
-  const [state, originalDispatch] = useReducer(reducer, { optionsTransformer, propsOptions }, init);
+  const [propsOptions, setPropsCache] = useState(initialOptions);
+  const [state, originalDispatch] = useReducer(reducer, { optionsTransformer, propsOptions: initialOptions }, init);
   const dispatch = (action) => originalDispatch({ ...action, optionsTransformer });
+
+  useEffect(() => {
+    if (!isEqual(initialOptions, propsOptions)) {
+      setPropsCache(initialOptions);
+    }
+  }, [initialOptions]);
 
   const isMounted = useIsMounted();
 

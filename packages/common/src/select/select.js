@@ -12,7 +12,7 @@ const Select = ({
   simpleValue = true,
   isMulti,
   pluckSingleValue = true,
-  options: propsOptions = [],
+  options: propsOptions,
   loadOptions,
   loadingMessage,
   placeholder = 'Choose...',
