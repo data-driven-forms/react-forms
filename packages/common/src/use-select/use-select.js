@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 
 import isEqual from 'lodash/isEqual';
 
@@ -58,7 +58,7 @@ const handleSelectChange = (option, simpleValue, isMulti, onChange, allOptions, 
 const useSelect = ({
   loadOptions,
   optionsTransformer,
-  options: propsOptions,
+  options: initialOptions = [],
   noValueUpdates,
   onChange,
   value,
@@ -69,8 +69,15 @@ const useSelect = ({
   simpleValue,
   compareValues,
 }) => {
-  const [state, originalDispatch] = useReducer(reducer, { optionsTransformer, propsOptions }, init);
-  const dispatch = (action) => originalDispatch({ ...action, optionsTransformer });
+  const [propsOptions, setPropsCache] = useState(initialOptions);
+  const [state, originalDispatch] = useReducer(reducer, { optionsTransformer, propsOptions: initialOptions }, init);
+  const dispatch = (action) => originalDispatch({ ...action, optionsTransformer, compareValues });
+
+  useEffect(() => {
+    if (!isEqual(initialOptions, propsOptions)) {
+      setPropsCache(initialOptions);
+    }
+  }, [initialOptions]);
 
   const isMounted = useIsMounted();
 
@@ -114,7 +121,7 @@ const useSelect = ({
   }, [loadOptionsStr, loadOptionsChangeCounter]);
 
   useEffect(() => {
-    if (state.isInitialLoaded) {
+    if (!isEqual(state.options, propsOptions) && state.isInitialLoaded) {
       if (!noValueUpdates && value && !propsOptions.map(({ value }) => value).includes(value)) {
         onChange(undefined);
       }
@@ -125,14 +132,14 @@ const useSelect = ({
 
   const onInputChange = (inputValue) => {
     if (inputValue && loadOptions && state.promises[inputValue] === undefined && isSearchable) {
-      dispatch({ type: 'setPromises', payload: { [inputValue]: true, compareValues } });
+      dispatch({ type: 'setPromises', payload: { [inputValue]: true } });
 
       loadOptions(inputValue)
         .then((options) => {
           if (isMounted.current) {
             dispatch({
               type: 'setPromises',
-              payload: { [inputValue]: false, compareValues },
+              payload: { [inputValue]: false },
               options,
             });
           }

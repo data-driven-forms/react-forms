@@ -6,7 +6,7 @@ export const init = ({ propsOptions, optionsTransformer }) => ({
   ...(optionsTransformer && { originalOptions: propsOptions }),
 });
 
-const reducer = (state, { type, payload, options = [], optionsTransformer }) => {
+const reducer = (state, { type, payload, options = [], optionsTransformer, compareValues }) => {
   switch (type) {
     case 'updateOptions':
       return {
@@ -42,14 +42,11 @@ const reducer = (state, { type, payload, options = [], optionsTransformer }) => 
         options: optionsTransformer
           ? optionsTransformer([
               ...state.options,
-              ...options.filter(({ value }) => !state.options.find((option) => payload.compareValues(option.value, value))),
+              ...options.filter(({ value }) => !state.options.find((option) => compareValues(option.value, value))),
             ])
-          : [...state.options, ...options.filter(({ value }) => !state.options.find((option) => payload.compareValues(option.value, value)))],
+          : [...state.options, ...options.filter(({ value }) => !state.options.find((option) => compareValues(option.value, value)))],
         ...(optionsTransformer && {
-          originalOptions: [
-            ...state.options,
-            ...options.filter(({ value }) => !state.options.find((option) => payload.compareValues(option.value, value))),
-          ],
+          originalOptions: [...state.options, ...options.filter(({ value }) => !state.options.find((option) => compareValues(option.value, value)))],
         }),
       };
     default:
