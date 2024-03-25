@@ -66,8 +66,8 @@ export const dependencies = {
   '@data-driven-forms/react-form-renderer': 'latest',
   '@data-driven-forms/ant-component-mapper': 'latest',
   '@data-driven-forms/common': 'latest',
-  antd: 'latest',
-  '@ant-design/icons': 'latest',
+  antd: '^4.0.0',
+  '@ant-design/icons': '^4.7.0',
   'prop-types': 'latest',
   '@babel/runtime': '^7.12.1',
 };
