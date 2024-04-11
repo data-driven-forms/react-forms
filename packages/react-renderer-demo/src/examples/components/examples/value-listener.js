@@ -21,7 +21,7 @@ const FieldListener = () => {
   return null;
 };
 
-const FieldListenerWrapper = () => <FormSpy subcription={{ values: true }}>{() => <FieldListener />}</FormSpy>;
+const FieldListenerWrapper = () => <FormSpy subscription={{ values: true }}>{() => <FieldListener />}</FormSpy>;
 
 const schema = {
   fields: [
