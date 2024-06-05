@@ -15,5 +15,5 @@ export { default as Textarea } from './textarea';
 export { default as TimePicker } from './time-picker';
 export { default as Wizard } from './wizard';
 export { default as FormFieldGrid } from './form-field-grid';
-export { default as MultipleChoiceList } from './multiple-chioce-list';
+export { default as MultipleChoiceList } from './multiple-choice-list';
 export { default as validationError } from './validation-error';

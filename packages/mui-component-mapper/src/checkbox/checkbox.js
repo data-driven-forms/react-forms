@@ -5,7 +5,7 @@ import { meta, input } from '@data-driven-forms/common/prop-types-templates';
 
 import FormFieldGrid from '../form-field-grid/form-field-grid';
 import { validationError } from '../validation-error/validation-error';
-import MultipleChoiceList from '../multiple-chioce-list/multiple-choice-list';
+import MultipleChoiceList from '../multiple-choice-list/multiple-choice-list';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 export const SingleCheckbox = (props) => {
