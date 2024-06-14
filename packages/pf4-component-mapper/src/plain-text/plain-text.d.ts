@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { TextProps, TextContentProps } from "@patternfly/react-core";
+import { ContentProps, TextContentProps } from "@patternfly/react-core";
 
 interface InternalPlainTextProps {
   label: ReactNode;
@@ -8,7 +8,7 @@ interface InternalPlainTextProps {
   TextContentProps: TextContentProps,
 }
 
-export type PlainTextProps = InternalPlainTextProps & TextProps;
+export type PlainTextProps = InternalPlainTextProps & ContentProps;
 
 declare const PlainText: React.ComponentType<PlainTextProps>;
 

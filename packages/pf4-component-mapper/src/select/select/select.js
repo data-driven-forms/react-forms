@@ -30,19 +30,19 @@ const itemToString = (value, isMulti, showMore, handleShowMore, handleChange) =>
     if (isMulti) {
       const visibleOptions = showMore ? value : value.slice(0, 3);
       return (
-        <div className="pf-v5-c-chip-group pf-v5-u-ml-sm" onClick={(event) => event.stopPropagation()}>
-          <ul className="pf-v5-c-chip-group__list" aria-label="Chip group category">
+        <div className="pf-v6-c-chip-group pf-v6-u-ml-sm" onClick={(event) => event.stopPropagation()}>
+          <ul className="pf-v6-c-chip-group__list" aria-label="Chip group category">
             {visibleOptions.map((item, index) => {
               const label = typeof item === 'object' ? item.label : item;
               return (
-                <li className="pf-v5-c-chip-group__list-item" onClick={(event) => event.stopPropagation()} key={item.key || item.value || item}>
-                  <div className="pf-v5-c-chip">
-                    <span className="pf-v5-c-chip__text" id={`pf-random-id-${index}-${label}`}>
+                <li className="pf-v6-c-chip-group__list-item" onClick={(event) => event.stopPropagation()} key={item.key || item.value || item}>
+                  <div className="pf-v6-c-chip">
+                    <span className="pf-v6-c-chip__text" id={`pf-random-id-${index}-${label}`}>
                       {label}
                     </span>
                     <button
                       onClick={() => handleChange(item)}
-                      className="pf-v5-c-button pf-u-plain pf-v5-u-pt-0 pf-v5-u-pb-0"
+                      className="pf-v6-c-button pf-u-plain pf-v6-u-pt-0 pf-v6-u-pb-0"
                       type="button"
                       aria-label="remove option"
                     >
@@ -53,9 +53,9 @@ const itemToString = (value, isMulti, showMore, handleShowMore, handleChange) =>
               );
             })}
             {value.length > 3 && (
-              <li className="pf-v5-c-chip-group__list-item">
-                <button type="button" onClick={handleShowMore} className="pf-v5-c-chip pf-m-overflow">
-                  <span className="pf-v5-c-chip__text">{showMore ? 'Show less' : `${value.length - 3} more`}</span>
+              <li className="pf-v6-c-chip-group__list-item">
+                <button type="button" onClick={handleShowMore} className="pf-v6-c-chip pf-m-overflow">
+                  <span className="pf-v6-c-chip__text">{showMore ? 'Show less' : `${value.length - 3} more`}</span>
                 </button>
               </li>
             )}
@@ -213,17 +213,17 @@ const InternalSelect = ({
       {({ isOpen, inputValue, itemToString, selectedItem, clearSelection, getInputProps, getToggleButtonProps, getItemProps, highlightedIndex }) => {
         const toggleButtonProps = getToggleButtonProps();
         return (
-          <div className="pf-v5-c-select">
+          <div className="pf-v6-c-select">
             <div
               ref={selectToggleRef}
               disabled={isDisabled}
-              className={`pf-v5-c-select__toggle${isDisabled ? ' pf-v5-m-disabled' : ''}${
+              className={`pf-v6-c-select__toggle${isDisabled ? ' pf-v5-m-disabled' : ''}${
                 isSearchable ? ' pf-v5-m-typeahead' : ''
               } ddorg__pf4-component-mapper__select-toggle`}
               tabIndex={0}
               {...toggleButtonProps}
             >
-              <div className="pf-v5-c-select_toggle-wrapper ddorg__pf4-component-mapper__select-toggle-wrapper">
+              <div className="pf-v6-c-select_toggle-wrapper ddorg__pf4-component-mapper__select-toggle-wrapper">
                 <ValueContainer
                   isMulti={isMulti}
                   isSearchable={isSearchable}
@@ -234,7 +234,7 @@ const InternalSelect = ({
                 />
               </div>
               {isClearable && parsedValue && <ClearIndicator clearSelection={clearSelection} />}
-              <span className="pf-v5-c-select__toggle-arrow">
+              <span className="pf-v6-c-select__toggle-arrow">
                 <Icon>{isFetching ? <CircleNotchIcon className="ddorg__pf4-component-mapper__select-loading-icon" /> : <CaretDownIcon />}</Icon>
               </span>
             </div>

@@ -24,11 +24,11 @@ const Input = ({ inputRef, isSearchable, isDisabled, getInputProps, value, ...pr
   const inputProps = getInputProps({ disabled: isDisabled });
   const initialInputValue = getInputString(inputProps.value, value);
   return (
-    <div className="ddorg__pf4-component-mapper__select-input-wrapper pf-v5-c-text-input-group pf-m-typeahead">
+    <div className="ddorg__pf4-component-mapper__select-input-wrapper pf-v6-c-text-input-group pf-m-typeahead">
       <input
         value=""
         {...props}
-        className="pf-v5-c-text-input-group__text-input"
+        className="pf-v6-c-text-input-group__text-input"
         ref={inputRef}
         {...{
           ...inputProps,

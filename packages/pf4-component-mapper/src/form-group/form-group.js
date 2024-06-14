@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormGroup as Pf4FormGroup, TextContent, Text, FormHelperText, HelperText, HelperTextItem } from '@patternfly/react-core';
+import { FormGroup as Pf4FormGroup, Content, FormHelperText, HelperText, HelperTextItem } from '@patternfly/react-core';
 import PropTypes from 'prop-types';
 
 import showError from '../show-error/show-error';
@@ -10,9 +10,9 @@ const FormGroup = ({ label, isRequired, helperText, meta, validateOnMount, descr
   return (
     <Pf4FormGroup isRequired={isRequired} label={!hideLabel && label} fieldId={id} aria-label={meta.error || meta.submitError} {...FormGroupProps}>
       {description && (
-        <TextContent>
-          <Text component="small">{description}</Text>
-        </TextContent>
+        <Content>
+          <Content component="small">{description}</Content>
+        </Content>
       )}
       {children}
       {(helperText || ['error', 'warning'].includes(validated)) && (
