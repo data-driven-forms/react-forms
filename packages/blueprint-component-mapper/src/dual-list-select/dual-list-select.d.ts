@@ -26,6 +26,7 @@ interface InternalDualListSelectProps {
   filterOptionsText?: ReactNode;
   leftValues?: DualListSelectValue[];
   rightValues?: DualListSelectValue[];
+  isFilterCaseInSensitive?: boolean;
   WrapperProps?: React.HTMLProps<HTMLDivElement>;
   LeftWrapperProps?: React.HTMLProps<HTMLDivElement>;
   RightWrapperProps?: React.HTMLProps<HTMLDivElement>;

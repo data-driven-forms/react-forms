@@ -23,6 +23,7 @@ Dual list select is wrapped in a form group, so it accepts all [form group props
 |filterOptionsText|String|'Remove your filter to see all options'|Placeholder for options when there is no filtered option|
 |leftSortTitle|String|'Sort options'|Accessible title for left sort button.|
 |rightSortTitle|String|'Sort value'|Accessible title for right sort button.|
+|isFilterCaseInSensitive|bool|true|Toolbar filter is case insensitive|
 
 ### Options
 

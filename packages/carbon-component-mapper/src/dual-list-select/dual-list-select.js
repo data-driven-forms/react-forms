@@ -304,6 +304,7 @@ DualListSelectInner.propTypes = {
   sortValuesTitle: PropTypes.string,
   filterOptionsText: PropTypes.node,
   filterValueText: PropTypes.node,
+  isFilterCaseInSensitive: PropTypes.bool,
   FormGroupProps: PropTypes.object,
   GridProps: PropTypes.object,
   RowProps: PropTypes.object,

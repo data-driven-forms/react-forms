@@ -44,6 +44,7 @@ interface InternalDualListSelectProps {
   sortValuesTitle?: string;
   filterOptionsText?: ReactNode;
   filterValueText?: ReactNode;
+  isFilterCaseInSensitive?: boolean;
   FormGroupProps?: CarbonFormGroups;
   GridProps?: GridDefaultProps;
   RowProps?: RowDefaultProps;
