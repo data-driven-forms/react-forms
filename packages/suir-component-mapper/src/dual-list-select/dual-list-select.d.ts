@@ -29,6 +29,7 @@ interface InternalDualListSelectProps {
   filterOptionsText?: ReactNode;
   leftValues?: DualListSelectOption[];
   rightValues?: DualListSelectOption[];
+  isFilterCaseInSensitive?: boolean;
   /** Sub components customization API */
   OptionsListProps?: SegmentProps;
   OptionProps?: DualListSelectOptionProps;

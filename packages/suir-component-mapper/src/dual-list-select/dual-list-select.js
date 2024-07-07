@@ -362,6 +362,7 @@ DualList.propTypes = {
   validateOnMount: PropTypes.bool,
   leftSortTitle: PropTypes.node,
   rightSortTitle: PropTypes.node,
+  isFilterCaseInSensitive: PropTypes.bool,
   /** Sub components customization API */
   OptionsListProps: PropTypes.object,
   OptionProps: PropTypes.object,

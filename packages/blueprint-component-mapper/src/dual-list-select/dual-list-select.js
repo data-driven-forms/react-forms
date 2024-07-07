@@ -263,6 +263,7 @@ DualListInternal.propTypes = {
   filterValues: PropTypes.func,
   rightValues: PropTypes.array,
   handleValuesClick: PropTypes.func,
+  isFilterCaseInSensitive: PropTypes.bool,
   WrapperProps: PropTypes.object,
   LeftWrapperProps: PropTypes.object,
   RightWrapperProps: PropTypes.object,
