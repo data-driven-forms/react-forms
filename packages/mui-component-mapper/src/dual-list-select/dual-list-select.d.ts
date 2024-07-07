@@ -48,6 +48,7 @@ interface InternalDualListSelectProps {
   id?: string;
   leftValues?: DualListOption[];
   rightValues?: DualListOption[];
+  isFilterCaseInSensitive?: boolean;
   FormFieldGridProps?: GridProps;
   InternalGridProps?: GridProps;
   ListGridProps?: GridProps;

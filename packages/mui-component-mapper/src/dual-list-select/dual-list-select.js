@@ -555,6 +555,7 @@ DualListSelect.propTypes = {
   rightValues: PropTypes.array,
   handleValuesClick: PropTypes.func,
   isFilterable: PropTypes.bool,
+  isFilterCaseInSensitive: PropTypes.bool,
   // props
   FormFieldGridProps: PropTypes.object,
   InternalGridProps: PropTypes.object,

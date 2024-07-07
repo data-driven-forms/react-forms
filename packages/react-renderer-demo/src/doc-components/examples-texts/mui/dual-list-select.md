@@ -23,6 +23,7 @@ Dual list select is wrapped in a form group, so it accepts all [form group props
 |filterOptionsText|String|'Remove your filter to see all options'|Placeholder for options when there is no filtered option|
 |checkboxVariant|bool|false|Change list item to checkboxes|
 |isFilterable|bool|true|Shows toolbar for both lists|
+|isFilterCaseInSensitive|bool|true|Toolbar filter is case insensitive|
 
 ### Options
 
