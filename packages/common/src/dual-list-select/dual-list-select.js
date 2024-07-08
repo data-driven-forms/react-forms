@@ -39,10 +39,10 @@ const DualListSelectCommon = (props) => {
   });
 
   const leftValues = rest.options
-    .filter((option) => !rest.input.value.includes(option.value) && option.label.includes(state.filterOptions))
+    .filter((option) => !rest.input.value.includes(option.value) && option.label.toLowerCase().includes(state.filterOptions.toLowerCase()))
     .sort((a, b) => (state.sortLeftDesc ? a.label.localeCompare(b.label) : b.label.localeCompare(a.label)));
   const rightValues = rest.options
-    .filter((option) => rest.input.value.includes(option.value) && option.label.includes(state.filterValue))
+    .filter((option) => rest.input.value.includes(option.value) && option.label.toLowerCase().includes(state.filterValue.toLowerCase()))
     .sort((a, b) => (state.sortRightDesc ? a.label.localeCompare(b.label) : b.label.localeCompare(a.label)));
 
   const handleOptionsClick = (event, value) => handleOptionClick(event, value, leftValues, true, dispatch, state);
