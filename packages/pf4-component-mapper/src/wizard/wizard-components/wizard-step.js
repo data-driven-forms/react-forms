@@ -61,7 +61,7 @@ const WizardStep = ({
 
   return (
     <Fragment>
-      <WizardBody hasNoBodyPadding={hasNoBodyPadding}>
+      <WizardBody hasNoPadding={hasNoBodyPadding}>
         <StepTemplate
           formFields={fields.map((item) => formOptions.renderForm([item], formOptions))}
           name={name}
