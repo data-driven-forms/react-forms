@@ -1,7 +1,13 @@
 import lodashIsEmpty from 'lodash/isEmpty';
 import get from 'lodash/get';
 
-const isEmptyValue = (value) => (typeof value === 'number' || value === true ? false : lodashIsEmpty(value));
+const isEmptyValue = (value) => {
+  if (value instanceof Date) {
+    return isNaN(value.getTime());
+  }
+
+  return typeof value === 'number' || value === true ? false : lodashIsEmpty(value);
+};
 
 const fieldCondition = (value, config) => {
   if (config.isNotEmpty) {

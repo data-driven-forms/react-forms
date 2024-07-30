@@ -463,6 +463,44 @@ describe('renderForm function', () => {
       expect(screen.getByLabelText('foo')).toBeInTheDocument();
     });
 
+    it('should render condition field only if the isNotEmpty condition is met and value is of Date instance', async () => {
+      const formFields = [
+        {
+          component: 'custom-component',
+          name: 'bar',
+          // set the value initially to be a Date instance
+          initialValue: new Date(),
+        },
+        {
+          component: 'custom-component',
+          name: 'foo',
+          condition: {
+            when: 'bar',
+            isNotEmpty: true,
+          },
+        },
+      ];
+
+      render(
+        <FormRenderer
+          componentMapper={{
+            'custom-component': CustomComponent,
+          }}
+          schema={{
+            fields: formFields,
+          }}
+        >
+          {({ formFields }) => formFields}
+        </FormRenderer>
+      );
+
+      expect(screen.getByLabelText('foo')).toBeInTheDocument();
+
+      await userEvent.clear(screen.getByLabelText('bar'));
+
+      expect(() => screen.getByLabelText('foo')).toThrow();
+    });
+
     it('should render condition field only if the isEmpty condition is met', async () => {
       const formFields = [
         {
