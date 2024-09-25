@@ -2,8 +2,17 @@ import { memoize, prepare, prepareMsg, selectNum, isNumber, trunc } from '../com
 
 export const required = memoize(({ message } = {}) => {
   return prepare((value) => {
-    const cond = typeof value === 'string' ? !value.trim() : value && !isNaN(value.length) ? !value.length : !value;
-    if (cond) {
+    let failsValidation = true;
+
+    if (typeof value === 'string') {
+      failsValidation = !value.trim();
+    } else if (Array.isArray(value)) {
+      failsValidation = !value.length;
+    } else {
+      failsValidation = value === null || value === undefined;
+    }
+
+    if (failsValidation) {
       return prepareMsg(message, 'required').defaultMessage;
     }
   });

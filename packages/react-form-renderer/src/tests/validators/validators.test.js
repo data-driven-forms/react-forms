@@ -10,8 +10,32 @@ describe('New validators', () => {
       expect(validatorMapper[validatorTypes.REQUIRED]()('Foo')).toBeUndefined();
     });
 
+    it('should pass required validator if numeric truthy value', () => {
+      expect(validatorMapper[validatorTypes.REQUIRED]()(1)).toBeUndefined();
+    });
+
+    it('should pass required validator if numeric falsy value', () => {
+      expect(validatorMapper[validatorTypes.REQUIRED]()(0)).toBeUndefined();
+    });
+
+    it('should pass required validator if boolean true', () => {
+      expect(validatorMapper[validatorTypes.REQUIRED]()(true)).toBeUndefined();
+    });
+
+    it('should pass required validator if boolean false', () => {
+      expect(validatorMapper[validatorTypes.REQUIRED]()(false)).toBeUndefined();
+    });
+
     it('should fail required validator', () => {
       expect(validatorMapper[validatorTypes.REQUIRED]()()).toBe('Required');
+    });
+
+    it('should fail required validator if explictly null', () => {
+      expect(validatorMapper[validatorTypes.REQUIRED]()(null)).toBe('Required');
+    });
+
+    it('should fail required validator if explictly undefined', () => {
+      expect(validatorMapper[validatorTypes.REQUIRED]()(undefined)).toBe('Required');
     });
 
     it('should fail required validator if string of white spaces', () => {
