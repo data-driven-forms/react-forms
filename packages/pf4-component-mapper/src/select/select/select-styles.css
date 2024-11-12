@@ -7,11 +7,6 @@
   animation: spin 2s linear infinite;
 }
 
-.pf-v6-c-select_toggle-wrapper.ddorg__pf4-component-mapper__select-toggle-wrapper {
-  flex: 1;
-  display: flex;
-}
-
 .ddorg__pf4-component-mapper__select-toggle.pf-m-typeahead {
   padding-left: 0;
 }

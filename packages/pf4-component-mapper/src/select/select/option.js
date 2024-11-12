@@ -9,17 +9,19 @@ const Option = ({ item, isActive, isSelected, ...props }) => (
       {...props}
       disabled={item.isDisabled || item.disabled}
       type="button"
-      className={`pf-v6-c-select__menu-item${isSelected ? ' pf-m-selected' : ''}${isActive ? ' pf-m-focus' : ''}${
+      className={`pf-v6-c-menu__item${isSelected ? ' pf-m-selected' : ''}${isActive ? ' pf-m-focus' : ''}${
         item.isDisabled || item.disabled ? ' pf-m-disabled' : ''
       }`}
     >
-      {item.label}
-      {isSelected && (
-        <span className="pf-v6-c-select__menu-item-icon">
-          <CheckIcon />
-        </span>
-      )}
-      {item.description && <div className="pf-v6-c-select__menu-item-description">{item.description}</div>}
+      <span className="pf-v6-c-menu__item-main">
+        {item.label}
+        {isSelected && (
+          <span className="pf-v6-c-menu__item-icon">
+            <CheckIcon />
+          </span>
+        )}
+        {item.description && <div className="pf-v6-c-menu__item-text">{item.description}</div>}
+      </span>
     </button>
   </li>
 );
