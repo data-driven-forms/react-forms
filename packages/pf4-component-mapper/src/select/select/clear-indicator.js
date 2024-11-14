@@ -10,7 +10,7 @@ const ClearIndicator = ({ clearSelection }) => (
       clearSelection();
       event.stopPropagation();
     }}
-    className="pf-v6-c-button pf-v6-c-menu__toggle-clear pf-v6-u-p-0"
+    className="pf-v6-c-button pf-v6-c-menu-toggle-clear pf-v6-u-p-0"
     type="button"
     aria-label="Clear all"
   >

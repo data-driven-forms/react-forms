@@ -57,7 +57,7 @@ describe('<Select />', () => {
     await userEvent.click(screen.getByLabelText('open menu'));
     await userEvent.click(screen.getByText('Translated'));
 
-    expect(screen.getByText('Translated', { selector: 'h1' }).closest('.pf-v6-c-menu__toggle-text')).toBeInTheDocument();
+    expect(screen.getByText('Translated', { selector: 'h1' }).closest('.pf-v6-c-menu-toggle-text')).toBeInTheDocument();
   });
 
   it('should render description', async () => {
@@ -137,7 +137,7 @@ describe('<Select />', () => {
     expect(screen.getByText('Category 1')).toHaveClass('pf-v6-c-menu__group-title');
     expect(screen.getByText('Category 2')).toHaveClass('pf-v6-c-menu__group-title');
     expect(container.getElementsByClassName('pf-v6-c-divider')).toHaveLength(3);
-    expect([...container.getElementsByClassName('pf-v6-c-menu__item')].map((opt) => opt.textContent)).toEqual([
+    expect([...container.getElementsByClassName('pf-v6-c-menu__item-main')].map((opt) => opt.textContent)).toEqual([
       'value 1',
       'value 2',
       'independent 1',
@@ -150,7 +150,7 @@ describe('<Select />', () => {
 
     await userEvent.click(screen.getByLabelText('open menu'));
 
-    expect(screen.getByText('value 1', { selector: 'button.pf-v6-c-menu__item' })).toHaveClass('pf-m-selected');
+    expect(screen.getByRole('option', { name: 'value 1' })).toHaveClass('pf-m-selected');
 
     await userEvent.click(screen.getByText('Submit'));
 
@@ -247,7 +247,7 @@ describe('<Select />', () => {
     render(<Select {...initialProps} value={value} isMulti onChange={onChange} closeMenuOnSelect={false} />);
 
     await userEvent.click(screen.getByLabelText('open menu'));
-    await userEvent.click(screen.getByText('First option', { selector: '.pf-v6-c-menu__item' }));
+    await userEvent.click(screen.getByText('First option', { selector: '.pf-v6-c-menu__item-main' }));
     await userEvent.click(screen.getByText('Second option'));
 
     expect(onChange).toHaveBeenCalledTimes(2);
@@ -261,7 +261,7 @@ describe('<Select />', () => {
     render(<Select {...initialProps} value={value} simpleValue={false} isMulti onChange={onChange} closeMenuOnSelect={false} />);
 
     await userEvent.click(screen.getByLabelText('open menu'));
-    await userEvent.click(screen.getByText('First option', { selector: '.pf-v6-c-menu__item' }));
+    await userEvent.click(screen.getByText('First option', { selector: '.pf-v6-c-menu__item-main' }));
     await userEvent.click(screen.getByText('Second option'));
 
     expect(onChange).toHaveBeenCalledTimes(2);
@@ -348,7 +348,7 @@ describe('<Select />', () => {
     );
 
     await userEvent.click(screen.getByLabelText('open menu'));
-    await waitFor(() => expect(screen.getByText('label', { selector: '.pf-v6-c-menu__item' })).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText('label', { selector: '.pf-v6-c-menu__item-main' })).toBeInTheDocument());
 
     expect(onChange).toHaveBeenCalledWith(['123']);
   });
@@ -370,7 +370,7 @@ describe('<Select />', () => {
     );
 
     await userEvent.click(screen.getByLabelText('open menu'));
-    await waitFor(() => expect(screen.getByText('label', { selector: '.pf-v6-c-menu__item' })).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText('label', { selector: '.pf-v6-c-menu__item-main' })).toBeInTheDocument());
 
     expect(onChange).toHaveBeenCalledWith([{ label: 'label', value: '123' }]);
   });

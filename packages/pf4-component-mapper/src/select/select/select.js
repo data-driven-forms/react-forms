@@ -217,8 +217,8 @@ const InternalSelect = ({
             <div
               ref={selectToggleRef}
               disabled={isDisabled}
-              className={`pf-v6-c-menu__toggle${isDisabled ? ' pf-v6-m-disabled' : ''}${
-                isSearchable ? ' pf-v6-m-typeahead' : ''
+              className={`pf-v6-c-menu-toggle${isDisabled ? ' pf-m-disabled' : ''}${
+                isSearchable ? ' pf-m-typeahead' : ''
               } ddorg__pf4-component-mapper__select-toggle`}
               tabIndex={0}
               {...toggleButtonProps}
@@ -232,9 +232,13 @@ const InternalSelect = ({
                 value={itemToString(selectedItem, isMulti, showMore, handleShowMore, handleChange)}
               />
               {isClearable && parsedValue && <ClearIndicator clearSelection={clearSelection} />}
-              <span className="pf-v6-c-menu__toggle-icon">
-                <Icon>{isFetching ? <CircleNotchIcon className="ddorg__pf4-component-mapper__select-loading-icon" /> : <CaretDownIcon />}</Icon>
-              </span>
+              <button className="pf-v6-c-menu-toggle__button">
+                <span className="pf-v6-c-menu-toggle__controls">
+                  <span className="pf-v6-c-menu-toggle__toggle-icon">
+                    <Icon>{isFetching ? <CircleNotchIcon className="ddorg__pf4-component-mapper__select-loading-icon" /> : <CaretDownIcon />}</Icon>
+                  </span>
+                </span>
+              </button>
             </div>
             {isOpen && (
               <Menu

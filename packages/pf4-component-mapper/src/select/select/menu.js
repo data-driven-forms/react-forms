@@ -147,7 +147,7 @@ const Menu = ({
   };
 
   const menuItems = (
-    <ul className={`pf-v6-c-menu${menuIsPortal ? ' ddorg__pf4-component-mapper__menu-portal' : ''}`}>
+    <ul className={`pf-v6-c-menu__list${menuIsPortal ? ' ddorg__pf4-component-mapper__menu-portal' : ''}`}>
       {filteredOptions.length === 0 && (
         <EmptyOption
           isSearchable={isSearchable}

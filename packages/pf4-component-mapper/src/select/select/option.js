@@ -4,14 +4,12 @@ import PropTypes from 'prop-types';
 import { CheckIcon } from '@patternfly/react-icons';
 
 const Option = ({ item, isActive, isSelected, ...props }) => (
-  <li>
+  <li className={`pf-v6-c-menu__list-item${item.isDisabled || item.disabled ? ' pf-m-disabled' : ''}`}>
     <button
       {...props}
       disabled={item.isDisabled || item.disabled}
       type="button"
-      className={`pf-v6-c-menu__item${isSelected ? ' pf-m-selected' : ''}${isActive ? ' pf-m-focus' : ''}${
-        item.isDisabled || item.disabled ? ' pf-m-disabled' : ''
-      }`}
+      className={`pf-v6-c-menu__item${isSelected ? ' pf-m-selected' : ''}${isActive ? ' pf-m-focus' : ''}`}
     >
       <span className="pf-v6-c-menu__item-main">
         {item.label}
