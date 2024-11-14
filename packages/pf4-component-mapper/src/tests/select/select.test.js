@@ -216,10 +216,7 @@ describe('<Select />', () => {
     expect(container.getElementsByClassName('pf-v6-c-divider')).toHaveLength(0);
     expect(container.getElementsByClassName('pf-v6-c-menu__group-title')).toHaveLength(0);
 
-    expect([...container.getElementsByClassName('pf-v6-c-menu__item')].map((opt) => opt.textContent)).toEqual([
-      'independent 1',
-      'independent 2',
-    ]);
+    expect([...container.getElementsByClassName('pf-v6-c-menu__item')].map((opt) => opt.textContent)).toEqual(['independent 1', 'independent 2']);
   });
 
   it('should return single simple value', async () => {
@@ -416,9 +413,7 @@ describe('<Select />', () => {
 
       rerender(<Select {...initialProps} options={NEW_OPTIONS} />);
 
-      expect([...container.getElementsByClassName('pf-v6-c-menu__item')].map((opt) => opt.textContent)).toEqual(
-        NEW_OPTIONS.map((opt) => opt.label)
-      );
+      expect([...container.getElementsByClassName('pf-v6-c-menu__item')].map((opt) => opt.textContent)).toEqual(NEW_OPTIONS.map((opt) => opt.label));
     });
 
     it('should change the options when loadOptions prop is changed', async () => {
@@ -434,9 +429,7 @@ describe('<Select />', () => {
         rerender(<Select {...initialProps} loadOptions={asyncLoadingNew} />);
       });
 
-      expect([...container.getElementsByClassName('pf-v6-c-menu__item')].map((opt) => opt.textContent)).toEqual(
-        NEW_OPTIONS.map((opt) => opt.label)
-      );
+      expect([...container.getElementsByClassName('pf-v6-c-menu__item')].map((opt) => opt.textContent)).toEqual(NEW_OPTIONS.map((opt) => opt.label));
     });
 
     it('should change the value when new options do not include it', async () => {
