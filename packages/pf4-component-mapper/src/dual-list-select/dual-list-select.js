@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { DualListSelector } from '@patternfly/react-core';
+import { DualListSelector } from '@patternfly/react-core/deprecated';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import isEqual from 'lodash/isEqual';
 

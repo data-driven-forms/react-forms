@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import FormTemplate from '@data-driven-forms/common/form-template';
 
-import { Button as PF4Button, ActionGroup, Form, TextContent, Text, TextVariants, Alert } from '@patternfly/react-core';
+import { Button as PF4Button, ActionGroup, Form, Content, ContentVariants, Alert } from '@patternfly/react-core';
 
 export const Button = ({ label, bsStyle, children, disabled, buttonType, ...props }) => (
   <PF4Button variant={buttonType === 'cancel' ? 'link' : bsStyle || 'secondary'} isDisabled={disabled} {...props}>
@@ -27,11 +27,11 @@ ButtonGroup.propTypes = {
 };
 
 export const Title = ({ children, ...props }) => (
-  <TextContent>
-    <Text component={TextVariants.h1} {...props}>
+  <Content>
+    <Content component={ContentVariants.h1} {...props}>
       {children}
-    </Text>
-  </TextContent>
+    </Content>
+  </Content>
 );
 
 Title.propTypes = {
@@ -39,11 +39,11 @@ Title.propTypes = {
 };
 
 export const Description = ({ children, ...props }) => (
-  <TextContent>
-    <Text component={TextVariants.p} {...props}>
+  <Content>
+    <Content component={ContentVariants.p} {...props}>
       {children}
-    </Text>
-  </TextContent>
+    </Content>
+  </Content>
 );
 
 Description.propTypes = {

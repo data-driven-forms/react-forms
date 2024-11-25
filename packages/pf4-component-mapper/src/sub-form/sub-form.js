@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useFormApi } from '@data-driven-forms/react-form-renderer';
 
-import { Title, Grid, GridItem, TextContent, Text, TextVariants } from '@patternfly/react-core';
+import { Title, Grid, GridItem, Content, ContentVariants } from '@patternfly/react-core';
 
 const SubForm = ({ fields, title, description, validate: _validate, component, ...rest }) => {
   const formOptions = useFormApi();
@@ -18,11 +18,11 @@ const SubForm = ({ fields, title, description, validate: _validate, component, .
       )}
       {description && (
         <GridItem sm={12}>
-          <TextContent>
-            <Text component={TextVariants.small} style={{ marginBottom: 0 }}>
+          <Content>
+            <Content component={ContentVariants.small} style={{ marginBottom: 0 }}>
               {description}
-            </Text>
-          </TextContent>
+            </Content>
+          </Content>
         </GridItem>
       )}
       {formOptions.renderForm(fields, formOptions)}

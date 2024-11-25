@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { FormSpy, WizardContext } from '@data-driven-forms/react-form-renderer';
 import Wizard from '@data-driven-forms/common/wizard/wizard';
 
-import { WizardNav, WizardHeader, Modal as PF4Modal } from '@patternfly/react-core';
+import { WizardNav, WizardHeader } from '@patternfly/react-core';
+import { Modal as PF4Modal } from '@patternfly/react-core/deprecated';
 
 import WizardStep from './wizard-components/wizard-step';
 import './wizard-components/wizard-styles.css';
@@ -97,11 +98,11 @@ const WizardInternal = ({
       container={state.container}
       aria-labelledby={rest.name}
       {...ModalProps}
-      className={inModal ? `pf-v5-c-form${ModalProps.className || ''}` : ModalProps.className}
+      className={inModal ? `pf-v6-c-form${ModalProps.className || ''}` : ModalProps.className}
     >
       <div
         tabIndex={inModal ? 0 : null}
-        className={`pf-v5-c-wizard ${inModal ? '' : 'no-shadow'} ddorg__pf4-component-mapper__wizard ${className ? className : ''}`}
+        className={`pf-v6-c-wizard ${inModal ? '' : 'no-shadow'} ddorg__pf4-component-mapper__wizard ${className ? className : ''}`}
         role="dialog"
         aria-modal={inModal ? 'true' : undefined}
         onKeyDown={(e) => {
@@ -124,8 +125,8 @@ const WizardInternal = ({
           />
         )}
         <WizardToggle activeStepIndex={activeStepIndex} currentStep={currentStep} navSchema={navSchema} isOpen={state.openNav} dispatch={dispatch} />
-        <div className="pf-v5-c-wizard__outer-wrap">
-          <div className="pf-v5-c-wizard__inner-wrap">
+        <div className="pf-v6-c-wizard__outer-wrap">
+          <div className="pf-v6-c-wizard__inner-wrap">
             <WizardNav aria-label={navAriaLabel} isExpanded={state.openNav}>
               <FormSpy subscription={{ values: true, valid: true, validating: true }}>
                 {({ values, valid, validating }) => (

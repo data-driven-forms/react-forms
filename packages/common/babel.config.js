@@ -3,7 +3,7 @@ const path = require('path');
 const glob = require('glob');
 
 const mapper = {
-  TextVariants: 'Text',
+  ContentVariants: 'Content',
   ButtonVariant: 'Button',
   TextListVariants: 'TextList',
   TextListItemVariants: 'TextListItem',
@@ -13,7 +13,7 @@ const mapper = {
   FormHelperText: 'Form',
   FormGroup: 'Form',
   GridItem: 'Grid',
-  TextContent: 'Text',
+  Content: 'Content',
   HelperTextItem: 'HelperText',
   ActionGroup: 'Form',
   Tab: 'Tabs',

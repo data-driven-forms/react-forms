@@ -18,15 +18,14 @@ describe('FormFields', () => {
     id: 'someIdKey',
   };
 
-  it('should render with onText/OffText Switch correctly', () => {
+  it('should render with onText Switch correctly', () => {
     render(
       <RenderWithProvider>
-        <Switch {...props} onText="I am on" offText="Turned off" />
+        <Switch {...props} onText="I am on" />
       </RenderWithProvider>
     );
 
-    expect(screen.getByText('I am on')).toHaveClass('pf-m-on');
-    expect(screen.getByText('Turned off')).not.toHaveClass('pf-m-on');
+    expect(screen.getByRole('switch')).toHaveAccessibleName('I am on');
   });
 
   describe('formFields generated tests', () => {

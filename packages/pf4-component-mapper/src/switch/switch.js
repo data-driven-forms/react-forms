@@ -6,25 +6,11 @@ import FormGroup from '../form-group/form-group';
 import IsRequired from '../is-required/is-required';
 
 const Switch = (props) => {
-  const {
-    label,
-    offText,
-    onText,
-    isRequired,
-    helperText,
-    meta,
-    validateOnMount,
-    description,
-    input,
-    isReadOnly,
-    isDisabled,
-    id,
-    FormGroupProps,
-    ...rest
-  } = useFieldApi({
-    ...props,
-    type: 'checkbox',
-  });
+  const { label, onText, isRequired, helperText, meta, validateOnMount, description, input, isReadOnly, isDisabled, id, FormGroupProps, ...rest } =
+    useFieldApi({
+      ...props,
+      type: 'checkbox',
+    });
   return (
     <FormGroup
       isRequired={isRequired}
@@ -42,7 +28,6 @@ const Switch = (props) => {
         id={id || input.name}
         isDisabled={isDisabled || isReadOnly}
         label={isRequired ? <IsRequired>{onText || label}</IsRequired> : onText || label}
-        labelOff={isRequired ? <IsRequired>{offText || label}</IsRequired> : offText || label}
       />
     </FormGroup>
   );
@@ -58,7 +43,6 @@ Switch.propTypes = {
   isDisabled: PropTypes.bool,
   id: PropTypes.string,
   onText: PropTypes.node,
-  offText: PropTypes.node,
   FormGroupProps: PropTypes.object,
 };
 
