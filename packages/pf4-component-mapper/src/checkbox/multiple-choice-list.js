@@ -7,7 +7,7 @@ import MultipleChoiceListCommon, { wrapperProps } from '@data-driven-forms/commo
 import FormGroup from '../form-group/form-group';
 
 const FinalCheckbox = ({ option, ...props }) => (
-  <Checkbox isChecked={props.checked} {...props} onChange={(_value, e) => props.onChange(e)} {...option} />
+  <Checkbox isChecked={props.checked} {...props} onChange={(e, _value) => props.onChange(e)} {...option} />
 );
 
 FinalCheckbox.propTypes = {
