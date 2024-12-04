@@ -32,13 +32,12 @@ const ArrayItem = memo(
           <FlexItem>
             {editedFields[0].label && <Spacer />}
             <Button
+              icon={<TrashIcon />}
               variant="plain"
               aria-label={buttonLabels.remove}
               disabled={isRemoveDisabled}
               {...(!isRemoveDisabled && { onClick: () => remove(fieldIndex) })}
-            >
-              <TrashIcon />
-            </Button>
+            />
           </FlexItem>
         </Flex>
         {!isLast && editedFields.length > 1 && <hr className="ddf-final-form-hr" />}

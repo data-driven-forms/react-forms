@@ -7,7 +7,7 @@ describe('Layout mapper', () => {
   it('should return PF4 Button', () => {
     render(<Button label="some label" />);
 
-    expect(screen.getByText('some label', { selector: 'button' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'some label' })).toBeInTheDocument();
   });
 
   it('should return PF4 ButtonGroup', () => {
@@ -17,13 +17,13 @@ describe('Layout mapper', () => {
       </ButtonGroup>
     );
 
-    expect(screen.getByText('some label', { selector: 'button' }).closest('.pf-v5-c-form__actions')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'some label' }).closest('.pf-v6-c-form__actions')).toBeInTheDocument();
   });
 
   it('should return PF4 Title', () => {
     render(<Title>Title</Title>);
 
-    expect(screen.getByText('Title', { selector: 'h1' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Title', level: 1 })).toBeInTheDocument();
   });
 
   it('should return PF4 Description', () => {
@@ -35,6 +35,6 @@ describe('Layout mapper', () => {
   it('should return PF4 Button disabled', () => {
     render(<Button disabled={true} label="some label" />);
 
-    expect(screen.getByText('some label', { selector: 'button' })).toBeDisabled();
+    expect(screen.getByRole('button', { name: 'some label' })).toBeDisabled();
   });
 });

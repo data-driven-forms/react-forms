@@ -11,6 +11,7 @@ const DualListSortButton = ({ position, ...rest }) => {
 
   return (
     <Button
+      icon={sortConfig[position] === 'asc' ? <PficonSortCommonAscIcon /> : <PficonSortCommonDescIcon />}
       variant={ButtonVariant.plain}
       onClick={
         sortConfig[position] === 'asc'
@@ -19,9 +20,7 @@ const DualListSortButton = ({ position, ...rest }) => {
       }
       aria-label="Sort"
       {...rest}
-    >
-      {sortConfig[position] === 'asc' ? <PficonSortCommonAscIcon /> : <PficonSortCommonDescIcon />}
-    </Button>
+    />
   );
 };
 
