@@ -1,6 +1,6 @@
 {
   "name": "@data-driven-forms/mui-component-mapper",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Component mapper for Material ui component mapper form data-driven-forms.",
   "main": "index.js",
   "module": "esm/index.js",
