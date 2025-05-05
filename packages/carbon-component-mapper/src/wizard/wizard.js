@@ -59,8 +59,6 @@ const Layout = ({ nav, fields, WizardBodyProps }) => {
   );
 };
 
-Layout;
-
 const VerticalLayout = ({ nav, fields, WizardBodyProps }) => {
   const { body } = useStyles();
 
@@ -77,8 +75,6 @@ const VerticalLayout = ({ nav, fields, WizardBodyProps }) => {
     </Grid>
   );
 };
-
-VerticalLayout;
 
 const WizardInternal = ({
   stepsInfo,
@@ -145,8 +141,6 @@ const WizardInternal = ({
     </div>
   );
 };
-
-WizardInternal;
 
 const Wizard = (props) => <WizardCommon Wizard={WizardInternal} {...props} />;
 

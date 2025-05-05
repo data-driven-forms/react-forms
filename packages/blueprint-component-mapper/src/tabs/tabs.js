@@ -15,5 +15,4 @@ const Tabs = ({ component, name, fields, ...props }) => {
   );
 };
 
-
 export default Tabs;

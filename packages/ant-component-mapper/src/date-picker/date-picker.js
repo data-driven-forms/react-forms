@@ -36,5 +36,4 @@ const DatePicker = ({ placeholder = 'Select date', ...props }) => {
   );
 };
 
-
 export default DatePicker;
