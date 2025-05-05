@@ -1,11 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import CommonSelect from '@data-driven-forms/common/select';
 import parseInternalValue from '@data-driven-forms/common/select/parse-internal-value';
 import FormFieldGrid from '../form-field-grid/form-field-grid';
 import { validationError, validationWarning } from '../helpers/helpers';
-import { meta, input } from '@data-driven-forms/common/prop-types-templates';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import { Dropdown } from 'semantic-ui-react';
 import FormField from '../form-field/form-field';
@@ -74,34 +72,6 @@ const SuirSelect = ({
       />
     </FormFieldGrid>
   );
-};
-
-SuirSelect.propTypes = {
-  input,
-  meta,
-  placeholder: PropTypes.node,
-  label: PropTypes.node,
-  helperText: PropTypes.node,
-  validateOnMount: PropTypes.bool,
-  isSearchable: PropTypes.bool,
-  options: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.any.isRequired, label: PropTypes.node.isRequired })),
-  description: PropTypes.node,
-  isReadOnly: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-  onChange: PropTypes.func.isRequired,
-  value: PropTypes.any,
-  isMulti: PropTypes.bool,
-  isClearable: PropTypes.bool,
-  noOptionsMessage: PropTypes.func,
-  isRequired: PropTypes.bool,
-  classNamePrefix: PropTypes.string,
-  onInputChange: PropTypes.func,
-  isFetching: PropTypes.bool,
-  hideSelectedOptions: PropTypes.bool,
-  closeMenuOnSelect: PropTypes.bool,
-  /** Sub components customization API */
-  FormFieldGridProps: PropTypes.object,
-  HelpertextProps: PropTypes.object,
 };
 
 const Select = (props) => {

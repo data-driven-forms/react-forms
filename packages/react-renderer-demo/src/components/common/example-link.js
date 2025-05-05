@@ -1,6 +1,5 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
-import PropTypes from 'prop-types';
 import RouterLink from 'next/link';
 import Button from '@mui/material/Button';
 
@@ -29,10 +28,5 @@ const ExampleLink = ({ to, text = 'To example' }) => (
     <br />
   </React.Fragment>
 );
-
-ExampleLink.propTypes = {
-  to: PropTypes.string.isRequired,
-  text: PropTypes.node,
-};
 
 export default ExampleLink;

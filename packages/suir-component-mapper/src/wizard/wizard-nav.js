@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Step, Icon } from 'semantic-ui-react';
 
 const WizardNav = ({ stepsInfo, activeStepIndex }) => {
@@ -16,18 +15,6 @@ const WizardNav = ({ stepsInfo, activeStepIndex }) => {
       ))}
     </Step.Group>
   );
-};
-
-WizardNav.propTypes = {
-  stepsInfo: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.node,
-      label: PropTypes.node,
-      StepLabelProps: PropTypes.object,
-      StepProps: PropTypes.object,
-    })
-  ),
-  activeStepIndex: PropTypes.number,
 };
 
 export default WizardNav;

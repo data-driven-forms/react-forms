@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import DualListSelectCommon from '@data-driven-forms/common/dual-list-select';
 import { Button, Grid, GridColumn, Input, Segment, Header } from 'semantic-ui-react';
@@ -52,21 +51,6 @@ const List = ({
   );
 };
 
-List.propTypes = {
-  value: PropTypes.arrayOf(
-    PropTypes.shape({
-      value: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired,
-    })
-  ),
-  optionClick: PropTypes.func.isRequired,
-  noOptionsTitle: PropTypes.node,
-  filterValue: PropTypes.string,
-  filterValueText: PropTypes.node,
-  selectedValues: PropTypes.array,
-  OptionProps: PropTypes.shape({ className: PropTypes.string, selectedClassName: PropTypes.string }),
-};
-
 const Toolbar = ({
   sortTitle,
   onFilter,
@@ -94,18 +78,6 @@ const Toolbar = ({
     />
   </div>
 );
-
-Toolbar.propTypes = {
-  sortTitle: PropTypes.node,
-  onFilter: PropTypes.func.isRequired,
-  onSort: PropTypes.func.isRequired,
-  sortDirection: PropTypes.bool,
-  value: PropTypes.string,
-  placeholder: PropTypes.string,
-  id: PropTypes.string,
-  sortUpIcon: PropTypes.string,
-  sortDownIcon: PropTypes.string,
-};
 
 const useDualListStyles = createUseStyles({
   dualListButtons: {
@@ -321,61 +293,6 @@ const DualList = ({
       </Grid>
     </FormFieldGrid>
   );
-};
-
-DualList.propTypes = {
-  leftTitle: PropTypes.node,
-  rightTitle: PropTypes.node,
-  moveLeftTitle: PropTypes.node,
-  moveRightTitle: PropTypes.node,
-  allToLeft: PropTypes.bool,
-  allToRight: PropTypes.bool,
-  moveAllLeftTitle: PropTypes.node,
-  moveAllRightTitle: PropTypes.node,
-  label: PropTypes.node,
-  isRequired: PropTypes.bool,
-  helperText: PropTypes.node,
-  noValueTitle: PropTypes.node,
-  noOptionsTitle: PropTypes.node,
-  filterOptionsTitle: PropTypes.node,
-  filterValueTitle: PropTypes.node,
-  filterValueText: PropTypes.node,
-  filterOptionsText: PropTypes.node,
-  id: PropTypes.string,
-  input: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-  }),
-  meta: PropTypes.any,
-  state: PropTypes.object,
-  sortOptions: PropTypes.func,
-  filterOptions: PropTypes.func,
-  handleOptionsClick: PropTypes.func,
-  leftValues: PropTypes.array,
-  handleMoveRight: PropTypes.func,
-  handleMoveLeft: PropTypes.func,
-  handleClearLeftValues: PropTypes.func,
-  handleClearRightValues: PropTypes.func,
-  sortValues: PropTypes.func,
-  filterValues: PropTypes.func,
-  rightValues: PropTypes.array,
-  handleValuesClick: PropTypes.func,
-  validateOnMount: PropTypes.bool,
-  leftSortTitle: PropTypes.node,
-  rightSortTitle: PropTypes.node,
-  /** Sub components customization API */
-  OptionsListProps: PropTypes.object,
-  OptionProps: PropTypes.object,
-  LabelProps: PropTypes.shape({ error: PropTypes.object, className: PropTypes.string }),
-  ToolbarProps: PropTypes.object,
-  ButtonGridProps: PropTypes.shape({ className: PropTypes.string }),
-  RightButtonProps: PropTypes.object,
-  DoubleRightButtonProps: PropTypes.object,
-  LeftButtonProps: PropTypes.object,
-  DoubleLeftButtonProps: PropTypes.object,
-  OptionsHeaderProps: PropTypes.object,
-  ValuesHeaderProps: PropTypes.object,
-  HelperTextProps: PropTypes.object,
-  FormFieldGridProps: PropTypes.object,
 };
 
 const DualListSelectWrapper = (props) => <DualListSelectCommon {...props} DualListSelect={DualList} />;

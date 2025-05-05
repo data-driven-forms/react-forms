@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 import prepareProps from '../prepare-props';
@@ -82,25 +81,6 @@ const TimePickerDate = (props) => {
       {...rest}
     />
   );
-};
-
-TimePickerDate.propTypes = {
-  isDisabled: PropTypes.bool,
-  isReadOnly: PropTypes.bool,
-  isRequired: PropTypes.bool,
-  label: PropTypes.node,
-  labelText: PropTypes.node,
-  description: PropTypes.node,
-  twelveHoursFormat: PropTypes.bool,
-  timezones: PropTypes.arrayOf(
-    PropTypes.shape({
-      value: PropTypes.string.isRequired,
-      label: PropTypes.node.isRequired,
-      showAs: PropTypes.string,
-    })
-  ),
-  WrapperProps: PropTypes.object,
-  defaultTimezone: PropTypes.string,
 };
 
 export default TimePickerDate;

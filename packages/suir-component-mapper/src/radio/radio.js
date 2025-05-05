@@ -1,7 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { FormRadio, FormField } from 'semantic-ui-react';
-import { wrapperProps } from '@data-driven-forms/common/multiple-choice-list';
 
 import FormFieldGrid from '../form-field-grid/form-field-grid';
 import { validationError, validationWarning } from '../helpers/helpers';
@@ -20,13 +18,6 @@ const RadioOption = ({ name, option, isDisabled, isReadOnly, ...props }) => {
       label={option.label}
     />
   );
-};
-
-RadioOption.propTypes = {
-  name: PropTypes.string.isRequired,
-  option: PropTypes.shape({ label: PropTypes.node.isRequired, value: PropTypes.any.isRequired }).isRequired,
-  isReadOnly: PropTypes.bool,
-  isDisabled: PropTypes.bool,
 };
 
 const Radio = ({ name, ...props }) => {
@@ -64,24 +55,6 @@ const Radio = ({ name, ...props }) => {
       ))}
     </FormFieldGrid>
   );
-};
-
-Radio.propTypes = {
-  ...wrapperProps,
-  options: PropTypes.arrayOf(
-    PropTypes.shape({
-      value: PropTypes.any,
-      label: PropTypes.node,
-    })
-  ),
-  label: PropTypes.node.isRequired,
-  isDisabled: PropTypes.bool,
-  children: PropTypes.any,
-  description: PropTypes.node,
-  /** Sub components customization API */
-  FormFieldGridProps: PropTypes.object,
-  FormFieldProps: PropTypes.object,
-  HelperTextProps: PropTypes.object,
 };
 
 export default Radio;

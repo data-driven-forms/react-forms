@@ -1,5 +1,4 @@
 import React, { createElement } from 'react';
-import PropTypes from 'prop-types';
 import { useFormApi } from '@data-driven-forms/react-form-renderer';
 import { Header } from 'semantic-ui-react';
 
@@ -22,16 +21,6 @@ const SubForm = ({
       {createElement(formFieldsGridElement || 'div', FormFieldsGridProps, renderForm(fields))}
     </div>
   );
-};
-
-SubForm.propTypes = {
-  fields: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
-  title: PropTypes.node,
-  description: PropTypes.node,
-  component: PropTypes.any,
-  HeaderProps: PropTypes.object,
-  DescriptionProps: PropTypes.shape({ element: PropTypes.string.isRequired }),
-  FormFieldsGridProps: PropTypes.shape({ element: PropTypes.string.isRequired }),
 };
 
 export default SubForm;

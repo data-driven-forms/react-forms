@@ -1,6 +1,5 @@
 import React, { memo, useReducer } from 'react';
 import { styled } from '@mui/material/styles';
-import PropTypes from 'prop-types';
 import { useFormApi, FieldArray } from '@data-driven-forms/react-form-renderer';
 import isEqual from 'lodash/isEqual';
 
@@ -86,20 +85,6 @@ const ArrayItem = memo(
   },
   ({ remove: _prevRemove, ...prev }, { remove: _nextRemove, ...next }) => isEqual(prev, next)
 );
-
-ArrayItem.propTypes = {
-  name: PropTypes.string,
-  fieldIndex: PropTypes.number.isRequired,
-  fields: PropTypes.arrayOf(PropTypes.object),
-  remove: PropTypes.func.isRequired,
-  length: PropTypes.number,
-  minItems: PropTypes.number,
-  removeLabel: PropTypes.node.isRequired,
-  FieldContainerProps: PropTypes.object,
-  FieldGroupGridProps: PropTypes.object,
-  RemoveButtonGridProps: PropTypes.object,
-  RemoveButtonProps: PropTypes.object,
-};
 
 const defaultButtonLabels = {
   add: 'ADD',
@@ -287,35 +272,6 @@ const DynamicArray = ({ ...props }) => {
       </FormControl>
     </StyledFormFieldGrid>
   );
-};
-
-DynamicArray.propTypes = {
-  label: PropTypes.node,
-  description: PropTypes.node,
-  fields: PropTypes.arrayOf(PropTypes.object).isRequired,
-  defaultItem: PropTypes.any,
-  minItems: PropTypes.number,
-  maxItems: PropTypes.number,
-  noItemsMessage: PropTypes.node,
-  FormControlProps: PropTypes.object,
-  FormFieldGridProps: PropTypes.object,
-  buttonLabels: PropTypes.object,
-  GridContainerProps: PropTypes.object,
-  HeaderGridProps: PropTypes.object,
-  HeaderProps: PropTypes.object,
-  UndoButtonProps: PropTypes.object,
-  RedoButtonProps: PropTypes.object,
-  AddButtonProps: PropTypes.object,
-  DescriptionGridProps: PropTypes.object,
-  DescriptionProps: PropTypes.object,
-  BodyGridProps: PropTypes.object,
-  NoItemsProps: PropTypes.object,
-  FormHelperTextGridProps: PropTypes.object,
-  FormHelperTextProps: PropTypes.object,
-  FieldContainerProps: PropTypes.object,
-  FieldGroupGridProps: PropTypes.object,
-  RemoveButtonGridProps: PropTypes.object,
-  RemoveButtonProps: PropTypes.object,
 };
 
 export default DynamicArray;

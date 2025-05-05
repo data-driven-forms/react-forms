@@ -9,7 +9,6 @@ import CodeIcon from '@mui/icons-material/Code';
 import CodeOffIcon from '@mui/icons-material/CodeOff';
 import Accordion from '@mui/material/Accordion';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
-import PropTypes from 'prop-types';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Paper from '@mui/material/Paper';
 import clsx from 'clsx';
@@ -301,11 +300,6 @@ const CodeExample = ({ source, mode = 'code' }) => {
       </ExampleRoot>
     </ErrorBoundary>
   );
-};
-
-CodeExample.propTypes = {
-  source: PropTypes.string.isRequired,
-  mode: PropTypes.oneOf(['code', 'preview']),
 };
 
 export default CodeExample;

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { FormControl, FormGroup, FormHelperText, Slider as MUISlider, FormLabel, Grid } from '@mui/material';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
@@ -67,27 +66,6 @@ const Slider = (props) => {
       </FormControl>
     </FormFieldGrid>
   );
-};
-
-Slider.propTypes = {
-  isReadOnly: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-  isRequired: PropTypes.bool,
-  label: PropTypes.node,
-  helperText: PropTypes.node,
-  description: PropTypes.node,
-  validateOnMount: PropTypes.bool,
-  FormFieldGridProps: PropTypes.object,
-  FormControlProps: PropTypes.object,
-  FormGroupProps: PropTypes.object,
-  FormLabelProps: PropTypes.object,
-  FormHelperTextProps: PropTypes.object,
-  before: PropTypes.node,
-  after: PropTypes.node,
-  InputGridProps: PropTypes.object,
-  BeforeGridProps: PropTypes.object,
-  SliderGridProps: PropTypes.object,
-  AfterGridProps: PropTypes.object,
 };
 
 export default Slider;

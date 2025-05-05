@@ -1,6 +1,5 @@
 import arrayMutators from 'final-form-arrays';
 import createFocusDecorator from 'final-form-focus';
-import PropTypes from 'prop-types';
 import React, { useCallback, useMemo, useRef, useState, cloneElement } from 'react';
 
 import defaultSchemaValidator from '../default-schema-validator';
@@ -187,46 +186,6 @@ const FormRenderer = ({
       initialValues={initialValues}
     />
   );
-};
-
-FormRenderer.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
-  onSubmit: PropTypes.func,
-  onCancel: PropTypes.func,
-  onReset: PropTypes.func,
-  onError: PropTypes.func,
-  schema: PropTypes.object.isRequired,
-  clearOnUnmount: PropTypes.bool,
-  subscription: PropTypes.shape({ [PropTypes.string]: PropTypes.bool }),
-  clearedValue: PropTypes.any,
-  componentMapper: PropTypes.shape({
-    [PropTypes.string]: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func, PropTypes.elementType]),
-  }).isRequired,
-  FormTemplate: PropTypes.elementType,
-  FormTemplateProps: PropTypes.object,
-  validatorMapper: PropTypes.shape({
-    [PropTypes.string]: PropTypes.func,
-  }),
-  actionMapper: PropTypes.shape({
-    [PropTypes.string]: PropTypes.func,
-  }),
-  schemaValidatorMapper: PropTypes.shape({
-    components: PropTypes.shape({
-      [PropTypes.string]: PropTypes.func,
-    }),
-    validators: PropTypes.shape({
-      [PropTypes.string]: PropTypes.func,
-    }),
-    actions: PropTypes.shape({
-      [PropTypes.string]: PropTypes.func,
-    }),
-  }),
-  initialValues: PropTypes.object,
-  decorators: PropTypes.array,
-  mutators: PropTypes.object,
-  conditionMapper: PropTypes.shape({
-    [PropTypes.string]: PropTypes.func,
-  }),
 };
 
 export default FormRenderer;

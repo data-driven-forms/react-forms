@@ -14,7 +14,6 @@ export default withBundleAnalyzer({
   crossOrigin: 'anonymous',
   pageExtensions: ['js', 'jsx', 'md', 'mdx'],
   distDir: '../dist',
-  swcMinify: true,
   webpack: (config, options) => {
     config.module.rules.push({
       test: /\.mdx?$/,

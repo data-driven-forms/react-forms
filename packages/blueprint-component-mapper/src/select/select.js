@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import FormGroupWrapper from '../form-group/form-group';
 
@@ -76,17 +75,6 @@ const Select = ({
       {!isMulti && <Button text={selectedOption ? selectedOption.label : placeholder} rightIcon="caret-down" disabled={props.disabled} />}
     </Component>
   );
-};
-
-Select.propTypes = {
-  input: PropTypes.object,
-  options: PropTypes.array,
-  placeholder: PropTypes.node,
-  isSearchable: PropTypes.bool,
-  noOptionsMessage: PropTypes.node,
-  tagInputProps: PropTypes.object,
-  isMulti: PropTypes.bool,
-  disabled: PropTypes.bool,
 };
 
 const WrapperSelect = (props) => <FormGroupWrapper {...props} Component={Select} />;

@@ -42,7 +42,6 @@
   },
   "dependencies": {
     "@data-driven-forms/common": "*",
-    "prop-types": "^15.7.2",
     "downshift": "^5.4.3",
     "lodash": "^4.17.21"
   }

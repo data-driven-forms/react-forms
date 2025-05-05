@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 import { FormGroup, RadioButtonGroup, RadioButton } from 'carbon-components-react';
@@ -23,20 +22,6 @@ const Radio = ({ component, ...props }) => {
       <HelperTextBlock helperText={helperText} errorText={invalid} warnText={warnText} />
     </FormGroup>
   );
-};
-
-Radio.propTypes = {
-  component: PropTypes.string,
-  FormGroupProps: PropTypes.object,
-  isDisabled: PropTypes.bool,
-  label: PropTypes.node,
-  isRequired: PropTypes.bool,
-  options: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.node,
-      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    })
-  ),
 };
 
 export default Radio;

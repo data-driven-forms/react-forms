@@ -1,6 +1,5 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
-import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
 import {
@@ -142,28 +141,6 @@ const ListInternal = ({
   </Paper>
 );
 
-ListInternal.propTypes = {
-  value: PropTypes.arrayOf(
-    PropTypes.shape({
-      value: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired,
-    })
-  ),
-  optionClick: PropTypes.func.isRequired,
-  noOptionsTitle: PropTypes.node,
-  filterValue: PropTypes.string,
-  filterValueText: PropTypes.node,
-  selectedValues: PropTypes.array,
-  checkboxVariant: PropTypes.bool,
-  ListProps: PropTypes.object,
-  ListItemProps: PropTypes.object,
-  ListItemIconProps: PropTypes.object,
-  ListItemTextProps: PropTypes.object,
-  ListItemSecondaryActionProps: PropTypes.object,
-  PaperProps: PropTypes.object,
-  LeftPaperProps: PropTypes.object,
-};
-
 const ToolbarInternal = ({
   ToolbarProps,
   LeftToolbarProps,
@@ -214,24 +191,6 @@ const ToolbarInternal = ({
     </IconButton>
   </Toolbar>
 );
-
-ToolbarInternal.propTypes = {
-  ToolbarProps: PropTypes.object,
-  LeftToolbarProps: PropTypes.object,
-  filterOptions: PropTypes.func,
-  filterOptionsTitle: PropTypes.node,
-  state: PropTypes.object,
-  FilterFieldProps: PropTypes.object,
-  sortOptions: PropTypes.func,
-  SortIconButtonProps: PropTypes.object,
-  SortIconProps: PropTypes.object,
-  LeftSortIconProps: PropTypes.object,
-  LeftFilterFieldProps: PropTypes.object,
-  LeftSortIconButtonProps: PropTypes.object,
-  filter: PropTypes.string,
-  sortDesc: PropTypes.bool,
-  isValue: PropTypes.bool,
-};
 
 const DualListSelect = ({
   handleOptionsClick,
@@ -512,103 +471,6 @@ const DualListSelect = ({
       </FormControl>
     </StyledDualListSelect>
   );
-};
-
-DualListSelect.propTypes = {
-  leftTitle: PropTypes.node,
-  rightTitle: PropTypes.node,
-  moveLeftTitle: PropTypes.node,
-  moveRightTitle: PropTypes.node,
-  allToLeft: PropTypes.bool,
-  allToRight: PropTypes.bool,
-  checkboxVariant: PropTypes.bool,
-  validateOnMount: PropTypes.bool,
-  moveAllLeftTitle: PropTypes.node,
-  moveAllRightTitle: PropTypes.node,
-  label: PropTypes.node,
-  isRequired: PropTypes.bool,
-  helperText: PropTypes.node,
-  noValueTitle: PropTypes.node,
-  noOptionsTitle: PropTypes.node,
-  filterOptionsTitle: PropTypes.node,
-  filterValueTitle: PropTypes.node,
-  filterValueText: PropTypes.node,
-  filterOptionsText: PropTypes.node,
-  description: PropTypes.node,
-  hideLabel: PropTypes.bool,
-  id: PropTypes.string,
-  input: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-  }),
-  meta: PropTypes.any,
-  state: PropTypes.object,
-  sortOptions: PropTypes.func,
-  filterOptions: PropTypes.func,
-  handleOptionsClick: PropTypes.func,
-  leftValues: PropTypes.array,
-  handleMoveRight: PropTypes.func,
-  handleMoveLeft: PropTypes.func,
-  handleClearLeftValues: PropTypes.func,
-  handleClearRightValues: PropTypes.func,
-  sortValues: PropTypes.func,
-  filterValues: PropTypes.func,
-  rightValues: PropTypes.array,
-  handleValuesClick: PropTypes.func,
-  isFilterable: PropTypes.bool,
-  // props
-  FormFieldGridProps: PropTypes.object,
-  InternalGridProps: PropTypes.object,
-  ListGridProps: PropTypes.object,
-  LeftListGridProps: PropTypes.object,
-  ListProps: PropTypes.object,
-  LeftListProps: PropTypes.object,
-  ButtonsGridProps: PropTypes.object,
-  ButtonsInternalGridProps: PropTypes.object,
-  ButtonGridProps: PropTypes.object,
-  ToRightGridProps: PropTypes.object,
-  IconButtonProps: PropTypes.object,
-  ToRightIconButtonProps: PropTypes.object,
-  AllToRightGridProps: PropTypes.object,
-  AllToRightIconButtonProps: PropTypes.object,
-  AllToLeftGridProps: PropTypes.object,
-  AllToLeftIconButtonProps: PropTypes.object,
-  ToLeftGridProps: PropTypes.object,
-  ToLeftIconButtonProps: PropTypes.object,
-  RightListGridProps: PropTypes.object,
-  RightListProps: PropTypes.object,
-  ListItemProps: PropTypes.object,
-  ListItemIconProps: PropTypes.object,
-  ListItemTextProps: PropTypes.object,
-  ListItemSecondaryActionProps: PropTypes.object,
-  LeftListItemProps: PropTypes.object,
-  LeftListItemIconProps: PropTypes.object,
-  LeftItemTextProps: PropTypes.object,
-  LeftItemSecondaryActionProps: PropTypes.object,
-  RightListItemProps: PropTypes.object,
-  RightListItemIconProps: PropTypes.object,
-  RightItemTextProps: PropTypes.object,
-  RightItemSecondaryActionProps: PropTypes.object,
-  FormControlProps: PropTypes.object,
-  FormLabelProps: PropTypes.object,
-  FormHelperTextProps: PropTypes.object,
-  TitleProps: PropTypes.object,
-  ToolbarProps: PropTypes.object,
-  FilterFieldProps: PropTypes.object,
-  SortIconButtonProps: PropTypes.object,
-  SortIconProps: PropTypes.object,
-  LeftToolbarProps: PropTypes.object,
-  LeftFilterFieldProps: PropTypes.object,
-  LeftSortIconButtonProps: PropTypes.object,
-  LeftSortIconProps: PropTypes.object,
-  LeftTitleProps: PropTypes.object,
-  RightToolbarProps: PropTypes.object,
-  RightFilterFieldProps: PropTypes.object,
-  RightSortIconButtonProps: PropTypes.object,
-  RightSortIconProps: PropTypes.object,
-  RightTitleProps: PropTypes.object,
-  PaperProps: PropTypes.object,
-  LeftPaperProps: PropTypes.object,
-  RightPaperProps: PropTypes.object,
 };
 
 const DualListSelectWrapper = (props) => <DualListSelectCommon {...props} DualListSelect={DualListSelect} />;

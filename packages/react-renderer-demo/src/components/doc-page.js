@@ -1,6 +1,5 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
-import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 
 import Grid from '@mui/material/Grid';
@@ -58,10 +57,6 @@ const DocPage = ({ children }) => {
       </Grid>
     </StyledGrid>
   );
-};
-
-DocPage.propTypes = {
-  children: PropTypes.node,
 };
 
 export default DocPage;

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { DualListSelector } from '@patternfly/react-core/deprecated';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import isEqual from 'lodash/isEqual';
@@ -110,18 +109,6 @@ const DualListTreeSelect = (props) => {
       </DualListContext.Provider>
     </FormGroup>
   );
-};
-
-DualListTreeSelect.propTypes = {
-  label: PropTypes.node,
-  validateOnMount: PropTypes.bool,
-  isRequired: PropTypes.bool,
-  helperText: PropTypes.node,
-  description: PropTypes.node,
-  hideLabel: PropTypes.bool,
-  id: PropTypes.string,
-  isSearchable: PropTypes.bool,
-  isSortable: PropTypes.bool,
 };
 
 export default DualListTreeSelect;

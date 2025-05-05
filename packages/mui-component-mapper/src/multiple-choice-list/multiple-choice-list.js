@@ -1,9 +1,8 @@
 import React, { createContext, useContext } from 'react';
-import PropTypes from 'prop-types';
 
 import { Grid, Checkbox, FormControlLabel, FormLabel, FormGroup, FormControl, FormHelperText } from '@mui/material';
 
-import MultipleChoiceListCommon, { wrapperProps } from '@data-driven-forms/common/multiple-choice-list';
+import MultipleChoiceListCommon from '@data-driven-forms/common/multiple-choice-list';
 import { validationError } from '../validation-error/validation-error';
 
 const CheckboxContext = createContext({});
@@ -27,11 +26,6 @@ const FinalCheckbox = ({ label, isDisabled: _isDisabled, ...rest }) => {
   );
 };
 
-FinalCheckbox.propTypes = {
-  isDisabled: PropTypes.bool,
-  label: PropTypes.node,
-};
-
 const Wrapper = ({ label, isRequired, children, meta, validateOnMount, helperText, description }) => {
   const invalid = validationError(meta, validateOnMount);
   const { FormFieldGridProps, FormControlProps, FormLabelProps, FormGroupProps, FormHelperTextProps } = useContext(CheckboxContext);
@@ -44,10 +38,6 @@ const Wrapper = ({ label, isRequired, children, meta, validateOnMount, helperTex
       </FormControl>
     </Grid>
   );
-};
-
-Wrapper.propTypes = {
-  ...wrapperProps,
 };
 
 const MultipleChoiceList = ({
@@ -66,18 +56,5 @@ const MultipleChoiceList = ({
     <MultipleChoiceListCommon {...props} Wrapper={Wrapper} Checkbox={FinalCheckbox} />
   </CheckboxContext.Provider>
 );
-
-MultipleChoiceList.propTypes = {
-  input: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-  }),
-  FormFieldGridProps: PropTypes.object,
-  FormControlProps: PropTypes.object,
-  FormGroupProps: PropTypes.object,
-  FormControlLabelProps: PropTypes.object,
-  CheckboxProps: PropTypes.object,
-  FormLabelProps: PropTypes.object,
-  FormHelperTextProps: PropTypes.object,
-};
 
 export default MultipleChoiceList;

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import GenericMuiComponent from '../helpers/generic-mui-component';
 
 const Checkbox = ({ activeMapper, component }) => {
@@ -9,11 +8,6 @@ const Checkbox = ({ activeMapper, component }) => {
   } catch (err) {
     return <GenericMuiComponent activeMapper={activeMapper} component={component} />;
   }
-};
-
-Checkbox.propTypes = {
-  activeMapper: PropTypes.string.isRequired,
-  component: PropTypes.string.isRequired,
 };
 
 export default Checkbox;

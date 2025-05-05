@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 import { TextInput, NumberInput } from 'carbon-components-react';
@@ -30,15 +29,6 @@ const TextField = (props) => {
       {...rest}
     />
   );
-};
-
-TextField.propTypes = {
-  isDisabled: PropTypes.bool,
-  isReadOnly: PropTypes.bool,
-  isRequired: PropTypes.bool,
-  label: PropTypes.node,
-  labelText: PropTypes.node,
-  description: PropTypes.node,
 };
 
 export default TextField;

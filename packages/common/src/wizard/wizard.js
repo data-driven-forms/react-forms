@@ -1,5 +1,4 @@
 import React, { useReducer, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { useFormApi, WizardContext } from '@data-driven-forms/react-form-renderer';
 
 import get from 'lodash/get';
@@ -97,34 +96,4 @@ const Wizard = ({ fields, isDynamic, crossroads, Wizard, component, initialState
   );
 };
 
-Wizard.propTypes = {
-  fields: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    })
-  ).isRequired,
-  isDynamic: PropTypes.bool,
-  crossroads: PropTypes.arrayOf(PropTypes.string),
-  Wizard: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  component: PropTypes.any,
-  initialState: PropTypes.object,
-  conditionalSubmitFlag: PropTypes.string,
-};
-
 export default Wizard;
-
-export const wizardProps = {
-  currentStep: PropTypes.object,
-  handlePrev: PropTypes.func,
-  onKeyDown: PropTypes.func,
-  jumpToStep: PropTypes.func,
-  setPrevSteps: PropTypes.func,
-  handleNext: PropTypes.func,
-  navSchema: PropTypes.array,
-  activeStepIndex: PropTypes.number,
-  maxStepIndex: PropTypes.number,
-  formOptions: PropTypes.shape({
-    onCancel: PropTypes.func,
-  }),
-  prevSteps: PropTypes.array,
-};

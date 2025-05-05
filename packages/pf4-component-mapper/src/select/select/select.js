@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 
 import DataDrivenSelect, { flatOptions } from '@data-driven-forms/common/select';
 import parseInternalValue from '@data-driven-forms/common/select/parse-internal-value';
@@ -268,34 +267,6 @@ const InternalSelect = ({
   );
 };
 
-InternalSelect.propTypes = {
-  onChange: PropTypes.func.isRequired,
-  options: PropTypes.arrayOf(
-    PropTypes.shape({
-      value: PropTypes.any,
-      label: PropTypes.any,
-      divider: PropTypes.bool,
-    })
-  ).isRequired,
-  value: PropTypes.any,
-  simpleValue: PropTypes.bool,
-  placeholder: PropTypes.string,
-  isSearchable: PropTypes.bool,
-  id: PropTypes.string,
-  name: PropTypes.string.isRequired,
-  isDisabled: PropTypes.bool,
-  isClearable: PropTypes.bool,
-  noResultsMessage: PropTypes.node,
-  noOptionsMessage: PropTypes.func,
-  isMulti: PropTypes.bool,
-  isFetching: PropTypes.bool,
-  onInputChange: PropTypes.func,
-  loadingMessage: PropTypes.node,
-  menuPortalTarget: PropTypes.any,
-  menuIsPortal: PropTypes.bool,
-  originalOptions: PropTypes.array,
-};
-
 const Select = ({
   showMoreLabel = 'more',
   showLessLabel = 'Show less',
@@ -333,30 +304,6 @@ const Select = ({
       optionsTransformer={flatOptions}
     />
   );
-};
-
-Select.propTypes = {
-  isSearchable: PropTypes.bool,
-  showMoreLabel: PropTypes.node,
-  showLessLabel: PropTypes.node,
-  simpleValue: PropTypes.bool,
-  value: PropTypes.any,
-  options: PropTypes.arrayOf(
-    PropTypes.shape({
-      value: PropTypes.any,
-      label: PropTypes.any,
-    })
-  ),
-  onChange: PropTypes.func.isRequired,
-  isMulti: PropTypes.bool,
-  loadOptions: PropTypes.func,
-  loadingMessage: PropTypes.node,
-  updatingMessage: PropTypes.node,
-  menuIsPortal: PropTypes.bool,
-  placeholder: PropTypes.string,
-  noResultsMessage: PropTypes.node,
-  noOptionsMessage: PropTypes.node,
-  isClearable: PropTypes.bool,
 };
 
 export default Select;

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { RadioGroup } from '@blueprintjs/core';
 
@@ -22,13 +21,6 @@ const Radio = ({ input, label, isRequired, providerRequired, ...props }) => (
     selectedValue={input.value}
   />
 );
-
-Radio.propTypes = {
-  input: PropTypes.object,
-  label: PropTypes.node,
-  isRequired: PropTypes.bool,
-  providerRequired: PropTypes.node,
-};
 
 const WrapperRadio = (props) => <FormGroupWrapper {...props} hideLabel Component={Radio} component="not-radio" />;
 

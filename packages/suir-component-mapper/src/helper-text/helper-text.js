@@ -1,6 +1,5 @@
 import React from 'react';
 import clsx from 'clsx';
-import PropTypes from 'prop-types';
 import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles({
@@ -16,11 +15,6 @@ const HelperText = ({ className, children }) => {
       <p className={clsx(classes.root, className)}>{children}</p>
     </div>
   );
-};
-
-HelperText.propTypes = {
-  className: PropTypes.string,
-  children: PropTypes.node,
 };
 
 export default HelperText;

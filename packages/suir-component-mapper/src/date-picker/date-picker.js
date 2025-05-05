@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import FormFieldGrid from '../form-field-grid/form-field-grid';
 import { validationError, validationWarning } from '../helpers/helpers';
@@ -40,20 +39,6 @@ const DatePicker = (props) => {
       />
     </FormFieldGrid>
   );
-};
-
-DatePicker.propTypes = {
-  isReadOnly: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-  placeholder: PropTypes.node,
-  isRequired: PropTypes.bool,
-  label: PropTypes.node,
-  helperText: PropTypes.node,
-  validateOnMount: PropTypes.bool,
-  description: PropTypes.node,
-  /** Sub components customization API */
-  FormFieldGridProps: PropTypes.object,
-  HelperTextProps: PropTypes.object,
 };
 
 export default DatePicker;

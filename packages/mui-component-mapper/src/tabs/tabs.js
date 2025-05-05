@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { AppBar, Grid, Tab, Tabs } from '@mui/material';
 
 import FormFieldGrid from '../form-field-grid';
@@ -34,15 +33,6 @@ const FormTabs = ({ fields, AppBarProps = {}, TabsProps = {}, TabProps = {}, For
       ))}
     </FormFieldGrid>
   );
-};
-
-FormTabs.propTypes = {
-  fields: PropTypes.array.isRequired,
-  AppBarProps: PropTypes.object,
-  TabsProps: PropTypes.object,
-  TabProps: PropTypes.object,
-  FormFieldGridProps: PropTypes.object,
-  GridItemProps: PropTypes.object,
 };
 
 export default FormTabs;

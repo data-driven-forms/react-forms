@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 import { Slider as CarbonSlider } from 'carbon-components-react';
@@ -29,15 +28,6 @@ const Slider = (props) => {
       <HelperTextBlock helperText={helperText} errorText={invalid} warnText={warnText} />
     </div>
   );
-};
-
-Slider.propTypes = {
-  isDisabled: PropTypes.bool,
-  isRequired: PropTypes.bool,
-  label: PropTypes.node,
-  labelText: PropTypes.node,
-  description: PropTypes.node,
-  WrapperProps: PropTypes.object,
 };
 
 export default Slider;

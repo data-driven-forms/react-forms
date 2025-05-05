@@ -1,5 +1,4 @@
 import React, { memo } from 'react';
-import PropTypes from 'prop-types';
 import isEqual from 'lodash/isEqual';
 import clsx from 'clsx';
 import { createUseStyles } from 'react-jss';
@@ -60,16 +59,6 @@ const ArrayItem = memo(
   },
   ({ remove: _prevRemove, ...prev }, { remove: _nextRemove, ...next }) => isEqual(prev, next)
 );
-
-ArrayItem.propTypes = {
-  remove: PropTypes.func,
-  fields: PropTypes.array,
-  name: PropTypes.string,
-  removeText: PropTypes.node,
-  buttonDisabled: PropTypes.bool,
-  RemoveButtonProps: PropTypes.object,
-  ArrayItemProps: PropTypes.object,
-};
 
 const FieldArray = (props) => {
   const {
@@ -144,25 +133,6 @@ const FieldArray = (props) => {
       </FieldArrayFF>
     </FormGroup>
   );
-};
-
-FieldArray.propTypes = {
-  noItemsMessage: PropTypes.node,
-  maxItems: PropTypes.number,
-  minItems: PropTypes.number,
-  buttonLabels: PropTypes.shape({
-    add: PropTypes.node,
-    remove: PropTypes.node,
-  }),
-  AddContainerProps: PropTypes.object,
-  AddButtonProps: PropTypes.object,
-  FormGroupProps: PropTypes.object,
-  WrapperProps: PropTypes.object,
-  ArrayItemProps: PropTypes.object,
-  RemoveButtonProps: PropTypes.object,
-  defaultItem: PropTypes.any,
-  isRequired: PropTypes.bool,
-  fields: PropTypes.array,
 };
 
 export default FieldArray;

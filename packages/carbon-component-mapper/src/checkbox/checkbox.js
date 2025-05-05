@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import MultipleChoiceListCommon from '@data-driven-forms/common/multiple-choice-list';
 
@@ -17,16 +16,6 @@ const Wrapper = ({ label, description, children, helperText, error, showError, i
     <HelperTextBlock helperText={helperText} errorText={showError && error} />
   </FormGroup>
 );
-
-Wrapper.propTypes = {
-  label: PropTypes.node,
-  children: PropTypes.node,
-  description: PropTypes.node,
-  helperText: PropTypes.node,
-  error: PropTypes.node,
-  showError: PropTypes.bool,
-  isRequired: PropTypes.bool,
-};
 
 const SingleCheckbox = (props) => {
   const { input, meta, validateOnMount, helperText, WrapperProps, ...rest } = useFieldApi(prepareProps({ ...props, type: 'checkbox' }));
@@ -47,28 +36,11 @@ const SingleCheckboxInCommon = ({ label, isDisabled, id, meta, option: { value, 
   <CarbonCheckbox id={id} labelText={label} disabled={isDisabled} {...props} {...rest} onChange={(_value, _name, event) => onChange(event)} />
 );
 
-SingleCheckboxInCommon.propTypes = {
-  label: PropTypes.node,
-  input: PropTypes.object,
-  isDisabled: PropTypes.bool,
-  isRequired: PropTypes.bool,
-  name: PropTypes.string,
-  id: PropTypes.string,
-  WrapperProps: PropTypes.object,
-  meta: PropTypes.object,
-  option: PropTypes.object,
-  onChange: PropTypes.func,
-};
-
 const Checkbox = ({ options, ...props }) =>
   options ? (
     <MultipleChoiceListCommon options={options} {...props} Wrapper={Wrapper} Checkbox={SingleCheckboxInCommon} />
   ) : (
     <SingleCheckbox {...props} />
   );
-
-Checkbox.propTypes = {
-  options: PropTypes.arrayOf(PropTypes.shape({ label: PropTypes.node, value: PropTypes.any })),
-};
 
 export default Checkbox;

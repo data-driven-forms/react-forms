@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Button } from 'antd';
 import selectNext from '@data-driven-forms/common/wizard/select-next';
 
@@ -27,23 +26,6 @@ const NextButton = ({
       {progressNext ? buttonLabels.next : buttonLabels.submit}
     </Button>
   );
-};
-
-NextButton.propTypes = {
-  nextStep: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.object]),
-  handleSubmit: PropTypes.func.isRequired,
-  valid: PropTypes.bool,
-  handleNext: PropTypes.func.isRequired,
-  getState: PropTypes.func.isRequired,
-  buttonLabels: PropTypes.shape({
-    submit: PropTypes.node.isRequired,
-    cancel: PropTypes.node.isRequired,
-    back: PropTypes.node.isRequired,
-    next: PropTypes.node.isRequired,
-  }).isRequired,
-  NextButtonProps: PropTypes.object,
-  SubmitButtonProps: PropTypes.object,
-  conditionalSubmitFlag: PropTypes.string.isRequired,
 };
 
 const WizardStepButtons = ({
@@ -80,28 +62,5 @@ const WizardStepButtons = ({
     />
   </div>
 );
-
-WizardStepButtons.propTypes = {
-  disableBack: PropTypes.bool,
-  handlePrev: PropTypes.func.isRequired,
-  handleNext: PropTypes.func.isRequired,
-  conditionalSubmitFlag: PropTypes.string.isRequired,
-  nextStep: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.shape({
-      when: PropTypes.string.isRequired,
-      stepMapper: PropTypes.object.isRequired,
-    }),
-  ]),
-  buttonLabels: PropTypes.object.isRequired,
-  formOptions: PropTypes.shape({
-    onCancel: PropTypes.func.isRequired,
-  }).isRequired,
-  ButtonProps: PropTypes.object,
-  NextButtonProps: PropTypes.object,
-  BackButtonProps: PropTypes.object,
-  CancelButtonProps: PropTypes.object,
-  SubmitButtonProps: PropTypes.object,
-};
 
 export default WizardStepButtons;

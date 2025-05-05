@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import DualListSelectCommon from '@data-driven-forms/common/dual-list-select';
 import { Menu, MenuItem, ButtonGroup, Button, ControlGroup, InputGroup } from '@blueprintjs/core';
@@ -49,23 +48,6 @@ const List = ({ value = [], optionClick, noOptionsTitle, filterValue, filterValu
   );
 };
 
-List.propTypes = {
-  value: PropTypes.arrayOf(
-    PropTypes.shape({
-      value: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired,
-    })
-  ),
-  optionClick: PropTypes.func.isRequired,
-  noOptionsTitle: PropTypes.node,
-  filterValue: PropTypes.string,
-  filterValueText: PropTypes.node,
-  selectedValues: PropTypes.array,
-  checkboxVariant: PropTypes.bool,
-  MenuProps: PropTypes.object,
-  MenuItemProps: PropTypes.object,
-};
-
 const Toolbar = ({
   sortTitle,
   onFilter,
@@ -82,18 +64,6 @@ const Toolbar = ({
     <Button icon={sortDirection ? 'sort-desc' : 'sort-asc'} title={sortTitle} onClick={onSort} {...ButtonProps} />
   </ControlGroup>
 );
-
-Toolbar.propTypes = {
-  sortTitle: PropTypes.node,
-  onFilter: PropTypes.func.isRequired,
-  onSort: PropTypes.func.isRequired,
-  sortDirection: PropTypes.bool,
-  value: PropTypes.string,
-  placeholder: PropTypes.string,
-  ControlGroupProps: PropTypes.object,
-  InputGroupProps: PropTypes.object,
-  ButtonProps: PropTypes.object,
-};
 
 const DualListInternal = ({
   allToRight = true,
@@ -232,57 +202,6 @@ const DualListInternal = ({
       </div>
     </div>
   );
-};
-
-DualListInternal.propTypes = {
-  leftTitle: PropTypes.node,
-  rightTitle: PropTypes.node,
-  moveLeftTitle: PropTypes.node,
-  moveRightTitle: PropTypes.node,
-  allToLeft: PropTypes.bool,
-  allToRight: PropTypes.bool,
-  validateOnMount: PropTypes.bool,
-  moveAllLeftTitle: PropTypes.node,
-  moveAllRightTitle: PropTypes.node,
-  noValueTitle: PropTypes.node,
-  noOptionsTitle: PropTypes.node,
-  filterOptionsTitle: PropTypes.node,
-  filterValueTitle: PropTypes.node,
-  filterValueText: PropTypes.node,
-  filterOptionsText: PropTypes.node,
-  state: PropTypes.object,
-  sortOptions: PropTypes.func,
-  filterOptions: PropTypes.func,
-  handleOptionsClick: PropTypes.func,
-  leftValues: PropTypes.array,
-  handleMoveRight: PropTypes.func,
-  handleMoveLeft: PropTypes.func,
-  handleClearLeftValues: PropTypes.func,
-  handleClearRightValues: PropTypes.func,
-  sortValues: PropTypes.func,
-  filterValues: PropTypes.func,
-  rightValues: PropTypes.array,
-  handleValuesClick: PropTypes.func,
-  WrapperProps: PropTypes.object,
-  LeftWrapperProps: PropTypes.object,
-  RightWrapperProps: PropTypes.object,
-  ButtonGroupProps: PropTypes.object,
-  ToRightButtonProps: PropTypes.object,
-  AllToRightButtonProps: PropTypes.object,
-  AllToLeftButtonProps: PropTypes.object,
-  ToLeftButtonProps: PropTypes.object,
-  LeftControlGroupProps: PropTypes.object,
-  LeftInputGroupProps: PropTypes.object,
-  LeftButtonProps: PropTypes.object,
-  RightControlGroupProps: PropTypes.object,
-  RightInputGroupProps: PropTypes.object,
-  RightButtonProps: PropTypes.object,
-  LeftMenuProps: PropTypes.object,
-  LeftMenuItemProps: PropTypes.object,
-  RightMenuProps: PropTypes.object,
-  RightMenuItemProps: PropTypes.object,
-  leftSortTitle: PropTypes.string,
-  rightSortTitle: PropTypes.string,
 };
 
 const DualListWrapper = (props) => <FormGroupInternal {...props} Component={DualListInternal} />;

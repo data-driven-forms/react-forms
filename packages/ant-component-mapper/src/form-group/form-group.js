@@ -1,9 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { Form } from 'antd';
 import { validationError } from '../validation-error/';
-import { childrenPropTypes } from '@data-driven-forms/common/prop-types-templates';
 
 const FormGroup = ({ label, children, isRequired, FormItemProps, meta, validateOnMount, helperText, description, hideLabel, input }) => {
   const invalid = validationError(meta, validateOnMount);
@@ -22,21 +20,6 @@ const FormGroup = ({ label, children, isRequired, FormItemProps, meta, validateO
       {children}
     </Form.Item>
   );
-};
-
-FormGroup.propTypes = {
-  label: PropTypes.string,
-  children: childrenPropTypes,
-  help: PropTypes.string,
-  isRequired: PropTypes.bool,
-  invalid: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-  FormItemProps: PropTypes.object,
-  meta: PropTypes.object,
-  validateOnMount: PropTypes.bool,
-  helperText: PropTypes.node,
-  description: PropTypes.node,
-  hideLabel: PropTypes.bool,
-  input: PropTypes.object,
 };
 
 export default FormGroup;

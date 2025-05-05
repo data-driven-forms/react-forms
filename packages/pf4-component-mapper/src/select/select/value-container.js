@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
 import Input from './input';
 
 const ValueContainer = ({ value, isMulti, placeholder, getInputProps, isSearchable, inputRef }) => {
@@ -17,15 +16,6 @@ const ValueContainer = ({ value, isMulti, placeholder, getInputProps, isSearchab
   }
 
   return <span className="pf-v6-c-menu-toggle-text">{value || placeholder}</span>;
-};
-
-ValueContainer.propTypes = {
-  value: PropTypes.node,
-  placeholder: PropTypes.node,
-  isMulti: PropTypes.bool,
-  getInputProps: PropTypes.func.isRequired,
-  isSearchable: PropTypes.bool,
-  inputRef: PropTypes.object,
 };
 
 export default ValueContainer;

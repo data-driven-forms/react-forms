@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 
 import { FormGroup, Intent } from '@blueprintjs/core';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
@@ -44,21 +43,6 @@ export const FormGroupInternal = ({
       />
     </FormGroup>
   );
-};
-
-FormGroupInternal.propTypes = {
-  isDisabled: PropTypes.bool,
-  isReadOnly: PropTypes.bool,
-  isRequired: PropTypes.bool,
-  Component: PropTypes.any,
-  helperText: PropTypes.node,
-  label: PropTypes.node,
-  validateOnMount: PropTypes.bool,
-  description: PropTypes.node,
-  FormGroupProps: PropTypes.object,
-  hideLabel: PropTypes.bool,
-  meta: PropTypes.object,
-  input: PropTypes.object,
 };
 
 const FormGroupWrapper = (props) => {

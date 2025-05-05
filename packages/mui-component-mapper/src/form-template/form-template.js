@@ -1,6 +1,5 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
-import PropTypes from 'prop-types';
 import { Grid, Button as MUIButton, Typography } from '@mui/material';
 import { Alert, AlertTitle } from '@mui/material';
 
@@ -33,12 +32,6 @@ const Form = ({ children, GridContainerProps, GridProps, ...props }) => (
   </Grid>
 );
 
-Form.propTypes = {
-  children: PropTypes.node,
-  GridProps: PropTypes.object,
-  GridContainerProps: PropTypes.object,
-};
-
 const Description = ({ children, GridProps, ...props }) => (
   <Grid item xs={12} {...GridProps}>
     <Typography variant="body1" gutterBottom {...props}>
@@ -46,11 +39,6 @@ const Description = ({ children, GridProps, ...props }) => (
     </Typography>
   </Grid>
 );
-
-Description.propTypes = {
-  children: PropTypes.node,
-  GridProps: PropTypes.object,
-};
 
 const Title = ({ children, GridProps, ...props }) => (
   <Grid item xs={12} {...GridProps}>
@@ -60,11 +48,6 @@ const Title = ({ children, GridProps, ...props }) => (
   </Grid>
 );
 
-Title.propTypes = {
-  children: PropTypes.node,
-  GridProps: PropTypes.object,
-};
-
 const ButtonGroup = ({ children, GridProps, ...props }) => (
   <StyledButtonGroup item xs={12} {...GridProps}>
     <div className={classes.buttonGroup} {...props}>
@@ -73,23 +56,11 @@ const ButtonGroup = ({ children, GridProps, ...props }) => (
   </StyledButtonGroup>
 );
 
-ButtonGroup.propTypes = {
-  children: PropTypes.node,
-  GridProps: PropTypes.object,
-};
-
 const Button = ({ label, variant, children, buttonType, ...props }) => (
   <MUIButton color={variant} variant="contained" {...props}>
     {label || children}
   </MUIButton>
 );
-
-Button.propTypes = {
-  children: PropTypes.node,
-  label: PropTypes.node,
-  variant: PropTypes.string,
-  buttonType: PropTypes.string,
-};
 
 const StyledAlert = styled(Alert)(() => ({
   '& .alert': {
@@ -119,11 +90,6 @@ export const FormError = ({ formError, alertProps }) => {
   }
 
   return null;
-};
-
-FormError.propTypes = {
-  formError: PropTypes.any,
-  alertProps: PropTypes.object,
 };
 
 const MuiFormTemplate = (props) => (

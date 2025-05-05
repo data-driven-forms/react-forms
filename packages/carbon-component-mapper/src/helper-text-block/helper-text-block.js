@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles({
@@ -26,12 +25,6 @@ const HelperTextBlock = ({ helperText, errorText, warnText }) => {
   }
 
   return null;
-};
-
-HelperTextBlock.propTypes = {
-  helperText: PropTypes.node,
-  errorText: PropTypes.node,
-  warnText: PropTypes.node,
 };
 
 export default HelperTextBlock;

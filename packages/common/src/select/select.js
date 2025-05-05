@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useMemo } from 'react';
 
-import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import useSelect from '../use-select/use-select';
 import deepEqual from './deep-equal';
@@ -106,33 +105,6 @@ const Select = ({
       {...(state.originalOptions && { originalOptions: state.originalOptions })}
     />
   );
-};
-
-Select.propTypes = {
-  options: PropTypes.array,
-  onChange: PropTypes.func,
-  classNamePrefix: PropTypes.string,
-  invalid: PropTypes.bool,
-  simpleValue: PropTypes.bool,
-  isMulti: PropTypes.bool,
-  pluckSingleValue: PropTypes.bool,
-  value: PropTypes.any,
-  placeholder: PropTypes.string,
-  loadOptionsChangeCounter: PropTypes.number,
-  isDisabled: PropTypes.bool,
-  isReadOnly: PropTypes.bool,
-  loadOptions: PropTypes.func,
-  loadingMessage: PropTypes.node,
-  loadingProps: PropTypes.object,
-  selectVariant: PropTypes.string,
-  updatingMessage: PropTypes.node,
-  noOptionsMessage: PropTypes.node,
-  isSearchable: PropTypes.bool,
-  isClearable: PropTypes.bool,
-  SelectComponent: PropTypes.elementType.isRequired,
-  noValueUpdates: PropTypes.bool,
-  optionsTransformer: PropTypes.func,
-  compareValues: PropTypes.func,
 };
 
 export default Select;

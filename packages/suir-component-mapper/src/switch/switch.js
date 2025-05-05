@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { FormCheckbox } from 'semantic-ui-react';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import FormFieldGrid from '../form-field-grid/form-field-grid';
@@ -70,21 +69,6 @@ export const Switch = (props) => {
       />
     </FormFieldGrid>
   );
-};
-
-Switch.propTypes = {
-  isReadOnly: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-  isRequired: PropTypes.bool,
-  label: PropTypes.node,
-  helperText: PropTypes.node,
-  validateOnMount: PropTypes.bool,
-  onText: PropTypes.node,
-  offText: PropTypes.node,
-  description: PropTypes.node,
-  /** Sub components customization API */
-  FormFieldGridProps: PropTypes.object,
-  HelpertextProps: PropTypes.object,
 };
 
 export default Switch;

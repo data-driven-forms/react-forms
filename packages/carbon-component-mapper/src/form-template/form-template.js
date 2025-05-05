@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { createUseStyles } from 'react-jss';
 
@@ -30,11 +29,6 @@ export const Button = ({ label, buttonType, ...props }) => (
   </CarbonButton>
 );
 
-Button.propTypes = {
-  label: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
-  buttonType: PropTypes.string,
-};
-
 export const ButtonGroup = ({ children, className, ...props }) => {
   const { butttons } = useStyles();
 
@@ -45,22 +39,9 @@ export const ButtonGroup = ({ children, className, ...props }) => {
   );
 };
 
-ButtonGroup.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
-  className: PropTypes.string,
-};
-
 export const Title = ({ children, ...props }) => <h3 {...props}>{children}</h3>;
 
-Title.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
-};
-
 export const Description = ({ children, ...props }) => <div {...props}>{children}</div>;
-
-Description.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
-};
 
 export const Form = ({ children, className, ...props }) => {
   const { form } = useStyles();
@@ -70,11 +51,6 @@ export const Form = ({ children, className, ...props }) => {
       {children}
     </CarbonForm>
   );
-};
-
-Form.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
-  className: PropTypes.string,
 };
 
 export const Header = (props) => {

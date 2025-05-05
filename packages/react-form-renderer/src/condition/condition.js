@@ -1,5 +1,4 @@
 import { useCallback, useContext, useEffect, useMemo, useReducer } from 'react';
-import PropTypes from 'prop-types';
 import isEqual from 'lodash/isEqual';
 
 import useFormApi from '../use-form-api';
@@ -103,57 +102,6 @@ const Condition = ({ condition, children, field }) => {
   }, [setters, state.initial]);
 
   return conditionResult.visible ? children : null;
-};
-
-const conditionProps = {
-  when: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string), PropTypes.func]),
-  is: PropTypes.oneOfType([PropTypes.array, PropTypes.string, PropTypes.object, PropTypes.number, PropTypes.bool, PropTypes.func]),
-  isNotEmpty: PropTypes.bool,
-  isEmpty: PropTypes.bool,
-  pattern: (props, name, componentName) => {
-    if (!props[name]) {
-      return;
-    }
-
-    if (typeof props[name] === 'string') {
-      return;
-    }
-
-    if (props[name] instanceof RegExp) {
-      return;
-    }
-
-    return new Error(`Invalid prop pattern supplied to condition in \`${componentName}\`. Validation failed.
-    pattern has to be RegExp or string. Received \`${typeof props[name]}\`.`);
-  },
-  notMatch: PropTypes.any,
-  then: PropTypes.shape({
-    visible: PropTypes.bool,
-    set: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
-  }),
-  else: PropTypes.shape({
-    visible: PropTypes.bool,
-    set: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
-  }),
-};
-
-const nestedConditions = {
-  or: PropTypes.oneOfType([PropTypes.shape(conditionProps), PropTypes.arrayOf(PropTypes.shape(conditionProps))]),
-  and: PropTypes.oneOfType([PropTypes.shape(conditionProps), PropTypes.arrayOf(PropTypes.shape(conditionProps))]),
-  not: PropTypes.oneOfType([PropTypes.shape(conditionProps), PropTypes.arrayOf(PropTypes.shape(conditionProps))]),
-  sequence: PropTypes.arrayOf(PropTypes.shape(conditionProps)),
-};
-
-const conditionsProps = {
-  ...conditionProps,
-  ...nestedConditions,
-};
-
-Condition.propTypes = {
-  condition: PropTypes.oneOfType([PropTypes.shape(conditionsProps), PropTypes.arrayOf(PropTypes.shape(conditionsProps))]),
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]).isRequired,
-  values: PropTypes.object.isRequired,
-  field: PropTypes.object.isRequired,
 };
 
 export default Condition;

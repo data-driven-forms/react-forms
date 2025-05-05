@@ -1,7 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Radio as AntRadio } from 'antd';
-import { wrapperProps } from '@data-driven-forms/common/multiple-choice-list';
 import FormGroup from '../form-group';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
@@ -10,11 +8,6 @@ const RadioOption = ({ name, option: { label, value, ...rest } }) => (
     {label}
   </AntRadio>
 );
-
-RadioOption.propTypes = {
-  name: PropTypes.string.isRequired,
-  option: PropTypes.shape({ label: PropTypes.string.isRequired, value: PropTypes.any.isRequired }).isRequired,
-};
 
 const Radio = ({ name, component, ...props }) => {
   const {
@@ -52,22 +45,6 @@ const Radio = ({ name, component, ...props }) => {
       </AntRadio.Group>
     </FormGroup>
   );
-};
-
-Radio.propTypes = {
-  ...wrapperProps,
-  options: PropTypes.arrayOf(
-    PropTypes.shape({
-      value: PropTypes.any,
-      label: PropTypes.node,
-    })
-  ),
-  label: PropTypes.node.isRequired,
-  isDisabled: PropTypes.bool,
-  isReadOnly: PropTypes.bool,
-  description: PropTypes.node,
-  FormItemProps: PropTypes.object,
-  component: PropTypes.string,
 };
 
 export default Radio;

@@ -1,6 +1,5 @@
 import React, { createContext, useContext } from 'react';
-import PropTypes from 'prop-types';
-import MultipleChoiceListCommon, { wrapperProps } from '@data-driven-forms/common/multiple-choice-list';
+import MultipleChoiceListCommon from '@data-driven-forms/common/multiple-choice-list';
 import { FormCheckbox, Header, FormField } from 'semantic-ui-react';
 import { createUseStyles } from 'react-jss';
 import clsx from 'clsx';
@@ -36,11 +35,6 @@ const FinalCheckbox = ({ label, isDisabled: _isDisabled, ...rest }) => {
     props: { isRequired, isReadOnly, helperText, validate, isDisabled, meta, ...props },
   } = useContext(CheckboxContext);
   return <FormCheckbox {...rest} {...props} disabled={isDisabled} label={label} />;
-};
-
-FinalCheckbox.propTypes = {
-  isDisabled: PropTypes.bool,
-  label: PropTypes.node,
 };
 
 const Wrapper = ({ label, isRequired, children, meta, validateOnMount, helperText }) => {
@@ -79,9 +73,6 @@ const Wrapper = ({ label, isRequired, children, meta, validateOnMount, helperTex
   );
 };
 
-Wrapper.propTypes = {
-  ...wrapperProps,
-};
 const MultipleChoiceList = ({
   FormFieldGridProps = {},
   FormFieldProps = {},
@@ -94,13 +85,5 @@ const MultipleChoiceList = ({
     <MultipleChoiceListCommon {...props} Wrapper={Wrapper} Checkbox={FinalCheckbox} />
   </CheckboxContext.Provider>
 );
-
-MultipleChoiceList.propTypes = {
-  FormFieldGridProps: PropTypes.object,
-  FormFieldProps: PropTypes.object,
-  HeaderProps: PropTypes.object,
-  OptionsListProps: PropTypes.object,
-  HelperTextProps: PropTypes.object,
-};
 
 export default MultipleChoiceList;

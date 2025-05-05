@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
 import FormSpy from '@data-driven-forms/react-form-renderer/form-spy';
 import WizardStepButtons from './step-buttons';
 
@@ -13,13 +12,5 @@ const WizardStep = ({ fields = [], formOptions, WizardStepProps, ...rest }) => (
     <FormSpy>{() => <WizardStepButtons formOptions={formOptions} {...rest} />}</FormSpy>
   </Fragment>
 );
-
-WizardStep.propTypes = {
-  fields: PropTypes.array,
-  formOptions: PropTypes.shape({
-    renderForm: PropTypes.func.isRequired,
-  }).isRequired,
-  WizardStepProps: PropTypes.object,
-};
 
 export default WizardStep;

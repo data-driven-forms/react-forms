@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import DualListSelectCommon from '@data-driven-forms/common/dual-list-select';
 import clsx from 'clsx';
 import { createUseStyles } from 'react-jss';
@@ -67,10 +66,6 @@ const EmptyList = ({ message }) => (
   </StructuredListWrapper>
 );
 
-EmptyList.propTypes = {
-  message: PropTypes.string,
-};
-
 const List = ({ options, selectedValues, handleOptionsClick, noTitle, ListProps, BodyProps }) => {
   const { dualList, dualListBody } = useStyles();
 
@@ -100,15 +95,6 @@ const List = ({ options, selectedValues, handleOptionsClick, noTitle, ListProps,
   );
 };
 
-List.propTypes = {
-  options: PropTypes.array,
-  selectedValues: PropTypes.array,
-  handleOptionsClick: PropTypes.func,
-  noTitle: PropTypes.node,
-  ListProps: PropTypes.object,
-  BodyProps: PropTypes.object,
-};
-
 const Toolbar = ({ sortTitle, onFilter, onSort, sortDirection, placeholder, ToolbarProps, SearchProps, SortProps }) => {
   const { toolbar, tooltipButton } = useStyles();
 
@@ -120,17 +106,6 @@ const Toolbar = ({ sortTitle, onFilter, onSort, sortDirection, placeholder, Tool
       </TooltipIcon>
     </div>
   );
-};
-
-Toolbar.propTypes = {
-  sortTitle: PropTypes.string,
-  onFilter: PropTypes.func,
-  onSort: PropTypes.func,
-  sortDirection: PropTypes.bool,
-  placeholder: PropTypes.string,
-  ToolbarProps: PropTypes.object,
-  SearchProps: PropTypes.object,
-  SortProps: PropTypes.object,
 };
 
 const isEmpty = (array) => array.length === 0;
@@ -268,62 +243,6 @@ const DualListSelectInner = ({
       </Grid>
     </FormGroup>
   );
-};
-
-DualListSelectInner.propTypes = {
-  leftValues: PropTypes.array,
-  handleOptionsClick: PropTypes.func,
-  rightValues: PropTypes.array,
-  handleValuesClick: PropTypes.func,
-  handleMoveRight: PropTypes.func,
-  handleClearLeftValues: PropTypes.func,
-  handleMoveLeft: PropTypes.func,
-  handleClearRightValues: PropTypes.func,
-  state: PropTypes.object,
-  filterOptions: PropTypes.func,
-  filterValues: PropTypes.func,
-  sortValues: PropTypes.func,
-  sortOptions: PropTypes.func,
-  noOptionsTitle: PropTypes.node,
-  noValueTitle: PropTypes.node,
-  leftTitle: PropTypes.node,
-  rightTitle: PropTypes.node,
-  LeftTitleElement: PropTypes.string,
-  RightTitleElement: PropTypes.string,
-  LeftTitleProps: PropTypes.object,
-  RightTitleProps: PropTypes.object,
-  moveLeftTitle: PropTypes.node,
-  moveRightTitle: PropTypes.node,
-  moveAllLeftTitle: PropTypes.node,
-  moveAllRightTitle: PropTypes.node,
-  label: PropTypes.node,
-  isRequired: PropTypes.bool,
-  filterOptionsTitle: PropTypes.string,
-  filterValuesTitle: PropTypes.string,
-  sortOptionsTitle: PropTypes.string,
-  sortValuesTitle: PropTypes.string,
-  filterOptionsText: PropTypes.node,
-  filterValueText: PropTypes.node,
-  FormGroupProps: PropTypes.object,
-  GridProps: PropTypes.object,
-  RowProps: PropTypes.object,
-  OptionsColumnProps: PropTypes.object,
-  ButtonColumnProps: PropTypes.object,
-  ValuesColumnProps: PropTypes.object,
-  AddButtonProps: PropTypes.object,
-  AddAllButtonProps: PropTypes.object,
-  RemoveButtonProps: PropTypes.object,
-  RemoveAllButtonProps: PropTypes.object,
-  LeftToolbarProps: PropTypes.object,
-  RightToolbarProps: PropTypes.object,
-  LeftSearchProps: PropTypes.object,
-  RightSearchProps: PropTypes.object,
-  LeftSortProps: PropTypes.object,
-  RightSortProps: PropTypes.object,
-  LeftListProps: PropTypes.object,
-  LeftBodyProps: PropTypes.object,
-  RightListProps: PropTypes.object,
-  RightBodyProps: PropTypes.object,
 };
 
 const DualListSelect = (props) => <DualListSelectCommon {...props} DualListSelect={DualListSelectInner} />;

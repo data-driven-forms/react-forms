@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Checkbox as AntCheckbox } from 'antd';
 import MultipleChoiceList from '../multiple-choice-list/multiple-choice-list';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
@@ -37,21 +36,6 @@ export const SingleCheckbox = (props) => {
   );
 };
 
-SingleCheckbox.propTypes = {
-  isReadOnly: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-  isRequired: PropTypes.bool,
-  label: PropTypes.node,
-  helperText: PropTypes.node,
-  description: PropTypes.node,
-  validateOnMount: PropTypes.bool,
-  FormItemProps: PropTypes.object,
-};
-
 const Checkbox = ({ options, ...props }) => (options ? <MultipleChoiceList options={options} {...props} /> : <SingleCheckbox {...props} />);
-
-Checkbox.propTypes = {
-  options: PropTypes.array,
-};
 
 export default Checkbox;

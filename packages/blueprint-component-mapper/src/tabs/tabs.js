@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { Tab, Tabs as BTabs } from '@blueprintjs/core';
 import { useFormApi } from '@data-driven-forms/react-form-renderer';
@@ -16,10 +15,5 @@ const Tabs = ({ component, name, fields, ...props }) => {
   );
 };
 
-Tabs.propTypes = {
-  component: PropTypes.string,
-  name: PropTypes.string,
-  fields: PropTypes.array,
-};
 
 export default Tabs;

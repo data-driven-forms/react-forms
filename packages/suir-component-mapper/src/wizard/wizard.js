@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 import { WizardContext } from '@data-driven-forms/react-form-renderer';
 import Wizard from '@data-driven-forms/common/wizard/wizard';
 import WizardNav from './wizard-nav';
@@ -33,19 +32,6 @@ const WizardInternal = ({ buttonLabels, stepsInfo, conditionalSubmitFlag }) => {
       </div>
     </div>
   );
-};
-
-WizardInternal.propTypes = {
-  buttonLabels: PropTypes.object,
-  conditionalSubmitFlag: PropTypes.string.isRequired,
-  stepsInfo: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.node,
-      label: PropTypes.node,
-      StepLabelProps: PropTypes.object,
-      StepProps: PropTypes.object,
-    })
-  ),
 };
 
 const SuirWizard = (props) => <Wizard Wizard={WizardInternal} {...props} />;

@@ -1,6 +1,5 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
-import PropTypes from 'prop-types';
 import ComponentExample from '@docs/components/component-example';
 
 import { Heading } from './mdx/mdx-components';
@@ -54,13 +53,6 @@ const ComponentExampleText = ({ linkText, schema, variants = [], schemaVariants 
       </div>
     </Root>
   );
-};
-
-ComponentExampleText.propTypes = {
-  linkText: PropTypes.string.isRequired,
-  schema: PropTypes.object.isRequired,
-  variants: PropTypes.arrayOf(PropTypes.object),
-  schemaVariants: PropTypes.object,
 };
 
 export default ComponentExampleText;

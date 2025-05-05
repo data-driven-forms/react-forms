@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import IconButton from '@mui/material/IconButton';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import SvgIcon from '@mui/material/SvgIcon';
@@ -24,9 +23,5 @@ const ShareButton = ({ path }) => (
     </IconButton>
   </CopyToClipboard>
 );
-
-ShareButton.propTypes = {
-  path: PropTypes.string.isRequired,
-};
 
 export default ShareButton;

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { useFormApi } from '@data-driven-forms/react-form-renderer';
 
 import { Tab, Tabs, TabTitleText } from '@patternfly/react-core';
@@ -25,13 +24,6 @@ const FormTabs = ({ fields, dataType, validate, component, ...rest }) => {
       {renderTabItems(fields, formOptions)}
     </Tabs>
   );
-};
-
-FormTabs.propTypes = {
-  fields: PropTypes.array.isRequired,
-  dataType: PropTypes.any,
-  validate: PropTypes.any,
-  component: PropTypes.any,
 };
 
 export default FormTabs;

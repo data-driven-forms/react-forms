@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import { Radio as Pf4Radio } from '@patternfly/react-core';
 import FormGroup from '../form-group/form-group';
@@ -20,14 +19,6 @@ const RadioOption = ({ name, option: { value, label, ...restOption }, isDisabled
       {...restOption}
     />
   );
-};
-
-RadioOption.propTypes = {
-  name: PropTypes.string.isRequired,
-  option: PropTypes.shape({ label: PropTypes.node.isRequired, value: PropTypes.any.isRequired }).isRequired,
-  isDisabled: PropTypes.bool,
-  isReadOnly: PropTypes.bool,
-  radioGroupValue: PropTypes.any,
 };
 
 const Radio = ({ name, type, ...props }) => {
@@ -57,22 +48,6 @@ const Radio = ({ name, type, ...props }) => {
       ))}
     </FormGroup>
   );
-};
-
-Radio.propTypes = {
-  label: PropTypes.node,
-  validateOnMount: PropTypes.bool,
-  isReadOnly: PropTypes.bool,
-  isRequired: PropTypes.bool,
-  helperText: PropTypes.node,
-  description: PropTypes.node,
-  hideLabel: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-  id: PropTypes.string,
-  name: PropTypes.string.isRequired,
-  options: PropTypes.arrayOf(PropTypes.shape({ label: PropTypes.node, value: PropTypes.any })).isRequired,
-  type: PropTypes.any,
-  FormGroupProps: PropTypes.object,
 };
 
 export default Radio;
