@@ -1,6 +1,5 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
-import PropTypes from 'prop-types';
 
 import IconButton from '@mui/material/IconButton';
 
@@ -61,14 +60,6 @@ const ComponentMapperBar = ({ prefix, href, github, npm, npmSvg }) => {
       </IconButton>
     </Root>
   );
-};
-
-ComponentMapperBar.propTypes = {
-  prefix: PropTypes.string.isRequired,
-  href: PropTypes.string.isRequired,
-  github: PropTypes.string.isRequired,
-  npm: PropTypes.string.isRequired,
-  npmSvg: PropTypes.string.isRequired,
 };
 
 export default ComponentMapperBar;

@@ -1,6 +1,5 @@
 import React, { memo } from 'react';
 import isEqual from 'lodash/isEqual';
-import PropTypes from 'prop-types';
 import { useFormApi, FieldArray } from '@data-driven-forms/react-form-renderer';
 
 import { Bullseye, Button, Flex, FlexItem, FormFieldGroup, FormFieldGroupHeader, FormHelperText, Grid, GridItem } from '@patternfly/react-core';
@@ -46,19 +45,6 @@ const ArrayItem = memo(
   },
   ({ remove: _prevRemove, ...prev }, { remove: _nextRemove, ...next }) => isEqual(prev, next)
 );
-
-ArrayItem.propTypes = {
-  name: PropTypes.string,
-  fieldIndex: PropTypes.number.isRequired,
-  fields: PropTypes.arrayOf(PropTypes.object),
-  remove: PropTypes.func.isRequired,
-  length: PropTypes.number,
-  minItems: PropTypes.number,
-  buttonLabels: PropTypes.shape({
-    remove: PropTypes.node,
-  }),
-  isLast: PropTypes.bool,
-};
 
 const DynamicArray = ({ ...props }) => {
   const {
@@ -142,22 +128,6 @@ const DynamicArray = ({ ...props }) => {
       )}
     </FieldArray>
   );
-};
-
-DynamicArray.propTypes = {
-  name: PropTypes.string,
-  label: PropTypes.node,
-  description: PropTypes.node,
-  fields: PropTypes.arrayOf(PropTypes.object).isRequired,
-  defaultItem: PropTypes.any,
-  minItems: PropTypes.number,
-  maxItems: PropTypes.number,
-  noItemsMessage: PropTypes.node,
-  buttonLabels: PropTypes.shape({
-    add: PropTypes.node,
-    remove: PropTypes.node,
-    removeAll: PropTypes.node,
-  }),
 };
 
 export default DynamicArray;

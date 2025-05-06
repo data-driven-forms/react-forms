@@ -1,6 +1,5 @@
 import React, { Fragment, useEffect, useRef } from 'react';
 import { Title, WizardBody } from '@patternfly/react-core';
-import PropTypes from 'prop-types';
 import WizardStepButtons from './step-buttons';
 
 export const RenderTitle = ({ title, customTitle }) =>
@@ -12,29 +11,12 @@ export const RenderTitle = ({ title, customTitle }) =>
     </Title>
   );
 
-RenderTitle.propTypes = {
-  title: PropTypes.node,
-  customTitle: PropTypes.node,
-};
-
 const DefaultStepTemplate = ({ formFields, formRef, title, customTitle, showTitle, showTitles }) => (
   <div ref={formRef} className="pf-c-form">
     {((showTitles && showTitle !== false) || showTitle) && <RenderTitle title={title} customTitle={customTitle} />}
     {formFields}
   </div>
 );
-
-DefaultStepTemplate.propTypes = {
-  title: PropTypes.node,
-  formFields: PropTypes.array.isRequired,
-  formOptions: PropTypes.shape({
-    renderForm: PropTypes.func.isRequired,
-  }).isRequired,
-  showTitles: PropTypes.bool,
-  showTitle: PropTypes.bool,
-  customTitle: PropTypes.node,
-  formRef: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({ current: PropTypes.instanceOf(Element) })]),
-};
 
 const WizardStep = ({
   name,
@@ -80,22 +62,6 @@ const WizardStep = ({
       <WizardStepButtons formOptions={formOptions} {...rest} />
     </Fragment>
   );
-};
-
-WizardStep.propTypes = {
-  title: PropTypes.node,
-  description: PropTypes.node,
-  fields: PropTypes.array.isRequired,
-  formOptions: PropTypes.shape({
-    renderForm: PropTypes.func.isRequired,
-  }).isRequired,
-  showTitles: PropTypes.bool,
-  showTitle: PropTypes.bool,
-  customTitle: PropTypes.node,
-  name: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  hasNoBodyPadding: PropTypes.bool,
-  StepTemplate: PropTypes.elementType,
-  conditionalSubmitFlag: PropTypes.string,
 };
 
 export default WizardStep;

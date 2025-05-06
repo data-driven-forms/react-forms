@@ -1,6 +1,5 @@
 import React from 'react';
 import { DatePicker as PF4DatePicker } from '@patternfly/react-core';
-import PropTypes from 'prop-types';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import FormGroup from '../form-group/form-group';
 
@@ -28,19 +27,6 @@ const DatePicker = (props) => {
       />
     </FormGroup>
   );
-};
-
-DatePicker.propTypes = {
-  label: PropTypes.node,
-  validateOnMount: PropTypes.bool,
-  isReadOnly: PropTypes.bool,
-  isRequired: PropTypes.bool,
-  helperText: PropTypes.node,
-  description: PropTypes.node,
-  hideLabel: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-  id: PropTypes.string,
-  FormGroupProps: PropTypes.object,
 };
 
 export default DatePicker;

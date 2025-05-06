@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import FormGroup from '../form-group';
 import { Select as AntSelect } from 'antd';
@@ -67,22 +66,6 @@ const Select = (props) => {
       </AntSelect>
     </FormGroup>
   );
-};
-
-Select.propTypes = {
-  isReadOnly: PropTypes.bool,
-  isClearable: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-  placeholder: PropTypes.node,
-  isRequired: PropTypes.bool,
-  label: PropTypes.node,
-  helperText: PropTypes.node,
-  validateOnMount: PropTypes.bool,
-  isSearchable: PropTypes.bool,
-  options: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.any.isRequired, label: PropTypes.node.isRequired })).isRequired,
-  description: PropTypes.node,
-  FormItemProps: PropTypes.object,
-  isMulti: PropTypes.bool,
 };
 
 export default Select;

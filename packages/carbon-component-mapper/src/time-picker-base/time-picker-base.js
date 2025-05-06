@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { TimePicker as CarbonTimePicker, TimePickerSelect, SelectItem } from 'carbon-components-react';
 
@@ -62,36 +61,5 @@ const TimePickerBase = ({
     <HelperTextBlock helperText={!invalid && helperText} warnText={warnText} />
   </div>
 );
-
-TimePickerBase.propTypes = {
-  isDisabled: PropTypes.bool,
-  isReadOnly: PropTypes.bool,
-  isRequired: PropTypes.bool,
-  label: PropTypes.node,
-  labelText: PropTypes.node,
-  description: PropTypes.node,
-  twelveHoursFormat: PropTypes.bool,
-  timezones: PropTypes.arrayOf(
-    PropTypes.shape({
-      value: PropTypes.string.isRequired,
-      label: PropTypes.node.isRequired,
-      showAs: PropTypes.string,
-    })
-  ),
-  WrapperProps: PropTypes.object,
-  input: PropTypes.shape({
-    name: PropTypes.string,
-  }).isRequired,
-  enhnancedOnBlur: PropTypes.func,
-  enhancedOnChange: PropTypes.func,
-  finalValue: PropTypes.any,
-  invalid: PropTypes.node,
-  helperText: PropTypes.node,
-  warnText: PropTypes.node,
-  selectFormat: PropTypes.func.isRequired,
-  selectTimezone: PropTypes.func.isRequired,
-  format: PropTypes.oneOf(['AM', 'PM']),
-  timezone: PropTypes.string,
-};
 
 export default TimePickerBase;

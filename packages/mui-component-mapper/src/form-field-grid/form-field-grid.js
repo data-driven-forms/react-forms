@@ -1,6 +1,5 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
-import PropTypes from 'prop-types';
 
 import { Grid } from '@mui/material';
 import clsx from 'clsx';
@@ -22,10 +21,5 @@ const FormFieldGrid = ({ children, className, ...props }) => (
     {children}
   </StyledGrid>
 );
-
-FormFieldGrid.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-};
 
 export default FormFieldGrid;

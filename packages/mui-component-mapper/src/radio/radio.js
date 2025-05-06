@@ -1,8 +1,6 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
-import PropTypes from 'prop-types';
 import { Radio as MUIRadio, FormControlLabel, FormControl, FormLabel, FormHelperText } from '@mui/material';
-import { wrapperProps } from '@data-driven-forms/common/multiple-choice-list';
 
 import FormFieldGrid from '../form-field-grid/form-field-grid';
 import { validationError } from '../validation-error/validation-error';
@@ -45,15 +43,6 @@ const RadioOption = ({ name, option, isDisabled, isReadOnly, FormControlLabelPro
       {...props}
     />
   );
-};
-
-RadioOption.propTypes = {
-  name: PropTypes.string.isRequired,
-  option: PropTypes.shape({ label: PropTypes.node.isRequired, value: PropTypes.any.isRequired }).isRequired,
-  isReadOnly: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-  FormControlLabelProps: PropTypes.object,
-  RadioProps: PropTypes.object,
 };
 
 const Radio = ({ name, ...props }) => {
@@ -104,25 +93,6 @@ const Radio = ({ name, ...props }) => {
       </FormControl>
     </StyledFormFieldGrid>
   );
-};
-
-Radio.propTypes = {
-  ...wrapperProps,
-  options: PropTypes.arrayOf(
-    PropTypes.shape({
-      value: PropTypes.any,
-      label: PropTypes.node,
-    })
-  ),
-  label: PropTypes.node.isRequired,
-  isDisabled: PropTypes.bool,
-  description: PropTypes.node,
-  FormFieldGridProps: PropTypes.object,
-  FormControlProps: PropTypes.object,
-  FormControlLabelProps: PropTypes.object,
-  RadioProps: PropTypes.object,
-  FormLabelProps: PropTypes.object,
-  FormHelperTextProps: PropTypes.object,
 };
 
 export default Radio;

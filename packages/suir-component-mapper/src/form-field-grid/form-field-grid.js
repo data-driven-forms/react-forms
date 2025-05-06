@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { createUseStyles } from 'react-jss';
 import clsx from 'clsx';
 import HelperText from '../helper-text/helper-text';
@@ -19,13 +18,6 @@ const FormFieldGrid = ({ className, children, helperText, HelperTextProps }) => 
       {helperText && <HelperText {...HelperTextProps}>{helperText}</HelperText>}
     </div>
   );
-};
-
-FormFieldGrid.propTypes = {
-  className: PropTypes.string,
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
-  helperText: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
-  HelperTextProps: PropTypes.object,
 };
 
 export default FormFieldGrid;

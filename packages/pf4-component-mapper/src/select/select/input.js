@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import '@patternfly/react-styles/css/components/TextInputGroup/text-input-group.css';
 
 import './input.css';
@@ -46,14 +45,6 @@ const Input = ({ inputRef, isSearchable, isDisabled, getInputProps, value, ...pr
       </div>
     </div>
   );
-};
-
-Input.propTypes = {
-  inputRef: PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-  isSearchable: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-  getInputProps: PropTypes.func.isRequired,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
 };
 
 export default Input;

@@ -1,5 +1,4 @@
 import React, { useReducer, useEffect, useContext } from 'react';
-import PropTypes from 'prop-types';
 import { FormSpy, WizardContext } from '@data-driven-forms/react-form-renderer';
 import Wizard from '@data-driven-forms/common/wizard/wizard';
 
@@ -21,12 +20,6 @@ const Modal = ({ children, container, inModal, ...rest }) =>
   ) : (
     children
   );
-
-Modal.propTypes = {
-  children: PropTypes.node,
-  container: PropTypes.instanceOf(Element),
-  inModal: PropTypes.bool,
-};
 
 const WizardInternal = ({
   inModal,
@@ -168,31 +161,6 @@ const WizardInternal = ({
   );
 };
 
-WizardInternal.propTypes = {
-  buttonLabels: PropTypes.shape({
-    submit: PropTypes.node.isRequired,
-    cancel: PropTypes.node.isRequired,
-    back: PropTypes.node.isRequired,
-    next: PropTypes.node.isRequired,
-  }).isRequired,
-  buttonsClassName: PropTypes.string,
-  title: PropTypes.any,
-  description: PropTypes.any,
-  inModal: PropTypes.bool,
-  showTitles: PropTypes.bool,
-  hideClose: PropTypes.bool,
-  titleId: PropTypes.string,
-  descriptionId: PropTypes.string,
-  closeButtonAriaLabel: PropTypes.string,
-  hasNoBodyPadding: PropTypes.bool,
-  navAriaLabel: PropTypes.string,
-  container: PropTypes.instanceOf(Element),
-  StepTemplate: PropTypes.elementType,
-  className: PropTypes.string,
-  conditionalSubmitFlag: PropTypes.string,
-  ModalProps: PropTypes.object,
-};
-
 const defaultLabels = {
   submit: 'Submit',
   cancel: 'Cancel',
@@ -203,13 +171,5 @@ const defaultLabels = {
 const WizardFunction = ({ buttonLabels = {}, ...props }) => (
   <Wizard Wizard={WizardInternal} {...props} buttonLabels={{ ...defaultLabels, ...buttonLabels }} />
 );
-
-WizardFunction.propTypes = {
-  buttonLabels: PropTypes.shape({
-    submit: PropTypes.node,
-    cancel: PropTypes.node,
-    back: PropTypes.node,
-  }),
-};
 
 export default WizardFunction;

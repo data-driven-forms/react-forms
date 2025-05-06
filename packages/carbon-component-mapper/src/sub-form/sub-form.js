@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { createUseStyles } from 'react-jss';
 
@@ -39,18 +38,6 @@ const SubForm = ({
       {formOptions.renderForm(fields, formOptions)}
     </div>
   );
-};
-
-SubForm.propTypes = {
-  fields: PropTypes.array,
-  component: PropTypes.string,
-  title: PropTypes.node,
-  description: PropTypes.node,
-  TitleElement: PropTypes.string,
-  DescriptionElement: PropTypes.string,
-  TitleProps: PropTypes.object,
-  DescriptionProps: PropTypes.object,
-  HeaderProps: PropTypes.object,
 };
 
 export default SubForm;

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useFormApi, FormSpy } from '@data-driven-forms/react-form-renderer';
 
 export const isDisabled = (disableStates, getState) => disableStates.map((item) => getState()[item]).find((item) => !!item);
@@ -70,32 +69,6 @@ export const FormControls = ({
   );
 };
 
-FormControls.propTypes = {
-  onCancel: PropTypes.func,
-  onReset: PropTypes.func,
-  submitLabel: PropTypes.node,
-  cancelLabel: PropTypes.node,
-  resetLabel: PropTypes.node,
-  canReset: PropTypes.bool,
-  disableSubmit: PropTypes.bool,
-  buttonOrder: PropTypes.arrayOf(PropTypes.string),
-  buttonClassName: PropTypes.string,
-  FormButtons: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func]),
-  Button: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func]),
-  ButtonGroup: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func]),
-  formSpyProps: PropTypes.shape({
-    submitting: PropTypes.bool,
-    pristine: PropTypes.bool,
-    validating: PropTypes.bool,
-    form: PropTypes.shape({
-      reset: PropTypes.func,
-    }),
-    values: PropTypes.object,
-  }),
-  buttonGroupProps: PropTypes.object,
-  buttonsProps: PropTypes.object,
-};
-
 const FormTemplate = ({
   FormWrapper,
   Title,
@@ -158,25 +131,6 @@ const FormTemplate = ({
       )}
     </FormWrapper>
   );
-};
-
-FormTemplate.propTypes = {
-  FormWrapper: PropTypes.oneOfType([PropTypes.node, PropTypes.func, PropTypes.element]).isRequired,
-  Title: PropTypes.oneOfType([PropTypes.node, PropTypes.func, PropTypes.element]).isRequired,
-  Description: PropTypes.oneOfType([PropTypes.node, PropTypes.func, PropTypes.element]).isRequired,
-  Button: PropTypes.oneOfType([PropTypes.node, PropTypes.func, PropTypes.element]).isRequired,
-  ButtonGroup: PropTypes.oneOfType([PropTypes.node, PropTypes.func, PropTypes.element]).isRequired,
-  formWrapperProps: PropTypes.object,
-  showFormControls: PropTypes.bool,
-  disableSubmit: PropTypes.arrayOf(PropTypes.string),
-  Header: PropTypes.oneOfType([PropTypes.node, PropTypes.func, PropTypes.element, PropTypes.oneOf([React.Fragment])]),
-  headerProps: PropTypes.object,
-  titleProps: PropTypes.object,
-  descriptionProps: PropTypes.object,
-  buttonGroupProps: PropTypes.object,
-  buttonsProps: PropTypes.object,
-  BeforeError: PropTypes.elementType,
-  alertProps: PropTypes.object,
 };
 
 export default FormTemplate;

@@ -1,3 +1,4 @@
+'use client';
 import React, { useContext, useState } from 'react';
 
 import FormRenderer from '@data-driven-forms/react-form-renderer/form-renderer';

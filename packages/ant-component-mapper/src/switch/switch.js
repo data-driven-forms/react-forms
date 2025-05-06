@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Switch as AntSwitch } from 'antd';
 import FormGroup from '../form-group';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
@@ -50,19 +49,6 @@ export const Switch = (props) => {
       />
     </FormGroup>
   );
-};
-
-Switch.propTypes = {
-  isReadOnly: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-  isRequired: PropTypes.bool,
-  label: PropTypes.node,
-  helperText: PropTypes.node,
-  validateOnMount: PropTypes.bool,
-  onText: PropTypes.node,
-  offText: PropTypes.node,
-  description: PropTypes.node,
-  FormItemProps: PropTypes.object,
 };
 
 export default Switch;

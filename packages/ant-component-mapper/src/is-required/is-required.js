@@ -1,5 +1,4 @@
 import React from 'react';
-import { childrenPropTypes } from '@data-driven-forms/common/prop-types-templates';
 
 import './is-required.css';
 
@@ -11,9 +10,5 @@ const IsRequired = ({ children }) => (
     {children}
   </React.Fragment>
 );
-
-IsRequired.propTypes = {
-  children: childrenPropTypes,
-};
 
 export default IsRequired;

@@ -1,6 +1,5 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
-import PropTypes from 'prop-types';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 
@@ -45,10 +44,6 @@ const FormTemplate = ({ formFields }) => {
       </Grid>
     </form>
   );
-};
-
-FormTemplate.propTypes = {
-  formFields: PropTypes.any,
 };
 
 const FormExample = ({ setFormState }) => (
@@ -111,9 +106,5 @@ const FormExample = ({ setFormState }) => (
     }}
   />
 );
-
-FormExample.propTypes = {
-  setFormState: PropTypes.func,
-};
 
 export default FormExample;

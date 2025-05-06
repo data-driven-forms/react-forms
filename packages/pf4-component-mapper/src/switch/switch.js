@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Switch as Pf4Switch } from '@patternfly/react-core';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import FormGroup from '../form-group/form-group';
@@ -31,19 +30,6 @@ const Switch = (props) => {
       />
     </FormGroup>
   );
-};
-
-Switch.propTypes = {
-  label: PropTypes.node,
-  validateOnMount: PropTypes.bool,
-  isReadOnly: PropTypes.bool,
-  isRequired: PropTypes.bool,
-  helperText: PropTypes.node,
-  description: PropTypes.node,
-  isDisabled: PropTypes.bool,
-  id: PropTypes.string,
-  onText: PropTypes.node,
-  FormGroupProps: PropTypes.object,
 };
 
 export default Switch;

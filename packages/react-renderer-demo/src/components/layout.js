@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
 import clsx from 'clsx';
-import PropTypes from 'prop-types';
 import Drawer from '@mui/material/Drawer';
 import Toolbar from '@mui/material/Toolbar';
 import Divider from '@mui/material/Divider';
@@ -266,10 +265,6 @@ const Layout = ({ children }) => {
       </Root>
     </MenuContext.Provider>
   );
-};
-
-Layout.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
 };
 
 export default Layout;

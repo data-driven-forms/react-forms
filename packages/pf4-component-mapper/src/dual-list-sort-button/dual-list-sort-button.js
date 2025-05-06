@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 import { Button, ButtonVariant } from '@patternfly/react-core';
 
 import { PficonSortCommonAscIcon, PficonSortCommonDescIcon } from '@patternfly/react-icons';
@@ -22,10 +21,6 @@ const DualListSortButton = ({ position, ...rest }) => {
       {...rest}
     />
   );
-};
-
-DualListSortButton.propTypes = {
-  position: PropTypes.oneOf(['left', 'right']),
 };
 
 export default DualListSortButton;

@@ -11,7 +11,7 @@ jobs:
       - checkout
       - node/install:
           install-yarn: true
-          node-version: '16.13'
+          node-version: '20'
       - run:
           name: install-deps
           command: yarn
@@ -40,7 +40,7 @@ jobs:
           at: ~/react-forms
       - node/install:
           install-yarn: true
-          node-version: '16.13'
+          node-version: '20'
       - run:
           name: Release new version
           command: |
@@ -55,7 +55,7 @@ jobs:
           at: ~/react-forms
       - node/install:
           install-yarn: true
-          node-version: '16.13'
+          node-version: '20'
       - run:
           name: Predeploy demo
           command: |

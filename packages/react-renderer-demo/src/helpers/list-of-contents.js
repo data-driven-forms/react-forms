@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
-import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -44,10 +43,6 @@ const ListHeader = ({ text }) => {
       {labelText}
     </StyledA>
   );
-};
-
-ListHeader.propTypes = {
-  text: PropTypes.string.isRequired,
 };
 
 const StyledStickyBox = styled(StickyBox)(({ theme }) => ({
@@ -137,10 +132,6 @@ const ListOfContents = ({ found = [] }) => {
       </div>
     </StyledStickyBox>
   );
-};
-
-ListOfContents.propTypes = {
-  found: PropTypes.array,
 };
 
 export default ListOfContents;

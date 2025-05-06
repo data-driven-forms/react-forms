@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 import WizardCommon from '@data-driven-forms/common/wizard/wizard';
 import { FormSpy, WizardContext } from '@data-driven-forms/react-form-renderer';
 
@@ -20,10 +19,6 @@ const WizardInternal = ({ WizardProps, ...props }) => {
   );
 };
 
-WizardInternal.propTypes = {
-  WizardProps: PropTypes.object,
-};
-
 const defaultLabels = {
   submit: 'Submit',
   cancel: 'Cancel',
@@ -34,9 +29,5 @@ const defaultLabels = {
 const Wizard = ({ buttonLabels, ...props }) => (
   <WizardCommon Wizard={WizardInternal} {...props} buttonLabels={{ ...defaultLabels, ...buttonLabels }} />
 );
-
-Wizard.propTypes = {
-  buttonLabels: PropTypes.object,
-};
 
 export default Wizard;

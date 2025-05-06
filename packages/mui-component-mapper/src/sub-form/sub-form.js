@@ -1,6 +1,5 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
-import PropTypes from 'prop-types';
 import { Typography, Grid } from '@mui/material';
 
 import { useFormApi } from '@data-driven-forms/react-form-renderer';
@@ -52,18 +51,6 @@ const SubForm = ({
       </Grid>
     </StyledGrid>
   );
-};
-
-SubForm.propTypes = {
-  fields: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
-  title: PropTypes.node,
-  description: PropTypes.node,
-  component: PropTypes.any,
-  TitleGridProps: PropTypes.object,
-  TitleProps: PropTypes.object,
-  DescriptionProps: PropTypes.object,
-  DescriptionGridProps: PropTypes.object,
-  ItemsGridProps: PropTypes.object,
 };
 
 export default SubForm;

@@ -4,7 +4,6 @@ import { WizardNav, WizardNavItem } from '@patternfly/react-core';
 
 import isEqual from 'lodash/isEqual';
 import get from 'lodash/get';
-import PropTypes from 'prop-types';
 
 const memoValues = (initialValue) => {
   let valueCache = initialValue;
@@ -68,15 +67,6 @@ const WizardNavigationInternal = React.memo(
   isEqual
 );
 
-WizardNavigationInternal.propTypes = {
-  activeStepIndex: PropTypes.number.isRequired,
-  maxStepIndex: PropTypes.number.isRequired,
-  jumpToStep: PropTypes.func.isRequired,
-  navSchema: PropTypes.array.isRequired,
-  valid: PropTypes.bool.isRequired,
-  validating: PropTypes.bool.isRequired,
-};
-
 const WizardNavigation = ({ setPrevSteps, crossroads, values, ...props }) => {
   const [memoValue] = useState(() =>
     memoValues(
@@ -109,12 +99,6 @@ const WizardNavigation = ({ setPrevSteps, crossroads, values, ...props }) => {
   });
 
   return <WizardNavigationInternal {...props} />;
-};
-
-WizardNavigation.propTypes = {
-  setPrevSteps: PropTypes.func.isRequired,
-  values: PropTypes.object.isRequired,
-  crossroads: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default WizardNavigation;

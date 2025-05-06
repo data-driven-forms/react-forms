@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { FormCheckbox } from 'semantic-ui-react';
 
 import FormFieldGrid from '../form-field-grid/form-field-grid';
@@ -49,26 +48,6 @@ export const SingleCheckbox = (props) => {
   );
 };
 
-SingleCheckbox.propTypes = {
-  isReadOnly: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-  isRequired: PropTypes.bool,
-  label: PropTypes.node,
-  helperText: PropTypes.node,
-  description: PropTypes.node,
-  validateOnMount: PropTypes.bool,
-  /** Sub components customization API */
-  FormFieldGridProps: PropTypes.object,
-  HelperTextProps: PropTypes.object,
-};
-
 const Checkbox = ({ options, ...props }) => (options ? <MultipleChoiceList options={options} {...props} /> : <SingleCheckbox {...props} />);
-
-Checkbox.propTypes = {
-  options: PropTypes.array,
-  /** Sub components customization API */
-  FormFieldGridProps: PropTypes.object,
-  HelperTextProps: PropTypes.object,
-};
 
 export default Checkbox;

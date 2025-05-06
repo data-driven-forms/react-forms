@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import WizardStep from './wizard-step';
-import PropTypes from 'prop-types';
 import { Steps, Modal } from 'antd';
 import Wizard from '@data-driven-forms/common/wizard/wizard';
 import { WizardContext } from '@data-driven-forms/react-form-renderer';
@@ -60,28 +59,8 @@ const WizardInternal = ({
   );
 };
 
-WizardInternal.propTypes = {
-  title: PropTypes.string,
-  buttonLabels: PropTypes.object,
-  stepsInfo: PropTypes.array,
-  WizardProps: PropTypes.object,
-  TitleProps: PropTypes.object,
-  StepProps: PropTypes.object,
-  WizardStepProps: PropTypes.object,
-  ButtonProps: PropTypes.object,
-  NextButtonProps: PropTypes.object,
-  BackButtonProps: PropTypes.object,
-  CancelButtonProps: PropTypes.object,
-  SubmitButtonProps: PropTypes.object,
-  conditionalSubmitFlag: PropTypes.string.isRequired,
-};
-
 const WizardFinal = ({ buttonLabels, ...props }) => (
   <Wizard Wizard={WizardInternal} buttonLabels={{ ...defaultButtonLabels, ...buttonLabels }} {...props} />
 );
-
-WizardFinal.propTypes = {
-  buttonLabels: PropTypes.object,
-};
 
 export default WizardFinal;

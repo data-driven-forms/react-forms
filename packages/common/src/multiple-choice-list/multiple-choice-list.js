@@ -1,8 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
-
-import { formGroup } from '../prop-types-templates';
 
 const SingleCheckbox = (props) => {
   const { input, Checkbox, ...rest } = useFieldApi({ ...props, type: 'checkbox' });
@@ -47,15 +44,4 @@ const MultipleChoiceList = (props) => {
   );
 };
 
-MultipleChoiceList.propTypes = {
-  name: PropTypes.string.isRequired,
-  Wrapper: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  Checkbox: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-};
-
 export default MultipleChoiceList;
-
-export const wrapperProps = {
-  ...formGroup,
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
-};

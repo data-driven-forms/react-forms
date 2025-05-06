@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
-import PropTypes from 'prop-types';
 import Popper from '@mui/material/Popper';
 import Grow from '@mui/material/Grow';
 import Paper from '@mui/material/Paper';
@@ -108,13 +107,6 @@ const NotificationPanel = ({ isOpen, onClose, anchorRef, setNewMessages }) => {
       )}
     </StyledPopper>
   );
-};
-
-NotificationPanel.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-  setNewMessages: PropTypes.func.isRequired,
-  anchorRef: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({ current: PropTypes.any })]).isRequired,
 };
 
 export default NotificationPanel;

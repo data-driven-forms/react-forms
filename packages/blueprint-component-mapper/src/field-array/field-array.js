@@ -1,5 +1,4 @@
 import React, { memo, useContext } from 'react';
-import PropTypes from 'prop-types';
 import isEqual from 'lodash/isEqual';
 import clsx from 'clsx';
 import { useFieldApi, useFormApi, FieldArray as FieldArrayFF } from '@data-driven-forms/react-form-renderer';
@@ -47,16 +46,6 @@ const ArrayItem = memo(
   },
   ({ remove: _prevRemove, ...prev }, { remove: _nextRemove, ...next }) => isEqual(prev, next)
 );
-
-ArrayItem.propTypes = {
-  remove: PropTypes.func,
-  fields: PropTypes.array,
-  name: PropTypes.string,
-  removeLabel: PropTypes.node,
-  ArrayItemProps: PropTypes.object,
-  RemoveButtonProps: PropTypes.object,
-  disabledRemove: PropTypes.bool,
-};
 
 const FieldArray = (props) => {
   const {
@@ -132,27 +121,6 @@ const FieldArray = (props) => {
       </FieldArrayFF>
     </FormGroup>
   );
-};
-
-FieldArray.propTypes = {
-  name: PropTypes.string,
-  defaultItem: PropTypes.any,
-  fields: PropTypes.array,
-  label: PropTypes.node,
-  description: PropTypes.node,
-  buttonLabels: PropTypes.object,
-  AddContainerProps: PropTypes.object,
-  AddButtonProps: PropTypes.object,
-  RemoveButtonProps: PropTypes.object,
-  ArrayItemProps: PropTypes.object,
-  FormGroupProps: PropTypes.object,
-  FieldArrayProps: PropTypes.object,
-  noItemsMessage: PropTypes.node,
-  validateOnMount: PropTypes.bool,
-  helperText: PropTypes.node,
-  isRequired: PropTypes.bool,
-  maxItems: PropTypes.number,
-  minItems: PropTypes.number,
 };
 
 export default FieldArray;

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { createUseStyles } from 'react-jss';
 
@@ -30,20 +29,6 @@ const Tabs = ({ fields, component, name, TabWrapperProps = {}, ...props }) => {
       ))}
     </CarbonTabs>
   );
-};
-
-Tabs.propTypes = {
-  TabWrapperProps: PropTypes.object,
-  component: PropTypes.string,
-  name: PropTypes.string,
-  fields: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string,
-      fields: PropTypes.array,
-      title: PropTypes.node,
-      label: PropTypes.node,
-    })
-  ),
 };
 
 export default Tabs;

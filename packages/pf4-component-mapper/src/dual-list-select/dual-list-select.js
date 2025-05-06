@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { DualListSelector } from '@patternfly/react-core/deprecated';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import isEqual from 'lodash/isEqual';
@@ -117,23 +116,6 @@ const DualList = (props) => {
   );
 };
 
-DualList.propTypes = {
-  label: PropTypes.node,
-  validateOnMount: PropTypes.bool,
-  isRequired: PropTypes.bool,
-  helperText: PropTypes.node,
-  description: PropTypes.node,
-  hideLabel: PropTypes.bool,
-  id: PropTypes.string,
-  getValueFromNode: PropTypes.func,
-  isSearchable: PropTypes.bool,
-  isSortable: PropTypes.bool,
-};
-
 const DualListWrapper = (props) => (props.isTree ? <DualListTree {...props} /> : <DualList {...props} />);
-
-DualListWrapper.propTypes = {
-  isTree: PropTypes.bool,
-};
 
 export default DualListWrapper;

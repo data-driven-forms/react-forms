@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 import DataDrivenSelect from '@data-driven-forms/common/select';
@@ -65,25 +64,6 @@ const ClearedMultiSelectFilterable = ({
   />
 );
 
-ClearedMultiSelectFilterable.propTypes = {
-  invalidText: PropTypes.node,
-  hideSelectedOptions: PropTypes.any,
-  noOptionsMessage: PropTypes.any,
-  onInputChange: PropTypes.func,
-  options: PropTypes.array,
-  isFetching: PropTypes.bool,
-  invalid: PropTypes.oneOfType([PropTypes.bool, PropTypes.node]),
-  isMulti: PropTypes.bool,
-  classNamePrefix: PropTypes.any,
-  closeMenuOnSelect: PropTypes.any,
-  onChange: PropTypes.func,
-  originalOnChange: PropTypes.func,
-  carbonLabel: PropTypes.node,
-  placeholder: PropTypes.node,
-  isRequired: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-};
-
 const ClearedMultiSelect = ({
   invalidText,
   hideSelectedOptions,
@@ -115,25 +95,6 @@ const ClearedMultiSelect = ({
     initialSelectedItems={getMultiValue(rest.value, options)}
   />
 );
-
-ClearedMultiSelect.propTypes = {
-  invalidText: PropTypes.node,
-  hideSelectedOptions: PropTypes.any,
-  noOptionsMessage: PropTypes.any,
-  onInputChange: PropTypes.func,
-  options: PropTypes.array,
-  isFetching: PropTypes.bool,
-  invalid: PropTypes.oneOfType([PropTypes.bool, PropTypes.node]),
-  isMulti: PropTypes.bool,
-  classNamePrefix: PropTypes.any,
-  closeMenuOnSelect: PropTypes.any,
-  onChange: PropTypes.func,
-  originalOnChange: PropTypes.func,
-  carbonLabel: PropTypes.node,
-  placeholder: PropTypes.node,
-  isRequired: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-};
 
 const getSelectValue = (value, isMulti) => (isMulti ? value : Array.isArray(value) ? value[0] : value);
 
@@ -168,28 +129,6 @@ const ClearedSelect = ({
     {renderOptions(options)}
   </CarbonSelect>
 );
-
-ClearedSelect.propTypes = {
-  invalidText: PropTypes.node,
-  hideSelectedOptions: PropTypes.any,
-  noOptionsMessage: PropTypes.any,
-  onInputChange: PropTypes.func,
-  options: PropTypes.array,
-  isFetching: PropTypes.bool,
-  invalid: PropTypes.oneOfType([PropTypes.bool, PropTypes.node]),
-  isMulti: PropTypes.bool,
-  classNamePrefix: PropTypes.any,
-  closeMenuOnSelect: PropTypes.any,
-  onChange: PropTypes.func,
-  originalOnChange: PropTypes.func,
-  carbonLabel: PropTypes.node,
-  placeholder: PropTypes.node,
-  isDisabled: PropTypes.bool,
-  isRequired: PropTypes.bool,
-  isSearchable: PropTypes.bool,
-  isClearable: PropTypes.bool,
-  value: PropTypes.any,
-};
 
 const getComboInitialValue = (value, options = []) => {
   const result = Array.isArray(value) ? value[0] : value;
@@ -233,29 +172,6 @@ const ClearedSelectSearchable = ({
     onChange={onChangeWrapper(onChange)}
   />
 );
-
-ClearedSelectSearchable.propTypes = {
-  invalidText: PropTypes.node,
-  hideSelectedOptions: PropTypes.any,
-  noOptionsMessage: PropTypes.any,
-  onInputChange: PropTypes.func,
-  options: PropTypes.array,
-  isFetching: PropTypes.bool,
-  invalid: PropTypes.oneOfType([PropTypes.bool, PropTypes.node]),
-  isMulti: PropTypes.bool,
-  classNamePrefix: PropTypes.any,
-  closeMenuOnSelect: PropTypes.any,
-  onChange: PropTypes.func,
-  originalOnChange: PropTypes.func,
-  carbonLabel: PropTypes.node,
-  placeholder: PropTypes.node,
-  isDisabled: PropTypes.bool,
-  isRequired: PropTypes.bool,
-  isSearchable: PropTypes.bool,
-  isClearable: PropTypes.bool,
-  labelText: PropTypes.string,
-  value: PropTypes.any,
-};
 
 const Select = (props) => {
   const {
@@ -308,17 +224,6 @@ const Select = (props) => {
       helperText={text}
     />
   );
-};
-
-Select.propTypes = {
-  isDisabled: PropTypes.bool,
-  isRequired: PropTypes.bool,
-  options: PropTypes.arrayOf(
-    PropTypes.shape({
-      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      label: PropTypes.node,
-    })
-  ),
 };
 
 export default Select;

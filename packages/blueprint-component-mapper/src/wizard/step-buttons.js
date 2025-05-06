@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import selectNext from '@data-driven-forms/common/wizard/select-next';
 import clsx from 'clsx';
 import { createUseStyles } from 'react-jss';
@@ -20,21 +19,6 @@ const NextButton = ({ nextStep, handleNext, buttonLabels, getState, handleSubmit
       {progressNext ? buttonLabels.next : buttonLabels.submit}
     </Button>
   );
-};
-
-NextButton.propTypes = {
-  handleNext: PropTypes.func,
-  formOptions: PropTypes.shape({
-    onCancel: PropTypes.func,
-    renderForm: PropTypes.func,
-    getState: PropTypes.func,
-  }),
-  buttonLabels: PropTypes.object,
-  nextStep: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.object]),
-  getState: PropTypes.func,
-  handleSubmit: PropTypes.func,
-  isDisabled: PropTypes.bool,
-  conditionalSubmitFlag: PropTypes.string.isRequired,
 };
 
 const useStyles = createUseStyles({
@@ -89,29 +73,6 @@ const StepButtons = ({
       </div>
     </div>
   );
-};
-
-StepButtons.propTypes = {
-  currentStep: PropTypes.object,
-  handlePrev: PropTypes.func,
-  handleNext: PropTypes.func,
-  conditionalSubmitFlag: PropTypes.string.isRequired,
-  formOptions: PropTypes.shape({
-    onCancel: PropTypes.func,
-    renderForm: PropTypes.func,
-    getState: PropTypes.func,
-    handleSubmit: PropTypes.func,
-    valid: PropTypes.bool,
-  }),
-  activeStepIndex: PropTypes.number,
-  buttonLabels: PropTypes.object,
-  isNextDisabled: PropTypes.bool,
-  ButtonToolbarProps: PropTypes.object,
-  DirectionButtonProps: PropTypes.object,
-  CancelButtonProps: PropTypes.object,
-  BackButtonProps: PropTypes.object,
-  NextButtonProps: PropTypes.object,
-  SubmitButtonProps: PropTypes.object,
 };
 
 export default StepButtons;

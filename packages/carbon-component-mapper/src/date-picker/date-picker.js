@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 import { DatePicker as CarbonDatePicker, DatePickerInput } from 'carbon-components-react';
@@ -30,14 +29,6 @@ const DatePicker = (props) => {
       <HelperTextBlock helperText={!invalid && helperText} warnText={warnText} />
     </div>
   );
-};
-
-DatePicker.propTypes = {
-  isDisabled: PropTypes.bool,
-  isRequired: PropTypes.bool,
-  datePickerType: PropTypes.string,
-  DatePickerProps: PropTypes.object,
-  WrapperProps: PropTypes.object,
 };
 
 export default DatePicker;

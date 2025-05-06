@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import NextLink from 'next/link';
 import MuiLink from '@mui/material/Link';
 import { styled } from '@mui/material/styles';
-import PropTypes from 'prop-types';
 
 // Add support for the sx prop for consistency with the other branches.
 const Anchor = styled('span')({});
@@ -31,17 +30,6 @@ export const NextLinkComposed = React.forwardRef(function NextLinkComposed(props
     </NextLink>
   );
 });
-
-NextLinkComposed.propTypes = {
-  to: PropTypes.string,
-  linkAs: PropTypes.string,
-  replace: PropTypes.bool,
-  scroll: PropTypes.bool,
-  shallow: PropTypes.bool,
-  prefetch: PropTypes.bool,
-  legacyBehavior: PropTypes.bool,
-  locale: PropTypes.string,
-};
 
 // A styled version of the Next.js Link component:
 // https://nextjs.org/docs/api-reference/next/link
@@ -97,21 +85,5 @@ const DocLink = React.forwardRef(function Link(props, ref) {
 
   return <MuiLink component={NextLinkComposed} className={className} ref={ref} {...nextjsProps} {...other} />;
 });
-
-DocLink.propTypes = {
-  role: PropTypes.any,
-  noLinkStyle: PropTypes.bool,
-  activeClassName: PropTypes.string,
-  href: PropTypes.string.isRequired,
-  as: PropTypes.string,
-  linkAs: PropTypes.string,
-  replace: PropTypes.bool,
-  scroll: PropTypes.bool,
-  shallow: PropTypes.bool,
-  prefetch: PropTypes.bool,
-  legacyBehavior: PropTypes.bool,
-  locale: PropTypes.string,
-  className: PropTypes.string,
-};
 
 export default DocLink;

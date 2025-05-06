@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { AngleRightIcon, CaretDownIcon } from '@patternfly/react-icons';
 
 const WizardToggle = ({ activeStepIndex, currentStep, navSchema, isOpen, dispatch }) => {
@@ -31,14 +30,6 @@ const WizardToggle = ({ activeStepIndex, currentStep, navSchema, isOpen, dispatc
       </span>
     </button>
   );
-};
-
-WizardToggle.propTypes = {
-  activeStepIndex: PropTypes.number,
-  currentStep: PropTypes.object,
-  navSchema: PropTypes.array,
-  isOpen: PropTypes.bool,
-  dispatch: PropTypes.func,
 };
 
 export default WizardToggle;

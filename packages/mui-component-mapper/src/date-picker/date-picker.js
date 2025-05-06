@@ -1,11 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { DatePicker as MUIDatePicker } from '@mui/x-date-pickers';
 
 import FormFieldGrid from '../form-field-grid/form-field-grid';
 import { validationError } from '../validation-error/validation-error';
-import { meta, input } from '@data-driven-forms/common/prop-types-templates';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import { TextField } from '@mui/material';
 
@@ -63,21 +61,6 @@ const DatePicker = (props) => {
       />
     </FormFieldGrid>
   );
-};
-
-DatePicker.propTypes = {
-  input,
-  meta,
-  isReadOnly: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-  placeholder: PropTypes.node,
-  isRequired: PropTypes.bool,
-  label: PropTypes.node,
-  helperText: PropTypes.node,
-  validateOnMount: PropTypes.bool,
-  description: PropTypes.node,
-  FormFieldGridProps: PropTypes.object,
-  DatePickerProps: PropTypes.object,
 };
 
 export default DatePicker;

@@ -1,5 +1,4 @@
 import React, { memo, useReducer } from 'react';
-import PropTypes from 'prop-types';
 import isEqual from 'lodash/isEqual';
 import { useFormApi, FieldArray } from '@data-driven-forms/react-form-renderer';
 
@@ -79,19 +78,6 @@ const ArrayItem = memo(
   },
   ({ remove: _prevRemove, ...prev }, { remove: _nextRemove, ...next }) => isEqual(prev, next)
 );
-
-ArrayItem.propTypes = {
-  name: PropTypes.string,
-  fieldIndex: PropTypes.number.isRequired,
-  fields: PropTypes.arrayOf(PropTypes.object),
-  remove: PropTypes.func.isRequired,
-  length: PropTypes.number,
-  minItems: PropTypes.number,
-  removeLabel: PropTypes.node.isRequired,
-  RemoveButtonProps: PropTypes.object,
-  ArrayItemGridProps: PropTypes.object,
-  ArrayItemFieldsGridProps: PropTypes.object,
-};
 
 const defaultButtonLabels = {
   add: 'ADD',
@@ -287,31 +273,6 @@ const DynamicArray = ({ ...props }) => {
       }}
     </FieldArray>
   );
-};
-
-DynamicArray.propTypes = {
-  label: PropTypes.node,
-  description: PropTypes.node,
-  fields: PropTypes.arrayOf(PropTypes.object).isRequired,
-  defaultItem: PropTypes.any,
-  minItems: PropTypes.number,
-  maxItems: PropTypes.number,
-  noItemsMessage: PropTypes.node,
-  buttonLabels: PropTypes.object,
-  /** Sub components customization API */
-  FieldArrayGridProps: PropTypes.object,
-  FieldArrayHeaderProps: PropTypes.object,
-  FieldArrayButtonGridProps: PropTypes.object,
-  ButtonGroupProps: PropTypes.object,
-  UndoButtonProps: PropTypes.object,
-  RedoButtonProps: PropTypes.object,
-  AddButtonProps: PropTypes.object,
-  DescriptionProps: PropTypes.object,
-  ArrayItemsGridProps: PropTypes.object,
-  NoItemsProps: PropTypes.object,
-  RemoveButtonProps: PropTypes.object,
-  ArrayItemGridProps: PropTypes.object,
-  ArrayItemFieldsGridProps: PropTypes.object,
 };
 
 export default DynamicArray;

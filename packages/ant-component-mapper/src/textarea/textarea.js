@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Input } from 'antd';
 
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
@@ -33,18 +32,6 @@ const Textarea = (props) => {
       />
     </FormGroup>
   );
-};
-
-Textarea.propTypes = {
-  isReadOnly: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-  placeholder: PropTypes.node,
-  isRequired: PropTypes.bool,
-  label: PropTypes.node,
-  helperText: PropTypes.node,
-  validateOnMount: PropTypes.bool,
-  description: PropTypes.node,
-  FormItemProps: PropTypes.object,
 };
 
 export default Textarea;

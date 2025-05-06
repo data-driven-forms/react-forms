@@ -1,9 +1,7 @@
 import React, { useMemo } from 'react';
-import PropTypes from 'prop-types';
 
 import FormFieldGrid from '../form-field-grid/form-field-grid';
 import { validationError } from '../validation-error/validation-error';
-import { meta } from '@data-driven-forms/common/prop-types-templates';
 import DDFSelect from '@data-driven-forms/common/select';
 import parseInternalValue from '@data-driven-forms/common/select/parse-internal-value';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
@@ -127,36 +125,6 @@ const InternalSelect = ({
       />
     </FormFieldGrid>
   );
-};
-
-InternalSelect.propTypes = {
-  meta,
-  placeholder: PropTypes.node,
-  label: PropTypes.node,
-  helperText: PropTypes.node,
-  validateOnMount: PropTypes.bool,
-  isSearchable: PropTypes.bool,
-  options: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.any.isRequired, label: PropTypes.node.isRequired })).isRequired,
-  description: PropTypes.node,
-  FormFieldGridProps: PropTypes.object,
-  value: PropTypes.any,
-  isClearable: PropTypes.bool,
-  classNamePrefix: PropTypes.string,
-  isMulti: PropTypes.bool,
-  loadingMessage: PropTypes.node,
-  onInputChange: PropTypes.func,
-  isFetching: PropTypes.bool,
-  noOptionsMessage: PropTypes.func,
-  closeMenuOnSelect: PropTypes.bool,
-  onChange: PropTypes.func.isRequired,
-  hideSelectedOptions: PropTypes.bool,
-  required: PropTypes.bool,
-  onFocus: PropTypes.func,
-  onBlur: PropTypes.func,
-  TextFieldProps: PropTypes.object,
-  inputProps: PropTypes.object,
-  isDisabled: PropTypes.bool,
-  loadingText: PropTypes.node,
 };
 
 const Select = (props) => {

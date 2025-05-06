@@ -79,7 +79,7 @@
     "no-unused-vars": "error",
     "react/no-unused-prop-types": "error",
     "react-hooks/rules-of-hooks": "error",
-    "react/prop-types": "error",
+    "react/prop-types": "off",
     "react/no-unescaped-entities": "error",
     "no-prototype-builtins": "error",
     "no-mixed-operators": "error",

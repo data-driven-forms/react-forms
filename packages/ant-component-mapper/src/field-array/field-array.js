@@ -1,6 +1,5 @@
 import React, { memo, useReducer } from 'react';
 import isEqual from 'lodash/isEqual';
-import PropTypes from 'prop-types';
 import { useFieldApi, useFormApi, FieldArray } from '@data-driven-forms/react-form-renderer';
 import { Row, Col, Button, Typography, Space } from 'antd';
 import { UndoOutlined, RedoOutlined } from '@ant-design/icons';
@@ -43,20 +42,6 @@ const ArrayItem = memo(
   },
   ({ remove: _prevRemove, ...prev }, { remove: _nextRemove, ...next }) => isEqual(prev, next)
 );
-
-ArrayItem.propTypes = {
-  name: PropTypes.string,
-  fieldIndex: PropTypes.number.isRequired,
-  fields: PropTypes.arrayOf(PropTypes.object),
-  remove: PropTypes.func.isRequired,
-  length: PropTypes.number,
-  minItems: PropTypes.number,
-  removeLabel: PropTypes.node.isRequired,
-  ArrayItemProps: PropTypes.object.isRequired,
-  FieldsContainerProps: PropTypes.object.isRequired,
-  RemoveContainerProps: PropTypes.object.isRequired,
-  RemoveButtonProps: PropTypes.object.isRequired,
-};
 
 const defaultButtonLabels = {
   add: 'ADD',
@@ -245,34 +230,6 @@ const DynamicArray = ({ ...props }) => {
       </FieldArray>
     </FormGroup>
   );
-};
-
-DynamicArray.propTypes = {
-  label: PropTypes.node,
-  description: PropTypes.node,
-  fields: PropTypes.arrayOf(PropTypes.object).isRequired,
-  defaultItem: PropTypes.any,
-  minItems: PropTypes.number,
-  maxItems: PropTypes.number,
-  noItemsMessage: PropTypes.node,
-  buttonLabels: PropTypes.object,
-  // customization props
-  FormItemProps: PropTypes.object,
-  ArrayItemProps: PropTypes.object,
-  FieldsContainerProps: PropTypes.object,
-  RemoveContainerProps: PropTypes.object,
-  RemoveButtonProps: PropTypes.object,
-  FieldArrayRowProps: PropTypes.object,
-  FieldArrayRowCol: PropTypes.object,
-  FieldArrayHeaderProps: PropTypes.object,
-  FieldArrayLabelProps: PropTypes.object,
-  FieldArrayButtonsProps: PropTypes.object,
-  UndoButtonProps: PropTypes.object,
-  RedoButtonProps: PropTypes.object,
-  AddButtonProps: PropTypes.object,
-  FieldArrayDescriptionProps: PropTypes.object,
-  NoItemsMessageProps: PropTypes.object,
-  ErrorMessageProps: PropTypes.object,
 };
 
 export default DynamicArray;

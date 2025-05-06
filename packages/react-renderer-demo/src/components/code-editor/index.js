@@ -1,9 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
-import Highlight, { defaultProps } from 'prism-react-renderer/';
-import ghTheme from 'prism-react-renderer/themes/github';
-import vsTheme from 'prism-react-renderer/themes/vsDark';
+import { Highlight, defaultProps, themes } from 'prism-react-renderer';
 import tranformImports from './transform-imports';
 import clsx from 'clsx';
 
@@ -28,10 +25,6 @@ const Pre = ({ children, ...props }) => (
     {children}
   </StyledPre>
 );
-
-Pre.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.element, PropTypes.arrayOf(PropTypes.element)]),
-};
 
 const Root = styled('div')(({ theme }) => ({
   '&.wrapper': {
@@ -62,14 +55,14 @@ const CodeEditor = ({ value, children, className, inExample, editorClassname, ke
 
   return (
     <Root className={clsx('wrapper', editorClassname)}>
-      <Highlight {...defaultProps} theme={lang === 'bash' ? ghTheme : vsTheme} code={content} language={lang || 'jsx'}>
+      <Highlight {...defaultProps} theme={lang === 'bash' ? themes.github : themes.vsDark} code={content} language={lang || 'jsx'}>
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
           <Pre className={className} style={style}>
             <React.Fragment>
               {tokens.map((line, i) => (
-                <div key={i} {...getLineProps({ line, key: i })}>
+                <div {...getLineProps({ line, key: i })} key={i}>
                   {line.map((token, key) => (
-                    <span key={key} {...getTokenProps({ token, key })} />
+                    <span {...getTokenProps({ token, key })} key={key} />
                   ))}
                 </div>
               ))}
@@ -79,15 +72,6 @@ const CodeEditor = ({ value, children, className, inExample, editorClassname, ke
       </Highlight>
     </Root>
   );
-};
-
-CodeEditor.propTypes = {
-  value: PropTypes.string,
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  className: PropTypes.string,
-  inExample: PropTypes.bool,
-  editorClassname: PropTypes.string,
-  keepLastLine: PropTypes.bool,
 };
 
 export default CodeEditor;

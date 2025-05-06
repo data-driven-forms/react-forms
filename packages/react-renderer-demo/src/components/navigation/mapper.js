@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import React, { useState, forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
@@ -55,13 +54,6 @@ const Item = ({ href, linkText, component, divider, level }) => {
       </Typography>
     </StyledListItem>
   );
-};
-
-Item.propTypes = {
-  href: PropTypes.string.isRequired,
-  linkText: PropTypes.string,
-  component: PropTypes.node,
-  divider: PropTypes.bool,
 };
 
 const StyledList = styled(List)(() => ({

@@ -1,5 +1,4 @@
 import React from 'react';
-import { childrenPropTypes } from '@data-driven-forms/common/prop-types-templates';
 import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles({
@@ -20,10 +19,6 @@ const IsRequired = ({ children }) => {
       {children}
     </React.Fragment>
   );
-};
-
-IsRequired.propTypes = {
-  children: childrenPropTypes,
 };
 
 export default IsRequired;

@@ -1,6 +1,5 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
-import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
 import { Stepper, Step, StepLabel } from '@mui/material';
@@ -26,18 +25,5 @@ const WizardNav = ({ StepperProps = {}, stepsInfo, activeStepIndex }) => (
     ))}
   </StyledStepper>
 );
-
-WizardNav.propTypes = {
-  StepperProps: PropTypes.object,
-  stepsInfo: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.node,
-      label: PropTypes.node,
-      StepLabelProps: PropTypes.object,
-      StepProps: PropTypes.object,
-    })
-  ),
-  activeStepIndex: PropTypes.number,
-};
 
 export default WizardNav;

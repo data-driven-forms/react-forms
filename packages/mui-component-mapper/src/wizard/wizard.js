@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { styled } from '@mui/material/styles';
-import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
 import { WizardContext } from '@data-driven-forms/react-form-renderer';
@@ -61,23 +60,6 @@ const WizardInternal = ({
       </Grid>
     </StyledWizard>
   );
-};
-
-WizardInternal.propTypes = {
-  buttonLabels: PropTypes.object,
-  stepsInfo: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.node,
-      label: PropTypes.node,
-      StepLabelProps: PropTypes.object,
-      StepProps: PropTypes.object,
-    })
-  ),
-  ButtonContainerProps: PropTypes.object,
-  StepperProps: PropTypes.object,
-  WizardBodyProps: PropTypes.object,
-  WizardProps: PropTypes.object,
-  conditionalSubmitFlag: PropTypes.string.isRequired,
 };
 
 const MuiWizard = (props) => <Wizard Wizard={WizardInternal} {...props} />;

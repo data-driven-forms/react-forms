@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { useFormApi } from '@data-driven-forms/react-form-renderer';
 import { H3, H4 } from '@blueprintjs/core';
@@ -16,12 +15,6 @@ const SubForm = ({ title, description, fields, ...props }) => {
       {formOptions.renderForm(fields, formOptions)}
     </div>
   );
-};
-
-SubForm.propTypes = {
-  title: PropTypes.node,
-  description: PropTypes.node,
-  fields: PropTypes.array,
 };
 
 export default SubForm;

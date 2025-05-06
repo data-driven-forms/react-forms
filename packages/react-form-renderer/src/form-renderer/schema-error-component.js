@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 const SchemaErrorComponent = ({ name, message }) => (
   <div
@@ -16,10 +15,5 @@ const SchemaErrorComponent = ({ name, message }) => (
     <p>If you don&apos;t know what this error means, please contact site administrator.</p>
   </div>
 );
-
-SchemaErrorComponent.propTypes = {
-  name: PropTypes.string.isRequired,
-  message: PropTypes.string.isRequired,
-};
 
 export default SchemaErrorComponent;

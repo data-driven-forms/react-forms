@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import MultipleChoiceList from './multiple-choice-list';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import FormGroup from '../form-group/form-group';
@@ -33,22 +32,6 @@ const SingleCheckbox = (props) => {
   );
 };
 
-SingleCheckbox.propTypes = {
-  label: PropTypes.node,
-  validateOnMount: PropTypes.bool,
-  isReadOnly: PropTypes.bool,
-  isRequired: PropTypes.bool,
-  helperText: PropTypes.node,
-  description: PropTypes.node,
-  isDisabled: PropTypes.bool,
-  id: PropTypes.string,
-  FormGroupProps: PropTypes.object,
-};
-
 const Checkbox = ({ options, ...props }) => (options ? <MultipleChoiceList options={options} {...props} /> : <SingleCheckbox {...props} />);
-
-Checkbox.propTypes = {
-  options: PropTypes.arrayOf(PropTypes.shape({ label: PropTypes.node, value: PropTypes.any })),
-};
 
 export default Checkbox;

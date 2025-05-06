@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react';
-import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import { useRouter } from 'next/router';
 
@@ -33,11 +32,6 @@ const Item = ({ text, setOpen }) => {
       {labelText}
     </StyledMenuItem>
   );
-};
-
-Item.propTypes = {
-  text: PropTypes.string.isRequired,
-  setOpen: PropTypes.func.isRequired,
 };
 
 const Root = styled('div')(() => ({
@@ -95,10 +89,6 @@ const ListOfContents = ({ found }) => {
       </ClickAwayListener>
     </Root>
   );
-};
-
-ListOfContents.propTypes = {
-  found: PropTypes.array,
 };
 
 export default ListOfContents;

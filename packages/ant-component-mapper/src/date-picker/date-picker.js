@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { DatePicker as AntDatePicker } from 'antd';
 import { validationError } from '../validation-error/validation-error';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
@@ -35,19 +34,6 @@ const DatePicker = ({ placeholder = 'Select date', ...props }) => {
       />
     </FormGroup>
   );
-};
-
-DatePicker.propTypes = {
-  isReadOnly: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-  placeholder: PropTypes.node,
-  isRequired: PropTypes.bool,
-  label: PropTypes.node,
-  helperText: PropTypes.node,
-  validateOnMount: PropTypes.bool,
-  locale: PropTypes.string,
-  description: PropTypes.node,
-  FormItemProps: PropTypes.object,
 };
 
 export default DatePicker;

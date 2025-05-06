@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useFormApi } from '@data-driven-forms/react-form-renderer';
 
 import { Tabs } from 'antd';
@@ -17,10 +16,6 @@ const FormTabs = ({ fields, ...rest }) => {
       ))}
     </Tabs>
   );
-};
-
-FormTabs.propTypes = {
-  fields: PropTypes.array.isRequired,
 };
 
 export default FormTabs;

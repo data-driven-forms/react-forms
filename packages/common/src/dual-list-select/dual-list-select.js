@@ -1,5 +1,4 @@
 import React, { useReducer } from 'react';
-import PropTypes from 'prop-types';
 import isEqual from 'lodash/isEqual';
 
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
@@ -95,10 +94,6 @@ const DualListSelectCommon = (props) => {
       state={state}
     />
   );
-};
-
-DualListSelectCommon.propTypes = {
-  DualListSelect: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
 };
 
 export default DualListSelectCommon;

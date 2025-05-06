@@ -1,5 +1,5 @@
 import { createTheme } from '@mui/material/styles';
-import { Roboto } from '@next/font/google';
+import { Roboto } from 'next/font/google';
 
 // eslint-disable-next-line new-cap
 export const roboto = Roboto({

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import { useRouter } from 'next/router';
 import CircularProgress from '@mui/material/CircularProgress';
-import PropTypes from 'prop-types';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import sdk from '@stackblitz/sdk';
@@ -385,21 +384,6 @@ const ComponentExample = ({ variants, schema, activeMapper, component, schemaVar
       </ButtonGroup>
     </Root>
   );
-};
-
-ComponentExample.propTypes = {
-  component: PropTypes.string.isRequired,
-  activeMapper: PropTypes.string.isRequired,
-  schema: PropTypes.object.isRequired,
-  variants: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      type: PropTypes.string.isRequired,
-      required: PropTypes.bool,
-    })
-  ).isRequired,
-  schemaVariants: PropTypes.object,
-  activeSchema: PropTypes.string,
 };
 
 export default ComponentExample;

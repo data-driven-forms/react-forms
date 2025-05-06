@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { Popover, Button } from '@blueprintjs/core';
 import { DatePicker as BDatePicker } from '@blueprintjs/datetime';
@@ -21,15 +20,6 @@ const DatePicker = ({
     <BDatePicker id={input.name} {...propsCatcher(props)} {...input} value={input.value || null} />
   </Popover>
 );
-
-DatePicker.propTypes = {
-  input: PropTypes.object,
-  disabled: PropTypes.bool,
-  placeholder: PropTypes.node,
-  valueRenderer: PropTypes.func,
-  PopoverProps: PropTypes.object,
-  ButtonProps: PropTypes.object,
-};
 
 const WrapperDatePicker = (props) => <FormGroupWrapper {...props} Component={DatePicker} />;
 
