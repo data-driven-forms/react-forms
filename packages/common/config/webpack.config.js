@@ -26,6 +26,9 @@ const devConfig = {
       process: 'process/browser.js'
     })
   ],
+  devServer: {
+    port: 3000,
+  },
   module: {
     rules: [
       {

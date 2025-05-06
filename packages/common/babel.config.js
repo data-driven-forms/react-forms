@@ -21,7 +21,9 @@ const mapper = {
   WizardNavItem: 'Wizard',
   WizardNav: 'Wizard',
   WizardBody: 'Wizard',
-  WizardHeader: 'Wizard'
+  WizardHeader: 'Wizard',
+  ActionListGroup: 'ActionList',
+  ActionListItem: 'ActionList',
 };
 
 const blueprintMapper = {
