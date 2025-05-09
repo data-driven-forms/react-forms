@@ -196,112 +196,64 @@ describe('DualListSelect', () => {
   it('sort options', async () => {
     render(<FormRenderer {...initialProps} />);
 
-    expect(screen.getAllByRole('button').map((b) => b.textContent)).toEqual([
-      '',
+    expect(Array.from(screen.getAllByRole('list').at(0).children).map((b) => b.textContent)).toEqual([
       'cats',
       'cats_1',
       'cats_2',
       'pigeons',
       'zebras',
-      '≫',
-      '>',
-      '<',
-      '≪',
-      '',
-      'No selected',
-      'Submit',
     ]);
 
     await userEvent.click(screen.getByLabelText('sort options'));
 
-    expect(screen.getAllByRole('button').map((b) => b.textContent)).toEqual([
-      '',
+    expect(Array.from(screen.getAllByRole('list').at(0).children).map((b) => b.textContent)).toEqual([
       'zebras',
       'pigeons',
       'cats_2',
       'cats_1',
       'cats',
-      '≫',
-      '>',
-      '<',
-      '≪',
-      '',
-      'No selected',
-      'Submit',
     ]);
 
     await userEvent.click(screen.getByLabelText('sort options'));
 
-    expect(screen.getAllByRole('button').map((b) => b.textContent)).toEqual([
-      '',
+    expect(Array.from(screen.getAllByRole('list').at(0).children).map((b) => b.textContent)).toEqual([
       'cats',
       'cats_1',
       'cats_2',
       'pigeons',
       'zebras',
-      '≫',
-      '>',
-      '<',
-      '≪',
-      '',
-      'No selected',
-      'Submit',
     ]);
   });
 
   it('sort value', async () => {
     render(<FormRenderer {...initialProps} initialValues={{ 'dual-list': schema.fields[0].options.map(({ value }) => value) }} />);
 
-    expect(screen.getAllByRole('button').map((b) => b.textContent)).toEqual([
-      '',
-      'No available options',
-      '≫',
-      '>',
-      '<',
-      '≪',
-      '',
+    expect(Array.from(screen.getAllByRole('list').at(1).children).map((b) => b.textContent)).toEqual([
       'cats',
       'cats_1',
       'cats_2',
       'pigeons',
       'zebras',
-      'Submit',
     ]);
 
     await userEvent.click(screen.getByLabelText('sort value'));
 
-    expect(screen.getAllByRole('button').map((b) => b.textContent)).toEqual([
-      '',
-      'No available options',
-      '≫',
-      '>',
-      '<',
-      '≪',
-      '',
+    expect(Array.from(screen.getAllByRole('list').at(1).children).map((b) => b.textContent)).toEqual([
       'zebras',
       'pigeons',
       'cats_2',
       'cats_1',
       'cats',
-      'Submit',
     ]);
 
     await userEvent.click(screen.getByLabelText('sort value'));
 
-    expect(screen.getAllByRole('button').map((b) => b.textContent)).toEqual([
-      '',
-      'No available options',
-      '≫',
-      '>',
-      '<',
-      '≪',
-      '',
+    expect(Array.from(screen.getAllByRole('list').at(1).children).map((b) => b.textContent)).toEqual([
       'cats',
       'cats_1',
       'cats_2',
       'pigeons',
       'zebras',
-      'Submit',
     ]);
   });
 

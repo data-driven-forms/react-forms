@@ -1,1 +1,8 @@
-../common/.npmignore
+config
+demo
+src
+babel.config.js
+generate-index.js
+.gitignore
+tsconfig.js
+tsconfig.json

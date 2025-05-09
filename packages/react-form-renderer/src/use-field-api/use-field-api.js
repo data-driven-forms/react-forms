@@ -1,5 +1,5 @@
 import { useEffect, useContext, useRef, useReducer, useState } from 'react';
-import { useField } from 'react-final-form';
+import { useField } from '@hyperkid/react-final-form';
 import enhancedOnChange from './enhanced-on-change';
 import RendererContext from '../renderer-context';
 import convertInitialValue from './convert-initial-value';
@@ -97,6 +97,7 @@ const useFieldApi = ({ name, resolveProps, skipRegistration = false, ...props })
 
   const combinedProps = { ...props, ...resolvedProps };
   const { initializeOnMount, component, render, validate, useWarnings, clearOnUnmount, dataType, FieldProps, ...rest } = combinedProps;
+  
 
   const [{ type, initialValue, validate: stateValidate, arrayValidator }, dispatch] = useReducer(
     reducer,
@@ -168,7 +169,7 @@ const useFieldApi = ({ name, resolveProps, skipRegistration = false, ...props })
       const value = Object.prototype.hasOwnProperty.call(enhancedProps, 'initialValue')
         ? enhancedProps.initialValue
         : formOptions.getFieldState(name).initial;
-      field.input.onChange(value);
+      formOptions.change(name, value);
     }
   }, [initializeOnMount, enhancedProps.initialValue, field.meta.initial, dataType]);
 

@@ -1,3 +1,3 @@
-import { FormSpy } from 'react-final-form';
+import { FormSpy } from '@hyperkid/react-final-form';
 
 export default FormSpy;

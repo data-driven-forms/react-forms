@@ -1,3 +1,3 @@
-import { FieldArray } from 'react-final-form-arrays';
+import { FieldArray } from '@hyperkid/react-final-form-arrays';
 
 export default FieldArray;

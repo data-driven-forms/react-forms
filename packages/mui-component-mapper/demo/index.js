@@ -10,7 +10,9 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import Typography from '@mui/material/Typography';
 import demoSchema from '../../../shared/demoschema';
 import fieldArraySchema from './demo-schemas/field-array-schema';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+
+
 
 import Button from '@mui/material/Button';
 import wizardSchema from './demo-schemas/wizard-schema';
@@ -140,12 +142,46 @@ const selectSchema = {
 };
 
 const App = () => {
-  const [schema, setSchema] = useState(wizardSchema);
+  // const [schema, setSchema] = useState(wizardSchema);
+  const schema = {
+    fields: [
+
+        {
+          component: componentTypes.DUAL_LIST_SELECT,
+          name: 'dual-list',
+          ButtonsGridProps: {
+            id: 'buttons-grid',
+          },
+          options: [
+            {
+              value: 'cats',
+              label: 'cats',
+            },
+            {
+              value: 'cats_1',
+              label: 'cats_1',
+            },
+            {
+              value: 'cats_2',
+              label: 'cats_2',
+            },
+            {
+              value: 'zebras',
+              label: 'zebras',
+            },
+            {
+              value: 'pigeons',
+              label: 'pigeons',
+            },
+          ],
+        },
+    ]
+  }
 
   return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
           <Grid container spacing={4} justifyContent="center" alignItems="center">
             <Grid item xs={12}>
               <Typography variant="h3">Material UI component mapper</Typography>

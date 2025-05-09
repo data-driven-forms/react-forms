@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormRenderer, componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -12,7 +12,7 @@ import FormTemplate from '../form-template';
 import componentMapper from '../component-mapper';
 
 const RendererWrapper = ({ schema = { fields: [] }, ...props }) => (
-  <LocalizationProvider dateAdapter={AdapterDateFns}>
+  <LocalizationProvider dateAdapter={AdapterDayjs}>
     <FormRenderer
       onSubmit={jest.fn()}
       FormTemplate={(props) => <FormTemplate {...props} />}

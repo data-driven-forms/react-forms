@@ -25,26 +25,28 @@
     "directory": "packages/mui-component-mapper"
   },
   "devDependencies": {
-    "@mui/icons-material": "^5.10.3",
-    "@mui/material": "^5.10.4",
-    "@mui/x-date-pickers": "^6.13.0",
-    "react-intl": "^6.4.6"
+    "@mui/icons-material": "^7.0.0",
+    "@mui/material": "^7.0.0",
+    "@mui/x-date-pickers": "^7.0.0",
+    "react-intl": "^7.1.11",
+    "@hyperkid/react-final-form": "^7.0.0",
+    "@hyperkid/react-final-form-arrays": "^4.0.2"
   },
   "peerDependencies": {
     "@data-driven-forms/react-form-renderer": "*",
-    "@mui/icons-material": "^5.10.3",
-    "@mui/material": "^5.10.4",
-    "@mui/x-date-pickers": "^5.0.1 || ^6.13.0",
+    "@mui/icons-material": "^7.0.0",
+    "@mui/material": "^7.0.0",
+    "@mui/x-date-pickers": "^7.0.0",
     "react": "^17.0.2 || ^18.0.0 || ^19.0.0",
     "react-dom": "^17.0.2 || ^18.0.0 || ^19.0.0"
   },
   "dependencies": {
     "@data-driven-forms/common": "*",
-    "@emotion/react": "^11.10.4",
-    "@emotion/styled": "^11.10.4",
-    "@mui/system": "^5.10.4",
-    "clsx": "^1.0.4",
-    "date-fns": "^2.16.1",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/system": "^7.0.0",
+    "clsx": "^2.1.1",
+    "dayjs": "^1.11.13",
     "lodash": "^4.17.21"
   }
 }

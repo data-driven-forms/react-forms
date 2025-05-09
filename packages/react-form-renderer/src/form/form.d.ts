@@ -1,4 +1,4 @@
-import { FormProps } from 'react-final-form';
+import { FormProps } from '@hyperkid/react-final-form';
 
 declare const Form: React.ComponentType<FormProps<{}>>;
 
