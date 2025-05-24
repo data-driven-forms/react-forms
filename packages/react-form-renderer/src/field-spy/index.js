@@ -1,37 +1,37 @@
-import React, { Component } from 'react';
-import FormSpy from '../form-spy';
+import React from 'react';
 import { useFormState } from 'react-final-form';
 
-
-const FieldSpy  = ({fields,field,children})=> {
-  const previousValues = React.useRef(Object.fromEntries(fields.map(field=>[field, null])));
-  const [renderCounter, setRenderCounter] = React.useState(0)
-  const memoizedChildren = React.useMemo(()=>children(values), [renderCounter,field])
+const FieldSpy = ({ fields, field, children }) => {
+  const previousValues = React.useRef(Object.fromEntries(fields.map((field) => [field, null])));
+  const [renderCounter, setRenderCounter] = React.useState(0);
+  const memoizedChildren = React.useMemo(() => children(), [renderCounter, field]);
   const getChangedFields = React.useCallback((prev, next, arr) =>
-    arr.filter(field => {
-      const nextVal = field.split('.').reduce((o,i)=> o ? o[i] : null, next) 
+    arr.filter((field) => {
+      const nextVal = field.split('.').reduce((o, i) => (o ? o[i] : null), next);
       if (!prev[field] && !nextVal) {
         return false;
       }
+
       if (prev[field] !== nextVal) {
         return true;
       }
-  
+
       return false;
-    } ));
-    const handleChange = React.useCallback(({ values }) => {
+    })
+  );
+
+  const { values } = useFormState({
+    subscription: { values: true },
+    onChange: () => {
       const changedFields = getChangedFields(previousValues.current, values, fields);
       if (changedFields.length) {
-        setRenderCounter(renderCounter+1)
+        setRenderCounter(renderCounter + 1);
         previousValues.current = { ...previousValues.current, ...values };
       }
-    });
-    const{values, initialValues}= useFormState({subscription:{values:true, initialValues:true}, onChange: handleChange})
-    
-   
-
+    },
+  });
 
   return memoizedChildren;
-}
+};
 
 export default FieldSpy;

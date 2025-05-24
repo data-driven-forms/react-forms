@@ -1,8 +1,5 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import setWith from 'lodash/setWith';
-import cloneDeep from 'lodash/cloneDeep';
-import { Field } from 'react-final-form';
 import RendererContext from '../renderer-context';
 import Condition from '../condition';
 import getConditionTriggers from '../get-condition-triggers';
@@ -20,28 +17,26 @@ FormFieldHideWrapper.defaultProps = {
   hideField: false,
 };
 
-const ConditionTriggerWrapper = ({ condition, values, children, field }) => {
-console.log(values)
+const ConditionTriggerWrapper = ({ condition, children, field }) => {
   return (
-    <Condition condition={condition} values={values} field={field}>
+    <Condition condition={condition} field={field}>
       {children}
     </Condition>
-  )
+  );
 };
 
 ConditionTriggerWrapper.propTypes = {
   condition: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   children: PropTypes.node.isRequired,
   field: PropTypes.object,
-  values: PropTypes.object.isRequired,
 };
 
 const ConditionTriggerDetector = ({ triggers = [], children, condition, field }) => {
   return (
     <FieldSpy fields={triggers} field={field}>
-      {(values) => (
-        <ConditionTriggerWrapper condition={condition} values={values} field={field}>
-         {children}
+      {() => (
+        <ConditionTriggerWrapper condition={condition} field={field}>
+          {children}
         </ConditionTriggerWrapper>
       )}
     </FieldSpy>
@@ -49,7 +44,6 @@ const ConditionTriggerDetector = ({ triggers = [], children, condition, field })
 };
 
 ConditionTriggerDetector.propTypes = {
-  values: PropTypes.object,
   triggers: PropTypes.arrayOf(PropTypes.string),
   children: PropTypes.node,
   condition: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
