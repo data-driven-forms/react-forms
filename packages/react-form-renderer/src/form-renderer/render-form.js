@@ -7,6 +7,7 @@ import RendererContext from '../renderer-context';
 import Condition from '../condition';
 import getConditionTriggers from '../get-condition-triggers';
 import prepareComponentProps from '../prepare-component-props';
+import FieldSpy from '../field-spy';
 
 const FormFieldHideWrapper = ({ hideField, children }) => (hideField ? <div hidden>{children}</div> : children);
 
@@ -19,11 +20,14 @@ FormFieldHideWrapper.defaultProps = {
   hideField: false,
 };
 
-const ConditionTriggerWrapper = ({ condition, values, children, field }) => (
-  <Condition condition={condition} values={values} field={field}>
-    {children}
-  </Condition>
-);
+const ConditionTriggerWrapper = ({ condition, values, children, field }) => {
+console.log(values)
+  return (
+    <Condition condition={condition} values={values} field={field}>
+      {children}
+    </Condition>
+  )
+};
 
 ConditionTriggerWrapper.propTypes = {
   condition: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
@@ -32,30 +36,15 @@ ConditionTriggerWrapper.propTypes = {
   values: PropTypes.object.isRequired,
 };
 
-const ConditionTriggerDetector = ({ values = {}, triggers = [], children, condition, field }) => {
-  const internalTriggers = [...triggers];
-  if (internalTriggers.length === 0) {
-    return (
-      <ConditionTriggerWrapper condition={condition} values={values} field={field}>
-        {children}
-      </ConditionTriggerWrapper>
-    );
-  }
-
-  const name = internalTriggers.shift();
+const ConditionTriggerDetector = ({ triggers = [], children, condition, field }) => {
   return (
-    <Field name={name} subscription={{ value: true, initial: true }}>
-      {({ input: { value } }) => (
-        <ConditionTriggerDetector
-          triggers={[...internalTriggers]}
-          values={setWith(cloneDeep(values), name, value, Object)}
-          condition={condition}
-          field={field}
-        >
-          {children}
-        </ConditionTriggerDetector>
+    <FieldSpy fields={triggers} field={field}>
+      {(values) => (
+        <ConditionTriggerWrapper condition={condition} values={values} field={field}>
+         {children}
+        </ConditionTriggerWrapper>
       )}
-    </Field>
+    </FieldSpy>
   );
 };
 
