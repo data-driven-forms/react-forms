@@ -17,13 +17,11 @@ FormFieldHideWrapper.defaultProps = {
   hideField: false,
 };
 
-const ConditionTriggerWrapper = ({ condition, children, field }) => {
-  return (
-    <Condition condition={condition} field={field}>
-      {children}
-    </Condition>
-  );
-};
+const ConditionTriggerWrapper = ({ condition, children, field }) => (
+  <Condition condition={condition} field={field}>
+    {children}
+  </Condition>
+);
 
 ConditionTriggerWrapper.propTypes = {
   condition: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),

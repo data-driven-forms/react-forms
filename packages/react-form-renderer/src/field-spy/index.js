@@ -26,7 +26,7 @@ const FieldSpy = ({ fields, field, children }) => {
       const changedFields = getChangedFields(previousValues.current, values, fields);
       if (changedFields.length) {
         setRenderCounter(renderCounter + 1);
-        previousValues.current = { ...previousValues.current, ...values };
+        previousValues.current = { ...values };
       }
     },
   });
