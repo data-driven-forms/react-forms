@@ -20,9 +20,9 @@ const FieldSpy = ({ fields, field, children }) => {
     })
   );
 
-  const { values } = useFormState({
+  useFormState({
     subscription: { values: true },
-    onChange: () => {
+    onChange: ({ values }) => {
       const changedFields = getChangedFields(previousValues.current, values, fields);
       if (changedFields.length) {
         setRenderCounter(renderCounter + 1);

@@ -14,7 +14,7 @@ const TextField = (props) => {
   return <input aria-label={input.name} placeholder={placeholder} {...input} />;
 };
 
-describe('condition test', () => {
+describe('field-spy test', () => {
   let initialProps;
 
   beforeEach(() => {
