@@ -1,5 +1,5 @@
 import { ComponentType, ReactElement, FunctionComponent, ReactNode } from 'react';
-import { FormProps } from 'react-final-form';
+import { FormProps } from '@hyperkid/react-final-form';
 import Schema from '../common-types/schema';
 import ComponentMapper from '../common-types/component-mapper';
 import { ValidatorMapper } from '../validator-mapper';

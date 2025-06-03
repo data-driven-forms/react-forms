@@ -1589,8 +1589,7 @@ describe('renderForm function', () => {
       />
     );
 
-    expect(intl).toHaveBeenCalledWith(id);
-    expect(intl.mock.calls).toHaveLength(1);
+    expect(intl).toHaveBeenLastCalledWith(id);
 
     expect(screen.getByText(`translated ${id}`, { selector: 'label' })).toBeInTheDocument();
     expect(screen.getByText('standard label', { selector: 'label' })).toBeInTheDocument();

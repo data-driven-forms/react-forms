@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import setWith from 'lodash/setWith';
 import cloneDeep from 'lodash/cloneDeep';
-import { Field } from 'react-final-form';
+import { Field } from '@hyperkid/react-final-form';
 import RendererContext from '../renderer-context';
 import Condition from '../condition';
 import getConditionTriggers from '../get-condition-triggers';

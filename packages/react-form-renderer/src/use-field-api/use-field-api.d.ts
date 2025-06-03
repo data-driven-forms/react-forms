@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { FieldMetaState, FieldInputProps, UseFieldConfig } from 'react-final-form';
+import { FieldMetaState, FieldInputProps, UseFieldConfig } from '@hyperkid/react-final-form';
 import { AnyObject } from '../common-types';
 
 export interface ValidatorType extends Object {

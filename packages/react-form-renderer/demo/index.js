@@ -1,130 +1,42 @@
 /* eslint-disable camelcase */
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { FormRenderer } from '../src';
+import { FormRenderer, componentTypes } from '../src';
 
 import FormTemplate from './form-template';
 import mapper from './form-fields-mapper';
 
-const schema = {
+const SHOWER_FIELD = 'shower_FIELD';
+const INITIALIZED_FIELD = 'initialized_FIELD';
+const SHOW_VALUE = 'show';
+
+const INITIAL_VALUE = 'some initial value';
+const NEW_VALUE = 'something different';
+const NOT_SHOW_VALUE = 'bla'; 
+const SCHEMA_INITIAL_VALUE = 'schema initial value';
+const SET_INITIALIZE_ON_MOUNT = true
+
+const formFields = (initializeOnMount = false, initialValue) => ({
   fields: [
     {
-      name: 'field1',
-      label: 'Field 1',
-      component: 'text-field',
+      component: componentTypes.TEXT_FIELD,
+      name: SHOWER_FIELD,
     },
     {
-      name: 'mapped-condition',
-      label: 'Mapped Condition',
-      component: 'text-field',
+      component: componentTypes.TEXT_FIELD,
+      name: INITIALIZED_FIELD,
+      initializeOnMount,
+      ...(initialValue ? { initialValue } : {}),
       condition: {
-        mappedAttributes: {
-          is: ['nameFn', 'John', 'Doe'],
-        },
-        when: 'field1',
+        when: SHOWER_FIELD,
+        is: SHOW_VALUE,
       },
-    },
-    {
-      name: 'formRadio',
-      label: 'SelectSubForm',
-      component: 'radio',
-      initializeOnMount: true,
-      clearOnUnmount: true,
-      options: [
-        { label: 'form1', value: 'form1' },
-        { label: 'form2', value: 'form2' },
-      ],
-    },
-    {
-      component: 'sub-form',
-      name: 'subform1',
-      condition: {
-        when: 'formRadio',
-        is: 'form1',
-      },
-      fields: [
-        {
-          name: 'txt1',
-          label: 'Enter text',
-          initializeOnMount: true,
-          clearOnUnmount: true,
-          component: 'text-field',
-        },
-        {
-          name: 'radioBtn',
-          label: 'Select',
-          component: 'radio',
-          initializeOnMount: true,
-          clearOnUnmount: true,
-          options: [
-            { label: 'abc', value: 'abc' },
-            { label: 'def', value: 'def' },
-          ],
-        },
-        {
-          name: 'txtField2',
-          label: 'Radio1',
-          initializeOnMount: true,
-          clearOnUnmount: true,
-          component: 'text-field',
-          condition: {
-            when: 'radioBtn',
-            is: 'def',
-          },
-        },
-      ],
-    },
-    {
-      component: 'sub-form',
-      title: 'Subform2',
-      description: 'This is a subform',
-      name: 'subform2',
-      condition: {
-        when: 'formRadio',
-        is: 'form2',
-      },
-      fields: [
-        {
-          name: 'radioBtn2',
-          label: 'Select',
-          component: 'radio',
-          initializeOnMount: true,
-          clearOnUnmount: true,
-          options: [
-            { label: 'pqr', value: 'pqr' },
-            { label: 'stu', value: 'stu' },
-          ],
-        },
-        {
-          name: 'txtField3',
-          label: 'Radio1',
-          initializeOnMount: true,
-          clearOnUnmount: true,
-          component: 'text-field',
-          condition: {
-            and: [
-              {
-                when: 'radioBtn2',
-                is: 'stu',
-              },
-              {
-                when: 'formRadio',
-                is: 'form2',
-              },
-            ],
-          },
-        },
-      ],
     },
   ],
-};
+});
 
-const initialValues = {
-  formRadio: 'form2',
-  radioBtn2: 'stu',
-  txtField3: 'data',
-  field1: 'John',
-};
+const schema = formFields(SET_INITIALIZE_ON_MOUNT, SCHEMA_INITIAL_VALUE)
+console.log({ schema })
 
 const App = () => {
   return (
@@ -137,11 +49,12 @@ const App = () => {
             };
           },
         }}
-        initialValues={initialValues}
+        // initialValues={initialValues}
         componentMapper={mapper}
         onSubmit={console.log}
         FormTemplate={FormTemplate}
         schema={schema}
+        // actionMapper={customActionMapper}
       />
     </div>
   );

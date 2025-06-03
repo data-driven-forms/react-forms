@@ -6,6 +6,7 @@ const packagePath = process.cwd();
 const src = path.resolve(packagePath, './src');
 
 async function generatePackages() {
+  const parentPackage = require(path.resolve(packagePath, './package.json'));
   const directories = glob
     .sync(`${src}/*/`)
     .filter((name) => !name.includes('/tests/'))
@@ -16,7 +17,9 @@ async function generatePackages() {
         .pop()
     );
   const cmds = directories.map((dir) => {
+    
     const pckg = {
+      name: `${parentPackage.name}-${dir}`,
       main: 'index.js',
       module: `../esm/${dir}`,
       typings: 'index.d.ts'

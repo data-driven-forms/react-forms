@@ -1,5 +1,5 @@
 import { ComponentType } from 'react';
-import { FormSpyProps } from 'react-final-form';
+import { FormSpyProps } from '@hyperkid/react-final-form';
 
 declare const FormSpy: ComponentType<FormSpyProps>;
 
