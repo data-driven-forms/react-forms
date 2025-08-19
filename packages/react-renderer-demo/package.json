@@ -30,7 +30,7 @@
         "@mdx-js/loader": "^2.2.1",
         "@mdx-js/react": "^2.2.1",
         "@mui/icons-material": "^5.10.3",
-        "@mui/material": "^5.10.4",
+        "@mui/material": "^5.18.0",
         "@mui/material-nextjs": "^7.0.2",
         "@mui/system": "^5.10.4",
         "@mui/x-date-pickers": "^5.0.1",
