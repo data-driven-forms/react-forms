@@ -68,7 +68,7 @@ const enhancedOnChange = ({ dataType, onChange, initial, clearedValue, dirty, ..
       : convertType(dataType, sanitizedValue);
   }
 
-  if (checkEmpty(result) && typeof initial !== 'undefined') {
+  if (checkEmpty(result)) {
     return onChange(clearedValue, ...args);
   }
 

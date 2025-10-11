@@ -37,7 +37,7 @@ describe('#enhancedOnChange', () => {
         type: 'checkbox',
       },
     };
-    expect(enhancedOnChange({ onChange: (value) => value, clearedValue, initial }, valueFalse)).toEqual(valueFalse);
+    expect(enhancedOnChange({ onChange: (value) => value, clearedValue }, valueFalse)).toEqual(valueFalse);
 
     const valueTrue = {
       target: {
@@ -45,7 +45,7 @@ describe('#enhancedOnChange', () => {
         type: 'checkbox',
       },
     };
-    expect(enhancedOnChange({ onChange: (value) => value, clearedValue, initial }, valueTrue)).toEqual(valueTrue);
+    expect(enhancedOnChange({ onChange: (value) => value, clearedValue }, valueTrue)).toEqual(valueTrue);
   });
 
   it('should correctly convert array datatype from strings to integers', () => {
@@ -61,39 +61,47 @@ describe('#enhancedOnChange', () => {
 
     it('should set delete value after sending empty string value', () => {
       const value = undefined;
-      expect(enhancedOnChange({ onChange: (value) => value, initial, clearedValue }, value)).toEqual(clearedValue);
-      expect(enhancedOnChange({ onChange: (value) => value, initial, clearedValue }, '')).toEqual(clearedValue);
+      expect(enhancedOnChange({ onChange: (value) => value, clearedValue }, value)).toEqual(clearedValue);
+      expect(enhancedOnChange({ onChange: (value) => value, clearedValue }, '')).toEqual(clearedValue);
     });
 
     it('should not set delete value after sending date', () => {
       const value = new Date(2021, 7, 20);
-      expect(enhancedOnChange({ onChange: (value) => value, initial, clearedValue }, value)).toEqual(value);
+      expect(enhancedOnChange({ onChange: (value) => value, clearedValue }, value)).toEqual(value);
     });
 
     it('should not set delete value after sending number 0', () => {
       const value = 0;
-      expect(enhancedOnChange({ onChange: (value) => value, initial, clearedValue }, value)).toEqual(value);
+      expect(enhancedOnChange({ onChange: (value) => value, clearedValue }, value)).toEqual(value);
     });
 
     it('should set delete value after sending empty array', () => {
       const value = [];
-      expect(enhancedOnChange({ onChange: (value) => value, initial, clearedValue }, value)).toEqual(clearedValue);
+      expect(enhancedOnChange({ onChange: (value) => value, clearedValue }, value)).toEqual(clearedValue);
     });
 
     it('should set delete value after sending empty object', () => {
       const value = {};
-      expect(enhancedOnChange({ onChange: (value) => value, initial, clearedValue }, value)).toEqual(clearedValue);
+      expect(enhancedOnChange({ onChange: (value) => value, clearedValue }, value)).toEqual(clearedValue);
     });
 
     it('should not set delete value after sending array', () => {
       const value = [1, 2, 'foo'];
-      expect(enhancedOnChange({ onChange: (value) => value, initial, clearedValue }, value)).toEqual(value);
+      expect(enhancedOnChange({ onChange: (value) => value, clearedValue }, value)).toEqual(value);
     });
 
     it('should not set delete value after sending object', () => {
       const value = { foo: 'bar' };
-      expect(enhancedOnChange({ onChange: (value) => value, initial, clearedValue }, value)).toEqual(value);
+      expect(enhancedOnChange({ onChange: (value) => value, clearedValue }, value)).toEqual(value);
     });
+    it('should keep empty string when clearedValue is empty string', () => {
+      const clearedValue = '';
+      const value = undefined;
+      const onChange = jest.fn();
+      enhancedOnChange({ onChange, clearedValue }, value);
+      expect(onChange).toHaveBeenCalledWith('');
+    });
+
   });
 
   describe('#input type file', () => {

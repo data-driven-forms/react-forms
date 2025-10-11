@@ -49,6 +49,6 @@ const ClearedValueExample = () => {
   );
 };
 
-ClearedValueExample.displayName = 'Cleard value example';
+ClearedValueExample.displayName = 'Cleared value example';
 
 export default ClearedValueExample;
