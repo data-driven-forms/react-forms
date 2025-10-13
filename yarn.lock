@@ -1496,10 +1496,10 @@
   resolved "https://registry.yarnpkg.com/@data-driven-forms/editor-core/-/editor-core-0.0.8.tgz#160ca7c2a8a6f28a849373008cd0d4758563b5c6"
   integrity sha512-UsOrlLsNWY0olD8oXyPs9gAhk5Cn3tLY4WIIGXMLwh6lj1JwPOrIr2I8WNGf9xqq6Hhc8nlWOWh5TsZmUBQ4Aw==
 
-"@data-driven-forms/editor-pro@0.0.13":
-  version "0.0.13"
-  resolved "https://registry.yarnpkg.com/@data-driven-forms/editor-pro/-/editor-pro-0.0.13.tgz#8b224a39c64bb203557896d6e6320794a0da2c9a"
-  integrity sha512-k99aeTXDgrG/ykj7mlQDCQO/Cv4Pr5NAbcp2W1IFKRqSa6kwSPWpPpx8pXxvPrDx9sCHzllkT72oqKt1ovq58g==
+"@data-driven-forms/editor-pro@0.0.15":
+  version "0.0.15"
+  resolved "https://registry.yarnpkg.com/@data-driven-forms/editor-pro/-/editor-pro-0.0.15.tgz#d52f88fbf699b1b8300fdc6c0c2ec5eaa5ada830"
+  integrity sha512-PB2KCR4MnSg0ZOqaoTlcAszJdwR0NMFtK7xx3opWBQ0aUE1b7ZpslRaUw8QABxMeE/3tg9d5Ts4R6qFZ6cs54A==
   dependencies:
     "@data-driven-forms/dnd" "^0.0.7"
     "@data-driven-forms/editor-core" "^0.0.8"
