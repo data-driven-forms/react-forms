@@ -38,6 +38,8 @@ jobs:
 
       - name: Derive appropriate SHAs for base and head for nx affected commands
         uses: nrwl/nx-set-shas@v4
+        with:
+          main-branch-name: 'master'
 
       - name: Run build on affected projects
         run: npx nx affected --target=build --parallel=3
