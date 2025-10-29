@@ -63,6 +63,5 @@
         "cwd": "packages/pf4-component-mapper"
       }
     }
-  },
-  "implicitDependencies": ["@data-driven-forms/common"]
+  }
 }

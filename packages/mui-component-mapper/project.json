@@ -73,6 +73,5 @@
         "cwd": "packages/mui-component-mapper"
       }
     }
-  },
-  "implicitDependencies": ["@data-driven-forms/common"]
+  }
 }

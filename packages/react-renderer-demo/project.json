@@ -48,9 +48,5 @@
         "cwd": "packages/react-renderer-demo"
       }
     }
-  },
-  "implicitDependencies": [
-    "@data-driven-forms/mui-component-mapper",
-    "@data-driven-forms/react-form-renderer"
-  ]
+  }
 }

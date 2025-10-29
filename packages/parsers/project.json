@@ -45,17 +45,6 @@
         "cwd": "packages/parsers"
       },
       "cache": true
-    },
-    "typecheck": {
-      "executor": "@nx/js:tsc",
-      "options": {
-        "main": "packages/parsers/src/index.js",
-        "tsConfig": "packages/parsers/tsconfig.json",
-        "outputPath": "packages/parsers/dist"
-      },
-      "outputs": ["{options.outputPath}"],
-      "cache": true
     }
-  },
-  "implicitDependencies": ["@data-driven-forms/react-form-renderer"]
+  }
 }

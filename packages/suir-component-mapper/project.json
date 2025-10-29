@@ -63,6 +63,5 @@
         "cwd": "packages/suir-component-mapper"
       }
     }
-  },
-  "implicitDependencies": ["@data-driven-forms/common"]
+  }
 }

@@ -69,6 +69,5 @@
         "cwd": "packages/ant-component-mapper"
       }
     }
-  },
-  "implicitDependencies": ["@data-driven-forms/common"]
+  }
 }

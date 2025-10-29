@@ -63,6 +63,5 @@
         "cwd": "packages/carbon-component-mapper"
       }
     }
-  },
-  "implicitDependencies": ["@data-driven-forms/common"]
+  }
 }
