@@ -1,0 +1,66 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "@data-driven-forms/react-form-renderer",
+  "root": "packages/react-form-renderer",
+  "sourceRoot": "packages/react-form-renderer/src",
+  "projectType": "library",
+  "tags": ["type:core", "scope:publishable", "platform:react"],
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "outputs": [
+        "{projectRoot}/index.js",
+        "{projectRoot}/esm",
+        "{projectRoot}/*.d.ts"
+      ],
+      "options": {
+        "command": "yarn build",
+        "cwd": "packages/react-form-renderer"
+      },
+      "cache": true
+    },
+    "build:cjs": {
+      "executor": "nx:run-commands",
+      "outputs": ["{projectRoot}/*.js"],
+      "options": {
+        "command": "yarn build:cjs",
+        "cwd": "packages/react-form-renderer"
+      },
+      "cache": true
+    },
+    "build:esm": {
+      "executor": "nx:run-commands",
+      "outputs": ["{projectRoot}/esm"],
+      "options": {
+        "command": "yarn build:esm",
+        "cwd": "packages/react-form-renderer"
+      },
+      "cache": true
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn test",
+        "cwd": "packages/react-form-renderer"
+      },
+      "cache": true
+    },
+    "typecheck": {
+      "executor": "@nx/js:tsc",
+      "options": {
+        "main": "packages/react-form-renderer/src/index.js",
+        "tsConfig": "packages/react-form-renderer/tsconfig.json",
+        "outputPath": "packages/react-form-renderer/dist"
+      },
+      "outputs": ["{options.outputPath}"],
+      "cache": true
+    },
+    "start": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn start",
+        "cwd": "packages/react-form-renderer"
+      }
+    }
+  }
+}

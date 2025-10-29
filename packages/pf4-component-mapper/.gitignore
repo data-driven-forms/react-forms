@@ -83,6 +83,7 @@ vendor
 !generate-packages.js
 !LICENSE
 !package.json
+!project.json
 !README.md
 !tsconfig.json
 !generate-typings.js

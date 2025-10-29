@@ -1,0 +1,56 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "@data-driven-forms/react-renderer-demo",
+  "root": "packages/react-renderer-demo",
+  "sourceRoot": "packages/react-renderer-demo/src",
+  "projectType": "application",
+  "tags": ["type:demo-app", "scope:private", "platform:react"],
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "outputs": [
+        "{projectRoot}/.next",
+        "{projectRoot}/out"
+      ],
+      "options": {
+        "command": "yarn build",
+        "cwd": "packages/react-renderer-demo"
+      },
+      "dependsOn": ["^build"],
+      "cache": true
+    },
+    "dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn dev",
+        "cwd": "packages/react-renderer-demo"
+      }
+    },
+    "start": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn start",
+        "cwd": "packages/react-renderer-demo"
+      }
+    },
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn lint",
+        "cwd": "packages/react-renderer-demo"
+      },
+      "cache": true
+    },
+    "analyze": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn analyze",
+        "cwd": "packages/react-renderer-demo"
+      }
+    }
+  },
+  "implicitDependencies": [
+    "@data-driven-forms/mui-component-mapper",
+    "@data-driven-forms/react-form-renderer"
+  ]
+}
