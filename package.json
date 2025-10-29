@@ -32,7 +32,8 @@
     "verbose": true,
     "testPathIgnorePatterns": [
       "/node_modules/",
-      "packages/suir-component-mapper/"
+      "packages/suir-component-mapper/",
+      "/.nx/"
     ],
     "setupFilesAfterEnv": [
       "<rootDir>/config/jest.setup.js"
@@ -53,7 +54,8 @@
       "\\.(css|scss)$": "identity-obj-proxy"
     },
     "modulePathIgnorePatterns": [
-      "<rootDir>/templates/"
+      "<rootDir>/templates/",
+      "<rootDir>/.nx/"
     ],
     "globalSetup": "<rootDir>/config/globalSetup.js"
   },

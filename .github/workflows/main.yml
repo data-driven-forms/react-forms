@@ -55,12 +55,15 @@ jobs:
         run: npx nx affected --target=typecheck --parallel=3
         continue-on-error: false
 
+      - name: Clear Jest cache
+        run: yarn jest --clearCache
+
       - name: Run tests on affected projects
         run: npx nx affected --target=test --parallel=3 --coverage
         continue-on-error: false
 
       - name: Run Nx release dry-run
-        run: npx nx release --dry-run --verbose
+        run: npx nx release --first-release --dry-run --verbose
 
   # Job that runs after merge (on push to master)
   post-merge:
@@ -72,8 +75,8 @@ jobs:
         uses: actions/checkout@v4
       - name: 🚀 Run Nx Release
         run: |
-          npx nx release --skip-publish --verbose
-          npx nx release publish --skip-existing --verbose
+          npx nx release --first-release --skip-publish --verbose
+          npx nx release --first-release publish --skip-existing --verbose
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
