@@ -9,7 +9,9 @@
     "build": {
       "executor": "nx:run-commands",
       "outputs": [
-        "{projectRoot}/dist"
+        "{projectRoot}/index.js",
+        "{projectRoot}/esm",
+        "{projectRoot}/*.d.ts"
       ],
       "options": {
         "command": "yarn build",
@@ -18,12 +20,40 @@
       "dependsOn": ["^build"],
       "cache": true
     },
+    "build:cjs": {
+      "executor": "nx:run-commands",
+      "outputs": ["{projectRoot}/*.js"],
+      "options": {
+        "command": "yarn build:cjs",
+        "cwd": "packages/parsers"
+      },
+      "cache": true
+    },
+    "build:esm": {
+      "executor": "nx:run-commands",
+      "outputs": ["{projectRoot}/esm"],
+      "options": {
+        "command": "yarn build:esm",
+        "cwd": "packages/parsers"
+      },
+      "cache": true
+    },
     "test": {
       "executor": "nx:run-commands",
       "options": {
         "command": "yarn test",
         "cwd": "packages/parsers"
       },
+      "cache": true
+    },
+    "typecheck": {
+      "executor": "@nx/js:tsc",
+      "options": {
+        "main": "packages/parsers/src/index.js",
+        "tsConfig": "packages/parsers/tsconfig.json",
+        "outputPath": "packages/parsers/dist"
+      },
+      "outputs": ["{options.outputPath}"],
       "cache": true
     }
   },
