@@ -2,9 +2,13 @@ on:
   pull_request:
     branches:
       - master
+  push:
+    branches:
+      - master
 
 jobs:
   github-action-show-version:
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     name: Next version is
     steps:
@@ -13,3 +17,59 @@ jobs:
         id: comment
         with:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+  # Job that runs on PR (before merge)
+  pr-checks:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    name: PR Checks
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Derive appropriate SHAs for base and head for nx affected commands
+        uses: nrwl/nx-set-shas@v4
+
+      - name: Run build on affected projects
+        run: npx nx affected --target=build --parallel=3
+        continue-on-error: false
+
+      - name: Run lint on affected projects
+        run: npx nx affected --target=lint --parallel=3
+        continue-on-error: false
+
+      - name: Run typecheck on affected projects
+        run: npx nx affected --target=typecheck --parallel=3
+        continue-on-error: false
+
+      - name: Run tests on affected projects
+        run: npx nx affected --target=test --parallel=3 --coverage
+        continue-on-error: false
+
+      - name: Run Nx release dry-run
+        run: npx nx release --dry-run --verbose
+
+  # Job that runs after merge (on push to master)
+  post-merge:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    name: Post-merge Actions
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: 🚀 Run Nx Release
+        run: |
+          npx nx release --skip-publish --verbose
+          npx nx release publish --skip-existing --verbose
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
