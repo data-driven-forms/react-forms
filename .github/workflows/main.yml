@@ -18,11 +18,10 @@ jobs:
         with:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
-  # Job that runs on PR (before merge)
-  pr-checks:
-    if: github.event_name == 'pull_request'
+  # Job that runs for both PR and merge
+  ci-checks:
     runs-on: ubuntu-latest
-    name: PR Checks
+    name: CI Checks (Build, Lint, Test, Release Dry-Run)
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -62,17 +61,31 @@ jobs:
         run: npx nx affected --target=test --parallel=3 --coverage
         continue-on-error: false
 
-      - name: Run Nx release dry-run
+      - name: Run Nx release dry-run (PR only)
+        if: github.event_name == 'pull_request'
         run: npx nx release --first-release --dry-run --verbose
 
-  # Job that runs after merge (on push to master)
-  post-merge:
-    if: github.event_name == 'push'
+  # Job that runs ONLY after merge (on push to master)
+  release:
+    if: github.event_name != 'pull_request'
+    needs: ci-checks
     runs-on: ubuntu-latest
-    name: Post-merge Actions
+    name: Release
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
       - name: 🚀 Run Nx Release
         run: |
           npx nx release --first-release --skip-publish --verbose
