@@ -1,1 +1,1 @@
-lerna run build --scope=@data-driven-forms/react-render-demo
+nx run @data-driven-forms/react-renderer-demo:build

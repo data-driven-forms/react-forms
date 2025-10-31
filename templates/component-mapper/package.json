@@ -12,7 +12,6 @@
     "build:esm": "BABEL_ENV=esm babel src --out-dir ./esm --ignore \"src/tests/*\"",
     "build:packages": "node ../../scripts/generate-packages.js",
     "build:css": "node ../../scripts/copy-css.js",{{buildtypingsscript}}
-    "release": "semantic-release"
   },
   "homepage": "https://data-driven-forms.org/",
   "bugs": "https://github.com/data-driven-forms/react-forms/issues",

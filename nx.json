@@ -7,6 +7,7 @@
   "plugins": [
     {
       "plugin": "@nx/js",
+      "exclude": ["**/node_modules/**"],
       "options": {
         "typecheck": {
           "targetName": "typecheck"
@@ -18,6 +19,7 @@
     },
     {
       "plugin": "@nx/js/typescript",
+      "exclude": ["**/node_modules/**"],
       "options": {
         "typecheck": {
           "targetName": "typecheck"
@@ -56,6 +58,15 @@
   },
   "namedInputs": {
     "sharedGlobals": ["{workspaceRoot}/.github/workflows/release.yml"],
-    "default": ["sharedGlobals"]
+    "default": [
+      "sharedGlobals",
+      "{projectRoot}/src/**/*",
+      "{projectRoot}/package.json",
+      "{projectRoot}/README.md",
+      "{projectRoot}/LICENSE",
+      "{projectRoot}/babel.config.js",
+      "{projectRoot}/tsconfig.json",
+      "!{projectRoot}/src/tests/**/*"
+    ]
   }
 }

@@ -14,7 +14,6 @@
     "build:typings": "node ../../scripts/generate-typings.js",
     "build:packages": "node ../../scripts/generate-packages.js",
     "vendor": "webpack --env vendor --config ./config/webpack.config.js",
-    "release": "semantic-release",
     "build:css": "node ../../scripts/copy-css.js",
     "test": "yarn --cwd ../.. test packages/ant-component-mapper"
   },

@@ -243,7 +243,7 @@ Please use our [documentation site](https://data-driven-forms.org/). In case of 
 
 ### Development setup
 
-Data Driven Forms is a monorepo that uses [Lerna](https://github.com/lerna/lerna) and [yarn workspaces](https://classic.yarnpkg.com/blog/2017/08/02/introducing-workspaces/), so you can use all its commands as well.
+Data Driven Forms is a monorepo that uses [NX](https://nx.dev/) and [yarn workspaces](https://classic.yarnpkg.com/blog/2017/08/02/introducing-workspaces/), so you can use all its commands as well.
 
 1. Install
 
@@ -269,7 +269,8 @@ yarn start
 4. How to clean?
 
 ```console
-yarn lerna clean # will delete all node_modules
+nx reset # will delete NX cache
+rm -rf node_modules # will delete all node_modules
 ```
 
 All packages are linked together by default, so if you run a `yarn build` in a package, all other packages are updated to the latest version of that package.
@@ -286,7 +287,7 @@ yarn test packages/pf3-component-mapper
 
 #### Commits
 
-Data Driven Forms uses [Semantic Release](https://github.com/semantic-release/commit-analyzer)
+Data Driven Forms uses [NX Release](https://nx.dev/features/manage-releases) with conventional commits
 
 Format:
 
