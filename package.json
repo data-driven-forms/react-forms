@@ -75,7 +75,7 @@
     "@swc/helpers": "~0.5.11",
     "@testing-library/dom": "^8.17.1",
     "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
+    "@testing-library/react": "^14.3.1",
     "@testing-library/user-event": "^14.4.3",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.3",
