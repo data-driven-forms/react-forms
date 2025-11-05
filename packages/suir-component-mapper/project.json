@@ -11,7 +11,8 @@
       "outputs": [
         "{projectRoot}/index.js",
         "{projectRoot}/esm",
-        "{projectRoot}/*.d.ts"
+        "{projectRoot}/*.d.ts",
+        "{projectRoot}/*/project.json"
       ],
       "options": {
         "command": "yarn build",

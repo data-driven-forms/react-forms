@@ -8,11 +8,12 @@
   "license": "Apache-2.0",
   "scripts": {
     "start": "webpack-dev-server --config ./config/webpack.config.js --open --hot",
-    "build": "yarn build:cjs && yarn build:esm && yarn build:typings && yarn build:packages && yarn build:css",
+    "build": "yarn build:cjs && yarn build:esm && yarn build:typings && yarn build:packages && yarn build:sub-projects && yarn build:css",
     "build:cjs": "BABEL_ENV=cjs babel src --out-dir ./ --ignore \"src/tests/*\"",
     "build:esm": "BABEL_ENV=esm babel src --out-dir ./esm --ignore \"src/tests/*\"",
     "build:typings": "node ../../scripts/generate-typings.js",
     "build:packages": "node ../../scripts/generate-packages.js",
+    "build:sub-projects": "node ../../scripts/generate-sub-projects.js",
     "build:css": "node ../../scripts/copy-css.js",
     "test": "yarn --cwd ../.. test packages/pf4-component-mapper"
   },
