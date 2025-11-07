@@ -79,6 +79,7 @@ vendor
 !config
 !.npmignore
 !.gitignore
+!.nxignore
 !babel.config.js
 !generate-packages.js
 !LICENSE
