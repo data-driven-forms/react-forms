@@ -1,7 +1,7 @@
 import { FormGroupProps } from "../form-group";
 import { UseFieldApiComponentConfig } from "@data-driven-forms/react-form-renderer";
 
-import { ToggleProps } from 'carbon-components-react';
+import { ToggleProps } from '@carbon/react';
 
 export type SwitchProps = ToggleProps & FormGroupProps & UseFieldApiComponentConfig;
 

@@ -1,6 +1,6 @@
 import { Field, AnyObject } from "@data-driven-forms/react-form-renderer";
 import { ReactNode } from "react";
-import { ButtonProps, ProgressIndicatorProps, ProgressStepProps } from "carbon-components-react";
+import { ButtonProps, ProgressIndicatorProps, ProgressStepProps } from "@carbon/react";
 
 export interface WizardButtonLabels {
   submit?: ReactNode;

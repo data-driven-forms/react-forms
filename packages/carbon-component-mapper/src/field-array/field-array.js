@@ -5,8 +5,8 @@ import { createUseStyles } from 'react-jss';
 
 import { useFieldApi, useFormApi, FieldArray as FieldArrayFF } from '@data-driven-forms/react-form-renderer';
 
-import { Button, FormGroup } from 'carbon-components-react';
-import { AddAlt32, Subtract32 } from '@carbon/icons-react';
+import { Button, FormGroup } from '@carbon/react';
+import { AddAlt, Subtract } from '@carbon/react/icons';
 
 import prepareProps from '../prepare-props';
 
@@ -45,7 +45,7 @@ const ArrayItem = memo(
         {formOptions.renderForm(editedFields, formOptions)}
         <Button
           disabled={buttonDisabled}
-          renderIcon={Subtract32}
+          renderIcon={(props) => <Subtract size={32} {...props} />}
           id={`remove-${name}`}
           kind="danger"
           onClick={remove}
@@ -119,7 +119,7 @@ const FieldArray = (props) => {
             <div {...AddContainerProps} className={clsx(addContainer, AddContainerProps.className)}>
               <Button
                 disabled={fieldArrayProps.fields.length >= maxItems}
-                renderIcon={AddAlt32}
+                renderIcon={(props) => <AddAlt size={32} {...props} />}
                 id={`add-${input.name}`}
                 onClick={() => fieldArrayProps.fields.push(defaultItem)}
                 {...AddButtonProps}

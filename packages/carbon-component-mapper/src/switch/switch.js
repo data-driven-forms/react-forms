@@ -1,7 +1,7 @@
 import React from 'react';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
-import { Toggle } from 'carbon-components-react';
+import { Toggle } from '@carbon/react';
 
 import prepareProps from '../prepare-props';
 import HelperTextBlock from '../helper-text-block/helper-text-block';
@@ -15,11 +15,11 @@ const Switch = (props) => {
   const invalid = (meta.touched || validateOnMount) && (meta.error || meta.submitError);
   const warnText = (meta.touched || validateOnMount) && meta.warning;
 
-  const { checked, ...inputRest } = input;
+  const { checked, name, onChange, ...inputRest } = input;
 
   return (
     <div {...WrapperProps}>
-      <Toggle {...inputRest} toggled={checked} key={input.name} id={input.name} labelA={offText} labelB={onText} {...rest} />
+      <Toggle {...inputRest} toggled={checked} onToggle={onChange} key={name} id={name} labelA={offText} labelB={onText} {...rest} />
       <HelperTextBlock helperText={helperText} errorText={invalid} warnText={warnText} />
     </div>
   );

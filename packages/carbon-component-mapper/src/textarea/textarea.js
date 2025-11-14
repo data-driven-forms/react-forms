@@ -1,7 +1,7 @@
 import React from 'react';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
-import { TextArea } from 'carbon-components-react';
+import { TextArea } from '@carbon/react';
 
 import prepareProps from '../prepare-props';
 

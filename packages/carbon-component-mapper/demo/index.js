@@ -7,7 +7,7 @@ import { wizardSchema } from './demo-schemas/wizard-schema';
 import sandboxSchema from './demo-schemas/sandbox';
 import demoSchema from '../../../shared/demoschema';
 
-import { Button } from 'carbon-components-react';
+import { Button } from '@carbon/react';
 
 const fieldArrayState = {
   schema: arraySchemaDDF,

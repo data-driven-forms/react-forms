@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { Field } from "@data-driven-forms/react-form-renderer";
 
-import { TabsProps as CarbonTabsProps, TabProps } from 'carbon-components-react';
+import { TabsProps as CarbonTabsProps, TabProps } from '@carbon/react';
 
 export interface TabField extends TabProps {
   name: string;

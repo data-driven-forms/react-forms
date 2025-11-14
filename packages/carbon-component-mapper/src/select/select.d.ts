@@ -1,7 +1,7 @@
 import { FormGroupProps } from "../form-group";
 import { UseFieldApiComponentConfig } from "@data-driven-forms/react-form-renderer";
 
-import { SelectItemProps, SelectProps as CarbonSelectProps } from 'carbon-components-react';
+import { SelectItemProps, SelectProps as CarbonSelectProps } from '@carbon/react';
 
 export interface SelectOption extends SelectItemProps {
   value: any;
