@@ -63,7 +63,7 @@ jobs:
 
       - name: Run Nx release dry-run (PR only)
         if: github.event_name == 'pull_request'
-        run: npx nx release --first-release --dry-run --verbose
+        run: npx nx release --dry-run --verbose
 
   # Job that runs ONLY after merge (on push to master)
   release:
@@ -86,10 +86,18 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
+      - name: Derive appropriate SHAs for base and head for nx affected commands
+        uses: nrwl/nx-set-shas@v4
+        with:
+          main-branch-name: 'master'
+
+      - name: Build affected packages
+        run: npx nx affected --target=build --parallel=3
+
       - name: 🚀 Run Nx Release
         run: |
-          npx nx release --first-release --skip-publish --verbose
-          npx nx release --first-release publish --skip-existing --verbose
+          npx nx release --skip-publish
+          npx nx release publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

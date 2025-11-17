@@ -43,7 +43,6 @@
       "@data-driven-forms/parsers",
       "@data-driven-forms/pf4-component-mapper",
       "@data-driven-forms/react-form-renderer",
-      "@data-driven-forms/react-renderer-demo",
       "@data-driven-forms/suir-component-mapper"
     ],
     "changelog": {
@@ -55,6 +54,13 @@
     "version": {
       "conventionalCommits": true,
       "fallbackCurrentVersionResolver": "disk"
+    }
+  },
+  "targetDefaults": {
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "{projectRoot}"
+      }
     }
   },
   "namedInputs": {

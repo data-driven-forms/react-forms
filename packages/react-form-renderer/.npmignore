@@ -5,3 +5,5 @@ babel.config.js
 generate-index.js
 .gitignore
 tsconfig.js
+project.json
+.nxignore
