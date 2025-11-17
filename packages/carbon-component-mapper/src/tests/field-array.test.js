@@ -62,7 +62,7 @@ describe('<FieldArray/>', () => {
     expect(screen.getByText(label)).toBeInTheDocument();
     expect(screen.getByText(noItemsMessage)).toBeInTheDocument();
     expect(() => screen.getByLabelText('name')).toThrow();
-    expect(screen.getAllByRole('button')[0]).toHaveClass('bx--tooltip__trigger');
+    expect(screen.getAllByRole('button')[0]).toHaveClass('cds--toggletip-button');
 
     await userEvent.click(screen.getByText('CUSTOM ADD'));
 
