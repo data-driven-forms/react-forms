@@ -1,7 +1,7 @@
 import React from 'react';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
-import { Slider as CarbonSlider } from 'carbon-components-react';
+import { Slider as CarbonSlider } from '@carbon/react';
 
 import prepareProps from '../prepare-props';
 import HelperTextBlock from '../helper-text-block/helper-text-block';

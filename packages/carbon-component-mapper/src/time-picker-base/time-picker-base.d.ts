@@ -3,7 +3,7 @@ import { AnyObject, Input } from "@data-driven-forms/react-form-renderer";
 
 import { FormGroupProps } from "../form-group";
 
-import { TimePickerProps as CarbonTimePickerProps, SelectItemProps } from 'carbon-components-react';
+import { TimePickerProps as CarbonTimePickerProps, SelectItemProps } from '@carbon/react';
 
 export interface Timezone extends SelectItemProps {
     value: string;

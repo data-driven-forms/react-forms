@@ -4,7 +4,7 @@ import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import DataDrivenSelect from '@data-driven-forms/common/select';
 import fnToString from '@data-driven-forms/common/utils/fn-to-string';
 
-import { Select as CarbonSelect, MultiSelect, SelectItem, ComboBox, SelectItemGroup } from 'carbon-components-react';
+import { Select as CarbonSelect, MultiSelect, FilterableMultiSelect, SelectItem, ComboBox, SelectItemGroup } from '@carbon/react';
 import prepareProps from '../prepare-props';
 
 const onChangeWrapper =
@@ -50,7 +50,7 @@ const ClearedMultiSelectFilterable = ({
   isDisabled,
   ...rest
 }) => (
-  <MultiSelect.Filterable
+  <FilterableMultiSelect
     disabled={isDisabled}
     {...rest}
     placeholder={carbonLabel || placeholder}

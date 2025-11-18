@@ -1,7 +1,7 @@
 import { FormGroupProps } from "../form-group";
 import { UseFieldApiComponentConfig } from "@data-driven-forms/react-form-renderer";
 
-import { SliderProps as CarbonSliderProps } from 'carbon-components-react';
+import { SliderProps as CarbonSliderProps } from '@carbon/react';
 
 export type SliderProps = CarbonSliderProps & FormGroupProps & UseFieldApiComponentConfig;
 

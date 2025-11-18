@@ -181,7 +181,10 @@ describe('<Select />', () => {
       <FormRenderer onSubmit={jest.fn()} FormTemplate={(props) => <FormTemplate {...props} />} schema={schema} componentMapper={componentMapper} />
     );
 
-    expect(screen.getByText('Choose...')).toHaveAttribute('id', 'multiselect-field-label-1');
+    const chooseElement = screen.getByText('Choose...');
+    expect(chooseElement).toBeInTheDocument();
+    expect(chooseElement).toHaveAttribute('id');
+    expect(chooseElement.getAttribute('id')).toMatch(/multiselect-field-label/);
   });
 
   ['isSearchable', 'isClearable'].forEach((setting) => {

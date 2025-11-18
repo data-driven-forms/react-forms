@@ -5,7 +5,6 @@ import { createUseStyles } from 'react-jss';
 
 import {
   Grid,
-  Row,
   Column,
   Button,
   FormGroup,
@@ -14,9 +13,8 @@ import {
   StructuredListRow,
   StructuredListBody,
   StructuredListCell,
-  TooltipIcon,
-} from 'carbon-components-react';
-import { CheckmarkFilled16, ChevronRight32, ChevronLeft32, CaretSortDown32, CaretSortUp32 } from '@carbon/icons-react';
+} from '@carbon/react';
+import { CheckmarkFilled, ChevronRight, ChevronLeft, CaretSortDown, CaretSortUp } from '@carbon/react/icons';
 
 import { buildLabel } from '../prepare-props';
 
@@ -50,9 +48,13 @@ const useStyles = createUseStyles({
   },
   toolbar: {
     display: 'flex',
+    '& .cds--tooltip-trigger__wrapper': {
+      height: '100%',
+    },
   },
   tooltipButton: {
     background: '#c2c1c1 !important',
+    height: '100%',
   },
 });
 
@@ -72,18 +74,16 @@ const List = ({ options, selectedValues, handleOptionsClick, noTitle, ListProps,
   return options.length > 0 ? (
     <StructuredListWrapper selection {...ListProps} className={clsx(dualList, ListProps.className)}>
       <StructuredListBody {...BodyProps} className={clsx(dualListBody, BodyProps.className)}>
-        {options.map(({ value, label, ListRowProps, ListCellProps, GridProps, RowProps, LabelProps, CheckmarkProps }) => (
+        {options.map(({ value, label, ListRowProps, ListCellProps, GridProps, LabelProps, CheckmarkProps }) => (
           <StructuredListRow key={value} {...ListRowProps} onClick={(e) => handleOptionsClick({ ...e, ctrlKey: true }, value)}>
             <StructuredListCell {...ListCellProps}>
-              <Grid {...GridProps}>
-                <Row narrow {...RowProps}>
-                  <Column sm={3} {...LabelProps}>
-                    {label}
-                  </Column>
-                  <Column sm={1} {...CheckmarkProps}>
-                    {selectedValues.includes(value) && <CheckmarkFilled16 />}
-                  </Column>
-                </Row>
+              <Grid condensed {...GridProps}>
+                <Column sm={3} {...LabelProps}>
+                  {label}
+                </Column>
+                <Column sm={1} {...CheckmarkProps}>
+                  {selectedValues.includes(value) && <CheckmarkFilled size={16} />}
+                </Column>
               </Grid>
             </StructuredListCell>
           </StructuredListRow>
@@ -101,9 +101,18 @@ const Toolbar = ({ sortTitle, onFilter, onSort, sortDirection, placeholder, Tool
   return (
     <div {...ToolbarProps} className={clsx(toolbar, ToolbarProps.className)}>
       <Search onChange={(e) => onFilter(e.target.value)} labelText="" placeholder={placeholder} {...SearchProps} />
-      <TooltipIcon onClick={onSort} tooltipText={sortTitle} {...SortProps} className={clsx(tooltipButton, SortProps.className)}>
-        {sortDirection ? <CaretSortDown32 /> : <CaretSortUp32 />}
-      </TooltipIcon>
+      <Button
+        kind="ghost"
+        size="sm"
+        hasIconOnly
+        onClick={onSort}
+        iconDescription={sortTitle}
+        renderIcon={(props) => (sortDirection ? <CaretSortDown size={32} {...props} /> : <CaretSortUp size={32} {...props} />)}
+        tooltipAlignment="center"
+        tooltipPosition="bottom"
+        {...SortProps}
+        className={clsx(tooltipButton, SortProps.className)}
+      />
     </div>
   );
 };
@@ -146,7 +155,6 @@ const DualListSelectInner = ({
   filterValueText = 'Remove your filter to see all selected',
   FormGroupProps = {},
   GridProps = {},
-  RowProps = {},
   OptionsColumnProps = {},
   ButtonColumnProps = {},
   ValuesColumnProps = {},
@@ -169,77 +177,75 @@ const DualListSelectInner = ({
 
   return (
     <FormGroup legendText={buildLabel(label || '', isRequired)} {...FormGroupProps}>
-      <Grid {...GridProps}>
-        <Row condensed {...RowProps}>
-          <Column sm={4} md={8} lg={5} {...OptionsColumnProps}>
-            {React.createElement(LeftTitleElement, LeftTitleProps, leftTitle)}
-            <Toolbar
-              onFilter={filterOptions}
-              placeholder={filterOptionsTitle}
-              sortDirection={state.sortLeftDesc}
-              onSort={sortOptions}
-              sortTitle={sortOptionsTitle}
-              ToolbarProps={LeftToolbarProps}
-              SearchProps={LeftSearchProps}
-              SortProps={LeftSortProps}
-            />
-            <List
-              ListProps={LeftListProps}
-              BodyProps={LeftBodyProps}
-              options={leftValues}
-              selectedValues={state.selectedLeftValues}
-              handleOptionsClick={handleOptionsClick}
-              noTitle={state.filterOptions ? filterOptionsText : noOptionsTitle}
-            />
-          </Column>
-          <Column sm={4} md={8} lg={2} {...ButtonColumnProps} className={clsx(buttonWrapper, ButtonColumnProps.className)}>
-            <Button
-              id="move-right"
-              renderIcon={ChevronRight32}
-              onClick={handleMoveRight}
-              disabled={isEmpty(state.selectedLeftValues)}
-              {...AddButtonProps}
-            >
-              {moveRightTitle}
-            </Button>
-            <Button id="move-all-right" onClick={handleClearLeftValues} disabled={isEmpty(leftValues)} {...AddAllButtonProps}>
-              {moveAllRightTitle}
-            </Button>
-            <Button id="move-all-left" onClick={handleClearRightValues} disabled={isEmpty(rightValues)} {...RemoveAllButtonProps}>
-              {moveAllLeftTitle}
-            </Button>
-            <Button
-              id="move-left"
-              renderIcon={ChevronLeft32}
-              onClick={handleMoveLeft}
-              disabled={isEmpty(state.selectedRightValues)}
-              {...RemoveButtonProps}
-            >
-              {moveLeftTitle}
-            </Button>
-          </Column>
-          <Column sm={4} md={8} lg={5} {...ValuesColumnProps}>
-            {React.createElement(RightTitleElement, RightTitleProps, rightTitle)}
-            <Toolbar
-              onFilter={filterValues}
-              placeholder={filterValuesTitle}
-              sortDirection={state.sortRightDesc}
-              onSort={sortValues}
-              sortTitle={sortValuesTitle}
-              ToolbarProps={RightToolbarProps}
-              SearchProps={RightSearchProps}
-              SortProps={RightSortProps}
-            />
-            <List
-              ListProps={RightListProps}
-              BodyProps={RightBodyProps}
-              options={rightValues}
-              selectedValues={state.selectedRightValues}
-              handleOptionsClick={handleValuesClick}
-              noTitle={state.filterValue ? filterValueText : noValueTitle}
-            />
-          </Column>
-        </Row>
+      <Grid condensed {...GridProps}>
+        <Column sm={4} md={8} lg={5} {...OptionsColumnProps}>
+          {React.createElement(LeftTitleElement, LeftTitleProps, leftTitle)}
+          <Toolbar
+            onFilter={filterOptions}
+            placeholder={filterOptionsTitle}
+            sortDirection={state.sortLeftDesc}
+            onSort={sortOptions}
+            sortTitle={sortOptionsTitle}
+            ToolbarProps={LeftToolbarProps}
+            SearchProps={LeftSearchProps}
+            SortProps={LeftSortProps}
+          />
+          <List
+            ListProps={LeftListProps}
+            BodyProps={LeftBodyProps}
+            options={leftValues}
+            selectedValues={state.selectedLeftValues}
+            handleOptionsClick={handleOptionsClick}
+            noTitle={state.filterOptions ? filterOptionsText : noOptionsTitle}
+          />
+        </Column>
+        <Column sm={4} md={8} lg={4} {...ButtonColumnProps} className={clsx(buttonWrapper, ButtonColumnProps.className)}>
+          <Button
+            id="move-right"
+            renderIcon={(props) => <ChevronRight size={32} {...props} />}
+            onClick={handleMoveRight}
+            disabled={isEmpty(state.selectedLeftValues)}
+            {...AddButtonProps}
+          >
+            {moveRightTitle}
+          </Button>
+          <Button id="move-all-right" onClick={handleClearLeftValues} disabled={isEmpty(leftValues)} {...AddAllButtonProps}>
+            {moveAllRightTitle}
+          </Button>
+          <Button id="move-all-left" onClick={handleClearRightValues} disabled={isEmpty(rightValues)} {...RemoveAllButtonProps}>
+            {moveAllLeftTitle}
+          </Button>
+          <Button
+            id="move-left"
+            renderIcon={(props) => <ChevronLeft size={32} {...props} />}
+            onClick={handleMoveLeft}
+            disabled={isEmpty(state.selectedRightValues)}
+            {...RemoveButtonProps}
+          >
+            {moveLeftTitle}
+          </Button>
+        </Column>
+        <Column sm={4} md={8} lg={5} {...ValuesColumnProps}>
+          {React.createElement(RightTitleElement, RightTitleProps, rightTitle)}
+          <Toolbar
+            onFilter={filterValues}
+            placeholder={filterValuesTitle}
+            sortDirection={state.sortRightDesc}
+            onSort={sortValues}
+            sortTitle={sortValuesTitle}
+            ToolbarProps={RightToolbarProps}
+            SearchProps={RightSearchProps}
+            SortProps={RightSortProps}
+          />
+          <List
+            ListProps={RightListProps}
+            BodyProps={RightBodyProps}
+            options={rightValues}
+            selectedValues={state.selectedRightValues}
+            handleOptionsClick={handleValuesClick}
+            noTitle={state.filterValue ? filterValueText : noValueTitle}
+          />
+        </Column>
       </Grid>
     </FormGroup>
   );

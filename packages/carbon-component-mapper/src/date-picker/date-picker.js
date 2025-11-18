@@ -1,7 +1,7 @@
 import React from 'react';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
-import { DatePicker as CarbonDatePicker, DatePickerInput } from 'carbon-components-react';
+import { DatePicker as CarbonDatePicker, DatePickerInput } from '@carbon/react';
 
 import prepareProps from '../prepare-props';
 import HelperTextBlock from '../helper-text-block/helper-text-block';
@@ -23,8 +23,8 @@ const DatePicker = (props) => {
 
   return (
     <div {...WrapperProps}>
-      <CarbonDatePicker {...input} datePickerType={datePickerType} {...DatePickerProps}>
-        <DatePickerInput id={input.name} invalid={Boolean(invalid)} invalidText={invalid ? invalid : ''} {...rest} />
+      <CarbonDatePicker {...input} datePickerType={datePickerType} invalid={Boolean(invalid)} {...DatePickerProps}>
+        <DatePickerInput id={input.name} invalidText={invalid || ''} {...rest} />
       </CarbonDatePicker>
       <HelperTextBlock helperText={!invalid && helperText} warnText={warnText} />
     </div>

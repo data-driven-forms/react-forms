@@ -1,7 +1,7 @@
 import { FormGroupProps } from "../form-group";
 import { UseFieldApiComponentConfig } from "@data-driven-forms/react-form-renderer";
 
-import { TextInputProps } from 'carbon-components-react';
+import { TextInputProps } from '@carbon/react';
 
 export type TextFieldProps = TextInputProps & FormGroupProps & UseFieldApiComponentConfig;
 
