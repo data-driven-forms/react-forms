@@ -4,9 +4,7 @@ import { createUseStyles } from 'react-jss';
 
 import WizardCommon from '@data-driven-forms/common/wizard/wizard';
 import { FormSpy, WizardContext } from '@data-driven-forms/react-form-renderer';
-import { Button, Column, Grid, Row } from 'carbon-components-react';
-
-import { ProgressStep, ProgressIndicator } from 'carbon-components-react/lib/components/ProgressIndicator/ProgressIndicator';
+import { Button, Column, Grid, ProgressStep, ProgressIndicator } from '@carbon/react';
 
 const useStyles = createUseStyles({
   horizontalNav: {
@@ -64,14 +62,12 @@ const VerticalLayout = ({ nav, fields, WizardBodyProps }) => {
 
   return (
     <Grid narrow>
-      <Row>
-        <Column sm={1} md={2} lg={3}>
-          {nav}
-        </Column>
-        <Column {...WizardBodyProps} className={clsx(body, WizardBodyProps?.className)}>
-          {fields}
-        </Column>
-      </Row>
+      <Column sm={1} md={2} lg={3}>
+        {nav}
+      </Column>
+      <Column sm={3} md={6} lg={13} {...WizardBodyProps} className={clsx(body, WizardBodyProps?.className)}>
+        {fields}
+      </Column>
     </Grid>
   );
 };

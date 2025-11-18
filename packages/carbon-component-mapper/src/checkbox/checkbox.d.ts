@@ -2,7 +2,7 @@ import { UseFieldApiComponentConfig } from "@data-driven-forms/react-form-render
 import { ReactNode } from "react";
 import { FormGroupProps } from "../form-group";
 
-import { CheckboxProps as CarbonCheckboxProps } from 'carbon-components-react';
+import { CheckboxProps as CarbonCheckboxProps } from '@carbon/react';
 
 export interface CheckboxOption extends CarbonCheckboxProps {
   value?: any;

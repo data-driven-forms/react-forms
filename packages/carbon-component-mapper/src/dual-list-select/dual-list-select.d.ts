@@ -10,7 +10,7 @@ import {
   StructuredListProps, StructuredListBodyProps,
   AllStructuredListRowProps,
   StructuredListCellProps
-} from 'carbon-components-react';
+} from '@carbon/react';
 
 export interface DualListSelectValue extends AnyObject {
   value: any;

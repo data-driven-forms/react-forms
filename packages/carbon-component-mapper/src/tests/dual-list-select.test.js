@@ -193,7 +193,7 @@ describe('DualListSelect', () => {
   it('sort options', async () => {
     const { container } = render(<FormRenderer {...initialProps} />);
 
-    expect([...container.getElementsByClassName('bx--structured-list-td')].map((el) => el.textContent)).toEqual([
+    expect([...container.getElementsByClassName('cds--structured-list-td')].map((el) => el.textContent)).toEqual([
       'cats',
       'cats_1',
       'cats_2',
@@ -204,7 +204,7 @@ describe('DualListSelect', () => {
 
     await userEvent.click(screen.getAllByRole('button')[1]);
 
-    expect([...container.getElementsByClassName('bx--structured-list-td')].map((el) => el.textContent)).toEqual([
+    expect([...container.getElementsByClassName('cds--structured-list-td')].map((el) => el.textContent)).toEqual([
       'zebras',
       'pigeons',
       'cats_2',
@@ -215,7 +215,7 @@ describe('DualListSelect', () => {
 
     await userEvent.click(screen.getAllByRole('button')[1]);
 
-    expect([...container.getElementsByClassName('bx--structured-list-td')].map((el) => el.textContent)).toEqual([
+    expect([...container.getElementsByClassName('cds--structured-list-td')].map((el) => el.textContent)).toEqual([
       'cats',
       'cats_1',
       'cats_2',
@@ -230,7 +230,7 @@ describe('DualListSelect', () => {
       <FormRenderer {...initialProps} initialValues={{ 'dual-list': schema.fields[0].options.map(({ value }) => value) }} />
     );
 
-    expect([...container.getElementsByClassName('bx--structured-list-td')].map((el) => el.textContent)).toEqual([
+    expect([...container.getElementsByClassName('cds--structured-list-td')].map((el) => el.textContent)).toEqual([
       'No option available',
       'cats',
       'cats_1',
@@ -241,7 +241,7 @@ describe('DualListSelect', () => {
 
     await userEvent.click(screen.getAllByRole('button')[7]);
 
-    expect([...container.getElementsByClassName('bx--structured-list-td')].map((el) => el.textContent)).toEqual([
+    expect([...container.getElementsByClassName('cds--structured-list-td')].map((el) => el.textContent)).toEqual([
       'No option available',
       'zebras',
       'pigeons',
@@ -252,7 +252,7 @@ describe('DualListSelect', () => {
 
     await userEvent.click(screen.getAllByRole('button')[7]);
 
-    expect([...container.getElementsByClassName('bx--structured-list-td')].map((el) => el.textContent)).toEqual([
+    expect([...container.getElementsByClassName('cds--structured-list-td')].map((el) => el.textContent)).toEqual([
       'No option available',
       'cats',
       'cats_1',

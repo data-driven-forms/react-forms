@@ -137,7 +137,7 @@ describe('component tests', () => {
             render(<RendererWrapper schema={{ fields: [descriptionField] }} />);
 
             expect(screen.getByText(helperText)).toBeInTheDocument();
-            expect(() => screen.getByText(description)).toThrow();
+            expect(screen.getByText(description)).toBeInTheDocument();
           });
 
           it('renders with error and helperText', async () => {
@@ -162,7 +162,7 @@ describe('component tests', () => {
           };
           render(<RendererWrapper schema={{ fields: [descriptionField] }} />);
 
-          expect(screen.getAllByRole('button')[0]).toHaveClass('bx--tooltip__trigger');
+          expect(screen.getAllByRole('button')[0]).toHaveClass('cds--toggletip-button');
         });
 
         it('renders isDisabled', () => {

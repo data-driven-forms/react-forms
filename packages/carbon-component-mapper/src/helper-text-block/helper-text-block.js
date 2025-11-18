@@ -13,15 +13,15 @@ const HelperTextBlock = ({ helperText, errorText, warnText }) => {
   const { helperTextStyle } = useStyles();
 
   if (errorText) {
-    return <div className={`bx--form-requirement ddorg__carbon-error-helper-text ${helperTextStyle}`}>{errorText}</div>;
+    return <div className={`cds--form-requirement ddorg__carbon-error-helper-text ${helperTextStyle}`}>{errorText}</div>;
   }
 
   if (warnText) {
-    return <div className={`bx--form-requirement ddorg__carbon-error-helper-text ${helperTextStyle}`}>{warnText}</div>;
+    return <div className={`cds--form-requirement ddorg__carbon-error-helper-text ${helperTextStyle}`}>{warnText}</div>;
   }
 
   if (helperText) {
-    return <div className="bx--form__helper-text">{helperText}</div>;
+    return <div className="cds--form__helper-text">{helperText}</div>;
   }
 
   return null;

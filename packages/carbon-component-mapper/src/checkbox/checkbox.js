@@ -2,7 +2,7 @@ import React from 'react';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import MultipleChoiceListCommon from '@data-driven-forms/common/multiple-choice-list';
 
-import { Checkbox as CarbonCheckbox, FormGroup } from 'carbon-components-react';
+import { Checkbox as CarbonCheckbox, FormGroup } from '@carbon/react';
 
 import WithDescription from '../with-description';
 import prepareProps, { buildLabel } from '../prepare-props';
@@ -33,7 +33,7 @@ const SingleCheckbox = (props) => {
 };
 
 const SingleCheckboxInCommon = ({ label, isDisabled, id, meta, option: { value, name, ...rest }, onChange, ...props }) => (
-  <CarbonCheckbox id={id} labelText={label} disabled={isDisabled} {...props} {...rest} onChange={(_value, _name, event) => onChange(event)} />
+  <CarbonCheckbox id={id} labelText={label} disabled={isDisabled} {...props} {...rest} onChange={(event, data) => onChange(event, data)} />
 );
 
 const Checkbox = ({ options, ...props }) =>

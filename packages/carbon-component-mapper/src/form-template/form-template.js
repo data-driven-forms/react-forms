@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import { createUseStyles } from 'react-jss';
 
-import { Form as CarbonForm, Button as CarbonButton, ButtonSet } from 'carbon-components-react';
+import { Form as CarbonForm, Button as CarbonButton, ButtonSet } from '@carbon/react';
 
 import FormTemplate from '@data-driven-forms/common/form-template';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { TimePicker as CarbonTimePicker, TimePickerSelect, SelectItem } from 'carbon-components-react';
+import { TimePicker as CarbonTimePicker, TimePickerSelect, SelectItem } from '@carbon/react';
 
 import HelperTextBlock from '../helper-text-block/helper-text-block';
 
