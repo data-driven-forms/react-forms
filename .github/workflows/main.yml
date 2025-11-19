@@ -5,6 +5,9 @@ on:
   push:
     branches:
       - master
+  
+permissions:
+  id-token: write
 
 jobs:
   github-action-show-version:
@@ -99,5 +102,5 @@ jobs:
           npx nx release --skip-publish
           npx nx release publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+          # NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
