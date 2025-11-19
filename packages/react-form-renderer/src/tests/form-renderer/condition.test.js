@@ -673,10 +673,13 @@ describe('condition test', () => {
 
     render(<FormRenderer {...initialProps} schema={schema} />);
 
-    await userEvent.type(screen.getByLabelText('field1'), 'foo');
+    await act(async () => {
+      await userEvent.type(screen.getByLabelText('field1'), 'foo');
+    });
 
     await waitFor(() => {
       expect(errorSpy).toHaveBeenCalled();
+      // eslint-disable-next-line no-console
       expect(console.error.mock.calls[0][0]).toContain('Received invalid setterValue. Expected object, received: ');
     });
   });

@@ -6,3 +6,5 @@ generate-index.js
 .gitignore
 tsconfig.js
 tsconfig.json
+project.json
+.nxignore

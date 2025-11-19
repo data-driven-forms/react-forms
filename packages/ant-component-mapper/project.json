@@ -1,0 +1,73 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "@data-driven-forms/ant-component-mapper",
+  "root": "packages/ant-component-mapper",
+  "sourceRoot": "packages/ant-component-mapper/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "outputs": [
+        "{projectRoot}/index.js",
+        "{projectRoot}/esm",
+        "{projectRoot}/*.d.ts"
+      ],
+      "options": {
+        "command": "yarn build",
+        "cwd": "packages/ant-component-mapper"
+      },
+      "dependsOn": ["^build"],
+      "cache": true
+    },
+    "build:cjs": {
+      "executor": "nx:run-commands",
+      "outputs": ["{projectRoot}/*.js"],
+      "options": {
+        "command": "yarn build:cjs",
+        "cwd": "packages/ant-component-mapper"
+      },
+      "cache": true
+    },
+    "build:esm": {
+      "executor": "nx:run-commands",
+      "outputs": ["{projectRoot}/esm"],
+      "options": {
+        "command": "yarn build:esm",
+        "cwd": "packages/ant-component-mapper"
+      },
+      "cache": true
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn test",
+        "cwd": "packages/ant-component-mapper"
+      },
+      "cache": true
+    },
+    "typecheck": {
+      "executor": "@nx/js:tsc",
+      "options": {
+        "main": "packages/ant-component-mapper/src/index.js",
+        "tsConfig": "packages/ant-component-mapper/tsconfig.json",
+        "outputPath": "packages/ant-component-mapper/dist"
+      },
+      "outputs": ["{options.outputPath}"],
+      "cache": true
+    },
+    "start": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn start",
+        "cwd": "packages/ant-component-mapper"
+      }
+    },
+    "vendor": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn vendor",
+        "cwd": "packages/ant-component-mapper"
+      }
+    }
+  }
+}

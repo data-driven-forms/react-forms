@@ -1,0 +1,25 @@
+# Ignore all files in the package directory
+/*
+
+# Allow only source files and configuration files
+!src/
+!src/**
+!demo/
+!demo/**
+!config/
+!config/**
+!scripts/
+!scripts/**
+!.npmignore
+!.gitignore
+!.nxignore
+!babel.config.js
+!generate-packages.js
+!generate-typings.js
+!rollup.config.js
+!generate-component-examples.js
+!LICENSE
+!package.json
+!project.json
+!README.md
+!tsconfig.json

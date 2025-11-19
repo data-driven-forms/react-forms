@@ -1,0 +1,67 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "@data-driven-forms/carbon-component-mapper",
+  "root": "packages/carbon-component-mapper",
+  "sourceRoot": "packages/carbon-component-mapper/src",
+  "projectType": "library",
+  "tags": ["type:component-mapper", "ui:carbon", "scope:publishable", "platform:react"],
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "outputs": [
+        "{projectRoot}/index.js",
+        "{projectRoot}/esm",
+        "{projectRoot}/*.d.ts"
+      ],
+      "options": {
+        "command": "yarn build",
+        "cwd": "packages/carbon-component-mapper"
+      },
+      "dependsOn": ["^build"],
+      "cache": true
+    },
+    "build:cjs": {
+      "executor": "nx:run-commands",
+      "outputs": ["{projectRoot}/*.js"],
+      "options": {
+        "command": "yarn build:cjs",
+        "cwd": "packages/carbon-component-mapper"
+      },
+      "cache": true
+    },
+    "build:esm": {
+      "executor": "nx:run-commands",
+      "outputs": ["{projectRoot}/esm"],
+      "options": {
+        "command": "yarn build:esm",
+        "cwd": "packages/carbon-component-mapper"
+      },
+      "cache": true
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn test",
+        "cwd": "packages/carbon-component-mapper"
+      },
+      "cache": true
+    },
+    "typecheck": {
+      "executor": "@nx/js:tsc",
+      "options": {
+        "main": "packages/carbon-component-mapper/src/index.js",
+        "tsConfig": "packages/carbon-component-mapper/tsconfig.json",
+        "outputPath": "packages/carbon-component-mapper/dist"
+      },
+      "outputs": ["{options.outputPath}"],
+      "cache": true
+    },
+    "start": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn start",
+        "cwd": "packages/carbon-component-mapper"
+      }
+    }
+  }
+}

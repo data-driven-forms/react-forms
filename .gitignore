@@ -78,3 +78,6 @@ packages/**/size-snapshot.json
 .nvmrc
 
 .DS_STORE
+
+# NX cache
+.nx/

@@ -1,0 +1,78 @@
+{
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "defaultBase": "master",
+  "workspaceLayout": {
+    "libsDir": "packages",
+    "appsDir": "apps"
+  },
+  "plugins": [
+    {
+      "plugin": "@nx/js",
+      "exclude": ["**/node_modules/**"],
+      "options": {
+        "typecheck": {
+          "targetName": "typecheck"
+        },
+        "build": {
+          "targetName": "build"
+        }
+      }
+    },
+    {
+      "plugin": "@nx/js/typescript",
+      "exclude": ["**/node_modules/**"],
+      "options": {
+        "typecheck": {
+          "targetName": "typecheck"
+        },
+        "build": {
+          "targetName": "build",
+          "buildDepsName": "build-deps",
+          "watchDepsName": "watch-deps"
+        }
+      }
+    }
+  ],
+  "release": {
+    "projects": [
+      "@data-driven-forms/ant-component-mapper",
+      "@data-driven-forms/blueprint-component-mapper",
+      "@data-driven-forms/carbon-component-mapper",
+      "@data-driven-forms/common",
+      "@data-driven-forms/mui-component-mapper",
+      "@data-driven-forms/pf4-component-mapper",
+      "@data-driven-forms/react-form-renderer",
+      "@data-driven-forms/suir-component-mapper"
+    ],
+    "changelog": {
+      "projectChangelogs": {
+        "createRelease": "github"
+      }
+    },
+    "projectsRelationship": "independent",
+    "version": {
+      "conventionalCommits": true,
+      "fallbackCurrentVersionResolver": "disk"
+    }
+  },
+  "targetDefaults": {
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "{projectRoot}"
+      }
+    }
+  },
+  "namedInputs": {
+    "sharedGlobals": ["{workspaceRoot}/.github/workflows/release.yml"],
+    "default": [
+      "sharedGlobals",
+      "{projectRoot}/src/**/*",
+      "{projectRoot}/package.json",
+      "{projectRoot}/README.md",
+      "{projectRoot}/LICENSE",
+      "{projectRoot}/babel.config.js",
+      "{projectRoot}/tsconfig.json",
+      "!{projectRoot}/src/tests/**/*"
+    ]
+  }
+}

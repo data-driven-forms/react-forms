@@ -235,7 +235,7 @@ Please use our [documentation site](https://data-driven-forms.org/). In case of 
 
 # Development setup
 
-Data Driven Forms is a monorepo that uses [Lerna](https://github.com/lerna/lerna) and [yarn workspaces](https://classic.yarnpkg.com/blog/2017/08/02/introducing-workspaces/), so you can use all its commands as well.
+Data Driven Forms is a monorepo that uses [NX](https://nx.dev/) and [yarn workspaces](https://classic.yarnpkg.com/blog/2017/08/02/introducing-workspaces/), so you can use all its commands as well.
 
 ---
 
@@ -286,7 +286,7 @@ yarn dev
 ### How to clean node_modules
 
 ```bash
-yarn lerna clean
+nx reset
 rm -rf node_modules
 ```
 ### Cleaning built files
@@ -341,7 +341,7 @@ If you introduce a new feature, you should document this change in our documenta
 
 ### Correct commit message
 
-A correct commit message is important, because we are using [semantic release](https://github.com/semantic-release/commit-analyzer) to automatically releease new versions. These messages are also used in our release notes, so other users can see what is being changed.
+A correct commit message is important, because we are using [nx release](https://nx.dev/features/manage-releases) with conventional commits to automatically release new versions. These messages are also used in our release notes, so other users can see what is being changed.
 
 **My change introduces a new feature**
 

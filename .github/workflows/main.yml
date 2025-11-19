@@ -2,14 +2,101 @@ on:
   pull_request:
     branches:
       - master
+  push:
+    branches:
+      - master
+  
+permissions:
+  id-token: write
+  contents: write
 
 jobs:
-  github-action-show-version:
+  # Job that runs for both PR and merge
+  ci-checks:
     runs-on: ubuntu-latest
-    name: Next version is
+    name: CI Checks (Build, Lint, Test, Release Dry-Run)
     steps:
-      - name: Publish a version comment
-        uses: rvsia/github-action-show-version@v1.9alpha
-        id: comment
+      - name: Checkout code
+        uses: actions/checkout@v4
         with:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Derive appropriate SHAs for base and head for nx affected commands
+        uses: nrwl/nx-set-shas@v4
+        with:
+          main-branch-name: 'master'
+
+      - name: Run build on affected projects
+        run: npx nx affected --target=build --parallel=3
+        continue-on-error: false
+
+      - name: Run lint on affected projects
+        run: npx nx affected --target=lint --parallel=3
+        continue-on-error: false
+
+      - name: Run typecheck on affected projects
+        run: npx nx affected --target=typecheck --parallel=3
+        continue-on-error: false
+
+      - name: Clear Jest cache
+        run: yarn jest --clearCache
+
+      - name: Run tests on affected projects
+        run: npx nx affected --target=test --parallel=3 --coverage
+        continue-on-error: false
+
+      - name: Run Nx release dry-run (PR only)
+        if: github.event_name == 'pull_request'
+        run: npx nx release --dry-run --verbose
+
+  # Job that runs ONLY after merge (on push to master)
+  release:
+    if: github.event_name != 'pull_request'
+    needs: ci-checks
+    runs-on: ubuntu-latest
+    name: Release
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ssh-key: ${{ secrets.BOT_SSH_KEY }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Derive appropriate SHAs for base and head for nx affected commands
+        uses: nrwl/nx-set-shas@v4
+        with:
+          main-branch-name: 'master'
+
+      - name: Build affected packages
+        run: npx nx affected --target=build --parallel=3
+
+      - name: 🚀 Run Nx Release
+        run: |
+          git config --global user.email "marvusm.mmi@gmail.com"
+          git config --global user.name "Martin Marosi"
+
+          npx nx release --skip-publish
+          npx nx release publish
+        env:
+          # NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+          NPM_CONFIG_PROVENANCE: false
+          npm_config_legacy_peer_deps: false
