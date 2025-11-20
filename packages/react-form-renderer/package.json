@@ -1,6 +1,6 @@
 {
   "name": "@data-driven-forms/react-form-renderer",
-  "version": "4.1.3",
+  "version": "4.1.4",
   "description": "React Form Renderer. Data Driven Forms converts JSON form definitions into fully functional React forms.",
   "main": "index.js",
   "module": "esm/index.js",
