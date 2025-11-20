@@ -54,10 +54,6 @@ jobs:
         run: npx nx affected --target=test --parallel=3 --coverage
         continue-on-error: false
 
-      - name: Run Nx release dry-run (PR only)
-        if: github.event_name == 'pull_request'
-        run: npx nx release --dry-run --verbose
-
   # Job that runs ONLY after merge (on push to master)
   release:
     if: github.event_name != 'pull_request'
@@ -76,6 +72,7 @@ jobs:
         with:
           node-version: '20'
           cache: 'yarn'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
@@ -90,11 +87,11 @@ jobs:
 
       - name: 🚀 Run Nx Release
         run: |
-          git config --global user.email "marvusm.mmi@gmail.com"
-          git config --global user.name "Martin Marosi"
+          echo "registry=https://registry.npmjs.org/" >> .npmrc
+          git config --global user.email "${{ secrets.RELEASE_EMAIL }}"
+          git config --global user.name "${{ secrets.RELEASE_USERNAME }}"
 
-          npx nx release --skip-publish
-          npx nx release publish
+          npx nx release -y
         env:
           # NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}

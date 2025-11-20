@@ -53,6 +53,10 @@
     "version": {
       "conventionalCommits": true,
       "fallbackCurrentVersionResolver": "disk"
+    },
+    "git": {
+      "commit": true,
+      "commitMessage": "chore(release): publish {version} [skip ci]"
     }
   },
   "targetDefaults": {
