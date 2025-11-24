@@ -4,7 +4,11 @@
   "root": "packages/common",
   "sourceRoot": "packages/common/src",
   "projectType": "library",
-  "tags": ["type:utility", "scope:shared", "platform:react"],
+  "tags": [
+    "type:utility",
+    "scope:shared",
+    "platform:react"
+  ],
   "targets": {
     "build": {
       "executor": "nx:run-commands",
@@ -14,34 +18,39 @@
         "{projectRoot}/*.d.ts"
       ],
       "options": {
-        "command": "yarn build",
+        "command": "npm run build",
         "cwd": "packages/common"
       },
       "cache": true
     },
     "build:cjs": {
       "executor": "nx:run-commands",
-      "outputs": ["{projectRoot}/*.js"],
+      "outputs": [
+        "{projectRoot}/*.js"
+      ],
       "options": {
-        "command": "yarn build:cjs",
+        "command": "npm run build:cjs",
         "cwd": "packages/common"
       },
       "cache": true
     },
     "build:esm": {
       "executor": "nx:run-commands",
-      "outputs": ["{projectRoot}/esm"],
+      "outputs": [
+        "{projectRoot}/esm"
+      ],
       "options": {
-        "command": "yarn build:esm",
+        "command": "npm run build:esm",
         "cwd": "packages/common"
       },
       "cache": true
     },
     "test": {
-      "executor": "nx:run-commands",
+      "executor": "@nx/jest:jest",
       "options": {
-        "command": "yarn test",
-        "cwd": "packages/common"
+        "jestConfig": "jest.config.js",
+        "testPathPattern": "packages/common",
+        "passWithNoTests": false
       },
       "cache": true
     },
@@ -52,7 +61,9 @@
         "tsConfig": "packages/common/tsconfig.json",
         "outputPath": "packages/common/dist"
       },
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "cache": true
     }
   }

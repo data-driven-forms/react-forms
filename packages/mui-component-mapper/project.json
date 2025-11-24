@@ -4,7 +4,12 @@
   "root": "packages/mui-component-mapper",
   "sourceRoot": "packages/mui-component-mapper/src",
   "projectType": "library",
-  "tags": ["type:component-mapper", "ui:material-ui", "scope:publishable", "platform:react"],
+  "tags": [
+    "type:component-mapper",
+    "ui:material-ui",
+    "scope:publishable",
+    "platform:react"
+  ],
   "targets": {
     "build": {
       "executor": "nx:run-commands",
@@ -14,7 +19,7 @@
         "{projectRoot}/*.d.ts"
       ],
       "options": {
-        "command": "yarn build",
+        "command": "npm run build",
         "cwd": "packages/mui-component-mapper"
       },
       "dependsOn": [
@@ -25,27 +30,32 @@
     },
     "build:cjs": {
       "executor": "nx:run-commands",
-      "outputs": ["{projectRoot}/*.js"],
+      "outputs": [
+        "{projectRoot}/*.js"
+      ],
       "options": {
-        "command": "yarn build:cjs",
+        "command": "npm run build:cjs",
         "cwd": "packages/mui-component-mapper"
       },
       "cache": true
     },
     "build:esm": {
       "executor": "nx:run-commands",
-      "outputs": ["{projectRoot}/esm"],
+      "outputs": [
+        "{projectRoot}/esm"
+      ],
       "options": {
-        "command": "yarn build:esm",
+        "command": "npm run build:esm",
         "cwd": "packages/mui-component-mapper"
       },
       "cache": true
     },
     "test": {
-      "executor": "nx:run-commands",
+      "executor": "@nx/jest:jest",
       "options": {
-        "command": "yarn test",
-        "cwd": "packages/mui-component-mapper"
+        "jestConfig": "jest.config.js",
+        "testPathPattern": "packages/mui-component-mapper",
+        "passWithNoTests": false
       },
       "cache": true
     },
@@ -56,20 +66,22 @@
         "tsConfig": "packages/mui-component-mapper/tsconfig.json",
         "outputPath": "packages/mui-component-mapper/dist"
       },
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "cache": true
     },
     "start": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "yarn start",
+        "command": "npm run start",
         "cwd": "packages/mui-component-mapper"
       }
     },
     "vendor": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "yarn vendor",
+        "command": "npm run vendor",
         "cwd": "packages/mui-component-mapper"
       }
     }

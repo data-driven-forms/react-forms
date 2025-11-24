@@ -12,7 +12,7 @@
     "private": true,
     "scripts": {
         "dev": "next src/",
-        "build": "yarn generate:examples && yarn next build src/",
+        "build": "npm run generate:examples && npm run next build src/",
         "start": "next start src/",
         "analyze": "ANALYZE=true next build src/",
         "lint": "eslint ./src",

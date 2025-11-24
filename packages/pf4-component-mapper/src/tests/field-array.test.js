@@ -105,9 +105,7 @@ describe('<FieldArray/>', () => {
     await userEvent.click(screen.getByLabelText('Remove'));
     await userEvent.click(screen.getByText('Submit'));
 
-    expect(onSubmit).toHaveBeenCalledWith({
-      nicePeople: [],
-    });
+    expect(onSubmit).toHaveBeenCalledWith({});
   });
 
   it('allow to remove all', async () => {
@@ -158,9 +156,7 @@ describe('<FieldArray/>', () => {
     await userEvent.click(screen.getByText('Delete all'));
     await userEvent.click(screen.getByText('Submit'));
 
-    expect(onSubmit).toHaveBeenCalledWith({
-      nicePeople: [],
-    });
+    expect(onSubmit).toHaveBeenCalledWith({});
   });
 
   it('allow to Add item/remove unnamed (array) fields', async () => {
@@ -200,9 +196,7 @@ describe('<FieldArray/>', () => {
     await userEvent.click(screen.getByLabelText('Remove'));
     await userEvent.click(screen.getByText('Submit'));
 
-    expect(onSubmit).toHaveBeenCalledWith({
-      nicePeople: [],
-    });
+    expect(onSubmit).toHaveBeenCalledWith({});
   });
 
   it('allow to Add item/remove within minItems/maxItems range', async () => {

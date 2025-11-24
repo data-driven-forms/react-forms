@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 
 Element.prototype.scrollTo = () => {};
 

@@ -4,8 +4,7 @@
 logs
 *.log
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+npm-debug.log*
 
 # Runtime data
 pids
@@ -55,8 +54,7 @@ typings/
 *.tgz
 
 # Yarn files
-.yarn-integrity
-yarn.lock
+package-lock.json
 
 # dotenv environment variables file
 .env

@@ -4,7 +4,12 @@
   "root": "packages/blueprint-component-mapper",
   "sourceRoot": "packages/blueprint-component-mapper/src",
   "projectType": "library",
-  "tags": ["type:component-mapper", "ui:blueprint", "scope:publishable", "platform:react"],
+  "tags": [
+    "type:component-mapper",
+    "ui:blueprint",
+    "scope:publishable",
+    "platform:react"
+  ],
   "targets": {
     "build": {
       "executor": "nx:run-commands",
@@ -14,35 +19,42 @@
         "{projectRoot}/*.d.ts"
       ],
       "options": {
-        "command": "yarn build",
+        "command": "npm run build",
         "cwd": "packages/blueprint-component-mapper"
       },
-      "dependsOn": ["^build"],
+      "dependsOn": [
+        "^build"
+      ],
       "cache": true
     },
     "build:cjs": {
       "executor": "nx:run-commands",
-      "outputs": ["{projectRoot}/*.js"],
+      "outputs": [
+        "{projectRoot}/*.js"
+      ],
       "options": {
-        "command": "yarn build:cjs",
+        "command": "npm run build:cjs",
         "cwd": "packages/blueprint-component-mapper"
       },
       "cache": true
     },
     "build:esm": {
       "executor": "nx:run-commands",
-      "outputs": ["{projectRoot}/esm"],
+      "outputs": [
+        "{projectRoot}/esm"
+      ],
       "options": {
-        "command": "yarn build:esm",
+        "command": "npm run build:esm",
         "cwd": "packages/blueprint-component-mapper"
       },
       "cache": true
     },
     "test": {
-      "executor": "nx:run-commands",
+      "executor": "@nx/jest:jest",
       "options": {
-        "command": "yarn test",
-        "cwd": "packages/blueprint-component-mapper"
+        "jestConfig": "jest.config.js",
+        "testPathPattern": "packages/blueprint-component-mapper",
+        "passWithNoTests": false
       },
       "cache": true
     },
@@ -53,13 +65,15 @@
         "tsConfig": "packages/blueprint-component-mapper/tsconfig.json",
         "outputPath": "packages/blueprint-component-mapper/dist"
       },
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "cache": true
     },
     "start": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "yarn start",
+        "command": "npm run start",
         "cwd": "packages/blueprint-component-mapper"
       }
     }

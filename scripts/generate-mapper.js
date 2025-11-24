@@ -67,7 +67,7 @@ inquirer.prompt(QUESTIONS).then(async ({ componentmapper, typescript }) => {
     const optionTypeScriptCommand = {
       files: [path.resolve(__dirname, `../packages/${componentmapper}-component-mapper/package.json`)],
       from: /\{\{buildtypingscmd\}\}/g,
-      to: typescript ? ' && yarn build:typings' : ''
+      to: typescript ? ' && npm run build:typings' : ''
     };
     const optionTypeScriptScript = {
       files: [path.resolve(__dirname, `../packages/${componentmapper}-component-mapper/package.json`)],

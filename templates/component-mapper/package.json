@@ -7,7 +7,7 @@
   "license": "Apache-2.0",
   "scripts": {
     "start": "webpack-dev-server --config ./config/webpack.config.js --open --hot",
-    "build": "yarn build:cjs && yarn build:esm{{buildtypingscmd}} && yarn build:packages && yarn build:css",
+    "build": "npm run build:cjs && npm run build:esm{{buildtypingscmd}} && npm run build:packages && npm run build:css",
     "build:cjs": "BABEL_ENV=cjs babel src --out-dir ./ --ignore \"src/tests/*\"",
     "build:esm": "BABEL_ENV=esm babel src --out-dir ./esm --ignore \"src/tests/*\"",
     "build:packages": "node ../../scripts/generate-packages.js",

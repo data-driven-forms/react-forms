@@ -13,7 +13,7 @@
         "{projectRoot}/out"
       ],
       "options": {
-        "command": "yarn build",
+        "command": "npm run build",
         "cwd": "packages/react-renderer-demo"
       },
       "dependsOn": ["^build"],
@@ -22,21 +22,21 @@
     "dev": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "yarn dev",
+        "command": "npm run dev",
         "cwd": "packages/react-renderer-demo"
       }
     },
     "start": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "yarn start",
+        "command": "npm run start",
         "cwd": "packages/react-renderer-demo"
       }
     },
     "lint": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "yarn lint",
+        "command": "npm run lint",
         "cwd": "packages/react-renderer-demo"
       },
       "cache": true
@@ -44,7 +44,7 @@
     "analyze": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "yarn analyze",
+        "command": "npm run analyze",
         "cwd": "packages/react-renderer-demo"
       }
     }

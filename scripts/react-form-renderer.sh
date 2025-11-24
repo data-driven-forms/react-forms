@@ -1,2 +1,2 @@
-yarn build
-yarn test-ci
+npm run build
+npm run test:ci

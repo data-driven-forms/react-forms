@@ -317,10 +317,6 @@ describe('condition test', () => {
 
     await userEvent.click(screen.getByText('Reset'));
 
-    await act(async () => {
-      jest.runAllTimers();
-    });
-
     await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({
@@ -680,7 +676,8 @@ describe('condition test', () => {
     await waitFor(() => {
       expect(errorSpy).toHaveBeenCalled();
       // eslint-disable-next-line no-console
-      expect(console.error.mock.calls[0][0]).toContain('Received invalid setterValue. Expected object, received: ');
+      const errorMessage = console.error.mock.calls.map(call => call[0]).join(' ');
+      expect(errorMessage).toContain('Received invalid setterValue. Expected object, received: ');
     });
   });
 

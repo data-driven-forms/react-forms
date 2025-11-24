@@ -14,7 +14,7 @@
         "{projectRoot}/*.d.ts"
       ],
       "options": {
-        "command": "yarn build",
+        "command": "npm run build",
         "cwd": "packages/suir-component-mapper"
       },
       "dependsOn": ["^build"],
@@ -24,7 +24,7 @@
       "executor": "nx:run-commands",
       "outputs": ["{projectRoot}/*.js"],
       "options": {
-        "command": "yarn build:cjs",
+        "command": "npm run build:cjs",
         "cwd": "packages/suir-component-mapper"
       },
       "cache": true
@@ -33,7 +33,7 @@
       "executor": "nx:run-commands",
       "outputs": ["{projectRoot}/esm"],
       "options": {
-        "command": "yarn build:esm",
+        "command": "npm run build:esm",
         "cwd": "packages/suir-component-mapper"
       },
       "cache": true
@@ -59,7 +59,7 @@
     "start": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "yarn start",
+        "command": "npm run start",
         "cwd": "packages/suir-component-mapper"
       }
     }
