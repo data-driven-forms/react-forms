@@ -4,7 +4,11 @@
   "root": "packages/parsers",
   "sourceRoot": "packages/parsers/src",
   "projectType": "library",
-  "tags": ["type:utility", "scope:private", "platform:react"],
+  "tags": [
+    "type:utility",
+    "scope:private",
+    "platform:react"
+  ],
   "targets": {
     "build": {
       "executor": "nx:run-commands",
@@ -14,35 +18,42 @@
         "{projectRoot}/*.d.ts"
       ],
       "options": {
-        "command": "yarn build",
+        "command": "npm run build",
         "cwd": "packages/parsers"
       },
-      "dependsOn": ["^build"],
+      "dependsOn": [
+        "^build"
+      ],
       "cache": true
     },
     "build:cjs": {
       "executor": "nx:run-commands",
-      "outputs": ["{projectRoot}/*.js"],
+      "outputs": [
+        "{projectRoot}/*.js"
+      ],
       "options": {
-        "command": "yarn build:cjs",
+        "command": "npm run build:cjs",
         "cwd": "packages/parsers"
       },
       "cache": true
     },
     "build:esm": {
       "executor": "nx:run-commands",
-      "outputs": ["{projectRoot}/esm"],
+      "outputs": [
+        "{projectRoot}/esm"
+      ],
       "options": {
-        "command": "yarn build:esm",
+        "command": "npm run build:esm",
         "cwd": "packages/parsers"
       },
       "cache": true
     },
     "test": {
-      "executor": "nx:run-commands",
+      "executor": "@nx/jest:jest",
       "options": {
-        "command": "yarn test",
-        "cwd": "packages/parsers"
+        "jestConfig": "jest.config.js",
+        "testPathPattern": "packages/parsers",
+        "passWithNoTests": false
       },
       "cache": true
     }

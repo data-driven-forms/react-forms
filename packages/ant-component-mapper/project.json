@@ -13,7 +13,7 @@
         "{projectRoot}/*.d.ts"
       ],
       "options": {
-        "command": "yarn build",
+        "command": "npm run build",
         "cwd": "packages/ant-component-mapper"
       },
       "dependsOn": ["^build"],
@@ -23,7 +23,7 @@
       "executor": "nx:run-commands",
       "outputs": ["{projectRoot}/*.js"],
       "options": {
-        "command": "yarn build:cjs",
+        "command": "npm run build:cjs",
         "cwd": "packages/ant-component-mapper"
       },
       "cache": true
@@ -32,16 +32,17 @@
       "executor": "nx:run-commands",
       "outputs": ["{projectRoot}/esm"],
       "options": {
-        "command": "yarn build:esm",
+        "command": "npm run build:esm",
         "cwd": "packages/ant-component-mapper"
       },
       "cache": true
     },
     "test": {
-      "executor": "nx:run-commands",
+      "executor": "@nx/jest:jest",
       "options": {
-        "command": "yarn test",
-        "cwd": "packages/ant-component-mapper"
+        "jestConfig": "jest.config.js",
+        "testPathPattern": "packages/ant-component-mapper",
+        "passWithNoTests": false
       },
       "cache": true
     },
@@ -58,14 +59,14 @@
     "start": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "yarn start",
+        "command": "npm run start",
         "cwd": "packages/ant-component-mapper"
       }
     },
     "vendor": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "yarn vendor",
+        "command": "npm run vendor",
         "cwd": "packages/ant-component-mapper"
       }
     }

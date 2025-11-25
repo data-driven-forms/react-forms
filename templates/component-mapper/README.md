@@ -33,18 +33,10 @@ You need to add React Form Renderer
 $ npm install @data-driven-forms/react-form-renderer -S
 ```
 
-```console
-$ yarn add @data-driven-forms/react-form-renderer
-```
-
 #### [{{componentmapper}} Mapper](https://data-driven-forms.org/mappers/{{componentmapper}}-component-mapper)
 
 ```console
 $ npm install @data-driven-forms/{{componentmapper}}-component-mapper -S
-```
-
-```console
-$ yarn add @data-driven-forms/{{componentmapper}}-component-mapper
 ```
 
 
@@ -104,18 +96,18 @@ Data Driven Forms supports all kinds of component, basic set is consisted of:
 
 ### Development setup
 
-Data Driven Forms is a monorepo that uses [NX](https://nx.dev/) and [yarn workspaces](https://classic.yarnpkg.com/blog/2017/08/02/introducing-workspaces/), so you can use all its commands as well.
+Data Driven Forms is a monorepo that uses [NX](https://nx.dev/) and [npm workspaces](https://docs.npmjs.com/cli/v8/using-npm/workspaces), so you can use all its commands as well.
 
 1. Install
 
 ```console
-yarn install
+npm install
 ```
 
 2. Build
 
 ```console
-yarn build
+npm run build
 ```
 
 3. Run a package
@@ -124,7 +116,7 @@ Each package has a small playground `package/demo`, where you can test your chan
 
 ```console
 cd packages/{{componentmapper}}-component-mapper
-yarn start
+npm start
 ```
 
 4. How to clean?
@@ -134,16 +126,16 @@ nx reset # will reset NX cache
 rm -rf node_modules # will delete all node_modules
 ```
 
-All packages are linked together by default, so if you run a `yarn build` in a package, all other packages are updated to the latest version of that package.
+All packages are linked together by default, so if you run a `npm run build` in a package, all other packages are updated to the latest version of that package.
 
 #### Tests
 
 Tests can be ran from the core folder or from specific packages.
 
 ```console
-yarn test
+npm test
 
-yarn test packages/{{componentmapper}}-component-mapper
+npm test -- packages/{{componentmapper}}-component-mapper
 ```
 
 #### Commits
