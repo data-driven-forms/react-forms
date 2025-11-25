@@ -26,8 +26,6 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-          registry-url: 'https://registry.npmjs.org'
-
       - name: Install dependencies
         run: npm ci
 
@@ -41,13 +39,11 @@ jobs:
 
       - name: 🚀 Run Nx Release
         run: |
-          echo "registry=https://registry.npmjs.org/" >> .npmrc
           git config --global user.email "${{ secrets.RELEASE_EMAIL }}"
           git config --global user.name "${{ secrets.RELEASE_USERNAME }}"
 
           npx nx release -y
         env:
-          # NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
           NPM_CONFIG_PROVENANCE: true
           npm_config_legacy_peer_deps: false
