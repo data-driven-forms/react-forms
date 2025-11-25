@@ -25,10 +25,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'yarn'
+          cache: 'npm'
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: npm ci
 
       - name: Derive appropriate SHAs for base and head for nx affected commands
         uses: nrwl/nx-set-shas@v4
@@ -48,7 +48,7 @@ jobs:
         continue-on-error: false
 
       - name: Clear Jest cache
-        run: yarn jest --clearCache
+        run: npm run jest -- --clearCache
 
       - name: Run tests on affected projects
         run: npx nx affected --target=test --parallel=3 --coverage
@@ -71,11 +71,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'yarn'
+          cache: 'npm'
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: npm ci
 
       - name: Derive appropriate SHAs for base and head for nx affected commands
         uses: nrwl/nx-set-shas@v4
