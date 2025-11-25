@@ -42,7 +42,6 @@ Optionally you can install one of provided mappers:
 $ npm install @data-driven-forms/ant-component-mapper -S
 ```
 
-
 ### Usage
 
 For using Data Driven Forms in your component you need the renderer and a component mapper, which provides formFields components and layoutFields components.
