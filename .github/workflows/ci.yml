@@ -1,0 +1,52 @@
+name: CI Checks
+
+on:
+  pull_request:
+    branches:
+      - master
+
+permissions:
+  contents: read
+
+jobs:
+  ci-checks:
+    runs-on: ubuntu-latest
+    name: CI Checks (Build, Lint, Test, Release Dry-Run)
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Derive appropriate SHAs for base and head for nx affected commands
+        uses: nrwl/nx-set-shas@v4
+        with:
+          main-branch-name: 'master'
+
+      - name: Run build on affected projects
+        run: npx nx affected --target=build --parallel=3
+        continue-on-error: false
+
+      - name: Run lint on affected projects
+        run: npx nx affected --target=lint --parallel=3
+        continue-on-error: false
+
+      - name: Run typecheck on affected projects
+        run: npx nx affected --target=typecheck --parallel=3
+        continue-on-error: false
+
+      - name: Clear Jest cache
+        run: npx jest --clearCache
+
+      - name: Run tests on affected projects
+        run: npx nx affected --target=test --parallel=3 --coverage
+        continue-on-error: false
