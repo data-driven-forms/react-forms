@@ -34,20 +34,12 @@ You need to add React Form Renderer
 $ npm install @data-driven-forms/react-form-renderer -S
 ```
 
-```console
-$ yarn add @data-driven-forms/react-form-renderer
-```
-
 Optionally you can install one of provided mappers:
 
 #### [ANT mapper](https://www.npmjs.com/package/@data-driven-forms/ant-component-mapper)
 
 ```console
 $ npm install @data-driven-forms/ant-component-mapper -S
-```
-
-```console
-$ yarn add @data-driven-forms/ant-component-mapper
 ```
 
 
