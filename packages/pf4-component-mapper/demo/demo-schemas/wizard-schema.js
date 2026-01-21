@@ -441,3 +441,62 @@ export const wizardSchemaMoreSubsteps = {
     }
   ]
 };
+
+export const wizardSchemaProgressAfterSubmission = {
+  fields: [
+    {
+      component: componentTypes.WIZARD,
+      name: 'progress-wizard',
+      title: 'Progress after submission',
+      description: 'This wizard shows a progress step after submission',
+      fields: [
+        {
+          title: 'Step 1',
+          name: 'step-1',
+          nextStep: 'step-2',
+          fields: [
+            {
+              component: componentTypes.TEXT_FIELD,
+              name: 'name',
+              label: 'Name',
+              isRequired: true,
+              validate: [
+                {
+                  type: validatorTypes.REQUIRED
+                }
+              ]
+            }
+          ]
+        },
+        {
+          title: 'Step 2',
+          name: 'step-2',
+          nextStep: 'progress-step',
+          fields: [
+            {
+              component: componentTypes.TEXT_FIELD,
+              name: 'email',
+              label: 'Email',
+              isRequired: true,
+              validate: [
+                {
+                  type: validatorTypes.REQUIRED
+                }
+              ]
+            }
+          ]
+        },
+        {
+          name: 'progress-step',
+          isProgressAfterSubmissionStep: true,
+          fields: [
+            {
+              name: 'progress-content',
+              component: 'progress-step-content'
+            }
+          ]
+        }
+      ]
+    }
+  ]
+};
