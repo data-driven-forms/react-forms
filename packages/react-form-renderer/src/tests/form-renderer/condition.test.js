@@ -676,7 +676,7 @@ describe('condition test', () => {
     await waitFor(() => {
       expect(errorSpy).toHaveBeenCalled();
       // eslint-disable-next-line no-console
-      const errorMessage = console.error.mock.calls.map(call => call[0]).join(' ');
+      const errorMessage = console.error.mock.calls.map((call) => call[0]).join(' ');
       expect(errorMessage).toContain('Received invalid setterValue. Expected object, received: ');
     });
   });

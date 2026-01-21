@@ -85,6 +85,8 @@ const WizardInternal = ({
     return null;
   }
 
+  const isProgressAfterSubmissionStep = currentStep.isProgressAfterSubmissionStep;
+
   return (
     <Modal
       inModal={inModal}
@@ -117,45 +119,57 @@ const WizardInternal = ({
             closeButtonAriaLabel={closeButtonAriaLabel}
           />
         )}
-        <WizardToggle activeStepIndex={activeStepIndex} currentStep={currentStep} navSchema={navSchema} isOpen={state.openNav} dispatch={dispatch} />
-        <div className="pf-v6-c-wizard__outer-wrap">
-          <div className="pf-v6-c-wizard__inner-wrap">
-            <WizardNav aria-label={navAriaLabel} isExpanded={state.openNav}>
-              <FormSpy subscription={{ values: true, valid: true, validating: true }}>
-                {({ values, valid, validating }) => (
-                  <WizardNavigation
-                    navSchema={navSchema}
-                    activeStepIndex={activeStepIndex}
-                    valid={valid}
-                    maxStepIndex={maxStepIndex}
-                    jumpToStep={(...args) => {
-                      state.openNav && dispatch({ type: 'closeNav' });
-                      return jumpToStep(...args);
-                    }}
-                    crossroads={crossroads}
-                    isDynamic={isDynamic}
-                    values={values}
-                    setPrevSteps={setPrevSteps}
-                    validating={validating}
-                  />
-                )}
-              </FormSpy>
-            </WizardNav>
-            <WizardStep
-              conditionalSubmitFlag={conditionalSubmitFlag}
-              buttonLabels={buttonLabels}
-              buttonsClassName={buttonsClassName}
-              showTitles={showTitles}
-              hasNoBodyPadding={hasNoBodyPadding}
-              StepTemplate={StepTemplate}
-              {...currentStep}
-              formOptions={formOptions}
-              handleNext={(nextStep) => handleNext(nextStep)}
-              handlePrev={handlePrev}
-              disableBack={activeStepIndex === 0}
+        {isProgressAfterSubmissionStep ? (
+          currentStep.fields.map((item) => formOptions.renderForm([item], formOptions))
+        ) : (
+          <>
+            <WizardToggle
+              activeStepIndex={activeStepIndex}
+              currentStep={currentStep}
+              navSchema={navSchema}
+              isOpen={state.openNav}
+              dispatch={dispatch}
             />
-          </div>
-        </div>
+            <div className="pf-v6-c-wizard__outer-wrap">
+              <div className="pf-v6-c-wizard__inner-wrap">
+                <WizardNav aria-label={navAriaLabel} isExpanded={state.openNav}>
+                  <FormSpy subscription={{ values: true, valid: true, validating: true }}>
+                    {({ values, valid, validating }) => (
+                      <WizardNavigation
+                        navSchema={navSchema}
+                        activeStepIndex={activeStepIndex}
+                        valid={valid}
+                        maxStepIndex={maxStepIndex}
+                        jumpToStep={(...args) => {
+                          state.openNav && dispatch({ type: 'closeNav' });
+                          return jumpToStep(...args);
+                        }}
+                        crossroads={crossroads}
+                        isDynamic={isDynamic}
+                        values={values}
+                        setPrevSteps={setPrevSteps}
+                        validating={validating}
+                      />
+                    )}
+                  </FormSpy>
+                </WizardNav>
+                <WizardStep
+                  conditionalSubmitFlag={conditionalSubmitFlag}
+                  buttonLabels={buttonLabels}
+                  buttonsClassName={buttonsClassName}
+                  showTitles={showTitles}
+                  hasNoBodyPadding={hasNoBodyPadding}
+                  StepTemplate={StepTemplate}
+                  {...currentStep}
+                  formOptions={formOptions}
+                  handleNext={(nextStep) => handleNext(nextStep)}
+                  handlePrev={handlePrev}
+                  disableBack={activeStepIndex === 0}
+                />
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </Modal>
   );
