@@ -1,15 +1,29 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { FormRenderer } from '@data-driven-forms/react-form-renderer';
+import { FormRenderer, WizardContext } from '@data-driven-forms/react-form-renderer';
 import { arraySchemaDDF } from './demo-schemas/widget-schema';
 import { componentMapper, FormTemplate } from '../src';
-import { Title, Button, Toolbar, ToolbarGroup, ToolbarItem } from '@patternfly/react-core';
+import {
+  Title,
+  Button,
+  Toolbar,
+  ToolbarGroup,
+  ToolbarItem,
+  EmptyState,
+  EmptyStateBody,
+  EmptyStateFooter,
+  EmptyStateActions,
+  Progress,
+  Bullseye
+} from '@patternfly/react-core';
+import { CogsIcon } from '@patternfly/react-icons';
 import {
   wizardSchema,
   wizardSchemaWithFunction,
   wizardSchemaSimple,
   wizardSchemaSubsteps,
   wizardSchemaMoreSubsteps,
+  wizardSchemaProgressAfterSubmission,
 } from './demo-schemas/wizard-schema';
 import sandboxSchema from './demo-schemas/sandbox';
 import dualSchema from './demo-schemas/dual-list-schema';
@@ -17,6 +31,48 @@ import demoSchema from '../../../shared/demoschema';
 import selectSchema from './demo-schemas/select-schema';
 
 const Summary = (props) => <div>Custom summary component.</div>;
+
+const ProgressStepContent = () => {
+  const { jumpToStep } = React.useContext(WizardContext);
+  const [percentValidated, setPercentValidated] = React.useState(0);
+
+  const tick = React.useCallback(() => {
+    if (percentValidated < 100) {
+      setPercentValidated(prevValue => prevValue + 20);
+    }
+  }, [percentValidated]);
+
+  React.useEffect(() => {
+    const interval = setInterval(() => tick(), 1000);
+    return () => clearInterval(interval);
+  }, [tick]);
+
+  return (
+    <Bullseye>
+      <EmptyState
+        headingLevel="h4"
+        titleText={percentValidated === 100 ? 'Validation complete' : 'Validating credentials'}
+        icon={CogsIcon}
+        variant="lg"
+      >
+        <EmptyStateBody>
+          <Progress value={percentValidated} measureLocation="outside" aria-label="Wizard validation progress" />
+        </EmptyStateBody>
+        <EmptyStateBody>
+          Description can be used to further elaborate on the validation step, or give the user a better idea of how
+          long the process will take.
+        </EmptyStateBody>
+        <EmptyStateFooter>
+          <EmptyStateActions>
+            <Button isDisabled={percentValidated !== 100} onClick={() => jumpToStep(0)}>
+              Go to beginning
+            </Button>
+          </EmptyStateActions>
+        </EmptyStateFooter>
+      </EmptyState>
+    </Bullseye>
+  );
+};
 
 const fieldArrayState = {
   schema: arraySchemaDDF,
@@ -132,6 +188,19 @@ class App extends React.Component {
                 }}
                 onCancel={() => console.log('Cancel action')}
                 schema={wizardSchemaSimple}
+                FormTemplate={(props) => <FormTemplate {...props} showFormControls={this.state.additionalOptions.showFormControls} />}
+                {...this.state.additionalOptions}
+              />
+              <div>Progress after submission</div>
+              <FormRenderer
+                onSubmit={console.log}
+                componentMapper={{
+                  ...componentMapper,
+                  summary: Summary,
+                  'progress-step-content': ProgressStepContent,
+                }}
+                onCancel={() => console.log('Cancel action')}
+                schema={wizardSchemaProgressAfterSubmission}
                 FormTemplate={(props) => <FormTemplate {...props} showFormControls={this.state.additionalOptions.showFormControls} />}
                 {...this.state.additionalOptions}
               />

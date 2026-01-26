@@ -22,6 +22,7 @@ const createSchema = ({ formOptions, fields }) => {
           field.substepOf,
         index,
         primary: !schema[schema.length - 1] || !field.substepOf || field.substepOf !== schema[schema.length - 1].substepOf,
+        isProgressAfterSubmissionStep: field.isProgressAfterSubmissionStep,
       },
     ];
 

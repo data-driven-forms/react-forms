@@ -201,7 +201,6 @@ const metadata = {
   carbon,
 };
 
-
 const stringifyWithFunctions = (string) =>
   JSON.stringify(string, null, 2)
     .replace(/<NEWLINE>/g, '\n')

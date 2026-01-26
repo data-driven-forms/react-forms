@@ -22,7 +22,7 @@ const WizardNavigationInternal = React.memo(
   ({ navSchema, activeStepIndex, maxStepIndex, jumpToStep, valid, validating }) => (
     <Fragment>
       {navSchema
-        .filter((field) => field.primary)
+        .filter((field) => field.primary && !field.isProgressAfterSubmissionStep)
         .map((step) => {
           const substeps = step.substepOf && navSchema.filter((field) => field.substepOf === step.substepOf);
 
