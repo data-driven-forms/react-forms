@@ -1,8 +1,15 @@
 export const html = `
 <html>
   <head>
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@patternfly/patternfly@latest/patternfly-base.css"/>
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@patternfly/patternfly@latest/patternfly-addons.css"/>
+    <style>
+      body {
+        margin: 0;
+        font-family: 'RedHatDisplay', 'Overpass', overpass, helvetica, arial, sans-serif;
+      }
+      #root {
+        padding: 0;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
@@ -11,17 +18,19 @@ export const html = `
 `;
 
 export const code = `import React, { Component } from 'react';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import FormRenderer from '@data-driven-forms/react-form-renderer/form-renderer';
 import FormTemplate from '@data-driven-forms/pf4-component-mapper/form-template';
 import componentMapper from '@data-driven-forms/pf4-component-mapper/component-mapper';
+
+import '@patternfly/react-core/dist/styles/base.css';
 
 import schema from './schema'
 
 class App extends Component {
   render() {
     return (
-      <div style={{margin: 24}}>
+      <div style={{margin: 24}} className="pf-v6-c-page">
         <FormRenderer
           schema={schema}
           FormTemplate={FormTemplate}
@@ -33,13 +42,16 @@ class App extends Component {
   }
 }
 
-render(<App />, document.getElementById('root'));`;
+const root = createRoot(document.getElementById('root'));
+root.render(<App />);`;
 
 export const wizardCode = `import React, { Component } from 'react';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import FormRenderer from '@data-driven-forms/react-form-renderer/form-renderer';
 import Pf4FormTemplate from '@data-driven-forms/pf4-component-mapper/form-template';
 import componentMapper from '@data-driven-forms/pf4-component-mapper/component-mapper';
+
+import '@patternfly/react-core/dist/styles/base.css';
 
 import schema from './schema'
 
@@ -48,7 +60,7 @@ const FormTemplate = (props) => <Pf4FormTemplate {...props} showFormControls={fa
 class App extends Component {
   render() {
     return (
-      <div style={{margin: 24}}>
+      <div style={{margin: 24}} className="pf-v6-c-page">
         <FormRenderer
           schema={schema}
           FormTemplate={FormTemplate}
@@ -60,7 +72,8 @@ class App extends Component {
   }
 }
 
-render(<App />, document.getElementById('root'));`;
+const root = createRoot(document.getElementById('root'));
+root.render(<App />);`;
 
 export const dependencies = {
   react: 'latest',
