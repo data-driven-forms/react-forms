@@ -1,0 +1,211 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Renovate configuration for @data-driven-forms library packages - maintains version ranges for library compatibility",
+  "extends": [
+    "config:base",
+    "schedule:weekends",
+    ":dependencyDashboard",
+    ":semanticCommits",
+    "group:monorepos",
+    "group:recommended",
+    ":maintainLockFilesWeekly"
+  ],
+  "prConcurrentLimit": 5,
+  "prHourlyLimit": 3,
+  "constraints": {
+    "node": ">=18"
+  },
+  "reviewers": [],
+  "rebaseWhen": "conflicted",
+  "separateMajorMinor": true,
+  "separateMinorPatch": false,
+  "rangeStrategy": "bump",
+  "respectLatest": true,
+  "major": {
+    "enabled": false
+  },
+  "minor": {
+    "enabled": true
+  },
+  "patch": {
+    "enabled": true
+  },
+  "npmrc": "package-lock=true",
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["before 5am on sunday"]
+  },
+  "ignorePaths": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/build/**"
+  ],
+  "packageRules": [
+    {
+      "description": "Group React ecosystem updates with testing library to avoid conflicts",
+      "groupName": "React ecosystem",
+      "matchPackageNames": [
+        "react",
+        "react-dom",
+        "@types/react",
+        "@types/react-dom",
+        "react-is",
+        "@testing-library/react",
+        "@testing-library/react-hooks"
+      ],
+      "rangeStrategy": "bump",
+      "respectLatest": true
+    },
+    {
+      "description": "Group Testing Library packages",
+      "groupName": "Testing Library",
+      "matchPackagePatterns": ["^@testing-library/"]
+    },
+    {
+      "description": "Group Babel packages",
+      "groupName": "Babel",
+      "matchPackagePatterns": ["^@babel/", "^babel-"]
+    },
+    {
+      "description": "Group TypeScript packages",
+      "groupName": "TypeScript",
+      "matchPackagePatterns": ["^@types/", "typescript", "ts-"]
+    },
+    {
+      "description": "Group ESLint packages",
+      "groupName": "ESLint",
+      "matchPackagePatterns": ["^eslint", "^@typescript-eslint/"]
+    },
+    {
+      "description": "Group Jest packages",
+      "groupName": "Jest",
+      "matchPackagePatterns": ["^jest", "@jest/"]
+    },
+    {
+      "description": "Group Nx packages",
+      "groupName": "Nx",
+      "matchPackagePatterns": ["^@nx/", "^nx$"]
+    },
+    {
+      "description": "Group Webpack packages",
+      "groupName": "Webpack",
+      "matchPackagePatterns": ["^webpack", "webpack-"]
+    },
+    {
+      "description": "Group PatternFly packages",
+      "groupName": "PatternFly",
+      "matchPackagePatterns": ["^@patternfly/"]
+    },
+    {
+      "description": "Group Material-UI packages",
+      "groupName": "Material-UI",
+      "matchPackagePatterns": ["^@mui/", "^@material-ui/"]
+    },
+    {
+      "description": "Group Carbon packages",
+      "groupName": "IBM Carbon",
+      "matchPackagePatterns": ["^@carbon/"]
+    },
+    {
+      "description": "Group Blueprint packages",
+      "groupName": "Blueprint",
+      "matchPackagePatterns": ["^@blueprintjs/"]
+    },
+    {
+      "description": "Group Emotion packages",
+      "groupName": "Emotion",
+      "matchPackagePatterns": ["^@emotion/"]
+    },
+    {
+      "description": "Enable peer dependency updates with ranges for library compatibility",
+      "matchDepTypes": ["peerDependencies"],
+      "enabled": true,
+      "rangeStrategy": "widen"
+    },
+    {
+      "description": "Pin internal workspace dependencies",
+      "matchPackagePatterns": ["^@data-driven-forms/"],
+      "enabled": false
+    },
+    {
+      "description": "Maintain ranges for regular dependencies in library packages",
+      "matchDepTypes": ["dependencies"],
+      "rangeStrategy": "bump"
+    },
+    {
+      "description": "Maintain ranges for optional dependencies",
+      "matchDepTypes": ["optionalDependencies"],
+      "rangeStrategy": "bump"
+    },
+    {
+      "description": "Allow dev dependencies to be more flexible with ranges",
+      "matchDepTypes": ["devDependencies"],
+      "rangeStrategy": "bump"
+    },
+    {
+      "description": "Widen peer dependency ranges to avoid conflicts",
+      "matchDepTypes": ["peerDependencies"],
+      "rangeStrategy": "widen"
+    },
+    {
+      "description": "Conservative approach for React peer dependencies to avoid conflicts",
+      "matchPackageNames": [
+        "react",
+        "react-dom"
+      ],
+      "matchDepTypes": ["peerDependencies"],
+      "rangeStrategy": "bump",
+      "respectLatest": true
+    },
+    {
+      "description": "Maintain caret ranges for core library dependencies",
+      "matchPackageNames": [
+        "final-form",
+        "react-final-form",
+        "lodash",
+        "clsx",
+        "date-fns"
+      ],
+      "matchDepTypes": ["dependencies"],
+      "rangeStrategy": "bump"
+    },
+    {
+      "description": "Maintain ranges for dev dependencies patch updates",
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["patch"],
+      "rangeStrategy": "bump"
+    },
+    {
+      "description": "Prevent conflicting React versions in overrides",
+      "matchPackageNames": [
+        "react",
+        "react-dom"
+      ],
+      "matchPaths": ["package.json"],
+      "rangeStrategy": "bump",
+      "respectLatest": true,
+      "minimumReleaseAge": "3 days"
+    },
+    {
+      "description": "Keep React Testing Library compatible with React versions",
+      "matchPackagePatterns": ["^@testing-library/"],
+      "rangeStrategy": "bump",
+      "respectLatest": true,
+      "minimumReleaseAge": "3 days"
+    },
+    {
+      "description": "Handle package overrides carefully to avoid peer dependency conflicts",
+      "matchManagers": ["npm"],
+      "matchDepNames": ["react", "react-dom"],
+      "postUpdateOptions": ["npmDedupe"],
+      "rangeStrategy": "bump",
+      "prTitle": "chore(deps): update React ecosystem (check peer dependencies)",
+      "prBodyTemplate": "This PR updates React ecosystem packages. Please verify that all peer dependencies are compatible before merging.\n\n{{{table}}}\n\n{{{notes}}}\n\n{{{changelogs}}}"
+    }
+  ],
+  "commitMessagePrefix": "chore(deps):",
+  "commitMessageAction": "update",
+  "commitMessageTopic": "{{depName}}",
+  "commitMessageExtra": "to {{newVersion}}",
+  "commitBody": "- Updates {{depName}} from {{currentVersion}} to {{newVersion}}\n- Release notes: {{releaseNotes}}\n\n{{#if hasReleaseNotes}}\n### Release Notes\n{{releaseNotes}}\n{{/if}}"
+}

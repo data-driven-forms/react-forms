@@ -19,13 +19,20 @@
     "codecov": "codecov",
     "start-demo": "nx run @data-driven-forms/react-renderer-demo:start",
     "lint": "npx eslint ./packages/*/src --ext .js",
-    "lint:ts": "tslint -c ./tslint.json 'packages/**/*.d.ts'",
+    "lint:ts": "eslint 'packages/**/*.d.ts' --parser @typescript-eslint/parser",
     "generate-template": "node ./scripts/generate-mapper.js",
     "clean-build": "node ./scripts/clean-build.js",
     "prebuild": "node ./scripts/clean-build.js"
   },
   "workspaces": [
-    "packages/*"
+    "packages/common",
+    "packages/react-form-renderer",
+    "packages/pf4-component-mapper",
+    "packages/ant-component-mapper",
+    "packages/mui-component-mapper",
+    "packages/carbon-component-mapper",
+    "packages/blueprint-component-mapper",
+    "packages/react-renderer-demo"
   ],
   "jest": {
     "testEnvironment": "jest-environment-jsdom",
@@ -33,6 +40,7 @@
     "testPathIgnorePatterns": [
       "/node_modules/",
       "packages/suir-component-mapper/",
+      "packages/parsers/",
       "/.nx/"
     ],
     "setupFilesAfterEnv": [
@@ -60,30 +68,30 @@
     "globalSetup": "<rootDir>/config/globalSetup.js"
   },
   "devDependencies": {
-    "@babel/cli": "^7.17.3",
-    "@babel/core": "^7.16.7",
-    "@babel/eslint-parser": "^7.16.5",
+    "@babel/cli": "^7.28.6",
+    "@babel/core": "^7.28.6",
+    "@babel/eslint-parser": "^7.28.6",
     "@babel/plugin-proposal-class-properties": "^7.16.7",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@babel/plugin-transform-runtime": "^7.16.8",
-    "@babel/preset-env": "^7.16.8",
+    "@babel/preset-env": "^7.28.6",
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
-    "@nx/jest": "^22.1.1",
-    "@nx/js": "^22.1.1",
+    "@nx/jest": "^22.4.2",
+    "@nx/js": "^22.4.2",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.3.0",
+    "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.4.3",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.3",
     "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.54.0",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^27.4.6",
     "babel-loader": "^8.2.3",
     "babel-plugin-transform-imports": "^2.0.0",
     "css-loader": "^6.5.1",
-    "dtslint": "^4.2.1",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-config-react-app": "^7.0.1",
@@ -101,33 +109,40 @@
     "inquirer": "^8.2.0",
     "jest": "^27.4.7",
     "ncp": "^2.0.0",
-    "nx": "^22.1.1",
+    "nx": "^22.4.2",
     "prettier": "^2.5.1",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "regenerator-runtime": "^0.13.9",
     "replace-in-file": "^6.3.2",
-    "sass": "^1.77.8",
+    "sass": "^1.97.3",
     "sass-loader": "^12.4.0",
     "strip-ansi": "^7.0.1",
     "style-loader": "^3.3.1",
-    "terser-webpack-plugin": "^5.3.0",
+    "terser-webpack-plugin": "^5.3.16",
     "ts-loader": "^9.2.6",
-    "tslint": "^6.1.3",
-    "tslint-config-prettier": "^1.18.0",
     "typescript": "^5.9.3",
-    "webpack": "^5.66.0",
-    "webpack-cli": "^4.9.1",
-    "webpack-dev-server": "^4.7.3"
+    "webpack": "^5.104.1",
+    "webpack-cli": "^5.1.3",
+    "webpack-dev-server": "^5.2.3"
   },
   "overrides": {
     "react-is": "^19.0.0",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "@types/react": "^19.1.2",
-    "@types/react-dom": "^19.1.3"
+    "@types/react-dom": "^19.1.3",
+    "semantic-ui-react": {
+      "react": "^19.0.0",
+      "react-dom": "^19.0.0"
+    },
+    "@fluentui/react-component-ref": {
+      "react": "^19.0.0",
+      "react-dom": "^19.0.0"
+    }
   },
   "dependencies": {
+    "lz-string": "^1.5.0",
     "ts-node": "^10.9.1"
   }
 }

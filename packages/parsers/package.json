@@ -1,7 +1,7 @@
 {
   "name": "@data-driven-forms/parsers",
   "version": "4.1.2",
-  "description": "Parsers for Data Driven Forms.",
+  "description": "[ARCHIVED] Parsers for Data Driven Forms. No longer maintained.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "private": true,

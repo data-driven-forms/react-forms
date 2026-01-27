@@ -13,7 +13,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Paper from '@mui/material/Paper';
 import clsx from 'clsx';
 import IconButton from '@mui/material/IconButton';
-import { getParameters } from 'codesandbox/lib/api/define';
+
 import Tooltip from '@mui/material/Tooltip';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
@@ -25,6 +25,16 @@ import { headerToId } from '../helpers/list-of-contents';
 import ShareButton from './mdx/share-button';
 import { grey } from '@mui/material/colors';
 import ErrorBoundary from './error-boundary';
+
+import LZString from 'lz-string';
+
+// CodeSandbox parameters function (using lz-string for compression)
+const getParameters = (parameters) => {
+  return LZString.compressToBase64(JSON.stringify(parameters))
+    .replace(/\+/g, '-') // Convert '+' to '-'
+    .replace(/\//g, '_') // Convert '/' to '_'
+    .replace(/=+$/, ''); // Remove ending '='
+};
 
 const HeadingRoot = styled('div')(({ theme }) => ({
   '& .anchor': {
