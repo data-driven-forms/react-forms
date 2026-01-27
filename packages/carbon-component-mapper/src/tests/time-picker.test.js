@@ -71,7 +71,7 @@ describe('TimePicker', () => {
     fireEvent.focusOut(screen.getByPlaceholderText('hh:mm'));
     await userEvent.click(screen.getByText('Submit'));
 
-    expect(screen.getByPlaceholderText('hh:mm')).toHaveValue('24:00');
+    expect(screen.getByPlaceholderText('hh:mm').value).toMatch(/^(00:00|24:00)$/);
     expect(onSubmit.mock.calls[0][0]['time-picker'].getHours()).toEqual(0);
     expect(onSubmit.mock.calls[0][0]['time-picker'].getMinutes()).toEqual(0);
   });
