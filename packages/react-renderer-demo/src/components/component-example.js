@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import { useRouter } from 'next/router';
-import CircularProgress from '@mui/material/CircularProgress';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import sdk from '@stackblitz/sdk';
+import { Sandpack } from '@codesandbox/sandpack-react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -23,12 +22,12 @@ import IconButton from '@mui/material/IconButton';
 
 import clsx from 'clsx';
 
-import * as mui from '../stackblitz-templates/mui-templates';
-import * as pf4 from '../stackblitz-templates/pf4-templates';
-import * as blueprint from '../stackblitz-templates/blueprint-templates';
-import * as suir from '../stackblitz-templates/suir-template';
-import * as ant from '../stackblitz-templates/ant-templates';
-import * as carbon from '../stackblitz-templates/carbon-templates';
+import * as mui from '../sandpack-templates/mui-sandpack';
+import * as pf4 from '../sandpack-templates/pf4-sandpack';
+import * as blueprint from '../sandpack-templates/blueprint-sandpack';
+import * as suir from '../sandpack-templates/suir-sandpack';
+import * as ant from '../sandpack-templates/ant-sandpack';
+import * as carbon from '../sandpack-templates/carbon-sandpack';
 
 import avalableMappers from '../helpers/available-mappers';
 import GhIcon from './common/gh-svg-icon';
@@ -104,10 +103,16 @@ const Root = styled('div')(({ theme }) => ({
 
   [`& .${classes.spinnerCheat}`]: {
     flex: 1,
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
     position: 'relative',
     boxShadow: theme.shadows[1],
     '& .longer + #code-target': {
       maxHeight: 'calc(100% - 49px)',
+    },
+    '& .sp-layout': {
+      height: '100%',
     },
   },
 
@@ -196,17 +201,6 @@ const metadata = {
   carbon,
 };
 
-const project = {
-  settings: {
-    compile: {
-      trigger: 'auto',
-      action: 'hmr',
-      clearConsole: false,
-    },
-  },
-  template: 'javascript',
-};
-
 const stringifyWithFunctions = (string) =>
   JSON.stringify(string, null, 2)
     .replace(/<NEWLINE>/g, '\n')
@@ -222,24 +216,18 @@ const ComponentExample = ({ variants, schema, activeMapper, component, schemaVar
     availableVariants?.find(({ value }) => value === activeSchema)?.schema ||
     availableVariants?.find(({ value }) => value === 'basic')?.schema ||
     schema;
-  const basicConfiguration = {
-    ...project,
-    dependencies: metadata[activeMapper].dependencies,
-    files: {
-      'index.html': metadata[activeMapper].html,
-      'index.js': metadata[activeMapper].code,
-      ...(component === 'wizard' && { 'index.js': metadata[activeMapper].wizardCode }),
-      'schema.js': `export default ${stringifyWithFunctions(selectedSchema)};`,
-    },
+
+  const sandpackFiles = {
+    '/index.js': metadata[activeMapper].code,
+    ...(component === 'wizard' && { '/index.js': metadata[activeMapper].wizardCode }),
+    '/schema.js': `export default ${stringifyWithFunctions(selectedSchema)};`,
+    ...(metadata[activeMapper].css && { '/styles.css': metadata[activeMapper].css }),
   };
-  const basicEditorSettings = { height: '100%', hideNavigation: true, forceEmbedLayout: true, openFile: 'schema.js' };
 
   useEffect(() => {
     if (activeSchema && !availableVariants?.find(({ value }) => value === activeSchema)) {
       push(`${pathname}?mapper=${activeMapper}&schema=basic`);
     }
-
-    sdk.embedProject('code-target', basicConfiguration, basicEditorSettings);
   }, [activeMapper, schema, activeSchema]);
 
   const renderMapperTabs = () =>
@@ -351,10 +339,25 @@ const ComponentExample = ({ variants, schema, activeMapper, component, schemaVar
                 />
               ))}
             </Tabs>
-            <div id="code-target" className="pepa"></div>
-            <div className={classes.spinner}>
-              <CircularProgress color="inherit" size={80} />
-            </div>
+            <Sandpack
+              key={`${activeMapper}-${activeSchema || 'default'}-${component}`}
+              template="react"
+              files={sandpackFiles}
+              customSetup={{
+                dependencies: metadata[activeMapper].dependencies,
+              }}
+              options={{
+                showNavigator: false,
+                showTabs: true,
+                showLineNumbers: true,
+                editorHeight: '100%',
+                activeFile: '/schema.js',
+                bundlerTimeout: 60000,
+                wrapContent: true,
+              }}
+              theme="light"
+              style={{ height: '100%', display: 'flex', flexDirection: 'column' }}
+            />
           </div>
         </Box>
       </Box>

@@ -20,6 +20,7 @@
     },
     "dependencies": {
         "@actions/github": "^5.0.0",
+        "@codesandbox/sandpack-react": "^2.20.0",
         "@data-driven-forms/editor-pro": "0.0.13",
         "@data-driven-forms/mui-component-mapper": "*",
         "@data-driven-forms/react-form-renderer": "*",
@@ -35,7 +36,6 @@
         "@mui/system": "^5.10.4",
         "@mui/x-date-pickers": "^5.0.1",
         "@next/bundle-analyzer": "^15.3.1",
-        "@stackblitz/sdk": "^1.5.3",
         "clsx": "^1.1.1",
         "codesandbox": "2.2.3",
         "evergreen-ui": "^6.9.10",
