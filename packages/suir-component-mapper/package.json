@@ -1,7 +1,7 @@
 {
   "name": "@data-driven-forms/suir-component-mapper",
   "version": "4.1.6",
-  "description": "Semantíc UI React component mapper for Data Driven Forms.",
+  "description": "[ARCHIVED] Semantic UI React component mapper for Data Driven Forms. No longer maintained as Semantic UI React is deprecated.",
   "main": "index.js",
   "module": "esm/index.js",
   "typings": "index.d.ts",

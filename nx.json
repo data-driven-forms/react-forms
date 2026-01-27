@@ -41,8 +41,7 @@
       "@data-driven-forms/common",
       "@data-driven-forms/mui-component-mapper",
       "@data-driven-forms/pf4-component-mapper",
-      "@data-driven-forms/react-form-renderer",
-      "@data-driven-forms/suir-component-mapper"
+      "@data-driven-forms/react-form-renderer"
     ],
     "changelog": {
       "projectChangelogs": {
