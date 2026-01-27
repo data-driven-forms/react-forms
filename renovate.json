@@ -172,8 +172,7 @@
     {
       "description": "Maintain ranges for dev dependencies patch updates",
       "matchDepTypes": ["devDependencies"],
-      "matchUpdateTypes": ["patch"],
-      "rangeStrategy": "bump"
+      "matchUpdateTypes": ["patch"]
     },
     {
       "description": "Prevent conflicting React versions in overrides",
