@@ -2,7 +2,7 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "description": "Renovate configuration for @data-driven-forms library packages - maintains version ranges for library compatibility",
   "extends": [
-    "config:base",
+    "config:recommended",
     "schedule:weekends",
     ":dependencyDashboard",
     ":semanticCommits",
@@ -35,11 +35,7 @@
     "enabled": true,
     "schedule": ["before 5am on sunday"]
   },
-  "ignorePaths": [
-    "**/node_modules/**",
-    "**/dist/**",
-    "**/build/**"
-  ],
+  "ignorePaths": ["**/node_modules/**", "**/dist/**", "**/build/**"],
   "packageRules": [
     {
       "description": "Group React ecosystem updates with testing library to avoid conflicts",
@@ -59,62 +55,62 @@
     {
       "description": "Group Testing Library packages",
       "groupName": "Testing Library",
-      "matchPackagePatterns": ["^@testing-library/"]
+      "matchPackageNames": ["/^@testing-library//"]
     },
     {
       "description": "Group Babel packages",
       "groupName": "Babel",
-      "matchPackagePatterns": ["^@babel/", "^babel-"]
+      "matchPackageNames": ["/^@babel//", "/^babel-/"]
     },
     {
       "description": "Group TypeScript packages",
       "groupName": "TypeScript",
-      "matchPackagePatterns": ["^@types/", "typescript", "ts-"]
+      "matchPackageNames": ["/^@types//", "/typescript/", "/ts-/"]
     },
     {
       "description": "Group ESLint packages",
       "groupName": "ESLint",
-      "matchPackagePatterns": ["^eslint", "^@typescript-eslint/"]
+      "matchPackageNames": ["/^eslint/", "/^@typescript-eslint//"]
     },
     {
       "description": "Group Jest packages",
       "groupName": "Jest",
-      "matchPackagePatterns": ["^jest", "@jest/"]
+      "matchPackageNames": ["/^jest/", "/@jest//"]
     },
     {
       "description": "Group Nx packages",
       "groupName": "Nx",
-      "matchPackagePatterns": ["^@nx/", "^nx$"]
+      "matchPackageNames": ["/^@nx//", "/^nx$/"]
     },
     {
       "description": "Group Webpack packages",
       "groupName": "Webpack",
-      "matchPackagePatterns": ["^webpack", "webpack-"]
+      "matchPackageNames": ["/^webpack/", "/webpack-/"]
     },
     {
       "description": "Group PatternFly packages",
       "groupName": "PatternFly",
-      "matchPackagePatterns": ["^@patternfly/"]
+      "matchPackageNames": ["/^@patternfly//"]
     },
     {
       "description": "Group Material-UI packages",
       "groupName": "Material-UI",
-      "matchPackagePatterns": ["^@mui/", "^@material-ui/"]
+      "matchPackageNames": ["/^@mui//", "/^@material-ui//"]
     },
     {
       "description": "Group Carbon packages",
       "groupName": "IBM Carbon",
-      "matchPackagePatterns": ["^@carbon/"]
+      "matchPackageNames": ["/^@carbon//"]
     },
     {
       "description": "Group Blueprint packages",
       "groupName": "Blueprint",
-      "matchPackagePatterns": ["^@blueprintjs/"]
+      "matchPackageNames": ["/^@blueprintjs//"]
     },
     {
       "description": "Group Emotion packages",
       "groupName": "Emotion",
-      "matchPackagePatterns": ["^@emotion/"]
+      "matchPackageNames": ["/^@emotion//"]
     },
     {
       "description": "Enable peer dependency updates with ranges for library compatibility",
@@ -124,8 +120,8 @@
     },
     {
       "description": "Pin internal workspace dependencies",
-      "matchPackagePatterns": ["^@data-driven-forms/"],
-      "enabled": false
+      "enabled": false,
+      "matchPackageNames": ["/^@data-driven-forms//"]
     },
     {
       "description": "Maintain ranges for regular dependencies in library packages",
@@ -149,10 +145,7 @@
     },
     {
       "description": "Conservative approach for React peer dependencies to avoid conflicts",
-      "matchPackageNames": [
-        "react",
-        "react-dom"
-      ],
+      "matchPackageNames": ["react", "react-dom"],
       "matchDepTypes": ["peerDependencies"],
       "rangeStrategy": "bump",
       "respectLatest": true
@@ -176,21 +169,18 @@
     },
     {
       "description": "Prevent conflicting React versions in overrides",
-      "matchPackageNames": [
-        "react",
-        "react-dom"
-      ],
-      "matchPaths": ["package.json"],
+      "matchPackageNames": ["react", "react-dom"],
+      "matchFileNames": ["package.json"],
       "rangeStrategy": "bump",
       "respectLatest": true,
       "minimumReleaseAge": "3 days"
     },
     {
       "description": "Keep React Testing Library compatible with React versions",
-      "matchPackagePatterns": ["^@testing-library/"],
       "rangeStrategy": "bump",
       "respectLatest": true,
-      "minimumReleaseAge": "3 days"
+      "minimumReleaseAge": "3 days",
+      "matchPackageNames": ["/^@testing-library//"]
     },
     {
       "description": "Handle package overrides carefully to avoid peer dependency conflicts",
