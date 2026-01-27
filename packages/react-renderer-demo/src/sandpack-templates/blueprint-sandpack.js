@@ -116,5 +116,5 @@ export const dependencies = {
   'final-form-arrays': '^3.1.0',
   'prop-types': '^15.8.1',
   'react-transition-group': '^4.4.5',
-  'classnames': '^2.3.2',
+  classnames: '^2.3.2',
 };
