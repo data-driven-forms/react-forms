@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import handleEnter from '@data-driven-forms/common/wizard/enter-handler';
 
-import RenderWithProvider from '../../../../../__mocks__/with-provider';
+import RenderWithProvider from '../__mocks__/with-provider';
 
 import WizardStepButtons from '../../wizard/wizard-components/step-buttons';
 import componentTypes from '@data-driven-forms/react-form-renderer/component-types';

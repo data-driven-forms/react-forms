@@ -6,7 +6,7 @@ import userEvent from '@testing-library/user-event';
 import Checkbox from '../checkbox';
 import Switch from '../switch';
 
-import RenderWithProvider from '../../../../__mocks__/with-provider';
+import RenderWithProvider from './__mocks__/with-provider';
 import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 import FormTemplate from '../form-template';
 import componentMapper from '../component-mapper';

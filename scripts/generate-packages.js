@@ -15,14 +15,16 @@ async function generatePackages() {
         .split('/')
         .pop()
     );
-  const cmds = directories.map((dir) => {
-    const pckg = {
-      main: 'index.js',
-      module: `../esm/${dir}`,
-      typings: 'index.d.ts'
-    };
-    return fse.writeJSON(path.resolve(packagePath, dir, 'package.json'), pckg);
-  });
+  const cmds = directories
+    .filter((dir) => fse.existsSync(path.resolve(packagePath, dir)))
+    .map((dir) => {
+      const pckg = {
+        main: 'index.js',
+        module: `../esm/${dir}`,
+        typings: 'index.d.ts'
+      };
+      return fse.writeJSON(path.resolve(packagePath, dir, 'package.json'), pckg);
+    });
 
   return Promise.all(cmds);
   // return fse.writeFileSync(`${src}/index.js`, content);

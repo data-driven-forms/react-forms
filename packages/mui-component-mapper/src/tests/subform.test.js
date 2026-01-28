@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 
 import Subform from '../sub-form';
-import RenderWithProvider from '../../../../__mocks__/with-provider';
+import RenderWithProvider from './__mocks__/with-provider';
 
 describe('subform', () => {
   const props = {

@@ -1,9 +1,9 @@
-import { ElementType } from "react";
+import { ElementType, ReactNode } from "react";
 import Schema from "./schema";
 import { AnyObject } from "../common-types/any-object";
 
 export interface FormTemplateRenderProps extends AnyObject {
-  formFields: ElementType[];
+  formFields: ReactNode[];
   schema: Schema;
 }
 

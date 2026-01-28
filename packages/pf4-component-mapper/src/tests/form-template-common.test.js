@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import FormTemplate from '../form-template';
-import RenderWithProvider from '../../../../__mocks__/with-provider';
+import RenderWithProvider from './__mocks__/with-provider';
 import componentMapper from '../component-mapper';
 
 describe('FormTemplate PF4 Common', () => {
