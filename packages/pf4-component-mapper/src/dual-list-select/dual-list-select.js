@@ -5,8 +5,8 @@ import isEqual from 'lodash/isEqual';
 
 import DualListTree from '../dual-list-tree-select/dual-list-tree-select';
 
-import FormGroup from '../form-group';
-import DualListContext from '../dual-list-context';
+import FormGroup from '../form-group/form-group';
+import DualListContext from '../dual-list-context/dual-list-context';
 
 const DualList = (props) => {
   const {

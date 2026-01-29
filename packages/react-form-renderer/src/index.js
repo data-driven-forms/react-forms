@@ -17,4 +17,4 @@ export { default as useFormApi } from './use-form-api';
 export { default as validatorMapper } from './validator-mapper';
 export { default as validatorTypes } from './validator-types';
 export { default as validators } from './validators';
-export { default as wizardContext } from './wizard-context';
+export { default as WizardContext } from './wizard-context';

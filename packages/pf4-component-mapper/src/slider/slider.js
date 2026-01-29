@@ -1,6 +1,6 @@
 import React from 'react';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
-import FormGroup from '../form-group';
+import FormGroup from '../form-group/form-group';
 import { Slider as PF4Slider } from '@patternfly/react-core';
 
 const Slider = (props) => {

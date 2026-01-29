@@ -8,3 +8,5 @@ tsconfig.js
 tsconfig.json
 project.json
 .nxignore
+jest.config.ts
+tsconfig.spec.json

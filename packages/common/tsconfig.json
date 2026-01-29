@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
     "sourceMap": true,
-    "module": "esnext",
+    "module": "es6",
     "moduleResolution": "node",
     "target": "es5",
-    "lib": ["es6", "dom"],
+    "lib": ["es2020", "dom"],
     "jsx": "preserve",
     "allowSyntheticDefaultImports": true,
     "noErrorTruncation": true,

@@ -1,1 +1,3 @@
 public/service-worker.js
+jest.config.ts
+tsconfig.spec.json

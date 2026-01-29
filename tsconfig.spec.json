@@ -1,0 +1,25 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist/out-tsc",
+    "module": "commonjs",
+    "types": ["jest", "node", "@testing-library/jest-dom"],
+    "allowJs": true,
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "include": [
+    "jest.config.js",
+    "jest.preset.js",
+    "packages/**/src/**/*.test.ts",
+    "packages/**/src/**/*.spec.ts",
+    "packages/**/src/**/*.test.tsx",
+    "packages/**/src/**/*.spec.tsx",
+    "packages/**/src/**/*.test.js",
+    "packages/**/src/**/*.spec.js",
+    "packages/**/src/**/*.test.jsx",
+    "packages/**/src/**/*.spec.jsx",
+    "packages/**/*.d.ts"
+  ]
+}

@@ -40,7 +40,7 @@
     "test": {
       "executor": "@nx/jest:jest",
       "options": {
-        "jestConfig": "jest.config.js",
+        "jestConfig": "packages/ant-component-mapper/jest.config.ts",
         "testPathPattern": "packages/ant-component-mapper",
         "passWithNoTests": false
       },

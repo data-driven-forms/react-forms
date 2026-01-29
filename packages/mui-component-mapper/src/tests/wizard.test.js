@@ -68,7 +68,8 @@ describe('wizard', () => {
     render(<FormRenderer {...initialProps} />);
 
     expect(screen.getByText('AWS step')).toHaveClass('Mui-active');
-    await expect(() => userEvent.click(screen.getByText('Continue'))).rejects.toThrow();
+    // Verify the Continue button is disabled when validation fails
+    expect(screen.getByText('Continue')).toBeDisabled();
 
     await userEvent.type(screen.getByLabelText('aws-field'), 'something');
     await userEvent.click(screen.getByText('Continue'));

@@ -13,8 +13,7 @@
     "build:esm": "BABEL_ENV=esm babel src --out-dir ./esm --ignore \"src/tests/*\"",
     "build:typings": "node ../../scripts/generate-typings.js",
     "build:packages": "node ../../scripts/generate-packages.js",
-    "build:css": "node ../../scripts/copy-css.js",
-    "test": "npm test --workspace=react-forms -- test packages/pf4-component-mapper"
+    "build:css": "node ../../scripts/copy-css.js"
   },
   "homepage": "https://data-driven-forms.org/",
   "bugs": "https://github.com/data-driven-forms/react-forms/issues",

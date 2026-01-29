@@ -3,8 +3,8 @@ import { DualListSelector } from '@patternfly/react-core/deprecated';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import isEqual from 'lodash/isEqual';
 
-import FormGroup from '../form-group';
-import DualListContext from '../dual-list-context';
+import FormGroup from '../form-group/form-group';
+import DualListContext from '../dual-list-context/dual-list-context';
 
 export const convertOptions = (options, sort) => {
   if (Array.isArray(options)) {

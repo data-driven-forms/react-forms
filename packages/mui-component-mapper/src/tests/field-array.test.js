@@ -181,7 +181,8 @@ describe('<FieldArray/>', () => {
     });
     onSubmit.mockClear();
 
-    await expect(() => userEvent.click(screen.getByText('ADD'))).rejects.toThrow();
+    // Verify the ADD button is disabled when max limit is reached
+    expect(screen.getByText('ADD')).toBeDisabled();
 
     await userEvent.click(screen.getByText('Submit'));
 
@@ -198,7 +199,8 @@ describe('<FieldArray/>', () => {
     });
     onSubmit.mockClear();
 
-    await expect(() => userEvent.click(screen.getByText('REMOVE'))).rejects.toThrow();
+    // Verify the REMOVE button is disabled when min limit is reached
+    expect(screen.getByText('REMOVE')).toBeDisabled();
     await userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({

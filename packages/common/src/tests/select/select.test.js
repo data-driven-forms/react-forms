@@ -10,10 +10,13 @@ import { useFieldApi, FormRenderer, componentTypes } from '@data-driven-forms/re
 import Select from '../../select';
 import reducer from '../../use-select/reducer';
 
+// userEvent will be set up in individual tests
+
 describe('Select test', () => {
   let state;
   let inputValue;
   let field;
+  let user;
 
   const DummySelect = (props) => {
     const { onChange, onInputChange, noOptionsMessage, name, checked, onBlur, onFocus, meta, ...rest } = props;
@@ -61,6 +64,8 @@ describe('Select test', () => {
   };
 
   beforeEach(() => {
+    // userEvent v13 doesn't need setup
+    user = userEvent;
     state = undefined;
     inputValue = undefined;
     field = {
@@ -131,12 +136,12 @@ describe('Select test', () => {
         />
       );
 
-      await userEvent.click(screen.getByText('Dogs'));
+      await user.click(screen.getByText('Dogs'));
 
       expect(state.value).toEqual([{ label: 'Dogs', value: 'd' }]);
       expect(inputValue).toEqual('d');
 
-      await userEvent.click(screen.getByText('Cats'));
+      await user.click(screen.getByText('Cats'));
 
       expect(state.value).toEqual([{ label: 'Cats', value: 'c' }]);
       expect(inputValue).toEqual('c');
@@ -279,8 +284,8 @@ describe('Select test', () => {
         />
       );
 
-      await userEvent.click(screen.getByText('Dogs'));
-      await userEvent.click(screen.getByText('Cats'));
+      await user.click(screen.getByText('Dogs'));
+      await user.click(screen.getByText('Cats'));
 
       expect(state.value).toEqual([
         { label: 'Dogs', value: 'd' },
@@ -306,8 +311,8 @@ describe('Select test', () => {
           }}
         />
       );
-      await userEvent.click(screen.getByText('Dogs'));
-      await userEvent.click(screen.getByText('Cats'));
+      await user.click(screen.getByText('Dogs'));
+      await user.click(screen.getByText('Cats'));
 
       expect(state.value).toEqual([
         { label: 'Dogs', value: 'd' },
@@ -315,7 +320,7 @@ describe('Select test', () => {
       ]);
       expect(inputValue).toEqual(['d', 'c']);
 
-      await userEvent.click(screen.getByText('Clear all'));
+      await user.click(screen.getByText('Clear all'));
 
       expect(state.value).toEqual([]);
       expect(inputValue).toEqual([]);
@@ -339,7 +344,7 @@ describe('Select test', () => {
         />
       );
 
-      await userEvent.click(screen.getByText('Select all'));
+      await user.click(screen.getByText('Select all'));
 
       expect(state.value).toEqual([
         { label: 'Select all', selectAll: true },
@@ -349,7 +354,7 @@ describe('Select test', () => {
       ]);
       expect(inputValue).toEqual(['d', 'c', 'h']);
 
-      await userEvent.click(screen.getByText('Hamsters'));
+      await user.click(screen.getByText('Hamsters'));
 
       expect(state.value).toEqual([
         { label: 'Dogs', value: 'd' },
@@ -376,12 +381,12 @@ describe('Select test', () => {
         />
       );
 
-      await userEvent.click(screen.getByText('Select none'));
+      await user.click(screen.getByText('Select none'));
 
       expect(state.value).toEqual([{ label: 'Select none', selectNone: true }]);
       expect(inputValue).toEqual('');
 
-      await userEvent.click(screen.getByText('Dogs'));
+      await user.click(screen.getByText('Dogs'));
 
       expect(state.value).toEqual([{ label: 'Dogs', value: 'd' }]);
       expect(inputValue).toEqual(['d']);
@@ -412,7 +417,7 @@ describe('Select test', () => {
           }}
         />
       );
-      await userEvent.click(screen.getByText('Select all'));
+      await user.click(screen.getByText('Select all'));
 
       expect(state.value).toEqual([
         { label: 'Select all', selectAll: true, value: 'select-all' },
@@ -422,7 +427,7 @@ describe('Select test', () => {
       ]);
       expect(inputValue).toEqual(['d', 'c', 'h']);
 
-      await userEvent.click(screen.getByText('Select none'));
+      await user.click(screen.getByText('Select none'));
 
       expect(state.value).toEqual([{ label: 'Select none', selectNone: true, value: 'select-none' }]);
       expect(inputValue).toEqual([]);

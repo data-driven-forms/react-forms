@@ -84,7 +84,7 @@ describe('DualListSelect', () => {
 
     await userEvent.click(screen.getByText('cats'));
 
-    const user = userEvent.setup();
+    const user = userEvent;
 
     await user.keyboard('{Control>}');
     await user.click(screen.getByText('zebras'));
@@ -100,7 +100,7 @@ describe('DualListSelect', () => {
     render(<FormRenderer {...initialProps} />);
 
     await userEvent.click(screen.getByText('cats'));
-    const user = userEvent.setup();
+    const user = userEvent;
 
     await user.keyboard('{Shift>}');
     await user.click(screen.getByText('zebras'));
@@ -117,7 +117,7 @@ describe('DualListSelect', () => {
 
     await userEvent.click(screen.getByText('cats'));
 
-    const user = userEvent.setup();
+    const user = userEvent;
 
     await user.keyboard('{Shift>}');
     await user.click(screen.getByText('zebras'));

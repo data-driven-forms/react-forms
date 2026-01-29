@@ -7,7 +7,7 @@ import * as enterHandle from '@data-driven-forms/common/wizard/enter-handler';
 
 import { componentMapper, FormTemplate } from '../../index';
 import reducer from '../../wizard/wizard-components/reducer';
-import commonReducer from '@data-driven-forms/common/src/wizard/reducer';
+import commonReducer from '@data-driven-forms/common/wizard/reducer';
 
 describe('<Wizard />', () => {
   let initialProps;

@@ -52,7 +52,7 @@
     "test": {
       "executor": "@nx/jest:jest",
       "options": {
-        "jestConfig": "jest.config.js",
+        "jestConfig": "packages/blueprint-component-mapper/jest.config.ts",
         "testPathPattern": "packages/blueprint-component-mapper",
         "passWithNoTests": false
       },
