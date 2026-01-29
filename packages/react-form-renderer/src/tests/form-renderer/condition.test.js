@@ -55,11 +55,11 @@ describe('condition test', () => {
 
     expect(() => screen.getByLabelText('field-2')).toThrow();
 
-    await userEvent.type(screen.getByLabelText('field-1'), 'show');
+    await waitFor(() => userEvent.type(screen.getByLabelText('field-1'), 'show'));
 
     expect(screen.getByLabelText('field-2')).toBeInTheDocument();
 
-    await userEvent.type(screen.getByLabelText('field-1'), 'dont');
+    await waitFor(() => userEvent.type(screen.getByLabelText('field-1'), 'dont'));
 
     expect(() => screen.getByLabelText('field-2')).toThrow();
   });
@@ -91,11 +91,11 @@ describe('condition test', () => {
 
     expect(() => screen.getByLabelText('field-2')).toThrow();
 
-    await userEvent.type(screen.getByLabelText('field-1'), 'show');
+    await waitFor(() => userEvent.type(screen.getByLabelText('field-1'), 'show'));
 
     expect(screen.getByLabelText('field-2')).toBeInTheDocument();
 
-    await userEvent.type(screen.getByLabelText('field-1'), 'dont');
+    await waitFor(() => userEvent.type(screen.getByLabelText('field-1'), 'dont'));
 
     expect(() => screen.getByLabelText('field-2')).toThrow();
   });
@@ -131,11 +131,11 @@ describe('condition test', () => {
 
     expect(() => screen.getByLabelText('field-2')).toThrow();
 
-    await userEvent.type(screen.getByLabelText('field-1'), 'show');
+    await waitFor(() => userEvent.type(screen.getByLabelText('field-1'), 'show'));
 
     expect(screen.getByLabelText('field-2')).toBeInTheDocument();
 
-    await userEvent.type(screen.getByLabelText('field-1'), 'dont');
+    await waitFor(() => userEvent.type(screen.getByLabelText('field-1'), 'dont'));
 
     expect(() => screen.getByLabelText('field-2')).toThrow();
   });
@@ -166,7 +166,7 @@ describe('condition test', () => {
 
     expect(() => screen.getByLabelText('field-2')).toThrow();
 
-    await userEvent.type(screen.getByLabelText('field-1'), 'show');
+    await waitFor(() => userEvent.type(screen.getByLabelText('field-1'), 'show'));
 
     expect(screen.getByLabelText('field-2')).toBeInTheDocument();
 
@@ -201,7 +201,7 @@ describe('condition test', () => {
       ],
     };
 
-    render(<FormRenderer {...initialProps} schema={schema} initialValues={{ 'field-1': 'show' }} />);
+    await waitFor(() => render(<FormRenderer {...initialProps} schema={schema} initialValues={{ 'field-1': 'show' }} />));
 
     expect(screen.getByLabelText('field-2')).toBeInTheDocument();
 
@@ -300,11 +300,11 @@ describe('condition test', () => {
       ],
     };
 
-    render(<FormRenderer {...initialProps} schema={schema} initialValues={{ 'field-1': 'show' }} />);
+    await waitFor(() => render(<FormRenderer {...initialProps} schema={schema} initialValues={{ 'field-1': 'show' }} />));
 
     expect(screen.getByLabelText('field-2')).toBeInTheDocument();
 
-    await userEvent.type(screen.getByLabelText('field-1'), 'dont');
+    await waitFor(() => userEvent.type(screen.getByLabelText('field-1'), 'dont'));
 
     expect(() => screen.getByLabelText('field-2')).toThrow();
 
@@ -315,7 +315,7 @@ describe('condition test', () => {
     });
     onSubmit.mockClear();
 
-    await userEvent.click(screen.getByText('Reset'));
+    await waitFor(() => userEvent.click(screen.getByText('Reset')));
 
     await userEvent.click(screen.getByText('Submit'));
 
@@ -375,7 +375,7 @@ describe('condition test', () => {
 
     expect(() => screen.getByLabelText('field-2')).toThrow();
 
-    await userEvent.type(screen.getByLabelText('field-1'), 'show');
+    await waitFor(() => userEvent.type(screen.getByLabelText('field-1'), 'show'));
 
     await userEvent.click(screen.getByText('Submit'));
     expect(onSubmit).toHaveBeenCalledWith({
@@ -412,11 +412,11 @@ describe('condition test', () => {
 
     expect(screen.getByLabelText('field-2')).toBeInTheDocument();
 
-    await userEvent.type(screen.getByLabelText('field-1'), 'show');
+    await waitFor(() => userEvent.type(screen.getByLabelText('field-1'), 'show'));
 
     expect(() => screen.getByLabelText('field-2')).toThrow();
 
-    await userEvent.type(screen.getByLabelText('field-1'), 'dont');
+    await waitFor(() => userEvent.type(screen.getByLabelText('field-1'), 'dont'));
 
     expect(screen.getByLabelText('field-2')).toBeInTheDocument();
   });
@@ -457,20 +457,20 @@ describe('condition test', () => {
 
     expect(screen.getByLabelText('field-2')).toBeInTheDocument();
 
-    await userEvent.type(screen.getByLabelText('field-1'), 'show'); // (show == show && '' == show) = FALSE => TRUE
+    await waitFor(() => userEvent.type(screen.getByLabelText('field-1'), 'show')); // (show == show && '' == show) = FALSE => TRUE
 
     expect(screen.getByLabelText('field-2')).toBeInTheDocument();
 
-    await userEvent.type(screen.getByLabelText('field-1'), 'dont'); // (show == dontshow && '' == show) = FALSE => TRUE
+    await waitFor(() => userEvent.type(screen.getByLabelText('field-1'), 'dont')); // (show == dontshow && '' == show) = FALSE => TRUE
 
     expect(screen.getByLabelText('field-2')).toBeInTheDocument();
 
-    await userEvent.type(screen.getByLabelText('field-3'), 'show'); // (show == dontshow && show == show) = FALSE => TRUE
+    await waitFor(() => userEvent.type(screen.getByLabelText('field-3'), 'show')); // (show == dontshow && show == show) = FALSE => TRUE
 
     expect(screen.getByLabelText('field-2')).toBeInTheDocument();
 
     await userEvent.clear(screen.getByLabelText('field-1'));
-    await userEvent.type(screen.getByLabelText('field-1'), 'show'); // (show == show && show == show) = TRUE => FALSE
+    await waitFor(() => userEvent.type(screen.getByLabelText('field-1'), 'show')); // (show == show && show == show) = TRUE => FALSE
 
     expect(() => screen.getByLabelText('field-2')).toThrow();
   });
@@ -522,8 +522,8 @@ describe('condition test', () => {
 
     render(<FormRenderer {...initialProps} schema={schema} />);
 
-    await userEvent.type(screen.getByLabelText('info.name.last'), 'Bond');
-    await userEvent.type(screen.getByLabelText('info.name.equipment'), 'Gun');
+    await waitFor(() => userEvent.type(screen.getByLabelText('info.name.last'), 'Bond'));
+    await waitFor(() => userEvent.type(screen.getByLabelText('info.name.equipment'), 'Gun'));
 
     await waitFor(() => expect(screen.getByLabelText('info.occupation')).toHaveValue('SPY'));
   });
@@ -559,10 +559,10 @@ describe('condition test', () => {
 
     expect(screen.getByLabelText('field2')).toHaveValue('schema initial value+++');
 
-    await userEvent.clear(screen.getByLabelText('field1'));
-    await userEvent.type(screen.getByLabelText('field1'), 'A');
-    await userEvent.clear(screen.getByLabelText('field1'));
-    await userEvent.type(screen.getByLabelText('field1'), 'B');
+    await waitFor(() => userEvent.clear(screen.getByLabelText('field1')));
+    await waitFor(() => userEvent.type(screen.getByLabelText('field1'), 'A'));
+    await waitFor(() => userEvent.clear(screen.getByLabelText('field1')));
+    await waitFor(() => userEvent.type(screen.getByLabelText('field1'), 'B'));
 
     await waitFor(() => expect(screen.getByLabelText('field2')).toHaveValue('set with then'));
   });
@@ -596,7 +596,7 @@ describe('condition test', () => {
     render(<FormRenderer {...initialProps} schema={schema} />);
     expect(screen.getByLabelText('field2')).toHaveValue('');
 
-    await userEvent.type(screen.getByLabelText('field1'), 'foo');
+    await waitFor(() => userEvent.type(screen.getByLabelText('field1'), 'foo'));
     await waitFor(() => expect(screen.getByLabelText('field2')).toHaveValue('foo'));
   });
 
@@ -630,7 +630,7 @@ describe('condition test', () => {
 
     render(<FormRenderer {...initialProps} schema={schema} />);
 
-    await userEvent.type(screen.getByLabelText('field1'), 'foo');
+    await waitFor(() => userEvent.type(screen.getByLabelText('field1'), 'foo'));
 
     await waitFor(() => expect(setSpy).toHaveBeenCalledTimes(1));
 
@@ -670,7 +670,7 @@ describe('condition test', () => {
     render(<FormRenderer {...initialProps} schema={schema} />);
 
     await act(async () => {
-      await userEvent.type(screen.getByLabelText('field1'), 'foo');
+      await waitFor(() => userEvent.type(screen.getByLabelText('field1'), 'foo'));
     });
 
     await waitFor(() => {
@@ -708,7 +708,7 @@ describe('condition test', () => {
     };
     render(<FormRenderer {...initialProps} schema={schema} />);
 
-    await userEvent.type(screen.getByLabelText('field1'), 'foo');
+    await waitFor(() => userEvent.type(screen.getByLabelText('field1'), 'foo'));
 
     await waitFor(() => {
       expect(screen.getByLabelText('field2')).toHaveValue('foo');
@@ -759,7 +759,7 @@ describe('condition test', () => {
 
     expect(screen.queryByLabelText('field-2')).not.toBeInTheDocument();
 
-    await userEvent.type(screen.getByLabelText('field-1'), 'show');
+    await waitFor(() => userEvent.type(screen.getByLabelText('field-1'), 'show'));
 
     expect(screen.getByLabelText('field-2')).toBeInTheDocument();
     expect(screen.queryByPlaceholderText('Changed placeholder')).not.toBeInTheDocument();

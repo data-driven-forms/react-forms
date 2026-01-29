@@ -48,7 +48,7 @@
     "test": {
       "executor": "@nx/jest:jest",
       "options": {
-        "jestConfig": "jest.config.js",
+        "jestConfig": "packages/common/jest.config.ts",
         "testPathPattern": "packages/common",
         "passWithNoTests": false
       },

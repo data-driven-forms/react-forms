@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
@@ -231,11 +231,7 @@ describe('dual list select', () => {
 
     await userEvent.click(screen.getByText('cats_2'));
 
-    const user = userEvent.setup();
-
-    await user.keyboard('{Control>}');
-    await user.click(screen.getByText('cats_1'));
-    await user.keyboard('{/Control}');
+    fireEvent.click(screen.getByText('cats_1'), { ctrlKey: true });
 
     await userEvent.click(screen.getByLabelText('handleMoveRight'));
 
@@ -265,12 +261,9 @@ describe('dual list select', () => {
     render(<FormRenderer {...rendererProps} />);
     await userEvent.click(screen.getByText('cats_2'));
 
-    const user = userEvent.setup();
-
-    await user.keyboard('{Control>}');
-    await user.click(screen.getByText('cats_1'));
-    await user.click(screen.getByText('cats_2'));
-    await user.keyboard('{/Control}');
+    // Use fireEvent for Ctrl+click interactions since userEvent v13 doesn't support keyboard modifiers the same way
+    fireEvent.click(screen.getByText('cats_1'), { ctrlKey: true });
+    fireEvent.click(screen.getByText('cats_2'), { ctrlKey: true });
 
     await userEvent.click(screen.getByLabelText('handleMoveRight'));
 
@@ -299,11 +292,7 @@ describe('dual list select', () => {
 
     await userEvent.click(screen.getByText('cats'));
 
-    const user = userEvent.setup();
-
-    await user.keyboard('{Shift>}');
-    await user.click(screen.getByText('cats_2'));
-    await user.keyboard('{/Shift}');
+    fireEvent.click(screen.getByText('cats_2'), { shiftKey: true });
 
     await userEvent.click(screen.getByLabelText('handleMoveRight'));
 

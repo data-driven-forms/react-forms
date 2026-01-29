@@ -3,7 +3,7 @@ import { Button, ButtonVariant } from '@patternfly/react-core';
 
 import { PficonSortCommonAscIcon, PficonSortCommonDescIcon } from '@patternfly/react-icons';
 
-import DualListContext from '../dual-list-context';
+import DualListContext from '../dual-list-context/dual-list-context';
 
 const DualListSortButton = ({ position, ...rest }) => {
   const { sortConfig, setSortConfig } = useContext(DualListContext);

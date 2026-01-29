@@ -52,7 +52,7 @@
     "test": {
       "executor": "@nx/jest:jest",
       "options": {
-        "jestConfig": "jest.config.js",
+        "jestConfig": "packages/carbon-component-mapper/jest.config.ts",
         "testPathPattern": "packages/carbon-component-mapper",
         "passWithNoTests": false
       },

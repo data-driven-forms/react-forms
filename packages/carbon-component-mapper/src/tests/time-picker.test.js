@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
@@ -123,13 +123,15 @@ describe('TimePicker', () => {
       ],
     };
 
-    render(<FormRenderer schema={schema} {...initialProps} />);
+    await waitFor(() => render(<FormRenderer schema={schema} {...initialProps} />));
 
     fireEvent.focusIn(screen.getByPlaceholderText('hh:mm'));
     fireEvent.change(screen.getByPlaceholderText('hh:mm'), { target: { value: '00:35' } });
     fireEvent.focusOut(screen.getByPlaceholderText('hh:mm'));
-    await userEvent.selectOptions(screen.getAllByLabelText('open list of options', { selector: 'select' })[1], screen.getByText('EST'));
-    await userEvent.click(screen.getByText('Submit'));
+    await waitFor(() =>
+      userEvent.selectOptions(screen.getAllByLabelText('open list of options', { selector: 'select' })[1], screen.getByText('EST'))
+    );
+    await waitFor(() => userEvent.click(screen.getByText('Submit')));
 
     expect(screen.getByPlaceholderText('hh:mm')).toHaveValue('07:35');
     expect(onSubmit.mock.calls[0][0]['time-picker'].getHours()).toEqual(12);

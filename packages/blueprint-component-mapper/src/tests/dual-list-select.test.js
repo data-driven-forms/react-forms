@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { componentMapper, FormTemplate } from '../index';
@@ -84,11 +84,8 @@ describe('DualListSelect', () => {
 
     await userEvent.click(screen.getByText('cats'));
 
-    const user = userEvent.setup();
-
-    await user.keyboard('{Control>}');
-    await user.click(screen.getByText('zebras'));
-    await user.keyboard('{/Control}');
+    // Use fireEvent for Ctrl+click interactions (userEvent v13 compatibility)
+    fireEvent.click(screen.getByText('zebras'), { ctrlKey: true });
 
     await userEvent.click(screen.getByTitle('Move selected to right'));
     await userEvent.click(screen.getByText('Submit'));
@@ -101,11 +98,8 @@ describe('DualListSelect', () => {
 
     await userEvent.click(screen.getByText('cats'));
 
-    const user = userEvent.setup();
-
-    await user.keyboard('{Shift>}');
-    await user.click(screen.getByText('zebras'));
-    await user.keyboard('{/Shift}');
+    // Use fireEvent for Shift+click interactions (userEvent v13 compatibility)
+    fireEvent.click(screen.getByText('zebras'), { shiftKey: true });
 
     await userEvent.click(screen.getByTitle('Move selected to right'));
     await userEvent.click(screen.getByText('Submit'));
@@ -118,15 +112,9 @@ describe('DualListSelect', () => {
 
     await userEvent.click(screen.getByText('cats'));
 
-    const user = userEvent.setup();
-
-    await user.keyboard('{Shift>}');
-    await user.click(screen.getByText('zebras'));
-    await user.keyboard('{/Shift}');
-
-    await user.keyboard('{Control>}');
-    await user.click(screen.getByText('cats'));
-    await user.keyboard('{/Control}');
+    // Use fireEvent for Shift+click and Ctrl+click interactions (userEvent v13 compatibility)
+    fireEvent.click(screen.getByText('zebras'), { shiftKey: true });
+    fireEvent.click(screen.getByText('cats'), { ctrlKey: true });
 
     await userEvent.click(screen.getByTitle('Move selected to right'));
     await userEvent.click(screen.getByText('Submit'));

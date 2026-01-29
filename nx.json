@@ -8,7 +8,7 @@
   "plugins": [
     {
       "plugin": "@nx/js",
-      "exclude": ["**/node_modules/**"],
+      "exclude": ["**/node_modules/**", "**/templates/**"],
       "options": {
         "typecheck": {
           "targetName": "typecheck"
@@ -20,7 +20,7 @@
     },
     {
       "plugin": "@nx/js/typescript",
-      "exclude": ["**/node_modules/**"],
+      "exclude": ["**/node_modules/**", "**/templates/**"],
       "options": {
         "typecheck": {
           "targetName": "typecheck"

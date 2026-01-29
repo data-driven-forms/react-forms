@@ -48,7 +48,7 @@
     "test": {
       "executor": "@nx/jest:jest",
       "options": {
-        "jestConfig": "jest.config.js",
+        "jestConfig": "packages/react-form-renderer/jest.config.ts",
         "testPathPattern": "packages/react-form-renderer",
         "passWithNoTests": false
       },

@@ -11,8 +11,7 @@
     "build:cjs": "BABEL_ENV=cjs babel src --out-dir ./ --ignore \"src/tests/*\"",
     "build:esm": "BABEL_ENV=esm babel src --out-dir ./esm --ignore \"src/tests/*\"",
     "build:typings": "node ../../scripts/generate-typings.js",
-    "build:packages": "node ../../scripts/generate-packages.js",
-    "test": "npm test --workspace=react-forms -- test packages/parsers"
+    "build:packages": "node ../../scripts/generate-packages.js"
   },
   "homepage": "https://data-driven-forms.org/",
   "bugs": "https://github.com/data-driven-forms/react-forms/issues",

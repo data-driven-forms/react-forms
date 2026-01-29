@@ -53,7 +53,7 @@
     "test": {
       "executor": "@nx/jest:jest",
       "options": {
-        "jestConfig": "jest.config.js",
+        "jestConfig": "packages/mui-component-mapper/jest.config.ts",
         "testPathPattern": "packages/mui-component-mapper",
         "passWithNoTests": false
       },
