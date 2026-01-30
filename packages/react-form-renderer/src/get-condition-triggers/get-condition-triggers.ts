@@ -1,7 +1,6 @@
-import { ConditionDefinition, WhenFunction, InnerWhenFunction } from '../condition';
+import { ConditionDefinition } from '../condition';
 import Field from '../common-types/field';
 import { ConditionMapper } from '../form-renderer/condition-mapper';
-
 
 const mergeFunctionTrigger = (fn: any, field: Field | undefined): string[] => {
   let internalTriggers: string[] = [];

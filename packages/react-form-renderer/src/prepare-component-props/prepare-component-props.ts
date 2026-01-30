@@ -24,17 +24,10 @@ interface PrepareComponentPropsResult {
 }
 
 const isExtendedMapperComponent = (binding: any): binding is ExtendedMapperComponent => {
-  return typeof binding === 'object' &&
-         binding !== null &&
-         Object.prototype.hasOwnProperty.call(binding, 'component');
+  return typeof binding === 'object' && binding !== null && Object.prototype.hasOwnProperty.call(binding, 'component');
 };
 
-const prepareComponentProps = ({
-  component,
-  rest,
-  componentMapper,
-  actionMapper
-}: PrepareComponentPropsInput): PrepareComponentPropsResult => {
+const prepareComponentProps = ({ component, rest, componentMapper, actionMapper }: PrepareComponentPropsInput): PrepareComponentPropsResult => {
   let componentProps: ComponentProps = {
     component,
     ...rest,

@@ -2,7 +2,7 @@ import parseCondition from '../parse-condition';
 import Field from '../common-types/field';
 import { ConditionMapper } from '../form-renderer/condition-mapper';
 
-type FieldOrSchema = Field | Field[] | { fields?: Field[] } & Record<string, any>;
+type FieldOrSchema = Field | Field[] | ({ fields?: Field[] } & Record<string, any>);
 
 const getVisibleFields = (
   schema: FieldOrSchema,

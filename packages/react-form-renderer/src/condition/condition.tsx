@@ -9,7 +9,7 @@ import Field from '../common-types/field';
 
 export interface ActionResolution {
   visible?: boolean;
-  set?: object | ((formState: FormState<Record<string, any>>, getFieldState: FormApi["getFieldState"]) => object);
+  set?: object | ((formState: FormState<Record<string, any>>, getFieldState: FormApi['getFieldState']) => object);
 }
 
 export type InnerWhenFunction = (currentField: string) => string;
@@ -57,6 +57,7 @@ interface ConditionAction {
 }
 
 export interface ConditionProps {
+  // eslint-disable-next-line react/no-unused-prop-types
   values?: object;
   children: ReactNode;
   condition?: ConditionDefinition | ConditionDefinition[];
@@ -102,15 +103,14 @@ const Condition: React.FC<ConditionProps> = ({ condition, children, field }) => 
   // It is required to get the context state values from in order to get the latest state.
   // Using the trigger values can cause issues with the radio field as each input is registered separately to state and does not yield the actual field value.
   const conditionResult = useMemo(
-    () => condition ? parseCondition(condition, formState.values, field, conditionMapper) : { visible: true, result: true },
+    () => (condition ? parseCondition(condition, formState.values, field, conditionMapper) : { visible: true, result: true }),
     [formState.values, condition, field, conditionMapper]
   );
 
   const hasSetProperty = (result: any): result is { set: object } => 'set' in result;
   const hasSetsProperty = (result: any): result is { sets: object[] } => 'sets' in result;
 
-  const setters = hasSetProperty(conditionResult) ? [conditionResult.set] :
-                  hasSetsProperty(conditionResult) ? conditionResult.sets : [];
+  const setters = hasSetProperty(conditionResult) ? [conditionResult.set] : hasSetsProperty(conditionResult) ? conditionResult.sets : [];
 
   useEffect(() => {
     if (!formState.dirty) {
@@ -118,11 +118,14 @@ const Condition: React.FC<ConditionProps> = ({ condition, children, field }) => 
     }
   }, [formState.dirty]);
 
-  const setValue = useCallback((setter: object) => {
-    Object.entries(setter).forEach(([name, value]) => {
-      formOptions.change(name, value);
-    });
-  }, [formOptions]);
+  const setValue = useCallback(
+    (setter: object) => {
+      Object.entries(setter).forEach(([name, value]) => {
+        formOptions.change(name, value);
+      });
+    },
+    [formOptions]
+  );
 
   useEffect(() => {
     if (setters && setters.length > 0 && (state.initial || !isEqual(setters, state.sets))) {

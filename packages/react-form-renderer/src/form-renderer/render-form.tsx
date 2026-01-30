@@ -39,13 +39,7 @@ interface ConditionTriggerDetectorProps {
   field: FieldType;
 }
 
-const ConditionTriggerDetector: React.FC<ConditionTriggerDetectorProps> = ({
-  values = {},
-  triggers = [],
-  children,
-  condition,
-  field
-}) => {
+const ConditionTriggerDetector: React.FC<ConditionTriggerDetectorProps> = ({ values = {}, triggers = [], children, condition, field }) => {
   const internalTriggers = [...triggers];
   if (internalTriggers.length === 0) {
     return (
@@ -104,7 +98,7 @@ const SingleField: React.FC<SingleFieldProps> = ({ component, ...rest }) => {
     component,
     rest,
     componentMapper,
-    actionMapper
+    actionMapper,
   });
 
   const combinedProps = {
@@ -134,8 +128,6 @@ const SingleField: React.FC<SingleFieldProps> = ({ component, ...rest }) => {
 };
 
 const renderForm = (fields: FieldType[]): ReactNode[] =>
-  fields.map((field) => (
-    Array.isArray(field) ? renderForm(field) : <SingleField key={field.name} {...field} />
-  ));
+  fields.map((field) => (Array.isArray(field) ? renderForm(field) : <SingleField key={field.name} {...field} />));
 
 export default renderForm;

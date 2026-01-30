@@ -1,7 +1,7 @@
 import { Validator } from '../validators';
 import { ConditionDefinition } from '../condition';
 import { DataType } from '../data-types';
-import { AnyObject } from '../common-types/any-object';
+import { AnyObject } from './any-object';
 import { FieldInputProps } from 'react-final-form';
 import { FormOptions } from '../renderer-context';
 import { Meta } from '../use-field-api';

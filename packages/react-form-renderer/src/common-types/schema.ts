@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
-import Field from "./field";
+import { ReactNode } from 'react';
+import Field from './field';
 
 interface Schema {
   title?: ReactNode;

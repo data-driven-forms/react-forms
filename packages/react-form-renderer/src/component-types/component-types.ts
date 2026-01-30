@@ -20,6 +20,6 @@ const componentTypes = {
   SLIDER: 'slider',
 } as const;
 
-export type ComponentType = typeof componentTypes[keyof typeof componentTypes];
+export type ComponentType = (typeof componentTypes)[keyof typeof componentTypes];
 
 export default componentTypes;

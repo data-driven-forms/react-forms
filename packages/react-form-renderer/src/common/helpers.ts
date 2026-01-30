@@ -19,7 +19,10 @@ const stringify = (args: any): string => {
   for (let k in options) {
     if (HAS_PROP.call(options, k)) {
       value = options[k];
-      arr.push(k, isValidElement(value) ? stringify(value.props) : isObject(value) ? stringify(value) : value != null ? value.toString() : 'undefined');
+      arr.push(
+        k,
+        isValidElement(value) ? stringify(value.props) : isObject(value) ? stringify(value) : value != null ? value.toString() : 'undefined'
+      );
     }
   }
 
@@ -45,7 +48,7 @@ interface MessageObject {
 
 const defaultMessage = (type: keyof typeof Validators.messages, values: object): MessageObject => {
   let msg = Validators.messages[type];
-  return typeof msg === 'string' ? { defaultMessage: msg, values } : Object.assign({}, msg, { values }) as MessageObject;
+  return typeof msg === 'string' ? { defaultMessage: msg, values } : (Object.assign({}, msg, { values }) as MessageObject);
 };
 
 export const prepareMsg = (msg: ReactNode | ((arg: any) => ReactNode), type: keyof typeof Validators.messages, values: object): MessageObject => {

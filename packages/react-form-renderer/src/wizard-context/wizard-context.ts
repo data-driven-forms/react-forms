@@ -1,5 +1,4 @@
 import { createContext } from 'react';
-import React from 'react';
 import { Field } from '../common-types';
 import { FormOptions } from '../renderer-context';
 

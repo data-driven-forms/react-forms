@@ -1,6 +1,5 @@
 /* eslint-disable no-prototype-builtins */
 import DefaultSchemaError from '../schema-errors';
-//import isValidComponent from './isValidComponent';
 import componentTypes from '../component-types';
 import dataTypes from '../data-types';
 import Schema from '../common-types/schema';
@@ -186,7 +185,12 @@ const checkCondition = (condition: any, fieldName: string, isRoot?: boolean | st
   }
 };
 
-const checkValidators = (validate: ValidatorDefinition[] | Function[], fieldName: string, validatorTypes: string[], validatorMapper: Record<string, Function> = {}): void => {
+const checkValidators = (
+  validate: ValidatorDefinition[] | Function[],
+  fieldName: string,
+  validatorTypes: string[],
+  validatorMapper: Record<string, Function> = {}
+): void => {
   if (validate === undefined) {
     return;
   }
@@ -278,7 +282,14 @@ const checkActions = (actions: Record<string, any[]>, name: string, actionTypes:
   });
 };
 
-const iterateOverFields = (fields: (Field | Field[])[], componentMapper: ComponentMapper, validatorTypes: string[], actionTypes: string[], schemaValidatorMapper: SchemaValidatorMapper, parent: Partial<Field> = {}): void => {
+const iterateOverFields = (
+  fields: (Field | Field[])[],
+  componentMapper: ComponentMapper,
+  validatorTypes: string[],
+  actionTypes: string[],
+  schemaValidatorMapper: SchemaValidatorMapper,
+  parent: Partial<Field> = {}
+): void => {
   fields.forEach((field) => {
     if (Array.isArray(field)) {
       return iterateOverFields(field, componentMapper, validatorTypes, actionTypes, schemaValidatorMapper);
@@ -335,7 +346,13 @@ const iterateOverFields = (fields: (Field | Field[])[], componentMapper: Compone
   });
 };
 
-const defaultSchemaValidator = (schema: Schema, componentMapper: ComponentMapper, validatorTypes: string[] = [], actionTypes: string[] = [], schemaValidatorMapper: SchemaValidatorMapper = {}): void => {
+const defaultSchemaValidator = (
+  schema: Schema,
+  componentMapper: ComponentMapper,
+  validatorTypes: string[] = [],
+  actionTypes: string[] = [],
+  schemaValidatorMapper: SchemaValidatorMapper = {}
+): void => {
   if (Array.isArray(schema) || typeof schema !== 'object') {
     throw new DefaultSchemaError(`Form Schema must be an object, received ${Array.isArray(schema) ? 'array' : typeof schema}!`);
   }

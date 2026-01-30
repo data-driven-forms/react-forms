@@ -1,5 +1,5 @@
 import React from 'react';
-import { AnyObject } from "./any-object";
+import { AnyObject } from './any-object';
 
 export interface ExtendedMapperComponent extends AnyObject {
   component: React.ComponentType | React.FunctionComponent | React.ElementType;

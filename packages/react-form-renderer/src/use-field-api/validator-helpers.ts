@@ -25,8 +25,11 @@ export type MainValidatorMapper = {
 
 const isValidatorMapper = (mapper: ValidatorMapper | MainValidatorMapper): mapper is ValidatorMapper => {
   // Check if all values are factory functions
-  return Object.values(mapper).every(value => {
-    if (typeof value !== 'function') return false;
+  return Object.values(mapper).every((value) => {
+    if (typeof value !== 'function') {
+      return false;
+    }
+
     try {
       const result = value({});
       return typeof result === 'function';
@@ -56,6 +59,7 @@ const convertMainValidatorMapper = (mainMapper: MainValidatorMapper): ValidatorM
       }
     }
   }
+
   return converted;
 };
 
@@ -78,7 +82,11 @@ export const prepareValidator = (validator: ValidatorDefinition | ValidatorFunct
   return mapper[validator.type]({ ...validator });
 };
 
-export const getValidate = (validate?: (ValidatorDefinition | ValidatorFunction)[], dataType?: DataType, mapper: ValidatorMapper | MainValidatorMapper = {}): ValidatorFunction[] => {
+export const getValidate = (
+  validate?: (ValidatorDefinition | ValidatorFunction)[],
+  dataType?: DataType,
+  mapper: ValidatorMapper | MainValidatorMapper = {}
+): ValidatorFunction[] => {
   const convertedMapper = isValidatorMapper(mapper) ? mapper : convertMainValidatorMapper(mapper as MainValidatorMapper);
 
   return [

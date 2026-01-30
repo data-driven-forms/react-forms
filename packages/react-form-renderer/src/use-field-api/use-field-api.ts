@@ -6,7 +6,6 @@ import convertInitialValue from './convert-initial-value';
 import assignSpecialType from './assign-special-type';
 import componentTypes from '../component-types';
 import { prepareArrayValidator, getValidate, ValidatorDefinition, MainValidatorMapper } from './validator-helpers';
-import { ValidatorMapper } from '../validator-mapper';
 import composeValidators from '../compose-validators';
 import { ValidatorFunction } from '../validators/validators';
 import isEqual from 'lodash/isEqual';
@@ -85,13 +84,25 @@ const calculateInitialValue = (props: UseFieldApiConfig): any => {
   }
 };
 
-const calculateArrayValidator = (props: UseFieldApiConfig, validate?: (ValidatorDefinition | ValidatorFunction)[], component?: string, validatorMapper?: MainValidatorMapper): ValidatorFunction | undefined => {
+const calculateArrayValidator = (
+  props: UseFieldApiConfig,
+  validate?: (ValidatorDefinition | ValidatorFunction)[],
+  component?: string,
+  validatorMapper?: MainValidatorMapper
+): ValidatorFunction | undefined => {
   if ((validate || props.dataType) && componentTypes.FIELD_ARRAY === component) {
     return prepareArrayValidator(getValidate(validate, props.dataType, validatorMapper));
   }
 };
 
-const calculateValidate = (props: UseFieldApiConfig, validate?: (ValidatorDefinition | ValidatorFunction)[], component?: string, validatorMapper?: MainValidatorMapper, setWarning?: (warning: any) => void, useWarnings?: boolean): ValidatorFunction | undefined => {
+const calculateValidate = (
+  props: UseFieldApiConfig,
+  validate?: (ValidatorDefinition | ValidatorFunction)[],
+  component?: string,
+  validatorMapper?: MainValidatorMapper,
+  setWarning?: (warning: any) => void,
+  useWarnings?: boolean
+): ValidatorFunction | undefined => {
   if ((validate || props.dataType) && componentTypes.FIELD_ARRAY !== component) {
     const validateFn = composeValidators(getValidate(validate, props.dataType, validatorMapper));
 

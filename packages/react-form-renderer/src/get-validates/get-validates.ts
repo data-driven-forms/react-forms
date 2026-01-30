@@ -1,7 +1,6 @@
 import get from 'lodash/get';
 import prepareComponentProps from '../prepare-component-props';
 import { dataTypeValidator } from '../validators/validator-functions';
-import Schema from '../common-types/schema';
 import Field from '../common-types/field';
 import ComponentMapper from '../common-types/component-mapper';
 import { ActionMapper } from '../form-renderer/action-mapper';
@@ -39,11 +38,7 @@ const getValidates = (
 
       // fake form state with only values
       if (resolveProps) {
-        const resolvedProps = resolveProps(
-          field,
-          { input: { value: get(values, field.name) }, meta: {} },
-          { getState: () => ({ values }) }
-        );
+        const resolvedProps = resolveProps(field, { input: { value: get(values, field.name) }, meta: {} }, { getState: () => ({ values }) });
 
         validate = resolvedProps?.validate;
       }

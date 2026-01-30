@@ -1,8 +1,8 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable no-unused-vars, @typescript-eslint/no-unused-vars */
 import React from 'react';
 import { componentTypes, useFormApi, ComponentMapper } from '../src';
 import FieldProvider from '../src/field-provider';
-import useFieldApi, { UseFieldApiProps, BaseFieldProps } from '../src/use-field-api';
+import useFieldApi, { BaseFieldProps } from '../src/use-field-api';
 
 interface FieldProviderRenderProps {
   input: any;
@@ -86,7 +86,7 @@ const SelectField = (props: SelectFieldProps & any) => {
 };
 
 const AsyncComponent = (props: BaseFieldProps<AsyncComponentProps>) => {
-  const { input, meta } = useFieldApi(props);
+  const { input: _input, meta: _meta } = useFieldApi(props);
   const { loadOptions, label } = props;
   const [loaded, setLoaded] = React.useState<boolean>(false);
   const [data, setData] = React.useState<any>({ message: 'nodata' });
@@ -146,15 +146,14 @@ const RadioOption = ({ name, option }: RadioOptionProps) => {
   );
 };
 
-const Radio = (props: RadioProps & any) => {
-  const { input, meta } = useFieldApi(props);
-  const { label, options, name } = props;
+const Radio = (props: BaseFieldProps<RadioProps>) => {
+  const { name, label, options, input: _input, meta: _meta } = useFieldApi(props);
   return (
     <div>
       <fieldset>
         <legend>{label}</legend>
         {options.map(({ value, label }: Option) => {
-          return <RadioOption key={value} option={{ value, label }} name={props.name} />;
+          return <RadioOption key={value} option={{ value, label }} name={name} />;
         })}
       </fieldset>
     </div>

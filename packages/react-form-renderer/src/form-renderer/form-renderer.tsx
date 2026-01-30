@@ -83,7 +83,7 @@ const renderChildren = (children: ReactNode | ((props: Record<string, any>) => R
 function FormRenderer<
   FormValues = Record<string, any>,
   InitialFormValues = Partial<FormValues>,
-  FormTemplateProps extends FormTemplateRenderProps = FormTemplateRenderProps
+  FTP extends FormTemplateRenderProps = FormTemplateRenderProps
 >({
   actionMapper,
   children,
@@ -105,7 +105,7 @@ function FormRenderer<
   validatorMapper,
   initialValues = {} as InitialFormValues,
   ...props
-}: FormRendererProps<FormValues, InitialFormValues, FormTemplateProps>): ReactElement<any, any> {
+}: FormRendererProps<FormValues, InitialFormValues, FTP>): ReactElement<any, any> {
   const [fileInputs, setFileInputs] = useState<string[]>([]);
   const formFields = useMemo(() => renderForm(schema.fields), [schema]);
   const registeredFields = useRef<Record<string, number>>({});
@@ -120,7 +120,7 @@ function FormRenderer<
     (values: FormValues, formApi: FormApi<FormValues>, ...args: any[]) => {
       const extendedFormApi = {
         ...formApi,
-        fileInputs
+        fileInputs,
       } as FormApi<FormValues, InitialFormValues> & { fileInputs: string[] };
       return !isFunc(onSubmit) ? undefined : onSubmit(values, extendedFormApi, ...args);
     },
@@ -157,20 +157,26 @@ function FormRenderer<
   }, []);
 
   const unRegisterInputFile = useCallback((name: string) => {
-    setFileInputs((prevFiles) => prevFiles.filter(file => file !== name));
+    setFileInputs((prevFiles) => prevFiles.filter((file) => file !== name));
   }, []);
 
   const setRegisteredFields = useCallback((fn: (prev: Record<string, number>) => Record<string, number>) => {
     return (registeredFields.current = fn({ ...registeredFields.current }));
   }, []);
 
-  const internalRegisterField = useCallback((name: string) => {
-    setRegisteredFields((prev) => (prev[name] ? { ...prev, [name]: prev[name] + 1 } : { ...prev, [name]: 1 }));
-  }, [setRegisteredFields]);
+  const internalRegisterField = useCallback(
+    (name: string) => {
+      setRegisteredFields((prev) => (prev[name] ? { ...prev, [name]: prev[name] + 1 } : { ...prev, [name]: 1 }));
+    },
+    [setRegisteredFields]
+  );
 
-  const internalUnRegisterField = useCallback((name: string) => {
-    setRegisteredFields(({ [name]: currentField, ...prev }) => (currentField && currentField > 1 ? { [name]: currentField - 1, ...prev } : prev));
-  }, [setRegisteredFields]);
+  const internalUnRegisterField = useCallback(
+    (name: string) => {
+      setRegisteredFields(({ [name]: currentField, ...prev }) => (currentField && currentField > 1 ? { [name]: currentField - 1, ...prev } : prev));
+    },
+    [setRegisteredFields]
+  );
 
   const internalGetRegisteredFields = useCallback(() => {
     const fields = registeredFields.current;
@@ -228,7 +234,7 @@ function FormRenderer<
             },
           }}
         >
-          {FormTemplate && <FormTemplate {...({ formFields, schema, ...FormTemplateProps } as FormTemplateProps)} />}
+          {FormTemplate && <FormTemplate {...({ formFields, schema, ...FormTemplateProps } as FTP)} />}
 
           {children && renderChildren(children, { formFields, schema })}
         </RendererContext.Provider>

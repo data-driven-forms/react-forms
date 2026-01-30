@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+/* eslint-disable react/prop-types, react/no-unused-prop-types */
 import React from 'react';
 import { useFormApi, FormSpy, FormOptions } from '../src';
 import { FormTemplateRenderProps } from '../src/common-types/form-template-render-props';
@@ -15,7 +15,7 @@ interface FormSpyProps {
 }
 
 const isDisabled = (disableStates: string[], getState: FormOptions['getState']): boolean =>
-  disableStates.map((item) => getState()[item]).find((item) => !!item);
+  disableStates.map((item) => (getState() as any)[item]).find((item) => !!item);
 
 const FormTemplate = ({ schema: { title, description }, formFields }: FormTemplateRenderProps) => {
   const { handleSubmit, getState, onReset, onCancel } = useFormApi();

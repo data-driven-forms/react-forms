@@ -2,7 +2,6 @@ import { memoize, prepare, prepareMsg, selectNum, isNumber, trunc } from '../com
 import { ValidatorFunction } from '../validators';
 import { ReactNode } from 'react';
 
-
 interface ValidatorOptions {
   message?: ReactNode | ((arg: any) => ReactNode);
 }
@@ -56,7 +55,6 @@ export const required = memoize(({ message }: ValidatorOptions = {}): ValidatorF
   });
 });
 
-
 export const length = memoize(({ '=': equal, is, max, maximum, min, minimum, message }: LengthOptions = {}): ValidatorFunction => {
   const finalEqual = selectNum(equal, is);
   const finalMin = selectNum(min, minimum);
@@ -83,7 +81,6 @@ export const length = memoize(({ '=': equal, is, max, maximum, min, minimum, mes
     }
   });
 });
-
 
 export const pattern = memoize(({ pattern: patternOption, message, flags }: PatternOptions = {}): ValidatorFunction => {
   const verifiedPattern = typeof patternOption === 'string' ? new RegExp(patternOption, flags) : patternOption;
@@ -114,7 +111,6 @@ export const pattern = memoize(({ pattern: patternOption, message, flags }: Patt
     }
   });
 });
-
 
 export const numericality = memoize(
   ({
@@ -191,7 +187,6 @@ export const numericality = memoize(
   }
 );
 
-
 const stringValidator = memoize(({ message }: ValidatorOptions = {}): ValidatorFunction => {
   return prepare((value: any) => {
     if (!value) {
@@ -209,21 +204,22 @@ const stringValidator = memoize(({ message }: ValidatorOptions = {}): ValidatorF
   });
 });
 
-const booleanValidator = memoize(({ message }: ValidatorOptions = {}): ValidatorFunction =>
-  prepare((value: any) => {
-    if (!value) {
-      return;
-    }
+const booleanValidator = memoize(
+  ({ message }: ValidatorOptions = {}): ValidatorFunction =>
+    prepare((value: any) => {
+      if (!value) {
+        return;
+      }
 
-    if (Array.isArray(value)) {
-      const error = value.find((item: any) => typeof item !== 'boolean');
-      return error ? prepareMsg(message, 'mustBeBool', {}).defaultMessage : undefined;
-    }
+      if (Array.isArray(value)) {
+        const error = value.find((item: any) => typeof item !== 'boolean');
+        return error ? prepareMsg(message, 'mustBeBool', {}).defaultMessage : undefined;
+      }
 
-    if (typeof value !== 'boolean') {
-      return prepareMsg(message, 'mustBeBool', {}).defaultMessage;
-    }
-  })
+      if (typeof value !== 'boolean') {
+        return prepareMsg(message, 'mustBeBool', {}).defaultMessage;
+      }
+    })
 );
 
 type DataType = 'string' | 'integer' | 'boolean' | 'number' | 'float';
@@ -251,4 +247,3 @@ export const dataTypeValidator = (type: DataType) =>
         ...options,
       }),
   }[type]);
-

@@ -19,7 +19,9 @@ const DEFAULT_COMPONENT = 'default-component';
 const noop = () => null;
 
 const isValidatorFactory = (fn: any): fn is (config: any) => ValidatorFunction => {
-  if (typeof fn !== 'function') return false;
+  if (typeof fn !== 'function') {
+    return false;
+  }
 
   try {
     const result = fn({});
@@ -39,20 +41,23 @@ const convertValidatorMapper = (validatorMapper: ValidatorMapper): HelperValidat
       converted[key] = () => value as ValidatorFunction;
     }
   }
+
   return converted;
 };
 
 const changeToDefaultComponent = (schema: Schema): Schema => {
   return {
     ...schema,
-    fields: schema.fields.map(field => ({
+    fields: schema.fields.map((field) => ({
       ...field,
       ...(field.component && { component: DEFAULT_COMPONENT }),
-      ...(field.fields && { fields: field.fields.map((subField: Field) => ({
-        ...subField,
-        ...(subField.component && { component: DEFAULT_COMPONENT })
-      })) }),
-    }))
+      ...(field.fields && {
+        fields: field.fields.map((subField: Field) => ({
+          ...subField,
+          ...(subField.component && { component: DEFAULT_COMPONENT }),
+        })),
+      }),
+    })),
   };
 };
 

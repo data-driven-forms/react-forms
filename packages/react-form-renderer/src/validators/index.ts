@@ -7,5 +7,5 @@ export {
   PatternOptions,
   NumericalityOptions,
   // Keep typo for backward compatibility
-  LenghtOptions
+  LenghtOptions,
 } from './validators';

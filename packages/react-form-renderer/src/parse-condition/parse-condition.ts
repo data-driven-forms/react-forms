@@ -1,9 +1,9 @@
 import lodashIsEmpty from 'lodash/isEmpty';
 import get from 'lodash/get';
-import { AnyObject } from "../common-types/any-object";
-import { ConditionDefinition, ConditionProp } from "../condition";
-import Field from "../common-types/field";
-import { ConditionMapper } from "../form-renderer/condition-mapper";
+import { AnyObject } from '../common-types/any-object';
+import { ConditionDefinition } from '../condition';
+import Field from '../common-types/field';
+import { ConditionMapper } from '../form-renderer/condition-mapper';
 
 interface ParsedConditionResult {
   visible: boolean;
@@ -126,6 +126,7 @@ export const parseCondition = (
     if (typeof condition[0].then === 'object') {
       positiveResult = { ...positiveResult, ...condition[0].then };
     }
+
     if (typeof condition[0].else === 'object') {
       negativeResult = { ...negativeResult, ...condition[0].else };
     }
@@ -146,7 +147,9 @@ export const parseCondition = (
   }
 
   if (conditionInternal.and) {
-    return !(Array.isArray(conditionInternal.and) ? conditionInternal.and : [conditionInternal.and]).map((cond) => parseCondition(cond, values, field, conditionMapper)).some(({ result }) => result === false)
+    return !(Array.isArray(conditionInternal.and) ? conditionInternal.and : [conditionInternal.and])
+      .map((cond) => parseCondition(cond, values, field, conditionMapper))
+      .some(({ result }) => result === false)
       ? positiveResult
       : negativeResult;
   }
@@ -167,7 +170,9 @@ export const parseCondition = (
   }
 
   if (conditionInternal.or) {
-    return (Array.isArray(conditionInternal.or) ? conditionInternal.or : [conditionInternal.or]).map((cond) => parseCondition(cond, values, field, conditionMapper)).some(({ result }) => result === true)
+    return (Array.isArray(conditionInternal.or) ? conditionInternal.or : [conditionInternal.or])
+      .map((cond) => parseCondition(cond, values, field, conditionMapper))
+      .some(({ result }) => result === true)
       ? positiveResult
       : negativeResult;
   }

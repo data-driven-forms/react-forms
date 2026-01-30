@@ -1,4 +1,4 @@
-export type DataType = 'integer'|'float'|'number'|'boolean'|'string';
+export type DataType = 'integer' | 'float' | 'number' | 'boolean' | 'string';
 
 interface IdataTypes {
   INTEGER: 'integer';
