@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
-import { componentTypes, validatorTypes } from '../src';
+import { componentTypes, validatorTypes, Schema } from '../src';
 
-const output = {
+const output: Schema = {
   title: 'Testing dialog',
   description: 'Description of testing Dialog',
   fields: [
@@ -126,7 +126,7 @@ const output = {
   ]
 };
 
-export const defaultValues = {
+export const defaultValues: Record<string, any> = {
   text_box_5: '"hello"',
   check_box_2: 'true',
   radio_button_4: '2',

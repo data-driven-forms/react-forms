@@ -1,10 +1,23 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { useFormApi, FormSpy } from '../src';
+import { useFormApi, FormSpy, FormOptions } from '../src';
+import { FormTemplateRenderProps } from '../src/common-types/form-template-render-props';
 
-const isDisabled = (disableStates, getState) => disableStates.map((item) => getState()[item]).find((item) => !!item);
+interface FormSpyProps {
+  submitting: boolean;
+  pristine: boolean;
+  validating: boolean;
+  valid: boolean;
+  form: {
+    reset: () => void;
+  };
+  values: Record<string, any>;
+}
 
-const FormTemplate = ({ schema: { title, description }, formFields }) => {
+const isDisabled = (disableStates: string[], getState: FormOptions['getState']): boolean =>
+  disableStates.map((item) => getState()[item]).find((item) => !!item);
+
+const FormTemplate = ({ schema: { title, description }, formFields }: FormTemplateRenderProps) => {
   const { handleSubmit, getState, onReset, onCancel } = useFormApi();
   return (
     <form onSubmit={handleSubmit}>
@@ -12,7 +25,7 @@ const FormTemplate = ({ schema: { title, description }, formFields }) => {
       {description && <h2>{description}</h2>}
       {formFields}
       <FormSpy>
-        {({ submitting, pristine, validating, valid, form: { reset }, values }) => (
+        {({ submitting, pristine, validating, valid, form: { reset }, values }: FormSpyProps) => (
           <React.Fragment>
             {JSON.stringify({ pristine, valid })}
             <button key="form-submit" type="submit" disabled={submitting || validating || isDisabled(['invalid'], getState)}>
@@ -29,7 +42,7 @@ const FormTemplate = ({ schema: { title, description }, formFields }) => {
             >
               Reset
             </button>
-            <button key="form-cancel" type="button" disabled={pristine} onClick={() => onCancel(values)}>
+            <button key="form-cancel" type="button" disabled={pristine} onClick={() => onCancel?.(values)}>
               Cancel
             </button>
           </React.Fragment>

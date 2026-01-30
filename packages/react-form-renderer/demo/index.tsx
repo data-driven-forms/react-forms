@@ -1,12 +1,13 @@
 /* eslint-disable camelcase */
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { FormRenderer } from '../src';
+import { FormRenderer, Schema } from '../src';
+import { ConditionMapper } from '../src/form-renderer/condition-mapper';
 
 import FormTemplate from './form-template';
 import mapper from './form-fields-mapper';
 
-const schema = {
+const schema: Schema = {
   fields: [
     {
       name: 'field1',
@@ -119,24 +120,26 @@ const schema = {
   ],
 };
 
-const initialValues = {
+const initialValues: Record<string, any> = {
   formRadio: 'form2',
   radioBtn2: 'stu',
   txtField3: 'data',
   field1: 'John',
 };
 
-const App = () => {
+const App: React.FC = () => {
+  const conditionMapper: ConditionMapper = {
+    nameFn: (name: string, _surname: string) => {
+      return (value: any, _conditionConfig: any) => {
+        return value === name;
+      };
+    },
+  };
+
   return (
     <div style={{ padding: 20 }}>
       <FormRenderer
-        conditionMapper={{
-          nameFn: (name, _surname) => {
-            return (value, _conditionConfig) => {
-              return value === name;
-            };
-          },
-        }}
+        conditionMapper={conditionMapper}
         initialValues={initialValues}
         componentMapper={mapper}
         onSubmit={console.log}
@@ -148,5 +151,9 @@ const App = () => {
 };
 
 const container = document.getElementById('root');
+if (!container) {
+  throw new Error('Root element not found');
+}
+
 const root = createRoot(container);
 root.render(<App />);

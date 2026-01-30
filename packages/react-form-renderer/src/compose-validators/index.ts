@@ -1,1 +1,1 @@
-export { default, composeValidators_generic } from './compose-validators';
+export { default } from './compose-validators';

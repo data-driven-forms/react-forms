@@ -6,7 +6,7 @@
   "module": "esm/index.js",
   "license": "Apache-2.0",
   "scripts": {
-    "start": "webpack-dev-server --config ./config/webpack.config.js --open --hot",
+    "start": "rspack serve --config ./config/rspack.config.js",
     "build": "npm run build:cjs && npm run build:esm && npm run build:packages",
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:esm": "tsc -p tsconfig.esm.json",

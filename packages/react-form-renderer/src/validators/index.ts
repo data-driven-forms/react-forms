@@ -1,10 +1,11 @@
 export {
   default,
   ValidatorFunction,
-  ValidatorFunction_Generic,
-  Validator_Generic,
-  ValidatorConfiguration_Generic,
-  LengthOptions_Generic,
-  PatternOptions_Generic,
-  NumericalityOptions_Generic
+  ValidatorConfiguration,
+  Validator,
+  LengthOptions,
+  PatternOptions,
+  NumericalityOptions,
+  // Keep typo for backward compatibility
+  LenghtOptions
 } from './validators';
