@@ -3,7 +3,7 @@ import Tabs from '../tabs';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import RenderWithProvider from '../../../../__mocks__/with-provider';
+import RenderWithProvider from './__mocks__/with-provider';
 
 describe('Tabs component', () => {
   const props = {
