@@ -49,7 +49,7 @@
     },
     "devDependencies": {
         "cross-env": "^7.0.3",
-        "glob": "^7.2.0",
+        "glob": "^7.2.3",
         "remark-gfm": "^3.0.1",
         "rimraf": "^3.0.2"
     }
