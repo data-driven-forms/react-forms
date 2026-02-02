@@ -1,13 +1,13 @@
 /**
  * Parses internal select value based on isMulti attribute
- * @param {Array} value value of the ddf internal select implementaion
- * @param {Boolean} isMulti if true, select is multi value
- * @returns {Array|String|Number|Boolean|Object|undefined|null}
+ * @param value value of the ddf internal select implementaion
+ * @param isMulti if true, select is multi value
+ * @returns parsed value
  */
-const parseInternalValue = (value, isMulti = false) => {
+const parseInternalValue = (value: any, isMulti: boolean = false): any => {
   let internalValue = value;
   if (isMulti && Array.isArray(internalValue)) {
-    internalValue = value.map((item) => (typeof item === 'object' ? item.value : item));
+    internalValue = value.map((item: any) => (typeof item === 'object' ? item.value : item));
   }
 
   if (!isMulti && Array.isArray(internalValue) && internalValue[0]) {

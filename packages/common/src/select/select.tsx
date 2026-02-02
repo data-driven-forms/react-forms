@@ -1,11 +1,40 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useMemo } from 'react';
+import { AnyObject } from "@data-driven-forms/react-form-renderer";
 
 import clsx from 'clsx';
 import useSelect from '../use-select/use-select';
 import deepEqual from './deep-equal';
+import { SelectOption, OptionValue, SelectValue } from '../types/shared-types';
 
-const Select = ({
+export interface SelectProps<T = OptionValue> {
+  options?: SelectOption<T>[];
+  onChange?: (value?: SelectValue<T>) => void;
+  classNamePrefix?: string;
+  invalid?: boolean;
+  simpleValue?: boolean;
+  isMulti?: boolean;
+  pluckSingleValue?: boolean;
+  value?: SelectValue<T>;
+  placeholder?: string;
+  loadOptionsChangeCounter?: number;
+  isDisabled?: boolean;
+  isReadOnly?: boolean;
+  loadOptions?: (inputValue?: string) => Promise<SelectOption<T>[]>;
+  loadingMessage?: React.ReactNode;
+  loadingProps?: AnyObject;
+  selectVariant?: string;
+  updatingMessage?: React.ReactNode;
+  noOptionsMessage?: React.ReactNode;
+  isSearchable?: boolean;
+  isClearable?: boolean;
+  SelectComponent?: React.ComponentType<AnyObject>;
+  noValueUpdates?: boolean;
+  optionsTransformer?: (options: AnyObject[]) => SelectOption<T>[];
+  compareValues?: (valueA: T, valueB: T) => boolean;
+}
+
+const Select = <T extends OptionValue = OptionValue>({
   invalid = false,
   classNamePrefix,
   simpleValue = true,
@@ -29,7 +58,7 @@ const Select = ({
   isSearchable = false,
   isClearable = false,
   ...props
-}) => {
+}: SelectProps<T>) => {
   const {
     state,
     value: selectValue,
@@ -58,6 +87,10 @@ const Select = ({
   // If we have multiple updates during one reconciliation pahse the search input reset will trigger on initial key stroke
   // JSON.stringify is expensive but seems to be working better.
   const selectValueInternal = useMemo(() => selectValue, [JSON.stringify(selectValue)]);
+
+  if (!SelectComponent) {
+    return null;
+  }
 
   if (state.isLoading) {
     return (

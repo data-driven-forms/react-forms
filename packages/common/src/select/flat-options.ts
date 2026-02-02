@@ -16,7 +16,6 @@ interface ResultedOption {
     divider?: boolean;
 }
 
-
 interface Options {
     label?: string | ReactNode;
     value?: any;
@@ -26,6 +25,8 @@ interface Options {
     options?: Option[];
 }
 
-declare const flatOptions: (options: Options[]) => ResultedOption[];
+const flatOptions = (options: Options[]): ResultedOption[] =>
+    options.flatMap((option) => (option.options ? [{ group: option.label }, ...option.options.map(opt => opt as ResultedOption)] : [option as ResultedOption]));
 
 export default flatOptions;
+export type { Option, ResultedOption, Options };
