@@ -13,7 +13,7 @@ export interface FormOptions<FormValues = Record<string, any>, InitialFormValues
   unRegisterInputFile?: (name: keyof FormValues) => void;
   onCancel?: (values: FormValues, ...args: any[]) => void;
   onReset?: () => void;
-  onSubmit?: (...args: any[]) => void;
+  onSubmit?: (...args: any[]) => void | any | Promise<any>;
   handleSubmit: () => Promise<FormValues | undefined> | undefined;
   onError?: (...args: any[]) => void;
   clearOnUnmount?: boolean;
