@@ -21,7 +21,7 @@ export * from './validators/validator-functions';
 export { default as WizardContext } from './wizard-context';
 
 // Export commonly used types
-export { Field, Schema, ComponentMapper, AnyObject } from './common-types';
+export { Field, Schema, ComponentMapper, AnyObject, TypedFieldProps } from './common-types';
 
 // Export all types
 export * from './component-types';

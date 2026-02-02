@@ -9,4 +9,15 @@ interface ComponentMapper {
   [key: string]: React.ComponentType | React.FunctionComponent | React.ElementType | ExtendedMapperComponent;
 }
 
+// Pure generic type that extracts component props from any ComponentMapper
+export type ComponentPropsMap<T extends ComponentMapper> = {
+  [K in keyof T]: T[K] extends React.ComponentType<infer P>
+    ? P
+    : T[K] extends ExtendedMapperComponent
+    ? T[K]['component'] extends React.ComponentType<infer P>
+      ? P
+      : never
+    : never;
+};
+
 export default ComponentMapper;

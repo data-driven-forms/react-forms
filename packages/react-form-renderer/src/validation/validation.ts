@@ -6,8 +6,8 @@ import getVisibleFields from '../get-visible-fields';
 import defaultValidatorMapper from '../validator-mapper';
 import { getValidate, ValidatorMapper as HelperValidatorMapper } from '../use-field-api/validator-helpers';
 import { ValidatorFunction } from '../validators';
-import Schema from '../common-types/schema';
-import Field from '../common-types/field';
+import { LegacySchema as Schema } from '../common-types/schema';
+import LegacyField from '../common-types/field';
 import ComponentMapper from '../common-types/component-mapper';
 import { ValidatorMapper } from '../validator-mapper';
 import { ActionMapper } from '../form-renderer/action-mapper';
@@ -52,7 +52,7 @@ const changeToDefaultComponent = (schema: Schema): Schema => {
       ...field,
       ...(field.component && { component: DEFAULT_COMPONENT }),
       ...(field.fields && {
-        fields: field.fields.map((subField: Field) => ({
+        fields: field.fields.map((subField: LegacyField) => ({
           ...subField,
           ...(subField.component && { component: DEFAULT_COMPONENT }),
         })),
@@ -99,7 +99,7 @@ const validation = async (schema: Schema, options: ValidationOptions): Promise<V
     finalSchema = changeToDefaultComponent(schema);
   }
 
-  defaultSchemaValidator(finalSchema, finalComponentMapper, validatorTypes, actionTypes, schemaValidatorMapper);
+  defaultSchemaValidator(finalSchema as any, finalComponentMapper, validatorTypes, actionTypes, schemaValidatorMapper);
 
   const visibleFieldsResult = getVisibleFields(finalSchema, values, undefined, conditionMapper);
   finalSchema = visibleFieldsResult as Schema;

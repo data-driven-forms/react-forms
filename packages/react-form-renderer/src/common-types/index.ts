@@ -8,4 +8,5 @@ export * from './form-template-render-props';
 export { default as SchemaValidatorMapper } from './schema-validator-mapper';
 export * from './schema-validator-mapper';
 export { default as Schema } from './schema';
+export * from './schema';
 export { FieldInputProps as Input } from 'react-final-form';
