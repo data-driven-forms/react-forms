@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import FormTabs from '../tabs';
-import RenderWithProvider from '../../../../__mocks__/with-provider';
+import RenderWithProvider from './__mocks__/with-provider';
 import { FormRenderer, validatorTypes } from '@data-driven-forms/react-form-renderer';
 import { componentMapper, FormTemplate } from '../index';
 

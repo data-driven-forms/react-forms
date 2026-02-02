@@ -85,9 +85,12 @@ vendor
 !package.json
 !project.json
 !README.md
+!tsconfig.*
 !tsconfig.json
 !tsconfig.spec.json
 !jest.config.ts
+!tsconfig.cjs.json
+!tsconfig.esm.json
 !generate-typings.js
 !rollup.config.js
 !generate-componen-examples.js
