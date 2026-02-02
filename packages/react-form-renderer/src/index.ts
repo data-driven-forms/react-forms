@@ -13,6 +13,7 @@ export { default as parseCondition } from './parse-condition';
 export { default as RendererContext, FormOptions } from './renderer-context';
 export { default as schemaErrors } from './schema-errors';
 export { default as useFieldApi } from './use-field-api';
+export { UseFieldApiConfig } from './use-field-api';
 export { default as useFormApi } from './use-form-api';
 export { default as validatorMapper, ValidatorMapper } from './validator-mapper';
 export { default as validatorTypes } from './validator-types';
