@@ -32,12 +32,12 @@ jobs:
         with:
           main-branch-name: 'master'
 
-      - name: Run build on affected projects
-        run: npx nx affected --target=build --parallel=3
+      - name: Run build on projects
+        run: npx nx run-many --target=build --parallel=3
         continue-on-error: false
 
-      - name: Run lint on affected projects
-        run: npx nx affected --target=lint --parallel=3
+      - name: Run lint on projects
+        run: npx nx run-many --target=lint --parallel=3
         continue-on-error: false
 
       # - name: Run typecheck on affected projects
@@ -47,6 +47,6 @@ jobs:
       - name: Clear Jest cache
         run: npx jest --clearCache
 
-      - name: Run tests on affected projects
-        run: npx nx affected --target=test --parallel=3 --coverage
+      - name: Run tests projects
+        run: npx nx run-many --target=test --parallel=3 --coverage
         continue-on-error: false

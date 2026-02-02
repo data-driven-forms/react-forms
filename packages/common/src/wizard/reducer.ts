@@ -72,9 +72,9 @@ type WizardAction =
       type: 'jumpToStep';
       payload: {
         index: number;
-        valid: boolean;
+        valid?: boolean;
         fields: WizardField[];
-        crossroads: string[];
+        crossroads?: string[];
         formOptions: FormOptions;
       };
     };
@@ -186,11 +186,7 @@ const jumpToStep = (
 
     const currentStep = findCurrentStep(newState.prevSteps[index], fields);
 
-    if (!currentStep) {
-      return state;
-    }
-
-    const currentStepHasStepMapper = DYNAMIC_WIZARD_TYPES.includes(typeof currentStep.nextStep);
+    const currentStepHasStepMapper = DYNAMIC_WIZARD_TYPES.includes(typeof currentStep?.nextStep);
 
     const hardcodedCrossroads = crossroads;
     const dynamicStepShouldDisableNav = newState.isDynamic && currentStepHasStepMapper;
@@ -211,7 +207,7 @@ const jumpToStep = (
         prevSteps: newState.prevSteps.slice(0, index),
         maxStepIndex: index,
       };
-    } else if (currentStep.disableForwardJumping) {
+    } else if (currentStep?.disableForwardJumping) {
       updatedState = {
         ...updatedState,
         prevSteps: newState.prevSteps.slice(0, index),

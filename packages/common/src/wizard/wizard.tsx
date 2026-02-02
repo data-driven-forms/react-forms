@@ -88,7 +88,7 @@ const WizardComponent: React.FC<WizardProps> = ({
   };
 
   const jumpToStep = (index: number, valid?: boolean) =>
-    dispatch({ type: 'jumpToStep', payload: { index, valid: valid ?? true, fields, crossroads: crossroads ?? [], formOptions } });
+    dispatch({ type: 'jumpToStep', payload: { index, valid, fields, crossroads, formOptions } });
 
   const handlePrev = () => jumpToStep(state.activeStepIndex - 1);
 

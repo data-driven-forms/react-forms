@@ -39,8 +39,8 @@ jobs:
         with:
           main-branch-name: 'master'
 
-      - name: Build affected packages
-        run: npx nx affected --target=build --parallel=3
+      - name: Build packages
+        run: npx nx run-many --target=build --parallel=3
 
       - name: 🚀 Run Nx Release
         run: |
