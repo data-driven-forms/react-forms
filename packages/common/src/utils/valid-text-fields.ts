@@ -23,6 +23,6 @@ const validTextFields = [
   'small',
   'sub',
   'sup',
-];
+] as const;
 
 export default validTextFields;

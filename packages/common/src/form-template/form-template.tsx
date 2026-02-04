@@ -1,9 +1,57 @@
-import React from 'react';
-import { useFormApi, FormSpy } from '@data-driven-forms/react-form-renderer';
+import React, { ElementType } from 'react';
+import { useFormApi, FormSpy, AnyObject } from '@data-driven-forms/react-form-renderer';
 
-export const isDisabled = (disableStates, getState) => disableStates.map((item) => getState()[item]).find((item) => !!item);
+// Define local interface until FormTemplateRenderProps is exported
+interface FormTemplateRenderProps extends AnyObject {
+  formFields: React.ReactNode[];
+  schema: {
+    title?: string;
+    description?: string;
+    label?: string;
+  };
+}
 
-export const completeButtons = (buttonOrder) => {
+export interface FormTemplateCommonProps extends FormTemplateRenderProps {
+    FormWrapper?: ElementType;
+    Title?: ElementType;
+    Description?: ElementType;
+    Button?: ElementType;
+    ButtonGroup?: ElementType;
+    formWrapperProps?: AnyObject;
+    showFormControls?: boolean;
+    disableSubmit?: string[];
+    Header?: ElementType;
+    headerProps?: AnyObject;
+    titleProps?: AnyObject;
+    descriptionProps?: AnyObject;
+    buttonGroupProps?: AnyObject;
+    buttonsProps?: AnyObject;
+    alertProps?: AnyObject;
+    BeforeError?: ElementType;
+}
+
+interface FormControlsProps {
+  onCancel?: ((values: Record<string, any>, ...args: any[]) => void) | (() => void);
+  onReset?: () => void;
+  submitLabel?: string;
+  cancelLabel?: string;
+  resetLabel?: string;
+  canReset?: boolean;
+  disableSubmit?: boolean;
+  buttonOrder?: string[];
+  buttonClassName?: string;
+  FormButtons?: ElementType;
+  Button?: ElementType;
+  ButtonGroup?: ElementType;
+  formSpyProps?: AnyObject;
+  buttonsProps?: AnyObject;
+  buttonGroupProps?: AnyObject;
+}
+
+export const isDisabled = (disableStates: string[], getState: () => AnyObject): boolean =>
+  disableStates.map((item) => getState()[item]).find((item) => !!item);
+
+export const completeButtons = (buttonOrder: string[]): string[] => {
   const expectedOrder = [...buttonOrder];
   if (!expectedOrder.includes('submit')) {
     expectedOrder.push('submit');
@@ -20,7 +68,7 @@ export const completeButtons = (buttonOrder) => {
   return expectedOrder;
 };
 
-export const FormControls = ({
+export const FormControls: React.FC<FormControlsProps> = ({
   onCancel,
   onReset,
   submitLabel = 'Submit',
@@ -33,7 +81,7 @@ export const FormControls = ({
   FormButtons,
   Button,
   ButtonGroup,
-  formSpyProps,
+  formSpyProps = {},
   buttonsProps = {},
   buttonGroupProps,
 }) => {
@@ -44,8 +92,8 @@ export const FormControls = ({
   const { submitting, pristine, validating } = formSpyProps;
   const { submit, reset, cancel } = buttonsProps;
 
-  const buttons = {
-    submit: (
+  const buttons: Record<string, React.ReactNode> = {
+    submit: Button ? (
       <Button
         key="form-submit"
         type="submit"
@@ -55,12 +103,16 @@ export const FormControls = ({
         label={submitLabel}
         {...submit}
       />
-    ),
-    reset: canReset ? (
+    ) : null,
+    reset: canReset && Button ? (
       <Button key="form-reset" type="button" buttonType="reset" disabled={pristine} onClick={onReset} label={resetLabel} {...reset} />
     ) : null,
-    cancel: onCancel ? <Button key="form-cancel" type="button" buttonType="cancel" onClick={onCancel} label={cancelLabel} {...cancel} /> : null,
+    cancel: onCancel && Button ? <Button key="form-cancel" type="button" buttonType="cancel" onClick={onCancel} label={cancelLabel} {...cancel} /> : null,
   };
+
+  if (!ButtonGroup) {
+    return null;
+  }
 
   return (
     <ButtonGroup {...buttonGroupProps} {...(buttonClassName && { className: buttonClassName })}>
@@ -69,7 +121,7 @@ export const FormControls = ({
   );
 };
 
-const FormTemplate = ({
+const FormTemplate: React.FC<FormTemplateCommonProps> = ({
   FormWrapper,
   Title,
   Description,
@@ -86,20 +138,23 @@ const FormTemplate = ({
   buttonsProps,
   alertProps,
   BeforeError,
+  schema,
+  formFields,
   ...rest
 }) => {
-  const {
-    schema: { title, description, label },
-    formFields,
-  } = rest;
+  const { title, description, label } = schema;
   const { onReset, onCancel, getState, handleSubmit } = useFormApi();
+
+  if (!FormWrapper) {
+    return null;
+  }
 
   return (
     <FormWrapper onSubmit={handleSubmit} {...formWrapperProps}>
       {(title || label || description) && (
         <Header {...headerProps}>
-          {(title || label) && <Title {...titleProps}>{title || label}</Title>}
-          {description && <Description {...descriptionProps}>{description}</Description>}
+          {(title || label) && Title && <Title {...titleProps}>{title || label}</Title>}
+          {description && Description && <Description {...descriptionProps}>{description}</Description>}
         </Header>
       )}
       {BeforeError && (
@@ -113,10 +168,9 @@ const FormTemplate = ({
       {formFields}
       {showFormControls && (
         <FormSpy>
-          {(formSpyProps) => (
+          {(formSpyProps: AnyObject) => (
             <FormControls
               Button={Button}
-              FormSpy={FormSpy}
               buttonGroupProps={buttonGroupProps}
               buttonsProps={buttonsProps}
               ButtonGroup={ButtonGroup}

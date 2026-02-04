@@ -1,4 +1,4 @@
-const deepEqual = (a, b, depth = 0) => {
+const deepEqual = (a: any, b: any, depth: number = 0): boolean => {
   if (depth > 4) {
     console.error('Recursion limit of 5 has been exceeded.');
     return false;

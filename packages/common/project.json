@@ -21,6 +21,7 @@
         "command": "npm run build",
         "cwd": "packages/common"
       },
+      "dependsOn": ["@data-driven-forms/react-form-renderer:build"],
       "cache": true
     },
     "build:cjs": {
