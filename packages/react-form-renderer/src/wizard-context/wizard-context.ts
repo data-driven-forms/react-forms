@@ -17,13 +17,13 @@ export type NextStep =
 export interface WizardContextValue {
   formOptions: FormOptions;
   crossroads: string[];
-  currentStep: { fields?: Field[]; name: string; title?: string; nextStep?: NextStep } | undefined;
+  currentStep: { fields?: Field[]; name: string; title?: string; nextStep?: NextStep; isProgressAfterSubmissionStep?: boolean } | undefined;
   handlePrev: Function;
   onKeyDown: Function;
   jumpToStep: Function;
-  setPrevSteps: Function;
+  setPrevSteps: () => void;
   handleNext: Function;
-  navSchema: Object;
+  navSchema: Record<string, any>[];
   activeStepIndex: number;
   maxStepIndex: number;
   isDynamic: boolean;
