@@ -6,11 +6,11 @@ import { AnyObject } from '@data-driven-forms/react-form-renderer';
 import useIsMounted from '../hooks/use-is-mounted';
 import reducer, { init, SelectState } from './reducer';
 import fnToString from '../utils/fn-to-string';
-import { SelectOption, OptionValue, SelectValue } from '../types/shared-types';
+import { SelectOption, OptionValue, SelectValue, FlatSelectOption } from '../types/shared-types';
 
 interface UseSelectProps<T = OptionValue> {
     loadOptions?: (inputValue?: string) => Promise<SelectOption<T>[]>;
-    optionsTransformer?: (options: AnyObject[]) => SelectOption<T>[];
+    optionsTransformer?: (options: AnyObject[]) => FlatSelectOption<T>[];
     options?: SelectOption<T>[];
     noValueUpdates?: boolean;
     onChange?: (value?: SelectValue<T>) => void;
@@ -27,8 +27,8 @@ const getSelectValue = <T extends OptionValue>(
   stateValue: SelectValue<T>,
   simpleValue: boolean,
   isMulti: boolean,
-  allOptions: SelectOption<T>[]
-): SelectOption<T>[] | SelectValue<T> => {
+  allOptions: (SelectOption<T> | FlatSelectOption<T>)[]
+): (SelectOption<T> | FlatSelectOption<T>)[] | SelectValue<T> => {
   let enhancedValue = stateValue;
 
   let hasSelectAll = isMulti && allOptions.find(({ selectAll }) => selectAll);
@@ -62,7 +62,7 @@ const handleSelectChange = <T extends OptionValue>(
   simpleValue: boolean,
   isMulti: boolean,
   onChange: (value?: SelectValue<T>) => void,
-  allOptions: SelectOption<T>[],
+  allOptions: (SelectOption<T> | FlatSelectOption<T>)[],
   removeSelectAll: boolean,
   removeSelectNone: boolean
 ): void => {

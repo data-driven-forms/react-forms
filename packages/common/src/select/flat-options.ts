@@ -1,22 +1,14 @@
 import { ReactNode } from "react";
+import { FlatSelectOption, OptionValue } from '../types/shared-types';
 
-interface Option {
+export interface Option {
     label: string | ReactNode;
     value: any;
     selectAll?: boolean;
     selectNone?: boolean;
 }
 
-interface ResultedOption {
-    label?: string | ReactNode;
-    value?: any;
-    selectAll?: boolean;
-    selectNone?: boolean;
-    group?: string | ReactNode;
-    divider?: boolean;
-}
-
-interface Options {
+export interface Options {
     label?: string | ReactNode;
     value?: any;
     divider?: boolean;
@@ -25,8 +17,8 @@ interface Options {
     options?: Option[];
 }
 
-const flatOptions = (options: Options[]): ResultedOption[] =>
-    options.flatMap((option) => (option.options ? [{ group: option.label }, ...option.options.map(opt => opt as ResultedOption)] : [option as ResultedOption]));
+const flatOptions = <T extends OptionValue = OptionValue>(options: Options[]): FlatSelectOption<T>[] =>
+    options.flatMap((option) => (option.options ? [{ group: option.label } as FlatSelectOption<T>, ...option.options.map(opt => opt as FlatSelectOption<T>)] : [option as FlatSelectOption<T>]));
 
 export default flatOptions;
-export type { Option, ResultedOption, Options };
+export type ResultedOption = FlatSelectOption;

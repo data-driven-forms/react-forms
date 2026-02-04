@@ -5,7 +5,7 @@ import { AnyObject } from "@data-driven-forms/react-form-renderer";
 import clsx from 'clsx';
 import useSelect from '../use-select/use-select';
 import deepEqual from './deep-equal';
-import { SelectOption, OptionValue, SelectValue } from '../types/shared-types';
+import { SelectOption, OptionValue, SelectValue, FlatSelectOption } from '../types/shared-types';
 
 export interface SelectProps<T = OptionValue> {
   options?: SelectOption<T>[];
@@ -26,12 +26,17 @@ export interface SelectProps<T = OptionValue> {
   selectVariant?: string;
   updatingMessage?: React.ReactNode;
   noOptionsMessage?: React.ReactNode;
+  noResultsMessage?: React.ReactNode;
   isSearchable?: boolean;
   isClearable?: boolean;
   SelectComponent?: React.ComponentType<AnyObject>;
   noValueUpdates?: boolean;
-  optionsTransformer?: (options: AnyObject[]) => SelectOption<T>[];
+  optionsTransformer?: (options: AnyObject[]) => FlatSelectOption<T>[];
   compareValues?: (valueA: T, valueB: T) => boolean;
+  menuIsPortal?: boolean;
+  menuPortalTarget?: Element;
+  showMoreLabel?: string;
+  showLessLabel?: string;
 }
 
 const Select = <T extends OptionValue = OptionValue>({
