@@ -204,7 +204,7 @@ describe('<Select />', () => {
     expect(screen.getByText('Category 2')).toHaveClass('pf-v6-c-menu__group-title');
     expect(container.getElementsByClassName('pf-v6-c-divider')).toHaveLength(0);
 
-    expect([...container.getElementsByClassName('pf-v6-c-menu__item')].map((opt) => opt.textContent)).toEqual([
+    expect([...container.getElementsByClassName('pf-v6-c-menu__list-item')].map((opt) => opt.textContent)).toEqual([
       'value 1',
       'value 2',
       'value 3',
@@ -216,7 +216,10 @@ describe('<Select />', () => {
     expect(container.getElementsByClassName('pf-v6-c-divider')).toHaveLength(0);
     expect(container.getElementsByClassName('pf-v6-c-menu__group-title')).toHaveLength(0);
 
-    expect([...container.getElementsByClassName('pf-v6-c-menu__item')].map((opt) => opt.textContent)).toEqual(['independent 1', 'independent 2']);
+    expect([...container.getElementsByClassName('pf-v6-c-menu__list-item')].map((opt) => opt.textContent)).toEqual([
+      'independent 1',
+      'independent 2',
+    ]);
   });
 
   it('should return single simple value', async () => {
@@ -354,19 +357,21 @@ describe('<Select />', () => {
     const asyncLoading = jest.fn().mockReturnValue(Promise.resolve([{ label: 'label', value: '123' }]));
     const onChange = jest.fn();
 
-    render(
-      <Select
-        {...initialProps}
-        value={[{ value: '123', label: 'label' }, 'Not in options']}
-        isMulti
-        options={undefined}
-        loadOptions={asyncLoading}
-        onChange={onChange}
-        simpleValue
-      />
+    await waitFor(() =>
+      render(
+        <Select
+          {...initialProps}
+          value={[{ value: '123', label: 'label' }, 'Not in options']}
+          isMulti
+          options={undefined}
+          loadOptions={asyncLoading}
+          onChange={onChange}
+          simpleValue
+        />
+      )
     );
 
-    await userEvent.click(screen.getByLabelText('open menu'));
+    await waitFor(() => userEvent.click(screen.getByLabelText('open menu')));
     await waitFor(() => expect(screen.getByText('label', { selector: '.pf-v6-c-menu__item-main' })).toBeInTheDocument());
 
     expect(onChange).toHaveBeenCalledWith([{ label: 'label', value: '123' }]);
@@ -407,7 +412,7 @@ describe('<Select />', () => {
 
       await userEvent.click(screen.getByLabelText('open menu'));
 
-      expect([...container.getElementsByClassName('pf-v6-c-menu__item')].map((opt) => opt.textContent)).toEqual(
+      expect([...container.getElementsByClassName('pf-v6-c-menu__list-item')].map((opt) => opt.textContent)).toEqual(
         initialProps.options.map((opt) => opt.label)
       );
 
@@ -425,7 +430,7 @@ describe('<Select />', () => {
         initialProps.options.map((opt) => opt.label)
       );
 
-      await act(async () => {
+      await waitFor(async () => {
         rerender(<Select {...initialProps} loadOptions={asyncLoadingNew} />);
       });
 

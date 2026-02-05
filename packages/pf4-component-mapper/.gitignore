@@ -77,6 +77,7 @@ vendor
 !src/*
 !demo/*
 !config
+!config/rspack.config.js
 !.npmignore
 !.gitignore
 !.nxignore
@@ -87,7 +88,10 @@ vendor
 !project.json
 !README.md
 !tsconfig.json
+!tsconfig.cjs.json
+!tsconfig.esm.json
 !tsconfig.spec.json
+!tsconfig.demo.json
 !jest.config.ts
 !generate-typings.js
 !rollup.config.js

@@ -15,7 +15,7 @@ interface DualListSelectComponentProps<T = OptionValue> {
   handleMoveLeft: () => void;
   handleClearLeftValues: () => void;
   handleClearRightValues: () => void;
-  filterOptions?: (options: SelectOption<T>[], filterValue: string) => SelectOption<T>[];
+  filterOptions?: (options: SelectOption<T>[], filterValue: string) => SelectOption<T>[] | ((value: string) => void);
   filterValue?: string;
   filterValueText?: string;
   filterPlaceholder?: string;
@@ -23,6 +23,11 @@ interface DualListSelectComponentProps<T = OptionValue> {
   filterValuePlaceholder?: string;
   noOptionsText?: string;
   noValueText?: string;
+  // Missing props that are actually used in implementation
+  sortOptions: () => void;
+  sortValues: () => void;
+  filterValues: (value: string) => void;
+  state: DualListSelectState<T>;
   [key: string]: unknown;
 }
 

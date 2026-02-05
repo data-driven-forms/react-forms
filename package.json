@@ -20,7 +20,7 @@
     "start-demo": "nx run @data-driven-forms/react-renderer-demo:start",
     "lint": "npm run lint:js && npm run lint:typescript",
     "lint:js": "npx eslint ./packages/*/src --ext .js",
-    "lint:typescript": "eslint packages/react-form-renderer/src/**/* packages/react-form-renderer/demo/**/* --ext .ts,.tsx,.js,.jsx",
+    "lint:typescript": "eslint packages/react-form-renderer/src/**/* packages/react-form-renderer/demo/**/* packages/pf4-component-mapper/src/**/* packages/pf4-component-mapper/demo/**/* --ext .ts,.tsx,.js,.jsx",
     "generate-template": "node ./scripts/generate-mapper.js",
     "clean-build": "node ./scripts/clean-build.js",
     "prebuild": "node ./scripts/clean-build.js"

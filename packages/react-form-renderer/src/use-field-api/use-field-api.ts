@@ -25,7 +25,7 @@ export interface UseFieldApiConfig extends AnyObject {
   useWarnings?: boolean;
   resolveProps?: (props: any, fieldProps: any, formOptions: any) => any;
   initializeOnMount?: boolean;
-  component: string;
+  component?: string;
   render?: any;
   clearOnUnmount?: boolean;
   dataType?: DataType;

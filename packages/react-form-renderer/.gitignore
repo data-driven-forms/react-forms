@@ -91,6 +91,7 @@ vendor
 !jest.config.ts
 !tsconfig.cjs.json
 !tsconfig.esm.json
+!tsconfig.demo.json
 !generate-typings.js
 !rollup.config.js
 !generate-componen-examples.js

@@ -1,29 +1,29 @@
 import { AnyObject } from '@data-driven-forms/react-form-renderer';
-import { SelectOption, OptionValue } from '../types/shared-types';
+import { SelectOption, OptionValue, FlatSelectOption } from '../types/shared-types';
 
 export interface SelectState<T = OptionValue> {
   isLoading: boolean;
-  options: SelectOption<T>[];
+  options: (SelectOption<T> | FlatSelectOption<T>)[];
   promises: AnyObject;
   isInitialLoaded: boolean;
-  originalOptions?: SelectOption<T>[];
+  originalOptions?: (SelectOption<T> | FlatSelectOption<T>)[];
 }
 
 interface InitProps<T = OptionValue> {
   propsOptions: SelectOption<T>[];
-  optionsTransformer?: (options: AnyObject[]) => SelectOption<T>[];
+  optionsTransformer?: (options: AnyObject[]) => FlatSelectOption<T>[];
 }
 
 type ReducerAction<T = OptionValue> =
-  | { type: 'updateOptions'; payload: SelectOption<T>[]; optionsTransformer?: (options: AnyObject[]) => SelectOption<T>[] }
+  | { type: 'updateOptions'; payload: SelectOption<T>[]; optionsTransformer?: (options: AnyObject[]) => FlatSelectOption<T>[] }
   | { type: 'startLoading' }
-  | { type: 'setOptions'; payload: SelectOption<T>[]; optionsTransformer?: (options: AnyObject[]) => SelectOption<T>[] }
+  | { type: 'setOptions'; payload: SelectOption<T>[]; optionsTransformer?: (options: AnyObject[]) => FlatSelectOption<T>[] }
   | { type: 'initialLoaded' }
   | {
       type: 'setPromises';
       payload: AnyObject;
       options?: SelectOption<T>[];
-      optionsTransformer?: (options: AnyObject[]) => SelectOption<T>[];
+      optionsTransformer?: (options: AnyObject[]) => FlatSelectOption<T>[];
       compareValues?: (value1: T, value2: T) => boolean;
     };
 
