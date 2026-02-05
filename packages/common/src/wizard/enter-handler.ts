@@ -1,3 +1,4 @@
+import { KeyboardEvent } from 'react';
 import selectNext, { NextStep } from './select-next';
 import { AnyObject } from '@data-driven-forms/react-form-renderer';
 
