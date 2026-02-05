@@ -88,6 +88,9 @@ vendor
 !README.md
 !tsconfig.json
 !tsconfig.spec.json
+!tsconfig.demo.json
+!tsconfig.cjs.json
+!tsconfig.esm.json
 !jest.config.ts
 !generate-typings.js
 !rollup.config.js
@@ -95,5 +98,6 @@ vendor
 !firebae.json
 !firebaseFunctions.js
 !scripts/
+!.eslintrc.json
 
 .DS_STORE

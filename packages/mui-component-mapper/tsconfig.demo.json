@@ -8,18 +8,24 @@
     "jsx": "react-jsx",
     "allowSyntheticDefaultImports": true,
     "noErrorTruncation": true,
-    "allowJs": false,
-    "strict": false,
-    "declaration": true,
-    "emitDeclarationOnly": false,
-    "outDir": "./dist",
-    "rootDir": "./src",
+    "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
+    "strict": false,
+    "noEmit": false,
+    "isolatedModules": false,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
     "noImplicitAny": false,
     "noImplicitReturns": false,
     "noImplicitThis": false,
+    "rootDir": "."
   },
-  "include": ["./src/**/*.ts", "./src/**/*.tsx"],
-  "exclude": ["./dist", "./src/tests/**/*", "./node_modules", "../*/node_modules", "../../node_modules"]
+  "include": [
+    "./demo/**/*",
+    "./src/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
