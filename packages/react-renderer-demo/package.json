@@ -37,7 +37,7 @@
         "@next/bundle-analyzer": "^15.3.1",
         "clsx": "^1.1.1",
         "markdown-to-jsx": "^7.1.6",
-        "next": "^15.3.1",
+        "next": "^15.5.12",
         "prism-react-renderer": "^2.4.1",
         "raw-loader": "^4.0.2",
         "react": "^19.0.0",
