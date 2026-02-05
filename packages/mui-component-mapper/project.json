@@ -23,8 +23,7 @@
         "cwd": "packages/mui-component-mapper"
       },
       "dependsOn": [
-        "@data-driven-forms/common:build",
-        "@data-driven-forms/react-form-renderer:build"
+        "^build"
       ],
       "cache": true
     },
@@ -62,7 +61,7 @@
     "typecheck": {
       "executor": "@nx/js:tsc",
       "options": {
-        "main": "packages/mui-component-mapper/src/index.js",
+        "main": "packages/mui-component-mapper/src/index.ts",
         "tsConfig": "packages/mui-component-mapper/tsconfig.json",
         "outputPath": "packages/mui-component-mapper/dist"
       },

@@ -22,7 +22,7 @@
     "arguments": true
   },
   "plugins": ["react", "jest"],
-  "extends": ["react-app", "eslint:recommended", "plugin:react/recommended", "plugin:prettier/recommended", "prettier"],
+  "extends": ["eslint-config-react-app", "eslint:recommended", "plugin:react/recommended", "plugin:prettier/recommended", "prettier"],
   "env": {
     "es6": true,
     "browser": true,
