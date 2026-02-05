@@ -37,6 +37,9 @@ export interface SelectProps<T = OptionValue> {
   menuPortalTarget?: Element;
   showMoreLabel?: string;
   showLessLabel?: string;
+  // Allow any additional props to be passed through to SelectComponent
+  // Different mappers may need different props for their SelectComponent implementations
+  [key: string]: any;
 }
 
 const Select = <T extends OptionValue = OptionValue>({

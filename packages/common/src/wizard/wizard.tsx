@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect, KeyboardEventHandler, KeyboardEvent } from 'react';
 import { useFormApi, WizardContext, AnyObject, Field } from '@data-driven-forms/react-form-renderer';
 
 import get from 'lodash/get';

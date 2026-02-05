@@ -5,8 +5,8 @@ import { useFormApi, FormSpy, AnyObject } from '@data-driven-forms/react-form-re
 interface FormTemplateRenderProps extends AnyObject {
   formFields: React.ReactNode[];
   schema: {
-    title?: string;
-    description?: string;
+    title?: React.ReactNode;
+    description?: React.ReactNode;
     label?: string;
   };
 }
