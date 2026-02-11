@@ -1,4 +1,4 @@
-import { createContext } from 'react';
+import { createContext, KeyboardEvent } from 'react';
 import { Field } from '../common-types';
 import { FormOptions } from '../renderer-context';
 
@@ -19,7 +19,7 @@ export interface WizardContextValue {
   crossroads: string[];
   currentStep: { fields?: Field[]; name: string; title?: string; nextStep?: NextStep; isProgressAfterSubmissionStep?: boolean } | undefined;
   handlePrev: Function;
-  onKeyDown: Function;
+  onKeyDown?: (e: KeyboardEvent) => void;
   jumpToStep: Function;
   setPrevSteps: () => void;
   handleNext: Function;

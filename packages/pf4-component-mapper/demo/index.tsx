@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { FormRenderer, WizardContext } from '@data-driven-forms/react-form-renderer';
 import { arraySchemaDDF } from './demo-schemas/widget-schema';
@@ -14,7 +14,7 @@ import {
   EmptyStateFooter,
   EmptyStateActions,
   Progress,
-  Bullseye
+  Bullseye,
 } from '@patternfly/react-core';
 import { CogsIcon } from '@patternfly/react-icons';
 import {
@@ -39,7 +39,7 @@ const ProgressStepContent = () => {
 
   const tick = React.useCallback(() => {
     if (percentValidated < 100) {
-      setPercentValidated(prevValue => prevValue + 20);
+      setPercentValidated((prevValue) => prevValue + 20);
     }
   }, [percentValidated]);
 
@@ -60,8 +60,7 @@ const ProgressStepContent = () => {
           <Progress value={percentValidated} measureLocation="outside" aria-label="Wizard validation progress" />
         </EmptyStateBody>
         <EmptyStateBody>
-          Description can be used to further elaborate on the validation step, or give the user a better idea of how
-          long the process will take.
+          Description can be used to further elaborate on the validation step, or give the user a better idea of how long the process will take.
         </EmptyStateBody>
         <EmptyStateFooter>
           <EmptyStateActions>
@@ -221,44 +220,4 @@ class App extends React.Component<{}, AppState> {
 
 const container = document.getElementById('root');
 const root = createRoot(container!);
-
-const NEW_OPTIONS = [{ label: 'Different label', value: 2 }];
-const asyncLoadingNew = () => Promise.resolve(NEW_OPTIONS);
-
-function SelectApp() {
-    const onChange = (value: any) => {
-      console.log('Selected:', value);
-    }
-      const initialProps = {
-      onChange,
-      name: 'test-select',
-      id: 'select',
-      options: [
-        {
-          label: 'First option',
-          value: 1,
-        },
-        {
-          label: 'Second option',
-          value: 2,
-        },
-      ],
-    };
-    const asyncLoading = () => Promise.resolve([{ label: 'labelxxx', value: '123' }]);
-
-    const [al, setAl] = useState(() => asyncLoading);
-    return (
-      <Select
-        {...initialProps}
-        value={[{ value: '123', label: 'labelxxx' }, 'Not in options']}
-        isMulti
-        options={undefined}
-        loadOptions={asyncLoading}
-        onChange={onChange}
-        simpleValue
-      />
-    )
-}
-
-
 root.render(<App />);

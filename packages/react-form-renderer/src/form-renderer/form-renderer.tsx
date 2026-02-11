@@ -29,7 +29,7 @@ export interface FormRendererProps<
   onReset?: () => void;
   onError?: (...args: any[]) => void;
   onSubmit?: FormProps<FormValues, InitialFormValues>['onSubmit'];
-  schema: Schema;
+  schema: Schema | (Record<string, any> & { fields: Array<Record<string, any>> });
   clearOnUnmount?: boolean;
   clearedValue?: any;
   componentMapper: ComponentMapper;
@@ -107,7 +107,7 @@ function FormRenderer<
   ...props
 }: FormRendererProps<FormValues, InitialFormValues, FTP>): ReactElement<any, any> {
   const [fileInputs, setFileInputs] = useState<string[]>([]);
-  const formFields = useMemo(() => renderForm(schema.fields), [schema]);
+  const formFields = useMemo(() => renderForm(schema.fields as any), [schema]);
   const registeredFields = useRef<Record<string, number>>({});
   const focusDecorator = useRef(createFocusDecorator());
   const validatorMapperMerged = useMemo(() => {
@@ -187,7 +187,7 @@ function FormRenderer<
     const validatorTypes = Object.keys(validatorMapperMerged);
     const actionTypes = actionMapper ? Object.keys(actionMapper) : [];
 
-    defaultSchemaValidator(schema, componentMapper, validatorTypes, actionTypes, schemaValidatorMapper);
+    defaultSchemaValidator(schema as any, componentMapper, validatorTypes, actionTypes, schemaValidatorMapper);
   } catch (error: any) {
     handleErrorCallback('schema-error', error);
     return <SchemaErrorComponent name={error.name} message={error.message} />;
@@ -230,13 +230,13 @@ function FormRenderer<
               ffGetRegisteredFields: form.getRegisteredFields,
               getRegisteredFields: internalGetRegisteredFields,
               initialValues,
-              schema,
+              schema: schema as any,
             },
           }}
         >
-          {FormTemplate && <FormTemplate {...({ formFields, schema, ...FormTemplateProps } as FTP)} />}
+          {FormTemplate && <FormTemplate {...({ formFields, schema: schema as any, ...FormTemplateProps } as FTP)} />}
 
-          {children && renderChildren(children, { formFields, schema })}
+          {children && renderChildren(children, { formFields, schema: schema as any })}
         </RendererContext.Provider>
       )}
       {...props}
