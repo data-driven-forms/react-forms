@@ -91,7 +91,7 @@ export const getValidate = (
 
   return [
     ...(validate ? validate.map((validator) => prepareValidator(validator, convertedMapper)) : []),
-    ...(dataType ? [dataTypeValidator(dataType)[dataType]()] : []),
+    ...(dataType ? [dataTypeValidator(dataType)() as unknown as ValidatorFunction] : []),
   ];
 };
 
