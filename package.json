@@ -91,7 +91,7 @@
     "replace-in-file": "^6.3.5",
     "sass": "^1.97.3",
     "sass-loader": "^12.6.0",
-    "strip-ansi": "^7.0.1",
+    "strip-ansi": "^7.1.2",
     "style-loader": "^3.3.4",
     "terser-webpack-plugin": "^5.3.16",
     "ts-jest": "^29.4.6",
