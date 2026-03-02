@@ -27,7 +27,7 @@
     "javascript"
   ],
   "devDependencies": {
-    "@carbon/react": "^1.99.0"
+    "@carbon/react": "^1.102.0"
   },
   "peerDependencies": {
     "react": "^17.0.2 || ^18.0.0 || ^19.0.0",
