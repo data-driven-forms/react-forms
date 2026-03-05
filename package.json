@@ -93,7 +93,7 @@
     "sass-loader": "^12.6.0",
     "strip-ansi": "^7.1.2",
     "style-loader": "^3.3.4",
-    "terser-webpack-plugin": "^5.3.16",
+    "terser-webpack-plugin": "^5.3.17",
     "ts-jest": "^29.4.6",
     "ts-loader": "^9.2.6",
     "typescript": "^5.9.3",
