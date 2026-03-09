@@ -287,6 +287,40 @@ describe('<WizardSTepButtons', () => {
     });
   });
 
+  it('shows submit button and advances when next step has isProgressAfterSubmissionStep', async () => {
+    const handleSubmit = jest.fn();
+    const handleNext = jest.fn();
+    const wizardFields = [
+      { name: 'step-review', nextStep: 'step-finished', fields: [] },
+      { name: 'step-finished', isProgressAfterSubmissionStep: true, fields: [] },
+    ];
+
+    render(
+      <RenderWithProvider>
+        <WizardStepButtons
+          {...initialProps}
+          formOptions={{
+            ...initialProps.formOptions,
+            handleSubmit,
+            getState: () => ({ values: {}, validating: false }),
+          }}
+          handleNext={handleNext}
+          nextStep="step-finished"
+          wizardFields={wizardFields}
+          buttonLabels={{ ...initialProps.buttonLabels, submit: 'Finish' }}
+        />
+      </RenderWithProvider>
+    );
+
+    expect(screen.getByText('Finish')).toBeInTheDocument();
+    expect(screen.queryByText('Next')).not.toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Finish'));
+
+    expect(handleSubmit).toHaveBeenCalled();
+    expect(handleNext).toHaveBeenCalledWith('step-finished');
+  });
+
   it('conditional submit step', async () => {
     const submit = jest.fn();
     const schema = {

@@ -270,7 +270,7 @@ All packages are linked together by default, so if you run a `yarn build` in a p
 Each package has a small playground `package/demo`, where you can test your changes.
 
 ```bash
-cd packages/pf3-component-mapper
+cd packages/pf4-component-mapper
 yarn start
 ```
 
