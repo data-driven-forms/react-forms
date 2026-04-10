@@ -40,6 +40,6 @@
   "dependencies": {
     "@data-driven-forms/common": "*",
     "downshift": "^5.4.7",
-    "lodash": "^4.17.23"
+    "lodash": "^4.18.1"
   }
 }
