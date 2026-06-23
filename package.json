@@ -114,6 +114,12 @@
     "@fluentui/react-component-ref": {
       "react": "^19.0.0",
       "react-dom": "^19.0.0"
+    },
+    "react-final-form": {
+      "react": "$react"
+    },
+    "react-final-form-arrays": {
+      "react": "$react"
     }
   },
   "dependencies": {
