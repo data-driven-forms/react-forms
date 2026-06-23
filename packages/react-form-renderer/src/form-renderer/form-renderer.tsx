@@ -1,5 +1,5 @@
 import arrayMutators from 'final-form-arrays';
-import createFocusDecorator from 'final-form-focus';
+import createFocusDecorator from './focus-decorator';
 import React, { useCallback, useMemo, useRef, useState, cloneElement, ReactNode, ComponentType, FunctionComponent, ReactElement } from 'react';
 import { FormProps } from 'react-final-form';
 import { FormApi } from 'final-form';
@@ -7,7 +7,7 @@ import { FormApi } from 'final-form';
 import defaultSchemaValidator from '../default-schema-validator';
 import defaultValidatorMapper from '../validator-mapper';
 import Form from '../form';
-import RendererContext from '../renderer-context';
+import RendererContext, { FormOptions } from '../renderer-context';
 import renderForm from './render-form';
 import SchemaErrorComponent from './schema-error-component';
 import Schema from '../common-types/schema';
@@ -21,14 +21,14 @@ import { ConditionMapper } from './condition-mapper';
 
 export interface FormRendererProps<
   FormValues = Record<string, any>,
-  InitialFormValues = Partial<FormValues>,
+  InitialFormValues extends Partial<FormValues> = Partial<FormValues>,
   FormTemplateProps extends FormTemplateRenderProps = FormTemplateRenderProps
-> extends Omit<NoIndex<FormProps<FormValues, InitialFormValues>>, 'onSubmit' | 'children'> {
+> extends Omit<NoIndex<FormProps<FormValues>>, 'onSubmit' | 'children'> {
   initialValues?: InitialFormValues;
   onCancel?: (values: FormValues, ...args: any[]) => void;
   onReset?: () => void;
   onError?: (...args: any[]) => void;
-  onSubmit?: FormProps<FormValues, InitialFormValues>['onSubmit'];
+  onSubmit?: FormProps<FormValues>['onSubmit'];
   schema: Schema | (Record<string, any> & { fields: Array<Record<string, any>> });
   clearOnUnmount?: boolean;
   clearedValue?: any;
@@ -82,7 +82,7 @@ const renderChildren = (children: ReactNode | ((props: Record<string, any>) => R
 
 function FormRenderer<
   FormValues = Record<string, any>,
-  InitialFormValues = Partial<FormValues>,
+  InitialFormValues extends Partial<FormValues> = Partial<FormValues>,
   FTP extends FormTemplateRenderProps = FormTemplateRenderProps
 >({
   actionMapper,
@@ -214,7 +214,7 @@ function FormRenderer<
               onCancel: isFunc(onCancel) ? handleCancelCallback(getState) : undefined,
               onReset: handleResetCallback(reset),
               onError: handleErrorCallback,
-              getState,
+              getState: getState as FormOptions['getState'],
               valid,
               clearedValue,
               submit,
@@ -240,7 +240,7 @@ function FormRenderer<
         </RendererContext.Provider>
       )}
       {...props}
-      initialValues={initialValues}
+      initialValues={initialValues as Partial<FormValues>}
     />
   );
 }
