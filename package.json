@@ -114,6 +114,22 @@
     "@fluentui/react-component-ref": {
       "react": "^19.0.0",
       "react-dom": "^19.0.0"
+    },
+    "@blueprintjs/core": {
+      "@types/react": "$@types/react",
+      "@types/react-dom": "$@types/react-dom"
+    },
+    "@blueprintjs/datetime": {
+      "@types/react": "$@types/react",
+      "@types/react-dom": "$@types/react-dom"
+    },
+    "@blueprintjs/select": {
+      "@types/react": "$@types/react",
+      "@types/react-dom": "$@types/react-dom"
+    },
+    "@blueprintjs/popover2": {
+      "@types/react": "$@types/react",
+      "@types/react-dom": "$@types/react-dom"
     }
   },
   "dependencies": {
