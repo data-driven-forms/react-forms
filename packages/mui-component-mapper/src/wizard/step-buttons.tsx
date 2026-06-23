@@ -39,9 +39,9 @@ const StyledGrid = styled(Grid)(() => ({
 
 interface FormState {
   values: AnyObject;
-  valid: boolean;
-  validating: boolean;
-  submitting: boolean;
+  valid?: boolean;
+  validating?: boolean;
+  submitting?: boolean;
 }
 
 interface NextButtonProps {

@@ -7,7 +7,7 @@ import Field from '../common-types/field';
 import Schema from '../common-types/schema';
 import { ConditionMapper } from '../form-renderer/condition-mapper';
 
-export interface FormOptions<FormValues = Record<string, any>, InitialFormValues = Partial<FormValues>>
+export interface FormOptions<FormValues = Record<string, any>, InitialFormValues extends Partial<FormValues> = Partial<FormValues>>
   extends FormApi<FormValues, InitialFormValues> {
   registerInputFile?: (name: keyof FormValues) => void;
   unRegisterInputFile?: (name: keyof FormValues) => void;
