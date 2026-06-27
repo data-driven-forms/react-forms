@@ -24,7 +24,7 @@
     "directory": "packages/ant-component-mapper"
   },
   "devDependencies": {
-    "antd": "^4.2.0"
+    "antd": "^4.24.16"
   },
   "peerDependencies": {
     "@data-driven-forms/react-form-renderer": "*",
