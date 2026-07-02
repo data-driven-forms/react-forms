@@ -127,7 +127,14 @@ const SingleField: React.FC<SingleFieldProps> = ({ component, ...rest }) => {
   );
 };
 
-const renderForm = (fields: FieldType[]): ReactNode[] =>
-  fields.map((field) => (Array.isArray(field) ? renderForm(field) : <SingleField key={field.name} {...field} />));
+const renderForm = (fields: FieldType[]): ReactNode[] => fields.map((field) => {
+  if (Array.isArray(field)) {
+    return renderForm(field);
+  }
+
+  const { key, ...otherFields } = field;
+  return <SingleField key={key || field.name} {...otherFields} />;
+});
+
 
 export default renderForm;
