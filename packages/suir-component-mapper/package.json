@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "@data-driven-forms/common": "*",
-    "classnames": "^2.2.6",
+    "classnames": "^2.5.1",
     "clsx": "^1.0.4",
     "lodash": "^4.17.23",
     "react-jss": "^10.1.1"
