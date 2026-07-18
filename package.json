@@ -80,7 +80,7 @@
     "identity-obj-proxy": "^3.0.0",
     "inquirer": "^8.2.7",
     "jest": "^29.7.0",
-    "jest-canvas-mock": "^2.5.2",
+    "jest-canvas-mock": "^2.5.8",
     "jest-environment-jsdom": "^29.7.0",
     "ncp": "^2.0.0",
     "nx": "^22.4.2",
