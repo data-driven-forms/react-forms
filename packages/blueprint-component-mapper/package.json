@@ -27,9 +27,9 @@
     "javascript"
   ],
   "devDependencies": {
-    "@blueprintjs/core": "^4.2.1",
-    "@blueprintjs/datetime": "^4.1.4",
-    "@blueprintjs/select": "^4.1.4"
+    "@blueprintjs/core": "^4.20.2",
+    "@blueprintjs/datetime": "^4.4.37",
+    "@blueprintjs/select": "^4.9.24"
   },
   "peerDependencies": {
     "@blueprintjs/core": "^4.2.1",
