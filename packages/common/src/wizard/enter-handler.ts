@@ -4,7 +4,7 @@ import { AnyObject } from '@data-driven-forms/react-form-renderer';
 
 interface FormOptions {
   valid: boolean;
-  getState: () => AnyObject & { validating: boolean; values: AnyObject };
+  getState: () => AnyObject & { validating?: boolean; values: AnyObject };
   getRegisteredFields: () => AnyObject;
 }
 

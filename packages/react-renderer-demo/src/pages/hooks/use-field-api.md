@@ -85,7 +85,7 @@ import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 const TextField = (props) => {
   const { input } = useFieldApi(props);
 
-  return <input {...rest}>
+  return <input {...input} />
 }
 ```
 
@@ -103,7 +103,7 @@ import Card from './custom-card.js';
 const TextField = (props) => {
   const { input } = useFieldApi(props);
 
-  return <Card onClick={() => input.onChange(props.value)}>
+  return <Card onClick={() => input.onChange(props.value)} />
 }
 ```
 
@@ -167,7 +167,7 @@ const TextField = (props) => {
   const { input, meta } = useFieldApi(props);
 
   return <React.Fragment>
-    <input {...rest}>
+    <input {...input} />
     {meta.validating && <Spinner />}
   </React.Fragment>
 }
@@ -186,7 +186,7 @@ const TextField = (props) => {
   const { input, meta } = useFieldApi(props);
 
   return <React.Fragment>
-    <input {...rest}>
+    <input {...input} />
     {meta.error && <ErrorMessage error={meta.error} />}
   </React.Fragment>
 }
@@ -209,7 +209,7 @@ const TextField = (props) => {
   const error = meta.touched && meta.error;
 
   return <React.Fragment>
-    <input {...rest}>
+    <input {...input} />
     {error && <ErrorMessage error={error} />}
   </React.Fragment>
 }

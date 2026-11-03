@@ -48,6 +48,7 @@ const ClearedMultiSelectFilterable = ({
   carbonLabel,
   placeholder,
   isDisabled,
+  loadingMessage,
   ...rest
 }) => (
   <FilterableMultiSelect
@@ -80,6 +81,7 @@ const ClearedMultiSelect = ({
   carbonLabel,
   placeholder,
   isDisabled,
+  loadingMessage,
   ...rest
 }) => (
   <MultiSelect
@@ -115,6 +117,7 @@ const ClearedSelect = ({
   originalOnChange,
   placeholder,
   value,
+  loadingMessage,
   ...rest
 }) => (
   <CarbonSelect
@@ -157,6 +160,7 @@ const ClearedSelectSearchable = ({
   labelText,
   onChange,
   value,
+  loadingMessage,
   ...rest
 }) => (
   <ComboBox

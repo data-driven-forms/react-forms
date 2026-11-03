@@ -50,7 +50,7 @@ import { FormTemplate } from '@data-driven-forms/pf4-component-mapper'
 
 <FormRenderer
   ...
-  FormTemplate={(props) => <FormTemplate {props} showFormControls={false} ... />}
+  FormTemplate={(props) => <FormTemplate {...props} showFormControls={false} ... />}
 />
 ```
 

@@ -36,28 +36,28 @@
     "packages/react-renderer-demo"
   ],
   "devDependencies": {
-    "@babel/cli": "^7.28.6",
-    "@babel/core": "^7.29.0",
-    "@babel/eslint-parser": "^7.28.6",
+    "@babel/cli": "^7.29.7",
+    "@babel/core": "^7.29.7",
+    "@babel/eslint-parser": "^7.29.7",
     "@babel/plugin-proposal-class-properties": "^7.18.6",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
-    "@babel/plugin-transform-runtime": "^7.29.0",
-    "@babel/preset-env": "^7.29.2",
-    "@babel/preset-react": "^7.28.5",
-    "@babel/preset-typescript": "^7.16.7",
-    "@nx/jest": "^22.4.2",
-    "@nx/js": "^22.4.2",
-    "@rspack/core": "^1.7.10",
-    "@rspack/cli": "^1.7.10",
+    "@babel/plugin-transform-runtime": "^7.29.7",
+    "@babel/preset-env": "^7.29.7",
+    "@babel/preset-react": "^7.29.7",
+    "@babel/preset-typescript": "^7.29.7",
+    "@nx/jest": "^23.3.0",
+    "@nx/js": "^23.3.0",
+    "@rspack/core": "^1.7.12",
+    "@rspack/cli": "^1.7.12",
     "@rspack/dev-server": "^1.2.1",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^15.0.7",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^30.0.0",
-    "@types/lodash": "^4.17.23",
-    "@types/react": "^19.1.2",
-    "@types/react-dom": "^19.1.3",
+    "@types/lodash": "^4.17.24",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
     "@typescript-eslint/eslint-plugin": "^8.54.0",
     "@typescript-eslint/parser": "^8.54.0",
     "babel-jest": "^29.7.0",
@@ -76,14 +76,14 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "fs-extra": "^10.1.0",
     "glob": "^7.2.3",
-    "html-webpack-plugin": "^5.6.6",
+    "html-webpack-plugin": "^5.6.7",
     "identity-obj-proxy": "^3.0.0",
     "inquirer": "^8.2.7",
     "jest": "^29.7.0",
-    "jest-canvas-mock": "^2.5.2",
+    "jest-canvas-mock": "^2.5.8",
     "jest-environment-jsdom": "^29.7.0",
     "ncp": "^2.0.0",
-    "nx": "^22.4.2",
+    "nx": "^23.3.0",
     "prettier": "^2.8.8",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -93,20 +93,20 @@
     "sass-loader": "^12.6.0",
     "strip-ansi": "^7.1.2",
     "style-loader": "^3.3.4",
-    "terser-webpack-plugin": "^5.3.17",
-    "ts-jest": "^29.4.6",
-    "ts-loader": "^9.2.6",
+    "terser-webpack-plugin": "^5.6.1",
+    "ts-jest": "^29.4.11",
+    "ts-loader": "^9.6.2",
     "typescript": "^5.9.3",
-    "webpack": "^5.105.4",
+    "webpack": "^5.108.4",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^5.2.3"
+    "webpack-dev-server": "^6.0.0"
   },
   "overrides": {
     "react-is": "^19.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "@types/react": "^19.1.2",
-    "@types/react-dom": "^19.1.3",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
     "semantic-ui-react": {
       "react": "^19.0.0",
       "react-dom": "^19.0.0"
@@ -114,10 +114,26 @@
     "@fluentui/react-component-ref": {
       "react": "^19.0.0",
       "react-dom": "^19.0.0"
+    },
+    "@blueprintjs/core": {
+      "@types/react": "$@types/react",
+      "@types/react-dom": "$@types/react-dom"
+    },
+    "@blueprintjs/datetime": {
+      "@types/react": "$@types/react",
+      "@types/react-dom": "$@types/react-dom"
+    },
+    "@blueprintjs/select": {
+      "@types/react": "$@types/react",
+      "@types/react-dom": "$@types/react-dom"
+    },
+    "@blueprintjs/popover2": {
+      "@types/react": "$@types/react",
+      "@types/react-dom": "$@types/react-dom"
     }
   },
   "dependencies": {
     "lz-string": "^1.5.0",
-    "ts-node": "^10.9.1"
+    "ts-node": "^10.9.2"
   }
 }

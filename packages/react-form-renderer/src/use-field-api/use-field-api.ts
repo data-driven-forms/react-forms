@@ -36,7 +36,7 @@ export interface UseFieldApiConfig extends AnyObject {
   type?: string;
 }
 
-export interface UseFieldApiComponentConfig extends UseFieldConfig<any> {
+export interface UseFieldApiComponentConfig extends UseFieldConfig {
   name: string;
 }
 

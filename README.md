@@ -203,7 +203,7 @@ const TextField = props => {
   const {label, input, meta, ...rest} = useFieldApi(props)
   return (
     <div>
-      <label htmlForm={input.name}>{label}</label>
+      <label htmlFor={input.name}>{label}</label>
       <input {...input} {...rest} id={input.name}/>
       {meta.error && <p>{meta.error}</p>}
     </div>
@@ -219,7 +219,7 @@ const schema = {
   fields: [{
     component: componentTypes.TEXT_FIELD,
     name: 'name',
-    label: 'Your name'
+    label: 'Your name',
     type: 'search',
   }]
 }

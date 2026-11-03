@@ -1,6 +1,6 @@
 {
   "name": "@data-driven-forms/carbon-component-mapper",
-  "version": "4.1.18",
+  "version": "4.2.1",
   "description": "Carbon React component mapper for Data Driven Forms.",
   "main": "index.js",
   "module": "esm/index.js",
@@ -27,7 +27,7 @@
     "javascript"
   ],
   "devDependencies": {
-    "@carbon/react": "^1.103.0"
+    "@carbon/react": "^1.110.0"
   },
   "peerDependencies": {
     "react": "^17.0.2 || ^18.0.0 || ^19.0.0",
