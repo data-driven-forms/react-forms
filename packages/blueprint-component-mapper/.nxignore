@@ -23,3 +23,5 @@
 !project.json
 !README.md
 !tsconfig.json
+!jest.config.ts
+!tsconfig.spec.json

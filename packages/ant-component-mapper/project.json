@@ -37,15 +37,6 @@
       },
       "cache": true
     },
-    "test": {
-      "executor": "@nx/jest:jest",
-      "options": {
-        "jestConfig": "packages/ant-component-mapper/jest.config.ts",
-        "testPathPattern": "packages/ant-component-mapper",
-        "passWithNoTests": false
-      },
-      "cache": true
-    },
     "typecheck": {
       "executor": "@nx/js:tsc",
       "options": {

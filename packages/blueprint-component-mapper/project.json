@@ -49,15 +49,6 @@
       },
       "cache": true
     },
-    "test": {
-      "executor": "@nx/jest:jest",
-      "options": {
-        "jestConfig": "packages/blueprint-component-mapper/jest.config.ts",
-        "testPathPattern": "packages/blueprint-component-mapper",
-        "passWithNoTests": false
-      },
-      "cache": true
-    },
     "typecheck": {
       "executor": "@nx/js:tsc",
       "options": {
