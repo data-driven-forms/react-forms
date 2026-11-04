@@ -12,7 +12,7 @@ module.exports = {
     '\\.(css|scss)$': 'identity-obj-proxy',
   },
   transformIgnorePatterns: [
-    'node_modules/(?!(@testing-library|@data-driven-forms)/)',
+    'node_modules/(?!(@testing-library|@data-driven-forms|temporal-.*)/)',
     '/config/jest\\.setup\\.js$'
   ],
   setupFilesAfterEnv: [setupTestsPath, 'jest-canvas-mock'],
