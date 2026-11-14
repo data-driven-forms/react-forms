@@ -36,8 +36,8 @@
   "dependencies": {
     "@data-driven-forms/common": "^4.1.10",
     "@data-driven-forms/react-form-renderer": "^4.1.10",
-    "@emotion/react": "^11.10.4",
-    "@emotion/styled": "^11.10.4",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
     "@mui/system": "^5.10.4",
     "clsx": "^1.2.1",
     "date-fns": "^2.16.1",
