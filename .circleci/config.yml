@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  codecov: codecov/codecov@1.0.4
+  codecov: codecov/codecov@1.2.5
   node: circleci/node@5.0.2
 jobs:
   build:
